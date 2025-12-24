@@ -55,14 +55,17 @@ extension VerifyOtpStatePatterns on VerifyOtpState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( Loading value)?  loading,TResult Function( Success value)?  success,TResult Function( Failure value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( Loading value)?  loading,TResult Function( Success value)?  success,TResult Function( Failure value)?  failure,TResult Function( ResendLoading value)?  resendLoading,TResult Function( ResendSuccess value)?  resendSuccess,TResult Function( ResendFailure value)?  resendFailure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case Loading() when loading != null:
 return loading(_that);case Success() when success != null:
 return success(_that);case Failure() when failure != null:
-return failure(_that);case _:
+return failure(_that);case ResendLoading() when resendLoading != null:
+return resendLoading(_that);case ResendSuccess() when resendSuccess != null:
+return resendSuccess(_that);case ResendFailure() when resendFailure != null:
+return resendFailure(_that);case _:
   return orElse();
 
 }
@@ -80,14 +83,17 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( Loading value)  loading,required TResult Function( Success value)  success,required TResult Function( Failure value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( Loading value)  loading,required TResult Function( Success value)  success,required TResult Function( Failure value)  failure,required TResult Function( ResendLoading value)  resendLoading,required TResult Function( ResendSuccess value)  resendSuccess,required TResult Function( ResendFailure value)  resendFailure,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case Loading():
 return loading(_that);case Success():
 return success(_that);case Failure():
-return failure(_that);case _:
+return failure(_that);case ResendLoading():
+return resendLoading(_that);case ResendSuccess():
+return resendSuccess(_that);case ResendFailure():
+return resendFailure(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +110,17 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( Loading value)?  loading,TResult? Function( Success value)?  success,TResult? Function( Failure value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( Loading value)?  loading,TResult? Function( Success value)?  success,TResult? Function( Failure value)?  failure,TResult? Function( ResendLoading value)?  resendLoading,TResult? Function( ResendSuccess value)?  resendSuccess,TResult? Function( ResendFailure value)?  resendFailure,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case Loading() when loading != null:
 return loading(_that);case Success() when success != null:
 return success(_that);case Failure() when failure != null:
-return failure(_that);case _:
+return failure(_that);case ResendLoading() when resendLoading != null:
+return resendLoading(_that);case ResendSuccess() when resendSuccess != null:
+return resendSuccess(_that);case ResendFailure() when resendFailure != null:
+return resendFailure(_that);case _:
   return null;
 
 }
@@ -128,13 +137,16 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( String message)?  success,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( String message)?  success,TResult Function( String message)?  failure,TResult Function()?  resendLoading,TResult Function( String message)?  resendSuccess,TResult Function( String message)?  resendFailure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case Loading() when loading != null:
 return loading();case Success() when success != null:
 return success(_that.message);case Failure() when failure != null:
-return failure(_that.message);case _:
+return failure(_that.message);case ResendLoading() when resendLoading != null:
+return resendLoading();case ResendSuccess() when resendSuccess != null:
+return resendSuccess(_that.message);case ResendFailure() when resendFailure != null:
+return resendFailure(_that.message);case _:
   return orElse();
 
 }
@@ -152,13 +164,16 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( String message)  success,required TResult Function( String message)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( String message)  success,required TResult Function( String message)  failure,required TResult Function()  resendLoading,required TResult Function( String message)  resendSuccess,required TResult Function( String message)  resendFailure,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case Loading():
 return loading();case Success():
 return success(_that.message);case Failure():
-return failure(_that.message);case _:
+return failure(_that.message);case ResendLoading():
+return resendLoading();case ResendSuccess():
+return resendSuccess(_that.message);case ResendFailure():
+return resendFailure(_that.message);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +190,16 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( String message)?  success,TResult? Function( String message)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( String message)?  success,TResult? Function( String message)?  failure,TResult? Function()?  resendLoading,TResult? Function( String message)?  resendSuccess,TResult? Function( String message)?  resendFailure,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case Loading() when loading != null:
 return loading();case Success() when success != null:
 return success(_that.message);case Failure() when failure != null:
-return failure(_that.message);case _:
+return failure(_that.message);case ResendLoading() when resendLoading != null:
+return resendLoading();case ResendSuccess() when resendSuccess != null:
+return resendSuccess(_that.message);case ResendFailure() when resendFailure != null:
+return resendFailure(_that.message);case _:
   return null;
 
 }
@@ -377,6 +395,170 @@ class _$FailureCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
   return _then(Failure(
+null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ResendLoading implements VerifyOtpState {
+  const ResendLoading();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResendLoading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'VerifyOtpState.resendLoading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class ResendSuccess implements VerifyOtpState {
+  const ResendSuccess(this.message);
+  
+
+ final  String message;
+
+/// Create a copy of VerifyOtpState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ResendSuccessCopyWith<ResendSuccess> get copyWith => _$ResendSuccessCopyWithImpl<ResendSuccess>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResendSuccess&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'VerifyOtpState.resendSuccess(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ResendSuccessCopyWith<$Res> implements $VerifyOtpStateCopyWith<$Res> {
+  factory $ResendSuccessCopyWith(ResendSuccess value, $Res Function(ResendSuccess) _then) = _$ResendSuccessCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class _$ResendSuccessCopyWithImpl<$Res>
+    implements $ResendSuccessCopyWith<$Res> {
+  _$ResendSuccessCopyWithImpl(this._self, this._then);
+
+  final ResendSuccess _self;
+  final $Res Function(ResendSuccess) _then;
+
+/// Create a copy of VerifyOtpState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(ResendSuccess(
+null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ResendFailure implements VerifyOtpState {
+  const ResendFailure(this.message);
+  
+
+ final  String message;
+
+/// Create a copy of VerifyOtpState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ResendFailureCopyWith<ResendFailure> get copyWith => _$ResendFailureCopyWithImpl<ResendFailure>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResendFailure&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'VerifyOtpState.resendFailure(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ResendFailureCopyWith<$Res> implements $VerifyOtpStateCopyWith<$Res> {
+  factory $ResendFailureCopyWith(ResendFailure value, $Res Function(ResendFailure) _then) = _$ResendFailureCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class _$ResendFailureCopyWithImpl<$Res>
+    implements $ResendFailureCopyWith<$Res> {
+  _$ResendFailureCopyWithImpl(this._self, this._then);
+
+  final ResendFailure _self;
+  final $Res Function(ResendFailure) _then;
+
+/// Create a copy of VerifyOtpState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(ResendFailure(
 null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));

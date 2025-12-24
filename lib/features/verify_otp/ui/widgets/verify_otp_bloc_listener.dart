@@ -45,6 +45,37 @@ class VerifyOtpBlocListener extends StatelessWidget {
               ),
             );
           },
+          // Resend states
+          resendLoading: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                duration: Duration(minutes: 1),
+                content: Row(
+                  children: [
+                    SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                    SizedBox(width: 12),
+                    Text('Resending code...'),
+                  ],
+                ),
+              ),
+            );
+          },
+          resendSuccess: (message) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(message)));
+          },
+          resendFailure: (error) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(error)));
+          },
         );
       },
       child: const SizedBox.shrink(),

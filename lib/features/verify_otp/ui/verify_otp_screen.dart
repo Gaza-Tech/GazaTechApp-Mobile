@@ -86,9 +86,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 AccountActionRow(
                   description: 'Didn\'t receive the code? ',
                   actionText: 'Resend Code',
-                  onTap: () {
-                    // context.read<VerifyOtpCubit>().resendOtp(email: widget.email);
-                  },
+                  onTap: () => context.read<VerifyOtpCubit>().resendOtp(),
                 ),
                 const VerticalSpace(40),
                 MyButton(

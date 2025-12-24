@@ -16,4 +16,16 @@ class VerifyOtpRepo {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
+
+  Future<ApiResult<ResendResponse>> resendOtp(
+    String email, {
+    OtpType type = OtpType.signup,
+  }) async {
+    try {
+      final response = await _apiService.resendOtp(email: email, type: type);
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
 }

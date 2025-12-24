@@ -12,4 +12,11 @@ class VerifyOtpApiService {
       type: body.type,
     );
   }
+
+  Future<ResendResponse> resendOtp({
+    required String email,
+    OtpType type = OtpType.signup,
+  }) async {
+    return await _supabase.auth.resend(type: type, email: email);
+  }
 }
