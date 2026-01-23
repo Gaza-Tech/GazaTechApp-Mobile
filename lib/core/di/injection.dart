@@ -13,6 +13,12 @@ import 'package:gaza_tech/features/home/cubit/home_cubit.dart';
 import 'package:gaza_tech/features/verify_otp/cubit/verify_otp_cubit.dart';
 import 'package:gaza_tech/features/verify_otp/data/repos/verify_otp_repo.dart';
 import 'package:gaza_tech/features/verify_otp/data/services/verify_otp_api_service.dart';
+import 'package:gaza_tech/features/forgot_password/cubit/forgot_password_cubit.dart';
+import 'package:gaza_tech/features/forgot_password/data/repos/forgot_password_repo.dart';
+import 'package:gaza_tech/features/forgot_password/data/services/forgot_password_api_service.dart';
+import 'package:gaza_tech/features/reset_password/cubit/reset_password_cubit.dart';
+import 'package:gaza_tech/features/reset_password/data/repos/reset_password_repo.dart';
+import 'package:gaza_tech/features/reset_password/data/services/reset_password_api_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -44,6 +50,28 @@ Future<void> setupGetIt() async {
     (email, _) => VerifyOtpCubit(getIt(), email),
   );
 
-  // 4. Home
+  // 5. Auth - Forgot Password
+  getIt.registerLazySingleton<ForgotPasswordApiService>(
+    () => ForgotPasswordApiService(getIt()),
+  );
+  getIt.registerLazySingleton<ForgotPasswordRepo>(
+    () => ForgotPasswordRepo(getIt()),
+  );
+  getIt.registerFactory<ForgotPasswordCubit>(
+    () => ForgotPasswordCubit(getIt()),
+  );
+
+  // 6. Auth - Reset Password
+  getIt.registerLazySingleton<ResetPasswordApiService>(
+    () => ResetPasswordApiService(getIt()),
+  );
+  getIt.registerLazySingleton<ResetPasswordRepo>(
+    () => ResetPasswordRepo(getIt()),
+  );
+  getIt.registerFactoryParam<ResetPasswordCubit, String, void>(
+    (email, _) => ResetPasswordCubit(getIt(), email),
+  );
+
+  // 7. Home
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
 }

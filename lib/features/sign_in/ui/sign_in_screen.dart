@@ -106,7 +106,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   alignment: AlignmentDirectional.centerEnd,
                   child: GestureDetector(
                     onTap: () {
-                      // TODO: Implement forgot password functionality
+                      context.pushNamed(MyRoutes.forgotPassword);
                     },
                     child: Text(
                       "Forgot Password?",

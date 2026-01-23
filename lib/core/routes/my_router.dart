@@ -10,6 +10,11 @@ import 'package:gaza_tech/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:gaza_tech/features/sign_up/ui/sign_up_screen.dart';
 import 'package:gaza_tech/features/verify_otp/cubit/verify_otp_cubit.dart';
 import 'package:gaza_tech/features/verify_otp/ui/verify_otp_screen.dart';
+import 'package:gaza_tech/features/forgot_password/cubit/forgot_password_cubit.dart';
+import 'package:gaza_tech/features/forgot_password/ui/forgot_password_screen.dart';
+import 'package:gaza_tech/features/reset_password/cubit/reset_password_cubit.dart';
+import 'package:gaza_tech/features/reset_password/ui/verify_recovery_otp_screen.dart';
+import 'package:gaza_tech/features/reset_password/ui/reset_password_screen.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -41,6 +46,29 @@ class MyRouter {
           builder: (_) => MultiBlocProvider(
             providers: [BlocProvider(create: (context) => getIt<HomeCubit>())],
             child: const HomeScreen(),
+          ),
+        );
+      case MyRoutes.forgotPassword:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ForgotPasswordCubit>(),
+            child: const ForgotPasswordScreen(),
+          ),
+        );
+      case MyRoutes.verifyRecoveryOtp:
+        final email = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ResetPasswordCubit>(param1: email),
+            child: VerifyRecoveryOtpScreen(email: email),
+          ),
+        );
+      case MyRoutes.resetPassword:
+        final email = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ResetPasswordCubit>(param1: email),
+            child: ResetPasswordScreen(email: email),
           ),
         );
       default:
