@@ -24,9 +24,35 @@ void main() async {
   runApp(MyApp(myRouter: MyRouter()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   final MyRouter myRouter;
   const MyApp({super.key, required this.myRouter});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final _navigatorKey = GlobalKey<NavigatorState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _setupAuthListener();
+  }
+
+  void _setupAuthListener() {
+    Supabase.instance.client.auth.onAuthStateChange.listen((data) {
+      final event = data.event;
+      if (event == AuthChangeEvent.signedIn) {
+        // Navigate to home when signed in via OAuth
+        _navigatorKey.currentState?.pushNamedAndRemoveUntil(
+          MyRoutes.home,
+          (route) => false,
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +64,11 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) {
         return MaterialApp(
+          navigatorKey: _navigatorKey,
           debugShowCheckedModeBanner: false,
-          title: 'Gaza Tech',
-          theme: MyTheme.darkTheme,
-          onGenerateRoute: myRouter.generateRoute,
+          title: 'Gaza Tech App',
+          theme: MyTheme.lightTheme,
+          onGenerateRoute: widget.myRouter.generateRoute,
           initialRoute: initialRoute,
         );
       },

@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Welcome to Tick It!"),
+          title: const Text("Welcome to Gaza Tech App!"),
           actions: [
             IconButton(
               icon: const Icon(Icons.logout),

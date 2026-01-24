@@ -10,6 +10,11 @@ import 'package:gaza_tech/features/sign_in/ui/widgets/account_action_row.dart';
 import 'package:gaza_tech/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:gaza_tech/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
 import 'package:gaza_tech/features/sign_up/ui/widgets/terms_agrement_row.dart';
+import 'package:gaza_tech/core/widgets/google_sign_in_button.dart';
+import 'package:gaza_tech/features/google_auth/cubit/google_auth_cubit.dart';
+import 'package:gaza_tech/features/google_auth/cubit/google_auth_state.dart';
+import 'package:gaza_tech/features/google_auth/ui/widgets/google_auth_bloc_listener.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -196,7 +201,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
                 const SignUpBlocListener(),
-                const VerticalSpace(16),
+                const VerticalSpace(24),
+
+                // Or divider
+                Row(
+                  children: [
+                    Expanded(child: Divider(color: Colors.grey[300])),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Text('Or', style: MyTextStyle.body.s),
+                    ),
+                    Expanded(child: Divider(color: Colors.grey[300])),
+                  ],
+                ),
+                const VerticalSpace(24),
+
+                // Google Sign In Button
+                BlocBuilder<GoogleAuthCubit, GoogleAuthState>(
+                  builder: (context, state) {
+                    return GoogleSignInButton(
+                      isLoading: state.maybeWhen(
+                        loading: () => true,
+                        orElse: () => false,
+                      ),
+                      onPressed: () =>
+                          context.read<GoogleAuthCubit>().signInWithGoogle(),
+                    );
+                  },
+                ),
+                const GoogleAuthBlocListener(),
+                const VerticalSpace(24),
 
                 // Already have an account? Sign in
                 AccountActionRow(

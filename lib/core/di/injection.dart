@@ -5,6 +5,9 @@ import 'package:gaza_tech/features/sign_in/data/services/sign_in_api_service.dar
 import 'package:gaza_tech/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:gaza_tech/features/sign_up/data/repos/sign_up_repo.dart';
 import 'package:gaza_tech/features/sign_up/data/services/sign_up_api_service.dart';
+import 'package:gaza_tech/features/google_auth/cubit/google_auth_cubit.dart';
+import 'package:gaza_tech/features/google_auth/data/repos/google_auth_repo.dart';
+import 'package:gaza_tech/features/google_auth/data/services/google_auth_api_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 // Feature Imports
@@ -74,4 +77,11 @@ Future<void> setupGetIt() async {
 
   // 7. Home
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
+
+  // 8. Google Auth
+  getIt.registerLazySingleton<GoogleAuthApiService>(
+    () => GoogleAuthApiService(getIt()),
+  );
+  getIt.registerLazySingleton<GoogleAuthRepo>(() => GoogleAuthRepo(getIt()));
+  getIt.registerFactory<GoogleAuthCubit>(() => GoogleAuthCubit(getIt()));
 }

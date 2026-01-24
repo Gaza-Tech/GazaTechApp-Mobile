@@ -10,6 +10,10 @@ import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/sign_in/cubit/sign_in_cubit.dart';
 import 'package:gaza_tech/features/sign_in/ui/widgets/account_action_row.dart';
+import 'package:gaza_tech/core/widgets/google_sign_in_button.dart';
+import 'package:gaza_tech/features/google_auth/cubit/google_auth_cubit.dart';
+import 'package:gaza_tech/features/google_auth/cubit/google_auth_state.dart';
+import 'package:gaza_tech/features/google_auth/ui/widgets/google_auth_bloc_listener.dart';
 import 'widgets/sign_in_bloc_listener.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -127,6 +131,35 @@ class _SignInScreenState extends State<SignInScreen> {
                   textStyle: MyTextStyle.action.l,
                 ),
                 const SignInBlocListener(),
+                const VerticalSpace(24),
+
+                // Or divider
+                Row(
+                  children: [
+                    Expanded(child: Divider(color: Colors.grey[300])),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Text('Or', style: MyTextStyle.body.s),
+                    ),
+                    Expanded(child: Divider(color: Colors.grey[300])),
+                  ],
+                ),
+                const VerticalSpace(24),
+
+                // Google Sign In Button
+                BlocBuilder<GoogleAuthCubit, GoogleAuthState>(
+                  builder: (context, state) {
+                    return GoogleSignInButton(
+                      isLoading: state.maybeWhen(
+                        loading: () => true,
+                        orElse: () => false,
+                      ),
+                      onPressed: () =>
+                          context.read<GoogleAuthCubit>().signInWithGoogle(),
+                    );
+                  },
+                ),
+                const GoogleAuthBlocListener(),
                 const VerticalSpace(24),
 
                 // Don't have an account? Sign up

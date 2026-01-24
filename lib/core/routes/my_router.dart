@@ -15,21 +15,28 @@ import 'package:gaza_tech/features/forgot_password/ui/forgot_password_screen.dar
 import 'package:gaza_tech/features/reset_password/cubit/reset_password_cubit.dart';
 import 'package:gaza_tech/features/reset_password/ui/verify_recovery_otp_screen.dart';
 import 'package:gaza_tech/features/reset_password/ui/reset_password_screen.dart';
+import 'package:gaza_tech/features/google_auth/cubit/google_auth_cubit.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case MyRoutes.signIn:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<SignInCubit>(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => getIt<SignInCubit>()),
+              BlocProvider(create: (context) => getIt<GoogleAuthCubit>()),
+            ],
             child: const SignInScreen(),
           ),
         );
       case MyRoutes.signUp:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<SignUpCubit>(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => getIt<SignUpCubit>()),
+              BlocProvider(create: (context) => getIt<GoogleAuthCubit>()),
+            ],
             child: const SignUpScreen(),
           ),
         );
