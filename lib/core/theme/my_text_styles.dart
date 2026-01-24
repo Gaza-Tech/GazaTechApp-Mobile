@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // The font family specified in the design.
-const String kFontFamily = 'Inter';
+const String kFontFamily = 'IBMPlexSansArabic';
 
 /// A class that holds the text styles from the Figma design.
 ///
