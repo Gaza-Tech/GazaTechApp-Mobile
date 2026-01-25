@@ -88,9 +88,14 @@ class _MyAppState extends State<MyApp> {
                   GlobalCupertinoLocalizations.delegate,
                 ],
 
-                // Theme with locale-aware font
+                // Theme Configuration - follows system theme
+                themeMode: ThemeMode.system,
                 theme: MyTheme.getTheme(
                   brightness: Brightness.light,
+                  locale: localeState.locale,
+                ),
+                darkTheme: MyTheme.getTheme(
+                  brightness: Brightness.dark,
                   locale: localeState.locale,
                 ),
 
