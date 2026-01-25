@@ -1,0 +1,257 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
+
+  @override
+  String get appTitle => 'Gaza Tech App';
+
+  @override
+  String get welcomeBack => 'Welcome Back';
+
+  @override
+  String get signInSubtitle => 'Sign in to continue to Gaza Tech';
+
+  @override
+  String get createAccount => 'Create Account';
+
+  @override
+  String get createAccountSubtitle => 'Join us to get started!';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get emailHint => 'Enter your email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get passwordHint => 'Enter your password';
+
+  @override
+  String get confirmPassword => 'Confirm Password';
+
+  @override
+  String get confirmPasswordHint => 'Re-enter your password';
+
+  @override
+  String get newPassword => 'New Password';
+
+  @override
+  String get newPasswordHint => 'Enter new password';
+
+  @override
+  String get confirmNewPasswordHint => 'Re-enter new password';
+
+  @override
+  String get firstName => 'First Name';
+
+  @override
+  String get firstNameHint => 'Enter your first name';
+
+  @override
+  String get lastName => 'Last Name';
+
+  @override
+  String get lastNameHint => 'Enter your last name';
+
+  @override
+  String get signIn => 'Sign in';
+
+  @override
+  String get signUp => 'Sign up';
+
+  @override
+  String get forgotPasswordLink => 'Forgot Password?';
+
+  @override
+  String get or => 'Or';
+
+  @override
+  String get continueWithGoogle => 'Continue with Google';
+
+  @override
+  String get dontHaveAccount => 'Don\'t have an account? ';
+
+  @override
+  String get alreadyHaveAccount => 'Already have an account? ';
+
+  @override
+  String get agreeToTermsPrefix => 'I agree to the ';
+
+  @override
+  String get termsAndConditions => 'Terms and Conditions';
+
+  @override
+  String get and => ' and ';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get verifyYourEmail => 'Verify Your Email';
+
+  @override
+  String get otpSentTo => 'A 6-digit code was sent to';
+
+  @override
+  String get recoverySentTo => 'A recovery code was sent to';
+
+  @override
+  String get enterConfirmationCode => 'Enter confirmation code';
+
+  @override
+  String get enterRecoveryCode => 'Enter recovery code';
+
+  @override
+  String get verify => 'Verify';
+
+  @override
+  String get didntReceiveCode => 'Didn\'t receive the code? ';
+
+  @override
+  String get resendCode => 'Resend Code';
+
+  @override
+  String get resendingCode => 'Resending code...';
+
+  @override
+  String get forgotPasswordTitle => 'Forgot Password';
+
+  @override
+  String get forgotPasswordSubtitle =>
+      'Enter your email address and we\'ll send you a recovery code.';
+
+  @override
+  String get sendRecoveryCode => 'Send Recovery Code';
+
+  @override
+  String get resetPasswordTitle => 'Reset Password';
+
+  @override
+  String get resetPasswordSubtitle => 'Create a new password for your account.';
+
+  @override
+  String get resetPassword => 'Reset Password';
+
+  @override
+  String get welcomeHome => 'Welcome to Gaza Tech App!';
+
+  @override
+  String get homeContent => 'Home Screen Content Goes Here';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get success => 'Success';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get signInCancelled => 'Sign-in cancelled';
+
+  @override
+  String get passwordResetSuccess =>
+      'Your password has been reset successfully. Please sign in with your new password.';
+
+  @override
+  String get required => 'Required';
+
+  @override
+  String get invalidEmail => 'Invalid email';
+
+  @override
+  String minChars(int count) {
+    return 'Min $count chars';
+  }
+
+  @override
+  String minCharacters(int count) {
+    return 'Min $count characters';
+  }
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get emailCannotBeEmpty => 'Email cannot be empty.';
+
+  @override
+  String get enterValidEmail => 'Please enter a valid email address.';
+
+  @override
+  String get passwordCannotBeEmpty => 'Password cannot be empty.';
+
+  @override
+  String passwordMinLength(int count) {
+    return 'Password must be at least $count characters long.';
+  }
+
+  @override
+  String get passwordNeedsUppercase =>
+      'Password must contain at least one uppercase letter.';
+
+  @override
+  String get passwordNeedsLowercase =>
+      'Password must contain at least one lowercase letter.';
+
+  @override
+  String get passwordNeedsNumber =>
+      'Password must contain at least one number.';
+
+  @override
+  String get passwordNeedsSpecialChar =>
+      'Password must contain at least one special character (@\$!%*?&).';
+
+  @override
+  String get uppercaseRequired => 'An uppercase letter is required.';
+
+  @override
+  String get lowercaseRequired => 'A lowercase letter is required.';
+
+  @override
+  String get numberRequired => 'A number is required.';
+
+  @override
+  String get specialCharRequired =>
+      'A special character (@\$!%*?&) is required.';
+
+  @override
+  String minLengthRequired(int count) {
+    return 'Must be at least $count characters long.';
+  }
+
+  @override
+  String fieldCannotBeEmpty(String fieldName) {
+    return '$fieldName cannot be empty.';
+  }
+
+  @override
+  String fieldMinLength(String fieldName, int count) {
+    return '$fieldName must be at least $count characters long.';
+  }
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get arabic => 'Arabic';
+}

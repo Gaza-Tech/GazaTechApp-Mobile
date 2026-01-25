@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_colors.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 
@@ -44,13 +45,13 @@ class TermsAgreementRow extends StatelessWidget {
         Expanded(
           child: Text.rich(
             TextSpan(
-              text: "I agree to the ",
+              text: context.l10n.agreeToTermsPrefix,
               style: MyTextStyle.body.s.copyWith(
                 color: MyColors.neutral.dark.light,
               ),
               children: [
                 TextSpan(
-                  text: "Terms and Conditions",
+                  text: context.l10n.termsAndConditions,
                   style: MyTextStyle.action.m.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
@@ -58,9 +59,9 @@ class TermsAgreementRow extends StatelessWidget {
                   recognizer: TapGestureRecognizer()
                     ..onTap = onTermsTap ?? () {},
                 ),
-                const TextSpan(text: " and "),
+                TextSpan(text: context.l10n.and),
                 TextSpan(
-                  text: "Privacy Policy",
+                  text: context.l10n.privacyPolicy,
                   style: MyTextStyle.action.m.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,

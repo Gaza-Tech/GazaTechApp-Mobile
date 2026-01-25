@@ -1,4 +1,7 @@
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:gaza_tech/core/localization/locale_cubit.dart';
+import 'package:gaza_tech/core/localization/locale_persistence.dart';
 import 'package:gaza_tech/features/sign_in/cubit/sign_in_cubit.dart';
 import 'package:gaza_tech/features/sign_in/data/repos/sign_in_repo.dart';
 import 'package:gaza_tech/features/sign_in/data/services/sign_in_api_service.dart';
@@ -26,6 +29,16 @@ import 'package:gaza_tech/features/reset_password/data/services/reset_password_a
 final getIt = GetIt.instance;
 
 Future<void> setupGetIt() async {
+  // 0. Shared Preferences (for locale persistence)
+  final sharedPreferences = await SharedPreferences.getInstance();
+  getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+
+  // 0.5 Locale Management
+  getIt.registerLazySingleton<LocalePersistence>(
+    () => LocalePersistence(getIt()),
+  );
+  getIt.registerLazySingleton<LocaleCubit>(() => LocaleCubit(getIt()));
+
   // 1. External Services (Supabase)
   final supabase = Supabase.instance.client;
   getIt.registerLazySingleton<SupabaseClient>(() => supabase);

@@ -32,13 +32,13 @@ class VerifyRecoveryOtpBlocListener extends StatelessWidget {
             Navigator.of(context).pop();
             showDialog(
               context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('Error'),
+              builder: (dialogContext) => AlertDialog(
+                title: Text(context.l10n.error),
                 content: Text(error),
                 actions: [
                   TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('OK'),
+                    onPressed: () => Navigator.pop(dialogContext),
+                    child: Text(context.l10n.ok),
                   ),
                 ],
               ),
@@ -46,17 +46,17 @@ class VerifyRecoveryOtpBlocListener extends StatelessWidget {
           },
           resendLoading: () {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                duration: Duration(minutes: 1),
+              SnackBar(
+                duration: const Duration(minutes: 1),
                 content: Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 18,
                       height: 18,
                       child: CircularProgressIndicator(strokeWidth: 2),
                     ),
-                    SizedBox(width: 12),
-                    Text('Resending code...'),
+                    const SizedBox(width: 12),
+                    Text(context.l10n.resendingCode),
                   ],
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/home/cubit/home_cubit.dart';
 import 'package:gaza_tech/features/home/cubit/home_state.dart';
@@ -24,7 +25,7 @@ class HomeScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Welcome to Gaza Tech App!"),
+          title: Text(context.l10n.welcomeHome),
           actions: [
             IconButton(
               icon: const Icon(Icons.logout),
@@ -33,7 +34,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
 
-        body: const Center(child: Text("Home Screen Content Goes Here")),
+        body: Center(child: Text(context.l10n.homeContent)),
       ),
     );
   }

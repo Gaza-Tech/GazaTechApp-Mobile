@@ -21,19 +21,19 @@ class GoogleAuthBlocListener extends StatelessWidget {
           },
           cancelled: () {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Sign-in cancelled')),
+              SnackBar(content: Text(context.l10n.signInCancelled)),
             );
           },
           failure: (error) {
             showDialog(
               context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('Error'),
+              builder: (dialogContext) => AlertDialog(
+                title: Text(context.l10n.error),
                 content: Text(error),
                 actions: [
                   TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('OK'),
+                    onPressed: () => Navigator.pop(dialogContext),
+                    child: Text(context.l10n.ok),
                   ),
                 ],
               ),

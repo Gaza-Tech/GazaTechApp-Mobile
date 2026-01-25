@@ -26,21 +26,19 @@ class ResetPasswordBlocListener extends StatelessWidget {
             showDialog(
               context: context,
               barrierDismissible: false,
-              builder: (context) => AlertDialog(
-                title: const Text('Success'),
-                content: const Text(
-                  'Your password has been reset successfully. Please sign in with your new password.',
-                ),
+              builder: (dialogContext) => AlertDialog(
+                title: Text(context.l10n.success),
+                content: Text(context.l10n.passwordResetSuccess),
                 actions: [
                   TextButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pop(dialogContext);
                       context.pushNamedAndRemoveUntil(
                         MyRoutes.signIn,
                         predicate: (route) => false,
                       );
                     },
-                    child: const Text('Sign In'),
+                    child: Text(context.l10n.signIn),
                   ),
                 ],
               ),
@@ -50,13 +48,13 @@ class ResetPasswordBlocListener extends StatelessWidget {
             Navigator.of(context).pop();
             showDialog(
               context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('Error'),
+              builder: (dialogContext) => AlertDialog(
+                title: Text(context.l10n.error),
                 content: Text(error),
                 actions: [
                   TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('OK'),
+                    onPressed: () => Navigator.pop(dialogContext),
+                    child: Text(context.l10n.ok),
                   ),
                 ],
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gaza_tech/l10n/app_localizations.dart';
 
 extension Navigation on BuildContext {
   Future<dynamic> pushNamed(String routeName, {Object? arguments}) {
@@ -24,4 +25,8 @@ extension Navigation on BuildContext {
   void pop() {
     return Navigator.of(this).pop();
   }
+}
+
+extension LocalizationExtension on BuildContext {
+  AppLocalizations get l10n => AppLocalizations.of(this);
 }

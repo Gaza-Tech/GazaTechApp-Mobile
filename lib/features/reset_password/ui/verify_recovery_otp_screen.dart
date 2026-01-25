@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/theme/my_theme.dart';
 import 'package:gaza_tech/core/widgets/my_otp_form_field.dart';
 import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/core/widgets/status_bar_hider.dart';
 import 'package:gaza_tech/features/sign_in/ui/widgets/account_action_row.dart';
 import 'package:gaza_tech/features/reset_password/cubit/reset_password_cubit.dart';
 import 'widgets/verify_recovery_otp_bloc_listener.dart';
@@ -32,25 +34,21 @@ class _VerifyRecoveryOtpScreenState extends State<VerifyRecoveryOtpScreen> {
           color: MyTheme.darkTheme.colorScheme.onSurface,
         ),
       ),
-      body: SafeArea(
+      body: StatusBarHider(
         child: SingleChildScrollView(
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Verify Your Email",
+                  context.l10n.verifyYourEmail,
                   style: MyTextStyle.heading.h1.copyWith(
                     color: MyTheme.darkTheme.colorScheme.onSurface,
                   ),
                 ),
                 const VerticalSpace(8),
-                Text(
-                  "A recovery code was sent to",
-                  style: MyTextStyle.body.s,
-                ),
+                Text(context.l10n.recoverySentTo, style: MyTextStyle.body.s),
                 const VerticalSpace(4),
                 Text(
                   widget.email,
@@ -60,7 +58,7 @@ class _VerifyRecoveryOtpScreenState extends State<VerifyRecoveryOtpScreen> {
                 ),
                 const VerticalSpace(40),
                 Text(
-                  "Enter recovery code",
+                  context.l10n.enterRecoveryCode,
                   style: MyTextStyle.body.s.copyWith(
                     color: MyTheme.darkTheme.colorScheme.onSurface,
                   ),
@@ -81,16 +79,17 @@ class _VerifyRecoveryOtpScreenState extends State<VerifyRecoveryOtpScreen> {
                 ),
                 const VerticalSpace(100),
                 AccountActionRow(
-                  description: 'Didn\'t receive the code? ',
-                  actionText: 'Resend Code',
+                  description: context.l10n.didntReceiveCode,
+                  actionText: context.l10n.resendCode,
                   onTap: () => context.read<ResetPasswordCubit>().resendOtp(),
                 ),
                 const VerticalSpace(40),
                 MyButton(
-                  text: "Verify",
+                  text: context.l10n.verify,
                   onPressed: isOtpComplete
-                      ? () =>
-                          context.read<ResetPasswordCubit>().emitVerifyOtpState()
+                      ? () => context
+                            .read<ResetPasswordCubit>()
+                            .emitVerifyOtpState()
                       : null,
                   height: 48.h,
                   backgroundColor: MyTheme.darkTheme.colorScheme.primary,

@@ -214,4 +214,16 @@ class MyTheme {
       ),
     );
   }
+
+  /// Returns theme with locale-aware font family
+  static ThemeData getTheme({
+    required Brightness brightness,
+    required Locale locale,
+  }) {
+    if (brightness == Brightness.light) {
+      return lightTheme.copyWith(textTheme: lightTheme.textTheme);
+    } else {
+      return darkTheme.copyWith(textTheme: darkTheme.textTheme);
+    }
+  }
 }

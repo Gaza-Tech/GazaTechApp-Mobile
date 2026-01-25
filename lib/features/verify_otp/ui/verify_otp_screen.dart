@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/theme/my_theme.dart';
 import 'package:gaza_tech/core/widgets/my_otp_form_field.dart';
 import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/core/widgets/status_bar_hider.dart';
 import 'package:gaza_tech/features/sign_in/ui/widgets/account_action_row.dart';
 import 'package:gaza_tech/features/verify_otp/cubit/verify_otp_cubit.dart';
 import 'widgets/verify_otp_bloc_listener.dart';
@@ -30,7 +32,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
           color: MyTheme.darkTheme.colorScheme.onSurface,
         ),
       ),
-      body: SafeArea(
+      body: StatusBarHider(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
@@ -39,7 +41,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
               children: [
                 // Verify Your Email
                 Text(
-                  "Verify Your Email",
+                  context.l10n.verifyYourEmail,
                   style: MyTextStyle.heading.h1.copyWith(
                     color: MyTheme.darkTheme.colorScheme.onSurface,
                   ),
@@ -47,7 +49,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 ),
                 const VerticalSpace(8),
                 Text(
-                  "A 6-digit code was sent to",
+                  context.l10n.otpSentTo,
                   style: MyTextStyle.body.s,
                   textAlign: TextAlign.center,
                 ),
@@ -61,7 +63,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 ),
                 const VerticalSpace(40),
                 Text(
-                  "Enter confirmation code",
+                  context.l10n.enterConfirmationCode,
                   style: MyTextStyle.body.s.copyWith(
                     color: MyTheme.darkTheme.colorScheme.onSurface,
                   ),
@@ -84,13 +86,13 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 const VerticalSpace(100),
                 // resend code row
                 AccountActionRow(
-                  description: 'Didn\'t receive the code? ',
-                  actionText: 'Resend Code',
+                  description: context.l10n.didntReceiveCode,
+                  actionText: context.l10n.resendCode,
                   onTap: () => context.read<VerifyOtpCubit>().resendOtp(),
                 ),
                 const VerticalSpace(40),
                 MyButton(
-                  text: "Verify",
+                  text: context.l10n.verify,
                   onPressed: isOtpComplete
                       ? () =>
                             context.read<VerifyOtpCubit>().emitVerifyOtpState()

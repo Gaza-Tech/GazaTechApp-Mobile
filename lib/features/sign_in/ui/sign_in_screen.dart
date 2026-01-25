@@ -5,9 +5,11 @@ import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/theme/my_theme.dart';
+import 'package:gaza_tech/core/widgets/language_switcher.dart';
 import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/core/widgets/status_bar_hider.dart';
 import 'package:gaza_tech/features/sign_in/cubit/sign_in_cubit.dart';
 import 'package:gaza_tech/features/sign_in/ui/widgets/account_action_row.dart';
 import 'package:gaza_tech/core/widgets/google_sign_in_button.dart';
@@ -35,20 +37,20 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: StatusBarHider(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Language Switcher
+                const LanguageSwitcher(),
+                const VerticalSpace(16),
                 // Welcome Back
-                Text("Welcome Back", style: MyTextStyle.heading.h1),
+                Text(context.l10n.welcomeBack, style: MyTextStyle.heading.h1),
                 const VerticalSpace(8),
-                Text(
-                  "Sign in to continue to Gaza Tech",
-                  style: MyTextStyle.body.s,
-                ),
+                Text(context.l10n.signInSubtitle, style: MyTextStyle.body.s),
                 const VerticalSpace(40),
 
                 // Sign In Form
@@ -59,7 +61,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     children: [
                       // Email Field
                       Text(
-                        "Email",
+                        context.l10n.email,
                         style: MyTextStyle.body.m.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
@@ -67,14 +69,15 @@ class _SignInScreenState extends State<SignInScreen> {
                       const VerticalSpace(8),
                       MyTextFormField(
                         controller: context.read<SignInCubit>().emailController,
-                        validator: (v) => v!.isEmpty ? "Required" : null,
-                        hintText: "Enter your email",
+                        validator: (v) =>
+                            v!.isEmpty ? context.l10n.required : null,
+                        hintText: context.l10n.emailHint,
                         textInputType: TextInputType.emailAddress,
                       ),
                       const VerticalSpace(24),
                       // Password Field
                       Text(
-                        "Password",
+                        context.l10n.password,
                         style: MyTextStyle.body.m.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
@@ -84,7 +87,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         controller: context
                             .read<SignInCubit>()
                             .passwordController,
-                        hintText: "Enter your password",
+                        hintText: context.l10n.passwordHint,
                         textInputType: TextInputType.text,
                         isObscureText: _obscurePassword,
                         suffixIcon: GestureDetector(
@@ -98,7 +101,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             color: Colors.grey[400],
                           ),
                         ),
-                        validator: (v) => v!.length < 6 ? "Min 6 chars" : null,
+                        validator: (v) =>
+                            v!.length < 6 ? context.l10n.minChars(6) : null,
                       ),
                     ],
                   ),
@@ -113,7 +117,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       context.pushNamed(MyRoutes.forgotPassword);
                     },
                     child: Text(
-                      "Forgot Password?",
+                      context.l10n.forgotPasswordLink,
                       style: MyTextStyle.action.m.copyWith(
                         color: MyTheme.darkTheme.colorScheme.primary,
                       ),
@@ -127,7 +131,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   onPressed: () => context.read<SignInCubit>().emitLoginState(),
                   height: 48.h,
                   backgroundColor: MyTheme.darkTheme.colorScheme.primary,
-                  text: "Sign in",
+                  text: context.l10n.signIn,
                   textStyle: MyTextStyle.action.l,
                 ),
                 const SignInBlocListener(),
@@ -139,7 +143,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     Expanded(child: Divider(color: Colors.grey[300])),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: Text('Or', style: MyTextStyle.body.s),
+                      child: Text(context.l10n.or, style: MyTextStyle.body.s),
                     ),
                     Expanded(child: Divider(color: Colors.grey[300])),
                   ],
@@ -164,8 +168,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 // Don't have an account? Sign up
                 AccountActionRow(
-                  description: "Don't have an account? ",
-                  actionText: "Sign up",
+                  description: context.l10n.dontHaveAccount,
+                  actionText: context.l10n.signUp,
                   onTap: () => context.pushNamedAndRemoveUntil(
                     MyRoutes.signUp,
                     predicate: (route) => false,

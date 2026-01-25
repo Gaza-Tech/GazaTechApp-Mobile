@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/theme/my_theme.dart';
+import 'package:gaza_tech/core/widgets/language_switcher.dart';
 import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/core/widgets/status_bar_hider.dart';
 import 'package:gaza_tech/features/forgot_password/cubit/forgot_password_cubit.dart';
 import 'widgets/forgot_password_bloc_listener.dart';
 
@@ -16,29 +19,29 @@ class ForgotPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyTheme.darkTheme.scaffoldBackgroundColor,
+        // background Color matches the scaffold background theme color
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? MyTheme.darkTheme.scaffoldBackgroundColor
+            : MyTheme.lightTheme.scaffoldBackgroundColor,
         elevation: 0,
-        iconTheme: IconThemeData(
-          color: MyTheme.darkTheme.colorScheme.onSurface,
-        ),
       ),
-      body: SafeArea(
+      body: StatusBarHider(
         child: SingleChildScrollView(
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Language Switcher
+                const LanguageSwitcher(),
+                const VerticalSpace(16),
                 Text(
-                  "Forgot Password",
-                  style: MyTextStyle.heading.h1.copyWith(
-                    color: MyTheme.darkTheme.colorScheme.onSurface,
-                  ),
+                  context.l10n.forgotPasswordTitle,
+                  style: MyTextStyle.heading.h1,
                 ),
                 const VerticalSpace(8),
                 Text(
-                  "Enter your email address and we'll send you a recovery code.",
+                  context.l10n.forgotPasswordSubtitle,
                   style: MyTextStyle.body.s,
                 ),
                 const VerticalSpace(40),
@@ -48,20 +51,25 @@ class ForgotPasswordScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Email",
+                        context.l10n.email,
                         style: MyTextStyle.body.m.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       const VerticalSpace(8),
                       MyTextFormField(
-                        controller:
-                            context.read<ForgotPasswordCubit>().emailController,
-                        hintText: "Enter your email",
+                        controller: context
+                            .read<ForgotPasswordCubit>()
+                            .emailController,
+                        hintText: context.l10n.emailHint,
                         textInputType: TextInputType.emailAddress,
                         validator: (v) {
-                          if (v == null || v.isEmpty) return "Required";
-                          if (!v.contains('@')) return "Invalid email";
+                          if (v == null || v.isEmpty) {
+                            return context.l10n.required;
+                          }
+                          if (!v.contains('@')) {
+                            return context.l10n.invalidEmail;
+                          }
                           return null;
                         },
                       ),
@@ -70,13 +78,14 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
                 const VerticalSpace(40),
                 MyButton(
-                  text: "Send Recovery Code",
+                  text: context.l10n.sendRecoveryCode,
                   onPressed: () => context
                       .read<ForgotPasswordCubit>()
                       .emitSendResetEmailState(),
                   height: 48.h,
                   backgroundColor: MyTheme.darkTheme.colorScheme.primary,
                 ),
+
                 const ForgotPasswordBlocListener(),
               ],
             ),

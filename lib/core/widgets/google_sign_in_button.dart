@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 
 class GoogleSignInButton extends StatelessWidget {
@@ -41,7 +42,7 @@ class GoogleSignInButton extends StatelessWidget {
                 ),
                 SizedBox(width: 12.w),
                 Text(
-                  'Continue with Google',
+                  context.l10n.continueWithGoogle,
                   style: MyTextStyle.action.m.copyWith(
                     color: Colors.black87,
                     fontWeight: FontWeight.w500,

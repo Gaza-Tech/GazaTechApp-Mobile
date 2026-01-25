@@ -6,6 +6,8 @@ import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/core/widgets/language_switcher.dart';
+import 'package:gaza_tech/core/widgets/status_bar_hider.dart';
 import 'package:gaza_tech/features/sign_in/ui/widgets/account_action_row.dart';
 import 'package:gaza_tech/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:gaza_tech/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
@@ -39,17 +41,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: StatusBarHider(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Language Switcher
+                const LanguageSwitcher(),
+                const VerticalSpace(16),
                 // Create Account
-                Text("Create Account", style: MyTextStyle.heading.h1),
+                Text(context.l10n.createAccount, style: MyTextStyle.heading.h1),
                 const VerticalSpace(8),
-                Text("Join us to get started!", style: MyTextStyle.body.s),
+                Text(
+                  context.l10n.createAccountSubtitle,
+                  style: MyTextStyle.body.s,
+                ),
                 const VerticalSpace(24),
 
                 // Sign Up Form
@@ -58,9 +66,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Email Field
+                      // First Name Field
                       Text(
-                        "First Name",
+                        context.l10n.firstName,
                         style: MyTextStyle.body.m.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
@@ -71,14 +79,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             .read<SignUpCubit>()
                             .firstNameController,
                         textInputType: TextInputType.name,
-                        hintText: "Enter your  first name",
-                        validator: (v) => v!.isEmpty ? "Required" : null,
+                        hintText: context.l10n.firstNameHint,
+                        validator: (v) =>
+                            v!.isEmpty ? context.l10n.required : null,
                       ),
                       const VerticalSpace(16),
 
                       // Last Name Fields
                       Text(
-                        "Last Name",
+                        context.l10n.lastName,
                         style: MyTextStyle.body.m.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
@@ -89,14 +98,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             .read<SignUpCubit>()
                             .lastNameController,
                         textInputType: TextInputType.name,
-                        hintText: "Enter your last name",
-                        validator: (v) => v!.isEmpty ? "Required" : null,
+                        hintText: context.l10n.lastNameHint,
+                        validator: (v) =>
+                            v!.isEmpty ? context.l10n.required : null,
                       ),
                       const VerticalSpace(16),
 
                       // Email Field
                       Text(
-                        "Email",
+                        context.l10n.email,
                         style: MyTextStyle.body.m.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
@@ -105,14 +115,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       MyTextFormField(
                         controller: context.read<SignUpCubit>().emailController,
                         textInputType: TextInputType.emailAddress,
-                        hintText: "Enter your email",
-                        validator: (v) => v!.isEmpty ? "Required" : null,
+                        hintText: context.l10n.emailHint,
+                        validator: (v) =>
+                            v!.isEmpty ? context.l10n.required : null,
                       ),
                       const VerticalSpace(16),
 
                       // Password Field
                       Text(
-                        "Password",
+                        context.l10n.password,
                         style: MyTextStyle.body.m.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
@@ -123,8 +134,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             .read<SignUpCubit>()
                             .passwordController,
                         textInputType: TextInputType.text,
-                        hintText: "Enter your password",
-                        validator: (v) => v!.length < 6 ? "Min 6 chars" : null,
+                        hintText: context.l10n.passwordHint,
+                        validator: (v) =>
+                            v!.length < 6 ? context.l10n.minChars(6) : null,
                         isObscureText: _obscurePassword,
                         suffixIcon: GestureDetector(
                           onTap: () => setState(
@@ -142,7 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                       // Confirm Password Field
                       Text(
-                        "Confirm Password",
+                        context.l10n.confirmPassword,
                         style: MyTextStyle.body.m.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
@@ -153,16 +165,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             .read<SignUpCubit>()
                             .confirmPasswordController,
                         textInputType: TextInputType.text,
-                        hintText: "Re-enter your password",
+                        hintText: context.l10n.confirmPasswordHint,
                         // validator must be same as password field
                         validator: (v) {
-                          if (v!.isEmpty) return "Required";
+                          if (v!.isEmpty) return context.l10n.required;
                           if (v !=
                               context
                                   .read<SignUpCubit>()
                                   .passwordController
                                   .text) {
-                            return "Passwords do not match";
+                            return context.l10n.passwordsDoNotMatch;
                           }
                           return null;
                         },
@@ -197,7 +209,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onPressed: _isAgreed
                       ? () => context.read<SignUpCubit>().emitSignUpState()
                       : null,
-                  text: "Sign up",
+                  text: context.l10n.signUp,
                   backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
                 const SignUpBlocListener(),
@@ -209,7 +221,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Expanded(child: Divider(color: Colors.grey[300])),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: Text('Or', style: MyTextStyle.body.s),
+                      child: Text(context.l10n.or, style: MyTextStyle.body.s),
                     ),
                     Expanded(child: Divider(color: Colors.grey[300])),
                   ],
@@ -234,8 +246,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 // Already have an account? Sign in
                 AccountActionRow(
-                  description: 'Already have an account? ',
-                  actionText: 'Sign in',
+                  description: context.l10n.alreadyHaveAccount,
+                  actionText: context.l10n.signIn,
                   onTap: () => context.pushNamedAndRemoveUntil(
                     MyRoutes.signIn,
                     predicate: (route) => false,

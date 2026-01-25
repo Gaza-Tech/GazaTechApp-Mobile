@@ -1,0 +1,139 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Gaza Tech App",
+
+  "welcomeBack": "Welcome Back",
+  "signInSubtitle": "Sign in to continue to Gaza Tech",
+  "createAccount": "Create Account",
+  "createAccountSubtitle": "Join us to get started!",
+
+  "email": "Email",
+  "emailHint": "Enter your email",
+  "password": "Password",
+  "passwordHint": "Enter your password",
+  "confirmPassword": "Confirm Password",
+  "confirmPasswordHint": "Re-enter your password",
+  "newPassword": "New Password",
+  "newPasswordHint": "Enter new password",
+  "confirmNewPasswordHint": "Re-enter new password",
+  "firstName": "First Name",
+  "firstNameHint": "Enter your first name",
+  "lastName": "Last Name",
+  "lastNameHint": "Enter your last name",
+
+  "signIn": "Sign in",
+  "signUp": "Sign up",
+  "forgotPasswordLink": "Forgot Password?",
+  "or": "Or",
+  "continueWithGoogle": "Continue with Google",
+
+  "dontHaveAccount": "Don't have an account? ",
+  "alreadyHaveAccount": "Already have an account? ",
+
+  "agreeToTermsPrefix": "I agree to the ",
+  "termsAndConditions": "Terms and Conditions",
+  "and": " and ",
+  "privacyPolicy": "Privacy Policy",
+
+  "verifyYourEmail": "Verify Your Email",
+  "otpSentTo": "A 6-digit code was sent to",
+  "recoverySentTo": "A recovery code was sent to",
+  "enterConfirmationCode": "Enter confirmation code",
+  "enterRecoveryCode": "Enter recovery code",
+  "verify": "Verify",
+  "didntReceiveCode": "Didn't receive the code? ",
+  "resendCode": "Resend Code",
+  "resendingCode": "Resending code...",
+
+  "forgotPasswordTitle": "Forgot Password",
+  "forgotPasswordSubtitle": "Enter your email address and we'll send you a recovery code.",
+  "sendRecoveryCode": "Send Recovery Code",
+
+  "resetPasswordTitle": "Reset Password",
+  "resetPasswordSubtitle": "Create a new password for your account.",
+  "resetPassword": "Reset Password",
+
+  "welcomeHome": "Welcome to Gaza Tech App!",
+  "homeContent": "Home Screen Content Goes Here",
+
+  "error": "Error",
+  "success": "Success",
+  "ok": "OK",
+  "cancel": "Cancel",
+  "signInCancelled": "Sign-in cancelled",
+
+  "passwordResetSuccess": "Your password has been reset successfully. Please sign in with your new password.",
+
+  "required": "Required",
+  "invalidEmail": "Invalid email",
+  "minChars": "Min {count} chars",
+  "@minChars": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "minCharacters": "Min {count} characters",
+  "@minCharacters": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "passwordsDoNotMatch": "Passwords do not match",
+
+  "emailCannotBeEmpty": "Email cannot be empty.",
+  "enterValidEmail": "Please enter a valid email address.",
+  "passwordCannotBeEmpty": "Password cannot be empty.",
+  "passwordMinLength": "Password must be at least {count} characters long.",
+  "@passwordMinLength": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "passwordNeedsUppercase": "Password must contain at least one uppercase letter.",
+  "passwordNeedsLowercase": "Password must contain at least one lowercase letter.",
+  "passwordNeedsNumber": "Password must contain at least one number.",
+  "passwordNeedsSpecialChar": "Password must contain at least one special character (@$!%*?&).",
+  "uppercaseRequired": "An uppercase letter is required.",
+  "lowercaseRequired": "A lowercase letter is required.",
+  "numberRequired": "A number is required.",
+  "specialCharRequired": "A special character (@$!%*?&) is required.",
+  "minLengthRequired": "Must be at least {count} characters long.",
+  "@minLengthRequired": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fieldCannotBeEmpty": "{fieldName} cannot be empty.",
+  "@fieldCannotBeEmpty": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldMinLength": "{fieldName} must be at least {count} characters long.",
+  "@fieldMinLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "settings": "Settings",
+  "language": "Language",
+  "english": "English",
+  "arabic": "Arabic"
+}
