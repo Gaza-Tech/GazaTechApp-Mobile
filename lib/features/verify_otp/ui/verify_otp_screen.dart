@@ -26,11 +26,11 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyTheme.darkTheme.scaffoldBackgroundColor,
+        // background Color matches the scaffold background theme color
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? MyTheme.darkTheme.scaffoldBackgroundColor
+            : MyTheme.lightTheme.scaffoldBackgroundColor,
         elevation: 0,
-        iconTheme: IconThemeData(
-          color: MyTheme.darkTheme.colorScheme.onSurface,
-        ),
       ),
       body: StatusBarHider(
         child: SingleChildScrollView(
@@ -42,9 +42,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 // Verify Your Email
                 Text(
                   context.l10n.verifyYourEmail,
-                  style: MyTextStyle.heading.h1.copyWith(
-                    color: MyTheme.darkTheme.colorScheme.onSurface,
-                  ),
+                  style: MyTextStyle.heading.h1,
                   textAlign: TextAlign.center,
                 ),
                 const VerticalSpace(8),
@@ -56,17 +54,13 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 const VerticalSpace(4),
                 Text(
                   widget.email,
-                  style: MyTextStyle.body.s.copyWith(
-                    color: MyTheme.darkTheme.colorScheme.primary,
-                  ),
+                  style: MyTextStyle.body.s,
                   textAlign: TextAlign.center,
                 ),
                 const VerticalSpace(40),
                 Text(
                   context.l10n.enterConfirmationCode,
-                  style: MyTextStyle.body.s.copyWith(
-                    color: MyTheme.darkTheme.colorScheme.onSurface,
-                  ),
+                  style: MyTextStyle.body.s,
                   textAlign: TextAlign.start,
                 ),
                 const VerticalSpace(8),

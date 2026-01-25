@@ -23,8 +23,14 @@ class GoogleSignInButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.r),
         ),
-        side: BorderSide(color: Colors.grey[300]!),
-        backgroundColor: Colors.white,
+        side: BorderSide(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey[700]!
+              : Colors.grey[300]!,
+        ),
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? Colors.grey[850]
+            : Colors.white,
       ),
       child: isLoading
           ? SizedBox(
@@ -44,7 +50,9 @@ class GoogleSignInButton extends StatelessWidget {
                 Text(
                   context.l10n.continueWithGoogle,
                   style: MyTextStyle.action.m.copyWith(
-                    color: Colors.black87,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black87,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
