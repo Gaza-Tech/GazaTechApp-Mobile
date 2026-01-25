@@ -253,4 +253,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get arabic => 'العربية';
+
+  @override
+  String get marketplace => 'السوق';
+
+  @override
+  String get addListing => 'إضافة إعلان';
+
+  @override
+  String get community => 'المجتمع';
+
+  @override
+  String get marketplaceContent => 'تصفح المنتجات والخدمات';
+
+  @override
+  String get communityContent => 'تواصل مع الآخرين';
 }

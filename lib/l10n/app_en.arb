@@ -135,5 +135,11 @@
   "settings": "Settings",
   "language": "Language",
   "english": "English",
-  "arabic": "العربية"
+  "arabic": "العربية",
+
+  "marketplace": "Marketplace",
+  "addListing":"Add Listing",
+  "community": "Community",
+  "marketplaceContent": "Browse products and services",
+  "communityContent": "Connect with others"
 }

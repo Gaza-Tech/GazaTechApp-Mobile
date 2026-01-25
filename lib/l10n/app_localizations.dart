@@ -553,6 +553,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'العربية'**
   String get arabic;
+
+  /// No description provided for @marketplace.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketplace'**
+  String get marketplace;
+
+  /// No description provided for @addListing.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Listing'**
+  String get addListing;
+
+  /// No description provided for @community.
+  ///
+  /// In en, this message translates to:
+  /// **'Community'**
+  String get community;
+
+  /// No description provided for @marketplaceContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse products and services'**
+  String get marketplaceContent;
+
+  /// No description provided for @communityContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with others'**
+  String get communityContent;
 }
 
 class _AppLocalizationsDelegate

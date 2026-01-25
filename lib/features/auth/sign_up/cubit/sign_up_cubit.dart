@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gaza_tech/core/netowoks/api_result.dart';
+import '../data/models/sign_up_request_body.dart';
+import '../data/repos/sign_up_repo.dart';
+import 'sign_up_state.dart';
+
+class SignUpCubit extends Cubit<SignUpState> {
+  final SignUpRepo _signUpRepo;
+  SignUpCubit(this._signUpRepo) : super(const SignUpState.initial());
+
+  final formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+
+  Future<void> emitSignUpState() async {
+    if (!formKey.currentState!.validate()) return;
+
+    emit(const SignUpState.loading());
+
+    final result = await _signUpRepo.signUp(
+      SignUpRequestBody(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+        name:
+            "${firstNameController.text.trim()} ${lastNameController.text.trim()}",
+      ),
+    );
+
+    result.when(
+      success: (data) => emit(const SignUpState.success("Sign Up Successful")),
+      failure: (error) => emit(SignUpState.failure(error.message ?? "Error")),
+    );
+  }
+}

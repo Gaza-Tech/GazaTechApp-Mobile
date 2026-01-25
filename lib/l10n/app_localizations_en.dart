@@ -254,4 +254,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get arabic => 'العربية';
+
+  @override
+  String get marketplace => 'Marketplace';
+
+  @override
+  String get addListing => 'Add Listing';
+
+  @override
+  String get community => 'Community';
+
+  @override
+  String get marketplaceContent => 'Browse products and services';
+
+  @override
+  String get communityContent => 'Connect with others';
 }

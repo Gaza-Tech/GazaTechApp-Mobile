@@ -90,5 +90,11 @@
   "settings": "الإعدادات",
   "language": "اللغة",
   "english": "English",
-  "arabic": "العربية"
+  "arabic": "العربية",
+
+  "marketplace": "السوق",
+  "addListing": "إضافة إعلان",
+  "community": "المجتمع",
+  "marketplaceContent": "تصفح المنتجات والخدمات",
+  "communityContent": "تواصل مع الآخرين"
 }

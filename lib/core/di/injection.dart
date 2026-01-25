@@ -2,29 +2,29 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gaza_tech/core/localization/locale_cubit.dart';
 import 'package:gaza_tech/core/localization/locale_persistence.dart';
-import 'package:gaza_tech/features/sign_in/cubit/sign_in_cubit.dart';
-import 'package:gaza_tech/features/sign_in/data/repos/sign_in_repo.dart';
-import 'package:gaza_tech/features/sign_in/data/services/sign_in_api_service.dart';
-import 'package:gaza_tech/features/sign_up/cubit/sign_up_cubit.dart';
-import 'package:gaza_tech/features/sign_up/data/repos/sign_up_repo.dart';
-import 'package:gaza_tech/features/sign_up/data/services/sign_up_api_service.dart';
-import 'package:gaza_tech/features/google_auth/cubit/google_auth_cubit.dart';
-import 'package:gaza_tech/features/google_auth/data/repos/google_auth_repo.dart';
-import 'package:gaza_tech/features/google_auth/data/services/google_auth_api_service.dart';
+import 'package:gaza_tech/features/auth/sign_in/cubit/sign_in_cubit.dart';
+import 'package:gaza_tech/features/auth/sign_in/data/repos/sign_in_repo.dart';
+import 'package:gaza_tech/features/auth/sign_in/data/services/sign_in_api_service.dart';
+import 'package:gaza_tech/features/auth/sign_up/cubit/sign_up_cubit.dart';
+import 'package:gaza_tech/features/auth/sign_up/data/repos/sign_up_repo.dart';
+import 'package:gaza_tech/features/auth/sign_up/data/services/sign_up_api_service.dart';
+import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_cubit.dart';
+import 'package:gaza_tech/features/auth/google_auth/data/repos/google_auth_repo.dart';
+import 'package:gaza_tech/features/auth/google_auth/data/services/google_auth_api_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 // Feature Imports
 
 import 'package:gaza_tech/features/home/cubit/home_cubit.dart';
-import 'package:gaza_tech/features/verify_otp/cubit/verify_otp_cubit.dart';
-import 'package:gaza_tech/features/verify_otp/data/repos/verify_otp_repo.dart';
-import 'package:gaza_tech/features/verify_otp/data/services/verify_otp_api_service.dart';
-import 'package:gaza_tech/features/forgot_password/cubit/forgot_password_cubit.dart';
-import 'package:gaza_tech/features/forgot_password/data/repos/forgot_password_repo.dart';
-import 'package:gaza_tech/features/forgot_password/data/services/forgot_password_api_service.dart';
-import 'package:gaza_tech/features/reset_password/cubit/reset_password_cubit.dart';
-import 'package:gaza_tech/features/reset_password/data/repos/reset_password_repo.dart';
-import 'package:gaza_tech/features/reset_password/data/services/reset_password_api_service.dart';
+import 'package:gaza_tech/features/auth/verify_otp/cubit/verify_otp_cubit.dart';
+import 'package:gaza_tech/features/auth/verify_otp/data/repos/verify_otp_repo.dart';
+import 'package:gaza_tech/features/auth/verify_otp/data/services/verify_otp_api_service.dart';
+import 'package:gaza_tech/features/auth/forgot_password/cubit/forgot_password_cubit.dart';
+import 'package:gaza_tech/features/auth/forgot_password/data/repos/forgot_password_repo.dart';
+import 'package:gaza_tech/features/auth/forgot_password/data/services/forgot_password_api_service.dart';
+import 'package:gaza_tech/features/auth/reset_password/cubit/reset_password_cubit.dart';
+import 'package:gaza_tech/features/auth/reset_password/data/repos/reset_password_repo.dart';
+import 'package:gaza_tech/features/auth/reset_password/data/services/reset_password_api_service.dart';
 
 final getIt = GetIt.instance;
 
