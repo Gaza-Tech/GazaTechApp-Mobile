@@ -279,5 +279,5 @@ class AppLocalizationsAr extends AppLocalizations {
   String get help => 'المساعدة';
 
   @override
-  String get logout => 'تسجيل الخروج';
+  String get sign_out => 'تسجيل الخروج';
 }

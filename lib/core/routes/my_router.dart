@@ -15,7 +15,7 @@ import 'package:gaza_tech/features/auth/reset_password/cubit/reset_password_cubi
 import 'package:gaza_tech/features/auth/reset_password/ui/verify_recovery_otp_screen.dart';
 import 'package:gaza_tech/features/auth/reset_password/ui/reset_password_screen.dart';
 import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_cubit.dart';
-import 'package:gaza_tech/features/auth/logout/cubit/logout_cubit.dart';
+import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -52,7 +52,7 @@ class MyRouter {
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => getIt<LogoutCubit>()),
+              BlocProvider(create: (context) => getIt<SignOutCubit>()),
             ],
             child: const HomeScreen(),
           ),

@@ -1,22 +1,22 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'logout_state.dart';
+import '../../sign_out/cubit/sign_out_state.dart';
 
-class LogoutCubit extends Cubit<LogoutState> {
+class SignOutCubit extends Cubit<SignOutState> {
   final SupabaseClient _supabase;
 
-  LogoutCubit(this._supabase) : super(const LogoutState.initial());
+  SignOutCubit(this._supabase) : super(const SignOutState.initial());
 
   /// Executes the Supabase signOut function.
-  Future<void> logout() async {
+  Future<void> signOut() async {
     try {
-      emit(const LogoutState.loading());
+      emit(const SignOutState.loading());
       await _supabase.auth.signOut();
       // Upon successful sign-out, emit the LoggedOut state
-      emit(const LogoutState.loggedOut());
+      emit(const SignOutState.loggedOut());
     } catch (e) {
       // Handle any potential Supabase sign-out errors
-      emit(LogoutState.error(e.toString()));
+      emit(SignOutState.error(e.toString()));
     }
   }
 }

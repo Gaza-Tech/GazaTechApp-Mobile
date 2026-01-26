@@ -1,3 +1,4 @@
+import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gaza_tech/core/localization/locale_cubit.dart';
@@ -24,7 +25,6 @@ import 'package:gaza_tech/features/auth/forgot_password/data/services/forgot_pas
 import 'package:gaza_tech/features/auth/reset_password/cubit/reset_password_cubit.dart';
 import 'package:gaza_tech/features/auth/reset_password/data/repos/reset_password_repo.dart';
 import 'package:gaza_tech/features/auth/reset_password/data/services/reset_password_api_service.dart';
-import 'package:gaza_tech/features/auth/logout/cubit/logout_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -97,6 +97,6 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<GoogleAuthRepo>(() => GoogleAuthRepo(getIt()));
   getIt.registerFactory<GoogleAuthCubit>(() => GoogleAuthCubit(getIt()));
 
-  // 9. Logout
-  getIt.registerFactory<LogoutCubit>(() => LogoutCubit(getIt()));
+  // 9. SignOut
+  getIt.registerFactory<SignOutCubit>(() => SignOutCubit(getIt()));
 }

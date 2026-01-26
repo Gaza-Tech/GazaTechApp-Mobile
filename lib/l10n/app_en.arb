@@ -146,5 +146,5 @@
   "profile": "Profile",
   "about": "About",
   "help": "Help",
-  "logout": "Logout"
+  "sign_out": "SignOut"
 }

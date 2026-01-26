@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/localization/locale_cubit.dart';
-import 'package:gaza_tech/features/auth/logout/cubit/logout_cubit.dart';
+import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -59,11 +59,35 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.language_outlined),
             title: Text(context.l10n.language),
-            onTap: () {
-              Navigator.pop(context);
-              // TODO: Show language selection dialog
-              context.read<LocaleCubit>().toggleLocale();
-            },
+            onTap: () => showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text(context.l10n.language),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTile(
+                      title: Text(context.l10n.english),
+                      onTap: () {
+                        context.read<LocaleCubit>().changeLocale(
+                          const Locale('en'),
+                        );
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(context.l10n.arabic),
+                      onTap: () {
+                        context.read<LocaleCubit>().changeLocale(
+                          const Locale('ar'),
+                        );
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
           const Divider(),
           ListTile(
@@ -89,12 +113,12 @@ class MyDrawer extends StatelessWidget {
               color: Theme.of(context).colorScheme.error,
             ),
             title: Text(
-              context.l10n.logout,
+              context.l10n.sign_out,
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
             onTap: () {
               Navigator.pop(context);
-              context.read<LogoutCubit>().logout();
+              context.read<SignOutCubit>().signOut();
             },
           ),
         ],

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
+import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_state.dart';
 import 'package:gaza_tech/features/marketplace/ui/marketplace_screen.dart';
 import 'package:gaza_tech/features/community/ui/community_screen.dart';
 import 'package:gaza_tech/features/home/ui/widgets/my_drawer.dart';
-import 'package:gaza_tech/features/auth/logout/cubit/logout_cubit.dart';
-import 'package:gaza_tech/features/auth/logout/cubit/logout_state.dart';
+import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LogoutCubit, LogoutState>(
+    return BlocListener<SignOutCubit, SignOutState>(
       listener: (context, state) {
         state.whenOrNull(
           loggedOut: () => Navigator.pushNamedAndRemoveUntil(

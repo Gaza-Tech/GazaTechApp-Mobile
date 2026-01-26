@@ -602,11 +602,11 @@ abstract class AppLocalizations {
   /// **'Help'**
   String get help;
 
-  /// No description provided for @logout.
+  /// No description provided for @sign_out.
   ///
   /// In en, this message translates to:
-  /// **'Logout'**
-  String get logout;
+  /// **'SignOut'**
+  String get sign_out;
 }
 
 class _AppLocalizationsDelegate

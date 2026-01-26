@@ -280,5 +280,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get help => 'Help';
 
   @override
-  String get logout => 'Logout';
+  String get sign_out => 'SignOut';
 }

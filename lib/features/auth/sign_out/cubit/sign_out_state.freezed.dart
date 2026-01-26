@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'logout_state.dart';
+part of 'sign_out_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,7 +12,7 @@ part of 'logout_state.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$LogoutState {
+mixin _$SignOutState {
 
 
 
@@ -20,7 +20,7 @@ mixin _$LogoutState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LogoutState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignOutState);
 }
 
 
@@ -29,20 +29,20 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'LogoutState()';
+  return 'SignOutState()';
 }
 
 
 }
 
 /// @nodoc
-class $LogoutStateCopyWith<$Res>  {
-$LogoutStateCopyWith(LogoutState _, $Res Function(LogoutState) __);
+class $SignOutStateCopyWith<$Res>  {
+$SignOutStateCopyWith(SignOutState _, $Res Function(SignOutState) __);
 }
 
 
-/// Adds pattern-matching-related methods to [LogoutState].
-extension LogoutStatePatterns on LogoutState {
+/// Adds pattern-matching-related methods to [SignOutState].
+extension SignOutStatePatterns on SignOutState {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -192,7 +192,7 @@ return error(_that.message);case _:
 /// @nodoc
 
 
-class _Initial implements LogoutState {
+class _Initial implements SignOutState {
   const _Initial();
   
 
@@ -212,7 +212,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'LogoutState.initial()';
+  return 'SignOutState.initial()';
 }
 
 
@@ -224,7 +224,7 @@ String toString() {
 /// @nodoc
 
 
-class _Loading implements LogoutState {
+class _Loading implements SignOutState {
   const _Loading();
   
 
@@ -244,7 +244,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'LogoutState.loading()';
+  return 'SignOutState.loading()';
 }
 
 
@@ -256,7 +256,7 @@ String toString() {
 /// @nodoc
 
 
-class _LoggedOut implements LogoutState {
+class _LoggedOut implements SignOutState {
   const _LoggedOut();
   
 
@@ -276,7 +276,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'LogoutState.loggedOut()';
+  return 'SignOutState.loggedOut()';
 }
 
 
@@ -288,13 +288,13 @@ String toString() {
 /// @nodoc
 
 
-class _Error implements LogoutState {
+class _Error implements SignOutState {
   const _Error(this.message);
   
 
  final  String message;
 
-/// Create a copy of LogoutState
+/// Create a copy of SignOutState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -313,14 +313,14 @@ int get hashCode => Object.hash(runtimeType,message);
 
 @override
 String toString() {
-  return 'LogoutState.error(message: $message)';
+  return 'SignOutState.error(message: $message)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$ErrorCopyWith<$Res> implements $LogoutStateCopyWith<$Res> {
+abstract mixin class _$ErrorCopyWith<$Res> implements $SignOutStateCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) = __$ErrorCopyWithImpl;
 @useResult
 $Res call({
@@ -339,7 +339,7 @@ class __$ErrorCopyWithImpl<$Res>
   final _Error _self;
   final $Res Function(_Error) _then;
 
-/// Create a copy of LogoutState
+/// Create a copy of SignOutState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
   return _then(_Error(
