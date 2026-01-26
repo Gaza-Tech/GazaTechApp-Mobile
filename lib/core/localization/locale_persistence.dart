@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:gaza_tech/core/cache/shared_pref_keys.dart';
+import 'package:gaza_tech/core/helpers/shared_pref_helper.dart';
 
 class LocalePersistence {
-  static const String _localeKey = 'app_locale';
+  // Using SharedPrefHelper for cleaner and more maintainable code
+  LocalePersistence();
 
-  final SharedPreferences _prefs;
-
-  LocalePersistence(this._prefs);
-
-  Locale? getSavedLocale() {
-    final languageCode = _prefs.getString(_localeKey);
-    if (languageCode != null) {
+  /// Gets the saved locale from SharedPreferences
+  /// Returns null if no locale has been saved
+  Future<Locale?> getSavedLocale() async {
+    final languageCode = await SharedPrefHelper.getString(SharedPrefKeys.appLocale);
+    if (languageCode.isNotEmpty) {
       return Locale(languageCode);
     }
     return null;
   }
 
+  /// Saves the current locale to SharedPreferences
   Future<void> saveLocale(Locale locale) async {
-    await _prefs.setString(_localeKey, locale.languageCode);
+    await SharedPrefHelper.setData(SharedPrefKeys.appLocale, locale.languageCode);
+  }
+
+  /// Removes the saved locale from SharedPreferences
+  Future<void> clearLocale() async {
+    await SharedPrefHelper.removeData(SharedPrefKeys.appLocale);
   }
 }

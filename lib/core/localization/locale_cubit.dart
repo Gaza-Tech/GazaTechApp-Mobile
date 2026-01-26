@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gaza_tech/core/localization/locale_helper.dart';
+import 'package:gaza_tech/core/helpers/locale_helper.dart';
 import 'package:gaza_tech/core/localization/locale_persistence.dart';
 import 'package:gaza_tech/core/localization/locale_state.dart';
 
@@ -11,8 +11,8 @@ class LocaleCubit extends Cubit<LocaleState> {
     _loadSavedLocale();
   }
 
-  void _loadSavedLocale() {
-    final savedLocale = _localePersistence.getSavedLocale();
+  Future<void> _loadSavedLocale() async {
+    final savedLocale = await _localePersistence.getSavedLocale();
     if (savedLocale != null) {
       emit(LocaleState(locale: savedLocale));
     } else {

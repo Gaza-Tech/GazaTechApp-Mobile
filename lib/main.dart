@@ -6,7 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gaza_tech/core/di/injection.dart';
 import 'package:gaza_tech/core/localization/locale_cubit.dart';
 import 'package:gaza_tech/core/localization/locale_state.dart';
-import 'package:gaza_tech/core/localization/locale_helper.dart';
+import 'package:gaza_tech/core/helpers/locale_helper.dart';
 import 'package:gaza_tech/core/netowoks/supabase_config.dart';
 import 'package:gaza_tech/core/routes/my_router.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';

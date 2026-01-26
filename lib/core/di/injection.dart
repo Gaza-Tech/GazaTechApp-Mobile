@@ -35,7 +35,7 @@ Future<void> setupGetIt() async {
 
   // 0.5 Locale Management
   getIt.registerLazySingleton<LocalePersistence>(
-    () => LocalePersistence(getIt()),
+    () => LocalePersistence(),
   );
   getIt.registerLazySingleton<LocaleCubit>(() => LocaleCubit(getIt()));
 
