@@ -268,4 +268,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get communityContent => 'تواصل مع الآخرين';
+
+  @override
+  String get profile => 'الملف الشخصي';
+
+  @override
+  String get about => 'حول';
+
+  @override
+  String get help => 'المساعدة';
+
+  @override
+  String get logout => 'تسجيل الخروج';
 }

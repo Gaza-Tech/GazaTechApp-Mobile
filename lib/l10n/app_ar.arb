@@ -96,5 +96,10 @@
   "addListing": "إضافة إعلان",
   "community": "المجتمع",
   "marketplaceContent": "تصفح المنتجات والخدمات",
-  "communityContent": "تواصل مع الآخرين"
+  "communityContent": "تواصل مع الآخرين",
+
+  "profile": "الملف الشخصي",
+  "about": "حول",
+  "help": "المساعدة",
+  "logout": "تسجيل الخروج"
 }

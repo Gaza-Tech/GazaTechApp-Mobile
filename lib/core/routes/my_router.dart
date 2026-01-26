@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/di/injection.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
-import 'package:gaza_tech/features/home/cubit/home_cubit.dart';
-import 'package:gaza_tech/features/home/ui/main_navigation_screen.dart';
+import 'package:gaza_tech/features/home/ui/home_screen.dart';
 import 'package:gaza_tech/features/auth/sign_in/cubit/sign_in_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_in/ui/sign_in_screen.dart';
 import 'package:gaza_tech/features/auth/sign_up/cubit/sign_up_cubit.dart';
@@ -16,6 +15,7 @@ import 'package:gaza_tech/features/auth/reset_password/cubit/reset_password_cubi
 import 'package:gaza_tech/features/auth/reset_password/ui/verify_recovery_otp_screen.dart';
 import 'package:gaza_tech/features/auth/reset_password/ui/reset_password_screen.dart';
 import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_cubit.dart';
+import 'package:gaza_tech/features/auth/logout/cubit/logout_cubit.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -51,8 +51,10 @@ class MyRouter {
       case MyRoutes.home:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
-            providers: [BlocProvider(create: (context) => getIt<HomeCubit>())],
-            child: const MainNavigationScreen(),
+            providers: [
+              BlocProvider(create: (context) => getIt<LogoutCubit>()),
+            ],
+            child: const HomeScreen(),
           ),
         );
       case MyRoutes.forgotPassword:

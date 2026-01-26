@@ -15,7 +15,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 // Feature Imports
 
-import 'package:gaza_tech/features/home/cubit/home_cubit.dart';
 import 'package:gaza_tech/features/auth/verify_otp/cubit/verify_otp_cubit.dart';
 import 'package:gaza_tech/features/auth/verify_otp/data/repos/verify_otp_repo.dart';
 import 'package:gaza_tech/features/auth/verify_otp/data/services/verify_otp_api_service.dart';
@@ -25,6 +24,7 @@ import 'package:gaza_tech/features/auth/forgot_password/data/services/forgot_pas
 import 'package:gaza_tech/features/auth/reset_password/cubit/reset_password_cubit.dart';
 import 'package:gaza_tech/features/auth/reset_password/data/repos/reset_password_repo.dart';
 import 'package:gaza_tech/features/auth/reset_password/data/services/reset_password_api_service.dart';
+import 'package:gaza_tech/features/auth/logout/cubit/logout_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -89,7 +89,6 @@ Future<void> setupGetIt() async {
   );
 
   // 7. Home
-  getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
 
   // 8. Google Auth
   getIt.registerLazySingleton<GoogleAuthApiService>(
@@ -97,4 +96,7 @@ Future<void> setupGetIt() async {
   );
   getIt.registerLazySingleton<GoogleAuthRepo>(() => GoogleAuthRepo(getIt()));
   getIt.registerFactory<GoogleAuthCubit>(() => GoogleAuthCubit(getIt()));
+
+  // 9. Logout
+  getIt.registerFactory<LogoutCubit>(() => LogoutCubit(getIt()));
 }

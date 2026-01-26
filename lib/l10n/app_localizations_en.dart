@@ -269,4 +269,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get communityContent => 'Connect with others';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get help => 'Help';
+
+  @override
+  String get logout => 'Logout';
 }

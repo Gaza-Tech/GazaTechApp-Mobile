@@ -141,5 +141,10 @@
   "addListing":"Add Listing",
   "community": "Community",
   "marketplaceContent": "Browse products and services",
-  "communityContent": "Connect with others"
+  "communityContent": "Connect with others",
+
+  "profile": "Profile",
+  "about": "About",
+  "help": "Help",
+  "logout": "Logout"
 }
