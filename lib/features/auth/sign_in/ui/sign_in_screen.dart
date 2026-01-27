@@ -128,7 +128,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 // Sign In Button
                 MyButton(
-                  onPressed: () => context.read<SignInCubit>().emitLoginState(),
+                  onPressed: () =>
+                      context.read<SignInCubit>().emitSignInState(),
                   height: 48.h,
                   backgroundColor: MyTheme.darkTheme.colorScheme.primary,
                   text: context.l10n.signIn,

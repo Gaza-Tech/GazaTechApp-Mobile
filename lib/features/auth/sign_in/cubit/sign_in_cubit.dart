@@ -13,7 +13,7 @@ class SignInCubit extends Cubit<SignInState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Future<void> emitLoginState() async {
+  Future<void> emitSignInState() async {
     if (!formKey.currentState!.validate()) return;
 
     emit(const SignInState.loading());
@@ -26,7 +26,7 @@ class SignInCubit extends Cubit<SignInState> {
     );
 
     result.when(
-      success: (data) => emit(const SignInState.success("Login Successful")),
+      success: (data) => emit(const SignInState.success("Sign in Successful")),
       failure: (error) => emit(SignInState.failure(error.message ?? "Error")),
     );
   }

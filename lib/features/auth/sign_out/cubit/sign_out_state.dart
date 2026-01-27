@@ -5,6 +5,6 @@ part 'sign_out_state.freezed.dart';
 class SignOutState with _$SignOutState {
   const factory SignOutState.initial() = _Initial;
   const factory SignOutState.loading() = _Loading;
-  const factory SignOutState.loggedOut() = _LoggedOut;
-  const factory SignOutState.error(String message) = _Error;
+  const factory SignOutState.success(String message) = Success;
+  const factory SignOutState.failure(String message) = Falure;
 }

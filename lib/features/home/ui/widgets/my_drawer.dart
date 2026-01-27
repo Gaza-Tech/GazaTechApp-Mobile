@@ -118,7 +118,7 @@ class MyDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-              context.read<SignOutCubit>().signOut();
+              context.read<SignOutCubit>().emitSignOutState();
             },
           ),
         ],

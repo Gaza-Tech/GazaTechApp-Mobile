@@ -14,6 +14,12 @@ class CommunityScreen extends StatelessWidget {
     return CustomScrollView(
       controller: scrollController,
       slivers: [
+        SliverAppBar(
+          title: Text(context.l10n.community),
+          floating: true,
+          snap: true,
+          elevation: 2,
+        ),
         SliverPadding(
           padding: const EdgeInsets.all(16),
           sliver: SliverList(
