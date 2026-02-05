@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,6 +27,13 @@ void main() async {
 
   // Setup Dependency Injection
   await setupGetIt();
+
+  // Set the system UI mode to edge-to-edge,
+  // making the navigation bar and status bar transparent
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent),
+  );
 
   runApp(MyApp(myRouter: MyRouter()));
 }

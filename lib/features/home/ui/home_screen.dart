@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/features/marketplace/ui/marketplace_screen.dart';
 import 'package:gaza_tech/features/community/ui/community_screen.dart';
@@ -78,7 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
             bottomNavigationBar: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
-              height: _isBottomNavVisible ? kBottomNavigationBarHeight : 0,
+              height: _isBottomNavVisible
+                  ? kBottomNavigationBarHeight + 20.h
+                  : 0,
               child: Wrap(
                 children: [
                   BottomNavigationBar(
@@ -86,17 +90,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: (index) => setState(() => _currentIndex = index),
                     type: BottomNavigationBarType.fixed,
                     selectedItemColor: Theme.of(context).colorScheme.primary,
+                    showSelectedLabels: false,
+                    showUnselectedLabels: false,
+                    iconSize: 28.sp,
                     items: [
                       BottomNavigationBarItem(
-                        icon: const Icon(Icons.store_outlined),
+                        icon: const Icon(Icons.storefront_outlined),
                         label: context.l10n.marketplace,
-                        activeIcon: const Icon(Icons.store),
+                        activeIcon: const Icon(Icons.storefront_rounded),
                         backgroundColor: Theme.of(context).colorScheme.primary,
                       ),
                       BottomNavigationBarItem(
-                        icon: const Icon(Icons.people_outline),
+                        icon: const Icon(Icons.people_alt_outlined),
                         label: context.l10n.community,
-                        activeIcon: const Icon(Icons.people),
+                        activeIcon: const Icon(Icons.people_alt_rounded),
                         backgroundColor: Theme.of(context).colorScheme.primary,
                       ),
                     ],

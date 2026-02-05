@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/localization/locale_cubit.dart';
+import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -22,15 +24,15 @@ class MyDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 CircleAvatar(
-                  radius: 32,
+                  radius: 32.r,
                   backgroundColor: Theme.of(context).colorScheme.onPrimary,
                   child: Icon(
                     Icons.person,
-                    size: 40,
+                    size: 40.sp,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                const SizedBox(height: 12),
+                const VerticalSpace(12),
                 Text(
                   context.l10n.welcomeHome,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
