@@ -86,6 +86,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Wrap(
                 children: [
                   BottomNavigationBar(
+                    backgroundColor: Theme.of(
+                      context,
+                    ).appBarTheme.backgroundColor,
                     currentIndex: _currentIndex,
                     onTap: (index) => setState(() => _currentIndex = index),
                     type: BottomNavigationBarType.fixed,
@@ -123,18 +126,26 @@ class _HomeScreenState extends State<HomeScreen> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
-      child: FloatingActionButton.extended(
-        onPressed: () => _onFabPressed(context),
-        icon: Icon(_currentIndex == 0 ? Icons.add : Icons.create),
-        label: AnimatedSize(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          child: _isFabExtended
-              ? Text(_currentIndex == 0 ? context.l10n.addListing : 'New Post')
-              : const SizedBox.shrink(),
-        ),
-        isExtended: _isFabExtended,
-      ),
+      child: _isFabExtended
+          ? FloatingActionButton.extended(
+              onPressed: () => _onFabPressed(context),
+              icon: Icon(_currentIndex == 0 ? Icons.add : Icons.create),
+              label: AnimatedSize(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                child: _isFabExtended
+                    ? Text(
+                        _currentIndex == 0
+                            ? context.l10n.addListing
+                            : 'New Post',
+                      )
+                    : const SizedBox.shrink(),
+              ),
+            )
+          : FloatingActionButton(
+              onPressed: () => _onFabPressed(context),
+              child: Icon(_currentIndex == 0 ? Icons.add : Icons.create),
+            ),
     );
   }
 
