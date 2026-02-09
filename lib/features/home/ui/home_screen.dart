@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/marketplace/ui/marketplace_screen.dart';
 import 'package:gaza_tech/features/community/ui/community_screen.dart';
 import 'package:gaza_tech/features/home/ui/widgets/my_drawer.dart';
@@ -150,13 +151,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onFabPressed(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          _currentIndex == 0 ? 'Add new listing' : 'Create new post',
-        ),
-        duration: const Duration(seconds: 1),
-      ),
-    );
+    context.pushNamed(MyRoutes.addListing);
   }
 }
