@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
-import 'package:gaza_tech/core/theme/my_theme.dart';
+import 'package:gaza_tech/core/theme/my_themes.dart';
 import 'package:gaza_tech/core/widgets/language_switcher.dart';
 import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
@@ -119,7 +119,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Text(
                       context.l10n.forgotPasswordLink,
                       style: MyTextStyle.action.m.copyWith(
-                        color: MyTheme.darkTheme.colorScheme.primary,
+                        color: MyThemes.darkTheme.colorScheme.primary,
                       ),
                     ),
                   ),
@@ -131,7 +131,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   onPressed: () =>
                       context.read<SignInCubit>().emitSignInState(),
                   height: 48.h,
-                  backgroundColor: MyTheme.darkTheme.colorScheme.primary,
+                  backgroundColor: MyThemes.darkTheme.colorScheme.primary,
                   text: context.l10n.signIn,
                   textStyle: MyTextStyle.action.l,
                 ),

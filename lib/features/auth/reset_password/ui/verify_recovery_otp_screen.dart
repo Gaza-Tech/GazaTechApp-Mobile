@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
-import 'package:gaza_tech/core/theme/my_theme.dart';
+import 'package:gaza_tech/core/theme/my_themes.dart';
 import 'package:gaza_tech/core/widgets/my_otp_form_field.dart';
 import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
@@ -28,10 +28,10 @@ class _VerifyRecoveryOtpScreenState extends State<VerifyRecoveryOtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyTheme.darkTheme.scaffoldBackgroundColor,
+        backgroundColor: MyThemes.darkTheme.scaffoldBackgroundColor,
         elevation: 0,
         iconTheme: IconThemeData(
-          color: MyTheme.darkTheme.colorScheme.onSurface,
+          color: MyThemes.darkTheme.colorScheme.onSurface,
         ),
       ),
       body: StatusBarHider(
@@ -44,7 +44,7 @@ class _VerifyRecoveryOtpScreenState extends State<VerifyRecoveryOtpScreen> {
                 Text(
                   context.l10n.verifyYourEmail,
                   style: MyTextStyle.heading.h1.copyWith(
-                    color: MyTheme.darkTheme.colorScheme.onSurface,
+                    color: MyThemes.darkTheme.colorScheme.onSurface,
                   ),
                 ),
                 const VerticalSpace(8),
@@ -53,14 +53,14 @@ class _VerifyRecoveryOtpScreenState extends State<VerifyRecoveryOtpScreen> {
                 Text(
                   widget.email,
                   style: MyTextStyle.body.s.copyWith(
-                    color: MyTheme.darkTheme.colorScheme.primary,
+                    color: MyThemes.darkTheme.colorScheme.primary,
                   ),
                 ),
                 const VerticalSpace(40),
                 Text(
                   context.l10n.enterRecoveryCode,
                   style: MyTextStyle.body.s.copyWith(
-                    color: MyTheme.darkTheme.colorScheme.onSurface,
+                    color: MyThemes.darkTheme.colorScheme.onSurface,
                   ),
                 ),
                 const VerticalSpace(8),
@@ -92,7 +92,7 @@ class _VerifyRecoveryOtpScreenState extends State<VerifyRecoveryOtpScreen> {
                             .emitVerifyOtpState()
                       : null,
                   height: 48.h,
-                  backgroundColor: MyTheme.darkTheme.colorScheme.primary,
+                  backgroundColor: MyThemes.darkTheme.colorScheme.primary,
                 ),
                 const VerifyRecoveryOtpBlocListener(),
               ],

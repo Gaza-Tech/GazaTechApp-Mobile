@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/theme/my_colors.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 
-class MyTheme {
+class MyThemes {
   // ==========================
   // LIGHT THEME
   // ==========================

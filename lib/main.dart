@@ -14,7 +14,7 @@ import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/l10n/app_localizations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'core/theme/my_theme.dart';
+import 'core/theme/my_themes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -98,11 +98,11 @@ class _MyAppState extends State<MyApp> {
 
                 // Theme Configuration - follows system theme
                 themeMode: ThemeMode.system,
-                theme: MyTheme.getTheme(
+                theme: MyThemes.getTheme(
                   brightness: Brightness.light,
                   locale: localeState.locale,
                 ),
-                darkTheme: MyTheme.getTheme(
+                darkTheme: MyThemes.getTheme(
                   brightness: Brightness.dark,
                   locale: localeState.locale,
                 ),
