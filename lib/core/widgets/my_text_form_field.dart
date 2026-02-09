@@ -14,6 +14,15 @@ class MyTextFormField extends StatelessWidget {
     required this.controller,
     this.validator,
     required this.textInputType,
+    this.helperText,
+    this.hintMaxLines,
+    this.helperMaxLines,
+    this.counterText,
+    this.maxLength,
+    this.maxLines,
+    this.minLines,
+    this.textInputAction,
+    this.onFieldSubmitted,
   });
 
   final EdgeInsets? contentPadding;
@@ -21,22 +30,38 @@ class MyTextFormField extends StatelessWidget {
   final InputBorder? enabledBorder;
   final TextStyle? inputTextStyle;
   final TextStyle? hintStyle;
+  final String? helperText;
+  final String? counterText;
   final String hintText;
+  final int? hintMaxLines;
+  final int? helperMaxLines;
   final bool? isObscureText;
   final Widget? suffixIcon;
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final TextInputType textInputType;
+  final int? maxLength;
+  final int? maxLines;
+  final int? minLines;
+  final TextInputAction? textInputAction;
+  final void Function(String)? onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (PointerDownEvent event) {
+        FocusScope.of(context).unfocus();
+      },
       controller: controller,
       validator: validator,
       keyboardType: textInputType,
       obscureText: isObscureText ?? false,
       style: inputTextStyle ?? Theme.of(context).textTheme.bodyMedium,
-
+      maxLength: maxLength,
+      maxLines: maxLines,
+      minLines: minLines,
+      textInputAction: textInputAction,
+      onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         isDense: true,
 
@@ -53,10 +78,9 @@ class MyTextFormField extends StatelessWidget {
         hintStyle:
             hintStyle ?? Theme.of(context).inputDecorationTheme.hintStyle,
 
+        helperText: helperText,
         // 4. Icon
         suffixIcon: suffixIcon,
-
-        // 5. Colors: 'filled' and 'fillColor' are removed; the Theme handles them.
       ),
     );
   }
