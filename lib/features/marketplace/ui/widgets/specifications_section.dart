@@ -4,6 +4,7 @@ import 'package:gaza_tech/core/theme/my_colors.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/features/marketplace/ui/widgets/labeled_field.dart';
 
 class SpecificationEntry {
   final TextEditingController nameController;
@@ -39,7 +40,8 @@ class SpecificationsDisplay extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Specifications', style: MyTextStyle.heading.h3),
+            const LabeledField(label: 'Specifications', isRequired: false),
+
             GestureDetector(
               onTap: onAdd,
               child: Text(
@@ -51,6 +53,12 @@ class SpecificationsDisplay extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        Text(
+          'Add technical details to help buyers make informed decisions',
+          style: MyTextStyle.body.s.copyWith(
+            color: MyColors.neutral.dark.light,
+          ),
         ),
         const VerticalSpace(12),
         ...List.generate(specifications.length, (index) {
@@ -85,13 +93,13 @@ class _SpecificationCard extends StatelessWidget {
         children: [
           MyTextFormField(
             controller: entry.nameController,
-            hintText: 'Field name',
+            hintText: 'e.g., Processor',
             textInputType: TextInputType.text,
           ),
           const VerticalSpace(8),
           MyTextFormField(
             controller: entry.valueController,
-            hintText: 'Value',
+            hintText: 'e.g., Apple A16 Bionic',
             textInputType: TextInputType.text,
           ),
           const VerticalSpace(8),

@@ -21,7 +21,6 @@ class PriceField extends StatelessWidget {
     return MyTextFormField(
       controller: controller,
       hintText: '0.00',
-      helperText: 'Set a competitive price to attract buyers',
       textInputType: const TextInputType.numberWithOptions(decimal: true),
       suffixIcon: Container(
         margin: EdgeInsets.only(right: 8.w),
@@ -65,12 +64,14 @@ class _CurrencyChip extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
         decoration: BoxDecoration(
           color: isSelected ? MyColors.highlight.darkest : Colors.transparent,
-          borderRadius: BorderRadius.circular(50.r),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         child: Text(
           label,
           style: MyTextStyle.body.s.copyWith(
-            color: isSelected ? Colors.white : MyColors.neutral.dark.light,
+            color: isSelected
+                ? MyColors.neutral.dark.darkest
+                : MyColors.neutral.dark.light,
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
           ),
         ),
