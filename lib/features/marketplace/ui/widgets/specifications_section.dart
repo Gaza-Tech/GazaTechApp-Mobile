@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gaza_tech/core/theme/my_colors.dart';
+import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
@@ -34,20 +34,21 @@ class SpecificationsDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const LabeledField(label: 'Specifications', isRequired: false),
+            LabeledField(label: context.l10n.specificationsLabel, isRequired: false),
 
             GestureDetector(
               onTap: onAdd,
               child: Text(
-                '+ Add Field',
+                context.l10n.addField,
                 style: MyTextStyle.body.m.copyWith(
-                  color: MyColors.highlight.darkest,
+                  color: theme.colorScheme.primary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -55,10 +56,8 @@ class SpecificationsDisplay extends StatelessWidget {
           ],
         ),
         Text(
-          'Add technical details to help buyers make informed decisions',
-          style: MyTextStyle.body.s.copyWith(
-            color: MyColors.neutral.dark.light,
-          ),
+          context.l10n.specificationsHelper,
+          style: theme.textTheme.bodySmall,
         ),
         const VerticalSpace(12),
         ...List.generate(specifications.length, (index) {
@@ -87,19 +86,19 @@ class _SpecificationCard extends StatelessWidget {
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: MyColors.neutral.dark.medium),
+        border: Border.all(color: Theme.of(context).dividerColor),
       ),
       child: Column(
         children: [
           MyTextFormField(
             controller: entry.nameController,
-            hintText: 'e.g., Processor',
+            hintText: context.l10n.specNameHint,
             textInputType: TextInputType.text,
           ),
           const VerticalSpace(8),
           MyTextFormField(
             controller: entry.valueController,
-            hintText: 'e.g., Apple A16 Bionic',
+            hintText: context.l10n.specValueHint,
             textInputType: TextInputType.text,
           ),
           const VerticalSpace(8),
@@ -107,7 +106,7 @@ class _SpecificationCard extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: onRemove,
-              label: Text('Remove', style: MyTextStyle.action.l),
+              label: Text(context.l10n.remove, style: MyTextStyle.action.l),
               icon: const Icon(Icons.delete),
             ),
           ),

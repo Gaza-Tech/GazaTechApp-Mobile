@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gaza_tech/core/theme/my_colors.dart';
+import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:image_picker/image_picker.dart';
@@ -72,12 +72,14 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
   }
 
   Widget _buildAddPhotoSlot() {
+    final borderColor = Theme.of(context).dividerColor;
+    final contentColor = Theme.of(context).textTheme.bodySmall?.color;
     return GestureDetector(
       onTap: _pickImage,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(color: MyColors.neutral.dark.light, width: 1.5),
+          border: Border.all(color: borderColor, width: 1.5),
         ),
         child: Center(
           child: Column(
@@ -86,13 +88,13 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
               Icon(
                 Icons.camera_alt_rounded,
                 size: 32.sp,
-                color: MyColors.neutral.dark.light,
+                color: contentColor,
               ),
               const VerticalSpace(4),
               Text(
-                'Add Main Image',
+                context.l10n.addMainImage,
                 style: MyTextStyle.caption.m.copyWith(
-                  color: MyColors.neutral.dark.light,
+                  color: contentColor,
                 ),
               ),
             ],
@@ -103,13 +105,14 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
   }
 
   Widget _buildEmptySlot() {
+    final borderColor = Theme.of(context).dividerColor;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: MyColors.neutral.dark.light, width: 1.5),
+        border: Border.all(color: borderColor, width: 1.5),
       ),
       child: Center(
-        child: Icon(Icons.add, size: 28.sp, color: MyColors.neutral.dark.light),
+        child: Icon(Icons.add, size: 28.sp, color: Theme.of(context).iconTheme.color),
       ),
     );
   }
@@ -133,7 +136,7 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
       childWhenDragging: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(color: MyColors.neutral.dark.light, width: 1.5),
+          border: Border.all(color: Theme.of(context).dividerColor, width: 1.5),
         ),
       ),
       child: DragTarget<int>(

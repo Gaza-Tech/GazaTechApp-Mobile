@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gaza_tech/core/theme/my_colors.dart';
-import 'package:gaza_tech/core/theme/my_text_styles.dart';
 
 class Selector extends StatelessWidget {
   final String? selectedValue;
@@ -21,6 +19,7 @@ class Selector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GestureDetector(
       onTap: () => _showBottomSheet(context),
       child: InputDecorator(
@@ -31,9 +30,9 @@ class Selector extends StatelessWidget {
             Text(
               selectedValue ?? hintText,
               style: selectedValue != null
-                  ? MyTextStyle.body.m
-                  : MyTextStyle.body.m.copyWith(
-                      color: MyColors.neutral.dark.light,
+                  ? theme.textTheme.bodyMedium
+                  : theme.textTheme.bodyMedium?.copyWith(
+                      color: theme.inputDecorationTheme.hintStyle?.color,
                     ),
             ),
             const Icon(Icons.keyboard_arrow_down),
@@ -44,6 +43,7 @@ class Selector extends StatelessWidget {
   }
 
   void _showBottomSheet(BuildContext context) {
+    final theme = Theme.of(context);
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -64,7 +64,7 @@ class Selector extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.all(16.w),
-                    child: Text(title, style: MyTextStyle.heading.h3),
+                    child: Text(title, style: theme.textTheme.titleMedium),
                   ),
                   Expanded(
                     child: ListView.builder(
@@ -74,11 +74,11 @@ class Selector extends StatelessWidget {
                         final item = items[index];
                         final isSelected = selectedValue == item;
                         return ListTile(
-                          title: Text(item, style: MyTextStyle.body.m),
+                          title: Text(item, style: theme.textTheme.bodyMedium),
                           trailing: isSelected
                               ? Icon(
                                   Icons.check,
-                                  color: MyColors.highlight.darkest,
+                                  color: theme.colorScheme.primary,
                                 )
                               : null,
                           onTap: () {

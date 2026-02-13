@@ -281,4 +281,152 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sign_out => 'Sign out';
+
+  @override
+  String get saveDraft => 'Save Draft';
+
+  @override
+  String productImagesMax(int count) {
+    return 'Product Images (Max $count)';
+  }
+
+  @override
+  String get productImagesHelper =>
+      'Add clear photos of your product. First image will be the cover.';
+
+  @override
+  String get productInformation => 'Product Information';
+
+  @override
+  String get publishListing => 'Publish Listing';
+
+  @override
+  String get titleLabel => 'Title';
+
+  @override
+  String get titleHelper => 'Be specific and descriptive';
+
+  @override
+  String get titleHint => 'e.g., iPhone 14 Pro Max 256GB Purple';
+
+  @override
+  String get categoryLabel => 'Category';
+
+  @override
+  String get selectCategory => 'Select category';
+
+  @override
+  String get selectCategoryTitle => 'Select Category';
+
+  @override
+  String get conditionLabel => 'Condition';
+
+  @override
+  String get conditionNew => 'New';
+
+  @override
+  String get conditionUsed => 'Used';
+
+  @override
+  String get conditionRefurbished => 'Refurbished';
+
+  @override
+  String get priceLabel => 'Price';
+
+  @override
+  String get priceHelper => 'Set a competitive price to attract buyers';
+
+  @override
+  String get priceHint => '0.00';
+
+  @override
+  String get currencyILS => '₪ ILS';
+
+  @override
+  String get currencyUSD => '\$ USD';
+
+  @override
+  String get descriptionLabel => 'Description';
+
+  @override
+  String get descriptionHelper => 'Be honest and detailed';
+
+  @override
+  String get descriptionHint => 'Describe your product...';
+
+  @override
+  String get specificationsLabel => 'Specifications';
+
+  @override
+  String get addField => '+ Add Field';
+
+  @override
+  String get specificationsHelper =>
+      'Add technical details to help buyers make informed decisions';
+
+  @override
+  String get specNameHint => 'e.g., Processor';
+
+  @override
+  String get specValueHint => 'e.g., Apple A16 Bionic';
+
+  @override
+  String get remove => 'Remove';
+
+  @override
+  String get locationLabel => 'Location';
+
+  @override
+  String get selectLocation => 'Select location';
+
+  @override
+  String get selectLocationTitle => 'Select Location';
+
+  @override
+  String get addMainImage => 'Add Main Image';
+
+  @override
+  String get categoryElectronics => 'Electronics';
+
+  @override
+  String get categoryClothing => 'Clothing';
+
+  @override
+  String get categoryHomeGarden => 'Home & Garden';
+
+  @override
+  String get categoryFood => 'Food';
+
+  @override
+  String get categoryServices => 'Services';
+
+  @override
+  String get categoryVehicles => 'Vehicles';
+
+  @override
+  String get categoryBooks => 'Books';
+
+  @override
+  String get categorySports => 'Sports';
+
+  @override
+  String get categoryOther => 'Other';
+
+  @override
+  String get locationGazaCity => 'Gaza City';
+
+  @override
+  String get locationJabalia => 'Jabalia';
+
+  @override
+  String get locationAlBureij => 'Al Bureij';
+
+  @override
+  String get locationAlNusirat => 'Al Nusirat';
+
+  @override
+  String get locationDeirAlBalah => 'Deir Al Balah';
+
+  @override
+  String get locationKhanYunis => 'Khan Yunis';
 }

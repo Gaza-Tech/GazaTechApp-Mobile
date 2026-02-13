@@ -607,6 +607,294 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign out'**
   String get sign_out;
+
+  /// No description provided for @saveDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Draft'**
+  String get saveDraft;
+
+  /// No description provided for @productImagesMax.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Images (Max {count})'**
+  String productImagesMax(int count);
+
+  /// No description provided for @productImagesHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Add clear photos of your product. First image will be the cover.'**
+  String get productImagesHelper;
+
+  /// No description provided for @productInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Information'**
+  String get productInformation;
+
+  /// No description provided for @publishListing.
+  ///
+  /// In en, this message translates to:
+  /// **'Publish Listing'**
+  String get publishListing;
+
+  /// No description provided for @titleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get titleLabel;
+
+  /// No description provided for @titleHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Be specific and descriptive'**
+  String get titleHelper;
+
+  /// No description provided for @titleHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., iPhone 14 Pro Max 256GB Purple'**
+  String get titleHint;
+
+  /// No description provided for @categoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get categoryLabel;
+
+  /// No description provided for @selectCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Select category'**
+  String get selectCategory;
+
+  /// No description provided for @selectCategoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Category'**
+  String get selectCategoryTitle;
+
+  /// No description provided for @conditionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Condition'**
+  String get conditionLabel;
+
+  /// No description provided for @conditionNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get conditionNew;
+
+  /// No description provided for @conditionUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Used'**
+  String get conditionUsed;
+
+  /// No description provided for @conditionRefurbished.
+  ///
+  /// In en, this message translates to:
+  /// **'Refurbished'**
+  String get conditionRefurbished;
+
+  /// No description provided for @priceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get priceLabel;
+
+  /// No description provided for @priceHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a competitive price to attract buyers'**
+  String get priceHelper;
+
+  /// No description provided for @priceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'0.00'**
+  String get priceHint;
+
+  /// No description provided for @currencyILS.
+  ///
+  /// In en, this message translates to:
+  /// **'₪ ILS'**
+  String get currencyILS;
+
+  /// No description provided for @currencyUSD.
+  ///
+  /// In en, this message translates to:
+  /// **'\$ USD'**
+  String get currencyUSD;
+
+  /// No description provided for @descriptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get descriptionLabel;
+
+  /// No description provided for @descriptionHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Be honest and detailed'**
+  String get descriptionHelper;
+
+  /// No description provided for @descriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe your product...'**
+  String get descriptionHint;
+
+  /// No description provided for @specificationsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Specifications'**
+  String get specificationsLabel;
+
+  /// No description provided for @addField.
+  ///
+  /// In en, this message translates to:
+  /// **'+ Add Field'**
+  String get addField;
+
+  /// No description provided for @specificationsHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Add technical details to help buyers make informed decisions'**
+  String get specificationsHelper;
+
+  /// No description provided for @specNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Processor'**
+  String get specNameHint;
+
+  /// No description provided for @specValueHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Apple A16 Bionic'**
+  String get specValueHint;
+
+  /// No description provided for @remove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get remove;
+
+  /// No description provided for @locationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get locationLabel;
+
+  /// No description provided for @selectLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Select location'**
+  String get selectLocation;
+
+  /// No description provided for @selectLocationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Location'**
+  String get selectLocationTitle;
+
+  /// No description provided for @addMainImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Main Image'**
+  String get addMainImage;
+
+  /// No description provided for @categoryElectronics.
+  ///
+  /// In en, this message translates to:
+  /// **'Electronics'**
+  String get categoryElectronics;
+
+  /// No description provided for @categoryClothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Clothing'**
+  String get categoryClothing;
+
+  /// No description provided for @categoryHomeGarden.
+  ///
+  /// In en, this message translates to:
+  /// **'Home & Garden'**
+  String get categoryHomeGarden;
+
+  /// No description provided for @categoryFood.
+  ///
+  /// In en, this message translates to:
+  /// **'Food'**
+  String get categoryFood;
+
+  /// No description provided for @categoryServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Services'**
+  String get categoryServices;
+
+  /// No description provided for @categoryVehicles.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicles'**
+  String get categoryVehicles;
+
+  /// No description provided for @categoryBooks.
+  ///
+  /// In en, this message translates to:
+  /// **'Books'**
+  String get categoryBooks;
+
+  /// No description provided for @categorySports.
+  ///
+  /// In en, this message translates to:
+  /// **'Sports'**
+  String get categorySports;
+
+  /// No description provided for @categoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get categoryOther;
+
+  /// No description provided for @locationGazaCity.
+  ///
+  /// In en, this message translates to:
+  /// **'Gaza City'**
+  String get locationGazaCity;
+
+  /// No description provided for @locationJabalia.
+  ///
+  /// In en, this message translates to:
+  /// **'Jabalia'**
+  String get locationJabalia;
+
+  /// No description provided for @locationAlBureij.
+  ///
+  /// In en, this message translates to:
+  /// **'Al Bureij'**
+  String get locationAlBureij;
+
+  /// No description provided for @locationAlNusirat.
+  ///
+  /// In en, this message translates to:
+  /// **'Al Nusirat'**
+  String get locationAlNusirat;
+
+  /// No description provided for @locationDeirAlBalah.
+  ///
+  /// In en, this message translates to:
+  /// **'Deir Al Balah'**
+  String get locationDeirAlBalah;
+
+  /// No description provided for @locationKhanYunis.
+  ///
+  /// In en, this message translates to:
+  /// **'Khan Yunis'**
+  String get locationKhanYunis;
 }
 
 class _AppLocalizationsDelegate

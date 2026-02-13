@@ -57,7 +57,9 @@ class MyTextFormField extends StatelessWidget {
       keyboardType: textInputType,
       obscureText: isObscureText ?? false,
       style: inputTextStyle ?? Theme.of(context).textTheme.bodyMedium,
+      maxLines: maxLines,
       maxLength: maxLength,
+      minLines: minLines,
       textInputAction: textInputAction,
       onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(

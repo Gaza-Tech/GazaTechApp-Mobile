@@ -97,6 +97,18 @@ class MyThemes {
           textStyle: MyTextStyle.action.l,
         ),
       ),
+
+      // 7. Chip Theme
+      chipTheme: ChipThemeData(
+        backgroundColor: MyColors.neutral.light.lightest,
+        labelStyle: MyTextStyle.body.s.copyWith(
+          color: MyColors.neutral.dark.darkest,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.dg),
+        ),
+      ),
     );
   }
 
