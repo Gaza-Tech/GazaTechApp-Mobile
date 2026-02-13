@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
-import 'package:gaza_tech/core/theme/my_theme.dart';
+import 'package:gaza_tech/core/theme/my_themes.dart';
 import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
@@ -34,10 +34,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyTheme.darkTheme.scaffoldBackgroundColor,
+        backgroundColor: MyThemes.darkTheme.scaffoldBackgroundColor,
         elevation: 0,
         iconTheme: IconThemeData(
-          color: MyTheme.darkTheme.colorScheme.onSurface,
+          color: MyThemes.darkTheme.colorScheme.onSurface,
         ),
         automaticallyImplyLeading: false,
       ),
@@ -51,7 +51,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 Text(
                   context.l10n.resetPasswordTitle,
                   style: MyTextStyle.heading.h1.copyWith(
-                    color: MyTheme.darkTheme.colorScheme.onSurface,
+                    color: MyThemes.darkTheme.colorScheme.onSurface,
                   ),
                 ),
                 const VerticalSpace(8),
@@ -151,7 +151,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       .read<ResetPasswordCubit>()
                       .emitResetPasswordState(),
                   height: 48.h,
-                  backgroundColor: MyTheme.darkTheme.colorScheme.primary,
+                  backgroundColor: MyThemes.darkTheme.colorScheme.primary,
                 ),
                 const ResetPasswordBlocListener(),
               ],

@@ -280,4 +280,152 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sign_out => 'تسجيل الخروج';
+
+  @override
+  String get saveDraft => 'حفظ المسودة';
+
+  @override
+  String productImagesMax(int count) {
+    return 'صور المنتج (الحد الأقصى $count)';
+  }
+
+  @override
+  String get productImagesHelper =>
+      'أضف صوراً واضحة لمنتجك. الصورة الأولى ستكون صورة الغلاف.';
+
+  @override
+  String get productInformation => 'معلومات المنتج';
+
+  @override
+  String get publishListing => 'نشر الإعلان';
+
+  @override
+  String get titleLabel => 'العنوان';
+
+  @override
+  String get titleHelper => 'كن محدداً ووصفياً';
+
+  @override
+  String get titleHint => 'مثال: آيفون 14 برو ماكس 256 جيجابايت بنفسجي';
+
+  @override
+  String get categoryLabel => 'الفئة';
+
+  @override
+  String get selectCategory => 'اختر الفئة';
+
+  @override
+  String get selectCategoryTitle => 'اختر الفئة';
+
+  @override
+  String get conditionLabel => 'الحالة';
+
+  @override
+  String get conditionNew => 'جديد';
+
+  @override
+  String get conditionUsed => 'مستعمل';
+
+  @override
+  String get conditionRefurbished => 'مُجدَّد';
+
+  @override
+  String get priceLabel => 'السعر';
+
+  @override
+  String get priceHelper => 'حدد سعراً تنافسياً لجذب المشترين';
+
+  @override
+  String get priceHint => '0.00';
+
+  @override
+  String get currencyILS => '₪ شيكل';
+
+  @override
+  String get currencyUSD => '\$ دولار';
+
+  @override
+  String get descriptionLabel => 'الوصف';
+
+  @override
+  String get descriptionHelper => 'كن صادقاً ومفصلاً';
+
+  @override
+  String get descriptionHint => 'صف منتجك...';
+
+  @override
+  String get specificationsLabel => 'المواصفات';
+
+  @override
+  String get addField => '+ إضافة حقل';
+
+  @override
+  String get specificationsHelper =>
+      'أضف تفاصيل تقنية لمساعدة المشترين على اتخاذ قرارات مدروسة';
+
+  @override
+  String get specNameHint => 'مثال: المعالج';
+
+  @override
+  String get specValueHint => 'مثال: Apple A16 Bionic';
+
+  @override
+  String get remove => 'حذف';
+
+  @override
+  String get locationLabel => 'الموقع';
+
+  @override
+  String get selectLocation => 'اختر الموقع';
+
+  @override
+  String get selectLocationTitle => 'اختر الموقع';
+
+  @override
+  String get addMainImage => 'إضافة صورة رئيسية';
+
+  @override
+  String get categoryElectronics => 'إلكترونيات';
+
+  @override
+  String get categoryClothing => 'ملابس';
+
+  @override
+  String get categoryHomeGarden => 'المنزل والحديقة';
+
+  @override
+  String get categoryFood => 'طعام';
+
+  @override
+  String get categoryServices => 'خدمات';
+
+  @override
+  String get categoryVehicles => 'مركبات';
+
+  @override
+  String get categoryBooks => 'كتب';
+
+  @override
+  String get categorySports => 'رياضة';
+
+  @override
+  String get categoryOther => 'أخرى';
+
+  @override
+  String get locationGazaCity => 'مدينة غزة';
+
+  @override
+  String get locationJabalia => 'جباليا';
+
+  @override
+  String get locationAlBureij => 'البريج';
+
+  @override
+  String get locationAlNusirat => 'النصيرات';
+
+  @override
+  String get locationDeirAlBalah => 'دير البلح';
+
+  @override
+  String get locationKhanYunis => 'خان يونس';
 }

@@ -138,7 +138,7 @@
   "arabic": "العربية",
 
   "marketplace": "Marketplace",
-  "addListing":"Add Listing",
+  "addListing": "Add Listing",
   "community": "Community",
   "marketplaceContent": "Browse products and services",
   "communityContent": "Connect with others",
@@ -146,5 +146,71 @@
   "profile": "Profile",
   "about": "About",
   "help": "Help",
-  "sign_out": "Sign out"
+  "sign_out": "Sign out",
+
+  "saveDraft": "Save Draft",
+  "productImagesMax": "Product Images (Max {count})",
+  "@productImagesMax": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "productImagesHelper": "Add clear photos of your product. First image will be the cover.",
+  "productInformation": "Product Information",
+  "publishListing": "Publish Listing",
+
+  "titleLabel": "Title",
+  "titleHelper": "Be specific and descriptive",
+  "titleHint": "e.g., iPhone 14 Pro Max 256GB Purple",
+
+  "categoryLabel": "Category",
+  "selectCategory": "Select category",
+  "selectCategoryTitle": "Select Category",
+
+  "conditionLabel": "Condition",
+  "conditionNew": "New",
+  "conditionUsed": "Used",
+  "conditionRefurbished": "Refurbished",
+
+  "priceLabel": "Price",
+  "priceHelper": "Set a competitive price to attract buyers",
+  "priceHint": "0.00",
+  "currencyILS": "₪ ILS",
+  "currencyUSD": "$ USD",
+
+  "descriptionLabel": "Description",
+  "descriptionHelper": "Be honest and detailed",
+  "descriptionHint": "Describe your product...",
+
+  "specificationsLabel": "Specifications",
+  "addField": "+ Add Field",
+  "specificationsHelper": "Add technical details to help buyers make informed decisions",
+  "specNameHint": "e.g., Processor",
+  "specValueHint": "e.g., Apple A16 Bionic",
+  "remove": "Remove",
+
+  "locationLabel": "Location",
+  "selectLocation": "Select location",
+  "selectLocationTitle": "Select Location",
+
+  "addMainImage": "Add Main Image",
+
+  "categoryElectronics": "Electronics",
+  "categoryClothing": "Clothing",
+  "categoryHomeGarden": "Home & Garden",
+  "categoryFood": "Food",
+  "categoryServices": "Services",
+  "categoryVehicles": "Vehicles",
+  "categoryBooks": "Books",
+  "categorySports": "Sports",
+  "categoryOther": "Other",
+
+  "locationGazaCity": "Gaza City",
+  "locationJabalia": "Jabalia",
+  "locationAlBureij": "Al Bureij",
+  "locationAlNusirat": "Al Nusirat",
+  "locationDeirAlBalah": "Deir Al Balah",
+  "locationKhanYunis": "Khan Yunis"
 }

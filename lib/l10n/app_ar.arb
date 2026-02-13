@@ -101,5 +101,64 @@
   "profile": "الملف الشخصي",
   "about": "حول",
   "help": "المساعدة",
-  "sign_out": "تسجيل الخروج"
+  "sign_out": "تسجيل الخروج",
+
+  "saveDraft": "حفظ المسودة",
+  "productImagesMax": "صور المنتج (الحد الأقصى {count})",
+  "productImagesHelper": "أضف صوراً واضحة لمنتجك. الصورة الأولى ستكون صورة الغلاف.",
+  "productInformation": "معلومات المنتج",
+  "publishListing": "نشر الإعلان",
+
+  "titleLabel": "العنوان",
+  "titleHelper": "كن محدداً ووصفياً",
+  "titleHint": "مثال: آيفون 14 برو ماكس 256 جيجابايت بنفسجي",
+
+  "categoryLabel": "الفئة",
+  "selectCategory": "اختر الفئة",
+  "selectCategoryTitle": "اختر الفئة",
+
+  "conditionLabel": "الحالة",
+  "conditionNew": "جديد",
+  "conditionUsed": "مستعمل",
+  "conditionRefurbished": "مُجدَّد",
+
+  "priceLabel": "السعر",
+  "priceHelper": "حدد سعراً تنافسياً لجذب المشترين",
+  "priceHint": "0.00",
+  "currencyILS": "₪ شيكل",
+  "currencyUSD": "$ دولار",
+
+  "descriptionLabel": "الوصف",
+  "descriptionHelper": "كن صادقاً ومفصلاً",
+  "descriptionHint": "صف منتجك...",
+
+  "specificationsLabel": "المواصفات",
+  "addField": "+ إضافة حقل",
+  "specificationsHelper": "أضف تفاصيل تقنية لمساعدة المشترين على اتخاذ قرارات مدروسة",
+  "specNameHint": "مثال: المعالج",
+  "specValueHint": "مثال: Apple A16 Bionic",
+  "remove": "حذف",
+
+  "locationLabel": "الموقع",
+  "selectLocation": "اختر الموقع",
+  "selectLocationTitle": "اختر الموقع",
+
+  "addMainImage": "إضافة صورة رئيسية",
+
+  "categoryElectronics": "إلكترونيات",
+  "categoryClothing": "ملابس",
+  "categoryHomeGarden": "المنزل والحديقة",
+  "categoryFood": "طعام",
+  "categoryServices": "خدمات",
+  "categoryVehicles": "مركبات",
+  "categoryBooks": "كتب",
+  "categorySports": "رياضة",
+  "categoryOther": "أخرى",
+
+  "locationGazaCity": "مدينة غزة",
+  "locationJabalia": "جباليا",
+  "locationAlBureij": "البريج",
+  "locationAlNusirat": "النصيرات",
+  "locationDeirAlBalah": "دير البلح",
+  "locationKhanYunis": "خان يونس"
 }

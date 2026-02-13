@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
-import 'package:gaza_tech/core/theme/my_theme.dart';
+import 'package:gaza_tech/core/theme/my_themes.dart';
 import 'package:gaza_tech/core/widgets/my_otp_form_field.dart';
 import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
@@ -28,8 +28,8 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
       appBar: AppBar(
         // background Color matches the scaffold background theme color
         backgroundColor: Theme.of(context).brightness == Brightness.dark
-            ? MyTheme.darkTheme.scaffoldBackgroundColor
-            : MyTheme.lightTheme.scaffoldBackgroundColor,
+            ? MyThemes.darkTheme.scaffoldBackgroundColor
+            : MyThemes.lightTheme.scaffoldBackgroundColor,
         elevation: 0,
       ),
       body: StatusBarHider(
@@ -91,7 +91,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                       ? () =>
                             context.read<VerifyOtpCubit>().emitVerifyOtpState()
                       : null,
-                  backgroundColor: MyTheme.darkTheme.colorScheme.primary,
+                  backgroundColor: MyThemes.darkTheme.colorScheme.primary,
                 ),
                 const VerifyOtpBlocListener(),
               ],

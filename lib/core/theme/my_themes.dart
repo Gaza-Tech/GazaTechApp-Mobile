@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/theme/my_colors.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 
-class MyTheme {
+class MyThemes {
   // ==========================
   // LIGHT THEME
   // ==========================
@@ -95,6 +95,18 @@ class MyTheme {
           ),
           padding: EdgeInsets.symmetric(vertical: 16.w),
           textStyle: MyTextStyle.action.l,
+        ),
+      ),
+
+      // 7. Chip Theme
+      chipTheme: ChipThemeData(
+        backgroundColor: MyColors.neutral.light.lightest,
+        labelStyle: MyTextStyle.body.s.copyWith(
+          color: MyColors.neutral.dark.darkest,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.dg),
         ),
       ),
     );
