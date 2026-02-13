@@ -190,7 +190,7 @@ class _AddListingScreenState extends State<AddListingScreen> {
               ),
               maxLength: 250,
               maxLines: null,
-              minLines: 5,
+              minLines: 10,
             ),
             const VerticalSpace(16),
 
