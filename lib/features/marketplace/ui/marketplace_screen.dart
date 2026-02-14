@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/routes/my_routes.dart';
 
 class MarketplaceScreen extends StatefulWidget {
   final ScrollController scrollController;
@@ -20,7 +21,6 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
           title: Text(context.l10n.marketplace),
           floating: true,
           snap: true,
-          elevation: 2,
         ),
         SliverPadding(
           padding: const EdgeInsets.all(16),
@@ -29,6 +29,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
               return Card(
                 margin: const EdgeInsets.only(bottom: 16),
                 child: ListTile(
+                  onTap: () => context.pushNamed(MyRoutes.listingDetails),
                   leading: CircleAvatar(
                     backgroundColor: Theme.of(
                       context,

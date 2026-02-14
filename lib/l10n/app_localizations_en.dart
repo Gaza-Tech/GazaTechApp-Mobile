@@ -429,4 +429,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get locationKhanYunis => 'Khan Yunis';
+
+  @override
+  String get sellerInformation => 'SELLER INFORMATION';
+
+  @override
+  String memberSince(String date) {
+    return 'Member since $date';
+  }
+
+  @override
+  String get contactSeller => 'Contact Seller';
+
+  @override
+  String get viewProfile => 'View Profile';
+
+  @override
+  String get descriptionSectionTitle => 'DESCRIPTION';
+
+  @override
+  String get specificationsSectionTitle => 'SPECIFICATIONS';
+
+  @override
+  String get similarProducts => 'Similar Products';
+
+  @override
+  String moreFromSeller(String sellerName) {
+    return 'More from $sellerName';
+  }
+
+  @override
+  String daysAgo(int count) {
+    return '$count days ago';
+  }
+
+  @override
+  String get weekAgo => '1 week ago';
+
+  @override
+  String get conditionLikeNew => 'Like New';
 }

@@ -212,5 +212,36 @@
   "locationAlBureij": "Al Bureij",
   "locationAlNusirat": "Al Nusirat",
   "locationDeirAlBalah": "Deir Al Balah",
-  "locationKhanYunis": "Khan Yunis"
+  "locationKhanYunis": "Khan Yunis",
+
+  "sellerInformation": "SELLER INFORMATION",
+  "memberSince": "Member since {date}",
+  "@memberSince": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "contactSeller": "Contact Seller",
+  "viewProfile": "View Profile",
+
+  "descriptionSectionTitle": "DESCRIPTION",
+  "specificationsSectionTitle": "SPECIFICATIONS",
+
+  "similarProducts": "Similar Products",
+  "moreFromSeller": "More from {sellerName}",
+  "@moreFromSeller": {
+    "placeholders": {
+      "sellerName": { "type": "String" }
+    }
+  },
+
+  "daysAgo": "{count} days ago",
+  "@daysAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "weekAgo": "1 week ago",
+
+  "conditionLikeNew": "Like New"
 }

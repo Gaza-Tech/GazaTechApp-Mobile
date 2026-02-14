@@ -895,6 +895,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Khan Yunis'**
   String get locationKhanYunis;
+
+  /// No description provided for @sellerInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'SELLER INFORMATION'**
+  String get sellerInformation;
+
+  /// No description provided for @memberSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Member since {date}'**
+  String memberSince(String date);
+
+  /// No description provided for @contactSeller.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Seller'**
+  String get contactSeller;
+
+  /// No description provided for @viewProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'View Profile'**
+  String get viewProfile;
+
+  /// No description provided for @descriptionSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'DESCRIPTION'**
+  String get descriptionSectionTitle;
+
+  /// No description provided for @specificationsSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'SPECIFICATIONS'**
+  String get specificationsSectionTitle;
+
+  /// No description provided for @similarProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Similar Products'**
+  String get similarProducts;
+
+  /// No description provided for @moreFromSeller.
+  ///
+  /// In en, this message translates to:
+  /// **'More from {sellerName}'**
+  String moreFromSeller(String sellerName);
+
+  /// No description provided for @daysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days ago'**
+  String daysAgo(int count);
+
+  /// No description provided for @weekAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'1 week ago'**
+  String get weekAgo;
+
+  /// No description provided for @conditionLikeNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Like New'**
+  String get conditionLikeNew;
 }
 
 class _AppLocalizationsDelegate

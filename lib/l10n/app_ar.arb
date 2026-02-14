@@ -160,5 +160,36 @@
   "locationAlBureij": "البريج",
   "locationAlNusirat": "النصيرات",
   "locationDeirAlBalah": "دير البلح",
-  "locationKhanYunis": "خان يونس"
+  "locationKhanYunis": "خان يونس",
+
+  "sellerInformation": "معلومات البائع",
+  "memberSince": "عضو منذ {date}",
+  "@memberSince": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "contactSeller": "تواصل مع البائع",
+  "viewProfile": "عرض الملف الشخصي",
+
+  "descriptionSectionTitle": "الوصف",
+  "specificationsSectionTitle": "المواصفات",
+
+  "similarProducts": "منتجات مشابهة",
+  "moreFromSeller": "المزيد من {sellerName}",
+  "@moreFromSeller": {
+    "placeholders": {
+      "sellerName": { "type": "String" }
+    }
+  },
+
+  "daysAgo": "منذ {count} أيام",
+  "@daysAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "weekAgo": "منذ أسبوع",
+
+  "conditionLikeNew": "شبه جديد"
 }

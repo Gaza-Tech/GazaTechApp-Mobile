@@ -428,4 +428,43 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get locationKhanYunis => 'خان يونس';
+
+  @override
+  String get sellerInformation => 'معلومات البائع';
+
+  @override
+  String memberSince(String date) {
+    return 'عضو منذ $date';
+  }
+
+  @override
+  String get contactSeller => 'تواصل مع البائع';
+
+  @override
+  String get viewProfile => 'عرض الملف الشخصي';
+
+  @override
+  String get descriptionSectionTitle => 'الوصف';
+
+  @override
+  String get specificationsSectionTitle => 'المواصفات';
+
+  @override
+  String get similarProducts => 'منتجات مشابهة';
+
+  @override
+  String moreFromSeller(String sellerName) {
+    return 'المزيد من $sellerName';
+  }
+
+  @override
+  String daysAgo(int count) {
+    return 'منذ $count أيام';
+  }
+
+  @override
+  String get weekAgo => 'منذ أسبوع';
+
+  @override
+  String get conditionLikeNew => 'شبه جديد';
 }

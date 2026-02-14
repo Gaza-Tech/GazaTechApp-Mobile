@@ -7,4 +7,5 @@ class MyRoutes {
   static const String verifyRecoveryOtp = '/verifyRecoveryOtp';
   static const String resetPassword = '/resetPassword';
   static const String addListing = '/addListing';
+  static const String listingDetails = '/listingDetails';
 }
