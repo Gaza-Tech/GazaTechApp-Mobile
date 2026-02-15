@@ -6,12 +6,12 @@ import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
-import 'package:gaza_tech/features/marketplace/add_listing/ui/widgets/selector.dart';
-import 'package:gaza_tech/features/marketplace/add_listing/ui/widgets/condition_selector.dart';
-import 'package:gaza_tech/features/marketplace/add_listing/ui/widgets/image_picker_grid.dart';
-import 'package:gaza_tech/features/marketplace/add_listing/ui/widgets/labeled_field.dart';
-import 'package:gaza_tech/features/marketplace/add_listing/ui/widgets/price_field.dart';
-import 'package:gaza_tech/features/marketplace/add_listing/ui/widgets/specifications_section.dart';
+import 'package:gaza_tech/features/add_listing/ui/widgets/selector.dart';
+import 'package:gaza_tech/features/add_listing/ui/widgets/condition_selector.dart';
+import 'package:gaza_tech/features/add_listing/ui/widgets/image_picker_grid.dart';
+import 'package:gaza_tech/features/add_listing/ui/widgets/labeled_field.dart';
+import 'package:gaza_tech/features/add_listing/ui/widgets/price_field.dart';
+import 'package:gaza_tech/features/add_listing/ui/widgets/specifications_section.dart';
 
 class AddListingScreen extends StatefulWidget {
   const AddListingScreen({super.key});

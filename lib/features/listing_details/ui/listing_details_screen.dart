@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
-import 'package:gaza_tech/features/marketplace/add_listing/ui/widgets/labeled_field.dart';
-import 'package:gaza_tech/features/marketplace/listing_details/ui/widgets/description_section.dart';
-import 'package:gaza_tech/features/marketplace/listing_details/ui/widgets/image_carousel.dart';
-import 'package:gaza_tech/features/marketplace/listing_details/ui/widgets/listing_info_section.dart';
-import 'package:gaza_tech/features/marketplace/listing_details/ui/widgets/listing_tags.dart';
-import 'package:gaza_tech/features/marketplace/listing_details/ui/widgets/more_from_seller_list.dart';
-import 'package:gaza_tech/features/marketplace/listing_details/ui/widgets/seller_info_card.dart';
-import 'package:gaza_tech/features/marketplace/listing_details/ui/widgets/similar_products_list.dart';
-import 'package:gaza_tech/features/marketplace/listing_details/ui/widgets/specifications_table.dart';
+import 'package:gaza_tech/features/add_listing/ui/widgets/labeled_field.dart';
+import 'package:gaza_tech/features/listing_details/ui/widgets/description_section.dart';
+import 'package:gaza_tech/features/listing_details/ui/widgets/image_carousel.dart';
+import 'package:gaza_tech/features/listing_details/ui/widgets/listing_info_section.dart';
+import 'package:gaza_tech/features/listing_details/ui/widgets/listing_tags.dart';
+import 'package:gaza_tech/features/listing_details/ui/widgets/more_from_seller_list.dart';
+import 'package:gaza_tech/features/listing_details/ui/widgets/seller_info_card.dart';
+import 'package:gaza_tech/features/listing_details/ui/widgets/similar_products_list.dart';
+import 'package:gaza_tech/features/listing_details/ui/widgets/specifications_table.dart';
 
 class ListingDetailsScreen extends StatefulWidget {
   const ListingDetailsScreen({super.key});

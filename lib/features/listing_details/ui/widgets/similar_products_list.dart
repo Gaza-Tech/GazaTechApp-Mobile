@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
-import 'package:gaza_tech/features/marketplace/listing_details/ui/widgets/product_card_horizontal.dart';
+import 'package:gaza_tech/features/listing_details/ui/widgets/product_card_horizontal.dart';
 
 class _DummyProduct {
   final String name;

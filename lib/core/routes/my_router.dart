@@ -16,8 +16,8 @@ import 'package:gaza_tech/features/auth/reset_password/ui/verify_recovery_otp_sc
 import 'package:gaza_tech/features/auth/reset_password/ui/reset_password_screen.dart';
 import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
-import 'package:gaza_tech/features/marketplace/add_listing/ui/add_listing_screen.dart';
-import 'package:gaza_tech/features/marketplace/listing_details/ui/listing_details_screen.dart';
+import 'package:gaza_tech/features/add_listing/ui/add_listing_screen.dart';
+import 'package:gaza_tech/features/listing_details/ui/listing_details_screen.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {

@@ -4,7 +4,7 @@ import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
-import 'package:gaza_tech/features/marketplace/add_listing/ui/widgets/labeled_field.dart';
+import 'package:gaza_tech/features/add_listing/ui/widgets/labeled_field.dart';
 
 class SpecificationEntry {
   final TextEditingController nameController;
