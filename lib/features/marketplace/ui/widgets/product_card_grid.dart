@@ -9,6 +9,7 @@ class ProductCardGrid extends StatelessWidget {
   final String name;
   final String price;
   final String location;
+  final String sellerName;
   final String productCondition;
   final VoidCallback onTap;
 
@@ -17,6 +18,7 @@ class ProductCardGrid extends StatelessWidget {
     required this.name,
     required this.price,
     required this.location,
+    required this.sellerName,
     required this.productCondition,
     required this.onTap,
   });
@@ -104,13 +106,37 @@ class ProductCardGrid extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    // Price
+                    // Price & Seller
                     Text(
                       price,
                       style: MyTextStyle.heading.h5.copyWith(
                         color: MyColors.highlight.darkest,
                       ),
                     ),
+                    if (sellerName.isNotEmpty)
+                      Flexible(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.person_outline,
+                              size: 12.sp,
+                              color: theme.textTheme.bodySmall?.color,
+                            ),
+                            const HorizontalSpace(2),
+                            Flexible(
+                              child: Text(
+                                sellerName,
+                                style: MyTextStyle.body.xs.copyWith(
+                                  color: theme.textTheme.bodySmall?.color,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     // Location
                     Row(
                       children: [

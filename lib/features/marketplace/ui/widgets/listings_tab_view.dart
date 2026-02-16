@@ -107,11 +107,19 @@ class _ListingsTabViewState extends State<ListingsTabView>
                     ),
                     delegate: SliverChildBuilderDelegate((context, index) {
                       final listing = listings[index];
+                      final isArabic =
+                          Localizations.localeOf(context).languageCode == 'ar';
+                      final locationName = isArabic
+                          ? (listing.locationNameAr.isNotEmpty
+                              ? listing.locationNameAr
+                              : listing.locationName)
+                          : listing.locationName;
                       return ProductCardGrid(
                         name: listing.title,
                         price:
                             '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}',
-                        location: listing.locationId,
+                        location: locationName,
+                        sellerName: listing.sellerName,
                         productCondition: listing.productCondition,
                         onTap: () => context.pushNamed(
                           MyRoutes.listingDetails,

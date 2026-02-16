@@ -21,6 +21,8 @@ _ListingModel _$ListingModelFromJson(Map<String, dynamic> json) =>
       contentStatus: json['content_status'] as String,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
+      locationData: json['locations'] as Map<String, dynamic>?,
+      sellerData: json['users'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$ListingModelToJson(_ListingModel instance) =>
@@ -38,4 +40,6 @@ Map<String, dynamic> _$ListingModelToJson(_ListingModel instance) =>
       'content_status': instance.contentStatus,
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),
+      'locations': instance.locationData,
+      'users': instance.sellerData,
     };

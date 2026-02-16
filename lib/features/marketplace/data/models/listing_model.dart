@@ -6,6 +6,8 @@ part 'listing_model.g.dart';
 
 @freezed
 abstract class ListingModel with _$ListingModel {
+  const ListingModel._();
+
   const factory ListingModel({
     @JsonKey(name: 'listing_id') required String listingId,
     @JsonKey(name: 'seller_id') required String sellerId,
@@ -20,10 +22,23 @@ abstract class ListingModel with _$ListingModel {
     @JsonKey(name: 'content_status') required String contentStatus,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
+
+    // Joined data from Supabase nested select
+    @JsonKey(name: 'locations') Map<String, dynamic>? locationData,
+    @JsonKey(name: 'users') Map<String, dynamic>? sellerData,
   }) = _ListingModel;
 
   factory ListingModel.fromJson(Map<String, dynamic> json) =>
       _$ListingModelFromJson(json);
+
+  String get locationName => locationData?['name'] ?? '';
+  String get locationNameAr => locationData?['name_ar'] ?? '';
+  String get sellerName {
+    if (sellerData == null) return '';
+    final first = sellerData!['first_name'] ?? '';
+    final last = sellerData!['last_name'] ?? '';
+    return '$first $last'.trim();
+  }
 }
 
 Map<String, dynamic>? _specificationsFromJson(dynamic value) {
