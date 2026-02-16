@@ -27,6 +27,9 @@ import 'package:gaza_tech/features/auth/forgot_password/data/services/forgot_pas
 import 'package:gaza_tech/features/auth/reset_password/cubit/reset_password_cubit.dart';
 import 'package:gaza_tech/features/auth/reset_password/data/repos/reset_password_repo.dart';
 import 'package:gaza_tech/features/auth/reset_password/data/services/reset_password_api_service.dart';
+import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
+import 'package:gaza_tech/features/marketplace/data/repos/marketplace_repo.dart';
+import 'package:gaza_tech/features/marketplace/data/services/marketplace_api_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -103,4 +106,13 @@ Future<void> setupGetIt() async {
   );
   getIt.registerLazySingleton<SignOutRepo>(() => SignOutRepo(getIt()));
   getIt.registerFactory<SignOutCubit>(() => SignOutCubit(getIt()));
+
+  // 10. Marketplace
+  getIt.registerLazySingleton<MarketplaceApiService>(
+    () => MarketplaceApiService(getIt()),
+  );
+  getIt.registerLazySingleton<MarketplaceRepo>(
+    () => MarketplaceRepo(getIt()),
+  );
+  getIt.registerFactory<MarketplaceCubit>(() => MarketplaceCubit(getIt()));
 }

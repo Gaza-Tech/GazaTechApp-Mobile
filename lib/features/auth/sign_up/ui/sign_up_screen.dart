@@ -138,6 +138,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         validator: (v) =>
                             v!.length < 6 ? context.l10n.minChars(6) : null,
                         isObscureText: _obscurePassword,
+                        maxLines: 1,
                         suffixIcon: GestureDetector(
                           onTap: () => setState(
                             () => _obscurePassword = !_obscurePassword,
@@ -166,6 +167,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             .confirmPasswordController,
                         textInputType: TextInputType.text,
                         hintText: context.l10n.confirmPasswordHint,
+                        maxLines: 1,
                         // validator must be same as password field
                         validator: (v) {
                           if (v!.isEmpty) return context.l10n.required;

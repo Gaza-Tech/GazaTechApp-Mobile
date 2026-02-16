@@ -271,6 +271,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get communityContent => 'Connect with others';
 
   @override
+  String get noListingsAvailable => 'No listings available';
+
+  @override
+  String get categoryAll => 'All';
+
+  @override
+  String get categoryElectronics => 'Electronics';
+
+  @override
+  String get categoryClothing => 'Clothing';
+
+  @override
+  String get categoryHomeGarden => 'Home & Garden';
+
+  @override
+  String get categoryFood => 'Food';
+
+  @override
+  String get categoryServices => 'Services';
+
+  @override
+  String get categoryVehicles => 'Vehicles';
+
+  @override
+  String get categoryBooks => 'Books';
+
+  @override
+  String get categorySports => 'Sports';
+
+  @override
+  String get categoryOther => 'Other';
+
+  @override
   String get profile => 'Profile';
 
   @override
@@ -384,33 +417,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addMainImage => 'Add Main Image';
-
-  @override
-  String get categoryElectronics => 'Electronics';
-
-  @override
-  String get categoryClothing => 'Clothing';
-
-  @override
-  String get categoryHomeGarden => 'Home & Garden';
-
-  @override
-  String get categoryFood => 'Food';
-
-  @override
-  String get categoryServices => 'Services';
-
-  @override
-  String get categoryVehicles => 'Vehicles';
-
-  @override
-  String get categoryBooks => 'Books';
-
-  @override
-  String get categorySports => 'Sports';
-
-  @override
-  String get categoryOther => 'Other';
 
   @override
   String get locationGazaCity => 'Gaza City';

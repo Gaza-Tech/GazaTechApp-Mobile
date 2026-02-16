@@ -1,0 +1,175 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gaza_tech/core/theme/my_colors.dart';
+import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/l10n/app_localizations.dart';
+
+class ProductCardGrid extends StatelessWidget {
+  final String name;
+  final String price;
+  final String location;
+  final String productCondition;
+  final VoidCallback onTap;
+
+  const ProductCardGrid({
+    super.key,
+    required this.name,
+    required this.price,
+    required this.location,
+    required this.productCondition,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: theme.cardTheme.color,
+          borderRadius: BorderRadius.circular(12.dg),
+          border: Border.all(
+            color: isDark
+                ? MyColors.neutral.light.lightest.withValues(alpha: 0.05)
+                : MyColors.neutral.light.medium,
+          ),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image section
+            Expanded(
+              flex: 3,
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: MyColors.neutral.dark.medium,
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.laptop_mac,
+                        size: 40.sp,
+                        color: Colors.white54,
+                      ),
+                    ),
+                  ),
+                  // Condition badge
+                  PositionedDirectional(
+                    top: 8.h,
+                    start: 8.w,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w,
+                        vertical: 4.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: _getConditionColor(productCondition),
+                        borderRadius: BorderRadius.circular(6.dg),
+                      ),
+                      child: Text(
+                        _getConditionLabel(context, productCondition),
+                        style: MyTextStyle.body.xs.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Info section
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: EdgeInsets.all(10.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Product name
+                    Text(
+                      name,
+                      style: MyTextStyle.body.s.copyWith(
+                        color: theme.textTheme.titleMedium?.color,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    // Price
+                    Text(
+                      price,
+                      style: MyTextStyle.heading.h5.copyWith(
+                        color: MyColors.highlight.darkest,
+                      ),
+                    ),
+                    // Location
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.location_on_outlined,
+                          size: 12.sp,
+                          color: theme.textTheme.bodySmall?.color,
+                        ),
+                        const HorizontalSpace(2),
+                        Expanded(
+                          child: Text(
+                            location,
+                            style: MyTextStyle.body.xs.copyWith(
+                              color: theme.textTheme.bodySmall?.color,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static String _getConditionLabel(BuildContext context, String condition) {
+    final l10n = AppLocalizations.of(context);
+    switch (condition.toLowerCase()) {
+      case 'new':
+        return l10n.conditionNew;
+      case 'used':
+        return l10n.conditionUsed;
+      case 'refurbished':
+        return l10n.conditionRefurbished;
+      case 'like_new':
+        return l10n.conditionLikeNew;
+      default:
+        return condition;
+    }
+  }
+
+  static Color _getConditionColor(String condition) {
+    switch (condition.toLowerCase()) {
+      case 'new':
+        return MyColors.highlight.darkest;
+      case 'like_new':
+        return MyColors.highlight.dark;
+      case 'refurbished':
+        return MyColors.support.warning.medium;
+      case 'used':
+        return MyColors.neutral.dark.light;
+      default:
+        return MyColors.neutral.dark.light;
+    }
+  }
+}

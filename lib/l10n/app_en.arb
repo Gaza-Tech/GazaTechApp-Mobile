@@ -143,6 +143,18 @@
   "marketplaceContent": "Browse products and services",
   "communityContent": "Connect with others",
 
+  "noListingsAvailable": "No listings available",
+  "categoryAll": "All",
+  "categoryElectronics": "Electronics",
+  "categoryClothing": "Clothing",
+  "categoryHomeGarden": "Home & Garden",
+  "categoryFood": "Food",
+  "categoryServices": "Services",
+  "categoryVehicles": "Vehicles",
+  "categoryBooks": "Books",
+  "categorySports": "Sports",
+  "categoryOther": "Other",
+
   "profile": "Profile",
   "about": "About",
   "help": "Help",

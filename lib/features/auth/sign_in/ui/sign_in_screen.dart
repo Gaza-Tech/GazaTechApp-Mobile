@@ -90,6 +90,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         hintText: context.l10n.passwordHint,
                         textInputType: TextInputType.text,
                         isObscureText: _obscurePassword,
+                        maxLines: 1,
                         suffixIcon: GestureDetector(
                           onTap: () => setState(
                             () => _obscurePassword = !_obscurePassword,

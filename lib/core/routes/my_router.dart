@@ -18,6 +18,7 @@ import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_cubit.dart
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 import 'package:gaza_tech/features/add_listing/ui/add_listing_screen.dart';
 import 'package:gaza_tech/features/listing_details/ui/listing_details_screen.dart';
+import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -55,6 +56,7 @@ class MyRouter {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => getIt<SignOutCubit>()),
+              BlocProvider(create: (context) => getIt<MarketplaceCubit>()),
             ],
             child: const HomeScreen(),
           ),

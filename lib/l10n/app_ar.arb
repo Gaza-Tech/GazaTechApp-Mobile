@@ -98,6 +98,9 @@
   "marketplaceContent": "تصفح المنتجات والخدمات",
   "communityContent": "تواصل مع الآخرين",
 
+  "noListingsAvailable": "لا توجد إعلانات متاحة",
+  "categoryAll": "الكل",
+
   "profile": "الملف الشخصي",
   "about": "حول",
   "help": "المساعدة",

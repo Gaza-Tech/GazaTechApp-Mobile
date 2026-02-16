@@ -584,6 +584,72 @@ abstract class AppLocalizations {
   /// **'Connect with others'**
   String get communityContent;
 
+  /// No description provided for @noListingsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No listings available'**
+  String get noListingsAvailable;
+
+  /// No description provided for @categoryAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get categoryAll;
+
+  /// No description provided for @categoryElectronics.
+  ///
+  /// In en, this message translates to:
+  /// **'Electronics'**
+  String get categoryElectronics;
+
+  /// No description provided for @categoryClothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Clothing'**
+  String get categoryClothing;
+
+  /// No description provided for @categoryHomeGarden.
+  ///
+  /// In en, this message translates to:
+  /// **'Home & Garden'**
+  String get categoryHomeGarden;
+
+  /// No description provided for @categoryFood.
+  ///
+  /// In en, this message translates to:
+  /// **'Food'**
+  String get categoryFood;
+
+  /// No description provided for @categoryServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Services'**
+  String get categoryServices;
+
+  /// No description provided for @categoryVehicles.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicles'**
+  String get categoryVehicles;
+
+  /// No description provided for @categoryBooks.
+  ///
+  /// In en, this message translates to:
+  /// **'Books'**
+  String get categoryBooks;
+
+  /// No description provided for @categorySports.
+  ///
+  /// In en, this message translates to:
+  /// **'Sports'**
+  String get categorySports;
+
+  /// No description provided for @categoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get categoryOther;
+
   /// No description provided for @profile.
   ///
   /// In en, this message translates to:
@@ -805,60 +871,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add Main Image'**
   String get addMainImage;
-
-  /// No description provided for @categoryElectronics.
-  ///
-  /// In en, this message translates to:
-  /// **'Electronics'**
-  String get categoryElectronics;
-
-  /// No description provided for @categoryClothing.
-  ///
-  /// In en, this message translates to:
-  /// **'Clothing'**
-  String get categoryClothing;
-
-  /// No description provided for @categoryHomeGarden.
-  ///
-  /// In en, this message translates to:
-  /// **'Home & Garden'**
-  String get categoryHomeGarden;
-
-  /// No description provided for @categoryFood.
-  ///
-  /// In en, this message translates to:
-  /// **'Food'**
-  String get categoryFood;
-
-  /// No description provided for @categoryServices.
-  ///
-  /// In en, this message translates to:
-  /// **'Services'**
-  String get categoryServices;
-
-  /// No description provided for @categoryVehicles.
-  ///
-  /// In en, this message translates to:
-  /// **'Vehicles'**
-  String get categoryVehicles;
-
-  /// No description provided for @categoryBooks.
-  ///
-  /// In en, this message translates to:
-  /// **'Books'**
-  String get categoryBooks;
-
-  /// No description provided for @categorySports.
-  ///
-  /// In en, this message translates to:
-  /// **'Sports'**
-  String get categorySports;
-
-  /// No description provided for @categoryOther.
-  ///
-  /// In en, this message translates to:
-  /// **'Other'**
-  String get categoryOther;
 
   /// No description provided for @locationGazaCity.
   ///

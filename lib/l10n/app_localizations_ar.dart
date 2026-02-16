@@ -270,6 +270,39 @@ class AppLocalizationsAr extends AppLocalizations {
   String get communityContent => 'تواصل مع الآخرين';
 
   @override
+  String get noListingsAvailable => 'لا توجد إعلانات متاحة';
+
+  @override
+  String get categoryAll => 'الكل';
+
+  @override
+  String get categoryElectronics => 'إلكترونيات';
+
+  @override
+  String get categoryClothing => 'ملابس';
+
+  @override
+  String get categoryHomeGarden => 'المنزل والحديقة';
+
+  @override
+  String get categoryFood => 'طعام';
+
+  @override
+  String get categoryServices => 'خدمات';
+
+  @override
+  String get categoryVehicles => 'مركبات';
+
+  @override
+  String get categoryBooks => 'كتب';
+
+  @override
+  String get categorySports => 'رياضة';
+
+  @override
+  String get categoryOther => 'أخرى';
+
+  @override
   String get profile => 'الملف الشخصي';
 
   @override
@@ -383,33 +416,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get addMainImage => 'إضافة صورة رئيسية';
-
-  @override
-  String get categoryElectronics => 'إلكترونيات';
-
-  @override
-  String get categoryClothing => 'ملابس';
-
-  @override
-  String get categoryHomeGarden => 'المنزل والحديقة';
-
-  @override
-  String get categoryFood => 'طعام';
-
-  @override
-  String get categoryServices => 'خدمات';
-
-  @override
-  String get categoryVehicles => 'مركبات';
-
-  @override
-  String get categoryBooks => 'كتب';
-
-  @override
-  String get categorySports => 'رياضة';
-
-  @override
-  String get categoryOther => 'أخرى';
 
   @override
   String get locationGazaCity => 'مدينة غزة';
