@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'listing_model.dart';
+part of 'listing_detail_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_ListingModel _$ListingModelFromJson(Map<String, dynamic> json) =>
-    _ListingModel(
+_ListingDetailModel _$ListingDetailModelFromJson(Map<String, dynamic> json) =>
+    _ListingDetailModel(
       listingId: json['listing_id'] as String,
       sellerId: json['seller_id'] as String,
       title: json['title'] as String,
@@ -26,9 +26,10 @@ _ListingModel _$ListingModelFromJson(Map<String, dynamic> json) =>
       images: (json['listing_images'] as List<dynamic>?)
           ?.map((e) => e as Map<String, dynamic>)
           .toList(),
+      categoryData: json['marketplace_categories'] as Map<String, dynamic>?,
     );
 
-Map<String, dynamic> _$ListingModelToJson(_ListingModel instance) =>
+Map<String, dynamic> _$ListingDetailModelToJson(_ListingDetailModel instance) =>
     <String, dynamic>{
       'listing_id': instance.listingId,
       'seller_id': instance.sellerId,
@@ -46,4 +47,5 @@ Map<String, dynamic> _$ListingModelToJson(_ListingModel instance) =>
       'locations': instance.locationData,
       'users': instance.sellerData,
       'listing_images': instance.images,
+      'marketplace_categories': instance.categoryData,
     };

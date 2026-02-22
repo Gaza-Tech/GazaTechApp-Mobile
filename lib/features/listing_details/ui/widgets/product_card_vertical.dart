@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/theme/my_colors.dart';
@@ -9,6 +10,7 @@ class ProductCardVertical extends StatelessWidget {
   final String price;
   final String location;
   final String timeAgo;
+  final String? imageUrl;
   final VoidCallback onTap;
 
   const ProductCardVertical({
@@ -17,6 +19,7 @@ class ProductCardVertical extends StatelessWidget {
     required this.price,
     required this.location,
     required this.timeAgo,
+    this.imageUrl,
     required this.onTap,
   });
 
@@ -43,17 +46,39 @@ class ProductCardVertical extends StatelessWidget {
             Container(
               width: 80.w,
               height: 80.w,
+              clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 color: MyColors.neutral.dark.medium,
                 borderRadius: BorderRadius.circular(8.dg),
               ),
-              child: Center(
-                child: Icon(
-                  Icons.laptop_mac,
-                  size: 32.sp,
-                  color: Colors.white54,
-                ),
-              ),
+              child: imageUrl != null
+                  ? CachedNetworkImage(
+                      imageUrl: imageUrl!,
+                      fit: BoxFit.cover,
+                      width: 80.w,
+                      height: 80.w,
+                      placeholder: (context, url) => Center(
+                        child: SizedBox(
+                          width: 20.w,
+                          height: 20.w,
+                          child: const CircularProgressIndicator(strokeWidth: 2),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Center(
+                        child: Icon(
+                          Icons.image_not_supported_outlined,
+                          size: 32.sp,
+                          color: Colors.white54,
+                        ),
+                      ),
+                    )
+                  : Center(
+                      child: Icon(
+                        Icons.image_outlined,
+                        size: 32.sp,
+                        color: Colors.white54,
+                      ),
+                    ),
             ),
             const HorizontalSpace(12),
             Expanded(

@@ -26,6 +26,7 @@ abstract class ListingModel with _$ListingModel {
     // Joined data from Supabase nested select
     @JsonKey(name: 'locations') Map<String, dynamic>? locationData,
     @JsonKey(name: 'users') Map<String, dynamic>? sellerData,
+    @JsonKey(name: 'listing_images') List<Map<String, dynamic>>? images,
   }) = _ListingModel;
 
   factory ListingModel.fromJson(Map<String, dynamic> json) =>
@@ -38,6 +39,17 @@ abstract class ListingModel with _$ListingModel {
     final first = sellerData!['first_name'] ?? '';
     final last = sellerData!['last_name'] ?? '';
     return '$first $last'.trim();
+  }
+
+  String? get thumbnailUrl {
+    if (images == null || images!.isEmpty) return null;
+    // Find thumbnail image first
+    final thumbnail = images!.where((img) => img['is_thumbnail'] == true);
+    if (thumbnail.isNotEmpty) return thumbnail.first['image_url'] as String?;
+    // Fallback to first image by sort_order
+    final sorted = List<Map<String, dynamic>>.from(images!)
+      ..sort((a, b) => (a['sort_order'] as int? ?? 0).compareTo(b['sort_order'] as int? ?? 0));
+    return sorted.first['image_url'] as String?;
   }
 }
 

@@ -3,55 +3,66 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/product_card_vertical.dart';
-
-class _DummyProduct {
-  final String name;
-  final String price;
-  final String location;
-  final String timeAgo;
-  const _DummyProduct({
-    required this.name,
-    required this.price,
-    required this.location,
-    required this.timeAgo,
-  });
-}
-
-const _products = [
-  _DummyProduct(
-    name: 'Mechanical Keyboard RGB',
-    price: '\$89',
-    location: 'Gaza City',
-    timeAgo: '5 days ago',
-  ),
-  _DummyProduct(
-    name: 'Wireless Gaming Mouse',
-    price: '\$45',
-    location: 'Gaza City',
-    timeAgo: '1 week ago',
-  ),
-];
+import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
 
 class MoreFromSellerList extends StatelessWidget {
-  const MoreFromSellerList({super.key});
+  final List<ListingModel> listings;
+
+  const MoreFromSellerList({super.key, required this.listings});
 
   @override
   Widget build(BuildContext context) {
+    if (listings.isEmpty) {
+      return Text(
+        context.l10n.noListingsAvailable,
+        style: Theme.of(context).textTheme.bodySmall,
+      );
+    }
+
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+
     return Column(
-      children: _products
+      children: listings
           .map(
-            (product) => Padding(
-              padding: EdgeInsets.only(bottom: 12.h),
-              child: ProductCardVertical(
-                name: product.name,
-                price: product.price,
-                location: product.location,
-                timeAgo: product.timeAgo,
-                onTap: () => context.pushNamed(MyRoutes.listingDetails),
-              ),
-            ),
+            (listing) {
+              final locationName = isArabic
+                  ? (listing.locationNameAr.isNotEmpty
+                      ? listing.locationNameAr
+                      : listing.locationName)
+                  : listing.locationName;
+              final timeAgo = _formatTimeAgo(context, listing.createdAt);
+              return Padding(
+                padding: EdgeInsets.only(bottom: 12.h),
+                child: ProductCardVertical(
+                  name: listing.title,
+                  price:
+                      '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}',
+                  location: locationName,
+                  timeAgo: timeAgo,
+                  imageUrl: listing.thumbnailUrl,
+                  onTap: () => context.pushNamed(
+                    MyRoutes.listingDetails,
+                    arguments: listing.listingId,
+                  ),
+                ),
+              );
+            },
           )
           .toList(),
     );
+  }
+
+  String _formatTimeAgo(BuildContext context, DateTime createdAt) {
+    final now = DateTime.now();
+    final difference = now.difference(createdAt);
+    final l10n = context.l10n;
+
+    if (difference.inDays >= 7) {
+      return l10n.weekAgo;
+    } else if (difference.inDays > 0) {
+      return l10n.daysAgo(difference.inDays);
+    } else {
+      return l10n.daysAgo(1);
+    }
   }
 }

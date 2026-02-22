@@ -473,4 +473,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get conditionLikeNew => 'شبه جديد';
+
+  @override
+  String get retry => 'إعادة المحاولة';
 }

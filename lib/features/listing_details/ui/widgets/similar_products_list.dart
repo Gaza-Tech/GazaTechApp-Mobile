@@ -4,37 +4,45 @@ import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/product_card_horizontal.dart';
-
-class _DummyProduct {
-  final String name;
-  final String price;
-  const _DummyProduct({required this.name, required this.price});
-}
-
-const _products = [
-  _DummyProduct(name: 'ASUS ROG Laptop', price: '\$1,150'),
-  _DummyProduct(name: 'MSI Gaming Laptop', price: '\$1,399'),
-  _DummyProduct(name: 'Lenovo Legion Pro', price: '\$1,250'),
-  _DummyProduct(name: 'Dell G15 Gaming', price: '\$999'),
-];
+import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
 
 class SimilarProductsList extends StatelessWidget {
-  const SimilarProductsList({super.key});
+  final List<ListingModel> listings;
+
+  const SimilarProductsList({super.key, required this.listings});
 
   @override
   Widget build(BuildContext context) {
+    if (listings.isEmpty) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Text(
+          context.l10n.noListingsAvailable,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+      );
+    }
+
     return SizedBox(
       height: 190.h,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 16.w),
-        itemCount: _products.length,
+        itemCount: listings.length,
         separatorBuilder: (_, _) => const HorizontalSpace(12),
-        itemBuilder: (context, index) => ProductCardHorizontal(
-          name: _products[index].name,
-          price: _products[index].price,
-          onTap: () => context.pushNamed(MyRoutes.listingDetails),
-        ),
+        itemBuilder: (context, index) {
+          final listing = listings[index];
+          return ProductCardHorizontal(
+            name: listing.title,
+            price:
+                '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}',
+            imageUrl: listing.thumbnailUrl,
+            onTap: () => context.pushNamed(
+              MyRoutes.listingDetails,
+              arguments: listing.listingId,
+            ),
+          );
+        },
       ),
     );
   }

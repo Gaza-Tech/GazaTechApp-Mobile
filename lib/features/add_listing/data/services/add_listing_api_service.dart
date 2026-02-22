@@ -52,11 +52,11 @@ class AddListingApiService {
     final path = '$sellerId/$listingId/$index.$extension';
 
     await _supabase.storage
-        .from('listing-images')
+        .from('marketplace-image')
         .upload(path, file);
 
     final publicUrl = _supabase.storage
-        .from('listing-images')
+        .from('marketplace-image')
         .getPublicUrl(path);
 
     return publicUrl;

@@ -123,22 +123,20 @@ class AddListingCubit extends Cubit<AddListingState> {
     // Step 1: Create the listing
     final createResult = await _repo.createListing(listingData);
 
-    createResult.when(
-      success: (listing) {
+    switch (createResult) {
+      case Success(data: final listing):
         final listingId = listing['listing_id'] as String;
-        _handleImageUpload(
+        await _handleImageUpload(
           listingId: listingId,
           sellerId: currentUser.id,
           images: images,
         );
-      },
-      failure: (error) {
+      case Failure(error: final error):
         emit(state.copyWith(
           isSubmitting: false,
           errorMessage: error.message ?? 'Failed to create listing',
         ));
-      },
-    );
+    }
   }
 
   /// Handle image upload after listing creation
@@ -158,19 +156,17 @@ class AddListingCubit extends Cubit<AddListingState> {
       images: images,
     );
 
-    uploadResult.when(
-      success: (imageUrls) {
-        _handleSaveImageRecords(listingId: listingId, imageUrls: imageUrls);
-      },
-      failure: (error) {
+    switch (uploadResult) {
+      case Success(data: final imageUrls):
+        await _handleSaveImageRecords(listingId: listingId, imageUrls: imageUrls);
+      case Failure(error: final error):
         // Listing created but image upload failed
         emit(state.copyWith(
           isSubmitting: false,
           submitSuccess: true,
           errorMessage: error.message,
         ));
-      },
-    );
+    }
   }
 
   /// Save image records to DB after upload
@@ -183,19 +179,17 @@ class AddListingCubit extends Cubit<AddListingState> {
       imageUrls: imageUrls,
     );
 
-    saveResult.when(
-      success: (_) {
+    switch (saveResult) {
+      case Success():
         emit(state.copyWith(isSubmitting: false, submitSuccess: true));
-      },
-      failure: (error) {
+      case Failure(error: final error):
         // Listing created but image records failed
         emit(state.copyWith(
           isSubmitting: false,
           submitSuccess: true,
           errorMessage: error.message,
         ));
-      },
-    );
+    }
   }
 
   @override
