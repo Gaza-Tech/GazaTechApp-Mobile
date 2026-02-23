@@ -474,4 +474,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get conditionLikeNew => 'Like New';
+
+  @override
+  String get retry => 'Retry';
 }

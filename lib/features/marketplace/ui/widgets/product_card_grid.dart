@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/theme/my_colors.dart';
@@ -11,6 +12,7 @@ class ProductCardGrid extends StatelessWidget {
   final String location;
   final String sellerName;
   final String productCondition;
+  final String? imageUrl;
   final VoidCallback onTap;
 
   const ProductCardGrid({
@@ -20,6 +22,7 @@ class ProductCardGrid extends StatelessWidget {
     required this.location,
     required this.sellerName,
     required this.productCondition,
+    this.imageUrl,
     required this.onTap,
   });
 
@@ -54,13 +57,36 @@ class ProductCardGrid extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: MyColors.neutral.dark.medium,
                     ),
-                    child: Center(
-                      child: Icon(
-                        Icons.laptop_mac,
-                        size: 40.sp,
-                        color: Colors.white54,
-                      ),
-                    ),
+                    child: imageUrl != null
+                        ? CachedNetworkImage(
+                            imageUrl: imageUrl!,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: double.infinity,
+                            placeholder: (context, url) => Center(
+                              child: SizedBox(
+                                width: 24.w,
+                                height: 24.w,
+                                child: const CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => Center(
+                              child: Icon(
+                                Icons.image_not_supported_outlined,
+                                size: 40.sp,
+                                color: Colors.white54,
+                              ),
+                            ),
+                          )
+                        : Center(
+                            child: Icon(
+                              Icons.image_outlined,
+                              size: 40.sp,
+                              color: Colors.white54,
+                            ),
+                          ),
                   ),
                   // Condition badge
                   PositionedDirectional(

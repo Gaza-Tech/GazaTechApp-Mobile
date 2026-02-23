@@ -1,15 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/theme/my_colors.dart';
 
 class ImageCarousel extends StatefulWidget {
-  final int imageCount;
+  final List<String> imageUrls;
   final bool isBookmarked;
   final VoidCallback onBookmarkToggle;
 
   const ImageCarousel({
     super.key,
-    required this.imageCount,
+    required this.imageUrls,
     required this.isBookmarked,
     required this.onBookmarkToggle,
   });
@@ -28,53 +29,78 @@ class _ImageCarouselState extends State<ImageCarousel> {
     super.dispose();
   }
 
+  Widget _buildImagePlaceholder() {
+    return Container(
+      color: MyColors.neutral.dark.medium,
+      child: Center(
+        child: Icon(Icons.image_outlined, size: 80.sp, color: Colors.white54),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final imageCount = widget.imageUrls.isEmpty ? 1 : widget.imageUrls.length;
+
     return Stack(
       children: [
         SizedBox(
-          height: 320.h,
+          height: 400.h,
           width: double.infinity,
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: widget.imageCount,
-            onPageChanged: (index) => setState(() => _currentPage = index),
-            itemBuilder: (context, index) => Container(
-              color: MyColors.neutral.dark.medium,
-              child: Center(
-                child: Icon(
-                  Icons.laptop_mac,
-                  size: 80.sp,
-                  color: Colors.white54,
+          child: widget.imageUrls.isEmpty
+              ? _buildImagePlaceholder()
+              : PageView.builder(
+                  controller: _pageController,
+                  itemCount: imageCount,
+                  onPageChanged: (index) =>
+                      setState(() => _currentPage = index),
+                  itemBuilder: (context, index) => CachedNetworkImage(
+                    imageUrl: widget.imageUrls[index],
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
+                    placeholder: (context, url) => Container(
+                      color: MyColors.neutral.dark.medium,
+                      child: const Center(child: CircularProgressIndicator()),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      color: MyColors.neutral.dark.medium,
+                      child: Center(
+                        child: Icon(
+                          Icons.image_not_supported_outlined,
+                          size: 80.sp,
+                          color: Colors.white54,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+        ),
+        // Page indicator dots (only show if multiple images)
+        if (widget.imageUrls.length > 1)
+          Positioned(
+            bottom: 16.h,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                imageCount,
+                (i) => AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  margin: EdgeInsets.symmetric(horizontal: 3.w),
+                  width: _currentPage == i ? 24.w : 8.w,
+                  height: 8.w,
+                  decoration: BoxDecoration(
+                    color: _currentPage == i
+                        ? MyColors.highlight.darkest
+                        : Colors.white.withValues(alpha: 0.5),
+                    borderRadius: BorderRadius.circular(4.dg),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        // Page indicator dots
-        Positioned(
-          bottom: 16.h,
-          left: 0,
-          right: 0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              widget.imageCount,
-              (i) => AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                margin: EdgeInsets.symmetric(horizontal: 3.w),
-                width: _currentPage == i ? 24.w : 8.w,
-                height: 8.w,
-                decoration: BoxDecoration(
-                  color: _currentPage == i
-                      ? MyColors.highlight.darkest
-                      : Colors.white.withValues(alpha: 0.5),
-                  borderRadius: BorderRadius.circular(4.dg),
-                ),
-              ),
-            ),
-          ),
-        ),
         // Bookmark button
         Positioned(
           top: MediaQuery.of(context).padding.top + kToolbarHeight - 36.h,

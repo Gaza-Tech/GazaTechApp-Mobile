@@ -194,5 +194,7 @@
   },
   "weekAgo": "منذ أسبوع",
 
-  "conditionLikeNew": "شبه جديد"
+  "conditionLikeNew": "شبه جديد",
+
+  "retry": "إعادة المحاولة"
 }

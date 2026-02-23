@@ -121,6 +121,7 @@ class _ListingsTabViewState extends State<ListingsTabView>
                         location: locationName,
                         sellerName: listing.sellerName,
                         productCondition: listing.productCondition,
+                        imageUrl: listing.thumbnailUrl,
                         onTap: () => context.pushNamed(
                           MyRoutes.listingDetails,
                           arguments: listing.listingId,

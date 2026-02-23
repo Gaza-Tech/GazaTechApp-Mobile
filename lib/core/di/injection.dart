@@ -30,6 +30,12 @@ import 'package:gaza_tech/features/auth/reset_password/data/services/reset_passw
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
 import 'package:gaza_tech/features/marketplace/data/repos/marketplace_repo.dart';
 import 'package:gaza_tech/features/marketplace/data/services/marketplace_api_service.dart';
+import 'package:gaza_tech/features/add_listing/cubit/add_listing_cubit.dart';
+import 'package:gaza_tech/features/add_listing/data/repos/add_listing_repo.dart';
+import 'package:gaza_tech/features/add_listing/data/services/add_listing_api_service.dart';
+import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
+import 'package:gaza_tech/features/listing_details/data/repos/listing_details_repo.dart';
+import 'package:gaza_tech/features/listing_details/data/services/listing_details_api_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -115,4 +121,24 @@ Future<void> setupGetIt() async {
     () => MarketplaceRepo(getIt()),
   );
   getIt.registerFactory<MarketplaceCubit>(() => MarketplaceCubit(getIt()));
+
+  // 11. Add Listing
+  getIt.registerLazySingleton<AddListingApiService>(
+    () => AddListingApiService(getIt()),
+  );
+  getIt.registerLazySingleton<AddListingRepo>(
+    () => AddListingRepo(getIt()),
+  );
+  getIt.registerFactory<AddListingCubit>(() => AddListingCubit(getIt()));
+
+  // 12. Listing Details
+  getIt.registerLazySingleton<ListingDetailsApiService>(
+    () => ListingDetailsApiService(getIt()),
+  );
+  getIt.registerLazySingleton<ListingDetailsRepo>(
+    () => ListingDetailsRepo(getIt()),
+  );
+  getIt.registerFactoryParam<ListingDetailsCubit, String, void>(
+    (listingId, _) => ListingDetailsCubit(getIt(), listingId),
+  );
 }

@@ -255,5 +255,7 @@
   },
   "weekAgo": "1 week ago",
 
-  "conditionLikeNew": "Like New"
+  "conditionLikeNew": "Like New",
+
+  "retry": "Retry"
 }
