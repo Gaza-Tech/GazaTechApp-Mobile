@@ -57,9 +57,19 @@ class ActiveFiltersBar extends StatelessWidget {
           ));
         }
 
-        if (filters.priceMin != null || filters.priceMax != null) {
-          final min = filters.priceMin?.toString() ?? '0';
-          final max = filters.priceMax?.toString() ?? '∞';
+        if (filters.priceMinUsd != null || filters.priceMaxUsd != null) {
+          final min = filters.priceMinUsd?.toString() ?? '0';
+          final max = filters.priceMaxUsd?.toString() ?? '∞';
+          chips.add(_buildChip(
+            context,
+            '\$$min – \$$max',
+            () => cubit.clearFilter('price'),
+          ));
+        }
+
+        if (filters.priceMinIls != null || filters.priceMaxIls != null) {
+          final min = filters.priceMinIls?.toString() ?? '0';
+          final max = filters.priceMaxIls?.toString() ?? '∞';
           chips.add(_buildChip(
             context,
             '₪$min – ₪$max',

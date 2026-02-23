@@ -9,8 +9,10 @@ class SearchCubit extends Cubit<SearchState> {
   final SearchRepo _repo;
 
   final TextEditingController searchController = TextEditingController();
-  final TextEditingController priceMinController = TextEditingController();
-  final TextEditingController priceMaxController = TextEditingController();
+  final TextEditingController priceMinUsdController = TextEditingController();
+  final TextEditingController priceMaxUsdController = TextEditingController();
+  final TextEditingController priceMinIlsController = TextEditingController();
+  final TextEditingController priceMaxIlsController = TextEditingController();
 
   SearchCubit(this._repo) : super(const SearchState());
 
@@ -162,10 +164,17 @@ class SearchCubit extends Cubit<SearchState> {
 
   /// Apply price range from controllers
   void _applyPriceRange() {
-    final min = int.tryParse(priceMinController.text);
-    final max = int.tryParse(priceMaxController.text);
+    final minUsd = int.tryParse(priceMinUsdController.text);
+    final maxUsd = int.tryParse(priceMaxUsdController.text);
+    final minIls = int.tryParse(priceMinIlsController.text);
+    final maxIls = int.tryParse(priceMaxIlsController.text);
     emit(state.copyWith(
-      filters: state.filters.copyWith(priceMin: min, priceMax: max),
+      filters: state.filters.copyWith(
+        priceMinUsd: minUsd,
+        priceMaxUsd: maxUsd,
+        priceMinIls: minIls,
+        priceMaxIls: maxIls,
+      ),
     ));
   }
 
@@ -177,8 +186,10 @@ class SearchCubit extends Cubit<SearchState> {
 
   /// Clear all filters and re-search
   void clearFilters() {
-    priceMinController.clear();
-    priceMaxController.clear();
+    priceMinUsdController.clear();
+    priceMaxUsdController.clear();
+    priceMinIlsController.clear();
+    priceMaxIlsController.clear();
     emit(state.copyWith(filters: const SearchFiltersModel()));
     if (state.keyword.isNotEmpty) search();
   }
@@ -195,10 +206,17 @@ class SearchCubit extends Cubit<SearchState> {
           filters: state.filters.copyWith(conditions: []),
         ));
       case 'price':
-        priceMinController.clear();
-        priceMaxController.clear();
+        priceMinUsdController.clear();
+        priceMaxUsdController.clear();
+        priceMinIlsController.clear();
+        priceMaxIlsController.clear();
         emit(state.copyWith(
-          filters: state.filters.copyWith(priceMin: null, priceMax: null),
+          filters: state.filters.copyWith(
+            priceMinUsd: null,
+            priceMaxUsd: null,
+            priceMinIls: null,
+            priceMaxIls: null,
+          ),
         ));
     }
     search();
@@ -207,8 +225,10 @@ class SearchCubit extends Cubit<SearchState> {
   @override
   Future<void> close() {
     searchController.dispose();
-    priceMinController.dispose();
-    priceMaxController.dispose();
+    priceMinUsdController.dispose();
+    priceMaxUsdController.dispose();
+    priceMinIlsController.dispose();
+    priceMaxIlsController.dispose();
     return super.close();
   }
 }

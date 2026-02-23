@@ -1052,6 +1052,18 @@ abstract class AppLocalizations {
   /// **'Price Range'**
   String get priceRange;
 
+  /// No description provided for @priceRangeUsd.
+  ///
+  /// In en, this message translates to:
+  /// **'Price Range (USD)'**
+  String get priceRangeUsd;
+
+  /// No description provided for @priceRangeIls.
+  ///
+  /// In en, this message translates to:
+  /// **'Price Range (ILS)'**
+  String get priceRangeIls;
+
   /// No description provided for @priceMin.
   ///
   /// In en, this message translates to:

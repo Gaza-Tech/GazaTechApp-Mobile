@@ -514,6 +514,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get priceRange => 'نطاق السعر';
 
   @override
+  String get priceRangeUsd => 'نطاق السعر (دولار)';
+
+  @override
+  String get priceRangeIls => 'نطاق السعر (شيكل)';
+
+  @override
   String get priceMin => 'الحد الأدنى';
 
   @override

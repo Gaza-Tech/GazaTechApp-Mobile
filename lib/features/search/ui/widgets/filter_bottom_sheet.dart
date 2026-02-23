@@ -235,50 +235,25 @@ class _FilterBottomSheetContent extends StatelessWidget {
                   ),
                   const VerticalSpace(16),
 
-                  // Price range
-                  Text(l10n.priceRange, style: MyTextStyle.heading.h4),
+                  // Price range USD
+                  Text(l10n.priceRangeUsd, style: MyTextStyle.heading.h4),
                   const VerticalSpace(8),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: cubit.priceMinController,
-                          keyboardType: TextInputType.number,
-                          style: MyTextStyle.body.m,
-                          decoration: InputDecoration(
-                            hintText: l10n.priceMin,
-                            hintStyle: MyTextStyle.body.m.copyWith(
-                              color: theme.textTheme.bodySmall?.color,
-                            ),
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: 12.w,
-                              vertical: 10.h,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12.w),
-                        child: Text('–', style: MyTextStyle.body.l),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          controller: cubit.priceMaxController,
-                          keyboardType: TextInputType.number,
-                          style: MyTextStyle.body.m,
-                          decoration: InputDecoration(
-                            hintText: l10n.priceMax,
-                            hintStyle: MyTextStyle.body.m.copyWith(
-                              color: theme.textTheme.bodySmall?.color,
-                            ),
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: 12.w,
-                              vertical: 10.h,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  _buildPriceRangeRow(
+                    theme: theme,
+                    l10n: l10n,
+                    minController: cubit.priceMinUsdController,
+                    maxController: cubit.priceMaxUsdController,
+                  ),
+                  const VerticalSpace(16),
+
+                  // Price range ILS
+                  Text(l10n.priceRangeIls, style: MyTextStyle.heading.h4),
+                  const VerticalSpace(8),
+                  _buildPriceRangeRow(
+                    theme: theme,
+                    l10n: l10n,
+                    minController: cubit.priceMinIlsController,
+                    maxController: cubit.priceMaxIlsController,
                   ),
                   const VerticalSpace(24),
 
@@ -297,6 +272,56 @@ class _FilterBottomSheetContent extends StatelessWidget {
           },
         );
       },
+    );
+  }
+
+  Widget _buildPriceRangeRow({
+    required ThemeData theme,
+    required dynamic l10n,
+    required TextEditingController minController,
+    required TextEditingController maxController,
+  }) {
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            controller: minController,
+            keyboardType: TextInputType.number,
+            style: MyTextStyle.body.m,
+            decoration: InputDecoration(
+              hintText: l10n.priceMin,
+              hintStyle: MyTextStyle.body.m.copyWith(
+                color: theme.textTheme.bodySmall?.color,
+              ),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 12.w,
+                vertical: 10.h,
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
+          child: Text('–', style: MyTextStyle.body.l),
+        ),
+        Expanded(
+          child: TextField(
+            controller: maxController,
+            keyboardType: TextInputType.number,
+            style: MyTextStyle.body.m,
+            decoration: InputDecoration(
+              hintText: l10n.priceMax,
+              hintStyle: MyTextStyle.body.m.copyWith(
+                color: theme.textTheme.bodySmall?.color,
+              ),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 12.w,
+                vertical: 10.h,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

@@ -45,8 +45,10 @@ class SearchRepo {
         categoryId: filters.categoryId,
         locationId: filters.locationId,
         conditions: filters.conditions.isEmpty ? null : filters.conditions,
-        priceMin: filters.priceMin,
-        priceMax: filters.priceMax,
+        priceMinUsd: filters.priceMinUsd,
+        priceMaxUsd: filters.priceMaxUsd,
+        priceMinIls: filters.priceMinIls,
+        priceMaxIls: filters.priceMaxIls,
         sort: filters.sort,
         page: page,
       );

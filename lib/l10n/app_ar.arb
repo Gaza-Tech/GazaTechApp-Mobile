@@ -210,6 +210,8 @@
   "sortPriceLowToHigh": "السعر: من الأقل للأعلى",
   "sortPriceHighToLow": "السعر: من الأعلى للأقل",
   "priceRange": "نطاق السعر",
+  "priceRangeUsd": "نطاق السعر (دولار)",
+  "priceRangeIls": "نطاق السعر (شيكل)",
   "priceMin": "الحد الأدنى",
   "priceMax": "الحد الأقصى",
   "conditionFilter": "الحالة"

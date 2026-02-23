@@ -36,8 +36,10 @@ class SearchApiService {
     String? categoryId,
     String? locationId,
     List<String>? conditions,
-    int? priceMin,
-    int? priceMax,
+    int? priceMinUsd,
+    int? priceMaxUsd,
+    int? priceMinIls,
+    int? priceMaxIls,
     SearchSortOption sort = SearchSortOption.newest,
     required int page,
   }) async {
@@ -70,12 +72,34 @@ class SearchApiService {
       query = query.inFilter('product_condition', conditions);
     }
 
-    if (priceMin != null) {
-      query = query.gte('price', priceMin);
-    }
+    // Build currency-specific price filters
+    final hasUsdFilter = priceMinUsd != null || priceMaxUsd != null;
+    final hasIlsFilter = priceMinIls != null || priceMaxIls != null;
 
-    if (priceMax != null) {
-      query = query.lte('price', priceMax);
+    if (hasUsdFilter && hasIlsFilter) {
+      // Both currencies: use OR to match either
+      final usdParts = <String>[];
+      final ilsParts = <String>[];
+
+      usdParts.add('currency.eq.USD');
+      if (priceMinUsd != null) usdParts.add('price.gte.$priceMinUsd');
+      if (priceMaxUsd != null) usdParts.add('price.lte.$priceMaxUsd');
+
+      ilsParts.add('currency.eq.ILS');
+      if (priceMinIls != null) ilsParts.add('price.gte.$priceMinIls');
+      if (priceMaxIls != null) ilsParts.add('price.lte.$priceMaxIls');
+
+      query = query.or(
+        'and(${usdParts.join(",")}),and(${ilsParts.join(",")})',
+      );
+    } else if (hasUsdFilter) {
+      query = query.eq('currency', 'USD');
+      if (priceMinUsd != null) query = query.gte('price', priceMinUsd);
+      if (priceMaxUsd != null) query = query.lte('price', priceMaxUsd);
+    } else if (hasIlsFilter) {
+      query = query.eq('currency', 'ILS');
+      if (priceMinIls != null) query = query.gte('price', priceMinIls);
+      if (priceMaxIls != null) query = query.lte('price', priceMaxIls);
     }
 
     String sortField;

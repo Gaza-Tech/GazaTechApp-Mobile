@@ -14,8 +14,10 @@ abstract class SearchFiltersModel with _$SearchFiltersModel {
     @Default(null) String? locationId,
     @Default(null) String? locationName,
     @Default([]) List<String> conditions,
-    @Default(null) int? priceMin,
-    @Default(null) int? priceMax,
+    @Default(null) int? priceMinUsd,
+    @Default(null) int? priceMaxUsd,
+    @Default(null) int? priceMinIls,
+    @Default(null) int? priceMaxIls,
     @Default(SearchSortOption.newest) SearchSortOption sort,
   }) = _SearchFiltersModel;
 
@@ -23,15 +25,23 @@ abstract class SearchFiltersModel with _$SearchFiltersModel {
       categoryId != null ||
       locationId != null ||
       conditions.isNotEmpty ||
-      priceMin != null ||
-      priceMax != null;
+      priceMinUsd != null ||
+      priceMaxUsd != null ||
+      priceMinIls != null ||
+      priceMaxIls != null;
+
+  bool get hasPriceFilter =>
+      priceMinUsd != null ||
+      priceMaxUsd != null ||
+      priceMinIls != null ||
+      priceMaxIls != null;
 
   int get activeFilterCount {
     int count = 0;
     if (categoryId != null) count++;
     if (locationId != null) count++;
     if (conditions.isNotEmpty) count++;
-    if (priceMin != null || priceMax != null) count++;
+    if (hasPriceFilter) count++;
     return count;
   }
 }

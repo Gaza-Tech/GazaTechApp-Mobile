@@ -516,6 +516,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get priceRange => 'Price Range';
 
   @override
+  String get priceRangeUsd => 'Price Range (USD)';
+
+  @override
+  String get priceRangeIls => 'Price Range (ILS)';
+
+  @override
   String get priceMin => 'Min';
 
   @override
