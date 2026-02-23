@@ -257,5 +257,21 @@
 
   "conditionLikeNew": "Like New",
 
-  "retry": "Retry"
+  "retry": "Retry",
+
+  "searchHint": "Search products...",
+  "searchPrompt": "Search for products",
+  "noResultsFound": "No results found",
+  "noResultsSubtitle": "Try different keywords or adjust your filters",
+  "filters": "Filters",
+  "clearAll": "Clear All",
+  "applyFilters": "Apply Filters",
+  "sortBy": "Sort By",
+  "sortNewest": "Newest",
+  "sortPriceLowToHigh": "Price: Low to High",
+  "sortPriceHighToLow": "Price: High to Low",
+  "priceRange": "Price Range",
+  "priceMin": "Min",
+  "priceMax": "Max",
+  "conditionFilter": "Condition"
 }

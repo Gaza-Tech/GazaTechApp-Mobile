@@ -477,4 +477,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get retry => 'Retry';
+
+  @override
+  String get searchHint => 'Search products...';
+
+  @override
+  String get searchPrompt => 'Search for products';
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get noResultsSubtitle =>
+      'Try different keywords or adjust your filters';
+
+  @override
+  String get filters => 'Filters';
+
+  @override
+  String get clearAll => 'Clear All';
+
+  @override
+  String get applyFilters => 'Apply Filters';
+
+  @override
+  String get sortBy => 'Sort By';
+
+  @override
+  String get sortNewest => 'Newest';
+
+  @override
+  String get sortPriceLowToHigh => 'Price: Low to High';
+
+  @override
+  String get sortPriceHighToLow => 'Price: High to Low';
+
+  @override
+  String get priceRange => 'Price Range';
+
+  @override
+  String get priceMin => 'Min';
+
+  @override
+  String get priceMax => 'Max';
+
+  @override
+  String get conditionFilter => 'Condition';
 }

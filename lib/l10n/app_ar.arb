@@ -196,5 +196,21 @@
 
   "conditionLikeNew": "شبه جديد",
 
-  "retry": "إعادة المحاولة"
+  "retry": "إعادة المحاولة",
+
+  "searchHint": "ابحث عن منتجات...",
+  "searchPrompt": "ابحث عن منتجات",
+  "noResultsFound": "لا توجد نتائج",
+  "noResultsSubtitle": "جرّب كلمات مختلفة أو عدّل الفلاتر",
+  "filters": "الفلاتر",
+  "clearAll": "مسح الكل",
+  "applyFilters": "تطبيق الفلاتر",
+  "sortBy": "ترتيب حسب",
+  "sortNewest": "الأحدث",
+  "sortPriceLowToHigh": "السعر: من الأقل للأعلى",
+  "sortPriceHighToLow": "السعر: من الأعلى للأقل",
+  "priceRange": "نطاق السعر",
+  "priceMin": "الحد الأدنى",
+  "priceMax": "الحد الأقصى",
+  "conditionFilter": "الحالة"
 }

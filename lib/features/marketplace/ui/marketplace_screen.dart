@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_state.dart';
 import 'package:gaza_tech/features/marketplace/ui/widgets/category_tab_bar.dart';
@@ -43,7 +44,9 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
       if (_tabController!.index == 0) {
         _marketplaceCubit.changeCategory('all');
       } else if (_tabController!.index <= categories.length) {
-        _marketplaceCubit.changeCategory(categories[_tabController!.index - 1].slug);
+        _marketplaceCubit.changeCategory(
+          categories[_tabController!.index - 1].slug,
+        );
       }
     }
   }
@@ -72,10 +75,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
         }
 
         // Build slug list: ['all', slug1, slug2, ...]
-        final categorySlugs = [
-          'all',
-          ...state.categories.map((c) => c.slug),
-        ];
+        final categorySlugs = ['all', ...state.categories.map((c) => c.slug)];
 
         return NestedScrollView(
           controller: widget.scrollController,
@@ -86,6 +86,12 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
                 floating: true,
                 snap: true,
                 pinned: false,
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () => context.pushNamed(MyRoutes.search),
+                  ),
+                ],
                 bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(56),
                   child: CategoryTabBar(

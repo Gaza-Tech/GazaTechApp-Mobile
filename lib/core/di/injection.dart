@@ -36,6 +36,9 @@ import 'package:gaza_tech/features/add_listing/data/services/add_listing_api_ser
 import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
 import 'package:gaza_tech/features/listing_details/data/repos/listing_details_repo.dart';
 import 'package:gaza_tech/features/listing_details/data/services/listing_details_api_service.dart';
+import 'package:gaza_tech/features/search/cubit/search_cubit.dart';
+import 'package:gaza_tech/features/search/data/repos/search_repo.dart';
+import 'package:gaza_tech/features/search/data/services/search_api_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -141,4 +144,11 @@ Future<void> setupGetIt() async {
   getIt.registerFactoryParam<ListingDetailsCubit, String, void>(
     (listingId, _) => ListingDetailsCubit(getIt(), listingId),
   );
+
+  // 13. Search
+  getIt.registerLazySingleton<SearchApiService>(
+    () => SearchApiService(getIt()),
+  );
+  getIt.registerLazySingleton<SearchRepo>(() => SearchRepo(getIt()));
+  getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt()));
 }

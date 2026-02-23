@@ -21,6 +21,8 @@ import 'package:gaza_tech/features/add_listing/ui/add_listing_screen.dart';
 import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
 import 'package:gaza_tech/features/listing_details/ui/listing_details_screen.dart';
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
+import 'package:gaza_tech/features/search/cubit/search_cubit.dart';
+import 'package:gaza_tech/features/search/ui/search_screen.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -100,6 +102,13 @@ class MyRouter {
             create: (context) =>
                 getIt<ListingDetailsCubit>(param1: listingId)..loadListing(),
             child: const ListingDetailsScreen(),
+          ),
+        );
+      case MyRoutes.search:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<SearchCubit>()..loadFilterData(),
+            child: const SearchScreen(),
           ),
         );
       default:

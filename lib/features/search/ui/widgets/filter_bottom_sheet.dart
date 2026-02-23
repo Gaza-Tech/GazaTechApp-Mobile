@@ -1,0 +1,332 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/theme/my_colors.dart';
+import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/core/widgets/my_button.dart';
+import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/features/search/cubit/search_cubit.dart';
+import 'package:gaza_tech/features/search/cubit/search_state.dart';
+import 'package:gaza_tech/features/search/data/models/search_filters_model.dart';
+
+void showFilterBottomSheet(BuildContext context) {
+  final cubit = context.read<SearchCubit>();
+
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20.dg)),
+    ),
+    builder: (_) {
+      return BlocProvider.value(
+        value: cubit,
+        child: const _FilterBottomSheetContent(),
+      );
+    },
+  );
+}
+
+class _FilterBottomSheetContent extends StatelessWidget {
+  const _FilterBottomSheetContent();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+
+    return BlocBuilder<SearchCubit, SearchState>(
+      builder: (context, state) {
+        final cubit = context.read<SearchCubit>();
+        final filters = state.filters;
+        final isArabic =
+            Localizations.localeOf(context).languageCode == 'ar';
+
+        return DraggableScrollableSheet(
+          initialChildSize: 0.75,
+          maxChildSize: 0.9,
+          minChildSize: 0.5,
+          expand: false,
+          builder: (context, scrollController) {
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: ListView(
+                controller: scrollController,
+                children: [
+                  const VerticalSpace(12),
+                  // Handle bar
+                  Center(
+                    child: Container(
+                      width: 40.w,
+                      height: 4.h,
+                      decoration: BoxDecoration(
+                        color: MyColors.neutral.light.darkest,
+                        borderRadius: BorderRadius.circular(2.dg),
+                      ),
+                    ),
+                  ),
+                  const VerticalSpace(16),
+
+                  // Header
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(l10n.filters, style: MyTextStyle.heading.h2),
+                      TextButton(
+                        onPressed: () => cubit.clearFilters(),
+                        child: Text(
+                          l10n.clearAll,
+                          style: MyTextStyle.action.m.copyWith(
+                            color: MyColors.support.error.dark,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const VerticalSpace(20),
+
+                  // Sort section
+                  Text(l10n.sortBy, style: MyTextStyle.heading.h4),
+                  const VerticalSpace(8),
+                  ...SearchSortOption.values.map((option) {
+                    final isSelected = filters.sort == option;
+                    return ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      dense: true,
+                      leading: Radio<SearchSortOption>(
+                        value: option,
+                        groupValue: filters.sort,
+                        activeColor: MyColors.highlight.darkest,
+                        onChanged: (value) {
+                          if (value != null) cubit.updateSort(value);
+                        },
+                      ),
+                      title: Text(
+                        _getSortLabel(l10n, option),
+                        style: MyTextStyle.body.m.copyWith(
+                          fontWeight:
+                              isSelected ? FontWeight.w600 : FontWeight.w400,
+                        ),
+                      ),
+                      onTap: () => cubit.updateSort(option),
+                    );
+                  }),
+                  const VerticalSpace(16),
+
+                  // Category dropdown
+                  Text(l10n.categoryLabel, style: MyTextStyle.heading.h4),
+                  const VerticalSpace(8),
+                  DropdownButtonFormField<String?>(
+                    initialValue: filters.categoryId,
+                    isExpanded: true,
+                    decoration: InputDecoration(
+                      hintText: l10n.selectCategory,
+                      hintStyle: MyTextStyle.body.m.copyWith(
+                        color: theme.textTheme.bodySmall?.color,
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 12.w,
+                        vertical: 10.h,
+                      ),
+                    ),
+                    items: [
+                      DropdownMenuItem<String?>(
+                        value: null,
+                        child: Text(l10n.categoryAll, style: MyTextStyle.body.m),
+                      ),
+                      ...state.categories.map((cat) {
+                        final name = isArabic
+                            ? (cat.nameAr?.isNotEmpty == true
+                                ? cat.nameAr!
+                                : cat.name)
+                            : cat.name;
+                        return DropdownMenuItem<String?>(
+                          value: cat.id,
+                          child: Text(name, style: MyTextStyle.body.m),
+                        );
+                      }),
+                    ],
+                    onChanged: (value) {
+                      if (value == null) {
+                        cubit.setCategory(null, null);
+                      } else {
+                        final cat = state.categories.firstWhere(
+                          (c) => c.id == value,
+                        );
+                        final name = isArabic
+                            ? (cat.nameAr?.isNotEmpty == true
+                                ? cat.nameAr!
+                                : cat.name)
+                            : cat.name;
+                        cubit.setCategory(value, name);
+                      }
+                    },
+                  ),
+                  const VerticalSpace(16),
+
+                  // Location dropdown
+                  Text(l10n.locationLabel, style: MyTextStyle.heading.h4),
+                  const VerticalSpace(8),
+                  DropdownButtonFormField<String?>(
+                    initialValue: filters.locationId,
+                    isExpanded: true,
+                    decoration: InputDecoration(
+                      hintText: l10n.selectLocation,
+                      hintStyle: MyTextStyle.body.m.copyWith(
+                        color: theme.textTheme.bodySmall?.color,
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 12.w,
+                        vertical: 10.h,
+                      ),
+                    ),
+                    items: [
+                      DropdownMenuItem<String?>(
+                        value: null,
+                        child: Text(l10n.categoryAll, style: MyTextStyle.body.m),
+                      ),
+                      ...state.locations.map((loc) {
+                        final name = isArabic
+                            ? (loc.nameAr?.isNotEmpty == true
+                                ? loc.nameAr!
+                                : loc.name)
+                            : loc.name;
+                        return DropdownMenuItem<String?>(
+                          value: loc.locationId,
+                          child: Text(name, style: MyTextStyle.body.m),
+                        );
+                      }),
+                    ],
+                    onChanged: (value) {
+                      if (value == null) {
+                        cubit.setLocation(null, null);
+                      } else {
+                        final loc = state.locations.firstWhere(
+                          (l) => l.locationId == value,
+                        );
+                        final name = isArabic
+                            ? (loc.nameAr?.isNotEmpty == true
+                                ? loc.nameAr!
+                                : loc.name)
+                            : loc.name;
+                        cubit.setLocation(value, name);
+                      }
+                    },
+                  ),
+                  const VerticalSpace(16),
+
+                  // Condition chips
+                  Text(l10n.conditionFilter, style: MyTextStyle.heading.h4),
+                  const VerticalSpace(8),
+                  Wrap(
+                    spacing: 8.w,
+                    runSpacing: 8.h,
+                    children: [
+                      _buildConditionChip(
+                          context, 'new', l10n.conditionNew, filters),
+                      _buildConditionChip(
+                          context, 'like_new', l10n.conditionLikeNew, filters),
+                      _buildConditionChip(context, 'refurbished',
+                          l10n.conditionRefurbished, filters),
+                      _buildConditionChip(
+                          context, 'used', l10n.conditionUsed, filters),
+                    ],
+                  ),
+                  const VerticalSpace(16),
+
+                  // Price range
+                  Text(l10n.priceRange, style: MyTextStyle.heading.h4),
+                  const VerticalSpace(8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: cubit.priceMinController,
+                          keyboardType: TextInputType.number,
+                          style: MyTextStyle.body.m,
+                          decoration: InputDecoration(
+                            hintText: l10n.priceMin,
+                            hintStyle: MyTextStyle.body.m.copyWith(
+                              color: theme.textTheme.bodySmall?.color,
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12.w,
+                              vertical: 10.h,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                        child: Text('–', style: MyTextStyle.body.l),
+                      ),
+                      Expanded(
+                        child: TextField(
+                          controller: cubit.priceMaxController,
+                          keyboardType: TextInputType.number,
+                          style: MyTextStyle.body.m,
+                          decoration: InputDecoration(
+                            hintText: l10n.priceMax,
+                            hintStyle: MyTextStyle.body.m.copyWith(
+                              color: theme.textTheme.bodySmall?.color,
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12.w,
+                              vertical: 10.h,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const VerticalSpace(24),
+
+                  // Apply button
+                  MyButton(
+                    text: l10n.applyFilters,
+                    onPressed: () {
+                      cubit.applyFiltersAndSearch();
+                      Navigator.pop(context);
+                    },
+                  ),
+                  const VerticalSpace(16),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildConditionChip(
+    BuildContext context,
+    String value,
+    String label,
+    SearchFiltersModel filters,
+  ) {
+    final isSelected = filters.conditions.contains(value);
+    return FilterChip(
+      label: Text(label),
+      selected: isSelected,
+      selectedColor: MyColors.highlight.lightest,
+      checkmarkColor: MyColors.highlight.darkest,
+      labelStyle: MyTextStyle.body.s.copyWith(
+        color: isSelected ? MyColors.highlight.darkest : null,
+      ),
+      onSelected: (_) => context.read<SearchCubit>().toggleCondition(value),
+    );
+  }
+
+  String _getSortLabel(dynamic l10n, SearchSortOption option) {
+    switch (option) {
+      case SearchSortOption.newest:
+        return l10n.sortNewest;
+      case SearchSortOption.priceLowToHigh:
+        return l10n.sortPriceLowToHigh;
+      case SearchSortOption.priceHighToLow:
+        return l10n.sortPriceHighToLow;
+    }
+  }
+}

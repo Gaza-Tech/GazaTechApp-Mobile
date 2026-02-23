@@ -8,4 +8,5 @@ class MyRoutes {
   static const String resetPassword = '/resetPassword';
   static const String addListing = '/addListing';
   static const String listingDetails = '/listingDetails';
+  static const String search = '/search';
 }

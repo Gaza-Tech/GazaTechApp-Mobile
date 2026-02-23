@@ -476,4 +476,49 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get retry => 'إعادة المحاولة';
+
+  @override
+  String get searchHint => 'ابحث عن منتجات...';
+
+  @override
+  String get searchPrompt => 'ابحث عن منتجات';
+
+  @override
+  String get noResultsFound => 'لا توجد نتائج';
+
+  @override
+  String get noResultsSubtitle => 'جرّب كلمات مختلفة أو عدّل الفلاتر';
+
+  @override
+  String get filters => 'الفلاتر';
+
+  @override
+  String get clearAll => 'مسح الكل';
+
+  @override
+  String get applyFilters => 'تطبيق الفلاتر';
+
+  @override
+  String get sortBy => 'ترتيب حسب';
+
+  @override
+  String get sortNewest => 'الأحدث';
+
+  @override
+  String get sortPriceLowToHigh => 'السعر: من الأقل للأعلى';
+
+  @override
+  String get sortPriceHighToLow => 'السعر: من الأعلى للأقل';
+
+  @override
+  String get priceRange => 'نطاق السعر';
+
+  @override
+  String get priceMin => 'الحد الأدنى';
+
+  @override
+  String get priceMax => 'الحد الأقصى';
+
+  @override
+  String get conditionFilter => 'الحالة';
 }
