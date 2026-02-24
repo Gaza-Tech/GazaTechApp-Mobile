@@ -39,8 +39,8 @@ class ProductCardGrid extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.dg),
           border: Border.all(
             color: isDark
-                ? MyColors.neutral.light.lightest.withValues(alpha: 0.05)
-                : MyColors.neutral.light.medium,
+                ? MyColors.dark.outlineVariant
+                : MyColors.light.outlineVariant,
           ),
         ),
         clipBehavior: Clip.antiAlias,
@@ -55,7 +55,7 @@ class ProductCardGrid extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: MyColors.neutral.dark.medium,
+                      color: MyColors.dark.outline,
                     ),
                     child: imageUrl != null
                         ? CachedNetworkImage(
@@ -136,7 +136,7 @@ class ProductCardGrid extends StatelessWidget {
                     Text(
                       price,
                       style: MyTextStyle.heading.h5.copyWith(
-                        color: MyColors.highlight.darkest,
+                        color: MyColors.primary.base,
                       ),
                     ),
                     if (sellerName.isNotEmpty)
@@ -213,15 +213,15 @@ class ProductCardGrid extends StatelessWidget {
   static Color _getConditionColor(String condition) {
     switch (condition.toLowerCase()) {
       case 'new':
-        return MyColors.highlight.darkest;
+        return MyColors.primary.base;
       case 'like_new':
-        return MyColors.highlight.dark;
+        return MyColors.primary.deep;
       case 'refurbished':
-        return MyColors.support.warning.medium;
+        return MyColors.status.warning.main;
       case 'used':
-        return MyColors.neutral.dark.light;
+        return MyColors.light.textDisabled;
       default:
-        return MyColors.neutral.dark.light;
+        return MyColors.light.textDisabled;
     }
   }
 }

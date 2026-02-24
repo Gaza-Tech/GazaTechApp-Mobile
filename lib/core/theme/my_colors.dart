@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// A class that holds the color palette from the Figma design.
+/// A class that holds the color palette extracted from the Gmail Material 3 design.
 ///
 /// This class is not meant to be instantiated. It provides static access
 /// to the app's colors, organized by category.
@@ -8,90 +8,153 @@ import 'package:flutter/material.dart';
 /// Example:
 /// ```
 /// Container(
-///   color: MyColor.Highlight.dark,
+///   color: MyColors.primary.base,
 /// )
 /// ```
 class MyColors {
   // Private constructor to prevent instantiation.
   MyColors._();
 
-  /// The 'Highlight' color group.
-  static const MyHighlightColors highlight = MyHighlightColors._();
+  /// Brand blue accent colors.
+  static const MyPrimaryColors primary = MyPrimaryColors._();
 
-  /// The 'Neutral' color group, split into Light and Dark themes.
-  static const MyNeutralColors neutral = MyNeutralColors._();
+  /// Light theme palette (surfaces, text, outlines).
+  static const MyLightPalette light = MyLightPalette._();
 
-  /// The 'Support' color group for states like success, warning, and error.
-  static const MySupportColors support = MySupportColors._();
+  /// Dark theme palette (surfaces, text, outlines).
+  static const MyDarkPalette dark = MyDarkPalette._();
+
+  /// Semantic status colors (success, warning, error).
+  static const MyStatusColors status = MyStatusColors._();
 }
 
-/// Helper class for 'Highlight' colors.
-class MyHighlightColors {
-  const MyHighlightColors._();
+/// Helper class for primary blue accent colors.
+class MyPrimaryColors {
+  const MyPrimaryColors._();
 
-  // Base Color: #00D9A3 (Teal/Mint)
-  final Color darkest = const Color(0xFF00D9A3);
-  final Color dark = const Color(0xFF33E1B5);
-  final Color medium = const Color(0xFF66E9C8);
-  final Color light = const Color(0xFF99F0DB);
-  final Color lightest = const Color(0xFFE5F9F6);
+  /// Main blue — buttons, links, active states.
+  final Color base = const Color(0xFF0B57D0);
+
+  /// Deeper blue — pressed/deep interactive states.
+  final Color deep = const Color(0xFF0842A0);
+
+  /// Light blue container — FAB background, selected chips (light mode).
+  final Color container = const Color(0xFFC2E7FF);
+
+  /// Soft blue — hover states, subtle highlights (light mode).
+  final Color soft = const Color(0xFFE8F0FE);
+
+  /// Adapted blue for dark backgrounds.
+  final Color onDark = const Color(0xFFA8C7FA);
+
+  /// Dark mode container — FAB/container background (dark mode).
+  final Color containerDark = const Color(0xFF004A77);
+
+  /// Dark mode soft — selected/hover states (dark mode).
+  final Color softDark = const Color(0xFF1B3A5C);
 }
 
-/// Helper class for 'Neutral' colors.
-class MyNeutralColors {
-  const MyNeutralColors._();
-  final MyNeutralLightColors light = const MyNeutralLightColors._();
-  final MyNeutralDarkColors dark = const MyNeutralDarkColors._();
+/// Helper class for light theme palette.
+class MyLightPalette {
+  const MyLightPalette._();
+
+  /// Main scaffold background — Pure White.
+  final Color background = const Color(0xFFFFFFFF);
+
+  /// Cards, elevated surfaces.
+  final Color surface = const Color(0xFFFFFFFF);
+
+  /// Search bar, secondary areas.
+  final Color surfaceVariant = const Color(0xFFF1F3F4);
+
+  /// Titles, headings.
+  final Color textPrimary = const Color(0xFF1F1F1F);
+
+  /// Body text, previews.
+  final Color textSecondary = const Color(0xFF444746);
+
+  /// Metadata, timestamps.
+  final Color textTertiary = const Color(0xFF5F6368);
+
+  /// Hint text, disabled.
+  final Color textDisabled = const Color(0xFF8E918F);
+
+  /// Borders, dividers.
+  final Color outline = const Color(0xFFC4C7C5);
+
+  /// Subtle dividers.
+  final Color outlineVariant = const Color(0xFFE3E3E3);
+
+  /// Unselected icons.
+  final Color icon = const Color(0xFF747775);
 }
 
-/// Helper class for 'Neutral Light' colors.
-class MyNeutralLightColors {
-  const MyNeutralLightColors._();
-  final Color darkest = const Color(0xFFc5c6cc);
-  final Color dark = const Color(0xFFD4D6DD);
-  final Color medium = const Color(0xFFE8E9F1);
-  final Color light = const Color(0xFFF8F9FE);
-  final Color lightest = const Color(0xFFFFFFFF);
+/// Helper class for dark theme palette.
+class MyDarkPalette {
+  const MyDarkPalette._();
+
+  /// Main scaffold background.
+  final Color background = const Color(0xFF1F1F1F);
+
+  /// Cards, elevated surfaces.
+  final Color surface = const Color(0xFF2D2D2D);
+
+  /// Search bar, secondary areas.
+  final Color surfaceVariant = const Color(0xFF303030);
+
+  /// Titles, headings.
+  final Color textPrimary = const Color(0xFFE3E3E3);
+
+  /// Body text.
+  final Color textSecondary = const Color(0xFFC4C7C5);
+
+  /// Metadata.
+  final Color textTertiary = const Color(0xFF9AA0A6);
+
+  /// Hint text, disabled.
+  final Color textDisabled = const Color(0xFF747775);
+
+  /// Borders.
+  final Color outline = const Color(0xFF444746);
+
+  /// Subtle borders.
+  final Color outlineVariant = const Color(0xFF3C4043);
+
+  /// Default icons.
+  final Color icon = const Color(0xFF9AA0A6);
 }
 
-/// Helper class for 'Neutral Dark' colors.
-class MyNeutralDarkColors {
-  const MyNeutralDarkColors._();
-  final Color darkest = const Color(0xFF1A1A1A);
-  final Color dark = const Color(0XFF242424);
-  final Color medium = const Color(0xFF4D4D4D);
-  final Color light = const Color(0xFF999999);
-  final Color lightest = const Color(0xFFCCCCCC);
+/// Helper class for semantic status colors.
+class MyStatusColors {
+  const MyStatusColors._();
+  final MySuccessColors success = const MySuccessColors._();
+  final MyWarningColors warning = const MyWarningColors._();
+  final MyErrorColors error = const MyErrorColors._();
 }
 
-/// Helper class for 'Support' colors.
-class MySupportColors {
-  const MySupportColors._();
-  final MySupportSuccessColors success = const MySupportSuccessColors._();
-  final MySupportWarningColors warning = const MySupportWarningColors._();
-  final MySupportErrorColors error = const MySupportErrorColors._();
+/// Helper class for success colors.
+class MySuccessColors {
+  const MySuccessColors._();
+  final Color main = const Color(0xFF1E8E3E);
+  final Color container = const Color(0xFFC4EECE);
+  final Color onDark = const Color(0xFF81C995);
+  final Color containerDark = const Color(0xFF0F5223);
 }
 
-/// Helper class for 'Support Success' colors.
-class MySupportSuccessColors {
-  const MySupportSuccessColors._();
-  final Color dark = const Color(0xFF298267);
-  final Color medium = const Color(0xFF3AC0A0);
-  final Color light = const Color(0xFFE7F4EB);
+/// Helper class for warning colors.
+class MyWarningColors {
+  const MyWarningColors._();
+  final Color main = const Color(0xFFEA8600);
+  final Color container = const Color(0xFFFEF7E0);
+  final Color onDark = const Color(0xFFFDD663);
+  final Color containerDark = const Color(0xFF7B5800);
 }
 
-/// Helper class for 'Support Warning' colors.
-class MySupportWarningColors {
-  const MySupportWarningColors._();
-  final Color dark = const Color(0xFFE86339);
-  final Color medium = const Color(0xFFFFB37C);
-  final Color light = const Color(0xFFFFF4E4);
-}
-
-/// Helper class for 'Support Error' colors.
-class MySupportErrorColors {
-  const MySupportErrorColors._();
-  final Color dark = const Color(0xFFED3241);
-  final Color medium = const Color(0xFFFF816D);
-  final Color light = const Color(0xFFFFE2E5);
+/// Helper class for error colors.
+class MyErrorColors {
+  const MyErrorColors._();
+  final Color main = const Color(0xFFD93025);
+  final Color container = const Color(0xFFFCE8E6);
+  final Color onDark = const Color(0xFFF28B82);
+  final Color containerDark = const Color(0xFF8C1D18);
 }

@@ -61,7 +61,7 @@ class _FilterBottomSheetContent extends StatelessWidget {
                       width: 40.w,
                       height: 4.h,
                       decoration: BoxDecoration(
-                        color: MyColors.neutral.light.darkest,
+                        color: MyColors.light.icon,
                         borderRadius: BorderRadius.circular(2.dg),
                       ),
                     ),
@@ -78,7 +78,7 @@ class _FilterBottomSheetContent extends StatelessWidget {
                         child: Text(
                           l10n.clearAll,
                           style: MyTextStyle.action.m.copyWith(
-                            color: MyColors.support.error.dark,
+                            color: MyColors.status.error.main,
                           ),
                         ),
                       ),
@@ -97,7 +97,7 @@ class _FilterBottomSheetContent extends StatelessWidget {
                       leading: Radio<SearchSortOption>(
                         value: option,
                         groupValue: filters.sort,
-                        activeColor: MyColors.highlight.darkest,
+                        activeColor: MyColors.primary.base,
                         onChanged: (value) {
                           if (value != null) cubit.updateSort(value);
                         },
@@ -335,10 +335,10 @@ class _FilterBottomSheetContent extends StatelessWidget {
     return FilterChip(
       label: Text(label),
       selected: isSelected,
-      selectedColor: MyColors.highlight.lightest,
-      checkmarkColor: MyColors.highlight.darkest,
+      selectedColor: MyColors.primary.soft,
+      checkmarkColor: MyColors.primary.base,
       labelStyle: MyTextStyle.body.s.copyWith(
-        color: isSelected ? MyColors.highlight.darkest : null,
+        color: isSelected ? MyColors.primary.base : null,
       ),
       onSelected: (_) => context.read<SearchCubit>().toggleCondition(value),
     );

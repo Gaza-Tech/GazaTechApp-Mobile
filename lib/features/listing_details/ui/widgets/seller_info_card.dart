@@ -31,8 +31,8 @@ class SellerInfoCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.dg),
         border: Border.all(
           color: isDark
-              ? MyColors.neutral.light.lightest.withValues(alpha: 0.05)
-              : MyColors.neutral.light.medium,
+              ? MyColors.dark.outlineVariant
+              : MyColors.light.outlineVariant,
         ),
       ),
       child: Column(
@@ -41,11 +41,11 @@ class SellerInfoCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 24.dg,
-                backgroundColor: MyColors.highlight.lightest,
+                backgroundColor: MyColors.primary.soft,
                 child: Text(
                   sellerName.isNotEmpty ? sellerName[0] : '?',
                   style: MyTextStyle.heading.h2.copyWith(
-                    color: MyColors.highlight.darkest,
+                    color: MyColors.primary.base,
                   ),
                 ),
               ),
@@ -74,7 +74,7 @@ class SellerInfoCard extends StatelessWidget {
                 child: OutlinedButton(
                   onPressed: onContactSeller,
                   style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: MyColors.highlight.darkest),
+                    side: BorderSide(color: MyColors.primary.base),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.dg),
                     ),
@@ -83,7 +83,7 @@ class SellerInfoCard extends StatelessWidget {
                   child: Text(
                     context.l10n.contactSeller,
                     style: MyTextStyle.action.m.copyWith(
-                      color: MyColors.highlight.darkest,
+                      color: MyColors.primary.base,
                     ),
                   ),
                 ),
@@ -95,8 +95,8 @@ class SellerInfoCard extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(
                       color: isDark
-                          ? MyColors.neutral.dark.medium
-                          : MyColors.neutral.light.darkest,
+                          ? MyColors.dark.outline
+                          : MyColors.light.icon,
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.dg),

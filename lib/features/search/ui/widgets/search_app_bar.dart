@@ -65,7 +65,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                   count.toString(),
                   style: TextStyle(fontSize: 10.sp),
                 ),
-                backgroundColor: MyColors.highlight.darkest,
+                backgroundColor: MyColors.primary.base,
                 child: const Icon(Icons.filter_alt_outlined),
               ),
               onPressed: () => showFilterBottomSheet(context),

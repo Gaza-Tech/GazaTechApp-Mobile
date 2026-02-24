@@ -31,7 +31,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
 
   Widget _buildImagePlaceholder() {
     return Container(
-      color: MyColors.neutral.dark.medium,
+      color: MyColors.dark.outline,
       child: Center(
         child: Icon(Icons.image_outlined, size: 80.sp, color: Colors.white54),
       ),
@@ -60,11 +60,11 @@ class _ImageCarouselState extends State<ImageCarousel> {
                     width: double.infinity,
                     height: double.infinity,
                     placeholder: (context, url) => Container(
-                      color: MyColors.neutral.dark.medium,
+                      color: MyColors.dark.outline,
                       child: const Center(child: CircularProgressIndicator()),
                     ),
                     errorWidget: (context, url, error) => Container(
-                      color: MyColors.neutral.dark.medium,
+                      color: MyColors.dark.outline,
                       child: Center(
                         child: Icon(
                           Icons.image_not_supported_outlined,
@@ -93,7 +93,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                   height: 8.w,
                   decoration: BoxDecoration(
                     color: _currentPage == i
-                        ? MyColors.highlight.darkest
+                        ? MyColors.primary.base
                         : Colors.white.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(4.dg),
                   ),
@@ -116,7 +116,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
               child: Icon(
                 widget.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
                 color: widget.isBookmarked
-                    ? MyColors.highlight.darkest
+                    ? MyColors.primary.base
                     : Colors.white,
                 size: 22.sp,
               ),

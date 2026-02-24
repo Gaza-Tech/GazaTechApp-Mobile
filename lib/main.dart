@@ -106,7 +106,6 @@ class _MyAppState extends State<MyApp> {
                   brightness: Brightness.dark,
                   locale: localeState.locale,
                 ),
-
                 onGenerateRoute: widget.myRouter.generateRoute,
                 initialRoute: initialRoute,
 

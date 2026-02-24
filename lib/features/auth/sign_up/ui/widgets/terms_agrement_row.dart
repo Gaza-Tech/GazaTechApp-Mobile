@@ -30,7 +30,7 @@ class TermsAgreementRow extends StatelessWidget {
           child: Checkbox(
             value: isAgreed,
             activeColor: Theme.of(context).colorScheme.primary,
-            side: BorderSide(color: MyColors.neutral.light.medium, width: 2),
+            side: BorderSide(color: MyColors.light.outlineVariant, width: 2),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),
@@ -47,7 +47,7 @@ class TermsAgreementRow extends StatelessWidget {
             TextSpan(
               text: context.l10n.agreeToTermsPrefix,
               style: MyTextStyle.body.s.copyWith(
-                color: MyColors.neutral.dark.light,
+                color: MyColors.light.textDisabled,
               ),
               children: [
                 TextSpan(

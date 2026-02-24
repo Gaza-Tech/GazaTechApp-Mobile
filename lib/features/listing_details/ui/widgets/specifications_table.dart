@@ -19,8 +19,8 @@ class SpecificationsTable extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.dg),
         border: Border.all(
           color: isDark
-              ? MyColors.neutral.light.lightest.withValues(alpha: 0.05)
-              : MyColors.neutral.light.medium,
+              ? MyColors.dark.outlineVariant
+              : MyColors.light.outlineVariant,
         ),
       ),
       child: Column(

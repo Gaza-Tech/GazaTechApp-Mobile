@@ -11,33 +11,33 @@ class MyThemes {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      fontFamily: kFontFamily, // Used constant from text styles
+      fontFamily: kFontFamily,
       // 1. Color Scheme
       colorScheme: ColorScheme.fromSeed(
-        seedColor: MyColors.highlight.darkest,
-        primary: MyColors.highlight.darkest,
-        secondary: MyColors.neutral.dark.light, // Mapped to a neutral grey
-        surface: MyColors.neutral.light.lightest, // White
-        error: MyColors.support.error.dark,
+        seedColor: MyColors.primary.base,
+        primary: MyColors.primary.base,
+        secondary: MyColors.light.textDisabled,
+        surface: MyColors.light.surface,
+        error: MyColors.status.error.main,
         brightness: Brightness.light,
       ),
 
       // Scaffold background
-      scaffoldBackgroundColor: MyColors.neutral.light.light, // F8F9FE
+      scaffoldBackgroundColor: MyColors.light.background,
       // 2. AppBar
       appBarTheme: AppBarTheme(
-        backgroundColor: MyColors.neutral.light.lightest,
+        backgroundColor: MyColors.light.background,
         elevation: 0,
         scrolledUnderElevation: 0,
-        iconTheme: IconThemeData(color: MyColors.neutral.dark.darkest),
+        iconTheme: IconThemeData(color: MyColors.light.textPrimary),
         titleTextStyle: MyTextStyle.heading.h2.copyWith(
-          color: MyColors.neutral.dark.darkest,
+          color: MyColors.light.textPrimary,
         ),
       ),
 
       // 3. Card
       cardTheme: CardThemeData(
-        color: MyColors.neutral.light.lightest,
+        color: MyColors.light.surface,
         surfaceTintColor: Colors.transparent,
         elevation: 1,
         margin: EdgeInsets.symmetric(vertical: 8.w),
@@ -49,47 +49,47 @@ class MyThemes {
       // 4. Inputs
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: MyColors.neutral.light.lightest,
+        fillColor: MyColors.light.surface,
         hintStyle: MyTextStyle.body.m.copyWith(
-          color: MyColors.neutral.dark.light, // Grey text
+          color: MyColors.light.textDisabled,
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 16.w),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.dg),
-          borderSide: BorderSide(color: MyColors.neutral.light.medium),
+          borderSide: BorderSide(color: MyColors.light.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.dg),
-          borderSide: BorderSide(color: MyColors.neutral.light.medium),
+          borderSide: BorderSide(color: MyColors.light.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.dg),
-          borderSide: BorderSide(color: MyColors.highlight.darkest),
+          borderSide: BorderSide(color: MyColors.primary.base),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.dg),
-          borderSide: BorderSide(color: MyColors.support.error.dark),
+          borderSide: BorderSide(color: MyColors.status.error.main),
         ),
       ),
 
       // 5. Text
       textTheme: TextTheme(
         titleMedium: MyTextStyle.heading.h3.copyWith(
-          color: MyColors.neutral.dark.darkest,
+          color: MyColors.light.textPrimary,
         ),
         bodyMedium: MyTextStyle.body.m.copyWith(
-          color: MyColors.neutral.dark.dark,
+          color: MyColors.light.textSecondary,
         ),
         bodySmall: MyTextStyle.body.s.copyWith(
-          color: MyColors.neutral.dark.light,
+          color: MyColors.light.textTertiary,
         ),
       ),
 
       // 6. Buttons
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: MyColors.highlight.darkest,
-          foregroundColor: MyColors.neutral.light.lightest, // White text
+          backgroundColor: MyColors.primary.base,
+          foregroundColor: MyColors.light.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.dg),
           ),
@@ -100,9 +100,9 @@ class MyThemes {
 
       // 7. Chip Theme
       chipTheme: ChipThemeData(
-        backgroundColor: MyColors.neutral.light.lightest,
+        backgroundColor: MyColors.light.surface,
         labelStyle: MyTextStyle.body.s.copyWith(
-          color: MyColors.neutral.dark.darkest,
+          color: MyColors.light.textPrimary,
         ),
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
         shape: RoundedRectangleBorder(
@@ -123,37 +123,37 @@ class MyThemes {
 
       // 1. Color Scheme
       colorScheme: ColorScheme.fromSeed(
-        seedColor: MyColors.highlight.darkest,
-        primary: MyColors.highlight.darkest,
-        secondary: MyColors.neutral.light.medium,
-        surface: MyColors.neutral.dark.dark, // Dark Surface
-        error: MyColors.support.error.dark,
+        seedColor: MyColors.primary.base,
+        primary: MyColors.primary.onDark,
+        secondary: MyColors.dark.textTertiary,
+        surface: MyColors.dark.surface,
+        error: MyColors.status.error.onDark,
         brightness: Brightness.dark,
       ),
 
       // Scaffold background
-      scaffoldBackgroundColor: MyColors.neutral.dark.darkest, // 1F2024
+      scaffoldBackgroundColor: MyColors.dark.background,
       // 2. AppBar
       appBarTheme: AppBarTheme(
-        backgroundColor: MyColors.neutral.dark.darkest,
+        backgroundColor: MyColors.dark.background,
         elevation: 0,
         scrolledUnderElevation: 0,
-        iconTheme: IconThemeData(color: MyColors.neutral.light.lightest),
+        iconTheme: IconThemeData(color: MyColors.dark.textPrimary),
         titleTextStyle: MyTextStyle.heading.h2.copyWith(
-          color: MyColors.neutral.light.lightest,
+          color: MyColors.dark.textPrimary,
         ),
       ),
 
       // 3. Card
       cardTheme: CardThemeData(
-        color: MyColors.neutral.dark.dark,
+        color: MyColors.dark.surface,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         margin: EdgeInsets.symmetric(vertical: 8.w),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.dg),
           side: BorderSide(
-            color: MyColors.neutral.light.lightest.withValues(alpha: 0.05),
+            color: MyColors.dark.outlineVariant,
           ),
         ),
       ),
@@ -161,47 +161,47 @@ class MyThemes {
       // 4. Inputs
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: MyColors.neutral.dark.dark, // or darkInput if kept
+        fillColor: MyColors.dark.surface,
         hintStyle: MyTextStyle.body.m.copyWith(
-          color: MyColors.neutral.light.dark,
+          color: MyColors.dark.textDisabled,
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.w),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.dg),
-          borderSide: BorderSide(color: MyColors.neutral.dark.medium),
+          borderSide: BorderSide(color: MyColors.dark.outline),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.dg),
-          borderSide: BorderSide(color: MyColors.neutral.dark.medium),
+          borderSide: BorderSide(color: MyColors.dark.outline),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: MyColors.highlight.darkest),
+          borderSide: BorderSide(color: MyColors.primary.onDark),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.dg),
-          borderSide: BorderSide(color: MyColors.support.error.dark),
+          borderSide: BorderSide(color: MyColors.status.error.onDark),
         ),
       ),
 
       // 5. Text
       textTheme: TextTheme(
         titleMedium: MyTextStyle.heading.h3.copyWith(
-          color: MyColors.neutral.light.lightest,
+          color: MyColors.dark.textPrimary,
         ),
         bodyMedium: MyTextStyle.body.m.copyWith(
-          color: MyColors.neutral.light.medium,
+          color: MyColors.dark.textSecondary,
         ),
         bodySmall: MyTextStyle.body.s.copyWith(
-          color: MyColors.neutral.light.dark,
+          color: MyColors.dark.textTertiary,
         ),
       ),
 
       // 6. Buttons
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: MyColors.highlight.darkest,
-          foregroundColor: MyColors.neutral.dark.darkest,
+          backgroundColor: MyColors.primary.onDark,
+          foregroundColor: MyColors.dark.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.dg),
           ),
@@ -211,13 +211,13 @@ class MyThemes {
       ),
 
       // 7. Icon Theme
-      iconTheme: IconThemeData(color: MyColors.neutral.light.medium),
+      iconTheme: IconThemeData(color: MyColors.dark.icon),
 
       // 8. Chip Theme
       chipTheme: ChipThemeData(
-        backgroundColor: MyColors.neutral.dark.dark,
+        backgroundColor: MyColors.dark.surface,
         labelStyle: MyTextStyle.body.s.copyWith(
-          color: MyColors.neutral.light.lightest,
+          color: MyColors.dark.textPrimary,
         ),
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
         shape: RoundedRectangleBorder(

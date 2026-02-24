@@ -20,9 +20,9 @@ class ListingTags extends StatelessWidget {
       children: [
         Chip(
           label: Text(condition),
-          backgroundColor: MyColors.highlight.darkest.withValues(alpha: 0.15),
+          backgroundColor: MyColors.primary.base.withValues(alpha: 0.15),
           labelStyle: MyTextStyle.body.s.copyWith(
-            color: MyColors.highlight.darkest,
+            color: MyColors.primary.base,
             fontWeight: FontWeight.w600,
           ),
           side: BorderSide.none,

@@ -33,8 +33,8 @@ class ProductCardHorizontal extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.dg),
           border: Border.all(
             color: isDark
-                ? MyColors.neutral.light.lightest.withValues(alpha: 0.05)
-                : MyColors.neutral.light.medium,
+                ? MyColors.dark.outlineVariant
+                : MyColors.light.outlineVariant,
           ),
         ),
         child: Column(
@@ -44,7 +44,7 @@ class ProductCardHorizontal extends StatelessWidget {
               height: 110.h,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
-                color: MyColors.neutral.dark.medium,
+                color: MyColors.dark.outline,
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(12.dg),
                 ),
@@ -95,7 +95,7 @@ class ProductCardHorizontal extends StatelessWidget {
                   Text(
                     price,
                     style: MyTextStyle.heading.h5.copyWith(
-                      color: MyColors.highlight.darkest,
+                      color: MyColors.primary.base,
                     ),
                   ),
                 ],
