@@ -23,6 +23,7 @@ class MyTextFormField extends StatelessWidget {
     this.minLines,
     this.textInputAction,
     this.onFieldSubmitted,
+    this.fillColor,
   });
 
   final EdgeInsets? contentPadding;
@@ -45,6 +46,7 @@ class MyTextFormField extends StatelessWidget {
   final int? minLines;
   final TextInputAction? textInputAction;
   final void Function(String)? onFieldSubmitted;
+  final Color? fillColor;
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +83,8 @@ class MyTextFormField extends StatelessWidget {
         helperText: helperText,
         // 4. Icon
         suffixIcon: suffixIcon,
+
+        fillColor: fillColor,
       ),
     );
   }
