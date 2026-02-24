@@ -87,14 +87,11 @@ class ActiveFiltersBar extends StatelessWidget {
 
         if (chips.isEmpty) return const SizedBox.shrink();
 
-        return SizedBox(
-          height: 44.h,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
-            itemCount: chips.length,
-            separatorBuilder: (_, _) => SizedBox(width: 8.w),
-            itemBuilder: (_, index) => chips[index],
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Align(
+            alignment: AlignmentDirectional.topStart,
+            child: Wrap(spacing: 8.w, runSpacing: 8.h, children: chips),
           ),
         );
       },
