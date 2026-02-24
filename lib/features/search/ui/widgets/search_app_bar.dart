@@ -32,7 +32,6 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
           hintStyle: MyTextStyle.body.m.copyWith(
             color: theme.textTheme.bodySmall?.color,
           ),
-          prefixIcon: const Icon(Icons.search, size: 22),
           suffixIcon: ValueListenableBuilder<TextEditingValue>(
             valueListenable: cubit.searchController,
             builder: (context, value, _) {
@@ -66,7 +65,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                   style: TextStyle(fontSize: 10.sp),
                 ),
                 backgroundColor: MyColors.primary.base,
-                child: const Icon(Icons.filter_alt_outlined),
+                child: const Icon(Icons.tune_rounded),
               ),
               onPressed: () => showFilterBottomSheet(context),
             );

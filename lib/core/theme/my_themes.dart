@@ -104,7 +104,6 @@ class MyThemes {
         labelStyle: MyTextStyle.body.s.copyWith(
           color: MyColors.light.textPrimary,
         ),
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.dg),
         ),
@@ -152,9 +151,7 @@ class MyThemes {
         margin: EdgeInsets.symmetric(vertical: 8.w),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.dg),
-          side: BorderSide(
-            color: MyColors.dark.outlineVariant,
-          ),
+          side: BorderSide(color: MyColors.dark.outlineVariant),
         ),
       ),
 
@@ -219,7 +216,6 @@ class MyThemes {
         labelStyle: MyTextStyle.body.s.copyWith(
           color: MyColors.dark.textPrimary,
         ),
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.dg),
         ),

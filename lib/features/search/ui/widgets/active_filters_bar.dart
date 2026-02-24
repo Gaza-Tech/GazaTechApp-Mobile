@@ -19,62 +19,70 @@ class ActiveFiltersBar extends StatelessWidget {
         final chips = <Widget>[];
 
         if (filters.categoryId != null && filters.categoryName != null) {
-          chips.add(_buildChip(
-            context,
-            filters.categoryName!,
-            () => cubit.clearFilter('category'),
-          ));
+          chips.add(
+            _buildChip(
+              context,
+              filters.categoryName!,
+              () => cubit.clearFilter('category'),
+            ),
+          );
         }
 
         if (filters.locationId != null && filters.locationName != null) {
-          chips.add(_buildChip(
-            context,
-            filters.locationName!,
-            () => cubit.clearFilter('location'),
-          ));
+          chips.add(
+            _buildChip(
+              context,
+              filters.locationName!,
+              () => cubit.clearFilter('location'),
+            ),
+          );
         }
 
         if (filters.conditions.isNotEmpty) {
           final l10n = context.l10n;
-          final labels = filters.conditions.map((c) {
-            switch (c) {
-              case 'new':
-                return l10n.conditionNew;
-              case 'like_new':
-                return l10n.conditionLikeNew;
-              case 'refurbished':
-                return l10n.conditionRefurbished;
-              case 'used':
-                return l10n.conditionUsed;
-              default:
-                return c;
-            }
-          }).join(', ');
-          chips.add(_buildChip(
-            context,
-            labels,
-            () => cubit.clearFilter('condition'),
-          ));
+          final labels = filters.conditions
+              .map((c) {
+                switch (c) {
+                  case 'new':
+                    return l10n.conditionNew;
+                  case 'like_new':
+                    return l10n.conditionLikeNew;
+                  case 'refurbished':
+                    return l10n.conditionRefurbished;
+                  case 'used':
+                    return l10n.conditionUsed;
+                  default:
+                    return c;
+                }
+              })
+              .join(', ');
+          chips.add(
+            _buildChip(context, labels, () => cubit.clearFilter('condition')),
+          );
         }
 
         if (filters.priceMinUsd != null || filters.priceMaxUsd != null) {
           final min = filters.priceMinUsd?.toString() ?? '0';
           final max = filters.priceMaxUsd?.toString() ?? '∞';
-          chips.add(_buildChip(
-            context,
-            '\$$min – \$$max',
-            () => cubit.clearFilter('price'),
-          ));
+          chips.add(
+            _buildChip(
+              context,
+              '\$$min – \$$max',
+              () => cubit.clearFilter('price'),
+            ),
+          );
         }
 
         if (filters.priceMinIls != null || filters.priceMaxIls != null) {
           final min = filters.priceMinIls?.toString() ?? '0';
           final max = filters.priceMaxIls?.toString() ?? '∞';
-          chips.add(_buildChip(
-            context,
-            '₪$min – ₪$max',
-            () => cubit.clearFilter('price'),
-          ));
+          chips.add(
+            _buildChip(
+              context,
+              '₪$min – ₪$max',
+              () => cubit.clearFilter('price'),
+            ),
+          );
         }
 
         if (chips.isEmpty) return const SizedBox.shrink();
@@ -93,17 +101,12 @@ class ActiveFiltersBar extends StatelessWidget {
     );
   }
 
-  Widget _buildChip(
-    BuildContext context,
-    String label,
-    VoidCallback onDelete,
-  ) {
+  Widget _buildChip(BuildContext context, String label, VoidCallback onDelete) {
     return Chip(
       label: Text(label, style: MyTextStyle.body.xs),
-      deleteIcon: Icon(Icons.close, size: 16.sp),
+      deleteIcon: const Icon(Icons.close),
       onDeleted: onDelete,
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      visualDensity: VisualDensity.compact,
+      backgroundColor: Theme.of(context).hoverColor,
     );
   }
 }
