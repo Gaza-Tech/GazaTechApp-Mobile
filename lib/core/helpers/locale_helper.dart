@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 class LocaleHelper {
   static const String arabicFontFamily = 'IBMPlexSansArabic';
+  static const String englishFontFamily = 'IBMPlexSans';
+
+  static String getFontFamily(Locale locale) {
+    return locale.languageCode == 'ar' ? arabicFontFamily : englishFontFamily;
+  }
 
   static const List<Locale> supportedLocales = [Locale('en'), Locale('ar')];
 

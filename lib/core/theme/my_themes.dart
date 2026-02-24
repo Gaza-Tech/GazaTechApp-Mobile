@@ -11,7 +11,7 @@ class MyThemes {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      fontFamily: kFontFamily,
+      fontFamily: MyTextStyle.fontFamily,
       // 1. Color Scheme
       colorScheme: ColorScheme.fromSeed(
         seedColor: MyColors.primary.base,
@@ -119,7 +119,7 @@ class MyThemes {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      fontFamily: kFontFamily,
+      fontFamily: MyTextStyle.fontFamily,
 
       // 1. Color Scheme
       colorScheme: ColorScheme.fromSeed(
@@ -228,14 +228,16 @@ class MyThemes {
   }
 
   /// Returns theme with locale-aware font family
+  /// Returns theme with locale-aware font family
   static ThemeData getTheme({
     required Brightness brightness,
     required Locale locale,
   }) {
+    MyTextStyle.init(locale);
     if (brightness == Brightness.light) {
-      return lightTheme.copyWith(textTheme: lightTheme.textTheme);
+      return lightTheme;
     } else {
-      return darkTheme.copyWith(textTheme: darkTheme.textTheme);
+      return darkTheme;
     }
   }
 }

@@ -97,76 +97,36 @@ flutter:
   fonts:
     - family: IBMPlexSansArabic
       fonts:
-        - asset: assets/fonts/IBMPlexSansArabic-Bold.ttf
+        - asset: assets/fonts/ar/IBMPlexSansArabic-Bold.ttf
           weight: 700
-        - asset: assets/fonts/IBMPlexSansArabic-SemiBold.ttf
+        - asset: assets/fonts/ar/IBMPlexSansArabic-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/IBMPlexSansArabic-Medium.ttf
+        - asset: assets/fonts/ar/IBMPlexSansArabic-Medium.ttf
           weight: 500
-        - asset: assets/fonts/IBMPlexSansArabic-Regular.ttf
+        - asset: assets/fonts/ar/IBMPlexSansArabic-Regular.ttf
           weight: 400
-        - asset: assets/fonts/IBMPlexSansArabic-Light.ttf
+        - asset: assets/fonts/ar/IBMPlexSansArabic-Light.ttf
           weight: 300
-        - asset: assets/fonts/IBMPlexSansArabic-ExtraLight.ttf
+        - asset: assets/fonts/ar/IBMPlexSansArabic-ExtraLight.ttf
           weight: 200
-        - asset: assets/fonts/IBMPlexSansArabic-Thin.ttf
+        - asset: assets/fonts/ar/IBMPlexSansArabic-Thin.ttf
           weight: 100
-
-    # - family: DMSans
-    #   fonts:
-    #     - asset: assets/fonts/DMSans/DMSans-Thin.ttf
-    #       weight: 100
-    #     - asset: assets/fonts/DMSans/DMSans-ThinItalic.ttf
-    #       weight: 100
-    #       style: italic
-    #     - asset: assets/fonts/DMSans/DMSans-ExtraLight.ttf
-    #       weight: 200
-    #     - asset: assets/fonts/DMSans/DMSans-ExtraLightItalic.ttf
-    #       weight: 200
-    #       style: italic
-    #     - asset: assets/fonts/DMSans/DMSans-Light.ttf
-    #       weight: 300
-    #     - asset: assets/fonts/DMSans/DMSans-LightItalic.ttf
-    #       weight: 300
-    #       style: italic
-    #     - asset: assets/fonts/DMSans/DMSans-Regular.ttf
-    #       weight: 400
-    #     - asset: assets/fonts/DMSans/DMSans-Italic.ttf
-    #       weight: 400
-    #       style: italic
-    #     - asset: assets/fonts/DMSans/DMSans-Medium.ttf
-    #       weight: 500
-    #     - asset: assets/fonts/DMSans/DMSans-MediumItalic.ttf
-    #       weight: 500
-    #       style: italic
-    #     - asset: assets/fonts/DMSans/DMSans-SemiBold.ttf
-    #       weight: 600
-    #     - asset: assets/fonts/DMSans/DMSans-SemiBoldItalic.ttf
-    #       weight: 600
-    #       style: italic
-    #     - asset: assets/fonts/DMSans/DMSans-Bold.ttf
-    #       weight: 700
-    #     - asset: assets/fonts/DMSans/DMSans-BoldItalic.ttf
-    #       weight: 700
-    #       style: italic
-    #     - asset: assets/fonts/DMSans/DMSans-ExtraBold.ttf
-    #       weight: 800
-    #     - asset: assets/fonts/DMSans/DMSans-ExtraBoldItalic.ttf
-    #       weight: 800
-    #       style: italic
-    #     - asset: assets/fonts/DMSans/DMSans-Black.ttf
-    #       weight: 900
-    #     - asset: assets/fonts/DMSans/DMSans-BlackItalic.ttf
-    #       weight: 900
-    #       style: italic
+    - family: IBMPlexSans
+      fonts:
+        - asset: assets/fonts/en/IBMPlexSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/en/IBMPlexSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/en/IBMPlexSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/en/IBMPlexSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/en/IBMPlexSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/en/IBMPlexSans-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/en/IBMPlexSans-Thin.ttf
+          weight: 100    
     
-    # - family: SFArabic
-    #   fonts:
-    #     - asset: assets/fonts/SF/SFArabic.ttf
-    #       weight: 400
-    # - family: SFEnglish
-    #   fonts:
-    #     - asset: assets/fonts/SF/SFEnglish.ttf
-    #       weight: 400
 
 

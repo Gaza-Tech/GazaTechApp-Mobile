@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-// The font family specified in the design.
-const String kFontFamily = 'IBMPlexSansArabic';
+import 'package:gaza_tech/core/helpers/locale_helper.dart';
 
 /// A class that holds the text styles from the Figma design.
 ///
@@ -19,6 +17,18 @@ const String kFontFamily = 'IBMPlexSansArabic';
 class MyTextStyle {
   // Private consructor to prevent instantiation.
   MyTextStyle._();
+
+  static String _fontFamily = 'IBMPlexSansArabic';
+  static String get fontFamily => _fontFamily;
+
+  /// Call this when locale changes to update the font family.
+  static void init(Locale locale) {
+    _fontFamily = LocaleHelper.getFontFamily(locale);
+    heading = MyHeadingStyles._();
+    body = MyBodyStyles._();
+    action = MyActionStyles._();
+    caption = MyCaptionStyles._();
+  }
 
   /// 'Heading' text styles (H1-H5).
   static MyHeadingStyles heading = MyHeadingStyles._();
@@ -38,31 +48,31 @@ class MyHeadingStyles {
   MyHeadingStyles._();
 
   final TextStyle h1 = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w800, // Extra bold
     fontSize: 24.0.sp,
   );
 
   final TextStyle h2 = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w800, // Extra bold
     fontSize: 18.0.sp,
   );
 
   final TextStyle h3 = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w800, // Extra bold
     fontSize: 16.0.sp,
   );
 
   final TextStyle h4 = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w700, // Bold
     fontSize: 14.0.sp,
   );
 
   final TextStyle h5 = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w700, // Bold
     fontSize: 12.0.sp,
   );
@@ -73,31 +83,31 @@ class MyBodyStyles {
   MyBodyStyles._();
 
   final TextStyle xl = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w400, // Regular
     fontSize: 18.0.sp,
   );
 
   final TextStyle l = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w400, // Regular
     fontSize: 16.0.sp,
   );
 
   final TextStyle m = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w400, // Regular
     fontSize: 14.0.sp,
   );
 
   final TextStyle s = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w400, // Regular
     fontSize: 12.0.sp,
   );
 
   final TextStyle xs = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w500, // Medium
     fontSize: 10.0.sp,
   );
@@ -108,19 +118,19 @@ class MyActionStyles {
   MyActionStyles._();
 
   final TextStyle l = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w600, // Semi Bold
     fontSize: 14.0.sp,
   );
 
   final TextStyle m = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w600, // Semi Bold
     fontSize: 12.0.sp,
   );
 
   final TextStyle s = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w600, // Semi Bold
     fontSize: 10.0.sp,
   );
@@ -131,7 +141,7 @@ class MyCaptionStyles {
   MyCaptionStyles._();
 
   final TextStyle m = TextStyle(
-    fontFamily: kFontFamily,
+    fontFamily: MyTextStyle.fontFamily,
     fontWeight: FontWeight.w600, // Semi Bold
     fontSize: 10.0.sp,
   );
