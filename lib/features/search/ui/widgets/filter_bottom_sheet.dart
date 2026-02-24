@@ -77,35 +77,35 @@ class _FilterBottomSheetContent extends StatelessWidget {
                         Row(
                           children: [
                             TextButton(
-                              style: ButtonStyle(
-                                backgroundColor: WidgetStateProperty.all(
-                                  MyColors.primary.container,
-                                ),
-                              ),
                               onPressed: () {
                                 cubit.applyFiltersAndSearch();
                                 Navigator.pop(context);
                               },
                               child: Text(
                                 l10n.applyFilters,
-                                style: MyTextStyle.action.m.copyWith(
-                                  color: MyColors.primary.base,
-                                ),
+                                style: MyTextStyle.action.m,
                               ),
                             ),
                             const HorizontalSpace(8),
+
+                            // Delelte All Text Button
                             TextButton(
                               style: ButtonStyle(
                                 backgroundColor: WidgetStateProperty.all(
-                                  MyColors.status.error.container,
+                                  theme.brightness == Brightness.dark
+                                      ? MyColors.status.error.containerDark
+                                      : MyColors.status.error.onDark,
+                                ),
+                                foregroundColor: WidgetStateProperty.all(
+                                  theme.brightness == Brightness.dark
+                                      ? MyColors.status.error.onDark
+                                      : MyColors.status.error.containerDark,
                                 ),
                               ),
                               onPressed: () => cubit.clearFilters(),
                               child: Text(
                                 l10n.clearAll,
-                                style: MyTextStyle.action.m.copyWith(
-                                  color: MyColors.status.error.main,
-                                ),
+                                style: MyTextStyle.action.m,
                               ),
                             ),
                           ],
@@ -400,11 +400,7 @@ class _FilterBottomSheetContent extends StatelessWidget {
     return FilterChip(
       label: Text(label),
       selected: isSelected,
-      selectedColor: MyColors.primary.soft,
-      checkmarkColor: MyColors.primary.base,
-      labelStyle: MyTextStyle.body.s.copyWith(
-        color: isSelected ? MyColors.primary.base : null,
-      ),
+      labelStyle: MyTextStyle.body.s,
       onSelected: (_) => context.read<SearchCubit>().toggleCondition(value),
     );
   }
