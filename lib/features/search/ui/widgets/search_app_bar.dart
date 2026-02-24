@@ -45,11 +45,11 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(50.dg),
+          borderRadius: BorderRadius.circular(12.dg),
           borderSide: const BorderSide(color: Colors.transparent),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(50.dg),
+          borderRadius: BorderRadius.circular(12.dg),
           borderSide: const BorderSide(color: Colors.transparent),
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 8.w),

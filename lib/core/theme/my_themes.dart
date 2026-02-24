@@ -101,11 +101,24 @@ class MyThemes {
       // 7. Chip Theme
       chipTheme: ChipThemeData(
         backgroundColor: MyColors.light.surface,
+        selectedColor: MyColors.primary.soft,
+        checkmarkColor: MyColors.primary.base,
         labelStyle: MyTextStyle.body.s.copyWith(
           color: MyColors.light.textPrimary,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.dg),
+        ),
+      ),
+
+      // 8. TextButton Theme
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: MyColors.primary.base,
+          textStyle: MyTextStyle.action.m,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.dg),
+          ),
         ),
       ),
     );
@@ -213,11 +226,24 @@ class MyThemes {
       // 8. Chip Theme
       chipTheme: ChipThemeData(
         backgroundColor: MyColors.dark.surface,
+        selectedColor: MyColors.primary.softDark,
+        checkmarkColor: MyColors.primary.onDark,
         labelStyle: MyTextStyle.body.s.copyWith(
           color: MyColors.dark.textPrimary,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.dg),
+        ),
+      ),
+
+      // 9. TextButton Theme
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: MyColors.primary.onDark,
+          textStyle: MyTextStyle.action.m,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.dg),
+          ),
         ),
       ),
     );
