@@ -18,7 +18,7 @@ class MyTextStyle {
   // Private consructor to prevent instantiation.
   MyTextStyle._();
 
-  static String _fontFamily = 'IBMPlexSansArabic';
+  static String _fontFamily = 'IBMPlexSans';
   static String get fontFamily => _fontFamily;
 
   /// Call this when locale changes to update the font family.
