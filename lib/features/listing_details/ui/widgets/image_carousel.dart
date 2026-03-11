@@ -56,7 +56,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                       setState(() => _currentPage = index),
                   itemBuilder: (context, index) => CachedNetworkImage(
                     imageUrl: widget.imageUrls[index],
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                     width: double.infinity,
                     height: double.infinity,
                     placeholder: (context, url) => Container(

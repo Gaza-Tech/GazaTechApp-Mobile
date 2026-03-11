@@ -54,9 +54,7 @@ class ProductCardGrid extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: MyColors.dark.outline,
-                    ),
+                    decoration: BoxDecoration(color: MyColors.dark.outline),
                     child: imageUrl != null
                         ? CachedNetworkImage(
                             imageUrl: imageUrl!,
@@ -115,7 +113,7 @@ class ProductCardGrid extends StatelessWidget {
             ),
             // Info section
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Padding(
                 padding: EdgeInsets.all(10.w),
                 child: Column(

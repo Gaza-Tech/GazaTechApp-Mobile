@@ -99,7 +99,7 @@ class _FilterBottomSheetContent extends StatelessWidget {
                                 foregroundColor: WidgetStateProperty.all(
                                   theme.brightness == Brightness.dark
                                       ? MyColors.status.error.onDark
-                                      : MyColors.status.error.containerDark,
+                                      : MyColors.status.error.main,
                                 ),
                               ),
                               onPressed: () => cubit.clearFilters(),
