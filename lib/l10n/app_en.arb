@@ -275,5 +275,31 @@
   "priceRangeIls": "Price Range (ILS)",
   "priceMin": "Min",
   "priceMax": "Max",
-  "conditionFilter": "Condition"
+  "conditionFilter": "Condition",
+
+  "searchCommunity": "Search community...",
+  "createPost": "Create Post",
+  "recent": "Recent",
+  "questions": "Questions",
+  "tips": "Tips",
+  "news": "News",
+  "troubleshooting": "Troubleshooting",
+  "hoursAgo": "{count} hours ago",
+  "@hoursAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "dayAgo": "1 day ago",
+  "question": "Question",
+  "newPost": "New Post",
+
+  "postTitle": "Post Title",
+  "enterPostTitle": "Enter post title",
+  "content": "Content",
+  "writeYourPostHere": "Write your post here...",
+  "attachments": "Attachments",
+  "addImagesOrFiles": "Add images or files",
+  "maxFileSize": "Max 5MB per file",
+  "publishPost": "Publish Post"
 }

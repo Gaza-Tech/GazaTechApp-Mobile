@@ -527,4 +527,63 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get conditionFilter => 'الحالة';
+
+  @override
+  String get searchCommunity => 'ابحث في المجتمع...';
+
+  @override
+  String get createPost => 'إنشاء منشور';
+
+  @override
+  String get recent => 'الأحدث';
+
+  @override
+  String get questions => 'أسئلة';
+
+  @override
+  String get tips => 'نصائح';
+
+  @override
+  String get news => 'أخبار';
+
+  @override
+  String get troubleshooting => 'حلول المشاكل';
+
+  @override
+  String hoursAgo(int count) {
+    return 'منذ $count ساعات';
+  }
+
+  @override
+  String get dayAgo => 'منذ يوم';
+
+  @override
+  String get question => 'سؤال';
+
+  @override
+  String get newPost => 'منشور جديد';
+
+  @override
+  String get postTitle => 'عنوان المنشور';
+
+  @override
+  String get enterPostTitle => 'أدخل عنوان المنشور';
+
+  @override
+  String get content => 'المحتوى';
+
+  @override
+  String get writeYourPostHere => 'اكتب منشورك هنا...';
+
+  @override
+  String get attachments => 'المرفقات';
+
+  @override
+  String get addImagesOrFiles => 'أضف صوراً أو ملفات';
+
+  @override
+  String get maxFileSize => 'الحد الأقصى 5 ميجابايت لكل ملف';
+
+  @override
+  String get publishPost => 'نشر المنشور';
 }

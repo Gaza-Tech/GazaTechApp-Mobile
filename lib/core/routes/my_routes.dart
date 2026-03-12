@@ -9,4 +9,5 @@ class MyRoutes {
   static const String addListing = '/addListing';
   static const String listingDetails = '/listingDetails';
   static const String search = '/search';
+  static const String createPost = '/createPost';
 }

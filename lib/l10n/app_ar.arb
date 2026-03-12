@@ -214,5 +214,31 @@
   "priceRangeIls": "نطاق السعر (شيكل)",
   "priceMin": "الحد الأدنى",
   "priceMax": "الحد الأقصى",
-  "conditionFilter": "الحالة"
+  "conditionFilter": "الحالة",
+
+  "searchCommunity": "ابحث في المجتمع...",
+  "createPost": "إنشاء منشور",
+  "recent": "الأحدث",
+  "questions": "أسئلة",
+  "tips": "نصائح",
+  "news": "أخبار",
+  "troubleshooting": "حلول المشاكل",
+  "hoursAgo": "منذ {count} ساعات",
+  "@hoursAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "dayAgo": "منذ يوم",
+  "question": "سؤال",
+  "newPost": "منشور جديد",
+
+  "postTitle": "عنوان المنشور",
+  "enterPostTitle": "أدخل عنوان المنشور",
+  "content": "المحتوى",
+  "writeYourPostHere": "اكتب منشورك هنا...",
+  "attachments": "المرفقات",
+  "addImagesOrFiles": "أضف صوراً أو ملفات",
+  "maxFileSize": "الحد الأقصى 5 ميجابايت لكل ملف",
+  "publishPost": "نشر المنشور"
 }

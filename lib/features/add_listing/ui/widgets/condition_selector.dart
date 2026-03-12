@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
-import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/core/widgets/chip_selector.dart';
 import 'package:gaza_tech/features/add_listing/ui/add_listing_screen.dart';
 
 class ConditionSelector extends StatelessWidget {
@@ -16,26 +15,24 @@ class ConditionSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: ProductCondition.values.map((condition) {
-        final isSelected = selectedCondition == condition;
-        final label = switch (condition) {
-          ProductCondition.newItem => context.l10n.conditionNew,
-          ProductCondition.used => context.l10n.conditionUsed,
-          ProductCondition.refurbished => context.l10n.conditionRefurbished,
-        };
-        return Padding(
-          padding: EdgeInsetsDirectional.only(end: 8.w),
-          child: ChoiceChip(
-            label: Text(label),
-            selected: isSelected,
-            labelStyle: MyTextStyle.body.s,
-            onSelected: (selected) {
-              onConditionChanged(selected ? condition : null);
-            },
-          ),
-        );
-      }).toList(),
+    final conditions = ProductCondition.values;
+    final labels = [
+      context.l10n.conditionNew,
+      context.l10n.conditionUsed,
+      context.l10n.conditionRefurbished,
+    ];
+
+    final selectedIndex = selectedCondition == null
+        ? null
+        : conditions.indexOf(selectedCondition!);
+
+    return ChipSelector(
+      items: labels,
+      selectedIndex: selectedIndex,
+      allowDeselect: true,
+      onChanged: (index) {
+        onConditionChanged(index == null ? null : conditions[index]);
+      },
     );
   }
 }

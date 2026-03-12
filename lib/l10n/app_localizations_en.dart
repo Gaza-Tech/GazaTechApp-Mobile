@@ -529,4 +529,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get conditionFilter => 'Condition';
+
+  @override
+  String get searchCommunity => 'Search community...';
+
+  @override
+  String get createPost => 'Create Post';
+
+  @override
+  String get recent => 'Recent';
+
+  @override
+  String get questions => 'Questions';
+
+  @override
+  String get tips => 'Tips';
+
+  @override
+  String get news => 'News';
+
+  @override
+  String get troubleshooting => 'Troubleshooting';
+
+  @override
+  String hoursAgo(int count) {
+    return '$count hours ago';
+  }
+
+  @override
+  String get dayAgo => '1 day ago';
+
+  @override
+  String get question => 'Question';
+
+  @override
+  String get newPost => 'New Post';
+
+  @override
+  String get postTitle => 'Post Title';
+
+  @override
+  String get enterPostTitle => 'Enter post title';
+
+  @override
+  String get content => 'Content';
+
+  @override
+  String get writeYourPostHere => 'Write your post here...';
+
+  @override
+  String get attachments => 'Attachments';
+
+  @override
+  String get addImagesOrFiles => 'Add images or files';
+
+  @override
+  String get maxFileSize => 'Max 5MB per file';
+
+  @override
+  String get publishPost => 'Publish Post';
 }

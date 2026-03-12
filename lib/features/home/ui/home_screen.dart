@@ -138,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? Text(
                         _currentIndex == 0
                             ? context.l10n.addListing
-                            : 'New Post',
+                            : context.l10n.newPost,
                       )
                     : const SizedBox.shrink(),
               ),
@@ -151,6 +151,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onFabPressed(BuildContext context) {
-    context.pushNamed(MyRoutes.addListing);
+    if (_currentIndex == 0) {
+      context.pushNamed(MyRoutes.addListing);
+    } else {
+      context.pushNamed(MyRoutes.createPost);
+    }
   }
 }
