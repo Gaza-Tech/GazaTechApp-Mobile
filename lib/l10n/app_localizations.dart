@@ -1249,6 +1249,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Gaming'**
   String get gaming;
+
+  /// No description provided for @replyingTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Replying to @{userName}'**
+  String replyingTo(String userName);
 }
 
 class _AppLocalizationsDelegate

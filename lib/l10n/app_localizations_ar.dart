@@ -617,4 +617,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get gaming => 'ألعاب';
+
+  @override
+  String replyingTo(String userName) {
+    return 'ردّاً على @$userName';
+  }
 }

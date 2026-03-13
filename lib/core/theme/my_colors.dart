@@ -62,7 +62,7 @@ class MyLightPalette {
   final Color background = const Color(0xFFFFFFFF);
 
   /// Cards, elevated surfaces.
-  final Color surface = const Color(0xFFFFFFFF);
+  final Color surface = const Color(0xFFF7F7F7);
 
   /// Search bar, secondary areas.
   final Color surfaceVariant = const Color(0xFFF1F3F4);

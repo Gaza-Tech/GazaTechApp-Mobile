@@ -619,4 +619,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gaming => 'Gaming';
+
+  @override
+  String replyingTo(String userName) {
+    return 'Replying to @$userName';
+  }
 }

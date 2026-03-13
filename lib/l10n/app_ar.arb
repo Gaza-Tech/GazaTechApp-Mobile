@@ -260,5 +260,12 @@
       "count": { "type": "int" }
     }
   },
-  "gaming": "ألعاب"
+  "gaming": "ألعاب",
+
+  "replyingTo": "ردّاً على @{userName}",
+  "@replyingTo": {
+    "placeholders": {
+      "userName": { "type": "String" }
+    }
+  }
 }

@@ -10,6 +10,7 @@ class CommentCard extends StatelessWidget {
   final int likes;
   final bool isLiked;
   final int indentLevel;
+  final VoidCallback? onReply;
 
   const CommentCard({
     super.key,
@@ -19,6 +20,7 @@ class CommentCard extends StatelessWidget {
     required this.likes,
     this.isLiked = false,
     this.indentLevel = 0,
+    this.onReply,
   });
 
   @override
@@ -101,10 +103,13 @@ class CommentCard extends StatelessWidget {
           ),
         ),
         SizedBox(width: 16.w),
-        Text(
-          context.l10n.reply,
-          style: MyTextStyle.action.s.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
+        GestureDetector(
+          onTap: onReply,
+          child: Text(
+            context.l10n.reply,
+            style: MyTextStyle.action.s.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
           ),
         ),
       ],

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/features/community/ui/widgets/comment_card.dart';
+import 'package:gaza_tech/features/community/ui/widgets/comment_input_bar.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_actions.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_header.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_image_gallery.dart';
@@ -18,6 +19,14 @@ class PostDetailsScreen extends StatefulWidget {
 class _PostDetailsScreenState extends State<PostDetailsScreen> {
   bool _isLiked = false;
   bool _isBookmarked = false;
+  String? _replyingTo;
+  final _commentController = TextEditingController();
+
+  @override
+  void dispose() {
+    _commentController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +34,16 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
     final l10n = context.l10n;
 
     return Scaffold(
+      bottomNavigationBar: CommentInputBar(
+        controller: _commentController,
+        replyingTo: _replyingTo,
+        onDismissReply: () => setState(() => _replyingTo = null),
+        onSubmit: () {
+          _commentController.clear();
+          setState(() => _replyingTo = null);
+          FocusScope.of(context).unfocus();
+        },
+      ),
       appBar: AppBar(
         title: Text(l10n.postDetails),
         actions: [
@@ -148,7 +167,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
   }
 
   List<Widget> _buildCommentsList() {
-    return const [
+    return [
       CommentCard(
         userName: 'Sarah Miller',
         timeAgo: '1 hour ago',
@@ -156,6 +175,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
             "I'd recommend the ASUS TUF Gaming A15. Great performance for the "
             "price and excellent cooling system. I've been using it for 6 months now.",
         likes: 24,
+        onReply: () => setState(() => _replyingTo = 'Sarah Miller'),
       ),
       CommentCard(
         userName: 'Ahmed e assan',
@@ -163,6 +183,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
         text: "Thanks! I'll check it out. What's the battery life like?",
         likes: 8,
         indentLevel: 1,
+        onReply: () => setState(() => _replyingTo = 'Ahmed e assan'),
       ),
       CommentCard(
         userName: 'Mike Chen',
@@ -171,6 +192,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
             'Lenovo Legion 5 is another solid option. Better build quality and '
             'the keyboard is amazing for gaming.',
         likes: 18,
+        onReply: () => setState(() => _replyingTo = 'Mike Chen'),
       ),
       CommentCard(
         userName: 'David Park',
@@ -179,6 +201,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
             "Don't forget to check the RAM and storage options. Make sure you "
             'can upgrade later if needed.',
         likes: 12,
+        onReply: () => setState(() => _replyingTo = 'David Park'),
       ),
     ];
   }

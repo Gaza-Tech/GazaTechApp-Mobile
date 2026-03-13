@@ -321,5 +321,12 @@
       "count": { "type": "int" }
     }
   },
-  "gaming": "Gaming"
+  "gaming": "Gaming",
+
+  "replyingTo": "Replying to @{userName}",
+  "@replyingTo": {
+    "placeholders": {
+      "userName": { "type": "String" }
+    }
+  }
 }
