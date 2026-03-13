@@ -586,4 +586,35 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get publishPost => 'نشر المنشور';
+
+  @override
+  String get postDetails => 'تفاصيل المنشور';
+
+  @override
+  String commentsCount(int count) {
+    return 'التعليقات ($count)';
+  }
+
+  @override
+  String get topSort => 'الأعلى';
+
+  @override
+  String get reply => 'رد';
+
+  @override
+  String get loadMoreComments => 'تحميل المزيد من التعليقات';
+
+  @override
+  String get relatedPosts => 'منشورات ذات صلة';
+
+  @override
+  String get addComment => 'أضف تعليقاً...';
+
+  @override
+  String minutesAgo(int count) {
+    return 'منذ $count دقيقة';
+  }
+
+  @override
+  String get gaming => 'ألعاب';
 }

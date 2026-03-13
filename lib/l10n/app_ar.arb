@@ -240,5 +240,25 @@
   "attachments": "المرفقات",
   "addImagesOrFiles": "أضف صوراً أو ملفات",
   "maxFileSize": "الحد الأقصى 5 ميجابايت لكل ملف",
-  "publishPost": "نشر المنشور"
+  "publishPost": "نشر المنشور",
+
+  "postDetails": "تفاصيل المنشور",
+  "commentsCount": "التعليقات ({count})",
+  "@commentsCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "topSort": "الأعلى",
+  "reply": "رد",
+  "loadMoreComments": "تحميل المزيد من التعليقات",
+  "relatedPosts": "منشورات ذات صلة",
+  "addComment": "أضف تعليقاً...",
+  "minutesAgo": "منذ {count} دقيقة",
+  "@minutesAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "gaming": "ألعاب"
 }

@@ -588,4 +588,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get publishPost => 'Publish Post';
+
+  @override
+  String get postDetails => 'Post Details';
+
+  @override
+  String commentsCount(int count) {
+    return 'Comments ($count)';
+  }
+
+  @override
+  String get topSort => 'Top';
+
+  @override
+  String get reply => 'Reply';
+
+  @override
+  String get loadMoreComments => 'Load More Comments';
+
+  @override
+  String get relatedPosts => 'Related Posts';
+
+  @override
+  String get addComment => 'Add a comment...';
+
+  @override
+  String minutesAgo(int count) {
+    return '$count min ago';
+  }
+
+  @override
+  String get gaming => 'Gaming';
 }

@@ -16,6 +16,7 @@ class PostCard extends StatelessWidget {
   final bool isBookmarked;
   final VoidCallback? onLikeToggle;
   final VoidCallback? onBookmarkToggle;
+  final VoidCallback? onTap;
 
   const PostCard({
     super.key,
@@ -30,6 +31,7 @@ class PostCard extends StatelessWidget {
     this.isBookmarked = false,
     this.onLikeToggle,
     this.onBookmarkToggle,
+    this.onTap,
   });
 
   @override
@@ -38,44 +40,48 @@ class PostCard extends StatelessWidget {
 
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
-      child: Padding(
-        padding: EdgeInsets.all(14.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            PostCardHeader(
-              userName: userName,
-              timeAgo: timeAgo,
-              category: category,
-            ),
-            SizedBox(height: 10.h),
-            Text(
-              title,
-              style: MyTextStyle.heading.h4.copyWith(
-                color: theme.colorScheme.onSurface,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12.r),
+        child: Padding(
+          padding: EdgeInsets.all(14.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              PostCardHeader(
+                userName: userName,
+                timeAgo: timeAgo,
+                category: category,
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            SizedBox(height: 6.h),
-            Text(
-              description,
-              style: MyTextStyle.body.s.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
+              SizedBox(height: 10.h),
+              Text(
+                title,
+                style: MyTextStyle.heading.h4.copyWith(
+                  color: theme.colorScheme.onSurface,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            SizedBox(height: 12.h),
-            PostCardActions(
-              likes: likes,
-              comments: comments,
-              isLiked: isLiked,
-              isBookmarked: isBookmarked,
-              onLikeToggle: onLikeToggle,
-              onBookmarkToggle: onBookmarkToggle,
-            ),
-          ],
+              SizedBox(height: 6.h),
+              Text(
+                description,
+                style: MyTextStyle.body.s.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: 12.h),
+              PostCardActions(
+                likes: likes,
+                comments: comments,
+                isLiked: isLiked,
+                isBookmarked: isBookmarked,
+                onLikeToggle: onLikeToggle,
+                onBookmarkToggle: onBookmarkToggle,
+              ),
+            ],
+          ),
         ),
       ),
     );

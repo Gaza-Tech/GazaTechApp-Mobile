@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_category_chips.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_search_bar.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card.dart';
@@ -115,6 +116,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 setState(
                   () => _bookmarkedPosts[index] = !_bookmarkedPosts[index],
                 );
+              },
+              onTap: () {
+                Navigator.pushNamed(context, MyRoutes.postDetails);
               },
             );
           }, childCount: _mockPosts.length),

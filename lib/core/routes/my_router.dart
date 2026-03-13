@@ -24,6 +24,7 @@ import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
 import 'package:gaza_tech/features/search/cubit/search_cubit.dart';
 import 'package:gaza_tech/features/search/ui/search_screen.dart';
 import 'package:gaza_tech/features/add_post/ui/add_post_screen.dart';
+import 'package:gaza_tech/features/community/ui/post_details_screen.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -115,6 +116,10 @@ class MyRouter {
       case MyRoutes.createPost:
         return MaterialPageRoute(
           builder: (_) => const AddPostScreen(),
+        );
+      case MyRoutes.postDetails:
+        return MaterialPageRoute(
+          builder: (_) => const PostDetailsScreen(),
         );
       default:
         return null;

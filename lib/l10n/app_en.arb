@@ -301,5 +301,25 @@
   "attachments": "Attachments",
   "addImagesOrFiles": "Add images or files",
   "maxFileSize": "Max 5MB per file",
-  "publishPost": "Publish Post"
+  "publishPost": "Publish Post",
+
+  "postDetails": "Post Details",
+  "commentsCount": "Comments ({count})",
+  "@commentsCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "topSort": "Top",
+  "reply": "Reply",
+  "loadMoreComments": "Load More Comments",
+  "relatedPosts": "Related Posts",
+  "addComment": "Add a comment...",
+  "minutesAgo": "{count} min ago",
+  "@minutesAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "gaming": "Gaming"
 }

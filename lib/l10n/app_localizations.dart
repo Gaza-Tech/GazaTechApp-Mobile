@@ -1195,6 +1195,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Publish Post'**
   String get publishPost;
+
+  /// No description provided for @postDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Post Details'**
+  String get postDetails;
+
+  /// No description provided for @commentsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Comments ({count})'**
+  String commentsCount(int count);
+
+  /// No description provided for @topSort.
+  ///
+  /// In en, this message translates to:
+  /// **'Top'**
+  String get topSort;
+
+  /// No description provided for @reply.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply'**
+  String get reply;
+
+  /// No description provided for @loadMoreComments.
+  ///
+  /// In en, this message translates to:
+  /// **'Load More Comments'**
+  String get loadMoreComments;
+
+  /// No description provided for @relatedPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Related Posts'**
+  String get relatedPosts;
+
+  /// No description provided for @addComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a comment...'**
+  String get addComment;
+
+  /// No description provided for @minutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} min ago'**
+  String minutesAgo(int count);
+
+  /// No description provided for @gaming.
+  ///
+  /// In en, this message translates to:
+  /// **'Gaming'**
+  String get gaming;
 }
 
 class _AppLocalizationsDelegate
