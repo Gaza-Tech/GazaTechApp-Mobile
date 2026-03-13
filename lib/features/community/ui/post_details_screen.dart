@@ -34,16 +34,6 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
     final l10n = context.l10n;
 
     return Scaffold(
-      bottomNavigationBar: CommentInputBar(
-        controller: _commentController,
-        replyingTo: _replyingTo,
-        onDismissReply: () => setState(() => _replyingTo = null),
-        onSubmit: () {
-          _commentController.clear();
-          setState(() => _replyingTo = null);
-          FocusScope.of(context).unfocus();
-        },
-      ),
       appBar: AppBar(
         title: Text(l10n.postDetails),
         actions: [
@@ -54,31 +44,46 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
           ),
         ],
       ),
-
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 8.h),
-            _buildAuthorSection(theme),
-            SizedBox(height: 14.h),
-            _buildPostContent(theme),
-            SizedBox(height: 14.h),
-            const PostImageGallery(),
-            SizedBox(height: 14.h),
-            _buildActions(),
-            Divider(height: 28.h),
-            _buildCommentsSection(theme, l10n),
-            SizedBox(height: 16.h),
-            ..._buildCommentsList(),
-            _buildLoadMoreButton(theme, l10n),
-            SizedBox(height: 8.h),
-            Divider(height: 28.h),
-            _buildRelatedPosts(theme, l10n),
-            SizedBox(height: 32.h),
-          ],
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 8.h),
+                  _buildAuthorSection(theme),
+                  SizedBox(height: 14.h),
+                  _buildPostContent(theme),
+                  SizedBox(height: 14.h),
+                  const PostImageGallery(),
+                  SizedBox(height: 14.h),
+                  _buildActions(),
+                  Divider(height: 28.h),
+                  _buildCommentsSection(theme, l10n),
+                  SizedBox(height: 16.h),
+                  ..._buildCommentsList(),
+                  _buildLoadMoreButton(theme, l10n),
+                  SizedBox(height: 8.h),
+                  Divider(height: 28.h),
+                  _buildRelatedPosts(theme, l10n),
+                  SizedBox(height: 32.h),
+                ],
+              ),
+            ),
+          ),
+          CommentInputBar(
+            controller: _commentController,
+            replyingTo: _replyingTo,
+            onDismissReply: () => setState(() => _replyingTo = null),
+            onSubmit: () {
+              _commentController.clear();
+              setState(() => _replyingTo = null);
+              FocusScope.of(context).unfocus();
+            },
+          ),
+        ],
       ),
     );
   }
