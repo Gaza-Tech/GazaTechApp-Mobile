@@ -355,13 +355,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get conditionLabel => 'Condition';
 
   @override
-  String get conditionNew => 'New';
+  String get conditionBrandNew => 'Brand New';
 
   @override
-  String get conditionUsed => 'Used';
+  String get conditionUsedExcellent => 'Used - Excellent';
 
   @override
-  String get conditionRefurbished => 'Refurbished';
+  String get conditionUsedGood => 'Used - Good';
+
+  @override
+  String get conditionForParts => 'For Parts';
 
   @override
   String get priceLabel => 'Price';
@@ -471,9 +474,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get weekAgo => '1 week ago';
-
-  @override
-  String get conditionLikeNew => 'Like New';
 
   @override
   String get retry => 'Retry';

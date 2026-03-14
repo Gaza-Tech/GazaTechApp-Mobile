@@ -182,9 +182,10 @@
   "selectCategoryTitle": "Select Category",
 
   "conditionLabel": "Condition",
-  "conditionNew": "New",
-  "conditionUsed": "Used",
-  "conditionRefurbished": "Refurbished",
+  "conditionBrandNew": "Brand New",
+  "conditionUsedExcellent": "Used - Excellent",
+  "conditionUsedGood": "Used - Good",
+  "conditionForParts": "For Parts",
 
   "priceLabel": "Price",
   "priceHelper": "Set a competitive price to attract buyers",
@@ -255,7 +256,7 @@
   },
   "weekAgo": "1 week ago",
 
-  "conditionLikeNew": "Like New",
+
 
   "retry": "Retry",
 

@@ -354,13 +354,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get conditionLabel => 'الحالة';
 
   @override
-  String get conditionNew => 'جديد';
+  String get conditionBrandNew => 'جديد تماماً';
 
   @override
-  String get conditionUsed => 'مستعمل';
+  String get conditionUsedExcellent => 'مستعمل - ممتاز';
 
   @override
-  String get conditionRefurbished => 'مُجدَّد';
+  String get conditionUsedGood => 'مستعمل - جيد';
+
+  @override
+  String get conditionForParts => 'للقطع';
 
   @override
   String get priceLabel => 'السعر';
@@ -470,9 +473,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get weekAgo => 'منذ أسبوع';
-
-  @override
-  String get conditionLikeNew => 'شبه جديد';
 
   @override
   String get retry => 'إعادة المحاولة';

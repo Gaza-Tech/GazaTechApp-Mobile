@@ -17,9 +17,10 @@ class ConditionSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     final conditions = ProductCondition.values;
     final labels = [
-      context.l10n.conditionNew,
-      context.l10n.conditionUsed,
-      context.l10n.conditionRefurbished,
+      context.l10n.conditionBrandNew,
+      context.l10n.conditionUsedExcellent,
+      context.l10n.conditionUsedGood,
+      context.l10n.conditionForParts,
     ];
 
     final selectedIndex = selectedCondition == null

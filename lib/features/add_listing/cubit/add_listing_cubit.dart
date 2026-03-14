@@ -101,9 +101,10 @@ class AddListingCubit extends Cubit<AddListingState> {
 
     // Map condition enum to DB value
     final conditionValue = switch (selectedCondition) {
-      ProductCondition.newItem => 'new',
-      ProductCondition.used => 'used',
-      ProductCondition.refurbished => 'refurbished',
+      ProductCondition.brandNew => 'brand_new',
+      ProductCondition.usedExcellent => 'used_excellent',
+      ProductCondition.usedGood => 'used_good',
+      ProductCondition.forParts => 'for_parts',
     };
 
     // Build listing data

@@ -121,9 +121,10 @@
   "selectCategoryTitle": "اختر الفئة",
 
   "conditionLabel": "الحالة",
-  "conditionNew": "جديد",
-  "conditionUsed": "مستعمل",
-  "conditionRefurbished": "مُجدَّد",
+  "conditionBrandNew": "جديد تماماً",
+  "conditionUsedExcellent": "مستعمل - ممتاز",
+  "conditionUsedGood": "مستعمل - جيد",
+  "conditionForParts": "للقطع",
 
   "priceLabel": "السعر",
   "priceHelper": "حدد سعراً تنافسياً لجذب المشترين",
@@ -194,7 +195,6 @@
   },
   "weekAgo": "منذ أسبوع",
 
-  "conditionLikeNew": "شبه جديد",
 
   "retry": "إعادة المحاولة",
 

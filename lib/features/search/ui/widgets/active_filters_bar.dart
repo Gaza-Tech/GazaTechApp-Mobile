@@ -43,14 +43,14 @@ class ActiveFiltersBar extends StatelessWidget {
           final labels = filters.conditions
               .map((c) {
                 switch (c) {
-                  case 'new':
-                    return l10n.conditionNew;
-                  case 'like_new':
-                    return l10n.conditionLikeNew;
-                  case 'refurbished':
-                    return l10n.conditionRefurbished;
-                  case 'used':
-                    return l10n.conditionUsed;
+                  case 'brand_new':
+                    return l10n.conditionBrandNew;
+                  case 'used_excellent':
+                    return l10n.conditionUsedExcellent;
+                  case 'used_good':
+                    return l10n.conditionUsedGood;
+                  case 'for_parts':
+                    return l10n.conditionForParts;
                   default:
                     return c;
                 }

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/theme/my_colors.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
-import 'package:gaza_tech/l10n/app_localizations.dart';
 
 class ProductCardGrid extends StatelessWidget {
   final String name;
@@ -30,7 +29,6 @@ class ProductCardGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -50,65 +48,39 @@ class ProductCardGrid extends StatelessWidget {
             // Image section
             Expanded(
               flex: 3,
-              child: Stack(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(color: MyColors.dark.outline),
-                    child: imageUrl != null
-                        ? CachedNetworkImage(
-                            imageUrl: imageUrl!,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: double.infinity,
-                            placeholder: (context, url) => Center(
-                              child: SizedBox(
-                                width: 24.w,
-                                height: 24.w,
-                                child: const CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ),
-                              ),
-                            ),
-                            errorWidget: (context, url, error) => Center(
-                              child: Icon(
-                                Icons.image_not_supported_outlined,
-                                size: 40.sp,
-                                color: Colors.white54,
-                              ),
-                            ),
-                          )
-                        : Center(
-                            child: Icon(
-                              Icons.image_outlined,
-                              size: 40.sp,
-                              color: Colors.white54,
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(color: MyColors.dark.outline),
+                child: imageUrl != null
+                    ? CachedNetworkImage(
+                        imageUrl: imageUrl!,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                        placeholder: (context, url) => Center(
+                          child: SizedBox(
+                            width: 24.w,
+                            height: 24.w,
+                            child: const CircularProgressIndicator(
+                              strokeWidth: 2,
                             ),
                           ),
-                  ),
-                  // Condition badge
-                  PositionedDirectional(
-                    top: 8.h,
-                    start: 8.w,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 8.w,
-                        vertical: 4.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: _getConditionColor(productCondition),
-                        borderRadius: BorderRadius.circular(6.dg),
-                      ),
-                      child: Text(
-                        _getConditionLabel(context, productCondition),
-                        style: MyTextStyle.body.xs.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                        ),
+                        errorWidget: (context, url, error) => Center(
+                          child: Icon(
+                            Icons.image_not_supported_outlined,
+                            size: 40.sp,
+                            color: Colors.white54,
+                          ),
+                        ),
+                      )
+                    : Center(
+                        child: Icon(
+                          Icons.image_outlined,
+                          size: 40.sp,
+                          color: Colors.white54,
                         ),
                       ),
-                    ),
-                  ),
-                ],
               ),
             ),
             // Info section
@@ -190,36 +162,5 @@ class ProductCardGrid extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  static String _getConditionLabel(BuildContext context, String condition) {
-    final l10n = AppLocalizations.of(context);
-    switch (condition.toLowerCase()) {
-      case 'new':
-        return l10n.conditionNew;
-      case 'used':
-        return l10n.conditionUsed;
-      case 'refurbished':
-        return l10n.conditionRefurbished;
-      case 'like_new':
-        return l10n.conditionLikeNew;
-      default:
-        return condition;
-    }
-  }
-
-  static Color _getConditionColor(String condition) {
-    switch (condition.toLowerCase()) {
-      case 'new':
-        return MyColors.primary.base;
-      case 'like_new':
-        return MyColors.primary.deep;
-      case 'refurbished':
-        return MyColors.status.warning.main;
-      case 'used':
-        return MyColors.light.textDisabled;
-      default:
-        return MyColors.light.textDisabled;
-    }
   }
 }

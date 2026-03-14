@@ -746,23 +746,29 @@ abstract class AppLocalizations {
   /// **'Condition'**
   String get conditionLabel;
 
-  /// No description provided for @conditionNew.
+  /// No description provided for @conditionBrandNew.
   ///
   /// In en, this message translates to:
-  /// **'New'**
-  String get conditionNew;
+  /// **'Brand New'**
+  String get conditionBrandNew;
 
-  /// No description provided for @conditionUsed.
+  /// No description provided for @conditionUsedExcellent.
   ///
   /// In en, this message translates to:
-  /// **'Used'**
-  String get conditionUsed;
+  /// **'Used - Excellent'**
+  String get conditionUsedExcellent;
 
-  /// No description provided for @conditionRefurbished.
+  /// No description provided for @conditionUsedGood.
   ///
   /// In en, this message translates to:
-  /// **'Refurbished'**
-  String get conditionRefurbished;
+  /// **'Used - Good'**
+  String get conditionUsedGood;
+
+  /// No description provided for @conditionForParts.
+  ///
+  /// In en, this message translates to:
+  /// **'For Parts'**
+  String get conditionForParts;
 
   /// No description provided for @priceLabel.
   ///
@@ -967,12 +973,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'1 week ago'**
   String get weekAgo;
-
-  /// No description provided for @conditionLikeNew.
-  ///
-  /// In en, this message translates to:
-  /// **'Like New'**
-  String get conditionLikeNew;
 
   /// No description provided for @retry.
   ///
