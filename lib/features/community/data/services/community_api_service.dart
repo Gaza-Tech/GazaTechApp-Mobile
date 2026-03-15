@@ -1,0 +1,238 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+class CommunityApiService {
+  final SupabaseClient _supabase;
+
+  CommunityApiService(this._supabase);
+
+  static const int postsPageSize = 10;
+  static const int commentsPageSize = 15;
+
+  static const String _postSelect = '''
+    post_id, author_id, title, content, post_category, content_status, created_at, published_at,
+    users!author_id(user_id, first_name, last_name, avatar_url),
+    community_posts_likes(count),
+    community_post_comments(count),
+    community_posts_attachments(file_url)
+  ''';
+
+  static const String _commentSelect = '''
+    comment_id, post_id, author_id, content, is_edited, created_at,
+    users!author_id(user_id, first_name, last_name, avatar_url),
+    community_comments_likes(count)
+  ''';
+
+  Future<List<Map<String, dynamic>>> fetchPosts({
+    String? category,
+    required int page,
+  }) async {
+    final startIndex = page * postsPageSize;
+    final endIndex = startIndex + postsPageSize;
+
+    var query = _supabase
+        .from('community_posts')
+        .select(_postSelect)
+        .eq('content_status', 'published');
+
+    if (category != null && category != 'all') {
+      query = query.eq('post_category', category);
+    }
+
+    final data = await query
+        .order('created_at', ascending: false)
+        .range(startIndex, endIndex);
+
+    return List<Map<String, dynamic>>.from(data);
+  }
+
+  Future<Set<String>> fetchLikedPostIds(List<String> postIds) async {
+    final userId = _supabase.auth.currentUser?.id;
+    if (userId == null || postIds.isEmpty) return {};
+
+    final data = await _supabase
+        .from('community_posts_likes')
+        .select('post_id')
+        .eq('user_id', userId)
+        .inFilter('post_id', postIds);
+
+    return {
+      for (final e in (data as List<dynamic>))
+        (e as Map<String, dynamic>)['post_id'] as String,
+    };
+  }
+
+  Future<Set<String>> fetchBookmarkedPostIds(List<String> postIds) async {
+    final userId = _supabase.auth.currentUser?.id;
+    if (userId == null || postIds.isEmpty) return {};
+
+    final data = await _supabase
+        .from('bookmarked_posts')
+        .select('post_id')
+        .eq('user_id', userId)
+        .inFilter('post_id', postIds);
+
+    return {
+      for (final e in (data as List<dynamic>))
+        (e as Map<String, dynamic>)['post_id'] as String,
+    };
+  }
+
+  Future<Map<String, dynamic>?> fetchPostDetails(String postId) async {
+    return await _supabase
+        .from('community_posts')
+        .select(_postSelect)
+        .eq('post_id', postId)
+        .maybeSingle();
+  }
+
+  Future<bool> isPostLiked(String postId) async {
+    final userId = _supabase.auth.currentUser?.id;
+    if (userId == null) return false;
+
+    final result = await _supabase
+        .from('community_posts_likes')
+        .select('user_id')
+        .eq('user_id', userId)
+        .eq('post_id', postId)
+        .maybeSingle();
+
+    return result != null;
+  }
+
+  Future<bool> isPostBookmarked(String postId) async {
+    final userId = _supabase.auth.currentUser?.id;
+    if (userId == null) return false;
+
+    final result = await _supabase
+        .from('bookmarked_posts')
+        .select('user_id')
+        .eq('user_id', userId)
+        .eq('post_id', postId)
+        .maybeSingle();
+
+    return result != null;
+  }
+
+  Future<List<Map<String, dynamic>>> fetchComments({
+    required String postId,
+    required int page,
+  }) async {
+    final startIndex = page * commentsPageSize;
+    final endIndex = startIndex + commentsPageSize;
+
+    final data = await _supabase
+        .from('community_post_comments')
+        .select(_commentSelect)
+        .eq('post_id', postId)
+        .order('created_at', ascending: false)
+        .range(startIndex, endIndex);
+
+    return List<Map<String, dynamic>>.from(data);
+  }
+
+  Future<bool> togglePostLike(String postId) async {
+    final userId = _supabase.auth.currentUser!.id;
+
+    final existing = await _supabase
+        .from('community_posts_likes')
+        .select('user_id')
+        .eq('user_id', userId)
+        .eq('post_id', postId)
+        .maybeSingle();
+
+    if (existing != null) {
+      await _supabase
+          .from('community_posts_likes')
+          .delete()
+          .eq('user_id', userId)
+          .eq('post_id', postId);
+      return false;
+    } else {
+      await _supabase.from('community_posts_likes').insert({
+        'user_id': userId,
+        'post_id': postId,
+      });
+      return true;
+    }
+  }
+
+  Future<bool> toggleCommentLike(String commentId) async {
+    final userId = _supabase.auth.currentUser!.id;
+
+    final existing = await _supabase
+        .from('community_comments_likes')
+        .select('user_id')
+        .eq('user_id', userId)
+        .eq('comment_id', commentId)
+        .maybeSingle();
+
+    if (existing != null) {
+      await _supabase
+          .from('community_comments_likes')
+          .delete()
+          .eq('user_id', userId)
+          .eq('comment_id', commentId);
+      return false;
+    } else {
+      await _supabase.from('community_comments_likes').insert({
+        'user_id': userId,
+        'comment_id': commentId,
+      });
+      return true;
+    }
+  }
+
+  Future<bool> toggleBookmark(String postId) async {
+    final userId = _supabase.auth.currentUser!.id;
+
+    final existing = await _supabase
+        .from('bookmarked_posts')
+        .select('user_id')
+        .eq('user_id', userId)
+        .eq('post_id', postId)
+        .maybeSingle();
+
+    if (existing != null) {
+      await _supabase
+          .from('bookmarked_posts')
+          .delete()
+          .eq('user_id', userId)
+          .eq('post_id', postId);
+      return false;
+    } else {
+      await _supabase.from('bookmarked_posts').insert({
+        'user_id': userId,
+        'post_id': postId,
+      });
+      return true;
+    }
+  }
+
+  Future<void> createPost({
+    required String title,
+    required String content,
+    required String category,
+  }) async {
+    final userId = _supabase.auth.currentUser!.id;
+    await _supabase.from('community_posts').insert({
+      'author_id': userId,
+      'title': title,
+      'content': content,
+      'post_category': category,
+      'content_status': 'published',
+      'published_at': DateTime.now().toIso8601String(),
+    });
+  }
+
+  Future<void> addComment({
+    required String postId,
+    required String content,
+  }) async {
+    final userId = _supabase.auth.currentUser!.id;
+    await _supabase.from('community_post_comments').insert({
+      'post_id': postId,
+      'author_id': userId,
+      'content': content,
+    });
+  }
+}

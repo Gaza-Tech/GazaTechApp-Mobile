@@ -329,5 +329,7 @@
     "placeholders": {
       "userName": { "type": "String" }
     }
-  }
+  },
+
+  "postPublished": "Post published successfully"
 }

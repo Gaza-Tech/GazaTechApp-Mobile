@@ -267,5 +267,7 @@
     "placeholders": {
       "userName": { "type": "String" }
     }
-  }
+  },
+
+  "postPublished": "تم نشر المنشور بنجاح"
 }

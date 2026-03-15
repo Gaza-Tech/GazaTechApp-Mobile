@@ -624,4 +624,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String replyingTo(String userName) {
     return 'Replying to @$userName';
   }
+
+  @override
+  String get postPublished => 'Post published successfully';
 }

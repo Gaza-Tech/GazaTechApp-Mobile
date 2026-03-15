@@ -23,7 +23,10 @@ import 'package:gaza_tech/features/listing_details/ui/listing_details_screen.dar
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
 import 'package:gaza_tech/features/search/cubit/search_cubit.dart';
 import 'package:gaza_tech/features/search/ui/search_screen.dart';
+import 'package:gaza_tech/features/add_post/cubit/add_post_cubit.dart';
 import 'package:gaza_tech/features/add_post/ui/add_post_screen.dart';
+import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
+import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
 import 'package:gaza_tech/features/community/ui/post_details_screen.dart';
 
 class MyRouter {
@@ -63,6 +66,7 @@ class MyRouter {
             providers: [
               BlocProvider(create: (context) => getIt<SignOutCubit>()),
               BlocProvider(create: (context) => getIt<MarketplaceCubit>()),
+              BlocProvider(create: (context) => getIt<CommunityCubit>()),
             ],
             child: const HomeScreen(),
           ),
@@ -115,11 +119,21 @@ class MyRouter {
         );
       case MyRoutes.createPost:
         return MaterialPageRoute(
-          builder: (_) => const AddPostScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<AddPostCubit>(),
+            child: const AddPostScreen(),
+          ),
         );
       case MyRoutes.postDetails:
+        final postId = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => const PostDetailsScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                getIt<PostDetailsCubit>(param1: postId)
+                  ..loadPost()
+                  ..loadComments(),
+            child: const PostDetailsScreen(),
+          ),
         );
       default:
         return null;

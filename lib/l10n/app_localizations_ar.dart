@@ -622,4 +622,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String replyingTo(String userName) {
     return 'ردّاً على @$userName';
   }
+
+  @override
+  String get postPublished => 'تم نشر المنشور بنجاح';
 }

@@ -1255,6 +1255,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Replying to @{userName}'**
   String replyingTo(String userName);
+
+  /// No description provided for @postPublished.
+  ///
+  /// In en, this message translates to:
+  /// **'Post published successfully'**
+  String get postPublished;
 }
 
 class _AppLocalizationsDelegate
