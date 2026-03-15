@@ -27,69 +27,79 @@ class ProductCardHorizontal extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 160.w,
+        width: 240.w,
+        padding: EdgeInsets.all(8.w),
         decoration: BoxDecoration(
           color: theme.cardTheme.color,
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: isDark
                 ? MyColors.dark.outlineVariant
                 : MyColors.light.outlineVariant,
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: 110.h,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                color: MyColors.dark.outline,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(12.dg),
-                ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.r),
+              child: SizedBox(
+                width: 80.w,
+                height: 80.h,
+                child: imageUrl != null
+                    ? CachedNetworkImage(
+                        imageUrl: imageUrl!,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                        placeholder: (context, url) => Container(
+                          color: MyColors.dark.outline,
+                          child: Center(
+                            child: SizedBox(
+                              width: 18.w,
+                              height: 18.w,
+                              child: const CircularProgressIndicator(
+                                  strokeWidth: 2),
+                            ),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => Container(
+                          color: MyColors.dark.outline,
+                          child: Center(
+                            child: Icon(
+                              Icons.image_not_supported_outlined,
+                              size: 28.sp,
+                              color: Colors.white54,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(
+                        color: MyColors.dark.outline,
+                        child: Center(
+                          child: Icon(
+                            Icons.image_outlined,
+                            size: 28.sp,
+                            color: Colors.white54,
+                          ),
+                        ),
+                      ),
               ),
-              child: imageUrl != null
-                  ? CachedNetworkImage(
-                      imageUrl: imageUrl!,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: double.infinity,
-                      placeholder: (context, url) => Center(
-                        child: SizedBox(
-                          width: 20.w,
-                          height: 20.w,
-                          child: const CircularProgressIndicator(strokeWidth: 2),
-                        ),
-                      ),
-                      errorWidget: (context, url, error) => Center(
-                        child: Icon(
-                          Icons.image_not_supported_outlined,
-                          size: 40.sp,
-                          color: Colors.white54,
-                        ),
-                      ),
-                    )
-                  : Center(
-                      child: Icon(
-                        Icons.image_outlined,
-                        size: 40.sp,
-                        color: Colors.white54,
-                      ),
-                    ),
             ),
-            Padding(
-              padding: EdgeInsets.all(10.w),
+            const HorizontalSpace(10),
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: MyTextStyle.body.s.copyWith(
+                      fontWeight: FontWeight.w600,
                       color: theme.textTheme.titleMedium?.color,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                   ),
                   const VerticalSpace(4),
                   Text(

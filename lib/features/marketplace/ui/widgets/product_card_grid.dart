@@ -29,111 +29,96 @@ class ProductCardGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        padding: EdgeInsets.all(10.w),
         decoration: BoxDecoration(
           color: theme.cardTheme.color,
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: isDark
                 ? MyColors.dark.outlineVariant
                 : MyColors.light.outlineVariant,
           ),
         ),
-        clipBehavior: Clip.antiAlias,
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image section
-            Expanded(
-              flex: 3,
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(color: MyColors.dark.outline),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.r),
+              child: SizedBox(
+                width: 100.w,
+                height: 100.h,
                 child: imageUrl != null
                     ? CachedNetworkImage(
                         imageUrl: imageUrl!,
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,
-                        placeholder: (context, url) => Center(
-                          child: SizedBox(
-                            width: 24.w,
-                            height: 24.w,
-                            child: const CircularProgressIndicator(
-                              strokeWidth: 2,
-                            ),
-                          ),
-                        ),
-                        errorWidget: (context, url, error) => Center(
-                          child: Icon(
-                            Icons.image_not_supported_outlined,
-                            size: 40.sp,
-                            color: Colors.white54,
-                          ),
-                        ),
+                        placeholder: (context, url) => _imagePlaceholder(),
+                        errorWidget: (context, url, error) => _imageError(),
                       )
-                    : Center(
-                        child: Icon(
-                          Icons.image_outlined,
-                          size: 40.sp,
-                          color: Colors.white54,
-                        ),
-                      ),
+                    : _imageError(),
               ),
             ),
-            // Info section
+            const HorizontalSpace(10),
             Expanded(
-              flex: 3,
-              child: Padding(
-                padding: EdgeInsets.all(10.w),
+              child: SizedBox(
+                height: 100.h,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Product name
-                    Text(
-                      name,
-                      style: MyTextStyle.body.s.copyWith(
-                        color: theme.textTheme.titleMedium?.color,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    // Price & Seller
-                    Text(
-                      price,
-                      style: MyTextStyle.heading.h5.copyWith(
-                        color: MyColors.primary.base,
-                      ),
-                    ),
+                    // Top: seller name
                     if (sellerName.isNotEmpty)
-                      Flexible(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.person_outline,
-                              size: 12.sp,
-                              color: theme.textTheme.bodySmall?.color,
-                            ),
-                            const HorizontalSpace(2),
-                            Flexible(
-                              child: Text(
-                                sellerName,
-                                style: MyTextStyle.body.xs.copyWith(
-                                  color: theme.textTheme.bodySmall?.color,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.person_outline,
+                            size: 13.sp,
+                            color: theme.textTheme.bodySmall?.color,
+                          ),
+                          const HorizontalSpace(4),
+                          Flexible(
+                            child: Text(
+                              sellerName,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: MyTextStyle.body.xs.copyWith(
+                                color: theme.textTheme.bodySmall?.color,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    // Location
+                    // Middle: name + price
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            name,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: MyTextStyle.body.s.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: theme.textTheme.titleMedium?.color,
+                            ),
+                          ),
+                          const VerticalSpace(2),
+                          Text(
+                            price,
+                            style: MyTextStyle.heading.h5.copyWith(
+                              color: MyColors.primary.base,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Bottom: location • condition
                     Row(
                       children: [
                         Icon(
@@ -142,16 +127,35 @@ class ProductCardGrid extends StatelessWidget {
                           color: theme.textTheme.bodySmall?.color,
                         ),
                         const HorizontalSpace(2),
-                        Expanded(
+                        Flexible(
                           child: Text(
                             location,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: MyTextStyle.body.xs.copyWith(
                               color: theme.textTheme.bodySmall?.color,
                             ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
+                        if (productCondition.isNotEmpty) ...[
+                          const HorizontalSpace(4),
+                          Icon(
+                            Icons.circle,
+                            size: 4,
+                            color: theme.textTheme.bodySmall?.color,
+                          ),
+                          const HorizontalSpace(4),
+                          Flexible(
+                            child: Text(
+                              productCondition,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: MyTextStyle.body.xs.copyWith(
+                                color: theme.textTheme.bodySmall?.color,
+                              ),
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ],
@@ -163,4 +167,26 @@ class ProductCardGrid extends StatelessWidget {
       ),
     );
   }
+
+  Widget _imagePlaceholder() => Container(
+        color: MyColors.dark.outline,
+        child: Center(
+          child: SizedBox(
+            width: 20.w,
+            height: 20.w,
+            child: const CircularProgressIndicator(strokeWidth: 2),
+          ),
+        ),
+      );
+
+  Widget _imageError() => Container(
+        color: MyColors.dark.outline,
+        child: Center(
+          child: Icon(
+            Icons.image_not_supported_outlined,
+            size: 32.sp,
+            color: Colors.white54,
+          ),
+        ),
+      );
 }

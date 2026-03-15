@@ -98,14 +98,10 @@ class _ListingsTabViewState extends State<ListingsTabView>
               slivers: [
                 SliverPadding(
                   padding: EdgeInsets.all(16.w),
-                  sliver: SliverGrid(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12.w,
-                      mainAxisSpacing: 12.h,
-                      childAspectRatio: 0.7,
-                    ),
-                    delegate: SliverChildBuilderDelegate((context, index) {
+                  sliver: SliverList.separated(
+                    separatorBuilder: (_, _) => SizedBox(height: 12.h),
+                    itemCount: listings.length,
+                    itemBuilder: (context, index) {
                       final listing = listings[index];
                       final isArabic =
                           Localizations.localeOf(context).languageCode == 'ar';
@@ -127,7 +123,7 @@ class _ListingsTabViewState extends State<ListingsTabView>
                           arguments: listing.listingId,
                         ),
                       );
-                    }, childCount: listings.length),
+                    },
                   ),
                 ),
                 // Loading indicator / end-of-list marker

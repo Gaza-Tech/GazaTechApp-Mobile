@@ -27,7 +27,7 @@ class ListingTags extends StatelessWidget {
           ),
           side: BorderSide.none,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(12.r),
           ),
           visualDensity: VisualDensity.compact,
           padding: EdgeInsets.symmetric(horizontal: 4.w),
@@ -37,7 +37,7 @@ class ListingTags extends StatelessWidget {
           label: Text(category),
           side: BorderSide.none,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(12.r),
           ),
           visualDensity: VisualDensity.compact,
           padding: EdgeInsets.symmetric(horizontal: 4.w),
