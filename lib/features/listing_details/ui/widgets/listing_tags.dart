@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gaza_tech/core/theme/my_colors.dart';
-import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/core/widgets/condition_tag.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/features/listing_details/ui/widgets/category_tag.dart';
 
 class ListingTags extends StatelessWidget {
   final String condition;
@@ -18,30 +17,9 @@ class ListingTags extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Chip(
-          label: Text(condition),
-          backgroundColor: MyColors.primary.base.withValues(alpha: 0.15),
-          labelStyle: MyTextStyle.body.s.copyWith(
-            color: MyColors.primary.base,
-            fontWeight: FontWeight.w600,
-          ),
-          side: BorderSide.none,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-          visualDensity: VisualDensity.compact,
-          padding: EdgeInsets.symmetric(horizontal: 4.w),
-        ),
+        ConditionTag(condition: condition),
         const HorizontalSpace(8),
-        Chip(
-          label: Text(category),
-          side: BorderSide.none,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-          visualDensity: VisualDensity.compact,
-          padding: EdgeInsets.symmetric(horizontal: 4.w),
-        ),
+        CategoryTag(category: category),
       ],
     );
   }

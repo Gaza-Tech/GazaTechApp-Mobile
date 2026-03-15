@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/theme/my_colors.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/core/widgets/condition_tag.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 
 class ProductCardGrid extends StatelessWidget {
@@ -58,7 +59,7 @@ class ProductCardGrid extends StatelessWidget {
               const HorizontalSpace(10),
               Expanded(
                 child: SizedBox(
-                  height: 100.h,
+                  height: 110.h,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,22 +132,7 @@ class ProductCardGrid extends StatelessWidget {
                           ),
                           if (productCondition.isNotEmpty) ...[
                             const HorizontalSpace(4),
-                            Icon(
-                              Icons.circle,
-                              size: 4,
-                              color: theme.textTheme.bodySmall?.color,
-                            ),
-                            const HorizontalSpace(4),
-                            Flexible(
-                              child: Text(
-                                productCondition,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: MyTextStyle.body.xs.copyWith(
-                                  color: theme.textTheme.bodySmall?.color,
-                                ),
-                              ),
-                            ),
+                            ConditionTag(condition: productCondition),
                           ],
                         ],
                       ),
