@@ -43,7 +43,7 @@ class ProductCardGrid extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.r),
                 child: SizedBox(
                   width: 100.w,
-                  height: 100.h,
+                  height: 110.h,
                   child: imageUrl != null
                       ? CachedNetworkImage(
                           imageUrl: imageUrl!,
@@ -64,28 +64,9 @@ class ProductCardGrid extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Top: seller name
-                      if (sellerName.isNotEmpty)
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.person_outline,
-                              size: 13.sp,
-                              color: theme.textTheme.bodySmall?.color,
-                            ),
-                            const HorizontalSpace(4),
-                            Flexible(
-                              child: Text(
-                                sellerName,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: MyTextStyle.body.xs.copyWith(
-                                  color: theme.textTheme.bodySmall?.color,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      // Top: condition tag
+                      if (productCondition.isNotEmpty)
+                        ConditionTag(condition: productCondition),
                       // Middle: name + price
                       Expanded(
                         child: Column(
@@ -111,9 +92,34 @@ class ProductCardGrid extends StatelessWidget {
                           ],
                         ),
                       ),
-                      // Bottom: location • condition
+                      // Bottom: seller • location
                       Row(
                         children: [
+                          if (sellerName.isNotEmpty) ...[
+                            Icon(
+                              Icons.person_outline,
+                              size: 13.sp,
+                              color: theme.textTheme.bodySmall?.color,
+                            ),
+                            const HorizontalSpace(2),
+                            Flexible(
+                              child: Text(
+                                sellerName,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: MyTextStyle.body.xs.copyWith(
+                                  color: theme.textTheme.bodySmall?.color,
+                                ),
+                              ),
+                            ),
+                            const HorizontalSpace(4),
+                            Icon(
+                              Icons.circle,
+                              size: 4,
+                              color: theme.textTheme.bodySmall?.color,
+                            ),
+                            const HorizontalSpace(4),
+                          ],
                           Icon(
                             Icons.location_on_outlined,
                             size: 12.sp,
@@ -130,10 +136,6 @@ class ProductCardGrid extends StatelessWidget {
                               ),
                             ),
                           ),
-                          if (productCondition.isNotEmpty) ...[
-                            const HorizontalSpace(4),
-                            ConditionTag(condition: productCondition),
-                          ],
                         ],
                       ),
                     ],
