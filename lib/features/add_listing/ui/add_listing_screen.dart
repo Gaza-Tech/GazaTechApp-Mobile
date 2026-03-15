@@ -23,7 +23,7 @@ class AddListingScreen extends StatefulWidget {
   State<AddListingScreen> createState() => _AddListingScreenState();
 }
 
-enum ProductCondition { newItem, used, refurbished }
+enum ProductCondition { brandNew, usedExcellent, usedGood, forParts }
 
 class _AddListingScreenState extends State<AddListingScreen> {
   static const int _maxImages = 5;

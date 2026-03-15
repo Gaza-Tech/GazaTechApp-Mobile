@@ -11,7 +11,7 @@ class MyThemes {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      fontFamily: MyTextStyle.fontFamily,
+      // fontFamily: MyTextStyle.fontFamily,
       // 1. Color Scheme
       colorScheme: ColorScheme.fromSeed(
         seedColor: MyColors.primary.base,
@@ -42,7 +42,7 @@ class MyThemes {
         elevation: 1,
         margin: EdgeInsets.symmetric(vertical: 8.w),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
         ),
       ),
 
@@ -55,19 +55,19 @@ class MyThemes {
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 16.w),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(color: MyColors.light.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(color: MyColors.light.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(color: MyColors.primary.base),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(color: MyColors.status.error.main),
         ),
       ),
@@ -91,7 +91,7 @@ class MyThemes {
           backgroundColor: MyColors.primary.base,
           foregroundColor: MyColors.light.background,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.dg),
+            borderRadius: BorderRadius.circular(12.r),
           ),
           padding: EdgeInsets.symmetric(vertical: 16.w),
           textStyle: MyTextStyle.action.l,
@@ -107,7 +107,7 @@ class MyThemes {
           color: MyColors.light.textPrimary,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
         ),
       ),
 
@@ -118,7 +118,7 @@ class MyThemes {
           backgroundColor: MyColors.primary.container,
           textStyle: MyTextStyle.action.m,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.dg),
+            borderRadius: BorderRadius.circular(12.r),
           ),
         ),
       ),
@@ -132,7 +132,7 @@ class MyThemes {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      fontFamily: MyTextStyle.fontFamily,
+      // fontFamily: MyTextStyle.fontFamily,
 
       // 1. Color Scheme
       colorScheme: ColorScheme.fromSeed(
@@ -164,7 +164,7 @@ class MyThemes {
         elevation: 0,
         margin: EdgeInsets.symmetric(vertical: 8.w),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
           side: BorderSide(color: MyColors.dark.outlineVariant),
         ),
       ),
@@ -178,19 +178,19 @@ class MyThemes {
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.w),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(color: MyColors.dark.outline),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(color: MyColors.dark.outline),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(color: MyColors.primary.onDark),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(color: MyColors.status.error.onDark),
         ),
       ),
@@ -214,7 +214,7 @@ class MyThemes {
           backgroundColor: MyColors.primary.onDark,
           foregroundColor: MyColors.dark.background,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.dg),
+            borderRadius: BorderRadius.circular(12.r),
           ),
           padding: EdgeInsets.symmetric(vertical: 16.w),
           textStyle: MyTextStyle.action.l,
@@ -233,7 +233,7 @@ class MyThemes {
           color: MyColors.dark.textPrimary,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.dg),
+          borderRadius: BorderRadius.circular(12.r),
         ),
       ),
 
@@ -244,20 +244,17 @@ class MyThemes {
           backgroundColor: MyColors.primary.containerDark,
           textStyle: MyTextStyle.action.m,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.dg),
+            borderRadius: BorderRadius.circular(12.r),
           ),
         ),
       ),
     );
   }
 
-  /// Returns theme with locale-aware font family
-  /// Returns theme with locale-aware font family
   static ThemeData getTheme({
     required Brightness brightness,
     required Locale locale,
   }) {
-    MyTextStyle.init(locale);
     if (brightness == Brightness.light) {
       return lightTheme;
     } else {

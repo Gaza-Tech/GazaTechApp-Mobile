@@ -121,9 +121,10 @@
   "selectCategoryTitle": "اختر الفئة",
 
   "conditionLabel": "الحالة",
-  "conditionNew": "جديد",
-  "conditionUsed": "مستعمل",
-  "conditionRefurbished": "مُجدَّد",
+  "conditionBrandNew": "جديد تماماً",
+  "conditionUsedExcellent": "مستعمل - ممتاز",
+  "conditionUsedGood": "مستعمل - جيد",
+  "conditionForParts": "للقطع",
 
   "priceLabel": "السعر",
   "priceHelper": "حدد سعراً تنافسياً لجذب المشترين",
@@ -194,7 +195,6 @@
   },
   "weekAgo": "منذ أسبوع",
 
-  "conditionLikeNew": "شبه جديد",
 
   "retry": "إعادة المحاولة",
 
@@ -214,5 +214,58 @@
   "priceRangeIls": "نطاق السعر (شيكل)",
   "priceMin": "الحد الأدنى",
   "priceMax": "الحد الأقصى",
-  "conditionFilter": "الحالة"
+  "conditionFilter": "الحالة",
+
+  "searchCommunity": "ابحث في المجتمع...",
+  "createPost": "إنشاء منشور",
+  "recent": "الأحدث",
+  "questions": "أسئلة",
+  "tips": "نصائح",
+  "news": "أخبار",
+  "troubleshooting": "حلول المشاكل",
+  "hoursAgo": "منذ {count} ساعات",
+  "@hoursAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "dayAgo": "منذ يوم",
+  "question": "سؤال",
+  "newPost": "منشور جديد",
+
+  "postTitle": "عنوان المنشور",
+  "enterPostTitle": "أدخل عنوان المنشور",
+  "content": "المحتوى",
+  "writeYourPostHere": "اكتب منشورك هنا...",
+  "attachments": "المرفقات",
+  "addImagesOrFiles": "أضف صوراً أو ملفات",
+  "maxFileSize": "الحد الأقصى 5 ميجابايت لكل ملف",
+  "publishPost": "نشر المنشور",
+
+  "postDetails": "تفاصيل المنشور",
+  "commentsCount": "التعليقات ({count})",
+  "@commentsCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "topSort": "الأعلى",
+  "reply": "رد",
+  "loadMoreComments": "تحميل المزيد من التعليقات",
+  "relatedPosts": "منشورات ذات صلة",
+  "addComment": "أضف تعليقاً...",
+  "minutesAgo": "منذ {count} دقيقة",
+  "@minutesAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "gaming": "ألعاب",
+
+  "replyingTo": "ردّاً على @{userName}",
+  "@replyingTo": {
+    "placeholders": {
+      "userName": { "type": "String" }
+    }
+  }
 }

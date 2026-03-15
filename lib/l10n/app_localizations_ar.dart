@@ -354,13 +354,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get conditionLabel => 'الحالة';
 
   @override
-  String get conditionNew => 'جديد';
+  String get conditionBrandNew => 'جديد تماماً';
 
   @override
-  String get conditionUsed => 'مستعمل';
+  String get conditionUsedExcellent => 'مستعمل - ممتاز';
 
   @override
-  String get conditionRefurbished => 'مُجدَّد';
+  String get conditionUsedGood => 'مستعمل - جيد';
+
+  @override
+  String get conditionForParts => 'للقطع';
 
   @override
   String get priceLabel => 'السعر';
@@ -472,9 +475,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get weekAgo => 'منذ أسبوع';
 
   @override
-  String get conditionLikeNew => 'شبه جديد';
-
-  @override
   String get retry => 'إعادة المحاولة';
 
   @override
@@ -527,4 +527,99 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get conditionFilter => 'الحالة';
+
+  @override
+  String get searchCommunity => 'ابحث في المجتمع...';
+
+  @override
+  String get createPost => 'إنشاء منشور';
+
+  @override
+  String get recent => 'الأحدث';
+
+  @override
+  String get questions => 'أسئلة';
+
+  @override
+  String get tips => 'نصائح';
+
+  @override
+  String get news => 'أخبار';
+
+  @override
+  String get troubleshooting => 'حلول المشاكل';
+
+  @override
+  String hoursAgo(int count) {
+    return 'منذ $count ساعات';
+  }
+
+  @override
+  String get dayAgo => 'منذ يوم';
+
+  @override
+  String get question => 'سؤال';
+
+  @override
+  String get newPost => 'منشور جديد';
+
+  @override
+  String get postTitle => 'عنوان المنشور';
+
+  @override
+  String get enterPostTitle => 'أدخل عنوان المنشور';
+
+  @override
+  String get content => 'المحتوى';
+
+  @override
+  String get writeYourPostHere => 'اكتب منشورك هنا...';
+
+  @override
+  String get attachments => 'المرفقات';
+
+  @override
+  String get addImagesOrFiles => 'أضف صوراً أو ملفات';
+
+  @override
+  String get maxFileSize => 'الحد الأقصى 5 ميجابايت لكل ملف';
+
+  @override
+  String get publishPost => 'نشر المنشور';
+
+  @override
+  String get postDetails => 'تفاصيل المنشور';
+
+  @override
+  String commentsCount(int count) {
+    return 'التعليقات ($count)';
+  }
+
+  @override
+  String get topSort => 'الأعلى';
+
+  @override
+  String get reply => 'رد';
+
+  @override
+  String get loadMoreComments => 'تحميل المزيد من التعليقات';
+
+  @override
+  String get relatedPosts => 'منشورات ذات صلة';
+
+  @override
+  String get addComment => 'أضف تعليقاً...';
+
+  @override
+  String minutesAgo(int count) {
+    return 'منذ $count دقيقة';
+  }
+
+  @override
+  String get gaming => 'ألعاب';
+
+  @override
+  String replyingTo(String userName) {
+    return 'ردّاً على @$userName';
+  }
 }

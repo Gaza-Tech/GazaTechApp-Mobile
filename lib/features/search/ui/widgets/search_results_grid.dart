@@ -31,37 +31,30 @@ class SearchResultsGrid extends StatelessWidget {
             slivers: [
               SliverPadding(
                 padding: EdgeInsets.all(16.w),
-                sliver: SliverGrid(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 12.w,
-                    mainAxisSpacing: 12.h,
-                    childAspectRatio: 0.7,
-                  ),
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final listing = listings[index];
-                      final locationName = isArabic
-                          ? (listing.locationNameAr.isNotEmpty
-                              ? listing.locationNameAr
-                              : listing.locationName)
-                          : listing.locationName;
-                      return ProductCardGrid(
-                        name: listing.title,
-                        price:
-                            '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}',
-                        location: locationName,
-                        sellerName: listing.sellerName,
-                        productCondition: listing.productCondition,
-                        imageUrl: listing.thumbnailUrl,
-                        onTap: () => context.pushNamed(
-                          MyRoutes.listingDetails,
-                          arguments: listing.listingId,
-                        ),
-                      );
-                    },
-                    childCount: listings.length,
-                  ),
+                sliver: SliverList.separated(
+                  separatorBuilder: (_, _) => SizedBox(height: 12.h),
+                  itemCount: listings.length,
+                  itemBuilder: (context, index) {
+                    final listing = listings[index];
+                    final locationName = isArabic
+                        ? (listing.locationNameAr.isNotEmpty
+                            ? listing.locationNameAr
+                            : listing.locationName)
+                        : listing.locationName;
+                    return ProductCardGrid(
+                      name: listing.title,
+                      price:
+                          '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}',
+                      location: locationName,
+                      sellerName: listing.sellerName,
+                      productCondition: listing.productCondition,
+                      imageUrl: listing.thumbnailUrl,
+                      onTap: () => context.pushNamed(
+                        MyRoutes.listingDetails,
+                        arguments: listing.listingId,
+                      ),
+                    );
+                  },
                 ),
               ),
               SliverToBoxAdapter(

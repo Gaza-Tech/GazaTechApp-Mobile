@@ -355,13 +355,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get conditionLabel => 'Condition';
 
   @override
-  String get conditionNew => 'New';
+  String get conditionBrandNew => 'Brand New';
 
   @override
-  String get conditionUsed => 'Used';
+  String get conditionUsedExcellent => 'Used - Excellent';
 
   @override
-  String get conditionRefurbished => 'Refurbished';
+  String get conditionUsedGood => 'Used - Good';
+
+  @override
+  String get conditionForParts => 'For Parts';
 
   @override
   String get priceLabel => 'Price';
@@ -473,9 +476,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get weekAgo => '1 week ago';
 
   @override
-  String get conditionLikeNew => 'Like New';
-
-  @override
   String get retry => 'Retry';
 
   @override
@@ -529,4 +529,99 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get conditionFilter => 'Condition';
+
+  @override
+  String get searchCommunity => 'Search community...';
+
+  @override
+  String get createPost => 'Create Post';
+
+  @override
+  String get recent => 'Recent';
+
+  @override
+  String get questions => 'Questions';
+
+  @override
+  String get tips => 'Tips';
+
+  @override
+  String get news => 'News';
+
+  @override
+  String get troubleshooting => 'Troubleshooting';
+
+  @override
+  String hoursAgo(int count) {
+    return '$count hours ago';
+  }
+
+  @override
+  String get dayAgo => '1 day ago';
+
+  @override
+  String get question => 'Question';
+
+  @override
+  String get newPost => 'New Post';
+
+  @override
+  String get postTitle => 'Post Title';
+
+  @override
+  String get enterPostTitle => 'Enter post title';
+
+  @override
+  String get content => 'Content';
+
+  @override
+  String get writeYourPostHere => 'Write your post here...';
+
+  @override
+  String get attachments => 'Attachments';
+
+  @override
+  String get addImagesOrFiles => 'Add images or files';
+
+  @override
+  String get maxFileSize => 'Max 5MB per file';
+
+  @override
+  String get publishPost => 'Publish Post';
+
+  @override
+  String get postDetails => 'Post Details';
+
+  @override
+  String commentsCount(int count) {
+    return 'Comments ($count)';
+  }
+
+  @override
+  String get topSort => 'Top';
+
+  @override
+  String get reply => 'Reply';
+
+  @override
+  String get loadMoreComments => 'Load More Comments';
+
+  @override
+  String get relatedPosts => 'Related Posts';
+
+  @override
+  String get addComment => 'Add a comment...';
+
+  @override
+  String minutesAgo(int count) {
+    return '$count min ago';
+  }
+
+  @override
+  String get gaming => 'Gaming';
+
+  @override
+  String replyingTo(String userName) {
+    return 'Replying to @$userName';
+  }
 }

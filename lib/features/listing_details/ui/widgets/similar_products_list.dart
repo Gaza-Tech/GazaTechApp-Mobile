@@ -24,7 +24,7 @@ class SimilarProductsList extends StatelessWidget {
     }
 
     return SizedBox(
-      height: 190.h,
+      height: 110.h,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 16.w),

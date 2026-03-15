@@ -116,3 +116,15 @@ After creating/modifying freezed classes, run `flutter pub run build_runner buil
 - Screen sizing: flutter_screenutil with 375x812 design size
 - Form controllers and formKey are defined in Cubit, not in UI
 - When adding a new feature: create the feature folder structure, register services/repo/cubit in `injection.dart`, add route in `my_routes.dart` and `my_router.dart`, add localization strings in both ARB files then run `flutter gen-l10n`
+
+
+## Widget Cleanliness & Refactoring Rules
+
+- **File length target**: Keep every `.dart` file under ~150 lines. If a file exceeds this, extract widgets.
+- **Extract to `ui/widgets/`**: Move any extracted widget into the feature's `ui/widgets/` subfolder. If reusable across features, move it to `lib/core/widgets/`.
+- **Reuse core widgets**: Always check `lib/core/widgets/` first (`MyButton`, `MyTextFormField`, etc.) before creating a new one. A pattern used in 2+ features belongs in `core/widgets/`.
+- **No deep inline nesting**: Any subtree deeper than 3 levels or longer than ~30 lines must be extracted — either as a private `_buildX()` method (for simple, stateless fragments) or a dedicated widget class (for anything with parameters or reuse potential).
+- **One widget class per file**: Never co-locate multiple unrelated widget classes in the same file.
+- **Prefer `const` constructors**: Mark widgets `const` wherever possible to aid Flutter's rebuild optimization.
+
+# After any changes get me commit messages that are clear and descriptive, following the pattern:

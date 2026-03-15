@@ -13,6 +13,7 @@ import 'package:gaza_tech/features/listing_details/ui/widgets/listing_info_secti
 import 'package:gaza_tech/features/listing_details/ui/widgets/listing_tags.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/more_from_seller_list.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/seller_info_card.dart';
+import 'package:gaza_tech/features/marketplace/ui/helpers/condition_tag_helper.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/similar_products_list.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/specifications_table.dart';
 import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
@@ -104,7 +105,8 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
             : listing.categoryName)
         : listing.categoryName;
 
-    final conditionLabel = _getConditionLabel(l10n, listing.productCondition);
+    final conditionLabel =
+        ConditionTagHelper.getLabel(context, listing.productCondition);
     final priceText =
         '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}';
     final timeAgo = _formatTimeAgo(l10n, listing.createdAt);
@@ -227,21 +229,6 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
         ],
       ),
     );
-  }
-
-  String _getConditionLabel(AppLocalizations l10n, String condition) {
-    switch (condition.toLowerCase()) {
-      case 'new':
-        return l10n.conditionNew;
-      case 'used':
-        return l10n.conditionUsed;
-      case 'refurbished':
-        return l10n.conditionRefurbished;
-      case 'like_new':
-        return l10n.conditionLikeNew;
-      default:
-        return condition;
-    }
   }
 
   String _formatTimeAgo(AppLocalizations l10n, DateTime createdAt) {

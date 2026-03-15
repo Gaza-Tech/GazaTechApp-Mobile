@@ -746,23 +746,29 @@ abstract class AppLocalizations {
   /// **'Condition'**
   String get conditionLabel;
 
-  /// No description provided for @conditionNew.
+  /// No description provided for @conditionBrandNew.
   ///
   /// In en, this message translates to:
-  /// **'New'**
-  String get conditionNew;
+  /// **'Brand New'**
+  String get conditionBrandNew;
 
-  /// No description provided for @conditionUsed.
+  /// No description provided for @conditionUsedExcellent.
   ///
   /// In en, this message translates to:
-  /// **'Used'**
-  String get conditionUsed;
+  /// **'Used - Excellent'**
+  String get conditionUsedExcellent;
 
-  /// No description provided for @conditionRefurbished.
+  /// No description provided for @conditionUsedGood.
   ///
   /// In en, this message translates to:
-  /// **'Refurbished'**
-  String get conditionRefurbished;
+  /// **'Used - Good'**
+  String get conditionUsedGood;
+
+  /// No description provided for @conditionForParts.
+  ///
+  /// In en, this message translates to:
+  /// **'For Parts'**
+  String get conditionForParts;
 
   /// No description provided for @priceLabel.
   ///
@@ -968,12 +974,6 @@ abstract class AppLocalizations {
   /// **'1 week ago'**
   String get weekAgo;
 
-  /// No description provided for @conditionLikeNew.
-  ///
-  /// In en, this message translates to:
-  /// **'Like New'**
-  String get conditionLikeNew;
-
   /// No description provided for @retry.
   ///
   /// In en, this message translates to:
@@ -1081,6 +1081,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Condition'**
   String get conditionFilter;
+
+  /// No description provided for @searchCommunity.
+  ///
+  /// In en, this message translates to:
+  /// **'Search community...'**
+  String get searchCommunity;
+
+  /// No description provided for @createPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Post'**
+  String get createPost;
+
+  /// No description provided for @recent.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get recent;
+
+  /// No description provided for @questions.
+  ///
+  /// In en, this message translates to:
+  /// **'Questions'**
+  String get questions;
+
+  /// No description provided for @tips.
+  ///
+  /// In en, this message translates to:
+  /// **'Tips'**
+  String get tips;
+
+  /// No description provided for @news.
+  ///
+  /// In en, this message translates to:
+  /// **'News'**
+  String get news;
+
+  /// No description provided for @troubleshooting.
+  ///
+  /// In en, this message translates to:
+  /// **'Troubleshooting'**
+  String get troubleshooting;
+
+  /// No description provided for @hoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} hours ago'**
+  String hoursAgo(int count);
+
+  /// No description provided for @dayAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'1 day ago'**
+  String get dayAgo;
+
+  /// No description provided for @question.
+  ///
+  /// In en, this message translates to:
+  /// **'Question'**
+  String get question;
+
+  /// No description provided for @newPost.
+  ///
+  /// In en, this message translates to:
+  /// **'New Post'**
+  String get newPost;
+
+  /// No description provided for @postTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Post Title'**
+  String get postTitle;
+
+  /// No description provided for @enterPostTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter post title'**
+  String get enterPostTitle;
+
+  /// No description provided for @content.
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get content;
+
+  /// No description provided for @writeYourPostHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Write your post here...'**
+  String get writeYourPostHere;
+
+  /// No description provided for @attachments.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachments'**
+  String get attachments;
+
+  /// No description provided for @addImagesOrFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Add images or files'**
+  String get addImagesOrFiles;
+
+  /// No description provided for @maxFileSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Max 5MB per file'**
+  String get maxFileSize;
+
+  /// No description provided for @publishPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Publish Post'**
+  String get publishPost;
+
+  /// No description provided for @postDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Post Details'**
+  String get postDetails;
+
+  /// No description provided for @commentsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Comments ({count})'**
+  String commentsCount(int count);
+
+  /// No description provided for @topSort.
+  ///
+  /// In en, this message translates to:
+  /// **'Top'**
+  String get topSort;
+
+  /// No description provided for @reply.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply'**
+  String get reply;
+
+  /// No description provided for @loadMoreComments.
+  ///
+  /// In en, this message translates to:
+  /// **'Load More Comments'**
+  String get loadMoreComments;
+
+  /// No description provided for @relatedPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Related Posts'**
+  String get relatedPosts;
+
+  /// No description provided for @addComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a comment...'**
+  String get addComment;
+
+  /// No description provided for @minutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} min ago'**
+  String minutesAgo(int count);
+
+  /// No description provided for @gaming.
+  ///
+  /// In en, this message translates to:
+  /// **'Gaming'**
+  String get gaming;
+
+  /// No description provided for @replyingTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Replying to @{userName}'**
+  String replyingTo(String userName);
 }
 
 class _AppLocalizationsDelegate
