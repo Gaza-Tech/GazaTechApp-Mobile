@@ -331,5 +331,13 @@
     }
   },
 
-  "postPublished": "Post published successfully"
+  "postPublished": "Post published successfully",
+
+  "viewReplies": "{count, plural, =1{View 1 reply} other{View {count} replies}}",
+  "@viewReplies": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "hideReplies": "Hide replies"
 }

@@ -17,9 +17,10 @@ class CommunityApiService {
   ''';
 
   static const String _commentSelect = '''
-    comment_id, post_id, author_id, content, is_edited, created_at,
+    comment_id, post_id, author_id, content, is_edited, created_at, parent_comment_id,
     users!author_id(user_id, first_name, last_name, avatar_url),
-    community_comments_likes(count)
+    community_comments_likes(count),
+    community_post_comments!parent_comment_id(count)
   ''';
 
   Future<List<Map<String, dynamic>>> fetchPosts({
@@ -124,6 +125,7 @@ class CommunityApiService {
         .from('community_post_comments')
         .select(_commentSelect)
         .eq('post_id', postId)
+        .isFilter('parent_comment_id', null)
         .order('created_at', ascending: false)
         .range(startIndex, endIndex);
 
@@ -224,15 +226,28 @@ class CommunityApiService {
     });
   }
 
+  Future<List<Map<String, dynamic>>> fetchReplies({
+    required String parentCommentId,
+  }) async {
+    final data = await _supabase
+        .from('community_post_comments')
+        .select(_commentSelect)
+        .eq('parent_comment_id', parentCommentId)
+        .order('created_at', ascending: true);
+    return List<Map<String, dynamic>>.from(data);
+  }
+
   Future<void> addComment({
     required String postId,
     required String content,
+    String? parentCommentId,
   }) async {
     final userId = _supabase.auth.currentUser!.id;
     await _supabase.from('community_post_comments').insert({
       'post_id': postId,
       'author_id': userId,
       'content': content,
+      if (parentCommentId != null) 'parent_comment_id': parentCommentId,
     });
   }
 }

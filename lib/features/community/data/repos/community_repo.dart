@@ -126,12 +126,29 @@ class CommunityRepo {
     }
   }
 
+  Future<ApiResult<List<CommentModel>>> fetchReplies({
+    required String parentCommentId,
+  }) async {
+    try {
+      final raw = await _service.fetchReplies(parentCommentId: parentCommentId);
+      final replies = raw.map((e) => CommentModel.fromJson(e)).toList();
+      return ApiResult.success(replies);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
   Future<ApiResult<void>> addComment({
     required String postId,
     required String content,
+    String? parentCommentId,
   }) async {
     try {
-      await _service.addComment(postId: postId, content: content);
+      await _service.addComment(
+        postId: postId,
+        content: content,
+        parentCommentId: parentCommentId,
+      );
       return ApiResult.success(null);
     } catch (e) {
       return ApiResult.failure(ErrorHandler.handle(e));

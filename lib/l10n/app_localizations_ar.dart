@@ -625,4 +625,20 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get postPublished => 'تم نشر المنشور بنجاح';
+
+  @override
+  String viewReplies(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'عرض $count ردّ',
+      few: 'عرض $count ردود',
+      two: 'عرض ردّين',
+      one: 'عرض رد واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hideReplies => 'إخفاء الردود';
 }

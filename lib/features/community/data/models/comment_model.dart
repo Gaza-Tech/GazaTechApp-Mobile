@@ -21,6 +21,17 @@ int _likesCountFromJson(dynamic value) {
   return 0;
 }
 
+int _repliesCountFromJson(dynamic value) {
+  if (value == null) return 0;
+  if (value is List && value.isNotEmpty) {
+    final first = value.first;
+    if (first is Map<String, dynamic>) {
+      return (first['count'] as num?)?.toInt() ?? 0;
+    }
+  }
+  return 0;
+}
+
 @freezed
 abstract class CommentModel with _$CommentModel {
   const CommentModel._();
@@ -32,6 +43,7 @@ abstract class CommentModel with _$CommentModel {
     required String content,
     @JsonKey(name: 'is_edited') @Default(false) bool isEdited,
     @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'parent_comment_id') String? parentCommentId,
     @JsonKey(name: 'users', fromJson: _authorFromJson) PostAuthorModel? author,
     @JsonKey(
       name: 'community_comments_likes',
@@ -39,6 +51,12 @@ abstract class CommentModel with _$CommentModel {
     )
     @Default(0)
     int likesCount,
+    @JsonKey(
+      name: 'community_post_comments',
+      fromJson: _repliesCountFromJson,
+    )
+    @Default(0)
+    int repliesCount,
   }) = _CommentModel;
 
   factory CommentModel.fromJson(Map<String, dynamic> json) =>

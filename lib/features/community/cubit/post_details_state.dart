@@ -18,6 +18,9 @@ abstract class PostDetailsState with _$PostDetailsState {
     @Default(false) bool isLiked,
     @Default(false) bool isBookmarked,
     @Default(<String>{}) Set<String> likedCommentIds,
+    @Default(<String, List<CommentModel>>{}) Map<String, List<CommentModel>> repliesByCommentId,
+    @Default(<String>{}) Set<String> expandedCommentIds,
+    @Default(<String>{}) Set<String> loadingReplyIds,
   }) = _PostDetailsState;
 
   const PostDetailsState._();

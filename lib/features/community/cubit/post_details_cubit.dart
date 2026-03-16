@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
+import '../data/models/comment_model.dart';
 import '../data/repos/community_repo.dart';
 import 'post_details_state.dart';
 
@@ -30,7 +31,14 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
 
   Future<void> loadComments() async {
     emit(
-      state.copyWith(isCommentsLoading: true, comments: [], commentsPage: 0),
+      state.copyWith(
+        isCommentsLoading: true,
+        comments: [],
+        commentsPage: 0,
+        repliesByCommentId: {},
+        expandedCommentIds: {},
+        loadingReplyIds: {},
+      ),
     );
 
     final result = await _repo.fetchComments(postId: postId, page: 0);
@@ -122,12 +130,83 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
     );
   }
 
-  Future<void> addComment(String content) async {
+  Future<void> toggleRepliesExpansion(String commentId) async {
+    if (state.expandedCommentIds.contains(commentId)) {
+      final newExpanded = Set<String>.from(state.expandedCommentIds)
+        ..remove(commentId);
+      emit(state.copyWith(expandedCommentIds: newExpanded));
+      return;
+    }
+
+    if (state.repliesByCommentId.containsKey(commentId)) {
+      final newExpanded = Set<String>.from(state.expandedCommentIds)
+        ..add(commentId);
+      emit(state.copyWith(expandedCommentIds: newExpanded));
+      return;
+    }
+
+    final newLoading = Set<String>.from(state.loadingReplyIds)..add(commentId);
+    emit(state.copyWith(loadingReplyIds: newLoading));
+
+    final result = await _repo.fetchReplies(parentCommentId: commentId);
+    result.when(
+      success: (replies) {
+        final newReplies = Map<String, List<CommentModel>>.from(
+          state.repliesByCommentId,
+        )..[commentId] = replies;
+        final newExpanded = Set<String>.from(state.expandedCommentIds)
+          ..add(commentId);
+        final newLoadingDone = Set<String>.from(state.loadingReplyIds)
+          ..remove(commentId);
+        emit(state.copyWith(
+          repliesByCommentId: newReplies,
+          expandedCommentIds: newExpanded,
+          loadingReplyIds: newLoadingDone,
+        ));
+      },
+      failure: (_) {
+        final newLoadingDone = Set<String>.from(state.loadingReplyIds)
+          ..remove(commentId);
+        emit(state.copyWith(loadingReplyIds: newLoadingDone));
+      },
+    );
+  }
+
+  Future<void> _refreshReplies(String parentCommentId) async {
+    final result = await _repo.fetchReplies(parentCommentId: parentCommentId);
+    result.when(
+      success: (replies) {
+        final newReplies = Map<String, List<CommentModel>>.from(
+          state.repliesByCommentId,
+        )..[parentCommentId] = replies;
+        final newExpanded = Set<String>.from(state.expandedCommentIds)
+          ..add(parentCommentId);
+        emit(state.copyWith(
+          repliesByCommentId: newReplies,
+          expandedCommentIds: newExpanded,
+        ));
+      },
+      failure: (_) {},
+    );
+  }
+
+  void _incrementParentReplyCount(String parentCommentId) {
+    final updatedComments = state.comments.map((c) {
+      if (c.commentId == parentCommentId) {
+        return c.copyWith(repliesCount: c.repliesCount + 1);
+      }
+      return c;
+    }).toList();
+    emit(state.copyWith(comments: updatedComments));
+  }
+
+  Future<void> addComment(String content, {String? parentCommentId}) async {
     if (content.trim().isEmpty) return;
 
     final result = await _repo.addComment(
       postId: postId,
       content: content.trim(),
+      parentCommentId: parentCommentId,
     );
     result.when(
       success: (_) {
@@ -138,7 +217,12 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
             ),
           ));
         }
-        loadComments();
+        if (parentCommentId != null) {
+          _incrementParentReplyCount(parentCommentId);
+          _refreshReplies(parentCommentId);
+        } else {
+          loadComments();
+        }
       },
       failure: (error) => emit(state.copyWith(errorMessage: error.message)),
     );

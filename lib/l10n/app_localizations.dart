@@ -1261,6 +1261,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Post published successfully'**
   String get postPublished;
+
+  /// No description provided for @viewReplies.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{View 1 reply} other{View {count} replies}}'**
+  String viewReplies(int count);
+
+  /// No description provided for @hideReplies.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide replies'**
+  String get hideReplies;
 }
 
 class _AppLocalizationsDelegate

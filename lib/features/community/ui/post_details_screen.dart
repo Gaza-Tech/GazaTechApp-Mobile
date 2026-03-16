@@ -10,6 +10,7 @@ import 'package:gaza_tech/features/community/ui/widgets/comment_input_bar.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_actions.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_header.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_image_gallery.dart';
+import 'package:gaza_tech/features/community/ui/widgets/view_replies_button.dart';
 
 class PostDetailsScreen extends StatefulWidget {
   const PostDetailsScreen({super.key});
@@ -20,6 +21,7 @@ class PostDetailsScreen extends StatefulWidget {
 
 class _PostDetailsScreenState extends State<PostDetailsScreen> {
   String? _replyingTo;
+  String? _replyingToCommentId;
   final _commentController = TextEditingController();
 
   @override
@@ -84,26 +86,71 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                             if (state.isCommentsLoading)
                               const Center(child: CircularProgressIndicator())
                             else
-                              ...state.comments.map(
-                                (comment) => CommentCard(
-                                  userName: comment.authorName,
-                                  timeAgo: _timeAgo(
-                                    context,
-                                    comment.createdAt,
+                              ...state.comments.expand((comment) {
+                                final cubit = context.read<PostDetailsCubit>();
+                                return [
+                                  CommentCard(
+                                    userName: comment.authorName,
+                                    timeAgo: _timeAgo(
+                                      context,
+                                      comment.createdAt,
+                                    ),
+                                    text: comment.content,
+                                    likes: comment.likesCount,
+                                    isLiked: state.likedCommentIds.contains(
+                                      comment.commentId,
+                                    ),
+                                    indentLevel: 0,
+                                    onReply: () => setState(() {
+                                      _replyingTo = comment.authorName;
+                                      _replyingToCommentId = comment.commentId;
+                                    }),
+                                    onLikeTap: () => cubit.toggleCommentLike(
+                                      comment.commentId,
+                                    ),
                                   ),
-                                  text: comment.content,
-                                  likes: comment.likesCount,
-                                  isLiked: state.likedCommentIds.contains(
-                                    comment.commentId,
-                                  ),
-                                  onReply: () => setState(
-                                    () => _replyingTo = comment.authorName,
-                                  ),
-                                  onLikeTap: () => context
-                                      .read<PostDetailsCubit>()
-                                      .toggleCommentLike(comment.commentId),
-                                ),
-                              ),
+                                  if (comment.repliesCount > 0)
+                                    ViewRepliesButton(
+                                      repliesCount: comment.repliesCount,
+                                      isExpanded: state.expandedCommentIds
+                                          .contains(comment.commentId),
+                                      isLoading: state.loadingReplyIds
+                                          .contains(comment.commentId),
+                                      onTap: () => cubit
+                                          .toggleRepliesExpansion(
+                                            comment.commentId,
+                                          ),
+                                    ),
+                                  if (state.expandedCommentIds
+                                      .contains(comment.commentId))
+                                    ...(state.repliesByCommentId[comment
+                                                .commentId] ??
+                                            [])
+                                        .map(
+                                          (reply) => CommentCard(
+                                            userName: reply.authorName,
+                                            timeAgo: _timeAgo(
+                                              context,
+                                              reply.createdAt,
+                                            ),
+                                            text: reply.content,
+                                            likes: reply.likesCount,
+                                            isLiked: state.likedCommentIds
+                                                .contains(reply.commentId),
+                                            indentLevel: 1,
+                                            onReply: () => setState(() {
+                                              _replyingTo = reply.authorName;
+                                              _replyingToCommentId =
+                                                  comment.commentId;
+                                            }),
+                                            onLikeTap: () =>
+                                                cubit.toggleCommentLike(
+                                              reply.commentId,
+                                            ),
+                                          ),
+                                        ),
+                                ];
+                              }),
                             if (state.hasMoreComments &&
                                 !state.isCommentsLoading)
                               _buildLoadMoreButton(context, state, theme, l10n),
@@ -115,14 +162,20 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                     CommentInputBar(
                       controller: _commentController,
                       replyingTo: _replyingTo,
-                      onDismissReply: () =>
-                          setState(() => _replyingTo = null),
+                      onDismissReply: () => setState(() {
+                        _replyingTo = null;
+                        _replyingToCommentId = null;
+                      }),
                       onSubmit: () {
-                        context
-                            .read<PostDetailsCubit>()
-                            .addComment(_commentController.text);
+                        context.read<PostDetailsCubit>().addComment(
+                          _commentController.text,
+                          parentCommentId: _replyingToCommentId,
+                        );
                         _commentController.clear();
-                        setState(() => _replyingTo = null);
+                        setState(() {
+                          _replyingTo = null;
+                          _replyingToCommentId = null;
+                        });
                         FocusScope.of(context).unfocus();
                       },
                     ),
@@ -203,7 +256,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          l10n.commentsCount(state.comments.length),
+          l10n.commentsCount(state.post!.commentsCount),
           style: MyTextStyle.heading.h3.copyWith(
             color: theme.colorScheme.onSurface,
           ),

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostDetailsState {
 
- PostModel? get post; List<CommentModel> get comments; bool get isPostLoading; bool get isCommentsLoading; bool get isLoadingMoreComments; bool get hasMoreComments; int get commentsPage; String? get errorMessage; bool get isLiked; bool get isBookmarked; Set<String> get likedCommentIds;
+ PostModel? get post; List<CommentModel> get comments; bool get isPostLoading; bool get isCommentsLoading; bool get isLoadingMoreComments; bool get hasMoreComments; int get commentsPage; String? get errorMessage; bool get isLiked; bool get isBookmarked; Set<String> get likedCommentIds; Map<String, List<CommentModel>> get repliesByCommentId; Set<String> get expandedCommentIds; Set<String> get loadingReplyIds;
 /// Create a copy of PostDetailsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $PostDetailsStateCopyWith<PostDetailsState> get copyWith => _$PostDetailsStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostDetailsState&&(identical(other.post, post) || other.post == post)&&const DeepCollectionEquality().equals(other.comments, comments)&&(identical(other.isPostLoading, isPostLoading) || other.isPostLoading == isPostLoading)&&(identical(other.isCommentsLoading, isCommentsLoading) || other.isCommentsLoading == isCommentsLoading)&&(identical(other.isLoadingMoreComments, isLoadingMoreComments) || other.isLoadingMoreComments == isLoadingMoreComments)&&(identical(other.hasMoreComments, hasMoreComments) || other.hasMoreComments == hasMoreComments)&&(identical(other.commentsPage, commentsPage) || other.commentsPage == commentsPage)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.isBookmarked, isBookmarked) || other.isBookmarked == isBookmarked)&&const DeepCollectionEquality().equals(other.likedCommentIds, likedCommentIds));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostDetailsState&&(identical(other.post, post) || other.post == post)&&const DeepCollectionEquality().equals(other.comments, comments)&&(identical(other.isPostLoading, isPostLoading) || other.isPostLoading == isPostLoading)&&(identical(other.isCommentsLoading, isCommentsLoading) || other.isCommentsLoading == isCommentsLoading)&&(identical(other.isLoadingMoreComments, isLoadingMoreComments) || other.isLoadingMoreComments == isLoadingMoreComments)&&(identical(other.hasMoreComments, hasMoreComments) || other.hasMoreComments == hasMoreComments)&&(identical(other.commentsPage, commentsPage) || other.commentsPage == commentsPage)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.isBookmarked, isBookmarked) || other.isBookmarked == isBookmarked)&&const DeepCollectionEquality().equals(other.likedCommentIds, likedCommentIds)&&const DeepCollectionEquality().equals(other.repliesByCommentId, repliesByCommentId)&&const DeepCollectionEquality().equals(other.expandedCommentIds, expandedCommentIds)&&const DeepCollectionEquality().equals(other.loadingReplyIds, loadingReplyIds));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,post,const DeepCollectionEquality().hash(comments),isPostLoading,isCommentsLoading,isLoadingMoreComments,hasMoreComments,commentsPage,errorMessage,isLiked,isBookmarked,const DeepCollectionEquality().hash(likedCommentIds));
+int get hashCode => Object.hash(runtimeType,post,const DeepCollectionEquality().hash(comments),isPostLoading,isCommentsLoading,isLoadingMoreComments,hasMoreComments,commentsPage,errorMessage,isLiked,isBookmarked,const DeepCollectionEquality().hash(likedCommentIds),const DeepCollectionEquality().hash(repliesByCommentId),const DeepCollectionEquality().hash(expandedCommentIds),const DeepCollectionEquality().hash(loadingReplyIds));
 
 @override
 String toString() {
-  return 'PostDetailsState(post: $post, comments: $comments, isPostLoading: $isPostLoading, isCommentsLoading: $isCommentsLoading, isLoadingMoreComments: $isLoadingMoreComments, hasMoreComments: $hasMoreComments, commentsPage: $commentsPage, errorMessage: $errorMessage, isLiked: $isLiked, isBookmarked: $isBookmarked, likedCommentIds: $likedCommentIds)';
+  return 'PostDetailsState(post: $post, comments: $comments, isPostLoading: $isPostLoading, isCommentsLoading: $isCommentsLoading, isLoadingMoreComments: $isLoadingMoreComments, hasMoreComments: $hasMoreComments, commentsPage: $commentsPage, errorMessage: $errorMessage, isLiked: $isLiked, isBookmarked: $isBookmarked, likedCommentIds: $likedCommentIds, repliesByCommentId: $repliesByCommentId, expandedCommentIds: $expandedCommentIds, loadingReplyIds: $loadingReplyIds)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $PostDetailsStateCopyWith<$Res>  {
   factory $PostDetailsStateCopyWith(PostDetailsState value, $Res Function(PostDetailsState) _then) = _$PostDetailsStateCopyWithImpl;
 @useResult
 $Res call({
- PostModel? post, List<CommentModel> comments, bool isPostLoading, bool isCommentsLoading, bool isLoadingMoreComments, bool hasMoreComments, int commentsPage, String? errorMessage, bool isLiked, bool isBookmarked, Set<String> likedCommentIds
+ PostModel? post, List<CommentModel> comments, bool isPostLoading, bool isCommentsLoading, bool isLoadingMoreComments, bool hasMoreComments, int commentsPage, String? errorMessage, bool isLiked, bool isBookmarked, Set<String> likedCommentIds, Map<String, List<CommentModel>> repliesByCommentId, Set<String> expandedCommentIds, Set<String> loadingReplyIds
 });
 
 
@@ -62,7 +62,7 @@ class _$PostDetailsStateCopyWithImpl<$Res>
 
 /// Create a copy of PostDetailsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? post = freezed,Object? comments = null,Object? isPostLoading = null,Object? isCommentsLoading = null,Object? isLoadingMoreComments = null,Object? hasMoreComments = null,Object? commentsPage = null,Object? errorMessage = freezed,Object? isLiked = null,Object? isBookmarked = null,Object? likedCommentIds = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? post = freezed,Object? comments = null,Object? isPostLoading = null,Object? isCommentsLoading = null,Object? isLoadingMoreComments = null,Object? hasMoreComments = null,Object? commentsPage = null,Object? errorMessage = freezed,Object? isLiked = null,Object? isBookmarked = null,Object? likedCommentIds = null,Object? repliesByCommentId = null,Object? expandedCommentIds = null,Object? loadingReplyIds = null,}) {
   return _then(_self.copyWith(
 post: freezed == post ? _self.post : post // ignore: cast_nullable_to_non_nullable
 as PostModel?,comments: null == comments ? _self.comments : comments // ignore: cast_nullable_to_non_nullable
@@ -75,6 +75,9 @@ as int,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage
 as String?,isLiked: null == isLiked ? _self.isLiked : isLiked // ignore: cast_nullable_to_non_nullable
 as bool,isBookmarked: null == isBookmarked ? _self.isBookmarked : isBookmarked // ignore: cast_nullable_to_non_nullable
 as bool,likedCommentIds: null == likedCommentIds ? _self.likedCommentIds : likedCommentIds // ignore: cast_nullable_to_non_nullable
+as Set<String>,repliesByCommentId: null == repliesByCommentId ? _self.repliesByCommentId : repliesByCommentId // ignore: cast_nullable_to_non_nullable
+as Map<String, List<CommentModel>>,expandedCommentIds: null == expandedCommentIds ? _self.expandedCommentIds : expandedCommentIds // ignore: cast_nullable_to_non_nullable
+as Set<String>,loadingReplyIds: null == loadingReplyIds ? _self.loadingReplyIds : loadingReplyIds // ignore: cast_nullable_to_non_nullable
 as Set<String>,
   ));
 }
@@ -172,10 +175,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( PostModel? post,  List<CommentModel> comments,  bool isPostLoading,  bool isCommentsLoading,  bool isLoadingMoreComments,  bool hasMoreComments,  int commentsPage,  String? errorMessage,  bool isLiked,  bool isBookmarked,  Set<String> likedCommentIds)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( PostModel? post,  List<CommentModel> comments,  bool isPostLoading,  bool isCommentsLoading,  bool isLoadingMoreComments,  bool hasMoreComments,  int commentsPage,  String? errorMessage,  bool isLiked,  bool isBookmarked,  Set<String> likedCommentIds,  Map<String, List<CommentModel>> repliesByCommentId,  Set<String> expandedCommentIds,  Set<String> loadingReplyIds)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PostDetailsState() when $default != null:
-return $default(_that.post,_that.comments,_that.isPostLoading,_that.isCommentsLoading,_that.isLoadingMoreComments,_that.hasMoreComments,_that.commentsPage,_that.errorMessage,_that.isLiked,_that.isBookmarked,_that.likedCommentIds);case _:
+return $default(_that.post,_that.comments,_that.isPostLoading,_that.isCommentsLoading,_that.isLoadingMoreComments,_that.hasMoreComments,_that.commentsPage,_that.errorMessage,_that.isLiked,_that.isBookmarked,_that.likedCommentIds,_that.repliesByCommentId,_that.expandedCommentIds,_that.loadingReplyIds);case _:
   return orElse();
 
 }
@@ -193,10 +196,10 @@ return $default(_that.post,_that.comments,_that.isPostLoading,_that.isCommentsLo
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( PostModel? post,  List<CommentModel> comments,  bool isPostLoading,  bool isCommentsLoading,  bool isLoadingMoreComments,  bool hasMoreComments,  int commentsPage,  String? errorMessage,  bool isLiked,  bool isBookmarked,  Set<String> likedCommentIds)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( PostModel? post,  List<CommentModel> comments,  bool isPostLoading,  bool isCommentsLoading,  bool isLoadingMoreComments,  bool hasMoreComments,  int commentsPage,  String? errorMessage,  bool isLiked,  bool isBookmarked,  Set<String> likedCommentIds,  Map<String, List<CommentModel>> repliesByCommentId,  Set<String> expandedCommentIds,  Set<String> loadingReplyIds)  $default,) {final _that = this;
 switch (_that) {
 case _PostDetailsState():
-return $default(_that.post,_that.comments,_that.isPostLoading,_that.isCommentsLoading,_that.isLoadingMoreComments,_that.hasMoreComments,_that.commentsPage,_that.errorMessage,_that.isLiked,_that.isBookmarked,_that.likedCommentIds);case _:
+return $default(_that.post,_that.comments,_that.isPostLoading,_that.isCommentsLoading,_that.isLoadingMoreComments,_that.hasMoreComments,_that.commentsPage,_that.errorMessage,_that.isLiked,_that.isBookmarked,_that.likedCommentIds,_that.repliesByCommentId,_that.expandedCommentIds,_that.loadingReplyIds);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -213,10 +216,10 @@ return $default(_that.post,_that.comments,_that.isPostLoading,_that.isCommentsLo
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( PostModel? post,  List<CommentModel> comments,  bool isPostLoading,  bool isCommentsLoading,  bool isLoadingMoreComments,  bool hasMoreComments,  int commentsPage,  String? errorMessage,  bool isLiked,  bool isBookmarked,  Set<String> likedCommentIds)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( PostModel? post,  List<CommentModel> comments,  bool isPostLoading,  bool isCommentsLoading,  bool isLoadingMoreComments,  bool hasMoreComments,  int commentsPage,  String? errorMessage,  bool isLiked,  bool isBookmarked,  Set<String> likedCommentIds,  Map<String, List<CommentModel>> repliesByCommentId,  Set<String> expandedCommentIds,  Set<String> loadingReplyIds)?  $default,) {final _that = this;
 switch (_that) {
 case _PostDetailsState() when $default != null:
-return $default(_that.post,_that.comments,_that.isPostLoading,_that.isCommentsLoading,_that.isLoadingMoreComments,_that.hasMoreComments,_that.commentsPage,_that.errorMessage,_that.isLiked,_that.isBookmarked,_that.likedCommentIds);case _:
+return $default(_that.post,_that.comments,_that.isPostLoading,_that.isCommentsLoading,_that.isLoadingMoreComments,_that.hasMoreComments,_that.commentsPage,_that.errorMessage,_that.isLiked,_that.isBookmarked,_that.likedCommentIds,_that.repliesByCommentId,_that.expandedCommentIds,_that.loadingReplyIds);case _:
   return null;
 
 }
@@ -228,7 +231,7 @@ return $default(_that.post,_that.comments,_that.isPostLoading,_that.isCommentsLo
 
 
 class _PostDetailsState extends PostDetailsState {
-  const _PostDetailsState({this.post, final  List<CommentModel> comments = const [], this.isPostLoading = false, this.isCommentsLoading = false, this.isLoadingMoreComments = false, this.hasMoreComments = true, this.commentsPage = 0, this.errorMessage, this.isLiked = false, this.isBookmarked = false, final  Set<String> likedCommentIds = const <String>{}}): _comments = comments,_likedCommentIds = likedCommentIds,super._();
+  const _PostDetailsState({this.post, final  List<CommentModel> comments = const [], this.isPostLoading = false, this.isCommentsLoading = false, this.isLoadingMoreComments = false, this.hasMoreComments = true, this.commentsPage = 0, this.errorMessage, this.isLiked = false, this.isBookmarked = false, final  Set<String> likedCommentIds = const <String>{}, final  Map<String, List<CommentModel>> repliesByCommentId = const <String, List<CommentModel>>{}, final  Set<String> expandedCommentIds = const <String>{}, final  Set<String> loadingReplyIds = const <String>{}}): _comments = comments,_likedCommentIds = likedCommentIds,_repliesByCommentId = repliesByCommentId,_expandedCommentIds = expandedCommentIds,_loadingReplyIds = loadingReplyIds,super._();
   
 
 @override final  PostModel? post;
@@ -254,6 +257,27 @@ class _PostDetailsState extends PostDetailsState {
   return EqualUnmodifiableSetView(_likedCommentIds);
 }
 
+ final  Map<String, List<CommentModel>> _repliesByCommentId;
+@override@JsonKey() Map<String, List<CommentModel>> get repliesByCommentId {
+  if (_repliesByCommentId is EqualUnmodifiableMapView) return _repliesByCommentId;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_repliesByCommentId);
+}
+
+ final  Set<String> _expandedCommentIds;
+@override@JsonKey() Set<String> get expandedCommentIds {
+  if (_expandedCommentIds is EqualUnmodifiableSetView) return _expandedCommentIds;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableSetView(_expandedCommentIds);
+}
+
+ final  Set<String> _loadingReplyIds;
+@override@JsonKey() Set<String> get loadingReplyIds {
+  if (_loadingReplyIds is EqualUnmodifiableSetView) return _loadingReplyIds;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableSetView(_loadingReplyIds);
+}
+
 
 /// Create a copy of PostDetailsState
 /// with the given fields replaced by the non-null parameter values.
@@ -265,16 +289,16 @@ _$PostDetailsStateCopyWith<_PostDetailsState> get copyWith => __$PostDetailsStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostDetailsState&&(identical(other.post, post) || other.post == post)&&const DeepCollectionEquality().equals(other._comments, _comments)&&(identical(other.isPostLoading, isPostLoading) || other.isPostLoading == isPostLoading)&&(identical(other.isCommentsLoading, isCommentsLoading) || other.isCommentsLoading == isCommentsLoading)&&(identical(other.isLoadingMoreComments, isLoadingMoreComments) || other.isLoadingMoreComments == isLoadingMoreComments)&&(identical(other.hasMoreComments, hasMoreComments) || other.hasMoreComments == hasMoreComments)&&(identical(other.commentsPage, commentsPage) || other.commentsPage == commentsPage)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.isBookmarked, isBookmarked) || other.isBookmarked == isBookmarked)&&const DeepCollectionEquality().equals(other._likedCommentIds, _likedCommentIds));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostDetailsState&&(identical(other.post, post) || other.post == post)&&const DeepCollectionEquality().equals(other._comments, _comments)&&(identical(other.isPostLoading, isPostLoading) || other.isPostLoading == isPostLoading)&&(identical(other.isCommentsLoading, isCommentsLoading) || other.isCommentsLoading == isCommentsLoading)&&(identical(other.isLoadingMoreComments, isLoadingMoreComments) || other.isLoadingMoreComments == isLoadingMoreComments)&&(identical(other.hasMoreComments, hasMoreComments) || other.hasMoreComments == hasMoreComments)&&(identical(other.commentsPage, commentsPage) || other.commentsPage == commentsPage)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.isBookmarked, isBookmarked) || other.isBookmarked == isBookmarked)&&const DeepCollectionEquality().equals(other._likedCommentIds, _likedCommentIds)&&const DeepCollectionEquality().equals(other._repliesByCommentId, _repliesByCommentId)&&const DeepCollectionEquality().equals(other._expandedCommentIds, _expandedCommentIds)&&const DeepCollectionEquality().equals(other._loadingReplyIds, _loadingReplyIds));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,post,const DeepCollectionEquality().hash(_comments),isPostLoading,isCommentsLoading,isLoadingMoreComments,hasMoreComments,commentsPage,errorMessage,isLiked,isBookmarked,const DeepCollectionEquality().hash(_likedCommentIds));
+int get hashCode => Object.hash(runtimeType,post,const DeepCollectionEquality().hash(_comments),isPostLoading,isCommentsLoading,isLoadingMoreComments,hasMoreComments,commentsPage,errorMessage,isLiked,isBookmarked,const DeepCollectionEquality().hash(_likedCommentIds),const DeepCollectionEquality().hash(_repliesByCommentId),const DeepCollectionEquality().hash(_expandedCommentIds),const DeepCollectionEquality().hash(_loadingReplyIds));
 
 @override
 String toString() {
-  return 'PostDetailsState(post: $post, comments: $comments, isPostLoading: $isPostLoading, isCommentsLoading: $isCommentsLoading, isLoadingMoreComments: $isLoadingMoreComments, hasMoreComments: $hasMoreComments, commentsPage: $commentsPage, errorMessage: $errorMessage, isLiked: $isLiked, isBookmarked: $isBookmarked, likedCommentIds: $likedCommentIds)';
+  return 'PostDetailsState(post: $post, comments: $comments, isPostLoading: $isPostLoading, isCommentsLoading: $isCommentsLoading, isLoadingMoreComments: $isLoadingMoreComments, hasMoreComments: $hasMoreComments, commentsPage: $commentsPage, errorMessage: $errorMessage, isLiked: $isLiked, isBookmarked: $isBookmarked, likedCommentIds: $likedCommentIds, repliesByCommentId: $repliesByCommentId, expandedCommentIds: $expandedCommentIds, loadingReplyIds: $loadingReplyIds)';
 }
 
 
@@ -285,7 +309,7 @@ abstract mixin class _$PostDetailsStateCopyWith<$Res> implements $PostDetailsSta
   factory _$PostDetailsStateCopyWith(_PostDetailsState value, $Res Function(_PostDetailsState) _then) = __$PostDetailsStateCopyWithImpl;
 @override @useResult
 $Res call({
- PostModel? post, List<CommentModel> comments, bool isPostLoading, bool isCommentsLoading, bool isLoadingMoreComments, bool hasMoreComments, int commentsPage, String? errorMessage, bool isLiked, bool isBookmarked, Set<String> likedCommentIds
+ PostModel? post, List<CommentModel> comments, bool isPostLoading, bool isCommentsLoading, bool isLoadingMoreComments, bool hasMoreComments, int commentsPage, String? errorMessage, bool isLiked, bool isBookmarked, Set<String> likedCommentIds, Map<String, List<CommentModel>> repliesByCommentId, Set<String> expandedCommentIds, Set<String> loadingReplyIds
 });
 
 
@@ -302,7 +326,7 @@ class __$PostDetailsStateCopyWithImpl<$Res>
 
 /// Create a copy of PostDetailsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? post = freezed,Object? comments = null,Object? isPostLoading = null,Object? isCommentsLoading = null,Object? isLoadingMoreComments = null,Object? hasMoreComments = null,Object? commentsPage = null,Object? errorMessage = freezed,Object? isLiked = null,Object? isBookmarked = null,Object? likedCommentIds = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? post = freezed,Object? comments = null,Object? isPostLoading = null,Object? isCommentsLoading = null,Object? isLoadingMoreComments = null,Object? hasMoreComments = null,Object? commentsPage = null,Object? errorMessage = freezed,Object? isLiked = null,Object? isBookmarked = null,Object? likedCommentIds = null,Object? repliesByCommentId = null,Object? expandedCommentIds = null,Object? loadingReplyIds = null,}) {
   return _then(_PostDetailsState(
 post: freezed == post ? _self.post : post // ignore: cast_nullable_to_non_nullable
 as PostModel?,comments: null == comments ? _self._comments : comments // ignore: cast_nullable_to_non_nullable
@@ -315,6 +339,9 @@ as int,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage
 as String?,isLiked: null == isLiked ? _self.isLiked : isLiked // ignore: cast_nullable_to_non_nullable
 as bool,isBookmarked: null == isBookmarked ? _self.isBookmarked : isBookmarked // ignore: cast_nullable_to_non_nullable
 as bool,likedCommentIds: null == likedCommentIds ? _self._likedCommentIds : likedCommentIds // ignore: cast_nullable_to_non_nullable
+as Set<String>,repliesByCommentId: null == repliesByCommentId ? _self._repliesByCommentId : repliesByCommentId // ignore: cast_nullable_to_non_nullable
+as Map<String, List<CommentModel>>,expandedCommentIds: null == expandedCommentIds ? _self._expandedCommentIds : expandedCommentIds // ignore: cast_nullable_to_non_nullable
+as Set<String>,loadingReplyIds: null == loadingReplyIds ? _self._loadingReplyIds : loadingReplyIds // ignore: cast_nullable_to_non_nullable
 as Set<String>,
   ));
 }

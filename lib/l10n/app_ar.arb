@@ -269,5 +269,13 @@
     }
   },
 
-  "postPublished": "تم نشر المنشور بنجاح"
+  "postPublished": "تم نشر المنشور بنجاح",
+
+  "viewReplies": "{count, plural, =1{عرض رد واحد} =2{عرض ردّين} few{عرض {count} ردود} other{عرض {count} ردّ}}",
+  "@viewReplies": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "hideReplies": "إخفاء الردود"
 }

@@ -627,4 +627,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get postPublished => 'Post published successfully';
+
+  @override
+  String viewReplies(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'View $count replies',
+      one: 'View 1 reply',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hideReplies => 'Hide replies';
 }

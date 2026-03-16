@@ -14,10 +14,14 @@ _CommentModel _$CommentModelFromJson(Map<String, dynamic> json) =>
       content: json['content'] as String,
       isEdited: json['is_edited'] as bool? ?? false,
       createdAt: DateTime.parse(json['created_at'] as String),
+      parentCommentId: json['parent_comment_id'] as String?,
       author: _authorFromJson(json['users']),
       likesCount: json['community_comments_likes'] == null
           ? 0
           : _likesCountFromJson(json['community_comments_likes']),
+      repliesCount: json['community_post_comments'] == null
+          ? 0
+          : _repliesCountFromJson(json['community_post_comments']),
     );
 
 Map<String, dynamic> _$CommentModelToJson(_CommentModel instance) =>
@@ -28,6 +32,8 @@ Map<String, dynamic> _$CommentModelToJson(_CommentModel instance) =>
       'content': instance.content,
       'is_edited': instance.isEdited,
       'created_at': instance.createdAt.toIso8601String(),
+      'parent_comment_id': instance.parentCommentId,
       'users': instance.author,
       'community_comments_likes': instance.likesCount,
+      'community_post_comments': instance.repliesCount,
     };
