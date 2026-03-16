@@ -5,7 +5,9 @@ import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
 import 'package:gaza_tech/features/community/cubit/community_state.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_category_chips.dart';
+import 'package:gaza_tech/features/community/data/models/community_sort.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_search_bar.dart';
+import 'package:gaza_tech/features/community/ui/widgets/community_sort_sheet.dart';
 import 'package:gaza_tech/features/community/ui/widgets/posts_tab_view.dart';
 
 class CommunityScreen extends StatefulWidget {
@@ -98,7 +100,13 @@ class _CommunityScreenState extends State<CommunityScreen>
                           horizontal: 16.w,
                           vertical: 8.h,
                         ),
-                        child: const CommunitySearchBar(),
+                        child: CommunitySearchBar(
+                          onSortTap: () =>
+                              showCommunitySortSheet(context),
+                          hasActiveSort:
+                              state.timeSort != CommunityTimeSort.newest ||
+                                  state.popularitySort != null,
+                        ),
                       ),
                       SizedBox(height: 4.h),
                       CommunityCategoryChips(

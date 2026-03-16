@@ -641,4 +641,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get hideReplies => 'إخفاء الردود';
+
+  @override
+  String get sortPosts => 'ترتيب المنشورات';
+
+  @override
+  String get timeBased => 'حسب الوقت';
+
+  @override
+  String get popularity => 'حسب الشعبية';
+
+  @override
+  String get newest => 'الأحدث';
+
+  @override
+  String get oldest => 'الأقدم';
+
+  @override
+  String get mostLiked => 'الأكثر إعجاباً';
+
+  @override
+  String get mostCommented => 'الأكثر تعليقاً';
+
+  @override
+  String get resetSort => 'إعادة تعيين';
 }

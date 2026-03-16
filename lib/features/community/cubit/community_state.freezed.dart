@@ -19,7 +19,8 @@ mixin _$CommunityState {
  Map<String, int> get currentPageByCategory; Map<String, bool> get hasMoreByCategory;// Loading states
  bool get isInitialLoading; bool get isLoadingMore;// Error state
  String? get errorMessage;// Global like/bookmark state
- Set<String> get likedPostIds; Set<String> get bookmarkedPostIds;
+ Set<String> get likedPostIds; Set<String> get bookmarkedPostIds;// Sort state
+ CommunityTimeSort get timeSort; CommunityPopularitySort? get popularitySort;
 /// Create a copy of CommunityState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,16 +31,16 @@ $CommunityStateCopyWith<CommunityState> get copyWith => _$CommunityStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CommunityState&&(identical(other.selectedCategory, selectedCategory) || other.selectedCategory == selectedCategory)&&const DeepCollectionEquality().equals(other.postsByCategory, postsByCategory)&&const DeepCollectionEquality().equals(other.currentPageByCategory, currentPageByCategory)&&const DeepCollectionEquality().equals(other.hasMoreByCategory, hasMoreByCategory)&&(identical(other.isInitialLoading, isInitialLoading) || other.isInitialLoading == isInitialLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other.likedPostIds, likedPostIds)&&const DeepCollectionEquality().equals(other.bookmarkedPostIds, bookmarkedPostIds));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CommunityState&&(identical(other.selectedCategory, selectedCategory) || other.selectedCategory == selectedCategory)&&const DeepCollectionEquality().equals(other.postsByCategory, postsByCategory)&&const DeepCollectionEquality().equals(other.currentPageByCategory, currentPageByCategory)&&const DeepCollectionEquality().equals(other.hasMoreByCategory, hasMoreByCategory)&&(identical(other.isInitialLoading, isInitialLoading) || other.isInitialLoading == isInitialLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other.likedPostIds, likedPostIds)&&const DeepCollectionEquality().equals(other.bookmarkedPostIds, bookmarkedPostIds)&&(identical(other.timeSort, timeSort) || other.timeSort == timeSort)&&(identical(other.popularitySort, popularitySort) || other.popularitySort == popularitySort));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,selectedCategory,const DeepCollectionEquality().hash(postsByCategory),const DeepCollectionEquality().hash(currentPageByCategory),const DeepCollectionEquality().hash(hasMoreByCategory),isInitialLoading,isLoadingMore,errorMessage,const DeepCollectionEquality().hash(likedPostIds),const DeepCollectionEquality().hash(bookmarkedPostIds));
+int get hashCode => Object.hash(runtimeType,selectedCategory,const DeepCollectionEquality().hash(postsByCategory),const DeepCollectionEquality().hash(currentPageByCategory),const DeepCollectionEquality().hash(hasMoreByCategory),isInitialLoading,isLoadingMore,errorMessage,const DeepCollectionEquality().hash(likedPostIds),const DeepCollectionEquality().hash(bookmarkedPostIds),timeSort,popularitySort);
 
 @override
 String toString() {
-  return 'CommunityState(selectedCategory: $selectedCategory, postsByCategory: $postsByCategory, currentPageByCategory: $currentPageByCategory, hasMoreByCategory: $hasMoreByCategory, isInitialLoading: $isInitialLoading, isLoadingMore: $isLoadingMore, errorMessage: $errorMessage, likedPostIds: $likedPostIds, bookmarkedPostIds: $bookmarkedPostIds)';
+  return 'CommunityState(selectedCategory: $selectedCategory, postsByCategory: $postsByCategory, currentPageByCategory: $currentPageByCategory, hasMoreByCategory: $hasMoreByCategory, isInitialLoading: $isInitialLoading, isLoadingMore: $isLoadingMore, errorMessage: $errorMessage, likedPostIds: $likedPostIds, bookmarkedPostIds: $bookmarkedPostIds, timeSort: $timeSort, popularitySort: $popularitySort)';
 }
 
 
@@ -50,7 +51,7 @@ abstract mixin class $CommunityStateCopyWith<$Res>  {
   factory $CommunityStateCopyWith(CommunityState value, $Res Function(CommunityState) _then) = _$CommunityStateCopyWithImpl;
 @useResult
 $Res call({
- String selectedCategory, Map<String, List<PostModel>> postsByCategory, Map<String, int> currentPageByCategory, Map<String, bool> hasMoreByCategory, bool isInitialLoading, bool isLoadingMore, String? errorMessage, Set<String> likedPostIds, Set<String> bookmarkedPostIds
+ String selectedCategory, Map<String, List<PostModel>> postsByCategory, Map<String, int> currentPageByCategory, Map<String, bool> hasMoreByCategory, bool isInitialLoading, bool isLoadingMore, String? errorMessage, Set<String> likedPostIds, Set<String> bookmarkedPostIds, CommunityTimeSort timeSort, CommunityPopularitySort? popularitySort
 });
 
 
@@ -67,7 +68,7 @@ class _$CommunityStateCopyWithImpl<$Res>
 
 /// Create a copy of CommunityState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? selectedCategory = null,Object? postsByCategory = null,Object? currentPageByCategory = null,Object? hasMoreByCategory = null,Object? isInitialLoading = null,Object? isLoadingMore = null,Object? errorMessage = freezed,Object? likedPostIds = null,Object? bookmarkedPostIds = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? selectedCategory = null,Object? postsByCategory = null,Object? currentPageByCategory = null,Object? hasMoreByCategory = null,Object? isInitialLoading = null,Object? isLoadingMore = null,Object? errorMessage = freezed,Object? likedPostIds = null,Object? bookmarkedPostIds = null,Object? timeSort = null,Object? popularitySort = freezed,}) {
   return _then(_self.copyWith(
 selectedCategory: null == selectedCategory ? _self.selectedCategory : selectedCategory // ignore: cast_nullable_to_non_nullable
 as String,postsByCategory: null == postsByCategory ? _self.postsByCategory : postsByCategory // ignore: cast_nullable_to_non_nullable
@@ -78,7 +79,9 @@ as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMo
 as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,likedPostIds: null == likedPostIds ? _self.likedPostIds : likedPostIds // ignore: cast_nullable_to_non_nullable
 as Set<String>,bookmarkedPostIds: null == bookmarkedPostIds ? _self.bookmarkedPostIds : bookmarkedPostIds // ignore: cast_nullable_to_non_nullable
-as Set<String>,
+as Set<String>,timeSort: null == timeSort ? _self.timeSort : timeSort // ignore: cast_nullable_to_non_nullable
+as CommunityTimeSort,popularitySort: freezed == popularitySort ? _self.popularitySort : popularitySort // ignore: cast_nullable_to_non_nullable
+as CommunityPopularitySort?,
   ));
 }
 
@@ -163,10 +166,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String selectedCategory,  Map<String, List<PostModel>> postsByCategory,  Map<String, int> currentPageByCategory,  Map<String, bool> hasMoreByCategory,  bool isInitialLoading,  bool isLoadingMore,  String? errorMessage,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String selectedCategory,  Map<String, List<PostModel>> postsByCategory,  Map<String, int> currentPageByCategory,  Map<String, bool> hasMoreByCategory,  bool isInitialLoading,  bool isLoadingMore,  String? errorMessage,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds,  CommunityTimeSort timeSort,  CommunityPopularitySort? popularitySort)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CommunityState() when $default != null:
-return $default(_that.selectedCategory,_that.postsByCategory,_that.currentPageByCategory,_that.hasMoreByCategory,_that.isInitialLoading,_that.isLoadingMore,_that.errorMessage,_that.likedPostIds,_that.bookmarkedPostIds);case _:
+return $default(_that.selectedCategory,_that.postsByCategory,_that.currentPageByCategory,_that.hasMoreByCategory,_that.isInitialLoading,_that.isLoadingMore,_that.errorMessage,_that.likedPostIds,_that.bookmarkedPostIds,_that.timeSort,_that.popularitySort);case _:
   return orElse();
 
 }
@@ -184,10 +187,10 @@ return $default(_that.selectedCategory,_that.postsByCategory,_that.currentPageBy
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String selectedCategory,  Map<String, List<PostModel>> postsByCategory,  Map<String, int> currentPageByCategory,  Map<String, bool> hasMoreByCategory,  bool isInitialLoading,  bool isLoadingMore,  String? errorMessage,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String selectedCategory,  Map<String, List<PostModel>> postsByCategory,  Map<String, int> currentPageByCategory,  Map<String, bool> hasMoreByCategory,  bool isInitialLoading,  bool isLoadingMore,  String? errorMessage,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds,  CommunityTimeSort timeSort,  CommunityPopularitySort? popularitySort)  $default,) {final _that = this;
 switch (_that) {
 case _CommunityState():
-return $default(_that.selectedCategory,_that.postsByCategory,_that.currentPageByCategory,_that.hasMoreByCategory,_that.isInitialLoading,_that.isLoadingMore,_that.errorMessage,_that.likedPostIds,_that.bookmarkedPostIds);case _:
+return $default(_that.selectedCategory,_that.postsByCategory,_that.currentPageByCategory,_that.hasMoreByCategory,_that.isInitialLoading,_that.isLoadingMore,_that.errorMessage,_that.likedPostIds,_that.bookmarkedPostIds,_that.timeSort,_that.popularitySort);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -204,10 +207,10 @@ return $default(_that.selectedCategory,_that.postsByCategory,_that.currentPageBy
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String selectedCategory,  Map<String, List<PostModel>> postsByCategory,  Map<String, int> currentPageByCategory,  Map<String, bool> hasMoreByCategory,  bool isInitialLoading,  bool isLoadingMore,  String? errorMessage,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String selectedCategory,  Map<String, List<PostModel>> postsByCategory,  Map<String, int> currentPageByCategory,  Map<String, bool> hasMoreByCategory,  bool isInitialLoading,  bool isLoadingMore,  String? errorMessage,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds,  CommunityTimeSort timeSort,  CommunityPopularitySort? popularitySort)?  $default,) {final _that = this;
 switch (_that) {
 case _CommunityState() when $default != null:
-return $default(_that.selectedCategory,_that.postsByCategory,_that.currentPageByCategory,_that.hasMoreByCategory,_that.isInitialLoading,_that.isLoadingMore,_that.errorMessage,_that.likedPostIds,_that.bookmarkedPostIds);case _:
+return $default(_that.selectedCategory,_that.postsByCategory,_that.currentPageByCategory,_that.hasMoreByCategory,_that.isInitialLoading,_that.isLoadingMore,_that.errorMessage,_that.likedPostIds,_that.bookmarkedPostIds,_that.timeSort,_that.popularitySort);case _:
   return null;
 
 }
@@ -219,7 +222,7 @@ return $default(_that.selectedCategory,_that.postsByCategory,_that.currentPageBy
 
 
 class _CommunityState extends CommunityState {
-  const _CommunityState({this.selectedCategory = 'all', final  Map<String, List<PostModel>> postsByCategory = const {}, final  Map<String, int> currentPageByCategory = const {}, final  Map<String, bool> hasMoreByCategory = const {}, this.isInitialLoading = false, this.isLoadingMore = false, this.errorMessage, final  Set<String> likedPostIds = const <String>{}, final  Set<String> bookmarkedPostIds = const <String>{}}): _postsByCategory = postsByCategory,_currentPageByCategory = currentPageByCategory,_hasMoreByCategory = hasMoreByCategory,_likedPostIds = likedPostIds,_bookmarkedPostIds = bookmarkedPostIds,super._();
+  const _CommunityState({this.selectedCategory = 'all', final  Map<String, List<PostModel>> postsByCategory = const {}, final  Map<String, int> currentPageByCategory = const {}, final  Map<String, bool> hasMoreByCategory = const {}, this.isInitialLoading = false, this.isLoadingMore = false, this.errorMessage, final  Set<String> likedPostIds = const <String>{}, final  Set<String> bookmarkedPostIds = const <String>{}, this.timeSort = CommunityTimeSort.newest, this.popularitySort}): _postsByCategory = postsByCategory,_currentPageByCategory = currentPageByCategory,_hasMoreByCategory = hasMoreByCategory,_likedPostIds = likedPostIds,_bookmarkedPostIds = bookmarkedPostIds,super._();
   
 
 @override@JsonKey() final  String selectedCategory;
@@ -269,6 +272,9 @@ class _CommunityState extends CommunityState {
   return EqualUnmodifiableSetView(_bookmarkedPostIds);
 }
 
+// Sort state
+@override@JsonKey() final  CommunityTimeSort timeSort;
+@override final  CommunityPopularitySort? popularitySort;
 
 /// Create a copy of CommunityState
 /// with the given fields replaced by the non-null parameter values.
@@ -280,16 +286,16 @@ _$CommunityStateCopyWith<_CommunityState> get copyWith => __$CommunityStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CommunityState&&(identical(other.selectedCategory, selectedCategory) || other.selectedCategory == selectedCategory)&&const DeepCollectionEquality().equals(other._postsByCategory, _postsByCategory)&&const DeepCollectionEquality().equals(other._currentPageByCategory, _currentPageByCategory)&&const DeepCollectionEquality().equals(other._hasMoreByCategory, _hasMoreByCategory)&&(identical(other.isInitialLoading, isInitialLoading) || other.isInitialLoading == isInitialLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other._likedPostIds, _likedPostIds)&&const DeepCollectionEquality().equals(other._bookmarkedPostIds, _bookmarkedPostIds));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CommunityState&&(identical(other.selectedCategory, selectedCategory) || other.selectedCategory == selectedCategory)&&const DeepCollectionEquality().equals(other._postsByCategory, _postsByCategory)&&const DeepCollectionEquality().equals(other._currentPageByCategory, _currentPageByCategory)&&const DeepCollectionEquality().equals(other._hasMoreByCategory, _hasMoreByCategory)&&(identical(other.isInitialLoading, isInitialLoading) || other.isInitialLoading == isInitialLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other._likedPostIds, _likedPostIds)&&const DeepCollectionEquality().equals(other._bookmarkedPostIds, _bookmarkedPostIds)&&(identical(other.timeSort, timeSort) || other.timeSort == timeSort)&&(identical(other.popularitySort, popularitySort) || other.popularitySort == popularitySort));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,selectedCategory,const DeepCollectionEquality().hash(_postsByCategory),const DeepCollectionEquality().hash(_currentPageByCategory),const DeepCollectionEquality().hash(_hasMoreByCategory),isInitialLoading,isLoadingMore,errorMessage,const DeepCollectionEquality().hash(_likedPostIds),const DeepCollectionEquality().hash(_bookmarkedPostIds));
+int get hashCode => Object.hash(runtimeType,selectedCategory,const DeepCollectionEquality().hash(_postsByCategory),const DeepCollectionEquality().hash(_currentPageByCategory),const DeepCollectionEquality().hash(_hasMoreByCategory),isInitialLoading,isLoadingMore,errorMessage,const DeepCollectionEquality().hash(_likedPostIds),const DeepCollectionEquality().hash(_bookmarkedPostIds),timeSort,popularitySort);
 
 @override
 String toString() {
-  return 'CommunityState(selectedCategory: $selectedCategory, postsByCategory: $postsByCategory, currentPageByCategory: $currentPageByCategory, hasMoreByCategory: $hasMoreByCategory, isInitialLoading: $isInitialLoading, isLoadingMore: $isLoadingMore, errorMessage: $errorMessage, likedPostIds: $likedPostIds, bookmarkedPostIds: $bookmarkedPostIds)';
+  return 'CommunityState(selectedCategory: $selectedCategory, postsByCategory: $postsByCategory, currentPageByCategory: $currentPageByCategory, hasMoreByCategory: $hasMoreByCategory, isInitialLoading: $isInitialLoading, isLoadingMore: $isLoadingMore, errorMessage: $errorMessage, likedPostIds: $likedPostIds, bookmarkedPostIds: $bookmarkedPostIds, timeSort: $timeSort, popularitySort: $popularitySort)';
 }
 
 
@@ -300,7 +306,7 @@ abstract mixin class _$CommunityStateCopyWith<$Res> implements $CommunityStateCo
   factory _$CommunityStateCopyWith(_CommunityState value, $Res Function(_CommunityState) _then) = __$CommunityStateCopyWithImpl;
 @override @useResult
 $Res call({
- String selectedCategory, Map<String, List<PostModel>> postsByCategory, Map<String, int> currentPageByCategory, Map<String, bool> hasMoreByCategory, bool isInitialLoading, bool isLoadingMore, String? errorMessage, Set<String> likedPostIds, Set<String> bookmarkedPostIds
+ String selectedCategory, Map<String, List<PostModel>> postsByCategory, Map<String, int> currentPageByCategory, Map<String, bool> hasMoreByCategory, bool isInitialLoading, bool isLoadingMore, String? errorMessage, Set<String> likedPostIds, Set<String> bookmarkedPostIds, CommunityTimeSort timeSort, CommunityPopularitySort? popularitySort
 });
 
 
@@ -317,7 +323,7 @@ class __$CommunityStateCopyWithImpl<$Res>
 
 /// Create a copy of CommunityState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? selectedCategory = null,Object? postsByCategory = null,Object? currentPageByCategory = null,Object? hasMoreByCategory = null,Object? isInitialLoading = null,Object? isLoadingMore = null,Object? errorMessage = freezed,Object? likedPostIds = null,Object? bookmarkedPostIds = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? selectedCategory = null,Object? postsByCategory = null,Object? currentPageByCategory = null,Object? hasMoreByCategory = null,Object? isInitialLoading = null,Object? isLoadingMore = null,Object? errorMessage = freezed,Object? likedPostIds = null,Object? bookmarkedPostIds = null,Object? timeSort = null,Object? popularitySort = freezed,}) {
   return _then(_CommunityState(
 selectedCategory: null == selectedCategory ? _self.selectedCategory : selectedCategory // ignore: cast_nullable_to_non_nullable
 as String,postsByCategory: null == postsByCategory ? _self._postsByCategory : postsByCategory // ignore: cast_nullable_to_non_nullable
@@ -328,7 +334,9 @@ as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMo
 as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,likedPostIds: null == likedPostIds ? _self._likedPostIds : likedPostIds // ignore: cast_nullable_to_non_nullable
 as Set<String>,bookmarkedPostIds: null == bookmarkedPostIds ? _self._bookmarkedPostIds : bookmarkedPostIds // ignore: cast_nullable_to_non_nullable
-as Set<String>,
+as Set<String>,timeSort: null == timeSort ? _self.timeSort : timeSort // ignore: cast_nullable_to_non_nullable
+as CommunityTimeSort,popularitySort: freezed == popularitySort ? _self.popularitySort : popularitySort // ignore: cast_nullable_to_non_nullable
+as CommunityPopularitySort?,
   ));
 }
 

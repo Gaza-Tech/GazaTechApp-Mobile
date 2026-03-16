@@ -1,5 +1,6 @@
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/core/netowoks/supabase_error_handler.dart';
+import '../models/community_sort.dart';
 import '../models/post_model.dart';
 import '../models/comment_model.dart';
 import '../models/posts_response.dart';
@@ -13,9 +14,16 @@ class CommunityRepo {
   Future<ApiResult<PostsResponse>> fetchPosts({
     String? category,
     required int page,
+    CommunityTimeSort timeSort = CommunityTimeSort.newest,
+    CommunityPopularitySort? popularitySort,
   }) async {
     try {
-      final raw = await _service.fetchPosts(category: category, page: page);
+      final raw = await _service.fetchPosts(
+        category: category,
+        page: page,
+        timeSort: timeSort,
+        popularitySort: popularitySort,
+      );
       final hasMore = raw.length > CommunityApiService.postsPageSize;
       final items =
           hasMore ? raw.sublist(0, CommunityApiService.postsPageSize) : raw;

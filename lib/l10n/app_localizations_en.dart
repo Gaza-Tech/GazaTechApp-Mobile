@@ -641,4 +641,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hideReplies => 'Hide replies';
+
+  @override
+  String get sortPosts => 'Sort Posts';
+
+  @override
+  String get timeBased => 'Time-Based';
+
+  @override
+  String get popularity => 'Popularity';
+
+  @override
+  String get newest => 'Newest';
+
+  @override
+  String get oldest => 'Oldest';
+
+  @override
+  String get mostLiked => 'Most Liked';
+
+  @override
+  String get mostCommented => 'Most Commented';
+
+  @override
+  String get resetSort => 'Reset';
 }

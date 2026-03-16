@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../data/models/community_sort.dart';
 import '../data/models/post_model.dart';
 
 part 'community_state.freezed.dart';
@@ -25,6 +26,10 @@ abstract class CommunityState with _$CommunityState {
     // Global like/bookmark state
     @Default(<String>{}) Set<String> likedPostIds,
     @Default(<String>{}) Set<String> bookmarkedPostIds,
+
+    // Sort state
+    @Default(CommunityTimeSort.newest) CommunityTimeSort timeSort,
+    CommunityPopularitySort? popularitySort,
   }) = _CommunityState;
 
   const CommunityState._();

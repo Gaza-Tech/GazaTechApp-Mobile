@@ -1,4 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../models/community_sort.dart';
 
 class CommunityApiService {
   final SupabaseClient _supabase;
@@ -9,10 +10,9 @@ class CommunityApiService {
   static const int commentsPageSize = 15;
 
   static const String _postSelect = '''
-    post_id, author_id, title, content, post_category, content_status, created_at, published_at,
+    post_id, author_id, title, content, post_category, content_status,
+    created_at, published_at, likes_count, comments_count,
     users!author_id(user_id, first_name, last_name, avatar_url),
-    community_posts_likes(count),
-    community_post_comments(count),
     community_posts_attachments(file_url)
   ''';
 
@@ -26,12 +26,14 @@ class CommunityApiService {
   Future<List<Map<String, dynamic>>> fetchPosts({
     String? category,
     required int page,
+    CommunityTimeSort timeSort = CommunityTimeSort.newest,
+    CommunityPopularitySort? popularitySort,
   }) async {
     final startIndex = page * postsPageSize;
     final endIndex = startIndex + postsPageSize;
 
     var query = _supabase
-        .from('community_posts')
+        .from('community_posts_with_counts')
         .select(_postSelect)
         .eq('content_status', 'published');
 
@@ -39,11 +41,24 @@ class CommunityApiService {
       query = query.eq('post_category', category);
     }
 
-    final data = await query
-        .order('created_at', ascending: false)
-        .range(startIndex, endIndex);
+    final ascending = timeSort == CommunityTimeSort.oldest;
 
-    return List<Map<String, dynamic>>.from(data);
+    final dynamic data;
+    if (popularitySort != null) {
+      final popCol = popularitySort == CommunityPopularitySort.mostLiked
+          ? 'likes_count'
+          : 'comments_count';
+      data = await query
+          .order('created_at', ascending: ascending)
+          .order(popCol, ascending: false)
+          .range(startIndex, endIndex);
+    } else {
+      data = await query
+          .order('created_at', ascending: ascending)
+          .range(startIndex, endIndex);
+    }
+
+    return List<Map<String, dynamic>>.from(data as List);
   }
 
   Future<Set<String>> fetchLikedPostIds(List<String> postIds) async {
@@ -80,7 +95,7 @@ class CommunityApiService {
 
   Future<Map<String, dynamic>?> fetchPostDetails(String postId) async {
     return await _supabase
-        .from('community_posts')
+        .from('community_posts_with_counts')
         .select(_postSelect)
         .eq('post_id', postId)
         .maybeSingle();

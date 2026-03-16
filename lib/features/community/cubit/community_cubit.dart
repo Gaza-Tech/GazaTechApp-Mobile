@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
+import '../data/models/community_sort.dart';
 import '../data/models/post_model.dart';
 import '../data/repos/community_repo.dart';
 import 'community_state.dart';
@@ -22,6 +23,28 @@ class CommunityCubit extends Cubit<CommunityState> {
     await fetchPosts(category);
   }
 
+  void updateTimeSort(CommunityTimeSort sort) {
+    if (state.timeSort == sort) return;
+    emit(state.copyWith(
+      timeSort: sort,
+      postsByCategory: {},
+      currentPageByCategory: {},
+      hasMoreByCategory: {},
+    ));
+    fetchPosts(state.selectedCategory);
+  }
+
+  void updatePopularitySort(CommunityPopularitySort sort) {
+    final next = state.popularitySort == sort ? null : sort;
+    emit(state.copyWith(
+      popularitySort: next,
+      postsByCategory: {},
+      currentPageByCategory: {},
+      hasMoreByCategory: {},
+    ));
+    fetchPosts(state.selectedCategory);
+  }
+
   Future<void> fetchPosts(String category) async {
     emit(state.copyWith(
       isInitialLoading: true,
@@ -31,6 +54,8 @@ class CommunityCubit extends Cubit<CommunityState> {
     final result = await _repo.fetchPosts(
       category: category == 'all' ? null : category,
       page: 0,
+      timeSort: state.timeSort,
+      popularitySort: state.popularitySort,
     );
 
     result.when(
@@ -82,6 +107,8 @@ class CommunityCubit extends Cubit<CommunityState> {
     final result = await _repo.fetchPosts(
       category: category == 'all' ? null : category,
       page: nextPage,
+      timeSort: state.timeSort,
+      popularitySort: state.popularitySort,
     );
 
     result.when(

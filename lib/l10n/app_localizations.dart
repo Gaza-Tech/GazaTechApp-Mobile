@@ -1273,6 +1273,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hide replies'**
   String get hideReplies;
+
+  /// No description provided for @sortPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort Posts'**
+  String get sortPosts;
+
+  /// No description provided for @timeBased.
+  ///
+  /// In en, this message translates to:
+  /// **'Time-Based'**
+  String get timeBased;
+
+  /// No description provided for @popularity.
+  ///
+  /// In en, this message translates to:
+  /// **'Popularity'**
+  String get popularity;
+
+  /// No description provided for @newest.
+  ///
+  /// In en, this message translates to:
+  /// **'Newest'**
+  String get newest;
+
+  /// No description provided for @oldest.
+  ///
+  /// In en, this message translates to:
+  /// **'Oldest'**
+  String get oldest;
+
+  /// No description provided for @mostLiked.
+  ///
+  /// In en, this message translates to:
+  /// **'Most Liked'**
+  String get mostLiked;
+
+  /// No description provided for @mostCommented.
+  ///
+  /// In en, this message translates to:
+  /// **'Most Commented'**
+  String get mostCommented;
+
+  /// No description provided for @resetSort.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get resetSort;
 }
 
 class _AppLocalizationsDelegate

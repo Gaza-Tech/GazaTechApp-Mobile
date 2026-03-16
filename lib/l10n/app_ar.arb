@@ -277,5 +277,14 @@
       "count": { "type": "int" }
     }
   },
-  "hideReplies": "إخفاء الردود"
+  "hideReplies": "إخفاء الردود",
+
+  "sortPosts": "ترتيب المنشورات",
+  "timeBased": "حسب الوقت",
+  "popularity": "حسب الشعبية",
+  "newest": "الأحدث",
+  "oldest": "الأقدم",
+  "mostLiked": "الأكثر إعجاباً",
+  "mostCommented": "الأكثر تعليقاً",
+  "resetSort": "إعادة تعيين"
 }

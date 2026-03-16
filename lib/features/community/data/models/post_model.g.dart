@@ -18,12 +18,8 @@ _PostModel _$PostModelFromJson(Map<String, dynamic> json) => _PostModel(
       ? null
       : DateTime.parse(json['published_at'] as String),
   author: _authorFromJson(json['users']),
-  likesCount: json['community_posts_likes'] == null
-      ? 0
-      : _countFromJson(json['community_posts_likes']),
-  commentsCount: json['community_post_comments'] == null
-      ? 0
-      : _countFromJson(json['community_post_comments']),
+  likesCount: (json['likes_count'] as num?)?.toInt() ?? 0,
+  commentsCount: (json['comments_count'] as num?)?.toInt() ?? 0,
   attachmentUrls: json['community_posts_attachments'] == null
       ? const []
       : _attachmentUrlsFromJson(json['community_posts_attachments']),
@@ -42,8 +38,8 @@ Map<String, dynamic> _$PostModelToJson(_PostModel instance) =>
       'created_at': instance.createdAt.toIso8601String(),
       'published_at': instance.publishedAt?.toIso8601String(),
       'users': instance.author,
-      'community_posts_likes': instance.likesCount,
-      'community_post_comments': instance.commentsCount,
+      'likes_count': instance.likesCount,
+      'comments_count': instance.commentsCount,
       'community_posts_attachments': instance.attachmentUrls,
       'isLiked': instance.isLiked,
       'isBookmarked': instance.isBookmarked,

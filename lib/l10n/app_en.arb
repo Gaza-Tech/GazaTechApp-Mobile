@@ -339,5 +339,14 @@
       "count": { "type": "int" }
     }
   },
-  "hideReplies": "Hide replies"
+  "hideReplies": "Hide replies",
+
+  "sortPosts": "Sort Posts",
+  "timeBased": "Time-Based",
+  "popularity": "Popularity",
+  "newest": "Newest",
+  "oldest": "Oldest",
+  "mostLiked": "Most Liked",
+  "mostCommented": "Most Commented",
+  "resetSort": "Reset"
 }

@@ -10,16 +10,6 @@ PostAuthorModel? _authorFromJson(dynamic value) {
   return null;
 }
 
-int _countFromJson(dynamic value) {
-  if (value == null) return 0;
-  if (value is List && value.isNotEmpty) {
-    final first = value.first;
-    if (first is Map<String, dynamic>) {
-      return (first['count'] as num?)?.toInt() ?? 0;
-    }
-  }
-  return 0;
-}
 
 List<String> _attachmentUrlsFromJson(dynamic value) {
   if (value is List) {
@@ -46,12 +36,8 @@ abstract class PostModel with _$PostModel {
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'published_at') DateTime? publishedAt,
     @JsonKey(name: 'users', fromJson: _authorFromJson) PostAuthorModel? author,
-    @JsonKey(name: 'community_posts_likes', fromJson: _countFromJson)
-    @Default(0)
-    int likesCount,
-    @JsonKey(name: 'community_post_comments', fromJson: _countFromJson)
-    @Default(0)
-    int commentsCount,
+    @JsonKey(name: 'likes_count') @Default(0) int likesCount,
+    @JsonKey(name: 'comments_count') @Default(0) int commentsCount,
     @JsonKey(
       name: 'community_posts_attachments',
       fromJson: _attachmentUrlsFromJson,
