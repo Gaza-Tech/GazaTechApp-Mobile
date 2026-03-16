@@ -115,9 +115,19 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
 
   Future<void> toggleCommentLike(String commentId) async {
     final wasLiked = state.likedCommentIds.contains(commentId);
+    final delta = wasLiked ? -1 : 1;
+
     final newIds = Set<String>.from(state.likedCommentIds);
     wasLiked ? newIds.remove(commentId) : newIds.add(commentId);
-    emit(state.copyWith(likedCommentIds: newIds));
+    emit(state.copyWith(
+      likedCommentIds: newIds,
+      comments: _patchLikesCount(state.comments, commentId, delta),
+      repliesByCommentId: _patchRepliesLikesCount(
+        state.repliesByCommentId,
+        commentId,
+        delta,
+      ),
+    ));
 
     final result = await _repo.toggleCommentLike(commentId);
     result.when(
@@ -125,8 +135,43 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
       failure: (_) {
         final revertIds = Set<String>.from(state.likedCommentIds);
         wasLiked ? revertIds.add(commentId) : revertIds.remove(commentId);
-        emit(state.copyWith(likedCommentIds: revertIds));
+        emit(state.copyWith(
+          likedCommentIds: revertIds,
+          comments: _patchLikesCount(state.comments, commentId, -delta),
+          repliesByCommentId: _patchRepliesLikesCount(
+            state.repliesByCommentId,
+            commentId,
+            -delta,
+          ),
+        ));
       },
+    );
+  }
+
+  List<CommentModel> _patchLikesCount(
+    List<CommentModel> comments,
+    String commentId,
+    int delta,
+  ) {
+    return comments
+        .map(
+          (c) => c.commentId == commentId
+              ? c.copyWith(likesCount: c.likesCount + delta)
+              : c,
+        )
+        .toList();
+  }
+
+  Map<String, List<CommentModel>> _patchRepliesLikesCount(
+    Map<String, List<CommentModel>> repliesByCommentId,
+    String commentId,
+    int delta,
+  ) {
+    return repliesByCommentId.map(
+      (parentId, replies) => MapEntry(
+        parentId,
+        _patchLikesCount(replies, commentId, delta),
+      ),
     );
   }
 

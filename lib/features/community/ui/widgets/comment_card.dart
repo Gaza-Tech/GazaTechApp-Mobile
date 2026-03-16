@@ -109,16 +109,18 @@ class CommentCard extends StatelessWidget {
             color: theme.colorScheme.onSurfaceVariant,
           ),
         ),
-        SizedBox(width: 16.w),
-        GestureDetector(
-          onTap: onReply,
-          child: Text(
-            context.l10n.reply,
-            style: MyTextStyle.action.s.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
+        if (onReply != null) ...[
+          SizedBox(width: 16.w),
+          GestureDetector(
+            onTap: onReply,
+            child: Text(
+              context.l10n.reply,
+              style: MyTextStyle.action.s.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
-        ),
+        ],
       ],
     );
   }

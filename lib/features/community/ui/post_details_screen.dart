@@ -138,12 +138,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                             isLiked: state.likedCommentIds
                                                 .contains(reply.commentId),
                                             indentLevel: 1,
-                                            onReply: () => setState(() {
-                                              _replyingTo = reply.authorName;
-                                              _replyingToCommentId =
-                                                  comment.commentId;
-                                            }),
-                                            onLikeTap: () =>
+                                              onLikeTap: () =>
                                                 cubit.toggleCommentLike(
                                               reply.commentId,
                                             ),
