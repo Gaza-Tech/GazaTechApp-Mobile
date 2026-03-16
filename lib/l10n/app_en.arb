@@ -341,6 +341,11 @@
   },
   "hideReplies": "Hide replies",
 
+  "recentSearches": "Recent searches",
+  "clearRecentSearches": "Clear",
+  "noCommunityResults": "No posts found",
+  "noCommunityResultsSubtitle": "Try different keywords",
+
   "sortPosts": "Sort Posts",
   "timeBased": "Time-Based",
   "popularity": "Popularity",

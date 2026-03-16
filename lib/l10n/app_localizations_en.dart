@@ -643,6 +643,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hideReplies => 'Hide replies';
 
   @override
+  String get recentSearches => 'Recent searches';
+
+  @override
+  String get clearRecentSearches => 'Clear';
+
+  @override
+  String get noCommunityResults => 'No posts found';
+
+  @override
+  String get noCommunityResultsSubtitle => 'Try different keywords';
+
+  @override
   String get sortPosts => 'Sort Posts';
 
   @override

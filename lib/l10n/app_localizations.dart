@@ -1274,6 +1274,30 @@ abstract class AppLocalizations {
   /// **'Hide replies'**
   String get hideReplies;
 
+  /// No description provided for @recentSearches.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent searches'**
+  String get recentSearches;
+
+  /// No description provided for @clearRecentSearches.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clearRecentSearches;
+
+  /// No description provided for @noCommunityResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No posts found'**
+  String get noCommunityResults;
+
+  /// No description provided for @noCommunityResultsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Try different keywords'**
+  String get noCommunityResultsSubtitle;
+
   /// No description provided for @sortPosts.
   ///
   /// In en, this message translates to:

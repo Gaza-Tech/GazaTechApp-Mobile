@@ -11,4 +11,5 @@ class MyRoutes {
   static const String search = '/search';
   static const String createPost = '/createPost';
   static const String postDetails = '/postDetails';
+  static const String communitySearch = '/communitySearch';
 }

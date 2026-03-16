@@ -28,6 +28,8 @@ import 'package:gaza_tech/features/add_post/ui/add_post_screen.dart';
 import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
 import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
 import 'package:gaza_tech/features/community/ui/post_details_screen.dart';
+import 'package:gaza_tech/features/community_search/cubit/community_search_cubit.dart';
+import 'package:gaza_tech/features/community_search/ui/community_search_screen.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -133,6 +135,14 @@ class MyRouter {
                   ..loadPost()
                   ..loadComments(),
             child: const PostDetailsScreen(),
+          ),
+        );
+      case MyRoutes.communitySearch:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                getIt<CommunitySearchCubit>()..loadRecentSearches(),
+            child: const CommunitySearchScreen(),
           ),
         );
       default:

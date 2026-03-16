@@ -24,6 +24,7 @@ class MyTextFormField extends StatelessWidget {
     this.textInputAction,
     this.onFieldSubmitted,
     this.fillColor,
+    this.autofocus = false,
   });
 
   final EdgeInsets? contentPadding;
@@ -47,6 +48,7 @@ class MyTextFormField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final void Function(String)? onFieldSubmitted;
   final Color? fillColor;
+  final bool autofocus;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,7 @@ class MyTextFormField extends StatelessWidget {
       onTapOutside: (PointerDownEvent event) {
         FocusScope.of(context).unfocus();
       },
+      autofocus: autofocus,
       controller: controller,
       validator: validator,
       keyboardType: textInputType,

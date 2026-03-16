@@ -5,11 +5,13 @@ import 'package:gaza_tech/core/theme/my_text_styles.dart';
 
 class CommunitySearchBar extends StatelessWidget {
   final VoidCallback? onSortTap;
+  final VoidCallback? onSearchTap;
   final String sortLabel;
 
   const CommunitySearchBar({
     super.key,
     this.onSortTap,
+    this.onSearchTap,
     required this.sortLabel,
   });
 
@@ -21,7 +23,9 @@ class CommunitySearchBar extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Container(
+          child: GestureDetector(
+            onTap: onSearchTap,
+            child: Container(
             padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
             decoration: BoxDecoration(
               color: isDark
@@ -31,11 +35,7 @@ class CommunitySearchBar extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(
-                  Icons.search,
-                  color: theme.colorScheme.onSurfaceVariant,
-                  size: 22.sp,
-                ),
+                Icon(Icons.search, color: theme.colorScheme.onSurfaceVariant),
                 SizedBox(width: 10.w),
                 Expanded(
                   child: Text(
@@ -48,6 +48,7 @@ class CommunitySearchBar extends StatelessWidget {
                 ),
               ],
             ),
+          ),
           ),
         ),
         SizedBox(width: 8.w),
@@ -81,11 +82,7 @@ class _SortButton extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.sort_rounded,
-              size: 18.sp,
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
+            Icon(Icons.sort_rounded, color: theme.colorScheme.onSurfaceVariant),
             SizedBox(width: 6.w),
             Text(
               label,

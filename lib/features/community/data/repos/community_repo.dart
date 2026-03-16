@@ -144,6 +144,38 @@ class CommunityRepo {
     }
   }
 
+  Future<ApiResult<PostsResponse>> searchPosts({
+    required String keyword,
+    required int page,
+  }) async {
+    try {
+      final raw = await _service.searchPosts(keyword: keyword, page: page);
+      final hasMore = raw.length > CommunityApiService.postsPageSize;
+      final items =
+          hasMore ? raw.sublist(0, CommunityApiService.postsPageSize) : raw;
+      final posts = items.map((e) => PostModel.fromJson(e)).toList();
+
+      final postIds = posts.map((p) => p.postId).toList();
+      final likedIds = await _service.fetchLikedPostIds(postIds);
+      final bookmarkedIds = await _service.fetchBookmarkedPostIds(postIds);
+
+      final enrichedPosts = posts
+          .map(
+            (p) => p.copyWith(
+              isLiked: likedIds.contains(p.postId),
+              isBookmarked: bookmarkedIds.contains(p.postId),
+            ),
+          )
+          .toList();
+
+      return ApiResult.success(
+        PostsResponse(posts: enrichedPosts, hasMore: hasMore),
+      );
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
   Future<ApiResult<void>> addComment({
     required String postId,
     required String content,

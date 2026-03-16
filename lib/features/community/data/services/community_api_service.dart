@@ -269,4 +269,22 @@ class CommunityApiService {
       if (parentCommentId != null) 'parent_comment_id': parentCommentId,
     });
   }
+
+  Future<List<Map<String, dynamic>>> searchPosts({
+    required String keyword,
+    required int page,
+  }) async {
+    final startIndex = page * postsPageSize;
+    final endIndex = startIndex + postsPageSize;
+
+    final data = await _supabase
+        .from('community_posts_with_counts')
+        .select(_postSelect)
+        .eq('content_status', 'published')
+        .or('title.ilike.%$keyword%,content.ilike.%$keyword%')
+        .order('created_at', ascending: false)
+        .range(startIndex, endIndex);
+
+    return List<Map<String, dynamic>>.from(data as List);
+  }
 }

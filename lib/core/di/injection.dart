@@ -44,6 +44,7 @@ import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
 import 'package:gaza_tech/features/community/data/repos/community_repo.dart';
 import 'package:gaza_tech/features/community/data/services/community_api_service.dart';
 import 'package:gaza_tech/features/add_post/cubit/add_post_cubit.dart';
+import 'package:gaza_tech/features/community_search/cubit/community_search_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -167,4 +168,9 @@ Future<void> setupGetIt() async {
     (postId, _) => PostDetailsCubit(getIt(), postId),
   );
   getIt.registerFactory<AddPostCubit>(() => AddPostCubit(getIt()));
+
+  // 15. Community Search
+  getIt.registerFactory<CommunitySearchCubit>(
+    () => CommunitySearchCubit(getIt()),
+  );
 }

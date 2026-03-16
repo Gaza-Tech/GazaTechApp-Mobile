@@ -643,6 +643,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get hideReplies => 'إخفاء الردود';
 
   @override
+  String get recentSearches => 'عمليات بحث سابقة';
+
+  @override
+  String get clearRecentSearches => 'مسح';
+
+  @override
+  String get noCommunityResults => 'لم يتم العثور على منشورات';
+
+  @override
+  String get noCommunityResultsSubtitle => 'جرّب كلمات مختلفة';
+
+  @override
   String get sortPosts => 'ترتيب المنشورات';
 
   @override

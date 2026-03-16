@@ -279,6 +279,11 @@
   },
   "hideReplies": "إخفاء الردود",
 
+  "recentSearches": "عمليات بحث سابقة",
+  "clearRecentSearches": "مسح",
+  "noCommunityResults": "لم يتم العثور على منشورات",
+  "noCommunityResultsSubtitle": "جرّب كلمات مختلفة",
+
   "sortPosts": "ترتيب المنشورات",
   "timeBased": "حسب الوقت",
   "popularity": "حسب الشعبية",

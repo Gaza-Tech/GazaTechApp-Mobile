@@ -6,6 +6,7 @@ import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
 import 'package:gaza_tech/features/community/cubit/community_state.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_category_chips.dart';
 import 'package:gaza_tech/features/community/data/models/community_sort.dart';
+import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_search_bar.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_sort_sheet.dart';
 import 'package:gaza_tech/features/community/ui/widgets/posts_tab_view.dart';
@@ -113,6 +114,10 @@ class _CommunityScreenState extends State<CommunityScreen>
                         child: CommunitySearchBar(
                           onSortTap: () =>
                               showCommunitySortSheet(context),
+                          onSearchTap: () => Navigator.pushNamed(
+                            context,
+                            MyRoutes.communitySearch,
+                          ),
                           sortLabel: _sortLabel(context, state.activeSort),
                         ),
                       ),
