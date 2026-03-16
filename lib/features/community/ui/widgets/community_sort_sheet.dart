@@ -57,23 +57,11 @@ class _CommunitySortSheet extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    l10n.sortPosts,
-                    style: MyTextStyle.body.l.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      cubit.updateSort(CommunitySort.newest);
-                      Navigator.pop(context);
-                    },
-                    child: Text(l10n.resetSort),
-                  ),
-                ],
+              Text(
+                l10n.sortPosts,
+                style: MyTextStyle.body.l.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               SizedBox(height: 8.h),
               Divider(height: 1.h),
