@@ -78,12 +78,19 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
 
   Future<void> togglePostLike() async {
     final wasLiked = state.isLiked;
-    emit(state.copyWith(isLiked: !wasLiked));
+    final delta = wasLiked ? -1 : 1;
+    emit(state.copyWith(
+      isLiked: !wasLiked,
+      post: state.post?.copyWith(likesCount: state.post!.likesCount + delta),
+    ));
 
     final result = await _repo.togglePostLike(postId);
     result.when(
       success: (_) {},
-      failure: (_) => emit(state.copyWith(isLiked: wasLiked)),
+      failure: (_) => emit(state.copyWith(
+        isLiked: wasLiked,
+        post: state.post?.copyWith(likesCount: state.post!.likesCount - delta),
+      )),
     );
   }
 
@@ -123,7 +130,16 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
       content: content.trim(),
     );
     result.when(
-      success: (_) => loadComments(),
+      success: (_) {
+        if (state.post != null) {
+          emit(state.copyWith(
+            post: state.post!.copyWith(
+              commentsCount: state.post!.commentsCount + 1,
+            ),
+          ));
+        }
+        loadComments();
+      },
       failure: (error) => emit(state.copyWith(errorMessage: error.message)),
     );
   }

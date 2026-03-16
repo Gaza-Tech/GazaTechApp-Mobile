@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
+import '../data/models/post_model.dart';
 import '../data/repos/community_repo.dart';
 import 'community_state.dart';
 
@@ -8,71 +9,28 @@ class CommunityCubit extends Cubit<CommunityState> {
 
   CommunityCubit(this._repo) : super(const CommunityState());
 
-  Future<void> fetchPosts() async {
-    if (state.isPostsLoading) return;
-
-    emit(
-      state.copyWith(
-        isPostsLoading: true,
-        errorMessage: null,
-        posts: [],
-        currentPage: 0,
-        hasMore: true,
-        likedPostIds: {},
-        bookmarkedPostIds: {},
-      ),
-    );
-
-    final result = await _repo.fetchPosts(
-      category: state.selectedCategory == 'all' ? null : state.selectedCategory,
-      page: 0,
-    );
-
-    result.when(
-      success: (response) {
-        final likedIds = response.posts
-            .where((p) => p.isLiked)
-            .map((p) => p.postId)
-            .toSet();
-        final bookmarkedIds = response.posts
-            .where((p) => p.isBookmarked)
-            .map((p) => p.postId)
-            .toSet();
-
-        emit(
-          state.copyWith(
-            isPostsLoading: false,
-            posts: response.posts,
-            hasMore: response.hasMore,
-            currentPage: 1,
-            likedPostIds: likedIds,
-            bookmarkedPostIds: bookmarkedIds,
-          ),
-        );
-      },
-      failure: (error) => emit(
-        state.copyWith(
-          isPostsLoading: false,
-          errorMessage: error.message,
-        ),
-      ),
-    );
-  }
-
-  Future<void> changeCategory(String category) async {
+  void changeCategory(String category) {
     if (state.selectedCategory == category) return;
     emit(state.copyWith(selectedCategory: category));
-    await fetchPosts();
   }
 
-  Future<void> fetchMorePosts() async {
-    if (state.isLoadingMore || !state.hasMore || state.isPostsLoading) return;
+  Future<void> fetchIfNeeded(String category) async {
+    if (state.postsByCategory.containsKey(category) &&
+        state.postsByCategory[category]!.isNotEmpty) {
+      return;
+    }
+    await fetchPosts(category);
+  }
 
-    emit(state.copyWith(isLoadingMore: true));
+  Future<void> fetchPosts(String category) async {
+    emit(state.copyWith(
+      isInitialLoading: true,
+      errorMessage: null,
+    ));
 
     final result = await _repo.fetchPosts(
-      category: state.selectedCategory == 'all' ? null : state.selectedCategory,
-      page: state.currentPage,
+      category: category == 'all' ? null : category,
+      page: 0,
     );
 
     result.when(
@@ -86,28 +44,113 @@ class CommunityCubit extends Cubit<CommunityState> {
             .map((p) => p.postId)
             .toSet();
 
-        emit(
-          state.copyWith(
-            isLoadingMore: false,
-            posts: [...state.posts, ...response.posts],
-            hasMore: response.hasMore,
-            currentPage: state.currentPage + 1,
-            likedPostIds: {...state.likedPostIds, ...newLikedIds},
-            bookmarkedPostIds: {...state.bookmarkedPostIds, ...newBookmarkedIds},
-          ),
-        );
+        final updatedPosts = Map<String, List<PostModel>>.from(
+          state.postsByCategory,
+        )..[category] = response.posts;
+
+        final updatedPages = Map<String, int>.from(
+          state.currentPageByCategory,
+        )..[category] = 0;
+
+        final updatedHasMore = Map<String, bool>.from(
+          state.hasMoreByCategory,
+        )..[category] = response.hasMore;
+
+        emit(state.copyWith(
+          postsByCategory: updatedPosts,
+          currentPageByCategory: updatedPages,
+          hasMoreByCategory: updatedHasMore,
+          isInitialLoading: false,
+          likedPostIds: {...state.likedPostIds, ...newLikedIds},
+          bookmarkedPostIds: {...state.bookmarkedPostIds, ...newBookmarkedIds},
+        ));
       },
-      failure: (error) => emit(
-        state.copyWith(isLoadingMore: false, errorMessage: error.message),
-      ),
+      failure: (error) => emit(state.copyWith(
+        isInitialLoading: false,
+        errorMessage: error.message,
+      )),
     );
+  }
+
+  Future<void> fetchMore(String category) async {
+    if (state.isLoadingMore || !state.hasMoreFor(category)) return;
+
+    final nextPage = state.currentPageFor(category) + 1;
+
+    emit(state.copyWith(isLoadingMore: true));
+
+    final result = await _repo.fetchPosts(
+      category: category == 'all' ? null : category,
+      page: nextPage,
+    );
+
+    result.when(
+      success: (response) {
+        final newLikedIds = response.posts
+            .where((p) => p.isLiked)
+            .map((p) => p.postId)
+            .toSet();
+        final newBookmarkedIds = response.posts
+            .where((p) => p.isBookmarked)
+            .map((p) => p.postId)
+            .toSet();
+
+        final current = state.postsByCategory[category] ?? [];
+        final updatedPosts = Map<String, List<PostModel>>.from(
+          state.postsByCategory,
+        )..[category] = [...current, ...response.posts];
+
+        final updatedPages = Map<String, int>.from(
+          state.currentPageByCategory,
+        )..[category] = nextPage;
+
+        final updatedHasMore = Map<String, bool>.from(
+          state.hasMoreByCategory,
+        )..[category] = response.hasMore;
+
+        emit(state.copyWith(
+          postsByCategory: updatedPosts,
+          currentPageByCategory: updatedPages,
+          hasMoreByCategory: updatedHasMore,
+          isLoadingMore: false,
+          likedPostIds: {...state.likedPostIds, ...newLikedIds},
+          bookmarkedPostIds: {...state.bookmarkedPostIds, ...newBookmarkedIds},
+        ));
+      },
+      failure: (error) => emit(state.copyWith(
+        isLoadingMore: false,
+        errorMessage: error.message,
+      )),
+    );
+  }
+
+  void resetPagination(String category) {
+    final updatedPages = Map<String, int>.from(state.currentPageByCategory)
+      ..remove(category);
+    final updatedHasMore = Map<String, bool>.from(state.hasMoreByCategory)
+      ..remove(category);
+    emit(state.copyWith(
+      currentPageByCategory: updatedPages,
+      hasMoreByCategory: updatedHasMore,
+    ));
   }
 
   Future<void> toggleLike(String postId) async {
     final wasLiked = state.likedPostIds.contains(postId);
     final newLikedIds = Set<String>.from(state.likedPostIds);
     wasLiked ? newLikedIds.remove(postId) : newLikedIds.add(postId);
-    emit(state.copyWith(likedPostIds: newLikedIds));
+
+    final delta = wasLiked ? -1 : 1;
+    final updatedPosts = <String, List<PostModel>>{};
+    for (final entry in state.postsByCategory.entries) {
+      updatedPosts[entry.key] = entry.value.map((p) {
+        if (p.postId == postId) {
+          return p.copyWith(likesCount: p.likesCount + delta);
+        }
+        return p;
+      }).toList();
+    }
+    emit(state.copyWith(likedPostIds: newLikedIds, postsByCategory: updatedPosts));
 
     final result = await _repo.togglePostLike(postId);
     result.when(
@@ -115,7 +158,17 @@ class CommunityCubit extends Cubit<CommunityState> {
       failure: (_) {
         final revertIds = Set<String>.from(state.likedPostIds);
         wasLiked ? revertIds.add(postId) : revertIds.remove(postId);
-        emit(state.copyWith(likedPostIds: revertIds));
+
+        final revertedPosts = <String, List<PostModel>>{};
+        for (final entry in state.postsByCategory.entries) {
+          revertedPosts[entry.key] = entry.value.map((p) {
+            if (p.postId == postId) {
+              return p.copyWith(likesCount: p.likesCount - delta);
+            }
+            return p;
+          }).toList();
+        }
+        emit(state.copyWith(likedPostIds: revertIds, postsByCategory: revertedPosts));
       },
     );
   }
