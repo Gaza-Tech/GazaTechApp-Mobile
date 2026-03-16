@@ -37,10 +37,13 @@ class CommunitySearchBar extends StatelessWidget {
                   size: 22.sp,
                 ),
                 SizedBox(width: 10.w),
-                Text(
-                  context.l10n.searchCommunity,
-                  style: MyTextStyle.body.m.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
+                Expanded(
+                  child: Text(
+                    context.l10n.searchCommunity,
+                    overflow: TextOverflow.ellipsis,
+                    style: MyTextStyle.body.m.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ),
               ],
