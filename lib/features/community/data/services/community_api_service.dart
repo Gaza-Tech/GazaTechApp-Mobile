@@ -26,8 +26,7 @@ class CommunityApiService {
   Future<List<Map<String, dynamic>>> fetchPosts({
     String? category,
     required int page,
-    CommunityTimeSort timeSort = CommunityTimeSort.newest,
-    CommunityPopularitySort? popularitySort,
+    CommunitySort sort = CommunitySort.newest,
   }) async {
     final startIndex = page * postsPageSize;
     final endIndex = startIndex + postsPageSize;
@@ -41,21 +40,26 @@ class CommunityApiService {
       query = query.eq('post_category', category);
     }
 
-    final ascending = timeSort == CommunityTimeSort.oldest;
-
     final dynamic data;
-    if (popularitySort != null) {
-      final popCol = popularitySort == CommunityPopularitySort.mostLiked
-          ? 'likes_count'
-          : 'comments_count';
-      data = await query
-          .order('created_at', ascending: ascending)
-          .order(popCol, ascending: false)
-          .range(startIndex, endIndex);
-    } else {
-      data = await query
-          .order('created_at', ascending: ascending)
-          .range(startIndex, endIndex);
+    switch (sort) {
+      case CommunitySort.newest:
+        data = await query
+            .order('created_at', ascending: false)
+            .range(startIndex, endIndex);
+      case CommunitySort.oldest:
+        data = await query
+            .order('created_at', ascending: true)
+            .range(startIndex, endIndex);
+      case CommunitySort.mostLiked:
+        data = await query
+            .order('likes_count', ascending: false)
+            .order('created_at', ascending: false)
+            .range(startIndex, endIndex);
+      case CommunitySort.mostCommented:
+        data = await query
+            .order('comments_count', ascending: false)
+            .order('created_at', ascending: false)
+            .range(startIndex, endIndex);
     }
 
     return List<Map<String, dynamic>>.from(data as List);

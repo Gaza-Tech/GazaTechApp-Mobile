@@ -14,15 +14,13 @@ class CommunityRepo {
   Future<ApiResult<PostsResponse>> fetchPosts({
     String? category,
     required int page,
-    CommunityTimeSort timeSort = CommunityTimeSort.newest,
-    CommunityPopularitySort? popularitySort,
+    CommunitySort sort = CommunitySort.newest,
   }) async {
     try {
       final raw = await _service.fetchPosts(
         category: category,
         page: page,
-        timeSort: timeSort,
-        popularitySort: popularitySort,
+        sort: sort,
       );
       final hasMore = raw.length > CommunityApiService.postsPageSize;
       final items =

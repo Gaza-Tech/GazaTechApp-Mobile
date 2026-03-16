@@ -5,12 +5,12 @@ import 'package:gaza_tech/core/theme/my_text_styles.dart';
 
 class CommunitySearchBar extends StatelessWidget {
   final VoidCallback? onSortTap;
-  final bool hasActiveSort;
+  final String sortLabel;
 
   const CommunitySearchBar({
     super.key,
     this.onSortTap,
-    this.hasActiveSort = false,
+    required this.sortLabel,
   });
 
   @override
@@ -48,55 +48,52 @@ class CommunitySearchBar extends StatelessWidget {
           ),
         ),
         SizedBox(width: 8.w),
-        _SortIconButton(onTap: onSortTap, isActive: hasActiveSort),
+        _SortButton(onTap: onSortTap, label: sortLabel),
       ],
     );
   }
 }
 
-class _SortIconButton extends StatelessWidget {
+class _SortButton extends StatelessWidget {
   final VoidCallback? onTap;
-  final bool isActive;
+  final String label;
 
-  const _SortIconButton({this.onTap, required this.isActive});
+  const _SortButton({this.onTap, required this.label});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final color =
-        isActive ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant;
 
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: isDark
-                ? theme.colorScheme.surfaceContainerHighest
-                : theme.colorScheme.surfaceContainerHigh,
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-          child: IconButton(
-            icon: Icon(Icons.tune_rounded, color: color, size: 22.sp),
-            onPressed: onTap,
-            splashRadius: 20.r,
-          ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+        decoration: BoxDecoration(
+          color: isDark
+              ? theme.colorScheme.surfaceContainerHighest
+              : theme.colorScheme.surfaceContainerHigh,
+          borderRadius: BorderRadius.circular(12.r),
         ),
-        if (isActive)
-          Positioned(
-            top: 6.h,
-            right: 6.w,
-            child: Container(
-              width: 8.w,
-              height: 8.w,
-              decoration: BoxDecoration(
-                color: theme.colorScheme.primary,
-                shape: BoxShape.circle,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.sort_rounded,
+              size: 18.sp,
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+            SizedBox(width: 6.w),
+            Text(
+              label,
+              style: MyTextStyle.body.s.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+                fontWeight: FontWeight.w500,
               ),
             ),
-          ),
-      ],
+          ],
+        ),
+      ),
     );
   }
 }

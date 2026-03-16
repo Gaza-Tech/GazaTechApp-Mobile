@@ -1,3 +1,1 @@
-enum CommunityTimeSort { newest, oldest }
-
-enum CommunityPopularitySort { mostLiked, mostCommented }
+enum CommunitySort { newest, oldest, mostLiked, mostCommented }

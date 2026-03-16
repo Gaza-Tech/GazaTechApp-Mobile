@@ -62,6 +62,16 @@ class _CommunityScreenState extends State<CommunityScreen>
     super.dispose();
   }
 
+  String _sortLabel(BuildContext context, CommunitySort sort) {
+    final l10n = context.l10n;
+    return switch (sort) {
+      CommunitySort.newest => l10n.newest,
+      CommunitySort.oldest => l10n.oldest,
+      CommunitySort.mostLiked => l10n.mostLiked,
+      CommunitySort.mostCommented => l10n.mostCommented,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final categories = [
@@ -103,9 +113,7 @@ class _CommunityScreenState extends State<CommunityScreen>
                         child: CommunitySearchBar(
                           onSortTap: () =>
                               showCommunitySortSheet(context),
-                          hasActiveSort:
-                              state.timeSort != CommunityTimeSort.newest ||
-                                  state.popularitySort != null,
+                          sortLabel: _sortLabel(context, state.activeSort),
                         ),
                       ),
                       SizedBox(height: 4.h),

@@ -23,21 +23,10 @@ class CommunityCubit extends Cubit<CommunityState> {
     await fetchPosts(category);
   }
 
-  void updateTimeSort(CommunityTimeSort sort) {
-    if (state.timeSort == sort) return;
+  void updateSort(CommunitySort sort) {
+    if (state.activeSort == sort) return;
     emit(state.copyWith(
-      timeSort: sort,
-      postsByCategory: {},
-      currentPageByCategory: {},
-      hasMoreByCategory: {},
-    ));
-    fetchPosts(state.selectedCategory);
-  }
-
-  void updatePopularitySort(CommunityPopularitySort sort) {
-    final next = state.popularitySort == sort ? null : sort;
-    emit(state.copyWith(
-      popularitySort: next,
+      activeSort: sort,
       postsByCategory: {},
       currentPageByCategory: {},
       hasMoreByCategory: {},
@@ -54,8 +43,7 @@ class CommunityCubit extends Cubit<CommunityState> {
     final result = await _repo.fetchPosts(
       category: category == 'all' ? null : category,
       page: 0,
-      timeSort: state.timeSort,
-      popularitySort: state.popularitySort,
+      sort: state.activeSort,
     );
 
     result.when(
@@ -107,8 +95,7 @@ class CommunityCubit extends Cubit<CommunityState> {
     final result = await _repo.fetchPosts(
       category: category == 'all' ? null : category,
       page: nextPage,
-      timeSort: state.timeSort,
-      popularitySort: state.popularitySort,
+      sort: state.activeSort,
     );
 
     result.when(

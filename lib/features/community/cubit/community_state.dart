@@ -28,8 +28,7 @@ abstract class CommunityState with _$CommunityState {
     @Default(<String>{}) Set<String> bookmarkedPostIds,
 
     // Sort state
-    @Default(CommunityTimeSort.newest) CommunityTimeSort timeSort,
-    CommunityPopularitySort? popularitySort,
+    @Default(CommunitySort.newest) CommunitySort activeSort,
   }) = _CommunityState;
 
   const CommunityState._();

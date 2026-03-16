@@ -32,6 +32,13 @@ class _CommunitySortSheet extends StatelessWidget {
         final l10n = context.l10n;
         final theme = Theme.of(context);
 
+        final options = [
+          (CommunitySort.newest, l10n.newest),
+          (CommunitySort.oldest, l10n.oldest),
+          (CommunitySort.mostLiked, l10n.mostLiked),
+          (CommunitySort.mostCommented, l10n.mostCommented),
+        ];
+
         return Padding(
           padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 32.h),
           child: Column(
@@ -43,7 +50,8 @@ class _CommunitySortSheet extends StatelessWidget {
                   width: 40.w,
                   height: 4.h,
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.3),
+                    color: theme.colorScheme.onSurfaceVariant
+                        .withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(2.r),
                   ),
                 ),
@@ -60,10 +68,8 @@ class _CommunitySortSheet extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      cubit.updateTimeSort(CommunityTimeSort.newest);
-                      if (state.popularitySort != null) {
-                        cubit.updatePopularitySort(state.popularitySort!);
-                      }
+                      cubit.updateSort(CommunitySort.newest);
+                      Navigator.pop(context);
                     },
                     child: Text(l10n.resetSort),
                   ),
@@ -71,59 +77,16 @@ class _CommunitySortSheet extends StatelessWidget {
               ),
               SizedBox(height: 8.h),
               Divider(height: 1.h),
-              SizedBox(height: 12.h),
-              Text(
-                l10n.timeBased.toUpperCase(),
-                style: MyTextStyle.body.s.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  letterSpacing: 0.8,
-                ),
-              ),
               SizedBox(height: 8.h),
-              Row(
-                children: [
-                  _SortOption(
-                    label: l10n.newest,
-                    selected: state.timeSort == CommunityTimeSort.newest,
-                    onTap: () => cubit.updateTimeSort(CommunityTimeSort.newest),
-                  ),
-                  SizedBox(width: 12.w),
-                  _SortOption(
-                    label: l10n.oldest,
-                    selected: state.timeSort == CommunityTimeSort.oldest,
-                    onTap: () => cubit.updateTimeSort(CommunityTimeSort.oldest),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16.h),
-              Divider(height: 1.h),
-              SizedBox(height: 12.h),
-              Text(
-                l10n.popularity.toUpperCase(),
-                style: MyTextStyle.body.s.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  letterSpacing: 0.8,
+              ...options.map(
+                (entry) => _SortOption(
+                  label: entry.$2,
+                  selected: state.activeSort == entry.$1,
+                  onTap: () {
+                    cubit.updateSort(entry.$1);
+                    Navigator.pop(context);
+                  },
                 ),
-              ),
-              SizedBox(height: 8.h),
-              Row(
-                children: [
-                  _SortOption(
-                    label: l10n.mostLiked,
-                    selected:
-                        state.popularitySort == CommunityPopularitySort.mostLiked,
-                    onTap: () => cubit
-                        .updatePopularitySort(CommunityPopularitySort.mostLiked),
-                  ),
-                  SizedBox(width: 12.w),
-                  _SortOption(
-                    label: l10n.mostCommented,
-                    selected: state.popularitySort ==
-                        CommunityPopularitySort.mostCommented,
-                    onTap: () => cubit.updatePopularitySort(
-                        CommunityPopularitySort.mostCommented),
-                  ),
-                ],
               ),
             ],
           ),
@@ -148,43 +111,31 @@ class _SortOption extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-        decoration: BoxDecoration(
-          color: selected
-              ? theme.colorScheme.primary.withValues(alpha: 0.12)
-              : theme.colorScheme.surfaceContainerHigh,
-          borderRadius: BorderRadius.circular(20.r),
-          border: Border.all(
-            color: selected
-                ? theme.colorScheme.primary
-                : Colors.transparent,
-            width: 1.5,
-          ),
-        ),
+      borderRadius: BorderRadius.circular(8.r),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 4.w),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
           children: [
-            if (selected) ...[
-              Icon(
-                Icons.check_circle_rounded,
-                size: 16.sp,
-                color: theme.colorScheme.primary,
-              ),
-              SizedBox(width: 4.w),
-            ],
-            Text(
-              label,
-              style: MyTextStyle.body.m.copyWith(
-                color: selected
-                    ? theme.colorScheme.primary
-                    : theme.colorScheme.onSurface,
-                fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
+            Expanded(
+              child: Text(
+                label,
+                style: MyTextStyle.body.m.copyWith(
+                  color: selected
+                      ? theme.colorScheme.primary
+                      : theme.colorScheme.onSurface,
+                  fontWeight:
+                      selected ? FontWeight.w600 : FontWeight.normal,
+                ),
               ),
             ),
+            if (selected)
+              Icon(
+                Icons.check_rounded,
+                size: 20.sp,
+                color: theme.colorScheme.primary,
+              ),
           ],
         ),
       ),
