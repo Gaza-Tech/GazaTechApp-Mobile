@@ -8,6 +8,7 @@ import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card.dart';
 import 'package:gaza_tech/features/community_search/cubit/community_search_cubit.dart';
 import 'package:gaza_tech/features/community_search/cubit/community_search_state.dart';
+import 'package:gaza_tech/features/community_search/ui/widgets/search_filter_sheet.dart';
 
 class CommunitySearchScreen extends StatelessWidget {
   const CommunitySearchScreen({super.key});
@@ -45,6 +46,20 @@ class CommunitySearchScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
+        actions: [
+          BlocBuilder<CommunitySearchCubit, CommunitySearchState>(
+            buildWhen: (prev, curr) =>
+                prev.filter.hasActiveFilters != curr.filter.hasActiveFilters,
+            builder: (context, state) => IconButton(
+              icon: Badge(
+                isLabelVisible: state.filter.hasActiveFilters,
+                child: const Icon(Icons.filter_alt_rounded),
+              ),
+              onPressed: () => showSearchFilterSheet(context),
+              padding: EdgeInsets.zero,
+            ),
+          ),
+        ],
         title: MyTextFormField(
           controller: cubit.searchController,
           hintText: context.l10n.searchCommunity,
@@ -62,7 +77,7 @@ class CommunitySearchScreen extends StatelessWidget {
               if (value.text.isEmpty) return const SizedBox.shrink();
               return IconButton(
                 icon: const Icon(Icons.clear, size: 20),
-                onPressed: () => cubit.searchController.clear(),
+                onPressed: () => cubit.clearSearch(),
               );
             },
           ),

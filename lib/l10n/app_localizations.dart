@@ -1345,6 +1345,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reset'**
   String get resetSort;
+
+  /// No description provided for @filterPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter Posts'**
+  String get filterPosts;
+
+  /// No description provided for @categoryFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get categoryFilter;
+
+  /// No description provided for @dateRangeFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Date Range'**
+  String get dateRangeFilter;
+
+  /// No description provided for @engagementLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Engagement Level'**
+  String get engagementLevel;
+
+  /// No description provided for @sortOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort Order'**
+  String get sortOrder;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @thisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This Week'**
+  String get thisWeek;
+
+  /// No description provided for @thisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This Month'**
+  String get thisMonth;
+
+  /// No description provided for @thisYear.
+  ///
+  /// In en, this message translates to:
+  /// **'This Year'**
+  String get thisYear;
+
+  /// No description provided for @likes100Plus.
+  ///
+  /// In en, this message translates to:
+  /// **'100+ Likes'**
+  String get likes100Plus;
+
+  /// No description provided for @comments50Plus.
+  ///
+  /// In en, this message translates to:
+  /// **'50+ Comments'**
+  String get comments50Plus;
 }
 
 class _AppLocalizationsDelegate

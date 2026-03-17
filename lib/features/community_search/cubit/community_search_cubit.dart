@@ -6,6 +6,7 @@ import 'package:gaza_tech/core/cache/shared_pref_keys.dart';
 import 'package:gaza_tech/core/helpers/shared_pref_helper.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/features/community/data/repos/community_repo.dart';
+import 'package:gaza_tech/features/community_search/data/models/search_filter.dart';
 import 'community_search_state.dart';
 
 class CommunitySearchCubit extends Cubit<CommunitySearchState> {
@@ -50,7 +51,11 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
       recentSearches: capped,
     ));
 
-    final result = await _repo.searchPosts(keyword: keyword, page: 0);
+    final result = await _repo.searchPosts(
+      keyword: keyword,
+      page: 0,
+      filter: state.filter,
+    );
 
     result.when(
       success: (response) {
@@ -82,8 +87,11 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
     final nextPage = state.currentPage + 1;
     emit(state.copyWith(isLoadingMore: true));
 
-    final result =
-        await _repo.searchPosts(keyword: state.keyword, page: nextPage);
+    final result = await _repo.searchPosts(
+      keyword: state.keyword,
+      page: nextPage,
+      filter: state.filter,
+    );
 
     result.when(
       success: (response) {
@@ -109,6 +117,28 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
         errorMessage: error.message,
       )),
     );
+  }
+
+  void clearSearch() {
+    searchController.clear();
+    emit(state.copyWith(
+      keyword: '',
+      results: [],
+      currentPage: 0,
+      hasMore: true,
+      isSearching: false,
+      errorMessage: null,
+    ));
+  }
+
+  Future<void> updateFilter(SearchFilter filter) async {
+    emit(state.copyWith(filter: filter));
+    if (state.keyword.isNotEmpty) await search();
+  }
+
+  Future<void> clearFilters() async {
+    emit(state.copyWith(filter: const SearchFilter()));
+    if (state.keyword.isNotEmpty) await search();
   }
 
   Future<void> removeRecentSearch(String query) async {

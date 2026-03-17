@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CommunitySearchState {
 
- String get keyword; List<PostModel> get results; int get currentPage; bool get hasMore; bool get isSearching; bool get isLoadingMore; List<String> get recentSearches; String? get errorMessage; Set<String> get likedPostIds; Set<String> get bookmarkedPostIds;
+ String get keyword; List<PostModel> get results; int get currentPage; bool get hasMore; bool get isSearching; bool get isLoadingMore; List<String> get recentSearches; String? get errorMessage; Set<String> get likedPostIds; Set<String> get bookmarkedPostIds; SearchFilter get filter;
 /// Create a copy of CommunitySearchState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CommunitySearchStateCopyWith<CommunitySearchState> get copyWith => _$CommunityS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CommunitySearchState&&(identical(other.keyword, keyword) || other.keyword == keyword)&&const DeepCollectionEquality().equals(other.results, results)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isSearching, isSearching) || other.isSearching == isSearching)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&const DeepCollectionEquality().equals(other.recentSearches, recentSearches)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other.likedPostIds, likedPostIds)&&const DeepCollectionEquality().equals(other.bookmarkedPostIds, bookmarkedPostIds));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CommunitySearchState&&(identical(other.keyword, keyword) || other.keyword == keyword)&&const DeepCollectionEquality().equals(other.results, results)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isSearching, isSearching) || other.isSearching == isSearching)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&const DeepCollectionEquality().equals(other.recentSearches, recentSearches)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other.likedPostIds, likedPostIds)&&const DeepCollectionEquality().equals(other.bookmarkedPostIds, bookmarkedPostIds)&&(identical(other.filter, filter) || other.filter == filter));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,keyword,const DeepCollectionEquality().hash(results),currentPage,hasMore,isSearching,isLoadingMore,const DeepCollectionEquality().hash(recentSearches),errorMessage,const DeepCollectionEquality().hash(likedPostIds),const DeepCollectionEquality().hash(bookmarkedPostIds));
+int get hashCode => Object.hash(runtimeType,keyword,const DeepCollectionEquality().hash(results),currentPage,hasMore,isSearching,isLoadingMore,const DeepCollectionEquality().hash(recentSearches),errorMessage,const DeepCollectionEquality().hash(likedPostIds),const DeepCollectionEquality().hash(bookmarkedPostIds),filter);
 
 @override
 String toString() {
-  return 'CommunitySearchState(keyword: $keyword, results: $results, currentPage: $currentPage, hasMore: $hasMore, isSearching: $isSearching, isLoadingMore: $isLoadingMore, recentSearches: $recentSearches, errorMessage: $errorMessage, likedPostIds: $likedPostIds, bookmarkedPostIds: $bookmarkedPostIds)';
+  return 'CommunitySearchState(keyword: $keyword, results: $results, currentPage: $currentPage, hasMore: $hasMore, isSearching: $isSearching, isLoadingMore: $isLoadingMore, recentSearches: $recentSearches, errorMessage: $errorMessage, likedPostIds: $likedPostIds, bookmarkedPostIds: $bookmarkedPostIds, filter: $filter)';
 }
 
 
@@ -45,11 +45,11 @@ abstract mixin class $CommunitySearchStateCopyWith<$Res>  {
   factory $CommunitySearchStateCopyWith(CommunitySearchState value, $Res Function(CommunitySearchState) _then) = _$CommunitySearchStateCopyWithImpl;
 @useResult
 $Res call({
- String keyword, List<PostModel> results, int currentPage, bool hasMore, bool isSearching, bool isLoadingMore, List<String> recentSearches, String? errorMessage, Set<String> likedPostIds, Set<String> bookmarkedPostIds
+ String keyword, List<PostModel> results, int currentPage, bool hasMore, bool isSearching, bool isLoadingMore, List<String> recentSearches, String? errorMessage, Set<String> likedPostIds, Set<String> bookmarkedPostIds, SearchFilter filter
 });
 
 
-
+$SearchFilterCopyWith<$Res> get filter;
 
 }
 /// @nodoc
@@ -62,7 +62,7 @@ class _$CommunitySearchStateCopyWithImpl<$Res>
 
 /// Create a copy of CommunitySearchState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? keyword = null,Object? results = null,Object? currentPage = null,Object? hasMore = null,Object? isSearching = null,Object? isLoadingMore = null,Object? recentSearches = null,Object? errorMessage = freezed,Object? likedPostIds = null,Object? bookmarkedPostIds = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? keyword = null,Object? results = null,Object? currentPage = null,Object? hasMore = null,Object? isSearching = null,Object? isLoadingMore = null,Object? recentSearches = null,Object? errorMessage = freezed,Object? likedPostIds = null,Object? bookmarkedPostIds = null,Object? filter = null,}) {
   return _then(_self.copyWith(
 keyword: null == keyword ? _self.keyword : keyword // ignore: cast_nullable_to_non_nullable
 as String,results: null == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
@@ -74,10 +74,20 @@ as bool,recentSearches: null == recentSearches ? _self.recentSearches : recentSe
 as List<String>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,likedPostIds: null == likedPostIds ? _self.likedPostIds : likedPostIds // ignore: cast_nullable_to_non_nullable
 as Set<String>,bookmarkedPostIds: null == bookmarkedPostIds ? _self.bookmarkedPostIds : bookmarkedPostIds // ignore: cast_nullable_to_non_nullable
-as Set<String>,
+as Set<String>,filter: null == filter ? _self.filter : filter // ignore: cast_nullable_to_non_nullable
+as SearchFilter,
   ));
 }
-
+/// Create a copy of CommunitySearchState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SearchFilterCopyWith<$Res> get filter {
+  
+  return $SearchFilterCopyWith<$Res>(_self.filter, (value) {
+    return _then(_self.copyWith(filter: value));
+  });
+}
 }
 
 
@@ -159,10 +169,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String keyword,  List<PostModel> results,  int currentPage,  bool hasMore,  bool isSearching,  bool isLoadingMore,  List<String> recentSearches,  String? errorMessage,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String keyword,  List<PostModel> results,  int currentPage,  bool hasMore,  bool isSearching,  bool isLoadingMore,  List<String> recentSearches,  String? errorMessage,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds,  SearchFilter filter)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CommunitySearchState() when $default != null:
-return $default(_that.keyword,_that.results,_that.currentPage,_that.hasMore,_that.isSearching,_that.isLoadingMore,_that.recentSearches,_that.errorMessage,_that.likedPostIds,_that.bookmarkedPostIds);case _:
+return $default(_that.keyword,_that.results,_that.currentPage,_that.hasMore,_that.isSearching,_that.isLoadingMore,_that.recentSearches,_that.errorMessage,_that.likedPostIds,_that.bookmarkedPostIds,_that.filter);case _:
   return orElse();
 
 }
@@ -180,10 +190,10 @@ return $default(_that.keyword,_that.results,_that.currentPage,_that.hasMore,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String keyword,  List<PostModel> results,  int currentPage,  bool hasMore,  bool isSearching,  bool isLoadingMore,  List<String> recentSearches,  String? errorMessage,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String keyword,  List<PostModel> results,  int currentPage,  bool hasMore,  bool isSearching,  bool isLoadingMore,  List<String> recentSearches,  String? errorMessage,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds,  SearchFilter filter)  $default,) {final _that = this;
 switch (_that) {
 case _CommunitySearchState():
-return $default(_that.keyword,_that.results,_that.currentPage,_that.hasMore,_that.isSearching,_that.isLoadingMore,_that.recentSearches,_that.errorMessage,_that.likedPostIds,_that.bookmarkedPostIds);case _:
+return $default(_that.keyword,_that.results,_that.currentPage,_that.hasMore,_that.isSearching,_that.isLoadingMore,_that.recentSearches,_that.errorMessage,_that.likedPostIds,_that.bookmarkedPostIds,_that.filter);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +210,10 @@ return $default(_that.keyword,_that.results,_that.currentPage,_that.hasMore,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String keyword,  List<PostModel> results,  int currentPage,  bool hasMore,  bool isSearching,  bool isLoadingMore,  List<String> recentSearches,  String? errorMessage,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String keyword,  List<PostModel> results,  int currentPage,  bool hasMore,  bool isSearching,  bool isLoadingMore,  List<String> recentSearches,  String? errorMessage,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds,  SearchFilter filter)?  $default,) {final _that = this;
 switch (_that) {
 case _CommunitySearchState() when $default != null:
-return $default(_that.keyword,_that.results,_that.currentPage,_that.hasMore,_that.isSearching,_that.isLoadingMore,_that.recentSearches,_that.errorMessage,_that.likedPostIds,_that.bookmarkedPostIds);case _:
+return $default(_that.keyword,_that.results,_that.currentPage,_that.hasMore,_that.isSearching,_that.isLoadingMore,_that.recentSearches,_that.errorMessage,_that.likedPostIds,_that.bookmarkedPostIds,_that.filter);case _:
   return null;
 
 }
@@ -215,7 +225,7 @@ return $default(_that.keyword,_that.results,_that.currentPage,_that.hasMore,_tha
 
 
 class _CommunitySearchState extends CommunitySearchState {
-  const _CommunitySearchState({this.keyword = '', final  List<PostModel> results = const [], this.currentPage = 0, this.hasMore = true, this.isSearching = false, this.isLoadingMore = false, final  List<String> recentSearches = const [], this.errorMessage, final  Set<String> likedPostIds = const <String>{}, final  Set<String> bookmarkedPostIds = const <String>{}}): _results = results,_recentSearches = recentSearches,_likedPostIds = likedPostIds,_bookmarkedPostIds = bookmarkedPostIds,super._();
+  const _CommunitySearchState({this.keyword = '', final  List<PostModel> results = const [], this.currentPage = 0, this.hasMore = true, this.isSearching = false, this.isLoadingMore = false, final  List<String> recentSearches = const [], this.errorMessage, final  Set<String> likedPostIds = const <String>{}, final  Set<String> bookmarkedPostIds = const <String>{}, this.filter = const SearchFilter()}): _results = results,_recentSearches = recentSearches,_likedPostIds = likedPostIds,_bookmarkedPostIds = bookmarkedPostIds,super._();
   
 
 @override@JsonKey() final  String keyword;
@@ -252,6 +262,7 @@ class _CommunitySearchState extends CommunitySearchState {
   return EqualUnmodifiableSetView(_bookmarkedPostIds);
 }
 
+@override@JsonKey() final  SearchFilter filter;
 
 /// Create a copy of CommunitySearchState
 /// with the given fields replaced by the non-null parameter values.
@@ -263,16 +274,16 @@ _$CommunitySearchStateCopyWith<_CommunitySearchState> get copyWith => __$Communi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CommunitySearchState&&(identical(other.keyword, keyword) || other.keyword == keyword)&&const DeepCollectionEquality().equals(other._results, _results)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isSearching, isSearching) || other.isSearching == isSearching)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&const DeepCollectionEquality().equals(other._recentSearches, _recentSearches)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other._likedPostIds, _likedPostIds)&&const DeepCollectionEquality().equals(other._bookmarkedPostIds, _bookmarkedPostIds));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CommunitySearchState&&(identical(other.keyword, keyword) || other.keyword == keyword)&&const DeepCollectionEquality().equals(other._results, _results)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isSearching, isSearching) || other.isSearching == isSearching)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&const DeepCollectionEquality().equals(other._recentSearches, _recentSearches)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other._likedPostIds, _likedPostIds)&&const DeepCollectionEquality().equals(other._bookmarkedPostIds, _bookmarkedPostIds)&&(identical(other.filter, filter) || other.filter == filter));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,keyword,const DeepCollectionEquality().hash(_results),currentPage,hasMore,isSearching,isLoadingMore,const DeepCollectionEquality().hash(_recentSearches),errorMessage,const DeepCollectionEquality().hash(_likedPostIds),const DeepCollectionEquality().hash(_bookmarkedPostIds));
+int get hashCode => Object.hash(runtimeType,keyword,const DeepCollectionEquality().hash(_results),currentPage,hasMore,isSearching,isLoadingMore,const DeepCollectionEquality().hash(_recentSearches),errorMessage,const DeepCollectionEquality().hash(_likedPostIds),const DeepCollectionEquality().hash(_bookmarkedPostIds),filter);
 
 @override
 String toString() {
-  return 'CommunitySearchState(keyword: $keyword, results: $results, currentPage: $currentPage, hasMore: $hasMore, isSearching: $isSearching, isLoadingMore: $isLoadingMore, recentSearches: $recentSearches, errorMessage: $errorMessage, likedPostIds: $likedPostIds, bookmarkedPostIds: $bookmarkedPostIds)';
+  return 'CommunitySearchState(keyword: $keyword, results: $results, currentPage: $currentPage, hasMore: $hasMore, isSearching: $isSearching, isLoadingMore: $isLoadingMore, recentSearches: $recentSearches, errorMessage: $errorMessage, likedPostIds: $likedPostIds, bookmarkedPostIds: $bookmarkedPostIds, filter: $filter)';
 }
 
 
@@ -283,11 +294,11 @@ abstract mixin class _$CommunitySearchStateCopyWith<$Res> implements $CommunityS
   factory _$CommunitySearchStateCopyWith(_CommunitySearchState value, $Res Function(_CommunitySearchState) _then) = __$CommunitySearchStateCopyWithImpl;
 @override @useResult
 $Res call({
- String keyword, List<PostModel> results, int currentPage, bool hasMore, bool isSearching, bool isLoadingMore, List<String> recentSearches, String? errorMessage, Set<String> likedPostIds, Set<String> bookmarkedPostIds
+ String keyword, List<PostModel> results, int currentPage, bool hasMore, bool isSearching, bool isLoadingMore, List<String> recentSearches, String? errorMessage, Set<String> likedPostIds, Set<String> bookmarkedPostIds, SearchFilter filter
 });
 
 
-
+@override $SearchFilterCopyWith<$Res> get filter;
 
 }
 /// @nodoc
@@ -300,7 +311,7 @@ class __$CommunitySearchStateCopyWithImpl<$Res>
 
 /// Create a copy of CommunitySearchState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? keyword = null,Object? results = null,Object? currentPage = null,Object? hasMore = null,Object? isSearching = null,Object? isLoadingMore = null,Object? recentSearches = null,Object? errorMessage = freezed,Object? likedPostIds = null,Object? bookmarkedPostIds = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? keyword = null,Object? results = null,Object? currentPage = null,Object? hasMore = null,Object? isSearching = null,Object? isLoadingMore = null,Object? recentSearches = null,Object? errorMessage = freezed,Object? likedPostIds = null,Object? bookmarkedPostIds = null,Object? filter = null,}) {
   return _then(_CommunitySearchState(
 keyword: null == keyword ? _self.keyword : keyword // ignore: cast_nullable_to_non_nullable
 as String,results: null == results ? _self._results : results // ignore: cast_nullable_to_non_nullable
@@ -312,11 +323,21 @@ as bool,recentSearches: null == recentSearches ? _self._recentSearches : recentS
 as List<String>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,likedPostIds: null == likedPostIds ? _self._likedPostIds : likedPostIds // ignore: cast_nullable_to_non_nullable
 as Set<String>,bookmarkedPostIds: null == bookmarkedPostIds ? _self._bookmarkedPostIds : bookmarkedPostIds // ignore: cast_nullable_to_non_nullable
-as Set<String>,
+as Set<String>,filter: null == filter ? _self.filter : filter // ignore: cast_nullable_to_non_nullable
+as SearchFilter,
   ));
 }
 
-
+/// Create a copy of CommunitySearchState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SearchFilterCopyWith<$Res> get filter {
+  
+  return $SearchFilterCopyWith<$Res>(_self.filter, (value) {
+    return _then(_self.copyWith(filter: value));
+  });
+}
 }
 
 // dart format on

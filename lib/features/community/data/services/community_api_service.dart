@@ -273,17 +273,55 @@ class CommunityApiService {
   Future<List<Map<String, dynamic>>> searchPosts({
     required String keyword,
     required int page,
+    List<String>? categories,
+    DateTime? dateAfter,
+    int? minLikes,
+    int? minComments,
+    CommunitySort sort = CommunitySort.newest,
   }) async {
     final startIndex = page * postsPageSize;
     final endIndex = startIndex + postsPageSize;
 
-    final data = await _supabase
+    var query = _supabase
         .from('community_posts_with_counts')
         .select(_postSelect)
         .eq('content_status', 'published')
-        .or('title.ilike.%$keyword%,content.ilike.%$keyword%')
-        .order('created_at', ascending: false)
-        .range(startIndex, endIndex);
+        .or('title.ilike.%$keyword%,content.ilike.%$keyword%');
+
+    if (categories != null && categories.isNotEmpty) {
+      query = query.inFilter('post_category', categories);
+    }
+    if (dateAfter != null) {
+      query = query.gte('created_at', dateAfter.toIso8601String());
+    }
+    if (minLikes != null) {
+      query = query.gte('likes_count', minLikes);
+    }
+    if (minComments != null) {
+      query = query.gte('comments_count', minComments);
+    }
+
+    final dynamic data;
+    switch (sort) {
+      case CommunitySort.newest:
+        data = await query
+            .order('created_at', ascending: false)
+            .range(startIndex, endIndex);
+      case CommunitySort.oldest:
+        data = await query
+            .order('created_at', ascending: true)
+            .range(startIndex, endIndex);
+      case CommunitySort.mostLiked:
+        data = await query
+            .order('likes_count', ascending: false)
+            .order('created_at', ascending: false)
+            .range(startIndex, endIndex);
+      case CommunitySort.mostCommented:
+        data = await query
+            .order('comments_count', ascending: false)
+            .order('created_at', ascending: false)
+            .range(startIndex, endIndex);
+    }
 
     return List<Map<String, dynamic>>.from(data as List);
   }

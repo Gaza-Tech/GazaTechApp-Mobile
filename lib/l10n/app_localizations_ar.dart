@@ -677,4 +677,37 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get resetSort => 'إعادة تعيين';
+
+  @override
+  String get filterPosts => 'تصفية المنشورات';
+
+  @override
+  String get categoryFilter => 'التصنيف';
+
+  @override
+  String get dateRangeFilter => 'النطاق الزمني';
+
+  @override
+  String get engagementLevel => 'مستوى التفاعل';
+
+  @override
+  String get sortOrder => 'ترتيب العرض';
+
+  @override
+  String get today => 'اليوم';
+
+  @override
+  String get thisWeek => 'هذا الأسبوع';
+
+  @override
+  String get thisMonth => 'هذا الشهر';
+
+  @override
+  String get thisYear => 'هذه السنة';
+
+  @override
+  String get likes100Plus => '+100 إعجاب';
+
+  @override
+  String get comments50Plus => '+50 تعليق';
 }

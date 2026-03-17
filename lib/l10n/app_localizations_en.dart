@@ -677,4 +677,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get resetSort => 'Reset';
+
+  @override
+  String get filterPosts => 'Filter Posts';
+
+  @override
+  String get categoryFilter => 'Category';
+
+  @override
+  String get dateRangeFilter => 'Date Range';
+
+  @override
+  String get engagementLevel => 'Engagement Level';
+
+  @override
+  String get sortOrder => 'Sort Order';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get thisWeek => 'This Week';
+
+  @override
+  String get thisMonth => 'This Month';
+
+  @override
+  String get thisYear => 'This Year';
+
+  @override
+  String get likes100Plus => '100+ Likes';
+
+  @override
+  String get comments50Plus => '50+ Comments';
 }

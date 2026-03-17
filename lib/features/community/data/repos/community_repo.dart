@@ -1,5 +1,6 @@
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/core/netowoks/supabase_error_handler.dart';
+import 'package:gaza_tech/features/community_search/data/models/search_filter.dart';
 import '../models/community_sort.dart';
 import '../models/post_model.dart';
 import '../models/comment_model.dart';
@@ -147,9 +148,26 @@ class CommunityRepo {
   Future<ApiResult<PostsResponse>> searchPosts({
     required String keyword,
     required int page,
+    SearchFilter filter = const SearchFilter(),
   }) async {
     try {
-      final raw = await _service.searchPosts(keyword: keyword, page: page);
+      DateTime? dateAfter = filter.dateRange?.cutoffDate;
+      int? minLikes;
+      int? minComments;
+      for (final level in filter.engagementLevels) {
+        if (level == EngagementLevel.likes100Plus) minLikes = 100;
+        if (level == EngagementLevel.comments50Plus) minComments = 50;
+      }
+
+      final raw = await _service.searchPosts(
+        keyword: keyword,
+        page: page,
+        categories: filter.categories.isEmpty ? null : filter.categories.toList(),
+        dateAfter: dateAfter,
+        minLikes: minLikes,
+        minComments: minComments,
+        sort: filter.sort,
+      );
       final hasMore = raw.length > CommunityApiService.postsPageSize;
       final items =
           hasMore ? raw.sublist(0, CommunityApiService.postsPageSize) : raw;

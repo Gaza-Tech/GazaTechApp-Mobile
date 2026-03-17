@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gaza_tech/features/community/data/models/post_model.dart';
+import 'package:gaza_tech/features/community_search/data/models/search_filter.dart';
 
 part 'community_search_state.freezed.dart';
 
@@ -16,6 +17,7 @@ abstract class CommunitySearchState with _$CommunitySearchState {
     String? errorMessage,
     @Default(<String>{}) Set<String> likedPostIds,
     @Default(<String>{}) Set<String> bookmarkedPostIds,
+    @Default(SearchFilter()) SearchFilter filter,
   }) = _CommunitySearchState;
 
   const CommunitySearchState._();

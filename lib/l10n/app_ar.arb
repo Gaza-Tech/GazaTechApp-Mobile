@@ -291,5 +291,17 @@
   "oldest": "الأقدم",
   "mostLiked": "الأكثر إعجاباً",
   "mostCommented": "الأكثر تعليقاً",
-  "resetSort": "إعادة تعيين"
+  "resetSort": "إعادة تعيين",
+
+  "filterPosts": "تصفية المنشورات",
+  "categoryFilter": "التصنيف",
+  "dateRangeFilter": "النطاق الزمني",
+  "engagementLevel": "مستوى التفاعل",
+  "sortOrder": "ترتيب العرض",
+  "today": "اليوم",
+  "thisWeek": "هذا الأسبوع",
+  "thisMonth": "هذا الشهر",
+  "thisYear": "هذه السنة",
+  "likes100Plus": "+100 إعجاب",
+  "comments50Plus": "+50 تعليق"
 }

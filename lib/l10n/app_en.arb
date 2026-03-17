@@ -353,5 +353,17 @@
   "oldest": "Oldest",
   "mostLiked": "Most Liked",
   "mostCommented": "Most Commented",
-  "resetSort": "Reset"
+  "resetSort": "Reset",
+
+  "filterPosts": "Filter Posts",
+  "categoryFilter": "Category",
+  "dateRangeFilter": "Date Range",
+  "engagementLevel": "Engagement Level",
+  "sortOrder": "Sort Order",
+  "today": "Today",
+  "thisWeek": "This Week",
+  "thisMonth": "This Month",
+  "thisYear": "This Year",
+  "likes100Plus": "100+ Likes",
+  "comments50Plus": "50+ Comments"
 }
