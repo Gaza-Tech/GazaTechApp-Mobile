@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/cache/shared_pref_keys.dart';
 import 'package:gaza_tech/core/helpers/shared_pref_helper.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
+import 'package:gaza_tech/features/community/data/models/community_sort.dart';
 import 'package:gaza_tech/features/community/data/repos/community_repo.dart';
 import 'package:gaza_tech/features/community_search/data/models/search_filter.dart';
 import 'community_search_state.dart';
@@ -158,6 +159,25 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
   void searchFromRecent(String query) {
     searchController.text = query;
     search();
+  }
+
+  Future<void> removeFilterCategory(String cat) async {
+    final updated = Set<String>.from(state.filter.categories)..remove(cat);
+    await updateFilter(state.filter.copyWith(categories: updated));
+  }
+
+  Future<void> clearFilterDateRange() async {
+    await updateFilter(state.filter.copyWith(dateRange: null));
+  }
+
+  Future<void> removeFilterEngagement(EngagementLevel level) async {
+    final updated = Set<EngagementLevel>.from(state.filter.engagementLevels)
+      ..remove(level);
+    await updateFilter(state.filter.copyWith(engagementLevels: updated));
+  }
+
+  Future<void> resetFilterSort() async {
+    await updateFilter(state.filter.copyWith(sort: CommunitySort.newest));
   }
 
   Future<void> toggleLike(String postId) async {

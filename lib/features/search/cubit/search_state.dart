@@ -13,6 +13,7 @@ abstract class SearchState with _$SearchState {
   const factory SearchState({
     @Default('') String keyword,
     @Default(SearchFiltersModel()) SearchFiltersModel filters,
+    @Default([]) List<String> recentSearches,
 
     // Filter dropdown data
     @Default([]) List<CategoryModel> categories,

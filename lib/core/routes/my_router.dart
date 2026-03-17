@@ -115,7 +115,8 @@ class MyRouter {
       case MyRoutes.search:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => getIt<SearchCubit>()..loadFilterData(),
+            create: (context) =>
+                getIt<SearchCubit>()..loadFilterData()..loadRecentSearches(),
             child: const SearchScreen(),
           ),
         );

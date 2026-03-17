@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gaza_tech/core/cache/shared_pref_keys.dart';
+import 'package:gaza_tech/core/helpers/shared_pref_helper.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import '../data/models/search_filters_model.dart';
 import '../data/repos/search_repo.dart';
@@ -9,10 +13,6 @@ class SearchCubit extends Cubit<SearchState> {
   final SearchRepo _repo;
 
   final TextEditingController searchController = TextEditingController();
-  final TextEditingController priceMinUsdController = TextEditingController();
-  final TextEditingController priceMaxUsdController = TextEditingController();
-  final TextEditingController priceMinIlsController = TextEditingController();
-  final TextEditingController priceMaxIlsController = TextEditingController();
 
   SearchCubit(this._repo) : super(const SearchState());
 
@@ -52,11 +52,35 @@ class SearchCubit extends Cubit<SearchState> {
     );
   }
 
+  Future<void> loadRecentSearches() async {
+    final raw = await SharedPrefHelper.getString(
+        SharedPrefKeys.marketplaceRecentSearches);
+    if (raw.isEmpty) return;
+    try {
+      final decoded = List<String>.from(jsonDecode(raw) as List);
+      emit(state.copyWith(recentSearches: decoded));
+    } catch (_) {}
+  }
+
   /// Execute search (fresh, page 0)
   Future<void> search() async {
     final keyword = searchController.text.trim();
 
     if (keyword.isEmpty && !state.filters.hasActiveFilters) return;
+
+    List<String> updatedRecentSearches = state.recentSearches;
+    if (keyword.isNotEmpty) {
+      final updated = [
+        keyword,
+        ...state.recentSearches.where((s) => s != keyword),
+      ];
+      final capped = updated.take(10).toList();
+      await SharedPrefHelper.setData(
+        SharedPrefKeys.marketplaceRecentSearches,
+        jsonEncode(capped),
+      );
+      updatedRecentSearches = capped;
+    }
 
     emit(state.copyWith(
       keyword: keyword,
@@ -65,6 +89,7 @@ class SearchCubit extends Cubit<SearchState> {
       currentPage: 0,
       hasMore: true,
       errorMessage: null,
+      recentSearches: updatedRecentSearches,
     ));
 
     final result = await _repo.searchListings(
@@ -122,74 +147,46 @@ class SearchCubit extends Cubit<SearchState> {
     );
   }
 
-  /// Toggle a condition in the filter
-  void toggleCondition(String condition) {
-    final current = List<String>.from(state.filters.conditions);
-    if (current.contains(condition)) {
-      current.remove(condition);
-    } else {
-      current.add(condition);
-    }
+  /// Apply filter and re-search
+  void updateFilter(SearchFiltersModel filter) {
+    emit(state.copyWith(filters: filter));
+    search();
+  }
+
+  /// Clear search text and reset to initial state
+  void clearSearch() {
+    searchController.clear();
     emit(state.copyWith(
-      filters: state.filters.copyWith(conditions: current),
+      keyword: '',
+      results: [],
+      currentPage: 0,
+      hasMore: true,
+      isSearching: false,
+      errorMessage: null,
     ));
   }
 
-  /// Set category filter
-  void setCategory(String? categoryId, String? categoryName) {
-    emit(state.copyWith(
-      filters: state.filters.copyWith(
-        categoryId: categoryId,
-        categoryName: categoryName,
-      ),
-    ));
+  Future<void> removeRecentSearch(String query) async {
+    final updated = state.recentSearches.where((s) => s != query).toList();
+    await SharedPrefHelper.setData(
+      SharedPrefKeys.marketplaceRecentSearches,
+      jsonEncode(updated),
+    );
+    emit(state.copyWith(recentSearches: updated));
   }
 
-  /// Set location filter
-  void setLocation(String? locationId, String? locationName) {
-    emit(state.copyWith(
-      filters: state.filters.copyWith(
-        locationId: locationId,
-        locationName: locationName,
-      ),
-    ));
+  Future<void> clearRecentSearches() async {
+    await SharedPrefHelper.removeData(SharedPrefKeys.marketplaceRecentSearches);
+    emit(state.copyWith(recentSearches: []));
   }
 
-  /// Update sort option
-  void updateSort(SearchSortOption sort) {
-    emit(state.copyWith(
-      filters: state.filters.copyWith(sort: sort),
-    ));
-  }
-
-  /// Apply price range from controllers
-  void _applyPriceRange() {
-    final minUsd = int.tryParse(priceMinUsdController.text);
-    final maxUsd = int.tryParse(priceMaxUsdController.text);
-    final minIls = int.tryParse(priceMinIlsController.text);
-    final maxIls = int.tryParse(priceMaxIlsController.text);
-    emit(state.copyWith(
-      filters: state.filters.copyWith(
-        priceMinUsd: minUsd,
-        priceMaxUsd: maxUsd,
-        priceMinIls: minIls,
-        priceMaxIls: maxIls,
-      ),
-    ));
-  }
-
-  /// Apply all current filter settings and run search
-  void applyFiltersAndSearch() {
-    _applyPriceRange();
+  void searchFromRecent(String query) {
+    searchController.text = query;
     search();
   }
 
   /// Clear all filters and re-search
   void clearFilters() {
-    priceMinUsdController.clear();
-    priceMaxUsdController.clear();
-    priceMinIlsController.clear();
-    priceMaxIlsController.clear();
     emit(state.copyWith(filters: const SearchFiltersModel()));
     if (state.keyword.isNotEmpty) search();
   }
@@ -198,18 +195,24 @@ class SearchCubit extends Cubit<SearchState> {
   void clearFilter(String type) {
     switch (type) {
       case 'category':
-        setCategory(null, null);
+        emit(state.copyWith(
+          filters: state.filters.copyWith(
+            categoryId: null,
+            categoryName: null,
+          ),
+        ));
       case 'location':
-        setLocation(null, null);
+        emit(state.copyWith(
+          filters: state.filters.copyWith(
+            locationId: null,
+            locationName: null,
+          ),
+        ));
       case 'condition':
         emit(state.copyWith(
           filters: state.filters.copyWith(conditions: []),
         ));
       case 'price':
-        priceMinUsdController.clear();
-        priceMaxUsdController.clear();
-        priceMinIlsController.clear();
-        priceMaxIlsController.clear();
         emit(state.copyWith(
           filters: state.filters.copyWith(
             priceMinUsd: null,
@@ -225,10 +228,6 @@ class SearchCubit extends Cubit<SearchState> {
   @override
   Future<void> close() {
     searchController.dispose();
-    priceMinUsdController.dispose();
-    priceMaxUsdController.dispose();
-    priceMinIlsController.dispose();
-    priceMaxIlsController.dispose();
     return super.close();
   }
 }

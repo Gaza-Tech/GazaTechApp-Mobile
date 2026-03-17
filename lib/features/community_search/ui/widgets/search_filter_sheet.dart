@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/core/widgets/filter_sheet_shell.dart';
 import 'package:gaza_tech/features/community/data/models/community_sort.dart';
 import 'package:gaza_tech/features/community_search/cubit/community_search_cubit.dart';
 import 'package:gaza_tech/features/community_search/data/models/search_filter.dart';
@@ -77,110 +78,61 @@ class _SearchFilterSheetState extends State<_SearchFilterSheet> {
       (CommunitySort.mostCommented, l10n.mostCommented),
     ];
 
-    return DraggableScrollableSheet(
-      expand: false,
-      initialChildSize: 0.85,
-      maxChildSize: 0.92,
-      builder: (_, controller) => Padding(
-        padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 32.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 40.w,
-                height: 4.h,
-                decoration: BoxDecoration(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurfaceVariant
-                      .withValues(alpha: 0.3),
-                  borderRadius: BorderRadius.circular(2.r),
-                ),
-              ),
+    return FilterSheetShell(
+      title: l10n.filterPosts,
+      onApply: () {
+        cubit.updateFilter(_temp);
+        Navigator.pop(context);
+      },
+      onClearAll: () => setState(() => _temp = const SearchFilter()),
+      contentBuilder: (controller) => ListView(
+        controller: controller,
+        children: [
+          _SectionHeader(l10n.categoryFilter),
+          ...categories.map(
+            (e) => CheckboxListTile(
+              title: Text(e.$2, style: MyTextStyle.body.m),
+              value: _temp.categories.contains(e.$1),
+              onChanged: (_) => _toggleCategory(e.$1),
+              dense: true,
+              contentPadding: EdgeInsets.zero,
             ),
-            SizedBox(height: 12.h),
-            Text(
-              l10n.filterPosts,
-              style: MyTextStyle.body.l.copyWith(fontWeight: FontWeight.w700),
+          ),
+          _SectionHeader(l10n.dateRangeFilter),
+          ...dateRanges.map(
+            (e) => RadioListTile<DateRange?>(
+              title: Text(e.$2, style: MyTextStyle.body.m),
+              value: e.$1,
+              groupValue: _temp.dateRange,
+              onChanged: (v) =>
+                  setState(() => _temp = _temp.copyWith(dateRange: v)),
+              dense: true,
+              contentPadding: EdgeInsets.zero,
             ),
-            SizedBox(height: 8.h),
-            Divider(height: 1.h),
-            Expanded(
-              child: ListView(
-                controller: controller,
-                children: [
-                  _SectionHeader(l10n.categoryFilter),
-                  ...categories.map(
-                    (e) => CheckboxListTile(
-                      title: Text(e.$2, style: MyTextStyle.body.m),
-                      value: _temp.categories.contains(e.$1),
-                      onChanged: (_) => _toggleCategory(e.$1),
-                      dense: true,
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                  ),
-                  _SectionHeader(l10n.dateRangeFilter),
-                  ...dateRanges.map(
-                    (e) => RadioListTile<DateRange?>(
-                      title: Text(e.$2, style: MyTextStyle.body.m),
-                      value: e.$1,
-                      groupValue: _temp.dateRange,
-                      onChanged: (v) =>
-                          setState(() => _temp = _temp.copyWith(dateRange: v)),
-                      dense: true,
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                  ),
-                  _SectionHeader(l10n.engagementLevel),
-                  ...engagements.map(
-                    (e) => CheckboxListTile(
-                      title: Text(e.$2, style: MyTextStyle.body.m),
-                      value: _temp.engagementLevels.contains(e.$1),
-                      onChanged: (_) => _toggleEngagement(e.$1),
-                      dense: true,
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                  ),
-                  _SectionHeader(l10n.sortOrder),
-                  ...sorts.map(
-                    (e) => RadioListTile<CommunitySort>(
-                      title: Text(e.$2, style: MyTextStyle.body.m),
-                      value: e.$1,
-                      groupValue: _temp.sort,
-                      onChanged: (v) =>
-                          setState(() => _temp = _temp.copyWith(sort: v!)),
-                      dense: true,
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                  ),
-                ],
-              ),
+          ),
+          _SectionHeader(l10n.engagementLevel),
+          ...engagements.map(
+            (e) => CheckboxListTile(
+              title: Text(e.$2, style: MyTextStyle.body.m),
+              value: _temp.engagementLevels.contains(e.$1),
+              onChanged: (_) => _toggleEngagement(e.$1),
+              dense: true,
+              contentPadding: EdgeInsets.zero,
             ),
-            SizedBox(height: 16.h),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () =>
-                        setState(() => _temp = const SearchFilter()),
-                    child: Text(l10n.clearAll),
-                  ),
-                ),
-                SizedBox(width: 12.w),
-                Expanded(
-                  child: FilledButton(
-                    onPressed: () {
-                      cubit.updateFilter(_temp);
-                      Navigator.pop(context);
-                    },
-                    child: Text(l10n.applyFilters),
-                  ),
-                ),
-              ],
+          ),
+          _SectionHeader(l10n.sortOrder),
+          ...sorts.map(
+            (e) => RadioListTile<CommunitySort>(
+              title: Text(e.$2, style: MyTextStyle.body.m),
+              value: e.$1,
+              groupValue: _temp.sort,
+              onChanged: (v) =>
+                  setState(() => _temp = _temp.copyWith(sort: v!)),
+              dense: true,
+              contentPadding: EdgeInsets.zero,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
