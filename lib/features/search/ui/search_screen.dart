@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
-import 'package:gaza_tech/core/theme/my_colors.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/active_filters_bar.dart';
 import 'package:gaza_tech/core/widgets/recent_searches_view.dart';
 import 'package:gaza_tech/core/widgets/search_app_bar.dart';
 import 'package:gaza_tech/features/search/cubit/search_cubit.dart';
 import 'package:gaza_tech/features/search/cubit/search_state.dart';
+import 'package:gaza_tech/features/search/data/models/search_filters_model.dart';
 import 'widgets/filter_bottom_sheet.dart';
 import 'widgets/search_results_grid.dart';
 
@@ -79,7 +79,28 @@ class SearchScreen extends StatelessWidget {
       ));
     }
 
+    if (filters.sort != SearchSortOption.newest) {
+      chips.add((
+        label: _getSortLabel(context, filters.sort),
+        onRemove: () => cubit.clearFilter('sort'),
+      ));
+    }
+
     return chips;
+  }
+
+  String _getSortLabel(BuildContext context, SearchSortOption sort) {
+    final l10n = context.l10n;
+    switch (sort) {
+      case SearchSortOption.newest:
+        return l10n.sortNewest;
+      case SearchSortOption.oldest:
+        return l10n.oldest;
+      case SearchSortOption.priceLowToHigh:
+        return l10n.sortPriceLowToHigh;
+      case SearchSortOption.priceHighToLow:
+        return l10n.sortPriceHighToLow;
+    }
   }
 
   @override
@@ -90,23 +111,19 @@ class SearchScreen extends StatelessWidget {
       appBar: SearchAppBar(
         controller: cubit.searchController,
         hintText: context.l10n.searchHint,
+        autofocus: true,
         onClear: cubit.clearSearch,
         onSearch: cubit.search,
         actions: [
           BlocBuilder<SearchCubit, SearchState>(
             buildWhen: (prev, curr) =>
-                prev.filters.activeFilterCount !=
-                curr.filters.activeFilterCount,
+                prev.filters.hasActiveFilters != curr.filters.hasActiveFilters ||
+                prev.filters.sort != curr.filters.sort,
             builder: (context, state) {
-              final count = state.filters.activeFilterCount;
               return IconButton(
                 icon: Badge(
-                  isLabelVisible: count > 0,
-                  label: Text(
-                    count.toString(),
-                    style: TextStyle(fontSize: 10.sp),
-                  ),
-                  backgroundColor: MyColors.primary.base,
+                  isLabelVisible: state.filters.hasActiveFilters ||
+                      state.filters.sort != SearchSortOption.newest,
                   child: const Icon(Icons.tune_rounded),
                 ),
                 onPressed: () => showFilterBottomSheet(context),
@@ -115,29 +132,7 @@ class SearchScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: BlocConsumer<SearchCubit, SearchState>(
-        listener: (context, state) {
-          if (state.hasError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Row(
-                  children: [
-                    const Icon(Icons.error_outline, color: Colors.white),
-                    SizedBox(width: 16.w),
-                    Flexible(
-                      child: Text(
-                        state.errorMessage ?? '',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-                duration: const Duration(seconds: 4),
-              ),
-            );
-          }
-        },
+      body: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, state) {
           return Column(
             children: [
@@ -181,6 +176,10 @@ class SearchScreen extends StatelessWidget {
 
     if (state.isSearching) {
       return const Center(child: CircularProgressIndicator());
+    }
+
+    if (state.hasError) {
+      return Center(child: Text(state.errorMessage!));
     }
 
     if (state.isEmpty) {

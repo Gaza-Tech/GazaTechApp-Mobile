@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'search_filters_model.freezed.dart';
 
-enum SearchSortOption { newest, priceLowToHigh, priceHighToLow }
+enum SearchSortOption { newest, oldest, priceLowToHigh, priceHighToLow }
 
 @freezed
 abstract class SearchFiltersModel with _$SearchFiltersModel {

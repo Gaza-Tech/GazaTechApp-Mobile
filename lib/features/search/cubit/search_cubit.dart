@@ -221,6 +221,10 @@ class SearchCubit extends Cubit<SearchState> {
             priceMaxIls: null,
           ),
         ));
+      case 'sort':
+        emit(state.copyWith(
+          filters: state.filters.copyWith(sort: SearchSortOption.newest),
+        ));
     }
     search();
   }

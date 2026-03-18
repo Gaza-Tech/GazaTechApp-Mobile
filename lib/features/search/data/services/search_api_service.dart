@@ -108,6 +108,9 @@ class SearchApiService {
       case SearchSortOption.newest:
         sortField = 'created_at';
         ascending = false;
+      case SearchSortOption.oldest:
+        sortField = 'created_at';
+        ascending = true;
       case SearchSortOption.priceLowToHigh:
         sortField = 'price';
         ascending = true;

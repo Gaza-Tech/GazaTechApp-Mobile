@@ -107,25 +107,16 @@ class _FilterBottomSheetContentState
             Text(l10n.sortBy, style: MyTextStyle.heading.h4),
             const SizedBox(height: 8),
             ...SearchSortOption.values.map((option) {
-              final isSelected = _temp.sort == option;
-              return ListTile(
-                contentPadding: EdgeInsets.zero,
-                dense: true,
-                leading: Radio<SearchSortOption>(
-                  value: option,
-                  groupValue: _temp.sort,
-                  onChanged: (v) =>
-                      setState(() => _temp = _temp.copyWith(sort: v!)),
-                ),
+              return RadioListTile<SearchSortOption>(
                 title: Text(
                   _getSortLabel(l10n, option),
-                  style: MyTextStyle.body.m.copyWith(
-                    fontWeight:
-                        isSelected ? FontWeight.w600 : FontWeight.w400,
-                  ),
+                  style: MyTextStyle.body.m,
                 ),
-                onTap: () =>
-                    setState(() => _temp = _temp.copyWith(sort: option)),
+                value: option,
+                groupValue: _temp.sort,
+                onChanged: (v) => setState(() => _temp = _temp.copyWith(sort: v!)),
+                dense: true,
+                contentPadding: EdgeInsets.zero,
               );
             }),
             const SizedBox(height: 16),
@@ -342,6 +333,8 @@ class _FilterBottomSheetContentState
     switch (option) {
       case SearchSortOption.newest:
         return l10n.sortNewest;
+      case SearchSortOption.oldest:
+        return l10n.oldest;
       case SearchSortOption.priceLowToHigh:
         return l10n.sortPriceLowToHigh;
       case SearchSortOption.priceHighToLow:
