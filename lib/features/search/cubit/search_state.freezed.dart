@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'search_state.dart';
+part of 'marketplace_search_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SearchState {
 
- String get keyword; SearchFiltersModel get filters; List<String> get recentSearches;// Filter dropdown data
+ String get keyword; MarketplaceSearchFiltersModel get filters; List<String> get recentSearches;// Filter dropdown data
  List<CategoryModel> get categories; List<LocationModel> get locations; bool get isFilterDataLoading;// Search results
  List<ListingModel> get results; int get currentPage; bool get hasMore;// Loading states
  bool get isSearching; bool get isLoadingMore;// Error
@@ -23,13 +23,13 @@ mixin _$SearchState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SearchStateCopyWith<SearchState> get copyWith => _$SearchStateCopyWithImpl<SearchState>(this as SearchState, _$identity);
+$SearchStateCopyWith<MarketplaceSearchState> get copyWith => _$SearchStateCopyWithImpl<MarketplaceSearchState>(this as MarketplaceSearchState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchState&&(identical(other.keyword, keyword) || other.keyword == keyword)&&(identical(other.filters, filters) || other.filters == filters)&&const DeepCollectionEquality().equals(other.recentSearches, recentSearches)&&const DeepCollectionEquality().equals(other.categories, categories)&&const DeepCollectionEquality().equals(other.locations, locations)&&(identical(other.isFilterDataLoading, isFilterDataLoading) || other.isFilterDataLoading == isFilterDataLoading)&&const DeepCollectionEquality().equals(other.results, results)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isSearching, isSearching) || other.isSearching == isSearching)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketplaceSearchState&&(identical(other.keyword, keyword) || other.keyword == keyword)&&(identical(other.filters, filters) || other.filters == filters)&&const DeepCollectionEquality().equals(other.recentSearches, recentSearches)&&const DeepCollectionEquality().equals(other.categories, categories)&&const DeepCollectionEquality().equals(other.locations, locations)&&(identical(other.isFilterDataLoading, isFilterDataLoading) || other.isFilterDataLoading == isFilterDataLoading)&&const DeepCollectionEquality().equals(other.results, results)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isSearching, isSearching) || other.isSearching == isSearching)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
@@ -46,10 +46,10 @@ String toString() {
 
 /// @nodoc
 abstract mixin class $SearchStateCopyWith<$Res>  {
-  factory $SearchStateCopyWith(SearchState value, $Res Function(SearchState) _then) = _$SearchStateCopyWithImpl;
+  factory $SearchStateCopyWith(MarketplaceSearchState value, $Res Function(MarketplaceSearchState) _then) = _$SearchStateCopyWithImpl;
 @useResult
 $Res call({
- String keyword, SearchFiltersModel filters, List<String> recentSearches, List<CategoryModel> categories, List<LocationModel> locations, bool isFilterDataLoading, List<ListingModel> results, int currentPage, bool hasMore, bool isSearching, bool isLoadingMore, String? errorMessage
+ String keyword, MarketplaceSearchFiltersModel filters, List<String> recentSearches, List<CategoryModel> categories, List<LocationModel> locations, bool isFilterDataLoading, List<ListingModel> results, int currentPage, bool hasMore, bool isSearching, bool isLoadingMore, String? errorMessage
 });
 
 
@@ -61,8 +61,8 @@ class _$SearchStateCopyWithImpl<$Res>
     implements $SearchStateCopyWith<$Res> {
   _$SearchStateCopyWithImpl(this._self, this._then);
 
-  final SearchState _self;
-  final $Res Function(SearchState) _then;
+  final MarketplaceSearchState _self;
+  final $Res Function(MarketplaceSearchState) _then;
 
 /// Create a copy of SearchState
 /// with the given fields replaced by the non-null parameter values.
@@ -70,7 +70,7 @@ class _$SearchStateCopyWithImpl<$Res>
   return _then(_self.copyWith(
 keyword: null == keyword ? _self.keyword : keyword // ignore: cast_nullable_to_non_nullable
 as String,filters: null == filters ? _self.filters : filters // ignore: cast_nullable_to_non_nullable
-as SearchFiltersModel,recentSearches: null == recentSearches ? _self.recentSearches : recentSearches // ignore: cast_nullable_to_non_nullable
+as MarketplaceSearchFiltersModel,recentSearches: null == recentSearches ? _self.recentSearches : recentSearches // ignore: cast_nullable_to_non_nullable
 as List<String>,categories: null == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
 as List<CategoryModel>,locations: null == locations ? _self.locations : locations // ignore: cast_nullable_to_non_nullable
 as List<LocationModel>,isFilterDataLoading: null == isFilterDataLoading ? _self.isFilterDataLoading : isFilterDataLoading // ignore: cast_nullable_to_non_nullable
@@ -96,8 +96,8 @@ $SearchFiltersModelCopyWith<$Res> get filters {
 }
 
 
-/// Adds pattern-matching-related methods to [SearchState].
-extension SearchStatePatterns on SearchState {
+/// Adds pattern-matching-related methods to [MarketplaceSearchState].
+extension SearchStatePatterns on MarketplaceSearchState {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -174,7 +174,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String keyword,  SearchFiltersModel filters,  List<String> recentSearches,  List<CategoryModel> categories,  List<LocationModel> locations,  bool isFilterDataLoading,  List<ListingModel> results,  int currentPage,  bool hasMore,  bool isSearching,  bool isLoadingMore,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String keyword,  MarketplaceSearchFiltersModel filters,  List<String> recentSearches,  List<CategoryModel> categories,  List<LocationModel> locations,  bool isFilterDataLoading,  List<ListingModel> results,  int currentPage,  bool hasMore,  bool isSearching,  bool isLoadingMore,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SearchState() when $default != null:
 return $default(_that.keyword,_that.filters,_that.recentSearches,_that.categories,_that.locations,_that.isFilterDataLoading,_that.results,_that.currentPage,_that.hasMore,_that.isSearching,_that.isLoadingMore,_that.errorMessage);case _:
@@ -195,7 +195,7 @@ return $default(_that.keyword,_that.filters,_that.recentSearches,_that.categorie
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String keyword,  SearchFiltersModel filters,  List<String> recentSearches,  List<CategoryModel> categories,  List<LocationModel> locations,  bool isFilterDataLoading,  List<ListingModel> results,  int currentPage,  bool hasMore,  bool isSearching,  bool isLoadingMore,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String keyword,  MarketplaceSearchFiltersModel filters,  List<String> recentSearches,  List<CategoryModel> categories,  List<LocationModel> locations,  bool isFilterDataLoading,  List<ListingModel> results,  int currentPage,  bool hasMore,  bool isSearching,  bool isLoadingMore,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _SearchState():
 return $default(_that.keyword,_that.filters,_that.recentSearches,_that.categories,_that.locations,_that.isFilterDataLoading,_that.results,_that.currentPage,_that.hasMore,_that.isSearching,_that.isLoadingMore,_that.errorMessage);case _:
@@ -215,7 +215,7 @@ return $default(_that.keyword,_that.filters,_that.recentSearches,_that.categorie
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String keyword,  SearchFiltersModel filters,  List<String> recentSearches,  List<CategoryModel> categories,  List<LocationModel> locations,  bool isFilterDataLoading,  List<ListingModel> results,  int currentPage,  bool hasMore,  bool isSearching,  bool isLoadingMore,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String keyword,  MarketplaceSearchFiltersModel filters,  List<String> recentSearches,  List<CategoryModel> categories,  List<LocationModel> locations,  bool isFilterDataLoading,  List<ListingModel> results,  int currentPage,  bool hasMore,  bool isSearching,  bool isLoadingMore,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _SearchState() when $default != null:
 return $default(_that.keyword,_that.filters,_that.recentSearches,_that.categories,_that.locations,_that.isFilterDataLoading,_that.results,_that.currentPage,_that.hasMore,_that.isSearching,_that.isLoadingMore,_that.errorMessage);case _:
@@ -229,12 +229,12 @@ return $default(_that.keyword,_that.filters,_that.recentSearches,_that.categorie
 /// @nodoc
 
 
-class _SearchState extends SearchState {
-  const _SearchState({this.keyword = '', this.filters = const SearchFiltersModel(), final  List<String> recentSearches = const [], final  List<CategoryModel> categories = const [], final  List<LocationModel> locations = const [], this.isFilterDataLoading = false, final  List<ListingModel> results = const [], this.currentPage = 0, this.hasMore = true, this.isSearching = false, this.isLoadingMore = false, this.errorMessage}): _recentSearches = recentSearches,_categories = categories,_locations = locations,_results = results,super._();
+class _SearchState extends MarketplaceSearchState {
+  const _SearchState({this.keyword = '', this.filters = const MarketplaceSearchFiltersModel(), final  List<String> recentSearches = const [], final  List<CategoryModel> categories = const [], final  List<LocationModel> locations = const [], this.isFilterDataLoading = false, final  List<ListingModel> results = const [], this.currentPage = 0, this.hasMore = true, this.isSearching = false, this.isLoadingMore = false, this.errorMessage}): _recentSearches = recentSearches,_categories = categories,_locations = locations,_results = results,super._();
   
 
 @override@JsonKey() final  String keyword;
-@override@JsonKey() final  SearchFiltersModel filters;
+@override@JsonKey() final  MarketplaceSearchFiltersModel filters;
  final  List<String> _recentSearches;
 @override@JsonKey() List<String> get recentSearches {
   if (_recentSearches is EqualUnmodifiableListView) return _recentSearches;
@@ -306,7 +306,7 @@ abstract mixin class _$SearchStateCopyWith<$Res> implements $SearchStateCopyWith
   factory _$SearchStateCopyWith(_SearchState value, $Res Function(_SearchState) _then) = __$SearchStateCopyWithImpl;
 @override @useResult
 $Res call({
- String keyword, SearchFiltersModel filters, List<String> recentSearches, List<CategoryModel> categories, List<LocationModel> locations, bool isFilterDataLoading, List<ListingModel> results, int currentPage, bool hasMore, bool isSearching, bool isLoadingMore, String? errorMessage
+ String keyword, MarketplaceSearchFiltersModel filters, List<String> recentSearches, List<CategoryModel> categories, List<LocationModel> locations, bool isFilterDataLoading, List<ListingModel> results, int currentPage, bool hasMore, bool isSearching, bool isLoadingMore, String? errorMessage
 });
 
 
@@ -327,7 +327,7 @@ class __$SearchStateCopyWithImpl<$Res>
   return _then(_SearchState(
 keyword: null == keyword ? _self.keyword : keyword // ignore: cast_nullable_to_non_nullable
 as String,filters: null == filters ? _self.filters : filters // ignore: cast_nullable_to_non_nullable
-as SearchFiltersModel,recentSearches: null == recentSearches ? _self._recentSearches : recentSearches // ignore: cast_nullable_to_non_nullable
+as MarketplaceSearchFiltersModel,recentSearches: null == recentSearches ? _self._recentSearches : recentSearches // ignore: cast_nullable_to_non_nullable
 as List<String>,categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
 as List<CategoryModel>,locations: null == locations ? _self._locations : locations // ignore: cast_nullable_to_non_nullable
 as List<LocationModel>,isFilterDataLoading: null == isFilterDataLoading ? _self.isFilterDataLoading : isFilterDataLoading // ignore: cast_nullable_to_non_nullable

@@ -4,19 +4,20 @@ import 'package:gaza_tech/features/marketplace/data/models/category_model.dart';
 import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
 import 'package:gaza_tech/features/marketplace/data/models/listings_response.dart';
 import 'package:gaza_tech/features/add_listing/data/models/location_model.dart';
-import '../models/search_filters_model.dart';
+import '../models/marketplace_search_filters_model.dart';
 import '../services/search_api_service.dart';
 
-class SearchRepo {
-  final SearchApiService _apiService;
+class MarketplaceSearchRepo {
+  final MarketplaceSearchApiService _apiService;
 
-  SearchRepo(this._apiService);
+  MarketplaceSearchRepo(this._apiService);
 
   Future<ApiResult<List<CategoryModel>>> getCategories() async {
     try {
       final data = await _apiService.fetchCategories();
-      final categories =
-          data.map((json) => CategoryModel.fromJson(json)).toList();
+      final categories = data
+          .map((json) => CategoryModel.fromJson(json))
+          .toList();
       return ApiResult.success(categories);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
@@ -26,8 +27,9 @@ class SearchRepo {
   Future<ApiResult<List<LocationModel>>> getLocations() async {
     try {
       final data = await _apiService.fetchLocations();
-      final locations =
-          data.map((json) => LocationModel.fromJson(json)).toList();
+      final locations = data
+          .map((json) => LocationModel.fromJson(json))
+          .toList();
       return ApiResult.success(locations);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
@@ -36,7 +38,7 @@ class SearchRepo {
 
   Future<ApiResult<ListingsResponse>> searchListings({
     String? keyword,
-    required SearchFiltersModel filters,
+    required MarketplaceSearchFiltersModel filters,
     required int page,
   }) async {
     try {
@@ -53,11 +55,13 @@ class SearchRepo {
         page: page,
       );
 
-      final hasMore = data.length > SearchApiService.pageSize;
-      final items =
-          hasMore ? data.sublist(0, SearchApiService.pageSize) : data;
-      final listings =
-          items.map((json) => ListingModel.fromJson(json)).toList();
+      final hasMore = data.length > MarketplaceSearchApiService.pageSize;
+      final items = hasMore
+          ? data.sublist(0, MarketplaceSearchApiService.pageSize)
+          : data;
+      final listings = items
+          .map((json) => ListingModel.fromJson(json))
+          .toList();
 
       return ApiResult.success(
         ListingsResponse(

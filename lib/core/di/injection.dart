@@ -1,6 +1,9 @@
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_out/data/repos/sign_out_repo.dart';
 import 'package:gaza_tech/features/auth/sign_out/data/services/sign_out_api_service.dart';
+import 'package:gaza_tech/features/search/cubit/marketplace_search_cubit.dart';
+import 'package:gaza_tech/features/search/data/repos/marketplace_search_repo.dart';
+import 'package:gaza_tech/features/search/data/services/search_api_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gaza_tech/core/localization/locale_cubit.dart';
@@ -36,9 +39,6 @@ import 'package:gaza_tech/features/add_listing/data/services/add_listing_api_ser
 import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
 import 'package:gaza_tech/features/listing_details/data/repos/listing_details_repo.dart';
 import 'package:gaza_tech/features/listing_details/data/services/listing_details_api_service.dart';
-import 'package:gaza_tech/features/marketplace_search/cubit/search_cubit.dart';
-import 'package:gaza_tech/features/marketplace_search/data/repos/search_repo.dart';
-import 'package:gaza_tech/features/marketplace_search/data/services/search_api_service.dart';
 import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
 import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
 import 'package:gaza_tech/features/community/data/repos/community_repo.dart';
@@ -126,18 +126,14 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<MarketplaceApiService>(
     () => MarketplaceApiService(getIt()),
   );
-  getIt.registerLazySingleton<MarketplaceRepo>(
-    () => MarketplaceRepo(getIt()),
-  );
+  getIt.registerLazySingleton<MarketplaceRepo>(() => MarketplaceRepo(getIt()));
   getIt.registerFactory<MarketplaceCubit>(() => MarketplaceCubit(getIt()));
 
   // 11. Add Listing
   getIt.registerLazySingleton<AddListingApiService>(
     () => AddListingApiService(getIt()),
   );
-  getIt.registerLazySingleton<AddListingRepo>(
-    () => AddListingRepo(getIt()),
-  );
+  getIt.registerLazySingleton<AddListingRepo>(() => AddListingRepo(getIt()));
   getIt.registerFactory<AddListingCubit>(() => AddListingCubit(getIt()));
 
   // 12. Listing Details
@@ -152,11 +148,11 @@ Future<void> setupGetIt() async {
   );
 
   // 13. Search
-  getIt.registerLazySingleton<SearchApiService>(
-    () => SearchApiService(getIt()),
+  getIt.registerLazySingleton<MarketplaceSearchApiService>(
+    () => MarketplaceSearchApiService(getIt()),
   );
-  getIt.registerLazySingleton<SearchRepo>(() => SearchRepo(getIt()));
-  getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt()));
+  getIt.registerLazySingleton<MarketplaceSearchRepo>(() => MarketplaceSearchRepo(getIt()));
+  getIt.registerFactory<MarketplaceSearchCubit>(() => MarketplaceSearchCubit(getIt()));
 
   // 14. Community
   getIt.registerLazySingleton<CommunityApiService>(

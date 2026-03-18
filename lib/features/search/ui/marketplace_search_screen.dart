@@ -6,9 +6,9 @@ import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/active_filters_bar.dart';
 import 'package:gaza_tech/core/widgets/recent_searches_view.dart';
 import 'package:gaza_tech/core/widgets/search_app_bar.dart';
-import 'package:gaza_tech/features/marketplace_search/cubit/search_cubit.dart';
-import 'package:gaza_tech/features/marketplace_search/cubit/search_state.dart';
-import 'package:gaza_tech/features/marketplace_search/data/models/search_filters_model.dart';
+import 'package:gaza_tech/features/search/cubit/marketplace_search_cubit.dart';
+import 'package:gaza_tech/features/search/cubit/marketplace_search_state.dart';
+import 'package:gaza_tech/features/search/data/models/marketplace_search_filters_model.dart';
 import 'widgets/filter_bottom_sheet.dart';
 import 'widgets/search_results_grid.dart';
 
@@ -17,8 +17,8 @@ class MarketpalceSearchScreen extends StatelessWidget {
 
   List<({String label, VoidCallback onRemove})> _buildFilterChips(
     BuildContext context,
-    SearchState state,
-    SearchCubit cubit,
+    MarketplaceSearchState state,
+    MarketplaceSearchCubit cubit,
   ) {
     final l10n = context.l10n;
     final filters = state.filters;
@@ -105,7 +105,7 @@ class MarketpalceSearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<SearchCubit>();
+    final cubit = context.read<MarketplaceSearchCubit>();
 
     return Scaffold(
       appBar: SearchAppBar(
@@ -115,7 +115,7 @@ class MarketpalceSearchScreen extends StatelessWidget {
         onClear: cubit.clearSearch,
         onSearch: cubit.search,
         actions: [
-          BlocBuilder<SearchCubit, SearchState>(
+          BlocBuilder<MarketplaceSearchCubit, MarketplaceSearchState>(
             buildWhen: (prev, curr) =>
                 prev.filters.hasActiveFilters !=
                     curr.filters.hasActiveFilters ||
@@ -134,7 +134,7 @@ class MarketpalceSearchScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: BlocBuilder<SearchCubit, SearchState>(
+      body: BlocBuilder<MarketplaceSearchCubit, MarketplaceSearchState>(
         builder: (context, state) {
           return Column(
             children: [
@@ -149,8 +149,8 @@ class MarketpalceSearchScreen extends StatelessWidget {
 
   Widget _buildBody(
     BuildContext context,
-    SearchState state,
-    SearchCubit cubit,
+    MarketplaceSearchState state,
+    MarketplaceSearchCubit cubit,
   ) {
     if (state.isInitial) {
       if (state.recentSearches.isEmpty) {

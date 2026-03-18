@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'search_filters_model.dart';
+part of 'marketplace_search_filters_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -19,13 +19,13 @@ mixin _$SearchFiltersModel {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SearchFiltersModelCopyWith<SearchFiltersModel> get copyWith => _$SearchFiltersModelCopyWithImpl<SearchFiltersModel>(this as SearchFiltersModel, _$identity);
+$SearchFiltersModelCopyWith<MarketplaceSearchFiltersModel> get copyWith => _$SearchFiltersModelCopyWithImpl<MarketplaceSearchFiltersModel>(this as MarketplaceSearchFiltersModel, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchFiltersModel&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.locationId, locationId) || other.locationId == locationId)&&(identical(other.locationName, locationName) || other.locationName == locationName)&&const DeepCollectionEquality().equals(other.conditions, conditions)&&(identical(other.priceMinUsd, priceMinUsd) || other.priceMinUsd == priceMinUsd)&&(identical(other.priceMaxUsd, priceMaxUsd) || other.priceMaxUsd == priceMaxUsd)&&(identical(other.priceMinIls, priceMinIls) || other.priceMinIls == priceMinIls)&&(identical(other.priceMaxIls, priceMaxIls) || other.priceMaxIls == priceMaxIls)&&(identical(other.sort, sort) || other.sort == sort));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketplaceSearchFiltersModel&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.locationId, locationId) || other.locationId == locationId)&&(identical(other.locationName, locationName) || other.locationName == locationName)&&const DeepCollectionEquality().equals(other.conditions, conditions)&&(identical(other.priceMinUsd, priceMinUsd) || other.priceMinUsd == priceMinUsd)&&(identical(other.priceMaxUsd, priceMaxUsd) || other.priceMaxUsd == priceMaxUsd)&&(identical(other.priceMinIls, priceMinIls) || other.priceMinIls == priceMinIls)&&(identical(other.priceMaxIls, priceMaxIls) || other.priceMaxIls == priceMaxIls)&&(identical(other.sort, sort) || other.sort == sort));
 }
 
 
@@ -42,7 +42,7 @@ String toString() {
 
 /// @nodoc
 abstract mixin class $SearchFiltersModelCopyWith<$Res>  {
-  factory $SearchFiltersModelCopyWith(SearchFiltersModel value, $Res Function(SearchFiltersModel) _then) = _$SearchFiltersModelCopyWithImpl;
+  factory $SearchFiltersModelCopyWith(MarketplaceSearchFiltersModel value, $Res Function(MarketplaceSearchFiltersModel) _then) = _$SearchFiltersModelCopyWithImpl;
 @useResult
 $Res call({
  String? categoryId, String? categoryName, String? locationId, String? locationName, List<String> conditions, int? priceMinUsd, int? priceMaxUsd, int? priceMinIls, int? priceMaxIls, SearchSortOption sort
@@ -57,8 +57,8 @@ class _$SearchFiltersModelCopyWithImpl<$Res>
     implements $SearchFiltersModelCopyWith<$Res> {
   _$SearchFiltersModelCopyWithImpl(this._self, this._then);
 
-  final SearchFiltersModel _self;
-  final $Res Function(SearchFiltersModel) _then;
+  final MarketplaceSearchFiltersModel _self;
+  final $Res Function(MarketplaceSearchFiltersModel) _then;
 
 /// Create a copy of SearchFiltersModel
 /// with the given fields replaced by the non-null parameter values.
@@ -81,8 +81,8 @@ as SearchSortOption,
 }
 
 
-/// Adds pattern-matching-related methods to [SearchFiltersModel].
-extension SearchFiltersModelPatterns on SearchFiltersModel {
+/// Adds pattern-matching-related methods to [MarketplaceSearchFiltersModel].
+extension SearchFiltersModelPatterns on MarketplaceSearchFiltersModel {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -214,7 +214,7 @@ return $default(_that.categoryId,_that.categoryName,_that.locationId,_that.locat
 /// @nodoc
 
 
-class _SearchFiltersModel extends SearchFiltersModel {
+class _SearchFiltersModel extends MarketplaceSearchFiltersModel {
   const _SearchFiltersModel({this.categoryId = null, this.categoryName = null, this.locationId = null, this.locationName = null, final  List<String> conditions = const [], this.priceMinUsd = null, this.priceMaxUsd = null, this.priceMinIls = null, this.priceMaxIls = null, this.sort = SearchSortOption.newest}): _conditions = conditions,super._();
   
 

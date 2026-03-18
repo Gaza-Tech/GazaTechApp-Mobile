@@ -5,10 +5,10 @@ part 'search_filters_model.freezed.dart';
 enum SearchSortOption { newest, oldest, priceLowToHigh, priceHighToLow }
 
 @freezed
-abstract class SearchFiltersModel with _$SearchFiltersModel {
-  const SearchFiltersModel._();
+abstract class MarketplaceSearchFiltersModel with _$SearchFiltersModel {
+  const MarketplaceSearchFiltersModel._();
 
-  const factory SearchFiltersModel({
+  const factory MarketplaceSearchFiltersModel({
     @Default(null) String? categoryId,
     @Default(null) String? categoryName,
     @Default(null) String? locationId,

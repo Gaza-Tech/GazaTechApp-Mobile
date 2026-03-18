@@ -4,20 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/marketplace/ui/widgets/product_card_grid.dart';
-import 'package:gaza_tech/features/marketplace_search/cubit/search_cubit.dart';
-import 'package:gaza_tech/features/marketplace_search/cubit/search_state.dart';
+import 'package:gaza_tech/features/search/cubit/marketplace_search_cubit.dart';
+import 'package:gaza_tech/features/search/cubit/marketplace_search_state.dart';
 
 class SearchResultsGrid extends StatelessWidget {
   const SearchResultsGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchCubit, SearchState>(
+    return BlocBuilder<MarketplaceSearchCubit, MarketplaceSearchState>(
       builder: (context, state) {
-        final cubit = context.read<SearchCubit>();
+        final cubit = context.read<MarketplaceSearchCubit>();
         final listings = state.results;
-        final isArabic =
-            Localizations.localeOf(context).languageCode == 'ar';
+        final isArabic = Localizations.localeOf(context).languageCode == 'ar';
 
         return NotificationListener<ScrollNotification>(
           onNotification: (notification) {
@@ -38,8 +37,8 @@ class SearchResultsGrid extends StatelessWidget {
                     final listing = listings[index];
                     final locationName = isArabic
                         ? (listing.locationNameAr.isNotEmpty
-                            ? listing.locationNameAr
-                            : listing.locationName)
+                              ? listing.locationNameAr
+                              : listing.locationName)
                         : listing.locationName;
                     return ProductCardGrid(
                       name: listing.title,
@@ -64,12 +63,11 @@ class SearchResultsGrid extends StatelessWidget {
                         child: Center(child: Icon(Icons.circle, size: 12)),
                       )
                     : state.isLoadingMore
-                        ? const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 16),
-                            child:
-                                Center(child: CircularProgressIndicator()),
-                          )
-                        : const SizedBox.shrink(),
+                    ? const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16),
+                        child: Center(child: CircularProgressIndicator()),
+                      )
+                    : const SizedBox.shrink(),
               ),
             ],
           ),

@@ -21,8 +21,6 @@ import 'package:gaza_tech/features/add_listing/ui/add_listing_screen.dart';
 import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
 import 'package:gaza_tech/features/listing_details/ui/listing_details_screen.dart';
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
-import 'package:gaza_tech/features/marketplace_search/cubit/search_cubit.dart';
-import 'package:gaza_tech/features/marketplace_search/ui/marketplace_search_screen.dart';
 import 'package:gaza_tech/features/add_post/cubit/add_post_cubit.dart';
 import 'package:gaza_tech/features/add_post/ui/add_post_screen.dart';
 import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
@@ -30,6 +28,8 @@ import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
 import 'package:gaza_tech/features/community/ui/post_details_screen.dart';
 import 'package:gaza_tech/features/community_search/cubit/community_search_cubit.dart';
 import 'package:gaza_tech/features/community_search/ui/community_search_screen.dart';
+import 'package:gaza_tech/features/search/cubit/marketplace_search_cubit.dart';
+import 'package:gaza_tech/features/search/ui/marketplace_search_screen.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -115,7 +115,7 @@ class MyRouter {
       case MyRoutes.search:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => getIt<SearchCubit>()
+            create: (context) => getIt<MarketplaceSearchCubit>()
               ..loadFilterData()
               ..loadRecentSearches(),
             child: const MarketpalceSearchScreen(),
