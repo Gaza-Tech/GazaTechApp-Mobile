@@ -529,6 +529,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get conditionFilter => 'الحالة';
 
   @override
+  String get searchMarketplace => 'ابحث في السوق...';
+
+  @override
   String get searchCommunity => 'ابحث في المجتمع...';
 
   @override
@@ -622,4 +625,92 @@ class AppLocalizationsAr extends AppLocalizations {
   String replyingTo(String userName) {
     return 'ردّاً على @$userName';
   }
+
+  @override
+  String get postPublished => 'تم نشر المنشور بنجاح';
+
+  @override
+  String viewReplies(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'عرض $count ردّ',
+      few: 'عرض $count ردود',
+      two: 'عرض ردّين',
+      one: 'عرض رد واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hideReplies => 'إخفاء الردود';
+
+  @override
+  String get recentSearches => 'عمليات بحث سابقة';
+
+  @override
+  String get clearRecentSearches => 'مسح';
+
+  @override
+  String get noCommunityResults => 'لم يتم العثور على منشورات';
+
+  @override
+  String get noCommunityResultsSubtitle => 'جرّب كلمات مختلفة';
+
+  @override
+  String get sortPosts => 'ترتيب المنشورات';
+
+  @override
+  String get timeBased => 'حسب الوقت';
+
+  @override
+  String get popularity => 'حسب الشعبية';
+
+  @override
+  String get newest => 'الأحدث';
+
+  @override
+  String get oldest => 'الأقدم';
+
+  @override
+  String get mostLiked => 'الأكثر إعجاباً';
+
+  @override
+  String get mostCommented => 'الأكثر تعليقاً';
+
+  @override
+  String get resetSort => 'إعادة تعيين';
+
+  @override
+  String get filterPosts => 'تصفية المنشورات';
+
+  @override
+  String get categoryFilter => 'التصنيف';
+
+  @override
+  String get dateRangeFilter => 'النطاق الزمني';
+
+  @override
+  String get engagementLevel => 'مستوى التفاعل';
+
+  @override
+  String get sortOrder => 'ترتيب العرض';
+
+  @override
+  String get today => 'اليوم';
+
+  @override
+  String get thisWeek => 'هذا الأسبوع';
+
+  @override
+  String get thisMonth => 'هذا الشهر';
+
+  @override
+  String get thisYear => 'هذه السنة';
+
+  @override
+  String get likes100Plus => '+100 إعجاب';
+
+  @override
+  String get comments50Plus => '+50 تعليق';
 }

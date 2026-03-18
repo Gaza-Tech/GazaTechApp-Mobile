@@ -1082,6 +1082,12 @@ abstract class AppLocalizations {
   /// **'Condition'**
   String get conditionFilter;
 
+  /// No description provided for @searchMarketplace.
+  ///
+  /// In en, this message translates to:
+  /// **'Search marketplace...'**
+  String get searchMarketplace;
+
   /// No description provided for @searchCommunity.
   ///
   /// In en, this message translates to:
@@ -1255,6 +1261,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Replying to @{userName}'**
   String replyingTo(String userName);
+
+  /// No description provided for @postPublished.
+  ///
+  /// In en, this message translates to:
+  /// **'Post published successfully'**
+  String get postPublished;
+
+  /// No description provided for @viewReplies.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{View 1 reply} other{View {count} replies}}'**
+  String viewReplies(int count);
+
+  /// No description provided for @hideReplies.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide replies'**
+  String get hideReplies;
+
+  /// No description provided for @recentSearches.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent searches'**
+  String get recentSearches;
+
+  /// No description provided for @clearRecentSearches.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clearRecentSearches;
+
+  /// No description provided for @noCommunityResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No posts found'**
+  String get noCommunityResults;
+
+  /// No description provided for @noCommunityResultsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Try different keywords'**
+  String get noCommunityResultsSubtitle;
+
+  /// No description provided for @sortPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort Posts'**
+  String get sortPosts;
+
+  /// No description provided for @timeBased.
+  ///
+  /// In en, this message translates to:
+  /// **'Time-Based'**
+  String get timeBased;
+
+  /// No description provided for @popularity.
+  ///
+  /// In en, this message translates to:
+  /// **'Popularity'**
+  String get popularity;
+
+  /// No description provided for @newest.
+  ///
+  /// In en, this message translates to:
+  /// **'Newest'**
+  String get newest;
+
+  /// No description provided for @oldest.
+  ///
+  /// In en, this message translates to:
+  /// **'Oldest'**
+  String get oldest;
+
+  /// No description provided for @mostLiked.
+  ///
+  /// In en, this message translates to:
+  /// **'Most Liked'**
+  String get mostLiked;
+
+  /// No description provided for @mostCommented.
+  ///
+  /// In en, this message translates to:
+  /// **'Most Commented'**
+  String get mostCommented;
+
+  /// No description provided for @resetSort.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get resetSort;
+
+  /// No description provided for @filterPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter Posts'**
+  String get filterPosts;
+
+  /// No description provided for @categoryFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get categoryFilter;
+
+  /// No description provided for @dateRangeFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Date Range'**
+  String get dateRangeFilter;
+
+  /// No description provided for @engagementLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Engagement Level'**
+  String get engagementLevel;
+
+  /// No description provided for @sortOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort Order'**
+  String get sortOrder;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @thisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This Week'**
+  String get thisWeek;
+
+  /// No description provided for @thisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This Month'**
+  String get thisMonth;
+
+  /// No description provided for @thisYear.
+  ///
+  /// In en, this message translates to:
+  /// **'This Year'**
+  String get thisYear;
+
+  /// No description provided for @likes100Plus.
+  ///
+  /// In en, this message translates to:
+  /// **'100+ Likes'**
+  String get likes100Plus;
+
+  /// No description provided for @comments50Plus.
+  ///
+  /// In en, this message translates to:
+  /// **'50+ Comments'**
+  String get comments50Plus;
 }
 
 class _AppLocalizationsDelegate

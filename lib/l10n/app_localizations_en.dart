@@ -531,6 +531,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get conditionFilter => 'Condition';
 
   @override
+  String get searchMarketplace => 'Search marketplace...';
+
+  @override
   String get searchCommunity => 'Search community...';
 
   @override
@@ -624,4 +627,90 @@ class AppLocalizationsEn extends AppLocalizations {
   String replyingTo(String userName) {
     return 'Replying to @$userName';
   }
+
+  @override
+  String get postPublished => 'Post published successfully';
+
+  @override
+  String viewReplies(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'View $count replies',
+      one: 'View 1 reply',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hideReplies => 'Hide replies';
+
+  @override
+  String get recentSearches => 'Recent searches';
+
+  @override
+  String get clearRecentSearches => 'Clear';
+
+  @override
+  String get noCommunityResults => 'No posts found';
+
+  @override
+  String get noCommunityResultsSubtitle => 'Try different keywords';
+
+  @override
+  String get sortPosts => 'Sort Posts';
+
+  @override
+  String get timeBased => 'Time-Based';
+
+  @override
+  String get popularity => 'Popularity';
+
+  @override
+  String get newest => 'Newest';
+
+  @override
+  String get oldest => 'Oldest';
+
+  @override
+  String get mostLiked => 'Most Liked';
+
+  @override
+  String get mostCommented => 'Most Commented';
+
+  @override
+  String get resetSort => 'Reset';
+
+  @override
+  String get filterPosts => 'Filter Posts';
+
+  @override
+  String get categoryFilter => 'Category';
+
+  @override
+  String get dateRangeFilter => 'Date Range';
+
+  @override
+  String get engagementLevel => 'Engagement Level';
+
+  @override
+  String get sortOrder => 'Sort Order';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get thisWeek => 'This Week';
+
+  @override
+  String get thisMonth => 'This Month';
+
+  @override
+  String get thisYear => 'This Year';
+
+  @override
+  String get likes100Plus => '100+ Likes';
+
+  @override
+  String get comments50Plus => '50+ Comments';
 }

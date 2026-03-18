@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
+import 'package:gaza_tech/features/marketplace/data/models/marketplace_sort.dart';
 import '../data/repos/marketplace_repo.dart';
 import 'marketplace_state.dart';
 
@@ -61,6 +62,7 @@ class MarketplaceCubit extends Cubit<MarketplaceState> {
     final result = await _repo.getListingsByCategory(
       categoryId: categoryId,
       page: 0,
+      sort: state.activeSort,
     );
 
     result.when(
@@ -112,6 +114,7 @@ class MarketplaceCubit extends Cubit<MarketplaceState> {
     final result = await _repo.getListingsByCategory(
       categoryId: categoryId,
       page: nextPage,
+      sort: state.activeSort,
     );
 
     result.when(
@@ -159,6 +162,21 @@ class MarketplaceCubit extends Cubit<MarketplaceState> {
       currentPageByCategory: updatedPages,
       hasMoreByCategory: updatedHasMore,
     ));
+  }
+
+  /// Update sort order and re-fetch all listings
+  Future<void> updateSort(MarketplaceSort sort) async {
+    if (state.activeSort == sort) return;
+
+    emit(state.copyWith(
+      activeSort: sort,
+      listingsByCategory: {},
+      currentPageByCategory: {},
+      hasMoreByCategory: {},
+      totalCountByCategory: {},
+    ));
+
+    await fetchListings(state.selectedCategory);
   }
 
   /// Clear all cached data

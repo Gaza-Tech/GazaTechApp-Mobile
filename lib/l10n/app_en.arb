@@ -278,6 +278,8 @@
   "priceMax": "Max",
   "conditionFilter": "Condition",
 
+  "searchMarketplace": "Search marketplace...",
+
   "searchCommunity": "Search community...",
   "createPost": "Create Post",
   "recent": "Recent",
@@ -329,5 +331,41 @@
     "placeholders": {
       "userName": { "type": "String" }
     }
-  }
+  },
+
+  "postPublished": "Post published successfully",
+
+  "viewReplies": "{count, plural, =1{View 1 reply} other{View {count} replies}}",
+  "@viewReplies": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "hideReplies": "Hide replies",
+
+  "recentSearches": "Recent searches",
+  "clearRecentSearches": "Clear",
+  "noCommunityResults": "No posts found",
+  "noCommunityResultsSubtitle": "Try different keywords",
+
+  "sortPosts": "Sort Posts",
+  "timeBased": "Time-Based",
+  "popularity": "Popularity",
+  "newest": "Newest",
+  "oldest": "Oldest",
+  "mostLiked": "Most Liked",
+  "mostCommented": "Most Commented",
+  "resetSort": "Reset",
+
+  "filterPosts": "Filter Posts",
+  "categoryFilter": "Category",
+  "dateRangeFilter": "Date Range",
+  "engagementLevel": "Engagement Level",
+  "sortOrder": "Sort Order",
+  "today": "Today",
+  "thisWeek": "This Week",
+  "thisMonth": "This Month",
+  "thisYear": "This Year",
+  "likes100Plus": "100+ Likes",
+  "comments50Plus": "50+ Comments"
 }

@@ -216,6 +216,8 @@
   "priceMax": "الحد الأقصى",
   "conditionFilter": "الحالة",
 
+  "searchMarketplace": "ابحث في السوق...",
+
   "searchCommunity": "ابحث في المجتمع...",
   "createPost": "إنشاء منشور",
   "recent": "الأحدث",
@@ -267,5 +269,41 @@
     "placeholders": {
       "userName": { "type": "String" }
     }
-  }
+  },
+
+  "postPublished": "تم نشر المنشور بنجاح",
+
+  "viewReplies": "{count, plural, =1{عرض رد واحد} =2{عرض ردّين} few{عرض {count} ردود} other{عرض {count} ردّ}}",
+  "@viewReplies": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "hideReplies": "إخفاء الردود",
+
+  "recentSearches": "عمليات بحث سابقة",
+  "clearRecentSearches": "مسح",
+  "noCommunityResults": "لم يتم العثور على منشورات",
+  "noCommunityResultsSubtitle": "جرّب كلمات مختلفة",
+
+  "sortPosts": "ترتيب المنشورات",
+  "timeBased": "حسب الوقت",
+  "popularity": "حسب الشعبية",
+  "newest": "الأحدث",
+  "oldest": "الأقدم",
+  "mostLiked": "الأكثر إعجاباً",
+  "mostCommented": "الأكثر تعليقاً",
+  "resetSort": "إعادة تعيين",
+
+  "filterPosts": "تصفية المنشورات",
+  "categoryFilter": "التصنيف",
+  "dateRangeFilter": "النطاق الزمني",
+  "engagementLevel": "مستوى التفاعل",
+  "sortOrder": "ترتيب العرض",
+  "today": "اليوم",
+  "thisWeek": "هذا الأسبوع",
+  "thisMonth": "هذا الشهر",
+  "thisYear": "هذه السنة",
+  "likes100Plus": "+100 إعجاب",
+  "comments50Plus": "+50 تعليق"
 }

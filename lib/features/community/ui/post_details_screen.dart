@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
+import 'package:gaza_tech/features/community/cubit/post_details_state.dart';
 import 'package:gaza_tech/features/community/ui/widgets/comment_card.dart';
 import 'package:gaza_tech/features/community/ui/widgets/comment_input_bar.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_actions.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_header.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_image_gallery.dart';
-import 'package:gaza_tech/features/community/ui/widgets/related_post_card.dart';
+import 'package:gaza_tech/features/community/ui/widgets/view_replies_button.dart';
 
 class PostDetailsScreen extends StatefulWidget {
   const PostDetailsScreen({super.key});
@@ -17,9 +20,8 @@ class PostDetailsScreen extends StatefulWidget {
 }
 
 class _PostDetailsScreenState extends State<PostDetailsScreen> {
-  bool _isLiked = false;
-  bool _isBookmarked = false;
   String? _replyingTo;
+  String? _replyingToCommentId;
   final _commentController = TextEditingController();
 
   @override
@@ -28,74 +30,170 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
     super.dispose();
   }
 
+  String _timeAgo(BuildContext context, DateTime createdAt) {
+    final l10n = context.l10n;
+    final diff = DateTime.now().difference(createdAt);
+    if (diff.inDays >= 2) return l10n.daysAgo(diff.inDays);
+    if (diff.inDays == 1) return l10n.dayAgo;
+    return l10n.hoursAgo(diff.inHours.clamp(1, 23));
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = context.l10n;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.postDetails),
-        actions: [
-          PopupMenuButton<String>(
-            icon: const Icon(Icons.more_vert),
-            onSelected: (_) {},
-            itemBuilder: (_) => [],
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 8.h),
-                  _buildAuthorSection(theme),
-                  SizedBox(height: 14.h),
-                  _buildPostContent(theme),
-                  SizedBox(height: 14.h),
-                  const PostImageGallery(),
-                  SizedBox(height: 14.h),
-                  _buildActions(),
-                  Divider(height: 28.h),
-                  _buildCommentsSection(theme, l10n),
-                  SizedBox(height: 16.h),
-                  ..._buildCommentsList(),
-                  _buildLoadMoreButton(theme, l10n),
-                  SizedBox(height: 8.h),
-                  Divider(height: 28.h),
-                  _buildRelatedPosts(theme, l10n),
-                  SizedBox(height: 32.h),
-                ],
+    return BlocBuilder<PostDetailsCubit, PostDetailsState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(l10n.postDetails),
+            actions: [
+              PopupMenuButton<String>(
+                icon: const Icon(Icons.more_vert),
+                onSelected: (_) {},
+                itemBuilder: (_) => [],
               ),
-            ),
+            ],
           ),
-          CommentInputBar(
-            controller: _commentController,
-            replyingTo: _replyingTo,
-            onDismissReply: () => setState(() => _replyingTo = null),
-            onSubmit: () {
-              _commentController.clear();
-              setState(() => _replyingTo = null);
-              FocusScope.of(context).unfocus();
-            },
-          ),
-        ],
-      ),
+          body: state.isPostLoading
+              ? const Center(child: CircularProgressIndicator())
+              : state.post == null
+              ? Center(child: Text(state.errorMessage ?? l10n.noResultsFound))
+              : Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 8.h),
+                            _buildAuthorSection(context, state, theme),
+                            SizedBox(height: 14.h),
+                            _buildPostContent(state, theme),
+                            if (state.post!.attachmentUrls.isNotEmpty) ...[
+                              SizedBox(height: 14.h),
+                              PostImageGallery(
+                                imageCount: state.post!.attachmentUrls.length,
+                              ),
+                            ],
+                            SizedBox(height: 14.h),
+                            _buildActions(context, state),
+                            Divider(height: 28.h),
+                            _buildCommentsHeader(state, theme, l10n),
+                            SizedBox(height: 16.h),
+                            if (state.isCommentsLoading)
+                              const Center(child: CircularProgressIndicator())
+                            else
+                              ...state.comments.expand((comment) {
+                                final cubit = context.read<PostDetailsCubit>();
+                                return [
+                                  CommentCard(
+                                    userName: comment.authorName,
+                                    timeAgo: _timeAgo(
+                                      context,
+                                      comment.createdAt,
+                                    ),
+                                    text: comment.content,
+                                    likes: comment.likesCount,
+                                    isLiked: state.likedCommentIds.contains(
+                                      comment.commentId,
+                                    ),
+                                    indentLevel: 0,
+                                    onReply: () => setState(() {
+                                      _replyingTo = comment.authorName;
+                                      _replyingToCommentId = comment.commentId;
+                                    }),
+                                    onLikeTap: () => cubit.toggleCommentLike(
+                                      comment.commentId,
+                                    ),
+                                  ),
+                                  if (comment.repliesCount > 0)
+                                    ViewRepliesButton(
+                                      repliesCount: comment.repliesCount,
+                                      isExpanded: state.expandedCommentIds
+                                          .contains(comment.commentId),
+                                      isLoading: state.loadingReplyIds
+                                          .contains(comment.commentId),
+                                      onTap: () => cubit
+                                          .toggleRepliesExpansion(
+                                            comment.commentId,
+                                          ),
+                                    ),
+                                  if (state.expandedCommentIds
+                                      .contains(comment.commentId))
+                                    ...(state.repliesByCommentId[comment
+                                                .commentId] ??
+                                            [])
+                                        .map(
+                                          (reply) => CommentCard(
+                                            userName: reply.authorName,
+                                            timeAgo: _timeAgo(
+                                              context,
+                                              reply.createdAt,
+                                            ),
+                                            text: reply.content,
+                                            likes: reply.likesCount,
+                                            isLiked: state.likedCommentIds
+                                                .contains(reply.commentId),
+                                            indentLevel: 1,
+                                              onLikeTap: () =>
+                                                cubit.toggleCommentLike(
+                                              reply.commentId,
+                                            ),
+                                          ),
+                                        ),
+                                ];
+                              }),
+                            if (state.hasMoreComments &&
+                                !state.isCommentsLoading)
+                              _buildLoadMoreButton(context, state, theme, l10n),
+                            SizedBox(height: 32.h),
+                          ],
+                        ),
+                      ),
+                    ),
+                    CommentInputBar(
+                      controller: _commentController,
+                      replyingTo: _replyingTo,
+                      onDismissReply: () => setState(() {
+                        _replyingTo = null;
+                        _replyingToCommentId = null;
+                      }),
+                      onSubmit: () {
+                        context.read<PostDetailsCubit>().addComment(
+                          _commentController.text,
+                          parentCommentId: _replyingToCommentId,
+                        );
+                        _commentController.clear();
+                        setState(() {
+                          _replyingTo = null;
+                          _replyingToCommentId = null;
+                        });
+                        FocusScope.of(context).unfocus();
+                      },
+                    ),
+                  ],
+                ),
+        );
+      },
     );
   }
 
-  Widget _buildAuthorSection(ThemeData theme) {
+  Widget _buildAuthorSection(
+    BuildContext context,
+    PostDetailsState state,
+    ThemeData theme,
+  ) {
+    final post = state.post!;
     return Row(
       children: [
-        const Expanded(
+        Expanded(
           child: PostCardHeader(
-            userName: 'Ahmed e assan',
-            timeAgo: '2 hours ago',
-            category: 'question',
+            userName: post.authorName,
+            timeAgo: _timeAgo(context, post.createdAt),
+            category: post.postCategory,
           ),
         ),
         IconButton(
@@ -108,21 +206,20 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
     );
   }
 
-  Widget _buildPostContent(ThemeData theme) {
+  Widget _buildPostContent(PostDetailsState state, ThemeData theme) {
+    final post = state.post!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Best Gaming Laptop Under \$1000?',
+          post.title,
           style: MyTextStyle.heading.h2.copyWith(
             color: theme.colorScheme.onSurface,
           ),
         ),
         SizedBox(height: 8.h),
         Text(
-          "I'm looking for recommendations on gaming laptops under \$1000. "
-          "I mainly play FPS games and some AAA titles. Need something with "
-          "good cooling and at least 144Hz display. What are your suggestions?",
+          post.content,
           style: MyTextStyle.body.m.copyWith(
             color: theme.colorScheme.onSurfaceVariant,
           ),
@@ -131,23 +228,30 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
     );
   }
 
-  Widget _buildActions() {
+  Widget _buildActions(BuildContext context, PostDetailsState state) {
+    final post = state.post!;
     return PostCardActions(
-      likes: 142,
-      comments: 28,
-      isLiked: _isLiked,
-      isBookmarked: _isBookmarked,
-      onLikeToggle: () => setState(() => _isLiked = !_isLiked),
-      onBookmarkToggle: () => setState(() => _isBookmarked = !_isBookmarked),
+      likes: post.likesCount,
+      comments: post.commentsCount,
+      isLiked: state.isLiked,
+      isBookmarked: state.isBookmarked,
+      onLikeToggle: () =>
+          context.read<PostDetailsCubit>().togglePostLike(),
+      onBookmarkToggle: () =>
+          context.read<PostDetailsCubit>().toggleBookmark(),
     );
   }
 
-  Widget _buildCommentsSection(ThemeData theme, dynamic l10n) {
+  Widget _buildCommentsHeader(
+    PostDetailsState state,
+    ThemeData theme,
+    dynamic l10n,
+  ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          l10n.commentsCount(28),
+          l10n.commentsCount(state.post!.commentsCount),
           style: MyTextStyle.heading.h3.copyWith(
             color: theme.colorScheme.onSurface,
           ),
@@ -171,84 +275,25 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
     );
   }
 
-  List<Widget> _buildCommentsList() {
-    return [
-      CommentCard(
-        userName: 'Sarah Miller',
-        timeAgo: '1 hour ago',
-        text:
-            "I'd recommend the ASUS TUF Gaming A15. Great performance for the "
-            "price and excellent cooling system. I've been using it for 6 months now.",
-        likes: 24,
-        onReply: () => setState(() => _replyingTo = 'Sarah Miller'),
-      ),
-      CommentCard(
-        userName: 'Ahmed e assan',
-        timeAgo: '45 min ago',
-        text: "Thanks! I'll check it out. What's the battery life like?",
-        likes: 8,
-        indentLevel: 1,
-        onReply: () => setState(() => _replyingTo = 'Ahmed e assan'),
-      ),
-      CommentCard(
-        userName: 'Mike Chen',
-        timeAgo: '2 hours ago',
-        text:
-            'Lenovo Legion 5 is another solid option. Better build quality and '
-            'the keyboard is amazing for gaming.',
-        likes: 18,
-        onReply: () => setState(() => _replyingTo = 'Mike Chen'),
-      ),
-      CommentCard(
-        userName: 'David Park',
-        timeAgo: '3 hours ago',
-        text:
-            "Don't forget to check the RAM and storage options. Make sure you "
-            'can upgrade later if needed.',
-        likes: 12,
-        onReply: () => setState(() => _replyingTo = 'David Park'),
-      ),
-    ];
-  }
-
-  Widget _buildLoadMoreButton(ThemeData theme, dynamic l10n) {
+  Widget _buildLoadMoreButton(
+    BuildContext context,
+    PostDetailsState state,
+    ThemeData theme,
+    dynamic l10n,
+  ) {
     return Center(
-      child: TextButton(
-        onPressed: () {},
-        child: Text(
-          l10n.loadMoreComments,
-          style: MyTextStyle.action.m.copyWith(
-            color: theme.colorScheme.primary,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRelatedPosts(ThemeData theme, dynamic l10n) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          l10n.relatedPosts,
-          style: MyTextStyle.heading.h3.copyWith(
-            color: theme.colorScheme.onSurface,
-          ),
-        ),
-        SizedBox(height: 12.h),
-        const RelatedPostCard(
-          title: 'Best Budget Gaming PC Build 2024',
-          category: 'Gaming',
-          likes: 89,
-          comments: 34,
-        ),
-        const RelatedPostCard(
-          title: '144Hz vs 240Hz Monitors: Worth the Upgrade?',
-          category: 'Gaming',
-          likes: 156,
-          comments: 67,
-        ),
-      ],
+      child: state.isLoadingMoreComments
+          ? const CircularProgressIndicator()
+          : TextButton(
+              onPressed: () =>
+                  context.read<PostDetailsCubit>().loadMoreComments(),
+              child: Text(
+                l10n.loadMoreComments,
+                style: MyTextStyle.action.m.copyWith(
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+            ),
     );
   }
 }

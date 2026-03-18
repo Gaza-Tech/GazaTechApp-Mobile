@@ -11,6 +11,7 @@ class CommentCard extends StatelessWidget {
   final bool isLiked;
   final int indentLevel;
   final VoidCallback? onReply;
+  final VoidCallback? onLikeTap;
 
   const CommentCard({
     super.key,
@@ -21,6 +22,7 @@ class CommentCard extends StatelessWidget {
     this.isLiked = false,
     this.indentLevel = 0,
     this.onReply,
+    this.onLikeTap,
   });
 
   @override
@@ -90,10 +92,15 @@ class CommentCard extends StatelessWidget {
   Widget _buildActions(BuildContext context, ThemeData theme) {
     return Row(
       children: [
-        Icon(
-          isLiked ? Icons.favorite : Icons.favorite_border,
-          size: 16.sp,
-          color: theme.colorScheme.onSurfaceVariant,
+        GestureDetector(
+          onTap: onLikeTap,
+          child: Icon(
+            isLiked ? Icons.favorite : Icons.favorite_border,
+            size: 16.sp,
+            color: isLiked
+                ? theme.colorScheme.error
+                : theme.colorScheme.onSurfaceVariant,
+          ),
         ),
         SizedBox(width: 4.w),
         Text(
@@ -102,16 +109,18 @@ class CommentCard extends StatelessWidget {
             color: theme.colorScheme.onSurfaceVariant,
           ),
         ),
-        SizedBox(width: 16.w),
-        GestureDetector(
-          onTap: onReply,
-          child: Text(
-            context.l10n.reply,
-            style: MyTextStyle.action.s.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
+        if (onReply != null) ...[
+          SizedBox(width: 16.w),
+          GestureDetector(
+            onTap: onReply,
+            child: Text(
+              context.l10n.reply,
+              style: MyTextStyle.action.s.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
-        ),
+        ],
       ],
     );
   }

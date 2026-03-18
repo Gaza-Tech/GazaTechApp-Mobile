@@ -36,9 +36,15 @@ import 'package:gaza_tech/features/add_listing/data/services/add_listing_api_ser
 import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
 import 'package:gaza_tech/features/listing_details/data/repos/listing_details_repo.dart';
 import 'package:gaza_tech/features/listing_details/data/services/listing_details_api_service.dart';
-import 'package:gaza_tech/features/search/cubit/search_cubit.dart';
-import 'package:gaza_tech/features/search/data/repos/search_repo.dart';
-import 'package:gaza_tech/features/search/data/services/search_api_service.dart';
+import 'package:gaza_tech/features/marketplace_search/cubit/search_cubit.dart';
+import 'package:gaza_tech/features/marketplace_search/data/repos/search_repo.dart';
+import 'package:gaza_tech/features/marketplace_search/data/services/search_api_service.dart';
+import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
+import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
+import 'package:gaza_tech/features/community/data/repos/community_repo.dart';
+import 'package:gaza_tech/features/community/data/services/community_api_service.dart';
+import 'package:gaza_tech/features/add_post/cubit/add_post_cubit.dart';
+import 'package:gaza_tech/features/community_search/cubit/community_search_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -151,4 +157,20 @@ Future<void> setupGetIt() async {
   );
   getIt.registerLazySingleton<SearchRepo>(() => SearchRepo(getIt()));
   getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt()));
+
+  // 14. Community
+  getIt.registerLazySingleton<CommunityApiService>(
+    () => CommunityApiService(getIt()),
+  );
+  getIt.registerLazySingleton<CommunityRepo>(() => CommunityRepo(getIt()));
+  getIt.registerFactory<CommunityCubit>(() => CommunityCubit(getIt()));
+  getIt.registerFactoryParam<PostDetailsCubit, String, void>(
+    (postId, _) => PostDetailsCubit(getIt(), postId),
+  );
+  getIt.registerFactory<AddPostCubit>(() => AddPostCubit(getIt()));
+
+  // 15. Community Search
+  getIt.registerFactory<CommunitySearchCubit>(
+    () => CommunitySearchCubit(getIt()),
+  );
 }

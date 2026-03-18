@@ -1,40 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
-import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/core/widgets/sort_button.dart';
+import 'package:gaza_tech/core/widgets/tappable_search_bar.dart';
 
 class CommunitySearchBar extends StatelessWidget {
-  const CommunitySearchBar({super.key});
+  final VoidCallback? onSortTap;
+  final VoidCallback? onSearchTap;
+  final String sortLabel;
+
+  const CommunitySearchBar({
+    super.key,
+    this.onSortTap,
+    this.onSearchTap,
+    required this.sortLabel,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
-      decoration: BoxDecoration(
-        color: isDark
-            ? theme.colorScheme.surfaceContainerHighest
-            : theme.colorScheme.surfaceContainerHigh,
-        borderRadius: BorderRadius.circular(12.r),
-      ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.search,
-            color: theme.colorScheme.onSurfaceVariant,
-            size: 22.sp,
+    return Row(
+      children: [
+        Expanded(
+          child: TappableSearchBar(
+            onTap: onSearchTap,
+            hintText: context.l10n.searchCommunity,
           ),
-          SizedBox(width: 10.w),
-          Text(
-            context.l10n.searchCommunity,
-            style: MyTextStyle.body.m.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-        ],
-      ),
+        ),
+        SizedBox(width: 8.w),
+        SortButton(onTap: onSortTap, label: sortLabel),
+      ],
     );
   }
 }
