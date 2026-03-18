@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../data/models/category_model.dart';
 import '../data/models/listing_model.dart';
+import '../data/models/marketplace_sort.dart';
 
 part 'marketplace_state.freezed.dart';
 
@@ -24,6 +25,9 @@ abstract class MarketplaceState with _$MarketplaceState {
     // Loading states
     @Default(false) bool isInitialLoading,
     @Default(false) bool isLoadingMore,
+
+    // Sort
+    @Default(MarketplaceSort.newest) MarketplaceSort activeSort,
 
     // Error state
     String? errorMessage,

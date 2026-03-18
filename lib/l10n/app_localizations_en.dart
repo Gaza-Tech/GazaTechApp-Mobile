@@ -531,6 +531,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get conditionFilter => 'Condition';
 
   @override
+  String get searchMarketplace => 'Search marketplace...';
+
+  @override
   String get searchCommunity => 'Search community...';
 
   @override

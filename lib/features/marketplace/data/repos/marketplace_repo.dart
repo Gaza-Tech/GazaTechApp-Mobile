@@ -3,6 +3,7 @@ import 'package:gaza_tech/core/netowoks/supabase_error_handler.dart';
 import '../models/category_model.dart';
 import '../models/listing_model.dart';
 import '../models/listings_response.dart';
+import '../models/marketplace_sort.dart';
 import '../services/marketplace_api_service.dart';
 
 class MarketplaceRepo {
@@ -26,11 +27,13 @@ class MarketplaceRepo {
   Future<ApiResult<ListingsResponse>> getListingsByCategory({
     required String? categoryId,
     required int page,
+    MarketplaceSort sort = MarketplaceSort.newest,
   }) async {
     try {
       final data = await _apiService.fetchListingsByCategory(
         categoryId: categoryId,
         page: page,
+        sort: sort,
       );
 
       // Check if we got more items than pageSize (means there are more pages)

@@ -1,4 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../models/marketplace_sort.dart';
 
 class MarketplaceApiService {
   final SupabaseClient _supabase;
@@ -13,6 +14,7 @@ class MarketplaceApiService {
   Future<List<Map<String, dynamic>>> fetchListingsByCategory({
     required String? categoryId,
     required int page,
+    MarketplaceSort sort = MarketplaceSort.newest,
   }) async {
     final startIndex = page * pageSize;
     // Fetch pageSize + 1 to check if there are more items
@@ -29,10 +31,28 @@ class MarketplaceApiService {
       query = query.eq('category_id', categoryId);
     }
 
-    // Order by created_at descending (newest first) and apply pagination
-    final data = await query
-        .order('created_at', ascending: false)
-        .range(startIndex, endIndex);
+    // Apply sort order and pagination
+    final List<dynamic> data;
+    switch (sort) {
+      case MarketplaceSort.newest:
+        data = await query
+            .order('created_at', ascending: false)
+            .range(startIndex, endIndex);
+      case MarketplaceSort.oldest:
+        data = await query
+            .order('created_at', ascending: true)
+            .range(startIndex, endIndex);
+      case MarketplaceSort.priceLowToHigh:
+        data = await query
+            .order('price', ascending: true)
+            .order('created_at', ascending: false)
+            .range(startIndex, endIndex);
+      case MarketplaceSort.priceHighToLow:
+        data = await query
+            .order('price', ascending: false)
+            .order('created_at', ascending: false)
+            .range(startIndex, endIndex);
+    }
 
     return List<Map<String, dynamic>>.from(data);
   }

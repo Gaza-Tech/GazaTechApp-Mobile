@@ -216,6 +216,8 @@
   "priceMax": "الحد الأقصى",
   "conditionFilter": "الحالة",
 
+  "searchMarketplace": "ابحث في السوق...",
+
   "searchCommunity": "ابحث في المجتمع...",
   "createPost": "إنشاء منشور",
   "recent": "الأحدث",

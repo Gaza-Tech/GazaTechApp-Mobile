@@ -529,6 +529,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get conditionFilter => 'الحالة';
 
   @override
+  String get searchMarketplace => 'ابحث في السوق...';
+
+  @override
   String get searchCommunity => 'ابحث في المجتمع...';
 
   @override

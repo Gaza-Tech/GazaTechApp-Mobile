@@ -1082,6 +1082,12 @@ abstract class AppLocalizations {
   /// **'Condition'**
   String get conditionFilter;
 
+  /// No description provided for @searchMarketplace.
+  ///
+  /// In en, this message translates to:
+  /// **'Search marketplace...'**
+  String get searchMarketplace;
+
   /// No description provided for @searchCommunity.
   ///
   /// In en, this message translates to:

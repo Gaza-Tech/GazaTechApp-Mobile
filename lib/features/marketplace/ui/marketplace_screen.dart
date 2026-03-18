@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
+import 'package:gaza_tech/core/widgets/sort_button.dart';
+import 'package:gaza_tech/core/widgets/tappable_search_bar.dart';
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_state.dart';
+import 'package:gaza_tech/features/marketplace/data/models/marketplace_sort.dart';
 import 'package:gaza_tech/features/marketplace/ui/widgets/category_tab_bar.dart';
 import 'package:gaza_tech/features/marketplace/ui/widgets/listings_tab_view.dart';
+import 'package:gaza_tech/features/marketplace/ui/widgets/marketplace_sort_sheet.dart';
 
 class MarketplaceScreen extends StatefulWidget {
   final ScrollController scrollController;
@@ -58,6 +63,16 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
     super.dispose();
   }
 
+  String _sortLabel(BuildContext context, MarketplaceSort sort) {
+    final l10n = context.l10n;
+    return switch (sort) {
+      MarketplaceSort.newest => l10n.sortNewest,
+      MarketplaceSort.oldest => l10n.oldest,
+      MarketplaceSort.priceLowToHigh => l10n.sortPriceLowToHigh,
+      MarketplaceSort.priceHighToLow => l10n.sortPriceHighToLow,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MarketplaceCubit, MarketplaceState>(
@@ -86,21 +101,40 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
                 floating: true,
                 snap: true,
                 pinned: false,
-                actions: [
-                  IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () => context.pushNamed(MyRoutes.search),
-                  ),
-                ],
                 bottom: PreferredSize(
-                  preferredSize: const Size.fromHeight(56),
-                  child: CategoryTabBar(
-                    categories: state.categories,
-                    selectedIndex: _tabController!.index,
-                    tabController: _tabController!,
-                    onTabChanged: (index) {
-                      _tabController!.animateTo(index);
-                    },
+                  preferredSize: Size.fromHeight(96.h),
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 8.h),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TappableSearchBar(
+                                onTap: () =>
+                                    context.pushNamed(MyRoutes.search),
+                                hintText: context.l10n.searchMarketplace,
+                              ),
+                            ),
+                            SizedBox(width: 8.w),
+                            SortButton(
+                              label: _sortLabel(context, state.activeSort),
+                              onTap: () =>
+                                  showMarketplaceSortSheet(context),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 8.h),
+                        CategoryTabBar(
+                          categories: state.categories,
+                          selectedIndex: _tabController!.index,
+                          tabController: _tabController!,
+                          onTabChanged: (index) {
+                            _tabController!.animateTo(index);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

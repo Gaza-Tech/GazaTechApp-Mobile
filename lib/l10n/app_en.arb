@@ -278,6 +278,8 @@
   "priceMax": "Max",
   "conditionFilter": "Condition",
 
+  "searchMarketplace": "Search marketplace...",
+
   "searchCommunity": "Search community...",
   "createPost": "Create Post",
   "recent": "Recent",
