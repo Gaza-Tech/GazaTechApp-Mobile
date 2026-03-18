@@ -21,8 +21,8 @@ import 'package:gaza_tech/features/add_listing/ui/add_listing_screen.dart';
 import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
 import 'package:gaza_tech/features/listing_details/ui/listing_details_screen.dart';
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
-import 'package:gaza_tech/features/search/cubit/search_cubit.dart';
-import 'package:gaza_tech/features/search/ui/search_screen.dart';
+import 'package:gaza_tech/features/marketplace_search/cubit/search_cubit.dart';
+import 'package:gaza_tech/features/marketplace_search/ui/marketplace_search_screen.dart';
 import 'package:gaza_tech/features/add_post/cubit/add_post_cubit.dart';
 import 'package:gaza_tech/features/add_post/ui/add_post_screen.dart';
 import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
@@ -115,9 +115,10 @@ class MyRouter {
       case MyRoutes.search:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) =>
-                getIt<SearchCubit>()..loadFilterData()..loadRecentSearches(),
-            child: const SearchScreen(),
+            create: (context) => getIt<SearchCubit>()
+              ..loadFilterData()
+              ..loadRecentSearches(),
+            child: const MarketpalceSearchScreen(),
           ),
         );
       case MyRoutes.createPost:
@@ -131,10 +132,9 @@ class MyRouter {
         final postId = settings.arguments as String;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) =>
-                getIt<PostDetailsCubit>(param1: postId)
-                  ..loadPost()
-                  ..loadComments(),
+            create: (context) => getIt<PostDetailsCubit>(param1: postId)
+              ..loadPost()
+              ..loadComments(),
             child: const PostDetailsScreen(),
           ),
         );

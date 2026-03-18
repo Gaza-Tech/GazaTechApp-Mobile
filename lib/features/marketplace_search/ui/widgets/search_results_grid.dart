@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/marketplace/ui/widgets/product_card_grid.dart';
-import 'package:gaza_tech/features/search/cubit/search_cubit.dart';
-import 'package:gaza_tech/features/search/cubit/search_state.dart';
+import 'package:gaza_tech/features/marketplace_search/cubit/search_cubit.dart';
+import 'package:gaza_tech/features/marketplace_search/cubit/search_state.dart';
 
 class SearchResultsGrid extends StatelessWidget {
   const SearchResultsGrid({super.key});

@@ -6,8 +6,8 @@ import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/filter_sheet_shell.dart';
 import 'package:gaza_tech/features/add_listing/data/models/location_model.dart';
 import 'package:gaza_tech/features/marketplace/data/models/category_model.dart';
-import 'package:gaza_tech/features/search/cubit/search_cubit.dart';
-import 'package:gaza_tech/features/search/data/models/search_filters_model.dart';
+import 'package:gaza_tech/features/marketplace_search/cubit/search_cubit.dart';
+import 'package:gaza_tech/features/marketplace_search/data/models/search_filters_model.dart';
 
 void showFilterBottomSheet(BuildContext context) {
   final cubit = context.read<SearchCubit>();

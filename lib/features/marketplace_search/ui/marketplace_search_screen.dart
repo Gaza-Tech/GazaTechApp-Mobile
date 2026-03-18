@@ -6,14 +6,14 @@ import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/active_filters_bar.dart';
 import 'package:gaza_tech/core/widgets/recent_searches_view.dart';
 import 'package:gaza_tech/core/widgets/search_app_bar.dart';
-import 'package:gaza_tech/features/search/cubit/search_cubit.dart';
-import 'package:gaza_tech/features/search/cubit/search_state.dart';
-import 'package:gaza_tech/features/search/data/models/search_filters_model.dart';
+import 'package:gaza_tech/features/marketplace_search/cubit/search_cubit.dart';
+import 'package:gaza_tech/features/marketplace_search/cubit/search_state.dart';
+import 'package:gaza_tech/features/marketplace_search/data/models/search_filters_model.dart';
 import 'widgets/filter_bottom_sheet.dart';
 import 'widgets/search_results_grid.dart';
 
-class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
+class MarketpalceSearchScreen extends StatelessWidget {
+  const MarketpalceSearchScreen({super.key});
 
   List<({String label, VoidCallback onRemove})> _buildFilterChips(
     BuildContext context,
@@ -117,12 +117,14 @@ class SearchScreen extends StatelessWidget {
         actions: [
           BlocBuilder<SearchCubit, SearchState>(
             buildWhen: (prev, curr) =>
-                prev.filters.hasActiveFilters != curr.filters.hasActiveFilters ||
+                prev.filters.hasActiveFilters !=
+                    curr.filters.hasActiveFilters ||
                 prev.filters.sort != curr.filters.sort,
             builder: (context, state) {
               return IconButton(
                 icon: Badge(
-                  isLabelVisible: state.filters.hasActiveFilters ||
+                  isLabelVisible:
+                      state.filters.hasActiveFilters ||
                       state.filters.sort != SearchSortOption.newest,
                   child: const Icon(Icons.tune_rounded),
                 ),
@@ -189,10 +191,7 @@ class SearchScreen extends StatelessWidget {
           children: [
             Icon(Icons.search_off, size: 64.sp, color: Colors.grey),
             SizedBox(height: 16.h),
-            Text(
-              context.l10n.noResultsFound,
-              style: MyTextStyle.heading.h3,
-            ),
+            Text(context.l10n.noResultsFound, style: MyTextStyle.heading.h3),
             SizedBox(height: 8.h),
             Text(
               context.l10n.noResultsSubtitle,

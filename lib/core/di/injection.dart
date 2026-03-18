@@ -36,9 +36,9 @@ import 'package:gaza_tech/features/add_listing/data/services/add_listing_api_ser
 import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
 import 'package:gaza_tech/features/listing_details/data/repos/listing_details_repo.dart';
 import 'package:gaza_tech/features/listing_details/data/services/listing_details_api_service.dart';
-import 'package:gaza_tech/features/search/cubit/search_cubit.dart';
-import 'package:gaza_tech/features/search/data/repos/search_repo.dart';
-import 'package:gaza_tech/features/search/data/services/search_api_service.dart';
+import 'package:gaza_tech/features/marketplace_search/cubit/search_cubit.dart';
+import 'package:gaza_tech/features/marketplace_search/data/repos/search_repo.dart';
+import 'package:gaza_tech/features/marketplace_search/data/services/search_api_service.dart';
 import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
 import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
 import 'package:gaza_tech/features/community/data/repos/community_repo.dart';
