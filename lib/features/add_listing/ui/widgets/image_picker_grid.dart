@@ -85,17 +85,11 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.camera_alt_rounded,
-                size: 32.sp,
-                color: contentColor,
-              ),
+              Icon(Icons.camera_alt_rounded, size: 32.sp, color: contentColor),
               const VerticalSpace(4),
               Text(
                 context.l10n.addMainImage,
-                style: MyTextStyle.caption.m.copyWith(
-                  color: contentColor,
-                ),
+                style: MyTextStyle.caption.m.copyWith(color: contentColor),
               ),
             ],
           ),
@@ -112,7 +106,11 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
         border: Border.all(color: borderColor, width: 1.5),
       ),
       child: Center(
-        child: Icon(Icons.add, size: 28.sp, color: Theme.of(context).iconTheme.color),
+        child: Icon(
+          Icons.add,
+          size: 28.sp,
+          color: Theme.of(context).iconTheme.color,
+        ),
       ),
     );
   }

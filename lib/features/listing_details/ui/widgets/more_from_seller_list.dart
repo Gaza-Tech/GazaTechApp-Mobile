@@ -22,33 +22,28 @@ class MoreFromSellerList extends StatelessWidget {
     final isArabic = Localizations.localeOf(context).languageCode == 'ar';
 
     return Column(
-      children: listings
-          .map(
-            (listing) {
-              final locationName = isArabic
-                  ? (listing.locationNameAr.isNotEmpty
-                      ? listing.locationNameAr
-                      : listing.locationName)
-                  : listing.locationName;
-              final timeAgo = _formatTimeAgo(context, listing.createdAt);
-              return Padding(
-                padding: EdgeInsets.only(bottom: 12.h),
-                child: ProductCardVertical(
-                  name: listing.title,
-                  price:
-                      '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}',
-                  location: locationName,
-                  timeAgo: timeAgo,
-                  imageUrl: listing.thumbnailUrl,
-                  onTap: () => context.pushNamed(
-                    MyRoutes.listingDetails,
-                    arguments: listing.listingId,
-                  ),
-                ),
-              );
-            },
-          )
-          .toList(),
+      children: listings.map((listing) {
+        final locationName = isArabic
+            ? (listing.locationNameAr.isNotEmpty
+                  ? listing.locationNameAr
+                  : listing.locationName)
+            : listing.locationName;
+        final timeAgo = _formatTimeAgo(context, listing.createdAt);
+        return Padding(
+          padding: EdgeInsets.only(bottom: 12.h),
+          child: ProductCardVertical(
+            name: listing.title,
+            price: '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}',
+            location: locationName,
+            timeAgo: timeAgo,
+            imageUrl: listing.thumbnailUrl,
+            onTap: () => context.pushNamed(
+              MyRoutes.listingDetails,
+              arguments: listing.listingId,
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/helpers/url_launcher_helper.dart';
+import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/add_listing/ui/widgets/labeled_field.dart';
 import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
@@ -51,7 +53,12 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
             loading: () => const Center(child: CircularProgressIndicator()),
             failure: (message) => _buildErrorState(context, message),
             success: (listing, similarListings, sellerListings) =>
-                _buildContent(context, listing, similarListings, sellerListings),
+                _buildContent(
+                  context,
+                  listing,
+                  similarListings,
+                  sellerListings,
+                ),
           );
         },
       ),
@@ -95,18 +102,20 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
 
     final locationName = isArabic
         ? (listing.locationNameAr.isNotEmpty
-            ? listing.locationNameAr
-            : listing.locationName)
+              ? listing.locationNameAr
+              : listing.locationName)
         : listing.locationName;
 
     final categoryName = isArabic
         ? (listing.categoryNameAr.isNotEmpty
-            ? listing.categoryNameAr
-            : listing.categoryName)
+              ? listing.categoryNameAr
+              : listing.categoryName)
         : listing.categoryName;
 
-    final conditionLabel =
-        ConditionTagHelper.getLabel(context, listing.productCondition);
+    final conditionLabel = ConditionTagHelper.getLabel(
+      context,
+      listing.productCondition,
+    );
     final priceText =
         '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}';
     final timeAgo = _formatTimeAgo(l10n, listing.createdAt);
@@ -137,10 +146,7 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
                 const VerticalSpace(16),
 
                 // Tags
-                ListingTags(
-                  condition: conditionLabel,
-                  category: categoryName,
-                ),
+                ListingTags(condition: conditionLabel, category: categoryName),
                 const VerticalSpace(12),
 
                 // Title, price, location
@@ -156,16 +162,20 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
                 const VerticalSpace(16),
 
                 // Seller information
-                LabeledField(
-                  label: l10n.sellerInformation,
-                  isRequired: false,
-                ),
+                LabeledField(label: l10n.sellerInformation, isRequired: false),
                 const VerticalSpace(12),
                 SellerInfoCard(
                   sellerName: listing.sellerName,
                   memberSince: memberSince,
-                  onContactSeller: () {},
-                  onViewProfile: () {},
+                  onContactSeller: () => _handleContactSeller(context, listing),
+                  onViewProfile: () => Navigator.pushNamed(
+                    context,
+                    MyRoutes.profile,
+                    arguments: {
+                      'userId': listing.sellerId,
+                      'isOwnProfile': false,
+                    },
+                  ),
                 ),
                 const VerticalSpace(16),
 
@@ -231,6 +241,36 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
     );
   }
 
+  void _handleContactSeller(
+    BuildContext context,
+    ListingDetailModel listing,
+  ) async {
+    final l10n = context.l10n;
+    if (listing.sellerWhatsappNumber != null) {
+      final success = await UrlLauncherHelper.launchWhatsApp(
+        listing.sellerWhatsappNumber!,
+      );
+      if (!success && context.mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.couldNotOpenLink)));
+      }
+    } else if (listing.sellerPhoneNumber != null) {
+      final success = await UrlLauncherHelper.launchPhoneDialer(
+        listing.sellerPhoneNumber!,
+      );
+      if (!success && context.mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.couldNotOpenLink)));
+      }
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.contactUnavailable)));
+    }
+  }
+
   String _formatTimeAgo(AppLocalizations l10n, DateTime createdAt) {
     final difference = DateTime.now().difference(createdAt);
     if (difference.inDays >= 7) {
@@ -244,8 +284,18 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
 
   String _formatDate(DateTime date) {
     final months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${months[date.month - 1]} ${date.year}';
   }

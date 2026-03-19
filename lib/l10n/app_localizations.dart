@@ -1417,6 +1417,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'50+ Comments'**
   String get comments50Plus;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// No description provided for @bio.
+  ///
+  /// In en, this message translates to:
+  /// **'Bio'**
+  String get bio;
+
+  /// No description provided for @bioHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell others about yourself...'**
+  String get bioHint;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phoneNumber;
+
+  /// No description provided for @whatsappNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'WhatsApp Number'**
+  String get whatsappNumber;
+
+  /// No description provided for @socialLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'Social Links'**
+  String get socialLinks;
+
+  /// No description provided for @facebookLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Facebook'**
+  String get facebookLink;
+
+  /// No description provided for @instagramLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Instagram'**
+  String get instagramLink;
+
+  /// No description provided for @twitterLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Twitter / X'**
+  String get twitterLink;
+
+  /// No description provided for @websiteLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Website'**
+  String get websiteLink;
+
+  /// No description provided for @changeAvatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Photo'**
+  String get changeAvatar;
+
+  /// No description provided for @removeAvatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Photo'**
+  String get removeAvatar;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get saveChanges;
+
+  /// No description provided for @profileUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully'**
+  String get profileUpdated;
+
+  /// No description provided for @myPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Posts'**
+  String get myPosts;
+
+  /// No description provided for @myListings.
+  ///
+  /// In en, this message translates to:
+  /// **'Listings'**
+  String get myListings;
+
+  /// No description provided for @bookmarks.
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmarks'**
+  String get bookmarks;
+
+  /// No description provided for @noPostsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No posts yet'**
+  String get noPostsYet;
+
+  /// No description provided for @noListingsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No listings yet'**
+  String get noListingsYet;
+
+  /// No description provided for @noBookmarksYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No bookmarks yet'**
+  String get noBookmarksYet;
+
+  /// No description provided for @personalInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Info'**
+  String get personalInfo;
+
+  /// No description provided for @contactInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Info'**
+  String get contactInfo;
+
+  /// No description provided for @verified.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified'**
+  String get verified;
+
+  /// No description provided for @avatarUploadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to upload photo'**
+  String get avatarUploadFailed;
+
+  /// No description provided for @contactUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact information is not available for this seller'**
+  String get contactUnavailable;
+
+  /// No description provided for @couldNotOpenLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open this link'**
+  String get couldNotOpenLink;
+
+  /// No description provided for @website.
+  ///
+  /// In en, this message translates to:
+  /// **'Website'**
+  String get website;
 }
 
 class _AppLocalizationsDelegate

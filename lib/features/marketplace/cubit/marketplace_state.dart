@@ -63,11 +63,9 @@ abstract class MarketplaceState with _$MarketplaceState {
   List<ListingModel> listingsFor(String category) =>
       listingsByCategory[category] ?? [];
 
-  bool hasMoreFor(String category) =>
-      hasMoreByCategory[category] ?? true;
+  bool hasMoreFor(String category) => hasMoreByCategory[category] ?? true;
 
-  int currentPageFor(String category) =>
-      currentPageByCategory[category] ?? 0;
+  int currentPageFor(String category) => currentPageByCategory[category] ?? 0;
 
   String? categoryIdFor(String categorySlug) {
     if (categorySlug == 'all') return null;

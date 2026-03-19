@@ -4,10 +4,10 @@ import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
 import 'package:gaza_tech/features/add_listing/data/models/location_model.dart';
 import '../data/models/marketplace_search_filters_model.dart';
 
-part 'search_state.freezed.dart';
+part 'marketplace_search_state.freezed.dart';
 
 @freezed
-abstract class MarketplaceSearchState with _$SearchState {
+abstract class MarketplaceSearchState with _$MarketplaceSearchState {
   const MarketplaceSearchState._();
 
   const factory MarketplaceSearchState({
@@ -32,7 +32,7 @@ abstract class MarketplaceSearchState with _$SearchState {
 
     // Error
     String? errorMessage,
-  }) = _SearchState;
+  }) = _MarketplaceSearchState;
 
   bool get hasResults => results.isNotEmpty;
   bool get isEmpty => !isSearching && results.isEmpty && keyword.isNotEmpty;

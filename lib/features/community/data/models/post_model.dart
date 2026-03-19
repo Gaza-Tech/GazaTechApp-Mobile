@@ -10,7 +10,6 @@ PostAuthorModel? _authorFromJson(dynamic value) {
   return null;
 }
 
-
 List<String> _attachmentUrlsFromJson(dynamic value) {
   if (value is List) {
     return value

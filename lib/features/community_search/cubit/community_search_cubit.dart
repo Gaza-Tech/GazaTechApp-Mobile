@@ -18,8 +18,9 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
   final TextEditingController searchController = TextEditingController();
 
   Future<void> loadRecentSearches() async {
-    final raw =
-        await SharedPrefHelper.getString(SharedPrefKeys.communityRecentSearches);
+    final raw = await SharedPrefHelper.getString(
+      SharedPrefKeys.communityRecentSearches,
+    );
     if (raw.isEmpty) return;
     try {
       final decoded = List<String>.from(jsonDecode(raw) as List);
@@ -42,15 +43,17 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
       jsonEncode(capped),
     );
 
-    emit(state.copyWith(
-      keyword: keyword,
-      isSearching: true,
-      results: [],
-      currentPage: 0,
-      hasMore: true,
-      errorMessage: null,
-      recentSearches: capped,
-    ));
+    emit(
+      state.copyWith(
+        keyword: keyword,
+        isSearching: true,
+        results: [],
+        currentPage: 0,
+        hasMore: true,
+        errorMessage: null,
+        recentSearches: capped,
+      ),
+    );
 
     final result = await _repo.searchPosts(
       keyword: keyword,
@@ -60,25 +63,27 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
 
     result.when(
       success: (response) {
-        final likedIds =
-            response.posts.where((p) => p.isLiked).map((p) => p.postId).toSet();
+        final likedIds = response.posts
+            .where((p) => p.isLiked)
+            .map((p) => p.postId)
+            .toSet();
         final bookmarkedIds = response.posts
             .where((p) => p.isBookmarked)
             .map((p) => p.postId)
             .toSet();
-        emit(state.copyWith(
-          results: response.posts,
-          hasMore: response.hasMore,
-          currentPage: 0,
-          isSearching: false,
-          likedPostIds: likedIds,
-          bookmarkedPostIds: bookmarkedIds,
-        ));
+        emit(
+          state.copyWith(
+            results: response.posts,
+            hasMore: response.hasMore,
+            currentPage: 0,
+            isSearching: false,
+            likedPostIds: likedIds,
+            bookmarkedPostIds: bookmarkedIds,
+          ),
+        );
       },
-      failure: (error) => emit(state.copyWith(
-        isSearching: false,
-        errorMessage: error.message,
-      )),
+      failure: (error) =>
+          emit(state.copyWith(isSearching: false, errorMessage: error.message)),
     );
   }
 
@@ -104,32 +109,38 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
             .where((p) => p.isBookmarked)
             .map((p) => p.postId)
             .toSet();
-        emit(state.copyWith(
-          results: [...state.results, ...response.posts],
-          hasMore: response.hasMore,
-          currentPage: nextPage,
-          isLoadingMore: false,
-          likedPostIds: {...state.likedPostIds, ...newLikedIds},
-          bookmarkedPostIds: {...state.bookmarkedPostIds, ...newBookmarkedIds},
-        ));
+        emit(
+          state.copyWith(
+            results: [...state.results, ...response.posts],
+            hasMore: response.hasMore,
+            currentPage: nextPage,
+            isLoadingMore: false,
+            likedPostIds: {...state.likedPostIds, ...newLikedIds},
+            bookmarkedPostIds: {
+              ...state.bookmarkedPostIds,
+              ...newBookmarkedIds,
+            },
+          ),
+        );
       },
-      failure: (error) => emit(state.copyWith(
-        isLoadingMore: false,
-        errorMessage: error.message,
-      )),
+      failure: (error) => emit(
+        state.copyWith(isLoadingMore: false, errorMessage: error.message),
+      ),
     );
   }
 
   void clearSearch() {
     searchController.clear();
-    emit(state.copyWith(
-      keyword: '',
-      results: [],
-      currentPage: 0,
-      hasMore: true,
-      isSearching: false,
-      errorMessage: null,
-    ));
+    emit(
+      state.copyWith(
+        keyword: '',
+        results: [],
+        currentPage: 0,
+        hasMore: true,
+        isSearching: false,
+        errorMessage: null,
+      ),
+    );
   }
 
   Future<void> updateFilter(SearchFilter filter) async {
@@ -207,10 +218,7 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
           }
           return p;
         }).toList();
-        emit(state.copyWith(
-          likedPostIds: revertIds,
-          results: revertedResults,
-        ));
+        emit(state.copyWith(likedPostIds: revertIds, results: revertedResults));
       },
     );
   }

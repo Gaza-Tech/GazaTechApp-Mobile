@@ -8,6 +8,7 @@ import 'package:gaza_tech/features/community/ui/widgets/community_category_chips
 import 'package:gaza_tech/features/community/data/models/community_sort.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_search_bar.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_sort_sheet.dart';
 import 'package:gaza_tech/features/community/ui/widgets/posts_tab_view.dart';
 
@@ -36,10 +37,7 @@ class _CommunityScreenState extends State<CommunityScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(
-      length: _categoryValues.length,
-      vsync: this,
-    );
+    _tabController = TabController(length: _categoryValues.length, vsync: this);
     _tabController.addListener(_onTabChanged);
   }
 
@@ -99,7 +97,17 @@ class _CommunityScreenState extends State<CommunityScreen>
                 actions: [
                   IconButton(
                     icon: Icon(Icons.person_outline, size: 26.sp),
-                    onPressed: () {},
+                    onPressed: () {
+                      final userId =
+                          Supabase.instance.client.auth.currentUser?.id;
+                      if (userId != null) {
+                        Navigator.pushNamed(
+                          context,
+                          MyRoutes.profile,
+                          arguments: {'userId': userId, 'isOwnProfile': true},
+                        );
+                      }
+                    },
                   ),
                 ],
                 bottom: PreferredSize(
@@ -112,8 +120,7 @@ class _CommunityScreenState extends State<CommunityScreen>
                           vertical: 8.h,
                         ),
                         child: CommunitySearchBar(
-                          onSortTap: () =>
-                              showCommunitySortSheet(context),
+                          onSortTap: () => showCommunitySortSheet(context),
                           onSearchTap: () => Navigator.pushNamed(
                             context,
                             MyRoutes.communitySearch,
@@ -124,8 +131,7 @@ class _CommunityScreenState extends State<CommunityScreen>
                       SizedBox(height: 4.h),
                       CommunityCategoryChips(
                         categories: categories,
-                        selectedIndex:
-                            selectedIndex < 0 ? 0 : selectedIndex,
+                        selectedIndex: selectedIndex < 0 ? 0 : selectedIndex,
                         onCategoryChanged: (index) =>
                             _tabController.animateTo(index),
                       ),

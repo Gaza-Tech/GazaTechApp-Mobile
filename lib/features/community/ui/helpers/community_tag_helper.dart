@@ -14,7 +14,7 @@ class CommunityTagHelper {
         return l10n.news;
       case 'troubleshooting':
         return l10n.troubleshooting;
-    default:
+      default:
         return categoryKey;
     }
   }

@@ -34,14 +34,11 @@ abstract class CommunityState with _$CommunityState {
   const CommunityState._();
 
   // Per-category helpers
-  List<PostModel> postsFor(String category) =>
-      postsByCategory[category] ?? [];
+  List<PostModel> postsFor(String category) => postsByCategory[category] ?? [];
 
-  bool hasMoreFor(String category) =>
-      hasMoreByCategory[category] ?? true;
+  bool hasMoreFor(String category) => hasMoreByCategory[category] ?? true;
 
-  int currentPageFor(String category) =>
-      currentPageByCategory[category] ?? 0;
+  int currentPageFor(String category) => currentPageByCategory[category] ?? 0;
 
   bool get isError => errorMessage != null;
 }

@@ -45,6 +45,13 @@ import 'package:gaza_tech/features/community/data/repos/community_repo.dart';
 import 'package:gaza_tech/features/community/data/services/community_api_service.dart';
 import 'package:gaza_tech/features/add_post/cubit/add_post_cubit.dart';
 import 'package:gaza_tech/features/community_search/cubit/community_search_cubit.dart';
+import 'package:gaza_tech/features/profile/cubit/profile_cubit.dart';
+import 'package:gaza_tech/features/profile/data/repos/profile_repo.dart';
+import 'package:gaza_tech/features/profile/data/services/profile_api_service.dart';
+import 'package:gaza_tech/features/profile/data/models/user_profile_model.dart';
+import 'package:gaza_tech/features/edit_profile/cubit/edit_profile_cubit.dart';
+import 'package:gaza_tech/features/edit_profile/data/repos/edit_profile_repo.dart';
+import 'package:gaza_tech/features/edit_profile/data/services/edit_profile_api_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -151,8 +158,12 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<MarketplaceSearchApiService>(
     () => MarketplaceSearchApiService(getIt()),
   );
-  getIt.registerLazySingleton<MarketplaceSearchRepo>(() => MarketplaceSearchRepo(getIt()));
-  getIt.registerFactory<MarketplaceSearchCubit>(() => MarketplaceSearchCubit(getIt()));
+  getIt.registerLazySingleton<MarketplaceSearchRepo>(
+    () => MarketplaceSearchRepo(getIt()),
+  );
+  getIt.registerFactory<MarketplaceSearchCubit>(
+    () => MarketplaceSearchCubit(getIt()),
+  );
 
   // 14. Community
   getIt.registerLazySingleton<CommunityApiService>(
@@ -168,5 +179,23 @@ Future<void> setupGetIt() async {
   // 15. Community Search
   getIt.registerFactory<CommunitySearchCubit>(
     () => CommunitySearchCubit(getIt()),
+  );
+
+  // 16. Profile
+  getIt.registerLazySingleton<ProfileApiService>(
+    () => ProfileApiService(getIt()),
+  );
+  getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
+  getIt.registerFactoryParam<ProfileCubit, String, bool>(
+    (userId, isOwnProfile) => ProfileCubit(getIt(), userId, isOwnProfile),
+  );
+
+  // 17. Edit Profile
+  getIt.registerLazySingleton<EditProfileApiService>(
+    () => EditProfileApiService(getIt()),
+  );
+  getIt.registerLazySingleton<EditProfileRepo>(() => EditProfileRepo(getIt()));
+  getIt.registerFactoryParam<EditProfileCubit, UserProfileModel, void>(
+    (profile, _) => EditProfileCubit(getIt(), profile),
   );
 }

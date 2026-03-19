@@ -33,24 +33,20 @@ class CommunityCategoryChips extends StatelessWidget {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
                 curve: Curves.easeInOut,
-                padding: EdgeInsets.symmetric(
-                  vertical: 8.h,
-                  horizontal: 16.w,
-                ),
+                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
                 decoration: BoxDecoration(
                   color: isSelected
                       ? theme.colorScheme.primary
                       : (isDark
-                          ? theme.colorScheme.surfaceContainerHighest
-                          : theme.colorScheme.surfaceContainerHigh),
+                            ? theme.colorScheme.surfaceContainerHighest
+                            : theme.colorScheme.surfaceContainerHigh),
                   borderRadius: BorderRadius.circular(25.r),
                 ),
                 child: Text(
                   categories[index],
                   style: TextStyle(
                     fontSize: 13.sp,
-                    fontWeight:
-                        isSelected ? FontWeight.w600 : FontWeight.w500,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                     color: isSelected
                         ? theme.colorScheme.onPrimary
                         : theme.colorScheme.onSurfaceVariant,

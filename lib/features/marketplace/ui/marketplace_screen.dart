@@ -111,16 +111,14 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
                           children: [
                             Expanded(
                               child: TappableSearchBar(
-                                onTap: () =>
-                                    context.pushNamed(MyRoutes.search),
+                                onTap: () => context.pushNamed(MyRoutes.search),
                                 hintText: context.l10n.searchMarketplace,
                               ),
                             ),
                             SizedBox(width: 8.w),
                             SortButton(
                               label: _sortLabel(context, state.activeSort),
-                              onTap: () =>
-                                  showMarketplaceSortSheet(context),
+                              onTap: () => showMarketplaceSortSheet(context),
                             ),
                           ],
                         ),

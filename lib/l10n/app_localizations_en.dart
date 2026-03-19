@@ -713,4 +713,86 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get comments50Plus => '50+ Comments';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get bio => 'Bio';
+
+  @override
+  String get bioHint => 'Tell others about yourself...';
+
+  @override
+  String get phoneNumber => 'Phone Number';
+
+  @override
+  String get whatsappNumber => 'WhatsApp Number';
+
+  @override
+  String get socialLinks => 'Social Links';
+
+  @override
+  String get facebookLink => 'Facebook';
+
+  @override
+  String get instagramLink => 'Instagram';
+
+  @override
+  String get twitterLink => 'Twitter / X';
+
+  @override
+  String get websiteLink => 'Website';
+
+  @override
+  String get changeAvatar => 'Change Photo';
+
+  @override
+  String get removeAvatar => 'Remove Photo';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get profileUpdated => 'Profile updated successfully';
+
+  @override
+  String get myPosts => 'Posts';
+
+  @override
+  String get myListings => 'Listings';
+
+  @override
+  String get bookmarks => 'Bookmarks';
+
+  @override
+  String get noPostsYet => 'No posts yet';
+
+  @override
+  String get noListingsYet => 'No listings yet';
+
+  @override
+  String get noBookmarksYet => 'No bookmarks yet';
+
+  @override
+  String get personalInfo => 'Personal Info';
+
+  @override
+  String get contactInfo => 'Contact Info';
+
+  @override
+  String get verified => 'Verified';
+
+  @override
+  String get avatarUploadFailed => 'Failed to upload photo';
+
+  @override
+  String get contactUnavailable =>
+      'Contact information is not available for this seller';
+
+  @override
+  String get couldNotOpenLink => 'Could not open this link';
+
+  @override
+  String get website => 'Website';
 }

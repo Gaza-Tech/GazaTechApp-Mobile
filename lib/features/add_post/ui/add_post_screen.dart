@@ -29,15 +29,15 @@ class _AddPostScreenState extends State<AddPostScreen> {
       listener: (context, state) {
         state.whenOrNull(
           success: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(context.l10n.postPublished)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(context.l10n.postPublished)));
             Navigator.pop(context);
           },
           failure: (message) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(message)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(message)));
           },
         );
       },
@@ -127,9 +127,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       text: context.l10n.publishPost,
                       onPressed: isLoading
                           ? null
-                          : () => cubit.createPost(
-                                _selectedCategoryIndex ?? -1,
-                              ),
+                          : () =>
+                                cubit.createPost(_selectedCategoryIndex ?? -1),
                     ),
                   ],
                 ),

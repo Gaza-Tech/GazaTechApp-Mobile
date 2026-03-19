@@ -15,8 +15,9 @@ class AddListingRepo {
   Future<ApiResult<List<CategoryModel>>> getCategories() async {
     try {
       final data = await _apiService.fetchCategories();
-      final categories =
-          data.map((json) => CategoryModel.fromJson(json)).toList();
+      final categories = data
+          .map((json) => CategoryModel.fromJson(json))
+          .toList();
       return ApiResult.success(categories);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
@@ -27,8 +28,9 @@ class AddListingRepo {
   Future<ApiResult<List<LocationModel>>> getLocations() async {
     try {
       final data = await _apiService.fetchLocations();
-      final locations =
-          data.map((json) => LocationModel.fromJson(json)).toList();
+      final locations = data
+          .map((json) => LocationModel.fromJson(json))
+          .toList();
       return ApiResult.success(locations);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
@@ -37,7 +39,8 @@ class AddListingRepo {
 
   /// Create a new listing
   Future<ApiResult<Map<String, dynamic>>> createListing(
-      Map<String, dynamic> data) async {
+    Map<String, dynamic> data,
+  ) async {
     try {
       final result = await _apiService.createListing(data);
       return ApiResult.success(result);

@@ -37,8 +37,8 @@ class CategoryTabBar extends StatelessWidget {
               final label = index == 0
                   ? context.l10n.categoryAll
                   : (isArabic && categories[index - 1].nameAr != null
-                      ? categories[index - 1].nameAr!
-                      : categories[index - 1].name);
+                        ? categories[index - 1].nameAr!
+                        : categories[index - 1].name);
 
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -56,16 +56,17 @@ class CategoryTabBar extends StatelessWidget {
                       color: isSelected
                           ? theme.colorScheme.primary
                           : (isDark
-                              ? theme.colorScheme.surfaceContainerHighest
-                              : theme.colorScheme.surfaceContainerHigh),
+                                ? theme.colorScheme.surfaceContainerHighest
+                                : theme.colorScheme.surfaceContainerHigh),
                       borderRadius: BorderRadius.circular(25),
                     ),
                     child: Text(
                       label,
                       style: TextStyle(
                         fontSize: 15,
-                        fontWeight:
-                            isSelected ? FontWeight.w600 : FontWeight.w500,
+                        fontWeight: isSelected
+                            ? FontWeight.w600
+                            : FontWeight.w500,
                         color: isSelected
                             ? theme.colorScheme.onPrimary
                             : theme.colorScheme.onSurfaceVariant,

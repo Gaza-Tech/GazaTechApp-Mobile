@@ -6,6 +6,5 @@ class SharedPrefKeys {
   static const String communityRecentSearches = 'community_recent_searches';
 
   // Marketplace search
-  static const String marketplaceRecentSearches =
-      'marketplace_recent_searches';
+  static const String marketplaceRecentSearches = 'marketplace_recent_searches';
 }

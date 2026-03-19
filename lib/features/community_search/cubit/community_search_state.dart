@@ -23,7 +23,11 @@ abstract class CommunitySearchState with _$CommunitySearchState {
   const CommunitySearchState._();
 
   bool get hasResults => results.isNotEmpty;
-  bool get isEmpty => keyword.isNotEmpty && !isSearching && results.isEmpty && errorMessage == null;
+  bool get isEmpty =>
+      keyword.isNotEmpty &&
+      !isSearching &&
+      results.isEmpty &&
+      errorMessage == null;
   bool get isInitial => keyword.isEmpty;
   bool get hasError => errorMessage != null;
 }

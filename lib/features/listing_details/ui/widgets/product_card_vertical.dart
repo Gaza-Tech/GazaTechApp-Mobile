@@ -61,7 +61,9 @@ class ProductCardVertical extends StatelessWidget {
                         child: SizedBox(
                           width: 20.w,
                           height: 20.w,
-                          child: const CircularProgressIndicator(strokeWidth: 2),
+                          child: const CircularProgressIndicator(
+                            strokeWidth: 2,
+                          ),
                         ),
                       ),
                       errorWidget: (context, url, error) => Center(

@@ -17,6 +17,8 @@ class PostCard extends StatelessWidget {
   final VoidCallback? onLikeToggle;
   final VoidCallback? onBookmarkToggle;
   final VoidCallback? onTap;
+  final String? avatarUrl;
+  final VoidCallback? onAuthorTap;
 
   const PostCard({
     super.key,
@@ -32,6 +34,8 @@ class PostCard extends StatelessWidget {
     this.onLikeToggle,
     this.onBookmarkToggle,
     this.onTap,
+    this.avatarUrl,
+    this.onAuthorTap,
   });
 
   @override
@@ -52,6 +56,8 @@ class PostCard extends StatelessWidget {
                 userName: userName,
                 timeAgo: timeAgo,
                 category: category,
+                avatarUrl: avatarUrl,
+                onAuthorTap: onAuthorTap,
               ),
               SizedBox(height: 10.h),
               Text(

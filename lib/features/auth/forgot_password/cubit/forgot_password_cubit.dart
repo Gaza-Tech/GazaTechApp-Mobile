@@ -8,7 +8,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   final ForgotPasswordRepo _forgotPasswordRepo;
 
   ForgotPasswordCubit(this._forgotPasswordRepo)
-      : super(const ForgotPasswordState.initial());
+    : super(const ForgotPasswordState.initial());
 
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
@@ -23,12 +23,14 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     );
 
     result.when(
-      success: (_) => emit(const ForgotPasswordState.success(
-        "Recovery code sent to your email",
-      )),
-      failure: (error) => emit(ForgotPasswordState.failure(
-        error.message ?? "Failed to send recovery email",
-      )),
+      success: (_) => emit(
+        const ForgotPasswordState.success("Recovery code sent to your email"),
+      ),
+      failure: (error) => emit(
+        ForgotPasswordState.failure(
+          error.message ?? "Failed to send recovery email",
+        ),
+      ),
     );
   }
 

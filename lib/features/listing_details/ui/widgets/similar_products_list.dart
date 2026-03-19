@@ -34,8 +34,7 @@ class SimilarProductsList extends StatelessWidget {
           final listing = listings[index];
           return ProductCardHorizontal(
             name: listing.title,
-            price:
-                '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}',
+            price: '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}',
             imageUrl: listing.thumbnailUrl,
             onTap: () => context.pushNamed(
               MyRoutes.listingDetails,

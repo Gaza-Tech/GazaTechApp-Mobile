@@ -50,8 +50,9 @@ class _CommunitySortSheet extends StatelessWidget {
                   width: 40.w,
                   height: 4.h,
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.onSurfaceVariant
-                        .withValues(alpha: 0.3),
+                    color: theme.colorScheme.onSurfaceVariant.withValues(
+                      alpha: 0.3,
+                    ),
                     borderRadius: BorderRadius.circular(2.r),
                   ),
                 ),
@@ -59,9 +60,7 @@ class _CommunitySortSheet extends StatelessWidget {
               SizedBox(height: 16.h),
               Text(
                 l10n.sortPosts,
-                style: MyTextStyle.body.l.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
+                style: MyTextStyle.body.l.copyWith(fontWeight: FontWeight.w700),
               ),
               SizedBox(height: 8.h),
               Divider(height: 1.h),
@@ -113,8 +112,7 @@ class _SortOption extends StatelessWidget {
                   color: selected
                       ? theme.colorScheme.primary
                       : theme.colorScheme.onSurface,
-                  fontWeight:
-                      selected ? FontWeight.w600 : FontWeight.normal,
+                  fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
                 ),
               ),
             ),

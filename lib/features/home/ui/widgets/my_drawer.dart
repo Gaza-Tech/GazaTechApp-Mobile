@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/localization/locale_cubit.dart';
+import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -48,7 +50,14 @@ class MyDrawer extends StatelessWidget {
             title: Text(context.l10n.profile),
             onTap: () {
               Navigator.pop(context);
-              // TODO: Navigate to profile screen
+              final userId = Supabase.instance.client.auth.currentUser?.id;
+              if (userId != null) {
+                Navigator.pushNamed(
+                  context,
+                  MyRoutes.profile,
+                  arguments: {'userId': userId, 'isOwnProfile': true},
+                );
+              }
             },
           ),
           ListTile(

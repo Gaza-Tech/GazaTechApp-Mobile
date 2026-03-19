@@ -9,7 +9,7 @@ class ListingDetailsCubit extends Cubit<ListingDetailsState> {
   final String listingId;
 
   ListingDetailsCubit(this._repo, this.listingId)
-      : super(const ListingDetailsState.initial());
+    : super(const ListingDetailsState.initial());
 
   /// Load listing details, similar listings, and seller listings
   Future<void> loadListing() async {
@@ -41,19 +41,23 @@ class ListingDetailsCubit extends Cubit<ListingDetailsState> {
           failure: (_) => <ListingModel>[],
         );
 
-        emit(ListingDetailsState.success(
-          listing: listing,
-          similarListings: similarListings,
-          sellerListings: sellerListings,
-        ));
+        emit(
+          ListingDetailsState.success(
+            listing: listing,
+            similarListings: similarListings,
+            sellerListings: sellerListings,
+          ),
+        );
 
         // Increment view count in background (fire and forget)
         _repo.incrementViewCount(listingId);
       },
       failure: (error) {
-        emit(ListingDetailsState.failure(
-          error.message ?? 'Failed to load listing details',
-        ));
+        emit(
+          ListingDetailsState.failure(
+            error.message ?? 'Failed to load listing details',
+          ),
+        );
       },
     );
   }

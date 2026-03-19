@@ -30,6 +30,11 @@ import 'package:gaza_tech/features/community_search/cubit/community_search_cubit
 import 'package:gaza_tech/features/community_search/ui/community_search_screen.dart';
 import 'package:gaza_tech/features/search/cubit/marketplace_search_cubit.dart';
 import 'package:gaza_tech/features/search/ui/marketplace_search_screen.dart';
+import 'package:gaza_tech/features/profile/cubit/profile_cubit.dart';
+import 'package:gaza_tech/features/profile/ui/profile_screen.dart';
+import 'package:gaza_tech/features/profile/data/models/user_profile_model.dart';
+import 'package:gaza_tech/features/edit_profile/cubit/edit_profile_cubit.dart';
+import 'package:gaza_tech/features/edit_profile/ui/edit_profile_screen.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -144,6 +149,34 @@ class MyRouter {
             create: (context) =>
                 getIt<CommunitySearchCubit>()..loadRecentSearches(),
             child: const CommunitySearchScreen(),
+          ),
+        );
+      case MyRoutes.profile:
+        final args = settings.arguments as Map<String, dynamic>;
+        final userId = args['userId'] as String;
+        final isOwnProfile = args['isOwnProfile'] as bool? ?? false;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) {
+              final cubit = getIt<ProfileCubit>(
+                param1: userId,
+                param2: isOwnProfile,
+              );
+              cubit.loadProfile();
+              cubit.fetchPosts();
+              cubit.fetchListings();
+              if (isOwnProfile) cubit.fetchBookmarkedPosts();
+              return cubit;
+            },
+            child: const ProfileScreen(),
+          ),
+        );
+      case MyRoutes.editProfile:
+        final profile = settings.arguments as UserProfileModel;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<EditProfileCubit>(param1: profile),
+            child: const EditProfileScreen(),
           ),
         );
       default:

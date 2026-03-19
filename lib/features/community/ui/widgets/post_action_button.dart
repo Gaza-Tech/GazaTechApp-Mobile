@@ -28,10 +28,7 @@ class PostActionButton extends StatelessWidget {
           children: [
             Icon(icon, size: 20.sp, color: color),
             SizedBox(width: 4.w),
-            Text(
-              label,
-              style: MyTextStyle.body.xs.copyWith(color: color),
-            ),
+            Text(label, style: MyTextStyle.body.xs.copyWith(color: color)),
           ],
         ),
       ),

@@ -4,16 +4,10 @@ import 'package:flutter/material.dart';
 class LocaleState {
   final Locale locale;
 
-  const LocaleState({
-    this.locale = const Locale('en'),
-  });
+  const LocaleState({this.locale = const Locale('en')});
 
-  LocaleState copyWith({
-    Locale? locale,
-  }) {
-    return LocaleState(
-      locale: locale ?? this.locale,
-    );
+  LocaleState copyWith({Locale? locale}) {
+    return LocaleState(locale: locale ?? this.locale);
   }
 
   @override
