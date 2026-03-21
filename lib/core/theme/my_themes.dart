@@ -98,7 +98,25 @@ class MyThemes {
         ),
       ),
 
-      // 7. Chip Theme
+      // 7. OutlinedButton Theme
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+        ),
+      ),
+
+      // 8. FilledButton Theme
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+        ),
+      ),
+
+      // 9. Chip Theme
       chipTheme: ChipThemeData(
         backgroundColor: MyColors.light.surface,
         selectedColor: MyColors.primary.soft,
@@ -111,7 +129,7 @@ class MyThemes {
         ),
       ),
 
-      // 8. TextButton Theme
+      // 10. TextButton Theme
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: MyColors.primary.base,
@@ -224,7 +242,25 @@ class MyThemes {
       // 7. Icon Theme
       iconTheme: IconThemeData(color: MyColors.dark.icon),
 
-      // 8. Chip Theme
+      // 8. OutlinedButton Theme
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+        ),
+      ),
+
+      // 9. FilledButton Theme
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+        ),
+      ),
+
+      // 10. Chip Theme
       chipTheme: ChipThemeData(
         backgroundColor: MyColors.dark.surfaceVariant,
         selectedColor: MyColors.primary.containerDark,
@@ -237,7 +273,7 @@ class MyThemes {
         ),
       ),
 
-      // 9. TextButton Theme
+      // 11. TextButton Theme
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: MyColors.primary.onDark,
