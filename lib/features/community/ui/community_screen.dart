@@ -8,7 +8,6 @@ import 'package:gaza_tech/features/community/ui/widgets/community_category_chips
 import 'package:gaza_tech/features/community/data/models/community_sort.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_search_bar.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_sort_sheet.dart';
 import 'package:gaza_tech/features/community/ui/widgets/posts_tab_view.dart';
 
