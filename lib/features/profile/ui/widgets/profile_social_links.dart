@@ -83,6 +83,7 @@ class ProfileSocialLinks extends StatelessWidget {
     return Wrap(
       spacing: 8.w,
       runSpacing: 4.h,
+      alignment: WrapAlignment.center,
       children: links
           .map(
             (link) => ActionChip(

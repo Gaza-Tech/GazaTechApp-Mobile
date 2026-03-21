@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:gaza_tech/features/edit_profile/cubit/edit_profile_state.dart';
@@ -38,10 +39,13 @@ class EditProfileScreen extends StatelessWidget {
                     ),
                   );
                 }
-                return TextButton(
-                  onPressed: () =>
-                      context.read<EditProfileCubit>().saveProfile(),
-                  child: Text(context.l10n.saveChanges),
+                return Padding(
+                  padding: EdgeInsetsDirectional.only(end: 16.w),
+                  child: TextButton(
+                    onPressed: () =>
+                        context.read<EditProfileCubit>().saveProfile(),
+                    child: Text(context.l10n.saveChanges),
+                  ),
                 );
               },
             ),
@@ -86,32 +90,31 @@ class EditProfileScreen extends StatelessWidget {
                     // Personal Info
                     _SectionHeader(label: context.l10n.personalInfo),
                     const VerticalSpace(12),
-                    TextFormField(
+                    MyTextFormField(
                       controller: cubit.firstNameController,
-                      decoration: InputDecoration(
-                        labelText: context.l10n.firstName,
-                      ),
+                      labelText: context.l10n.firstName,
+                      hintText: '',
+                      textInputType: TextInputType.name,
                       validator: (v) => (v == null || v.trim().isEmpty)
                           ? context.l10n.required
                           : null,
                     ),
                     const VerticalSpace(12),
-                    TextFormField(
+                    MyTextFormField(
                       controller: cubit.lastNameController,
-                      decoration: InputDecoration(
-                        labelText: context.l10n.lastName,
-                      ),
+                      labelText: context.l10n.lastName,
+                      hintText: '',
+                      textInputType: TextInputType.name,
                       validator: (v) => (v == null || v.trim().isEmpty)
                           ? context.l10n.required
                           : null,
                     ),
                     const VerticalSpace(12),
-                    TextFormField(
+                    MyTextFormField(
                       controller: cubit.bioController,
-                      decoration: InputDecoration(
-                        labelText: context.l10n.bio,
-                        hintText: context.l10n.bioHint,
-                      ),
+                      labelText: context.l10n.bio,
+                      hintText: context.l10n.bioHint,
+                      textInputType: TextInputType.multiline,
                       maxLines: 3,
                     ),
                     const VerticalSpace(24),
@@ -119,62 +122,56 @@ class EditProfileScreen extends StatelessWidget {
                     // Contact Info
                     _SectionHeader(label: context.l10n.contactInfo),
                     const VerticalSpace(12),
-                    TextFormField(
+                    MyTextFormField(
                       controller: cubit.phoneNumberController,
-                      decoration: InputDecoration(
-                        labelText: context.l10n.phoneNumber,
-                        prefixIcon: const Icon(Icons.phone_outlined),
-                      ),
-                      keyboardType: TextInputType.phone,
+                      labelText: context.l10n.phoneNumber,
+                      hintText: '',
+                      prefixIcon: const Icon(Icons.phone_outlined),
+                      textInputType: TextInputType.phone,
                     ),
                     const VerticalSpace(12),
-                    TextFormField(
+                    MyTextFormField(
                       controller: cubit.whatsappNumberController,
-                      decoration: InputDecoration(
-                        labelText: context.l10n.whatsappNumber,
-                        prefixIcon: const Icon(Icons.chat_outlined),
-                      ),
-                      keyboardType: TextInputType.phone,
+                      labelText: context.l10n.whatsappNumber,
+                      hintText: '',
+                      prefixIcon: const Icon(Icons.chat_outlined),
+                      textInputType: TextInputType.phone,
                     ),
                     const VerticalSpace(24),
 
                     // Social Links
                     _SectionHeader(label: context.l10n.socialLinks),
                     const VerticalSpace(12),
-                    TextFormField(
+                    MyTextFormField(
                       controller: cubit.facebookLinkController,
-                      decoration: InputDecoration(
-                        labelText: context.l10n.facebookLink,
-                        prefixIcon: const Icon(Icons.facebook),
-                      ),
-                      keyboardType: TextInputType.url,
+                      labelText: context.l10n.facebookLink,
+                      hintText: '',
+                      prefixIcon: const Icon(Icons.facebook),
+                      textInputType: TextInputType.url,
                     ),
                     const VerticalSpace(12),
-                    TextFormField(
+                    MyTextFormField(
                       controller: cubit.instagramLinkController,
-                      decoration: InputDecoration(
-                        labelText: context.l10n.instagramLink,
-                        prefixIcon: const Icon(Icons.camera_alt_outlined),
-                      ),
-                      keyboardType: TextInputType.url,
+                      labelText: context.l10n.instagramLink,
+                      hintText: '',
+                      prefixIcon: const Icon(Icons.camera_alt_outlined),
+                      textInputType: TextInputType.url,
                     ),
                     const VerticalSpace(12),
-                    TextFormField(
+                    MyTextFormField(
                       controller: cubit.twitterLinkController,
-                      decoration: InputDecoration(
-                        labelText: context.l10n.twitterLink,
-                        prefixIcon: const Icon(Icons.alternate_email),
-                      ),
-                      keyboardType: TextInputType.url,
+                      labelText: context.l10n.twitterLink,
+                      hintText: '',
+                      prefixIcon: const Icon(Icons.alternate_email),
+                      textInputType: TextInputType.url,
                     ),
                     const VerticalSpace(12),
-                    TextFormField(
+                    MyTextFormField(
                       controller: cubit.websiteLinkController,
-                      decoration: InputDecoration(
-                        labelText: context.l10n.websiteLink,
-                        prefixIcon: const Icon(Icons.language),
-                      ),
-                      keyboardType: TextInputType.url,
+                      labelText: context.l10n.websiteLink,
+                      hintText: '',
+                      prefixIcon: const Icon(Icons.language),
+                      textInputType: TextInputType.url,
                     ),
                     SizedBox(height: 40.h),
                   ],

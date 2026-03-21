@@ -94,22 +94,6 @@ class _CommunityScreenState extends State<CommunityScreen>
                 floating: true,
                 snap: true,
                 pinned: false,
-                actions: [
-                  IconButton(
-                    icon: Icon(Icons.person_outline, size: 26.sp),
-                    onPressed: () {
-                      final userId =
-                          Supabase.instance.client.auth.currentUser?.id;
-                      if (userId != null) {
-                        Navigator.pushNamed(
-                          context,
-                          MyRoutes.profile,
-                          arguments: {'userId': userId, 'isOwnProfile': true},
-                        );
-                      }
-                    },
-                  ),
-                ],
                 bottom: PreferredSize(
                   preferredSize: Size.fromHeight(112.h),
                   child: Column(
