@@ -5,16 +5,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/cache/shared_pref_keys.dart';
 import 'package:gaza_tech/core/helpers/shared_pref_helper.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
-import '../data/models/search_filters_model.dart';
-import '../data/repos/search_repo.dart';
-import 'search_state.dart';
+import '../data/models/marketplace_search_filters_model.dart';
+import '../data/repos/marketplace_search_repo.dart';
+import 'marketplace_search_state.dart';
 
-class SearchCubit extends Cubit<SearchState> {
-  final SearchRepo _repo;
+class MarketplaceSearchCubit extends Cubit<MarketplaceSearchState> {
+  final MarketplaceSearchRepo _repo;
 
   final TextEditingController searchController = TextEditingController();
 
-  SearchCubit(this._repo) : super(const SearchState());
+  MarketplaceSearchCubit(this._repo) : super(const MarketplaceSearchState());
 
   /// Load categories and locations for filter dropdowns
   Future<void> loadFilterData() async {
@@ -29,32 +29,39 @@ class SearchCubit extends Cubit<SearchState> {
       success: (categories) {
         locationsResult.when(
           success: (locations) {
-            emit(state.copyWith(
-              categories: categories,
-              locations: locations,
-              isFilterDataLoading: false,
-            ));
+            emit(
+              state.copyWith(
+                categories: categories,
+                locations: locations,
+                isFilterDataLoading: false,
+              ),
+            );
           },
           failure: (error) {
-            emit(state.copyWith(
-              isFilterDataLoading: false,
-              errorMessage: error.message,
-            ));
+            emit(
+              state.copyWith(
+                isFilterDataLoading: false,
+                errorMessage: error.message,
+              ),
+            );
           },
         );
       },
       failure: (error) {
-        emit(state.copyWith(
-          isFilterDataLoading: false,
-          errorMessage: error.message,
-        ));
+        emit(
+          state.copyWith(
+            isFilterDataLoading: false,
+            errorMessage: error.message,
+          ),
+        );
       },
     );
   }
 
   Future<void> loadRecentSearches() async {
     final raw = await SharedPrefHelper.getString(
-        SharedPrefKeys.marketplaceRecentSearches);
+      SharedPrefKeys.marketplaceRecentSearches,
+    );
     if (raw.isEmpty) return;
     try {
       final decoded = List<String>.from(jsonDecode(raw) as List);
@@ -82,15 +89,17 @@ class SearchCubit extends Cubit<SearchState> {
       updatedRecentSearches = capped;
     }
 
-    emit(state.copyWith(
-      keyword: keyword,
-      isSearching: true,
-      results: [],
-      currentPage: 0,
-      hasMore: true,
-      errorMessage: null,
-      recentSearches: updatedRecentSearches,
-    ));
+    emit(
+      state.copyWith(
+        keyword: keyword,
+        isSearching: true,
+        results: [],
+        currentPage: 0,
+        hasMore: true,
+        errorMessage: null,
+        recentSearches: updatedRecentSearches,
+      ),
+    );
 
     final result = await _repo.searchListings(
       keyword: keyword.isEmpty ? null : keyword,
@@ -100,18 +109,17 @@ class SearchCubit extends Cubit<SearchState> {
 
     result.when(
       success: (response) {
-        emit(state.copyWith(
-          results: response.listings,
-          hasMore: response.hasMore,
-          currentPage: 0,
-          isSearching: false,
-        ));
+        emit(
+          state.copyWith(
+            results: response.listings,
+            hasMore: response.hasMore,
+            currentPage: 0,
+            isSearching: false,
+          ),
+        );
       },
       failure: (error) {
-        emit(state.copyWith(
-          isSearching: false,
-          errorMessage: error.message,
-        ));
+        emit(state.copyWith(isSearching: false, errorMessage: error.message));
       },
     );
   }
@@ -131,24 +139,23 @@ class SearchCubit extends Cubit<SearchState> {
 
     result.when(
       success: (response) {
-        emit(state.copyWith(
-          results: [...state.results, ...response.listings],
-          hasMore: response.hasMore,
-          currentPage: nextPage,
-          isLoadingMore: false,
-        ));
+        emit(
+          state.copyWith(
+            results: [...state.results, ...response.listings],
+            hasMore: response.hasMore,
+            currentPage: nextPage,
+            isLoadingMore: false,
+          ),
+        );
       },
       failure: (error) {
-        emit(state.copyWith(
-          isLoadingMore: false,
-          errorMessage: error.message,
-        ));
+        emit(state.copyWith(isLoadingMore: false, errorMessage: error.message));
       },
     );
   }
 
   /// Apply filter and re-search
-  void updateFilter(SearchFiltersModel filter) {
+  void updateFilter(MarketplaceSearchFiltersModel filter) {
     emit(state.copyWith(filters: filter));
     search();
   }
@@ -156,14 +163,16 @@ class SearchCubit extends Cubit<SearchState> {
   /// Clear search text and reset to initial state
   void clearSearch() {
     searchController.clear();
-    emit(state.copyWith(
-      keyword: '',
-      results: [],
-      currentPage: 0,
-      hasMore: true,
-      isSearching: false,
-      errorMessage: null,
-    ));
+    emit(
+      state.copyWith(
+        keyword: '',
+        results: [],
+        currentPage: 0,
+        hasMore: true,
+        isSearching: false,
+        errorMessage: null,
+      ),
+    );
   }
 
   Future<void> removeRecentSearch(String query) async {
@@ -187,7 +196,7 @@ class SearchCubit extends Cubit<SearchState> {
 
   /// Clear all filters and re-search
   void clearFilters() {
-    emit(state.copyWith(filters: const SearchFiltersModel()));
+    emit(state.copyWith(filters: const MarketplaceSearchFiltersModel()));
     if (state.keyword.isNotEmpty) search();
   }
 
@@ -195,36 +204,42 @@ class SearchCubit extends Cubit<SearchState> {
   void clearFilter(String type) {
     switch (type) {
       case 'category':
-        emit(state.copyWith(
-          filters: state.filters.copyWith(
-            categoryId: null,
-            categoryName: null,
+        emit(
+          state.copyWith(
+            filters: state.filters.copyWith(
+              categoryId: null,
+              categoryName: null,
+            ),
           ),
-        ));
+        );
       case 'location':
-        emit(state.copyWith(
-          filters: state.filters.copyWith(
-            locationId: null,
-            locationName: null,
+        emit(
+          state.copyWith(
+            filters: state.filters.copyWith(
+              locationId: null,
+              locationName: null,
+            ),
           ),
-        ));
+        );
       case 'condition':
-        emit(state.copyWith(
-          filters: state.filters.copyWith(conditions: []),
-        ));
+        emit(state.copyWith(filters: state.filters.copyWith(conditions: [])));
       case 'price':
-        emit(state.copyWith(
-          filters: state.filters.copyWith(
-            priceMinUsd: null,
-            priceMaxUsd: null,
-            priceMinIls: null,
-            priceMaxIls: null,
+        emit(
+          state.copyWith(
+            filters: state.filters.copyWith(
+              priceMinUsd: null,
+              priceMaxUsd: null,
+              priceMinIls: null,
+              priceMaxIls: null,
+            ),
           ),
-        ));
+        );
       case 'sort':
-        emit(state.copyWith(
-          filters: state.filters.copyWith(sort: SearchSortOption.newest),
-        ));
+        emit(
+          state.copyWith(
+            filters: state.filters.copyWith(sort: SearchSortOption.newest),
+          ),
+        );
     }
     search();
   }

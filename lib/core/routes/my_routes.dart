@@ -12,4 +12,6 @@ class MyRoutes {
   static const String createPost = '/createPost';
   static const String postDetails = '/postDetails';
   static const String communitySearch = '/communitySearch';
+  static const String profile = '/profile';
+  static const String editProfile = '/editProfile';
 }

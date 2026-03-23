@@ -1,6 +1,9 @@
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_out/data/repos/sign_out_repo.dart';
 import 'package:gaza_tech/features/auth/sign_out/data/services/sign_out_api_service.dart';
+import 'package:gaza_tech/features/search/cubit/marketplace_search_cubit.dart';
+import 'package:gaza_tech/features/search/data/repos/marketplace_search_repo.dart';
+import 'package:gaza_tech/features/search/data/services/search_api_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gaza_tech/core/localization/locale_cubit.dart';
@@ -36,15 +39,19 @@ import 'package:gaza_tech/features/add_listing/data/services/add_listing_api_ser
 import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
 import 'package:gaza_tech/features/listing_details/data/repos/listing_details_repo.dart';
 import 'package:gaza_tech/features/listing_details/data/services/listing_details_api_service.dart';
-import 'package:gaza_tech/features/marketplace_search/cubit/search_cubit.dart';
-import 'package:gaza_tech/features/marketplace_search/data/repos/search_repo.dart';
-import 'package:gaza_tech/features/marketplace_search/data/services/search_api_service.dart';
 import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
 import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
 import 'package:gaza_tech/features/community/data/repos/community_repo.dart';
 import 'package:gaza_tech/features/community/data/services/community_api_service.dart';
 import 'package:gaza_tech/features/add_post/cubit/add_post_cubit.dart';
 import 'package:gaza_tech/features/community_search/cubit/community_search_cubit.dart';
+import 'package:gaza_tech/features/profile/cubit/profile_cubit.dart';
+import 'package:gaza_tech/features/profile/data/repos/profile_repo.dart';
+import 'package:gaza_tech/features/profile/data/services/profile_api_service.dart';
+import 'package:gaza_tech/features/profile/data/models/user_profile_model.dart';
+import 'package:gaza_tech/features/edit_profile/cubit/edit_profile_cubit.dart';
+import 'package:gaza_tech/features/edit_profile/data/repos/edit_profile_repo.dart';
+import 'package:gaza_tech/features/edit_profile/data/services/edit_profile_api_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -126,18 +133,14 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<MarketplaceApiService>(
     () => MarketplaceApiService(getIt()),
   );
-  getIt.registerLazySingleton<MarketplaceRepo>(
-    () => MarketplaceRepo(getIt()),
-  );
+  getIt.registerLazySingleton<MarketplaceRepo>(() => MarketplaceRepo(getIt()));
   getIt.registerFactory<MarketplaceCubit>(() => MarketplaceCubit(getIt()));
 
   // 11. Add Listing
   getIt.registerLazySingleton<AddListingApiService>(
     () => AddListingApiService(getIt()),
   );
-  getIt.registerLazySingleton<AddListingRepo>(
-    () => AddListingRepo(getIt()),
-  );
+  getIt.registerLazySingleton<AddListingRepo>(() => AddListingRepo(getIt()));
   getIt.registerFactory<AddListingCubit>(() => AddListingCubit(getIt()));
 
   // 12. Listing Details
@@ -152,11 +155,15 @@ Future<void> setupGetIt() async {
   );
 
   // 13. Search
-  getIt.registerLazySingleton<SearchApiService>(
-    () => SearchApiService(getIt()),
+  getIt.registerLazySingleton<MarketplaceSearchApiService>(
+    () => MarketplaceSearchApiService(getIt()),
   );
-  getIt.registerLazySingleton<SearchRepo>(() => SearchRepo(getIt()));
-  getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt()));
+  getIt.registerLazySingleton<MarketplaceSearchRepo>(
+    () => MarketplaceSearchRepo(getIt()),
+  );
+  getIt.registerFactory<MarketplaceSearchCubit>(
+    () => MarketplaceSearchCubit(getIt()),
+  );
 
   // 14. Community
   getIt.registerLazySingleton<CommunityApiService>(
@@ -172,5 +179,23 @@ Future<void> setupGetIt() async {
   // 15. Community Search
   getIt.registerFactory<CommunitySearchCubit>(
     () => CommunitySearchCubit(getIt()),
+  );
+
+  // 16. Profile
+  getIt.registerLazySingleton<ProfileApiService>(
+    () => ProfileApiService(getIt()),
+  );
+  getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
+  getIt.registerFactoryParam<ProfileCubit, String, bool>(
+    (userId, isOwnProfile) => ProfileCubit(getIt(), userId, isOwnProfile),
+  );
+
+  // 17. Edit Profile
+  getIt.registerLazySingleton<EditProfileApiService>(
+    () => EditProfileApiService(getIt()),
+  );
+  getIt.registerLazySingleton<EditProfileRepo>(() => EditProfileRepo(getIt()));
+  getIt.registerFactoryParam<EditProfileCubit, UserProfileModel, void>(
+    (profile, _) => EditProfileCubit(getIt(), profile),
   );
 }

@@ -18,7 +18,8 @@ abstract class ListingDetailModel with _$ListingDetailModel {
     required int price,
     String? currency,
     @JsonKey(name: 'location_id') required String locationId,
-    @JsonKey(fromJson: _specificationsFromJson) Map<String, dynamic>? specifications,
+    @JsonKey(fromJson: _specificationsFromJson)
+    Map<String, dynamic>? specifications,
     @JsonKey(name: 'content_status') required String contentStatus,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
@@ -49,17 +50,21 @@ abstract class ListingDetailModel with _$ListingDetailModel {
     return null;
   }
 
+  String? get sellerPhoneNumber => sellerData?['phone_number'] as String?;
+  String? get sellerWhatsappNumber => sellerData?['whatsapp_number'] as String?;
+
   String get categoryName => categoryData?['name'] ?? '';
   String get categoryNameAr => categoryData?['name_ar'] ?? '';
 
   List<String> get imageUrls {
     if (images == null || images!.isEmpty) return [];
     final sorted = List<Map<String, dynamic>>.from(images!)
-      ..sort((a, b) =>
-          (a['sort_order'] as int? ?? 0).compareTo(b['sort_order'] as int? ?? 0));
-    return sorted
-        .map((img) => img['image_url'] as String)
-        .toList();
+      ..sort(
+        (a, b) => (a['sort_order'] as int? ?? 0).compareTo(
+          b['sort_order'] as int? ?? 0,
+        ),
+      );
+    return sorted.map((img) => img['image_url'] as String).toList();
   }
 
   List<MapEntry<String, String>> get specificationEntries {
@@ -81,7 +86,9 @@ Map<String, dynamic>? _specificationsFromJson(dynamic value) {
     // Convert list of {label, value} to map
     final map = <String, dynamic>{};
     for (final item in value) {
-      if (item is Map && item.containsKey('label') && item.containsKey('value')) {
+      if (item is Map &&
+          item.containsKey('label') &&
+          item.containsKey('value')) {
         map[item['label'] as String] = item['value'];
       }
     }

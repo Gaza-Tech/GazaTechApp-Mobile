@@ -7,8 +7,10 @@ class ResetPasswordState with _$ResetPasswordState {
 
   // OTP Verification states
   const factory ResetPasswordState.verifyLoading() = VerifyLoading;
-  const factory ResetPasswordState.verifySuccess(String message) = VerifySuccess;
-  const factory ResetPasswordState.verifyFailure(String message) = VerifyFailure;
+  const factory ResetPasswordState.verifySuccess(String message) =
+      VerifySuccess;
+  const factory ResetPasswordState.verifyFailure(String message) =
+      VerifyFailure;
 
   // Password Reset states
   const factory ResetPasswordState.resetLoading() = ResetLoading;
@@ -17,6 +19,8 @@ class ResetPasswordState with _$ResetPasswordState {
 
   // Resend OTP states
   const factory ResetPasswordState.resendLoading() = ResendLoading;
-  const factory ResetPasswordState.resendSuccess(String message) = ResendSuccess;
-  const factory ResetPasswordState.resendFailure(String message) = ResendFailure;
+  const factory ResetPasswordState.resendSuccess(String message) =
+      ResendSuccess;
+  const factory ResetPasswordState.resendFailure(String message) =
+      ResendFailure;
 }

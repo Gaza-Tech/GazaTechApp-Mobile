@@ -31,10 +31,7 @@ class SpecificationsTable extends StatelessWidget {
           return Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 14.h,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -54,8 +51,7 @@ class SpecificationsTable extends StatelessWidget {
                   ],
                 ),
               ),
-              if (!isLast)
-                Divider(height: 1, indent: 16.w, endIndent: 16.w),
+              if (!isLast) Divider(height: 1, indent: 16.w, endIndent: 16.w),
             ],
           );
         }).toList(),

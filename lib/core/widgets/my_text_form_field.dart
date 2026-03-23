@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 
 class MyTextFormField extends StatelessWidget {
   const MyTextFormField({
@@ -9,7 +11,9 @@ class MyTextFormField extends StatelessWidget {
     this.inputTextStyle,
     this.hintStyle,
     required this.hintText,
+    this.labelText,
     this.isObscureText,
+    this.prefixIcon,
     this.suffixIcon,
     required this.controller,
     this.validator,
@@ -35,9 +39,11 @@ class MyTextFormField extends StatelessWidget {
   final String? helperText;
   final String? counterText;
   final String hintText;
+  final String? labelText;
   final int? hintMaxLines;
   final int? helperMaxLines;
   final bool? isObscureText;
+  final Widget? prefixIcon;
   final Widget? suffixIcon;
   final TextEditingController controller;
   final String? Function(String?)? validator;
@@ -52,43 +58,55 @@ class MyTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      onTapOutside: (PointerDownEvent event) {
-        FocusScope.of(context).unfocus();
-      },
-      autofocus: autofocus,
-      controller: controller,
-      validator: validator,
-      keyboardType: textInputType,
-      obscureText: isObscureText ?? false,
-      style: inputTextStyle ?? Theme.of(context).textTheme.bodyMedium,
-      maxLines: maxLines,
-      maxLength: maxLength,
-      minLines: minLines,
-      textInputAction: textInputAction,
-      onFieldSubmitted: onFieldSubmitted,
-      decoration: InputDecoration(
-        isDense: true,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // lable
+        Text(
+          labelText ?? '',
+          style: MyTextStyle.body.m.copyWith(fontWeight: FontWeight.w500),
+        ),
+        const VerticalSpace(8),
+        TextFormField(
+          onTapOutside: (PointerDownEvent event) {
+            FocusScope.of(context).unfocus();
+          },
+          autofocus: autofocus,
+          controller: controller,
+          validator: validator,
+          keyboardType: textInputType,
+          obscureText: isObscureText ?? false,
+          style: inputTextStyle ?? Theme.of(context).textTheme.bodyMedium,
+          maxLines: maxLines,
+          maxLength: maxLength,
+          minLines: minLines,
+          textInputAction: textInputAction,
+          onFieldSubmitted: onFieldSubmitted,
+          decoration: InputDecoration(
+            isDense: true,
 
-        // 1. Padding: Uses Theme defaults unless overridden here
-        contentPadding: contentPadding,
+            // 1. Padding: Uses Theme defaults unless overridden here
+            contentPadding: contentPadding,
 
-        // 2. Borders: Theme handles default styles.
-        // We only pass these if the parent widget explicitly provides a custom border.
-        focusedBorder: focusedBorder,
-        enabledBorder: enabledBorder,
+            // 2. Borders: Theme handles default styles.
+            // We only pass these if the parent widget explicitly provides a custom border.
+            focusedBorder: focusedBorder,
+            enabledBorder: enabledBorder,
 
-        // 3. Hint: Theme sets the color and style
-        hintText: hintText,
-        hintStyle:
-            hintStyle ?? Theme.of(context).inputDecorationTheme.hintStyle,
+            // 3. Hint: Theme sets the color and style
+            hintText: hintText,
+            hintStyle:
+                hintStyle ?? Theme.of(context).inputDecorationTheme.hintStyle,
 
-        helperText: helperText,
-        // 4. Icon
-        suffixIcon: suffixIcon,
+            helperText: helperText,
+            // 4. Icons
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
 
-        fillColor: fillColor,
-      ),
+            fillColor: fillColor,
+          ),
+        ),
+      ],
     );
   }
 }

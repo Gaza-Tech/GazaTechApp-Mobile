@@ -9,7 +9,9 @@ class LocalePersistence {
   /// Gets the saved locale from SharedPreferences
   /// Returns null if no locale has been saved
   Future<Locale?> getSavedLocale() async {
-    final languageCode = await SharedPrefHelper.getString(SharedPrefKeys.appLocale);
+    final languageCode = await SharedPrefHelper.getString(
+      SharedPrefKeys.appLocale,
+    );
     if (languageCode.isNotEmpty) {
       return Locale(languageCode);
     }
@@ -18,7 +20,10 @@ class LocalePersistence {
 
   /// Saves the current locale to SharedPreferences
   Future<void> saveLocale(Locale locale) async {
-    await SharedPrefHelper.setData(SharedPrefKeys.appLocale, locale.languageCode);
+    await SharedPrefHelper.setData(
+      SharedPrefKeys.appLocale,
+      locale.languageCode,
+    );
   }
 
   /// Removes the saved locale from SharedPreferences

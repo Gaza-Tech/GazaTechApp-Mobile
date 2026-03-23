@@ -30,8 +30,7 @@ class AddListingApiService {
   }
 
   /// Insert a new listing into marketplace_listings
-  Future<Map<String, dynamic>> createListing(
-      Map<String, dynamic> data) async {
+  Future<Map<String, dynamic>> createListing(Map<String, dynamic> data) async {
     final result = await _supabase
         .from('marketplace_listings')
         .insert(data)
@@ -51,9 +50,7 @@ class AddListingApiService {
     final extension = file.path.split('.').last;
     final path = '$sellerId/$listingId/$index.$extension';
 
-    await _supabase.storage
-        .from('marketplace-image')
-        .upload(path, file);
+    await _supabase.storage.from('marketplace-image').upload(path, file);
 
     final publicUrl = _supabase.storage
         .from('marketplace-image')
@@ -67,12 +64,18 @@ class AddListingApiService {
     required String listingId,
     required List<String> imageUrls,
   }) async {
-    final records = imageUrls.asMap().entries.map((entry) => {
-          'listing_id': listingId,
-          'image_url': entry.value,
-          'sort_order': entry.key + 1,
-          'is_thumbnail': entry.key == 0,
-        }).toList();
+    final records = imageUrls
+        .asMap()
+        .entries
+        .map(
+          (entry) => {
+            'listing_id': listingId,
+            'image_url': entry.value,
+            'sort_order': entry.key + 1,
+            'is_thumbnail': entry.key == 0,
+          },
+        )
+        .toList();
 
     await _supabase.from('listing_images').insert(records);
   }

@@ -25,8 +25,9 @@ class PostCardActions extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final activeColor =
-        isDark ? MyColors.status.error.onDark : MyColors.status.error.main;
+    final activeColor = isDark
+        ? MyColors.status.error.onDark
+        : MyColors.status.error.main;
     final bookmarkColor = theme.colorScheme.primary;
     final inactiveColor = theme.colorScheme.onSurfaceVariant;
 

@@ -36,10 +36,7 @@ class _CommunityScreenState extends State<CommunityScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(
-      length: _categoryValues.length,
-      vsync: this,
-    );
+    _tabController = TabController(length: _categoryValues.length, vsync: this);
     _tabController.addListener(_onTabChanged);
   }
 
@@ -96,12 +93,6 @@ class _CommunityScreenState extends State<CommunityScreen>
                 floating: true,
                 snap: true,
                 pinned: false,
-                actions: [
-                  IconButton(
-                    icon: Icon(Icons.person_outline, size: 26.sp),
-                    onPressed: () {},
-                  ),
-                ],
                 bottom: PreferredSize(
                   preferredSize: Size.fromHeight(112.h),
                   child: Column(
@@ -112,8 +103,7 @@ class _CommunityScreenState extends State<CommunityScreen>
                           vertical: 8.h,
                         ),
                         child: CommunitySearchBar(
-                          onSortTap: () =>
-                              showCommunitySortSheet(context),
+                          onSortTap: () => showCommunitySortSheet(context),
                           onSearchTap: () => Navigator.pushNamed(
                             context,
                             MyRoutes.communitySearch,
@@ -124,8 +114,7 @@ class _CommunityScreenState extends State<CommunityScreen>
                       SizedBox(height: 4.h),
                       CommunityCategoryChips(
                         categories: categories,
-                        selectedIndex:
-                            selectedIndex < 0 ? 0 : selectedIndex,
+                        selectedIndex: selectedIndex < 0 ? 0 : selectedIndex,
                         onCategoryChanged: (index) =>
                             _tabController.animateTo(index),
                       ),

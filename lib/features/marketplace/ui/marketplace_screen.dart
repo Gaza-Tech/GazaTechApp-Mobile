@@ -103,38 +103,36 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
                 pinned: false,
                 bottom: PreferredSize(
                   preferredSize: Size.fromHeight(96.h),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 8.h),
-                    child: Column(
-                      children: [
-                        Row(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 8.h),
+                        child: Row(
                           children: [
                             Expanded(
                               child: TappableSearchBar(
-                                onTap: () =>
-                                    context.pushNamed(MyRoutes.search),
+                                onTap: () => context.pushNamed(MyRoutes.search),
                                 hintText: context.l10n.searchMarketplace,
                               ),
                             ),
                             SizedBox(width: 8.w),
                             SortButton(
                               label: _sortLabel(context, state.activeSort),
-                              onTap: () =>
-                                  showMarketplaceSortSheet(context),
+                              onTap: () => showMarketplaceSortSheet(context),
                             ),
                           ],
                         ),
-                        SizedBox(height: 8.h),
-                        CategoryTabBar(
-                          categories: state.categories,
-                          selectedIndex: _tabController!.index,
-                          tabController: _tabController!,
-                          onTabChanged: (index) {
-                            _tabController!.animateTo(index);
-                          },
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 8.h),
+                      CategoryTabBar(
+                        categories: state.categories,
+                        selectedIndex: _tabController!.index,
+                        tabController: _tabController!,
+                        onTabChanged: (index) {
+                          _tabController!.animateTo(index);
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ),

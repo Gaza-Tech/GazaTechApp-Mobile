@@ -20,16 +20,17 @@ class MarketplaceCubit extends Cubit<MarketplaceState> {
 
     result.when(
       success: (categories) {
-        emit(state.copyWith(
-          categories: categories,
-          isCategoriesLoading: false,
-        ));
+        emit(
+          state.copyWith(categories: categories, isCategoriesLoading: false),
+        );
       },
       failure: (error) {
-        emit(state.copyWith(
-          isCategoriesLoading: false,
-          errorMessage: error.message ?? 'Failed to load categories',
-        ));
+        emit(
+          state.copyWith(
+            isCategoriesLoading: false,
+            errorMessage: error.message ?? 'Failed to load categories',
+          ),
+        );
       },
     );
   }
@@ -52,10 +53,7 @@ class MarketplaceCubit extends Cubit<MarketplaceState> {
 
   /// Fetch listings for a specific category (initial load or refresh)
   Future<void> fetchListings(String category) async {
-    emit(state.copyWith(
-      isInitialLoading: true,
-      errorMessage: null,
-    ));
+    emit(state.copyWith(isInitialLoading: true, errorMessage: null));
 
     final categoryId = state.categoryIdFor(category);
 
@@ -71,32 +69,33 @@ class MarketplaceCubit extends Cubit<MarketplaceState> {
           state.listingsByCategory,
         )..[category] = response.listings;
 
-        final updatedPages = Map<String, int>.from(
-          state.currentPageByCategory,
-        )..[category] = 0;
+        final updatedPages = Map<String, int>.from(state.currentPageByCategory)
+          ..[category] = 0;
 
-        final updatedHasMore = Map<String, bool>.from(
-          state.hasMoreByCategory,
-        )..[category] = response.hasMore;
+        final updatedHasMore = Map<String, bool>.from(state.hasMoreByCategory)
+          ..[category] = response.hasMore;
 
-        final updatedCounts = Map<String, int>.from(
-          state.totalCountByCategory,
-        )..[category] = response.totalCount;
+        final updatedCounts = Map<String, int>.from(state.totalCountByCategory)
+          ..[category] = response.totalCount;
 
-        emit(state.copyWith(
-          listingsByCategory: updatedListings,
-          currentPageByCategory: updatedPages,
-          hasMoreByCategory: updatedHasMore,
-          totalCountByCategory: updatedCounts,
-          isInitialLoading: false,
-          errorMessage: null,
-        ));
+        emit(
+          state.copyWith(
+            listingsByCategory: updatedListings,
+            currentPageByCategory: updatedPages,
+            hasMoreByCategory: updatedHasMore,
+            totalCountByCategory: updatedCounts,
+            isInitialLoading: false,
+            errorMessage: null,
+          ),
+        );
       },
       failure: (error) {
-        emit(state.copyWith(
-          isInitialLoading: false,
-          errorMessage: error.message ?? 'Failed to load listings',
-        ));
+        emit(
+          state.copyWith(
+            isInitialLoading: false,
+            errorMessage: error.message ?? 'Failed to load listings',
+          ),
+        );
       },
     );
   }
@@ -124,57 +123,61 @@ class MarketplaceCubit extends Cubit<MarketplaceState> {
           state.listingsByCategory,
         )..[category] = [...currentListings, ...response.listings];
 
-        final updatedPages = Map<String, int>.from(
-          state.currentPageByCategory,
-        )..[category] = nextPage;
+        final updatedPages = Map<String, int>.from(state.currentPageByCategory)
+          ..[category] = nextPage;
 
-        final updatedHasMore = Map<String, bool>.from(
-          state.hasMoreByCategory,
-        )..[category] = response.hasMore;
+        final updatedHasMore = Map<String, bool>.from(state.hasMoreByCategory)
+          ..[category] = response.hasMore;
 
-        emit(state.copyWith(
-          listingsByCategory: updatedListings,
-          currentPageByCategory: updatedPages,
-          hasMoreByCategory: updatedHasMore,
-          isLoadingMore: false,
-        ));
+        emit(
+          state.copyWith(
+            listingsByCategory: updatedListings,
+            currentPageByCategory: updatedPages,
+            hasMoreByCategory: updatedHasMore,
+            isLoadingMore: false,
+          ),
+        );
       },
       failure: (error) {
-        emit(state.copyWith(
-          isLoadingMore: false,
-          errorMessage: error.message ?? 'Failed to load more listings',
-        ));
+        emit(
+          state.copyWith(
+            isLoadingMore: false,
+            errorMessage: error.message ?? 'Failed to load more listings',
+          ),
+        );
       },
     );
   }
 
   /// Reset pagination for a specific category (for pull-to-refresh)
   void resetPagination(String category) {
-    final updatedPages = Map<String, int>.from(
-      state.currentPageByCategory,
-    )..remove(category);
+    final updatedPages = Map<String, int>.from(state.currentPageByCategory)
+      ..remove(category);
 
-    final updatedHasMore = Map<String, bool>.from(
-      state.hasMoreByCategory,
-    )..remove(category);
+    final updatedHasMore = Map<String, bool>.from(state.hasMoreByCategory)
+      ..remove(category);
 
-    emit(state.copyWith(
-      currentPageByCategory: updatedPages,
-      hasMoreByCategory: updatedHasMore,
-    ));
+    emit(
+      state.copyWith(
+        currentPageByCategory: updatedPages,
+        hasMoreByCategory: updatedHasMore,
+      ),
+    );
   }
 
   /// Update sort order and re-fetch all listings
   Future<void> updateSort(MarketplaceSort sort) async {
     if (state.activeSort == sort) return;
 
-    emit(state.copyWith(
-      activeSort: sort,
-      listingsByCategory: {},
-      currentPageByCategory: {},
-      hasMoreByCategory: {},
-      totalCountByCategory: {},
-    ));
+    emit(
+      state.copyWith(
+        activeSort: sort,
+        listingsByCategory: {},
+        currentPageByCategory: {},
+        hasMoreByCategory: {},
+        totalCountByCategory: {},
+      ),
+    );
 
     await fetchListings(state.selectedCategory);
   }

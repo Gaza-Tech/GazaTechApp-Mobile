@@ -25,20 +25,19 @@ class CommunityCubit extends Cubit<CommunityState> {
 
   void updateSort(CommunitySort sort) {
     if (state.activeSort == sort) return;
-    emit(state.copyWith(
-      activeSort: sort,
-      postsByCategory: {},
-      currentPageByCategory: {},
-      hasMoreByCategory: {},
-    ));
+    emit(
+      state.copyWith(
+        activeSort: sort,
+        postsByCategory: {},
+        currentPageByCategory: {},
+        hasMoreByCategory: {},
+      ),
+    );
     fetchPosts(state.selectedCategory);
   }
 
   Future<void> fetchPosts(String category) async {
-    emit(state.copyWith(
-      isInitialLoading: true,
-      errorMessage: null,
-    ));
+    emit(state.copyWith(isInitialLoading: true, errorMessage: null));
 
     final result = await _repo.fetchPosts(
       category: category == 'all' ? null : category,
@@ -61,27 +60,29 @@ class CommunityCubit extends Cubit<CommunityState> {
           state.postsByCategory,
         )..[category] = response.posts;
 
-        final updatedPages = Map<String, int>.from(
-          state.currentPageByCategory,
-        )..[category] = 0;
+        final updatedPages = Map<String, int>.from(state.currentPageByCategory)
+          ..[category] = 0;
 
-        final updatedHasMore = Map<String, bool>.from(
-          state.hasMoreByCategory,
-        )..[category] = response.hasMore;
+        final updatedHasMore = Map<String, bool>.from(state.hasMoreByCategory)
+          ..[category] = response.hasMore;
 
-        emit(state.copyWith(
-          postsByCategory: updatedPosts,
-          currentPageByCategory: updatedPages,
-          hasMoreByCategory: updatedHasMore,
-          isInitialLoading: false,
-          likedPostIds: {...state.likedPostIds, ...newLikedIds},
-          bookmarkedPostIds: {...state.bookmarkedPostIds, ...newBookmarkedIds},
-        ));
+        emit(
+          state.copyWith(
+            postsByCategory: updatedPosts,
+            currentPageByCategory: updatedPages,
+            hasMoreByCategory: updatedHasMore,
+            isInitialLoading: false,
+            likedPostIds: {...state.likedPostIds, ...newLikedIds},
+            bookmarkedPostIds: {
+              ...state.bookmarkedPostIds,
+              ...newBookmarkedIds,
+            },
+          ),
+        );
       },
-      failure: (error) => emit(state.copyWith(
-        isInitialLoading: false,
-        errorMessage: error.message,
-      )),
+      failure: (error) => emit(
+        state.copyWith(isInitialLoading: false, errorMessage: error.message),
+      ),
     );
   }
 
@@ -114,27 +115,29 @@ class CommunityCubit extends Cubit<CommunityState> {
           state.postsByCategory,
         )..[category] = [...current, ...response.posts];
 
-        final updatedPages = Map<String, int>.from(
-          state.currentPageByCategory,
-        )..[category] = nextPage;
+        final updatedPages = Map<String, int>.from(state.currentPageByCategory)
+          ..[category] = nextPage;
 
-        final updatedHasMore = Map<String, bool>.from(
-          state.hasMoreByCategory,
-        )..[category] = response.hasMore;
+        final updatedHasMore = Map<String, bool>.from(state.hasMoreByCategory)
+          ..[category] = response.hasMore;
 
-        emit(state.copyWith(
-          postsByCategory: updatedPosts,
-          currentPageByCategory: updatedPages,
-          hasMoreByCategory: updatedHasMore,
-          isLoadingMore: false,
-          likedPostIds: {...state.likedPostIds, ...newLikedIds},
-          bookmarkedPostIds: {...state.bookmarkedPostIds, ...newBookmarkedIds},
-        ));
+        emit(
+          state.copyWith(
+            postsByCategory: updatedPosts,
+            currentPageByCategory: updatedPages,
+            hasMoreByCategory: updatedHasMore,
+            isLoadingMore: false,
+            likedPostIds: {...state.likedPostIds, ...newLikedIds},
+            bookmarkedPostIds: {
+              ...state.bookmarkedPostIds,
+              ...newBookmarkedIds,
+            },
+          ),
+        );
       },
-      failure: (error) => emit(state.copyWith(
-        isLoadingMore: false,
-        errorMessage: error.message,
-      )),
+      failure: (error) => emit(
+        state.copyWith(isLoadingMore: false, errorMessage: error.message),
+      ),
     );
   }
 
@@ -143,10 +146,12 @@ class CommunityCubit extends Cubit<CommunityState> {
       ..remove(category);
     final updatedHasMore = Map<String, bool>.from(state.hasMoreByCategory)
       ..remove(category);
-    emit(state.copyWith(
-      currentPageByCategory: updatedPages,
-      hasMoreByCategory: updatedHasMore,
-    ));
+    emit(
+      state.copyWith(
+        currentPageByCategory: updatedPages,
+        hasMoreByCategory: updatedHasMore,
+      ),
+    );
   }
 
   Future<void> toggleLike(String postId) async {
@@ -164,7 +169,9 @@ class CommunityCubit extends Cubit<CommunityState> {
         return p;
       }).toList();
     }
-    emit(state.copyWith(likedPostIds: newLikedIds, postsByCategory: updatedPosts));
+    emit(
+      state.copyWith(likedPostIds: newLikedIds, postsByCategory: updatedPosts),
+    );
 
     final result = await _repo.togglePostLike(postId);
     result.when(
@@ -182,7 +189,12 @@ class CommunityCubit extends Cubit<CommunityState> {
             return p;
           }).toList();
         }
-        emit(state.copyWith(likedPostIds: revertIds, postsByCategory: revertedPosts));
+        emit(
+          state.copyWith(
+            likedPostIds: revertIds,
+            postsByCategory: revertedPosts,
+          ),
+        );
       },
     );
   }

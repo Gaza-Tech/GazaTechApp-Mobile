@@ -87,18 +87,24 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
   Future<void> togglePostLike() async {
     final wasLiked = state.isLiked;
     final delta = wasLiked ? -1 : 1;
-    emit(state.copyWith(
-      isLiked: !wasLiked,
-      post: state.post?.copyWith(likesCount: state.post!.likesCount + delta),
-    ));
+    emit(
+      state.copyWith(
+        isLiked: !wasLiked,
+        post: state.post?.copyWith(likesCount: state.post!.likesCount + delta),
+      ),
+    );
 
     final result = await _repo.togglePostLike(postId);
     result.when(
       success: (_) {},
-      failure: (_) => emit(state.copyWith(
-        isLiked: wasLiked,
-        post: state.post?.copyWith(likesCount: state.post!.likesCount - delta),
-      )),
+      failure: (_) => emit(
+        state.copyWith(
+          isLiked: wasLiked,
+          post: state.post?.copyWith(
+            likesCount: state.post!.likesCount - delta,
+          ),
+        ),
+      ),
     );
   }
 
@@ -119,15 +125,17 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
 
     final newIds = Set<String>.from(state.likedCommentIds);
     wasLiked ? newIds.remove(commentId) : newIds.add(commentId);
-    emit(state.copyWith(
-      likedCommentIds: newIds,
-      comments: _patchLikesCount(state.comments, commentId, delta),
-      repliesByCommentId: _patchRepliesLikesCount(
-        state.repliesByCommentId,
-        commentId,
-        delta,
+    emit(
+      state.copyWith(
+        likedCommentIds: newIds,
+        comments: _patchLikesCount(state.comments, commentId, delta),
+        repliesByCommentId: _patchRepliesLikesCount(
+          state.repliesByCommentId,
+          commentId,
+          delta,
+        ),
       ),
-    ));
+    );
 
     final result = await _repo.toggleCommentLike(commentId);
     result.when(
@@ -135,15 +143,17 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
       failure: (_) {
         final revertIds = Set<String>.from(state.likedCommentIds);
         wasLiked ? revertIds.add(commentId) : revertIds.remove(commentId);
-        emit(state.copyWith(
-          likedCommentIds: revertIds,
-          comments: _patchLikesCount(state.comments, commentId, -delta),
-          repliesByCommentId: _patchRepliesLikesCount(
-            state.repliesByCommentId,
-            commentId,
-            -delta,
+        emit(
+          state.copyWith(
+            likedCommentIds: revertIds,
+            comments: _patchLikesCount(state.comments, commentId, -delta),
+            repliesByCommentId: _patchRepliesLikesCount(
+              state.repliesByCommentId,
+              commentId,
+              -delta,
+            ),
           ),
-        ));
+        );
       },
     );
   }
@@ -168,10 +178,8 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
     int delta,
   ) {
     return repliesByCommentId.map(
-      (parentId, replies) => MapEntry(
-        parentId,
-        _patchLikesCount(replies, commentId, delta),
-      ),
+      (parentId, replies) =>
+          MapEntry(parentId, _patchLikesCount(replies, commentId, delta)),
     );
   }
 
@@ -203,11 +211,13 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
           ..add(commentId);
         final newLoadingDone = Set<String>.from(state.loadingReplyIds)
           ..remove(commentId);
-        emit(state.copyWith(
-          repliesByCommentId: newReplies,
-          expandedCommentIds: newExpanded,
-          loadingReplyIds: newLoadingDone,
-        ));
+        emit(
+          state.copyWith(
+            repliesByCommentId: newReplies,
+            expandedCommentIds: newExpanded,
+            loadingReplyIds: newLoadingDone,
+          ),
+        );
       },
       failure: (_) {
         final newLoadingDone = Set<String>.from(state.loadingReplyIds)
@@ -226,10 +236,12 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
         )..[parentCommentId] = replies;
         final newExpanded = Set<String>.from(state.expandedCommentIds)
           ..add(parentCommentId);
-        emit(state.copyWith(
-          repliesByCommentId: newReplies,
-          expandedCommentIds: newExpanded,
-        ));
+        emit(
+          state.copyWith(
+            repliesByCommentId: newReplies,
+            expandedCommentIds: newExpanded,
+          ),
+        );
       },
       failure: (_) {},
     );
@@ -256,11 +268,13 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
     result.when(
       success: (_) {
         if (state.post != null) {
-          emit(state.copyWith(
-            post: state.post!.copyWith(
-              commentsCount: state.post!.commentsCount + 1,
+          emit(
+            state.copyWith(
+              post: state.post!.copyWith(
+                commentsCount: state.post!.commentsCount + 1,
+              ),
             ),
-          ));
+          );
         }
         if (parentCommentId != null) {
           _incrementParentReplyCount(parentCommentId);

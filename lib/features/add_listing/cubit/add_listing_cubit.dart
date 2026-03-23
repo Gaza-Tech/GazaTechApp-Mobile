@@ -48,12 +48,14 @@ class AddListingCubit extends Cubit<AddListingState> {
       },
     );
 
-    emit(state.copyWith(
-      categories: categories,
-      locations: locations,
-      isLoadingFormData: false,
-      errorMessage: error,
-    ));
+    emit(
+      state.copyWith(
+        categories: categories,
+        locations: locations,
+        isLoadingFormData: false,
+        errorMessage: error,
+      ),
+    );
   }
 
   /// Create a listing with all form data
@@ -71,21 +73,26 @@ class AddListingCubit extends Cubit<AddListingState> {
     if (selectedCategoryId == null ||
         selectedLocationId == null ||
         selectedCondition == null) {
-      emit(state.copyWith(
-        errorMessage: 'Please fill in all required fields',
-      ));
+      emit(state.copyWith(errorMessage: 'Please fill in all required fields'));
       return;
     }
 
-    emit(state.copyWith(
-        isSubmitting: true, errorMessage: null, submitSuccess: false));
+    emit(
+      state.copyWith(
+        isSubmitting: true,
+        errorMessage: null,
+        submitSuccess: false,
+      ),
+    );
 
     final currentUser = Supabase.instance.client.auth.currentUser;
     if (currentUser == null) {
-      emit(state.copyWith(
-        isSubmitting: false,
-        errorMessage: 'You must be logged in to create a listing',
-      ));
+      emit(
+        state.copyWith(
+          isSubmitting: false,
+          errorMessage: 'You must be logged in to create a listing',
+        ),
+      );
       return;
     }
 
@@ -133,10 +140,12 @@ class AddListingCubit extends Cubit<AddListingState> {
           images: images,
         );
       case Failure(error: final error):
-        emit(state.copyWith(
-          isSubmitting: false,
-          errorMessage: error.message ?? 'Failed to create listing',
-        ));
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+            errorMessage: error.message ?? 'Failed to create listing',
+          ),
+        );
     }
   }
 
@@ -159,14 +168,19 @@ class AddListingCubit extends Cubit<AddListingState> {
 
     switch (uploadResult) {
       case Success(data: final imageUrls):
-        await _handleSaveImageRecords(listingId: listingId, imageUrls: imageUrls);
+        await _handleSaveImageRecords(
+          listingId: listingId,
+          imageUrls: imageUrls,
+        );
       case Failure(error: final error):
         // Listing created but image upload failed
-        emit(state.copyWith(
-          isSubmitting: false,
-          submitSuccess: true,
-          errorMessage: error.message,
-        ));
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+            submitSuccess: true,
+            errorMessage: error.message,
+          ),
+        );
     }
   }
 
@@ -185,11 +199,13 @@ class AddListingCubit extends Cubit<AddListingState> {
         emit(state.copyWith(isSubmitting: false, submitSuccess: true));
       case Failure(error: final error):
         // Listing created but image records failed
-        emit(state.copyWith(
-          isSubmitting: false,
-          submitSuccess: true,
-          errorMessage: error.message,
-        ));
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+            submitSuccess: true,
+            errorMessage: error.message,
+          ),
+        );
     }
   }
 

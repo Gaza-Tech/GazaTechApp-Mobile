@@ -41,7 +41,10 @@ class SpecificationsDisplay extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            LabeledField(label: context.l10n.specificationsLabel, isRequired: false),
+            LabeledField(
+              label: context.l10n.specificationsLabel,
+              isRequired: false,
+            ),
 
             GestureDetector(
               onTap: onAdd,

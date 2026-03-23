@@ -95,10 +95,7 @@ class _DashedBorderPainter extends CustomPainter {
       double distance = 0;
       while (distance < metric.length) {
         final end = (distance + dashWidth).clamp(0.0, metric.length);
-        dashedPath.addPath(
-          metric.extractPath(distance, end),
-          Offset.zero,
-        );
+        dashedPath.addPath(metric.extractPath(distance, end), Offset.zero);
         distance += dashWidth + dashSpace;
       }
     }

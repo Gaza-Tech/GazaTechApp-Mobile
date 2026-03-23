@@ -6,6 +6,7 @@ import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
 import 'package:gaza_tech/features/community/cubit/community_state.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PostsTabView extends StatefulWidget {
   final String category;
@@ -124,6 +125,9 @@ class _PostsTabViewState extends State<PostsTabView>
                     itemCount: posts.length,
                     itemBuilder: (context, index) {
                       final post = posts[index];
+                      final currentUserId =
+                          Supabase.instance.client.auth.currentUser?.id;
+                      final isOwnPost = post.authorId == currentUserId;
                       return PostCard(
                         userName: post.authorName,
                         timeAgo: _timeAgo(context, post.createdAt),
@@ -133,8 +137,18 @@ class _PostsTabViewState extends State<PostsTabView>
                         likes: post.likesCount,
                         comments: post.commentsCount,
                         isLiked: state.likedPostIds.contains(post.postId),
-                        isBookmarked:
-                            state.bookmarkedPostIds.contains(post.postId),
+                        isBookmarked: state.bookmarkedPostIds.contains(
+                          post.postId,
+                        ),
+                        avatarUrl: post.author?.avatarUrl,
+                        onAuthorTap: () => Navigator.pushNamed(
+                          context,
+                          MyRoutes.profile,
+                          arguments: {
+                            'userId': post.authorId,
+                            'isOwnProfile': isOwnPost,
+                          },
+                        ),
                         onLikeToggle: () =>
                             _communityCubit.toggleLike(post.postId),
                         onBookmarkToggle: () =>

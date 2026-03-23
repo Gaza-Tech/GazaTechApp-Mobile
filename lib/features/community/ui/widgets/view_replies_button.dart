@@ -30,10 +30,7 @@ class ViewRepliesButton extends StatelessWidget {
           children: [
             SizedBox(
               width: 24.w,
-              child: Divider(
-                color: theme.colorScheme.primary,
-                thickness: 1,
-              ),
+              child: Divider(color: theme.colorScheme.primary, thickness: 1),
             ),
             SizedBox(width: 8.w),
             if (isLoading)
@@ -47,9 +44,7 @@ class ViewRepliesButton extends StatelessWidget {
               )
             else
               Text(
-                isExpanded
-                    ? l10n.hideReplies
-                    : l10n.viewReplies(repliesCount),
+                isExpanded ? l10n.hideReplies : l10n.viewReplies(repliesCount),
                 style: MyTextStyle.action.s.copyWith(
                   color: theme.colorScheme.primary,
                 ),

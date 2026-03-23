@@ -1,10 +1,10 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../models/search_filters_model.dart';
+import '../models/marketplace_search_filters_model.dart';
 
-class SearchApiService {
+class MarketplaceSearchApiService {
   final SupabaseClient _supabase;
 
-  SearchApiService(this._supabase);
+  MarketplaceSearchApiService(this._supabase);
 
   static const int pageSize = 20;
 
@@ -89,9 +89,7 @@ class SearchApiService {
       if (priceMinIls != null) ilsParts.add('price.gte.$priceMinIls');
       if (priceMaxIls != null) ilsParts.add('price.lte.$priceMaxIls');
 
-      query = query.or(
-        'and(${usdParts.join(",")}),and(${ilsParts.join(",")})',
-      );
+      query = query.or('and(${usdParts.join(",")}),and(${ilsParts.join(",")})');
     } else if (hasUsdFilter) {
       query = query.eq('currency', 'USD');
       if (priceMinUsd != null) query = query.gte('price', priceMinUsd);

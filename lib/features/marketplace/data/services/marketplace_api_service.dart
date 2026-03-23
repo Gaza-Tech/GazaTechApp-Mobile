@@ -23,7 +23,9 @@ class MarketplaceApiService {
     // Build query with joined location & seller data
     var query = _supabase
         .from('marketplace_listings')
-        .select('*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name), listing_images(image_url, is_thumbnail, sort_order)')
+        .select(
+          '*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name), listing_images(image_url, is_thumbnail, sort_order)',
+        )
         .eq('content_status', 'published');
 
     // Apply category filter using UUID (skip if null = "all")
@@ -80,7 +82,9 @@ class MarketplaceApiService {
 
     final data = await _supabase
         .from('marketplace_listings')
-        .select('*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name), listing_images(image_url, is_thumbnail, sort_order)')
+        .select(
+          '*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name), listing_images(image_url, is_thumbnail, sort_order)',
+        )
         .eq('content_status', 'published')
         .or('title.ilike.%$keyword%,description.ilike.%$keyword%')
         .order('created_at', ascending: false)
@@ -94,5 +98,3 @@ class MarketplaceApiService {
     await _supabase.rpc('increment_views', params: {'listing_id': listingId});
   }
 }
-
-

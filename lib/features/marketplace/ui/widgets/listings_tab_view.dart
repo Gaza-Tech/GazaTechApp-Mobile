@@ -107,8 +107,8 @@ class _ListingsTabViewState extends State<ListingsTabView>
                           Localizations.localeOf(context).languageCode == 'ar';
                       final locationName = isArabic
                           ? (listing.locationNameAr.isNotEmpty
-                              ? listing.locationNameAr
-                              : listing.locationName)
+                                ? listing.locationNameAr
+                                : listing.locationName)
                           : listing.locationName;
                       return ProductCardGrid(
                         name: listing.title,

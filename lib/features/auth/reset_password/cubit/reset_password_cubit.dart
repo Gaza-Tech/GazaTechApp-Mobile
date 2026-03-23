@@ -9,7 +9,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   final String email;
 
   ResetPasswordCubit(this._resetPasswordRepo, this.email)
-      : super(const ResetPasswordState.initial());
+    : super(const ResetPasswordState.initial());
 
   final otpController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -25,12 +25,14 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     );
 
     result.when(
-      success: (_) => emit(const ResetPasswordState.verifySuccess(
-        "OTP verified successfully",
-      )),
-      failure: (error) => emit(ResetPasswordState.verifyFailure(
-        error.message ?? "Invalid or expired code",
-      )),
+      success: (_) => emit(
+        const ResetPasswordState.verifySuccess("OTP verified successfully"),
+      ),
+      failure: (error) => emit(
+        ResetPasswordState.verifyFailure(
+          error.message ?? "Invalid or expired code",
+        ),
+      ),
     );
   }
 
@@ -44,12 +46,14 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     );
 
     result.when(
-      success: (_) => emit(const ResetPasswordState.resetSuccess(
-        "Password reset successful",
-      )),
-      failure: (error) => emit(ResetPasswordState.resetFailure(
-        error.message ?? "Failed to reset password",
-      )),
+      success: (_) => emit(
+        const ResetPasswordState.resetSuccess("Password reset successful"),
+      ),
+      failure: (error) => emit(
+        ResetPasswordState.resetFailure(
+          error.message ?? "Failed to reset password",
+        ),
+      ),
     );
   }
 
@@ -59,12 +63,13 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     final result = await _resetPasswordRepo.resendRecoveryOtp(email);
 
     result.when(
-      success: (_) => emit(const ResetPasswordState.resendSuccess(
-        "Recovery code resent",
-      )),
-      failure: (error) => emit(ResetPasswordState.resendFailure(
-        error.message ?? "Failed to resend code",
-      )),
+      success: (_) =>
+          emit(const ResetPasswordState.resendSuccess("Recovery code resent")),
+      failure: (error) => emit(
+        ResetPasswordState.resendFailure(
+          error.message ?? "Failed to resend code",
+        ),
+      ),
     );
   }
 }

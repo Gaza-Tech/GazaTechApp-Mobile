@@ -1,14 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'search_filters_model.freezed.dart';
+part 'marketplace_search_filters_model.freezed.dart';
 
 enum SearchSortOption { newest, oldest, priceLowToHigh, priceHighToLow }
 
 @freezed
-abstract class SearchFiltersModel with _$SearchFiltersModel {
-  const SearchFiltersModel._();
+abstract class MarketplaceSearchFiltersModel
+    with _$MarketplaceSearchFiltersModel {
+  const MarketplaceSearchFiltersModel._();
 
-  const factory SearchFiltersModel({
+  const factory MarketplaceSearchFiltersModel({
     @Default(null) String? categoryId,
     @Default(null) String? categoryName,
     @Default(null) String? locationId,
@@ -19,7 +20,7 @@ abstract class SearchFiltersModel with _$SearchFiltersModel {
     @Default(null) int? priceMinIls,
     @Default(null) int? priceMaxIls,
     @Default(SearchSortOption.newest) SearchSortOption sort,
-  }) = _SearchFiltersModel;
+  }) = _MarketplaceSearchFiltersModel;
 
   bool get hasActiveFilters =>
       categoryId != null ||

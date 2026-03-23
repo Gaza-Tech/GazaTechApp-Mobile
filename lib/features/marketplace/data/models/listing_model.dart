@@ -18,7 +18,8 @@ abstract class ListingModel with _$ListingModel {
     required int price,
     String? currency,
     @JsonKey(name: 'location_id') required String locationId,
-    @JsonKey(fromJson: _specificationsFromJson) Map<String, dynamic>? specifications,
+    @JsonKey(fromJson: _specificationsFromJson)
+    Map<String, dynamic>? specifications,
     @JsonKey(name: 'content_status') required String contentStatus,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
@@ -48,7 +49,11 @@ abstract class ListingModel with _$ListingModel {
     if (thumbnail.isNotEmpty) return thumbnail.first['image_url'] as String?;
     // Fallback to first image by sort_order
     final sorted = List<Map<String, dynamic>>.from(images!)
-      ..sort((a, b) => (a['sort_order'] as int? ?? 0).compareTo(b['sort_order'] as int? ?? 0));
+      ..sort(
+        (a, b) => (a['sort_order'] as int? ?? 0).compareTo(
+          b['sort_order'] as int? ?? 0,
+        ),
+      );
     return sorted.first['image_url'] as String?;
   }
 }

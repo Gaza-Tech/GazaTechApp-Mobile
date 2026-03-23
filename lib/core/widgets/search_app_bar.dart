@@ -30,7 +30,8 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final resolvedFillColor = fillColor ??
+    final resolvedFillColor =
+        fillColor ??
         (isDark
             ? theme.colorScheme.surfaceContainerHighest
             : theme.colorScheme.surfaceContainerHigh);

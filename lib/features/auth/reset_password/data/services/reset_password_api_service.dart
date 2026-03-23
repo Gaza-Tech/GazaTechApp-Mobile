@@ -16,15 +16,10 @@ class ResetPasswordApiService {
   }
 
   Future<UserResponse> updatePassword(String password) async {
-    return await _supabase.auth.updateUser(
-      UserAttributes(password: password),
-    );
+    return await _supabase.auth.updateUser(UserAttributes(password: password));
   }
 
   Future<ResendResponse> resendRecoveryOtp({required String email}) async {
-    return await _supabase.auth.resend(
-      type: OtpType.recovery,
-      email: email,
-    );
+    return await _supabase.auth.resend(type: OtpType.recovery, email: email);
   }
 }

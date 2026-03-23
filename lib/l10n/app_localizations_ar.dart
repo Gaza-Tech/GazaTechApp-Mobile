@@ -713,4 +713,85 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get comments50Plus => '+50 تعليق';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get bio => 'نبذة عني';
+
+  @override
+  String get bioHint => 'أخبر الآخرين عن نفسك...';
+
+  @override
+  String get phoneNumber => 'رقم الهاتف';
+
+  @override
+  String get whatsappNumber => 'رقم واتساب';
+
+  @override
+  String get socialLinks => 'روابط التواصل';
+
+  @override
+  String get facebookLink => 'فيسبوك';
+
+  @override
+  String get instagramLink => 'إنستغرام';
+
+  @override
+  String get twitterLink => 'تويتر / X';
+
+  @override
+  String get websiteLink => 'الموقع الإلكتروني';
+
+  @override
+  String get changeAvatar => 'تغيير الصورة';
+
+  @override
+  String get removeAvatar => 'حذف الصورة';
+
+  @override
+  String get saveChanges => 'حفظ التغييرات';
+
+  @override
+  String get profileUpdated => 'تم تحديث الملف الشخصي بنجاح';
+
+  @override
+  String get myPosts => 'المنشورات';
+
+  @override
+  String get myListings => 'إعلاناتي';
+
+  @override
+  String get bookmarks => 'المحفوظات';
+
+  @override
+  String get noPostsYet => 'لا توجد منشورات بعد';
+
+  @override
+  String get noListingsYet => 'لا توجد إعلانات بعد';
+
+  @override
+  String get noBookmarksYet => 'لا توجد محفوظات بعد';
+
+  @override
+  String get personalInfo => 'المعلومات الشخصية';
+
+  @override
+  String get contactInfo => 'معلومات التواصل';
+
+  @override
+  String get verified => 'موثق';
+
+  @override
+  String get avatarUploadFailed => 'فشل رفع الصورة';
+
+  @override
+  String get contactUnavailable => 'معلومات التواصل غير متوفرة لهذا البائع';
+
+  @override
+  String get couldNotOpenLink => 'تعذر فتح هذا الرابط';
+
+  @override
+  String get website => 'الموقع';
 }

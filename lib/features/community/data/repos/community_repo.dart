@@ -24,8 +24,9 @@ class CommunityRepo {
         sort: sort,
       );
       final hasMore = raw.length > CommunityApiService.postsPageSize;
-      final items =
-          hasMore ? raw.sublist(0, CommunityApiService.postsPageSize) : raw;
+      final items = hasMore
+          ? raw.sublist(0, CommunityApiService.postsPageSize)
+          : raw;
       final posts = items.map((e) => PostModel.fromJson(e)).toList();
 
       final postIds = posts.map((p) => p.postId).toList();
@@ -76,10 +77,9 @@ class CommunityRepo {
     try {
       final raw = await _service.fetchComments(postId: postId, page: page);
       final hasMore = raw.length > CommunityApiService.commentsPageSize;
-      final items =
-          hasMore
-              ? raw.sublist(0, CommunityApiService.commentsPageSize)
-              : raw;
+      final items = hasMore
+          ? raw.sublist(0, CommunityApiService.commentsPageSize)
+          : raw;
       final comments = items.map((e) => CommentModel.fromJson(e)).toList();
       return ApiResult.success(
         CommentsResponse(comments: comments, hasMore: hasMore),
@@ -162,15 +162,18 @@ class CommunityRepo {
       final raw = await _service.searchPosts(
         keyword: keyword,
         page: page,
-        categories: filter.categories.isEmpty ? null : filter.categories.toList(),
+        categories: filter.categories.isEmpty
+            ? null
+            : filter.categories.toList(),
         dateAfter: dateAfter,
         minLikes: minLikes,
         minComments: minComments,
         sort: filter.sort,
       );
       final hasMore = raw.length > CommunityApiService.postsPageSize;
-      final items =
-          hasMore ? raw.sublist(0, CommunityApiService.postsPageSize) : raw;
+      final items = hasMore
+          ? raw.sublist(0, CommunityApiService.postsPageSize)
+          : raw;
       final posts = items.map((e) => PostModel.fromJson(e)).toList();
 
       final postIds = posts.map((p) => p.postId).toList();

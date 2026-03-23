@@ -114,15 +114,16 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                       repliesCount: comment.repliesCount,
                                       isExpanded: state.expandedCommentIds
                                           .contains(comment.commentId),
-                                      isLoading: state.loadingReplyIds
-                                          .contains(comment.commentId),
-                                      onTap: () => cubit
-                                          .toggleRepliesExpansion(
-                                            comment.commentId,
-                                          ),
+                                      isLoading: state.loadingReplyIds.contains(
+                                        comment.commentId,
+                                      ),
+                                      onTap: () => cubit.toggleRepliesExpansion(
+                                        comment.commentId,
+                                      ),
                                     ),
-                                  if (state.expandedCommentIds
-                                      .contains(comment.commentId))
+                                  if (state.expandedCommentIds.contains(
+                                    comment.commentId,
+                                  ))
                                     ...(state.repliesByCommentId[comment
                                                 .commentId] ??
                                             [])
@@ -138,10 +139,10 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                             isLiked: state.likedCommentIds
                                                 .contains(reply.commentId),
                                             indentLevel: 1,
-                                              onLikeTap: () =>
+                                            onLikeTap: () =>
                                                 cubit.toggleCommentLike(
-                                              reply.commentId,
-                                            ),
+                                                  reply.commentId,
+                                                ),
                                           ),
                                         ),
                                 ];
@@ -235,10 +236,8 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
       comments: post.commentsCount,
       isLiked: state.isLiked,
       isBookmarked: state.isBookmarked,
-      onLikeToggle: () =>
-          context.read<PostDetailsCubit>().togglePostLike(),
-      onBookmarkToggle: () =>
-          context.read<PostDetailsCubit>().toggleBookmark(),
+      onLikeToggle: () => context.read<PostDetailsCubit>().togglePostLike(),
+      onBookmarkToggle: () => context.read<PostDetailsCubit>().toggleBookmark(),
     );
   }
 

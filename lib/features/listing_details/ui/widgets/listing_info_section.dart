@@ -33,9 +33,7 @@ class ListingInfoSection extends StatelessWidget {
         const VerticalSpace(8),
         Text(
           price,
-          style: MyTextStyle.heading.h2.copyWith(
-            color: MyColors.primary.base,
-          ),
+          style: MyTextStyle.heading.h2.copyWith(color: MyColors.primary.base),
         ),
         const VerticalSpace(12),
         Row(

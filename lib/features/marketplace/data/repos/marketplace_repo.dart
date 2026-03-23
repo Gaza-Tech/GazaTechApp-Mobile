@@ -15,7 +15,9 @@ class MarketplaceRepo {
   Future<ApiResult<List<CategoryModel>>> getCategories() async {
     try {
       final data = await _apiService.fetchCategories();
-      final categories = data.map((json) => CategoryModel.fromJson(json)).toList();
+      final categories = data
+          .map((json) => CategoryModel.fromJson(json))
+          .toList();
       return ApiResult.success(categories);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));

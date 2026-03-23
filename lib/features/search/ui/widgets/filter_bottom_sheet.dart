@@ -6,11 +6,11 @@ import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/filter_sheet_shell.dart';
 import 'package:gaza_tech/features/add_listing/data/models/location_model.dart';
 import 'package:gaza_tech/features/marketplace/data/models/category_model.dart';
-import 'package:gaza_tech/features/marketplace_search/cubit/search_cubit.dart';
-import 'package:gaza_tech/features/marketplace_search/data/models/search_filters_model.dart';
+import 'package:gaza_tech/features/search/cubit/marketplace_search_cubit.dart';
+import 'package:gaza_tech/features/search/data/models/marketplace_search_filters_model.dart';
 
 void showFilterBottomSheet(BuildContext context) {
-  final cubit = context.read<SearchCubit>();
+  final cubit = context.read<MarketplaceSearchCubit>();
 
   showModalBottomSheet(
     context: context,
@@ -33,9 +33,8 @@ class _FilterBottomSheetContent extends StatefulWidget {
       _FilterBottomSheetContentState();
 }
 
-class _FilterBottomSheetContentState
-    extends State<_FilterBottomSheetContent> {
-  late SearchFiltersModel _temp;
+class _FilterBottomSheetContentState extends State<_FilterBottomSheetContent> {
+  late MarketplaceSearchFiltersModel _temp;
   late TextEditingController _priceMinUsd;
   late TextEditingController _priceMaxUsd;
   late TextEditingController _priceMinIls;
@@ -46,18 +45,22 @@ class _FilterBottomSheetContentState
   @override
   void initState() {
     super.initState();
-    final state = context.read<SearchCubit>().state;
+    final state = context.read<MarketplaceSearchCubit>().state;
     _temp = state.filters;
     _categories = state.categories;
     _locations = state.locations;
-    _priceMinUsd =
-        TextEditingController(text: _temp.priceMinUsd?.toString() ?? '');
-    _priceMaxUsd =
-        TextEditingController(text: _temp.priceMaxUsd?.toString() ?? '');
-    _priceMinIls =
-        TextEditingController(text: _temp.priceMinIls?.toString() ?? '');
-    _priceMaxIls =
-        TextEditingController(text: _temp.priceMaxIls?.toString() ?? '');
+    _priceMinUsd = TextEditingController(
+      text: _temp.priceMinUsd?.toString() ?? '',
+    );
+    _priceMaxUsd = TextEditingController(
+      text: _temp.priceMaxUsd?.toString() ?? '',
+    );
+    _priceMinIls = TextEditingController(
+      text: _temp.priceMinIls?.toString() ?? '',
+    );
+    _priceMaxIls = TextEditingController(
+      text: _temp.priceMaxIls?.toString() ?? '',
+    );
   }
 
   @override
@@ -73,7 +76,7 @@ class _FilterBottomSheetContentState
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
-    final cubit = context.read<SearchCubit>();
+    final cubit = context.read<MarketplaceSearchCubit>();
     final isArabic = Localizations.localeOf(context).languageCode == 'ar';
 
     return Padding(
@@ -95,7 +98,7 @@ class _FilterBottomSheetContentState
           Navigator.pop(context);
         },
         onClearAll: () => setState(() {
-          _temp = const SearchFiltersModel();
+          _temp = const MarketplaceSearchFiltersModel();
           _priceMinUsd.clear();
           _priceMaxUsd.clear();
           _priceMinIls.clear();
@@ -114,7 +117,8 @@ class _FilterBottomSheetContentState
                 ),
                 value: option,
                 groupValue: _temp.sort,
-                onChanged: (v) => setState(() => _temp = _temp.copyWith(sort: v!)),
+                onChanged: (v) =>
+                    setState(() => _temp = _temp.copyWith(sort: v!)),
                 dense: true,
                 contentPadding: EdgeInsets.zero,
               );
@@ -123,7 +127,7 @@ class _FilterBottomSheetContentState
             Text(l10n.categoryLabel, style: MyTextStyle.heading.h4),
             const SizedBox(height: 8),
             DropdownButtonFormField<String?>(
-              value: _temp.categoryId,
+              initialValue: _temp.categoryId,
               isExpanded: true,
               decoration: InputDecoration(
                 hintText: l10n.selectCategory,
@@ -154,10 +158,12 @@ class _FilterBottomSheetContentState
               ],
               onChanged: (value) {
                 if (value == null) {
-                  setState(() => _temp = _temp.copyWith(
-                        categoryId: null,
-                        categoryName: null,
-                      ));
+                  setState(
+                    () => _temp = _temp.copyWith(
+                      categoryId: null,
+                      categoryName: null,
+                    ),
+                  );
                 } else {
                   final cat = _categories.firstWhere((c) => c.id == value);
                   final name = isArabic
@@ -165,10 +171,12 @@ class _FilterBottomSheetContentState
                             ? cat.nameAr!
                             : cat.name)
                       : cat.name;
-                  setState(() => _temp = _temp.copyWith(
-                        categoryId: value,
-                        categoryName: name,
-                      ));
+                  setState(
+                    () => _temp = _temp.copyWith(
+                      categoryId: value,
+                      categoryName: name,
+                    ),
+                  );
                 }
               },
             ),
@@ -176,7 +184,7 @@ class _FilterBottomSheetContentState
             Text(l10n.locationLabel, style: MyTextStyle.heading.h4),
             const SizedBox(height: 8),
             DropdownButtonFormField<String?>(
-              value: _temp.locationId,
+              initialValue: _temp.locationId,
               isExpanded: true,
               decoration: InputDecoration(
                 hintText: l10n.selectLocation,
@@ -207,22 +215,27 @@ class _FilterBottomSheetContentState
               ],
               onChanged: (value) {
                 if (value == null) {
-                  setState(() => _temp = _temp.copyWith(
-                        locationId: null,
-                        locationName: null,
-                      ));
+                  setState(
+                    () => _temp = _temp.copyWith(
+                      locationId: null,
+                      locationName: null,
+                    ),
+                  );
                 } else {
-                  final loc =
-                      _locations.firstWhere((l) => l.locationId == value);
+                  final loc = _locations.firstWhere(
+                    (l) => l.locationId == value,
+                  );
                   final name = isArabic
                       ? (loc.nameAr?.isNotEmpty == true
                             ? loc.nameAr!
                             : loc.name)
                       : loc.name;
-                  setState(() => _temp = _temp.copyWith(
-                        locationId: value,
-                        locationName: name,
-                      ));
+                  setState(
+                    () => _temp = _temp.copyWith(
+                      locationId: value,
+                      locationName: name,
+                    ),
+                  );
                 }
               },
             ),
@@ -235,7 +248,9 @@ class _FilterBottomSheetContentState
               children: [
                 _buildConditionChip('brand_new', l10n.conditionBrandNew),
                 _buildConditionChip(
-                    'used_excellent', l10n.conditionUsedExcellent),
+                  'used_excellent',
+                  l10n.conditionUsedExcellent,
+                ),
                 _buildConditionChip('used_good', l10n.conditionUsedGood),
                 _buildConditionChip('for_parts', l10n.conditionForParts),
               ],

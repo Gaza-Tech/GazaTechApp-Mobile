@@ -11,9 +11,7 @@ class CategoryTag extends StatelessWidget {
     return Chip(
       label: Text(category),
       side: BorderSide.none,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.r),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
       visualDensity: VisualDensity.compact,
       padding: EdgeInsets.symmetric(horizontal: 4.w),
     );

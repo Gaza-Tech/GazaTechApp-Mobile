@@ -45,16 +45,10 @@ abstract class CommentModel with _$CommentModel {
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'parent_comment_id') String? parentCommentId,
     @JsonKey(name: 'users', fromJson: _authorFromJson) PostAuthorModel? author,
-    @JsonKey(
-      name: 'community_comments_likes',
-      fromJson: _likesCountFromJson,
-    )
+    @JsonKey(name: 'community_comments_likes', fromJson: _likesCountFromJson)
     @Default(0)
     int likesCount,
-    @JsonKey(
-      name: 'community_post_comments',
-      fromJson: _repliesCountFromJson,
-    )
+    @JsonKey(name: 'community_post_comments', fromJson: _repliesCountFromJson)
     @Default(0)
     int repliesCount,
   }) = _CommentModel;

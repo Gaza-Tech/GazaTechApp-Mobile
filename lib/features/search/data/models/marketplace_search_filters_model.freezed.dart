@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'search_filters_model.dart';
+part of 'marketplace_search_filters_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,20 +12,20 @@ part of 'search_filters_model.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$SearchFiltersModel {
+mixin _$MarketplaceSearchFiltersModel {
 
  String? get categoryId; String? get categoryName; String? get locationId; String? get locationName; List<String> get conditions; int? get priceMinUsd; int? get priceMaxUsd; int? get priceMinIls; int? get priceMaxIls; SearchSortOption get sort;
-/// Create a copy of SearchFiltersModel
+/// Create a copy of MarketplaceSearchFiltersModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SearchFiltersModelCopyWith<SearchFiltersModel> get copyWith => _$SearchFiltersModelCopyWithImpl<SearchFiltersModel>(this as SearchFiltersModel, _$identity);
+$MarketplaceSearchFiltersModelCopyWith<MarketplaceSearchFiltersModel> get copyWith => _$MarketplaceSearchFiltersModelCopyWithImpl<MarketplaceSearchFiltersModel>(this as MarketplaceSearchFiltersModel, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchFiltersModel&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.locationId, locationId) || other.locationId == locationId)&&(identical(other.locationName, locationName) || other.locationName == locationName)&&const DeepCollectionEquality().equals(other.conditions, conditions)&&(identical(other.priceMinUsd, priceMinUsd) || other.priceMinUsd == priceMinUsd)&&(identical(other.priceMaxUsd, priceMaxUsd) || other.priceMaxUsd == priceMaxUsd)&&(identical(other.priceMinIls, priceMinIls) || other.priceMinIls == priceMinIls)&&(identical(other.priceMaxIls, priceMaxIls) || other.priceMaxIls == priceMaxIls)&&(identical(other.sort, sort) || other.sort == sort));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketplaceSearchFiltersModel&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.locationId, locationId) || other.locationId == locationId)&&(identical(other.locationName, locationName) || other.locationName == locationName)&&const DeepCollectionEquality().equals(other.conditions, conditions)&&(identical(other.priceMinUsd, priceMinUsd) || other.priceMinUsd == priceMinUsd)&&(identical(other.priceMaxUsd, priceMaxUsd) || other.priceMaxUsd == priceMaxUsd)&&(identical(other.priceMinIls, priceMinIls) || other.priceMinIls == priceMinIls)&&(identical(other.priceMaxIls, priceMaxIls) || other.priceMaxIls == priceMaxIls)&&(identical(other.sort, sort) || other.sort == sort));
 }
 
 
@@ -34,15 +34,15 @@ int get hashCode => Object.hash(runtimeType,categoryId,categoryName,locationId,l
 
 @override
 String toString() {
-  return 'SearchFiltersModel(categoryId: $categoryId, categoryName: $categoryName, locationId: $locationId, locationName: $locationName, conditions: $conditions, priceMinUsd: $priceMinUsd, priceMaxUsd: $priceMaxUsd, priceMinIls: $priceMinIls, priceMaxIls: $priceMaxIls, sort: $sort)';
+  return 'MarketplaceSearchFiltersModel(categoryId: $categoryId, categoryName: $categoryName, locationId: $locationId, locationName: $locationName, conditions: $conditions, priceMinUsd: $priceMinUsd, priceMaxUsd: $priceMaxUsd, priceMinIls: $priceMinIls, priceMaxIls: $priceMaxIls, sort: $sort)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $SearchFiltersModelCopyWith<$Res>  {
-  factory $SearchFiltersModelCopyWith(SearchFiltersModel value, $Res Function(SearchFiltersModel) _then) = _$SearchFiltersModelCopyWithImpl;
+abstract mixin class $MarketplaceSearchFiltersModelCopyWith<$Res>  {
+  factory $MarketplaceSearchFiltersModelCopyWith(MarketplaceSearchFiltersModel value, $Res Function(MarketplaceSearchFiltersModel) _then) = _$MarketplaceSearchFiltersModelCopyWithImpl;
 @useResult
 $Res call({
  String? categoryId, String? categoryName, String? locationId, String? locationName, List<String> conditions, int? priceMinUsd, int? priceMaxUsd, int? priceMinIls, int? priceMaxIls, SearchSortOption sort
@@ -53,14 +53,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$SearchFiltersModelCopyWithImpl<$Res>
-    implements $SearchFiltersModelCopyWith<$Res> {
-  _$SearchFiltersModelCopyWithImpl(this._self, this._then);
+class _$MarketplaceSearchFiltersModelCopyWithImpl<$Res>
+    implements $MarketplaceSearchFiltersModelCopyWith<$Res> {
+  _$MarketplaceSearchFiltersModelCopyWithImpl(this._self, this._then);
 
-  final SearchFiltersModel _self;
-  final $Res Function(SearchFiltersModel) _then;
+  final MarketplaceSearchFiltersModel _self;
+  final $Res Function(MarketplaceSearchFiltersModel) _then;
 
-/// Create a copy of SearchFiltersModel
+/// Create a copy of MarketplaceSearchFiltersModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? categoryId = freezed,Object? categoryName = freezed,Object? locationId = freezed,Object? locationName = freezed,Object? conditions = null,Object? priceMinUsd = freezed,Object? priceMaxUsd = freezed,Object? priceMinIls = freezed,Object? priceMaxIls = freezed,Object? sort = null,}) {
   return _then(_self.copyWith(
@@ -81,8 +81,8 @@ as SearchSortOption,
 }
 
 
-/// Adds pattern-matching-related methods to [SearchFiltersModel].
-extension SearchFiltersModelPatterns on SearchFiltersModel {
+/// Adds pattern-matching-related methods to [MarketplaceSearchFiltersModel].
+extension MarketplaceSearchFiltersModelPatterns on MarketplaceSearchFiltersModel {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -95,10 +95,10 @@ extension SearchFiltersModelPatterns on SearchFiltersModel {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SearchFiltersModel value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MarketplaceSearchFiltersModel value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _SearchFiltersModel() when $default != null:
+case _MarketplaceSearchFiltersModel() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -117,10 +117,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SearchFiltersModel value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MarketplaceSearchFiltersModel value)  $default,){
 final _that = this;
 switch (_that) {
-case _SearchFiltersModel():
+case _MarketplaceSearchFiltersModel():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -138,10 +138,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SearchFiltersModel value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MarketplaceSearchFiltersModel value)?  $default,){
 final _that = this;
 switch (_that) {
-case _SearchFiltersModel() when $default != null:
+case _MarketplaceSearchFiltersModel() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -161,7 +161,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? categoryId,  String? categoryName,  String? locationId,  String? locationName,  List<String> conditions,  int? priceMinUsd,  int? priceMaxUsd,  int? priceMinIls,  int? priceMaxIls,  SearchSortOption sort)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _SearchFiltersModel() when $default != null:
+case _MarketplaceSearchFiltersModel() when $default != null:
 return $default(_that.categoryId,_that.categoryName,_that.locationId,_that.locationName,_that.conditions,_that.priceMinUsd,_that.priceMaxUsd,_that.priceMinIls,_that.priceMaxIls,_that.sort);case _:
   return orElse();
 
@@ -182,7 +182,7 @@ return $default(_that.categoryId,_that.categoryName,_that.locationId,_that.locat
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? categoryId,  String? categoryName,  String? locationId,  String? locationName,  List<String> conditions,  int? priceMinUsd,  int? priceMaxUsd,  int? priceMinIls,  int? priceMaxIls,  SearchSortOption sort)  $default,) {final _that = this;
 switch (_that) {
-case _SearchFiltersModel():
+case _MarketplaceSearchFiltersModel():
 return $default(_that.categoryId,_that.categoryName,_that.locationId,_that.locationName,_that.conditions,_that.priceMinUsd,_that.priceMaxUsd,_that.priceMinIls,_that.priceMaxIls,_that.sort);case _:
   throw StateError('Unexpected subclass');
 
@@ -202,7 +202,7 @@ return $default(_that.categoryId,_that.categoryName,_that.locationId,_that.locat
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? categoryId,  String? categoryName,  String? locationId,  String? locationName,  List<String> conditions,  int? priceMinUsd,  int? priceMaxUsd,  int? priceMinIls,  int? priceMaxIls,  SearchSortOption sort)?  $default,) {final _that = this;
 switch (_that) {
-case _SearchFiltersModel() when $default != null:
+case _MarketplaceSearchFiltersModel() when $default != null:
 return $default(_that.categoryId,_that.categoryName,_that.locationId,_that.locationName,_that.conditions,_that.priceMinUsd,_that.priceMaxUsd,_that.priceMinIls,_that.priceMaxIls,_that.sort);case _:
   return null;
 
@@ -214,8 +214,8 @@ return $default(_that.categoryId,_that.categoryName,_that.locationId,_that.locat
 /// @nodoc
 
 
-class _SearchFiltersModel extends SearchFiltersModel {
-  const _SearchFiltersModel({this.categoryId = null, this.categoryName = null, this.locationId = null, this.locationName = null, final  List<String> conditions = const [], this.priceMinUsd = null, this.priceMaxUsd = null, this.priceMinIls = null, this.priceMaxIls = null, this.sort = SearchSortOption.newest}): _conditions = conditions,super._();
+class _MarketplaceSearchFiltersModel extends MarketplaceSearchFiltersModel {
+  const _MarketplaceSearchFiltersModel({this.categoryId = null, this.categoryName = null, this.locationId = null, this.locationName = null, final  List<String> conditions = const [], this.priceMinUsd = null, this.priceMaxUsd = null, this.priceMinIls = null, this.priceMaxIls = null, this.sort = SearchSortOption.newest}): _conditions = conditions,super._();
   
 
 @override@JsonKey() final  String? categoryId;
@@ -235,17 +235,17 @@ class _SearchFiltersModel extends SearchFiltersModel {
 @override@JsonKey() final  int? priceMaxIls;
 @override@JsonKey() final  SearchSortOption sort;
 
-/// Create a copy of SearchFiltersModel
+/// Create a copy of MarketplaceSearchFiltersModel
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SearchFiltersModelCopyWith<_SearchFiltersModel> get copyWith => __$SearchFiltersModelCopyWithImpl<_SearchFiltersModel>(this, _$identity);
+_$MarketplaceSearchFiltersModelCopyWith<_MarketplaceSearchFiltersModel> get copyWith => __$MarketplaceSearchFiltersModelCopyWithImpl<_MarketplaceSearchFiltersModel>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchFiltersModel&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.locationId, locationId) || other.locationId == locationId)&&(identical(other.locationName, locationName) || other.locationName == locationName)&&const DeepCollectionEquality().equals(other._conditions, _conditions)&&(identical(other.priceMinUsd, priceMinUsd) || other.priceMinUsd == priceMinUsd)&&(identical(other.priceMaxUsd, priceMaxUsd) || other.priceMaxUsd == priceMaxUsd)&&(identical(other.priceMinIls, priceMinIls) || other.priceMinIls == priceMinIls)&&(identical(other.priceMaxIls, priceMaxIls) || other.priceMaxIls == priceMaxIls)&&(identical(other.sort, sort) || other.sort == sort));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketplaceSearchFiltersModel&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.locationId, locationId) || other.locationId == locationId)&&(identical(other.locationName, locationName) || other.locationName == locationName)&&const DeepCollectionEquality().equals(other._conditions, _conditions)&&(identical(other.priceMinUsd, priceMinUsd) || other.priceMinUsd == priceMinUsd)&&(identical(other.priceMaxUsd, priceMaxUsd) || other.priceMaxUsd == priceMaxUsd)&&(identical(other.priceMinIls, priceMinIls) || other.priceMinIls == priceMinIls)&&(identical(other.priceMaxIls, priceMaxIls) || other.priceMaxIls == priceMaxIls)&&(identical(other.sort, sort) || other.sort == sort));
 }
 
 
@@ -254,15 +254,15 @@ int get hashCode => Object.hash(runtimeType,categoryId,categoryName,locationId,l
 
 @override
 String toString() {
-  return 'SearchFiltersModel(categoryId: $categoryId, categoryName: $categoryName, locationId: $locationId, locationName: $locationName, conditions: $conditions, priceMinUsd: $priceMinUsd, priceMaxUsd: $priceMaxUsd, priceMinIls: $priceMinIls, priceMaxIls: $priceMaxIls, sort: $sort)';
+  return 'MarketplaceSearchFiltersModel(categoryId: $categoryId, categoryName: $categoryName, locationId: $locationId, locationName: $locationName, conditions: $conditions, priceMinUsd: $priceMinUsd, priceMaxUsd: $priceMaxUsd, priceMinIls: $priceMinIls, priceMaxIls: $priceMaxIls, sort: $sort)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SearchFiltersModelCopyWith<$Res> implements $SearchFiltersModelCopyWith<$Res> {
-  factory _$SearchFiltersModelCopyWith(_SearchFiltersModel value, $Res Function(_SearchFiltersModel) _then) = __$SearchFiltersModelCopyWithImpl;
+abstract mixin class _$MarketplaceSearchFiltersModelCopyWith<$Res> implements $MarketplaceSearchFiltersModelCopyWith<$Res> {
+  factory _$MarketplaceSearchFiltersModelCopyWith(_MarketplaceSearchFiltersModel value, $Res Function(_MarketplaceSearchFiltersModel) _then) = __$MarketplaceSearchFiltersModelCopyWithImpl;
 @override @useResult
 $Res call({
  String? categoryId, String? categoryName, String? locationId, String? locationName, List<String> conditions, int? priceMinUsd, int? priceMaxUsd, int? priceMinIls, int? priceMaxIls, SearchSortOption sort
@@ -273,17 +273,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$SearchFiltersModelCopyWithImpl<$Res>
-    implements _$SearchFiltersModelCopyWith<$Res> {
-  __$SearchFiltersModelCopyWithImpl(this._self, this._then);
+class __$MarketplaceSearchFiltersModelCopyWithImpl<$Res>
+    implements _$MarketplaceSearchFiltersModelCopyWith<$Res> {
+  __$MarketplaceSearchFiltersModelCopyWithImpl(this._self, this._then);
 
-  final _SearchFiltersModel _self;
-  final $Res Function(_SearchFiltersModel) _then;
+  final _MarketplaceSearchFiltersModel _self;
+  final $Res Function(_MarketplaceSearchFiltersModel) _then;
 
-/// Create a copy of SearchFiltersModel
+/// Create a copy of MarketplaceSearchFiltersModel
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? categoryId = freezed,Object? categoryName = freezed,Object? locationId = freezed,Object? locationName = freezed,Object? conditions = null,Object? priceMinUsd = freezed,Object? priceMaxUsd = freezed,Object? priceMinIls = freezed,Object? priceMaxIls = freezed,Object? sort = null,}) {
-  return _then(_SearchFiltersModel(
+  return _then(_MarketplaceSearchFiltersModel(
 categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
 as String?,categoryName: freezed == categoryName ? _self.categoryName : categoryName // ignore: cast_nullable_to_non_nullable
 as String?,locationId: freezed == locationId ? _self.locationId : locationId // ignore: cast_nullable_to_non_nullable

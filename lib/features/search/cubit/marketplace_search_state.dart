@@ -2,17 +2,18 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gaza_tech/features/marketplace/data/models/category_model.dart';
 import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
 import 'package:gaza_tech/features/add_listing/data/models/location_model.dart';
-import '../data/models/search_filters_model.dart';
+import '../data/models/marketplace_search_filters_model.dart';
 
-part 'search_state.freezed.dart';
+part 'marketplace_search_state.freezed.dart';
 
 @freezed
-abstract class SearchState with _$SearchState {
-  const SearchState._();
+abstract class MarketplaceSearchState with _$MarketplaceSearchState {
+  const MarketplaceSearchState._();
 
-  const factory SearchState({
+  const factory MarketplaceSearchState({
     @Default('') String keyword,
-    @Default(SearchFiltersModel()) SearchFiltersModel filters,
+    @Default(MarketplaceSearchFiltersModel())
+    MarketplaceSearchFiltersModel filters,
     @Default([]) List<String> recentSearches,
 
     // Filter dropdown data
@@ -31,7 +32,7 @@ abstract class SearchState with _$SearchState {
 
     // Error
     String? errorMessage,
-  }) = _SearchState;
+  }) = _MarketplaceSearchState;
 
   bool get hasResults => results.isNotEmpty;
   bool get isEmpty => !isSearching && results.isEmpty && keyword.isNotEmpty;
