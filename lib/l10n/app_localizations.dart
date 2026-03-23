@@ -1579,6 +1579,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Website'**
   String get website;
+
+  /// No description provided for @bookmarkedPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Posts'**
+  String get bookmarkedPosts;
+
+  /// No description provided for @bookmarkedListings.
+  ///
+  /// In en, this message translates to:
+  /// **'Listings'**
+  String get bookmarkedListings;
+
+  /// No description provided for @noBookmarkedListingsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No bookmarked listings yet'**
+  String get noBookmarkedListingsYet;
 }
 
 class _AppLocalizationsDelegate

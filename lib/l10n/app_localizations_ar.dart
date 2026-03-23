@@ -794,4 +794,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get website => 'الموقع';
+
+  @override
+  String get bookmarkedPosts => 'المنشورات';
+
+  @override
+  String get bookmarkedListings => 'الإعلانات';
+
+  @override
+  String get noBookmarkedListingsYet => 'لا توجد إعلانات محفوظة بعد';
 }

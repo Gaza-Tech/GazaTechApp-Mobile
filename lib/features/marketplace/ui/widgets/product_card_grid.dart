@@ -14,6 +14,8 @@ class ProductCardGrid extends StatelessWidget {
   final String productCondition;
   final String? imageUrl;
   final VoidCallback onTap;
+  final bool isBookmarked;
+  final VoidCallback? onBookmarkToggle;
 
   const ProductCardGrid({
     super.key,
@@ -24,6 +26,8 @@ class ProductCardGrid extends StatelessWidget {
     required this.productCondition,
     this.imageUrl,
     required this.onTap,
+    this.isBookmarked = false,
+    this.onBookmarkToggle,
   });
 
   @override
@@ -39,21 +43,54 @@ class ProductCardGrid extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10.r),
-                child: SizedBox(
-                  width: 100.w,
-                  height: 110.h,
-                  child: imageUrl != null
-                      ? CachedNetworkImage(
-                          imageUrl: imageUrl!,
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: double.infinity,
-                          placeholder: (context, url) => _imagePlaceholder(),
-                          errorWidget: (context, url, error) => _imageError(),
-                        )
-                      : _imageError(),
+              SizedBox(
+                width: 100.w,
+                height: 110.h,
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10.r),
+                      child: SizedBox(
+                        width: 100.w,
+                        height: 110.h,
+                        child: imageUrl != null
+                            ? CachedNetworkImage(
+                                imageUrl: imageUrl!,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                                placeholder: (context, url) =>
+                                    _imagePlaceholder(),
+                                errorWidget: (context, url, error) =>
+                                    _imageError(),
+                              )
+                            : _imageError(),
+                      ),
+                    ),
+                    if (onBookmarkToggle != null)
+                      Positioned(
+                        top: 4.h,
+                        right: 4.w,
+                        child: GestureDetector(
+                          onTap: onBookmarkToggle,
+                          child: Container(
+                            width: 28.w,
+                            height: 28.w,
+                            decoration: const BoxDecoration(
+                              color: Colors.black54,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              isBookmarked
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_border,
+                              size: 16.sp,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
               const HorizontalSpace(10),

@@ -29,6 +29,7 @@ abstract class ListingDetailModel with _$ListingDetailModel {
     @JsonKey(name: 'users') Map<String, dynamic>? sellerData,
     @JsonKey(name: 'listing_images') List<Map<String, dynamic>>? images,
     @JsonKey(name: 'marketplace_categories') Map<String, dynamic>? categoryData,
+    @Default(false) @JsonKey(includeFromJson: false) bool isBookmarked,
   }) = _ListingDetailModel;
 
   factory ListingDetailModel.fromJson(Map<String, dynamic> json) =>

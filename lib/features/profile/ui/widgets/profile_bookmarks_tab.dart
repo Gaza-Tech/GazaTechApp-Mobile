@@ -7,6 +7,7 @@ import 'package:gaza_tech/features/community/ui/widgets/post_card.dart';
 import 'package:gaza_tech/features/profile/cubit/profile_cubit.dart';
 import 'package:gaza_tech/features/profile/cubit/profile_state.dart';
 import 'package:gaza_tech/l10n/app_localizations.dart';
+import 'bookmarked_listings_list.dart';
 
 class ProfileBookmarksTab extends StatefulWidget {
   const ProfileBookmarksTab({super.key});
@@ -17,7 +18,9 @@ class ProfileBookmarksTab extends StatefulWidget {
 
 class _ProfileBookmarksTabState extends State<ProfileBookmarksTab>
     with AutomaticKeepAliveClientMixin {
-  bool _onScrollNotification(ScrollNotification notification) {
+  int _selectedSegment = 0;
+
+  bool _onPostsScrollNotification(ScrollNotification notification) {
     if (notification is ScrollEndNotification &&
         notification.metrics.extentAfter == 0) {
       context.read<ProfileCubit>().fetchMoreBookmarkedPosts();
@@ -50,6 +53,32 @@ class _ProfileBookmarksTabState extends State<ProfileBookmarksTab>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final l10n = context.l10n;
+
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          child: SegmentedButton<int>(
+            segments: [
+              ButtonSegment(value: 0, label: Text(l10n.bookmarkedPosts)),
+              ButtonSegment(value: 1, label: Text(l10n.bookmarkedListings)),
+            ],
+            selected: {_selectedSegment},
+            onSelectionChanged: (selection) =>
+                setState(() => _selectedSegment = selection.first),
+          ),
+        ),
+        Expanded(
+          child: _selectedSegment == 0
+              ? _buildPostsContent(context)
+              : const BookmarkedListingsList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPostsContent(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
         if (state.isBookmarksLoading) {
@@ -61,13 +90,13 @@ class _ProfileBookmarksTabState extends State<ProfileBookmarksTab>
         }
 
         return NotificationListener<ScrollNotification>(
-          onNotification: _onScrollNotification,
+          onNotification: _onPostsScrollNotification,
           child: CustomScrollView(
             slivers: [
               SliverPadding(
                 padding: EdgeInsets.symmetric(vertical: 8.h),
                 sliver: SliverList.separated(
-                  separatorBuilder: (_, __) => const SizedBox.shrink(),
+                  separatorBuilder: (_, _) => const SizedBox.shrink(),
                   itemCount: state.bookmarkedPosts.length,
                   itemBuilder: (context, index) {
                     final post = state.bookmarkedPosts[index];

@@ -32,6 +32,9 @@ abstract class MarketplaceSearchState with _$MarketplaceSearchState {
 
     // Error
     String? errorMessage,
+
+    // Bookmark tracking
+    @Default(<String>{}) Set<String> bookmarkedListingIds,
   }) = _MarketplaceSearchState;
 
   bool get hasResults => results.isNotEmpty;

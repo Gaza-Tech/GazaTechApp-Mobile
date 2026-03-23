@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
+import 'package:gaza_tech/core/services/bookmark_event_service.dart';
 import '../data/models/community_sort.dart';
 import '../data/models/post_model.dart';
 import '../data/repos/community_repo.dart';
@@ -7,8 +10,26 @@ import 'community_state.dart';
 
 class CommunityCubit extends Cubit<CommunityState> {
   final CommunityRepo _repo;
+  final BookmarkEventService _bookmarkEventService;
+  late final StreamSubscription<PostBookmarkEvent> _bookmarkSub;
 
-  CommunityCubit(this._repo) : super(const CommunityState());
+  CommunityCubit(this._repo, this._bookmarkEventService)
+    : super(const CommunityState()) {
+    _bookmarkSub = _bookmarkEventService.postBookmarkChanges.listen(
+      _onPostBookmarkEvent,
+    );
+  }
+
+  void _onPostBookmarkEvent(PostBookmarkEvent event) {
+    final current = state.bookmarkedPostIds;
+    if (current.contains(event.postId) == event.isBookmarked) return;
+
+    final updated = Set<String>.from(current);
+    event.isBookmarked
+        ? updated.add(event.postId)
+        : updated.remove(event.postId);
+    emit(state.copyWith(bookmarkedPostIds: updated));
+  }
 
   void changeCategory(String category) {
     if (state.selectedCategory == category) return;
@@ -47,6 +68,7 @@ class CommunityCubit extends Cubit<CommunityState> {
 
     result.when(
       success: (response) {
+        final fetchedPostIds = response.posts.map((p) => p.postId).toSet();
         final newLikedIds = response.posts
             .where((p) => p.isLiked)
             .map((p) => p.postId)
@@ -55,6 +77,9 @@ class CommunityCubit extends Cubit<CommunityState> {
             .where((p) => p.isBookmarked)
             .map((p) => p.postId)
             .toSet();
+        final cleanedLikedIds = state.likedPostIds.difference(fetchedPostIds);
+        final cleanedBookmarkedIds =
+            state.bookmarkedPostIds.difference(fetchedPostIds);
 
         final updatedPosts = Map<String, List<PostModel>>.from(
           state.postsByCategory,
@@ -72,11 +97,8 @@ class CommunityCubit extends Cubit<CommunityState> {
             currentPageByCategory: updatedPages,
             hasMoreByCategory: updatedHasMore,
             isInitialLoading: false,
-            likedPostIds: {...state.likedPostIds, ...newLikedIds},
-            bookmarkedPostIds: {
-              ...state.bookmarkedPostIds,
-              ...newBookmarkedIds,
-            },
+            likedPostIds: {...cleanedLikedIds, ...newLikedIds},
+            bookmarkedPostIds: {...cleanedBookmarkedIds, ...newBookmarkedIds},
           ),
         );
       },
@@ -101,6 +123,7 @@ class CommunityCubit extends Cubit<CommunityState> {
 
     result.when(
       success: (response) {
+        final fetchedPostIds = response.posts.map((p) => p.postId).toSet();
         final newLikedIds = response.posts
             .where((p) => p.isLiked)
             .map((p) => p.postId)
@@ -109,6 +132,9 @@ class CommunityCubit extends Cubit<CommunityState> {
             .where((p) => p.isBookmarked)
             .map((p) => p.postId)
             .toSet();
+        final cleanedLikedIds = state.likedPostIds.difference(fetchedPostIds);
+        final cleanedBookmarkedIds =
+            state.bookmarkedPostIds.difference(fetchedPostIds);
 
         final current = state.postsByCategory[category] ?? [];
         final updatedPosts = Map<String, List<PostModel>>.from(
@@ -127,11 +153,8 @@ class CommunityCubit extends Cubit<CommunityState> {
             currentPageByCategory: updatedPages,
             hasMoreByCategory: updatedHasMore,
             isLoadingMore: false,
-            likedPostIds: {...state.likedPostIds, ...newLikedIds},
-            bookmarkedPostIds: {
-              ...state.bookmarkedPostIds,
-              ...newBookmarkedIds,
-            },
+            likedPostIds: {...cleanedLikedIds, ...newLikedIds},
+            bookmarkedPostIds: {...cleanedBookmarkedIds, ...newBookmarkedIds},
           ),
         );
       },
@@ -206,6 +229,10 @@ class CommunityCubit extends Cubit<CommunityState> {
         ? newBookmarkedIds.remove(postId)
         : newBookmarkedIds.add(postId);
     emit(state.copyWith(bookmarkedPostIds: newBookmarkedIds));
+    _bookmarkEventService.emitPostBookmark(
+      postId,
+      isBookmarked: !wasBookmarked,
+    );
 
     final result = await _repo.toggleBookmark(postId);
     result.when(
@@ -214,7 +241,17 @@ class CommunityCubit extends Cubit<CommunityState> {
         final revertIds = Set<String>.from(state.bookmarkedPostIds);
         wasBookmarked ? revertIds.add(postId) : revertIds.remove(postId);
         emit(state.copyWith(bookmarkedPostIds: revertIds));
+        _bookmarkEventService.emitPostBookmark(
+          postId,
+          isBookmarked: wasBookmarked,
+        );
       },
     );
+  }
+
+  @override
+  Future<void> close() {
+    _bookmarkSub.cancel();
+    return super.close();
   }
 }

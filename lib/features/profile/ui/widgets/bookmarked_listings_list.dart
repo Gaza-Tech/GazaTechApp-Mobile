@@ -4,37 +4,48 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/marketplace/ui/widgets/product_card_grid.dart';
-import 'package:gaza_tech/features/search/cubit/marketplace_search_cubit.dart';
-import 'package:gaza_tech/features/search/cubit/marketplace_search_state.dart';
+import 'package:gaza_tech/features/profile/cubit/profile_cubit.dart';
+import 'package:gaza_tech/features/profile/cubit/profile_state.dart';
 
-class SearchResultsGrid extends StatelessWidget {
-  const SearchResultsGrid({super.key});
+class BookmarkedListingsList extends StatelessWidget {
+  const BookmarkedListingsList({super.key});
+
+  bool _onScrollNotification(
+    ScrollNotification notification,
+    BuildContext context,
+  ) {
+    if (notification is ScrollEndNotification &&
+        notification.metrics.extentAfter == 0) {
+      context.read<ProfileCubit>().fetchMoreBookmarkedListings();
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MarketplaceSearchCubit, MarketplaceSearchState>(
+    return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
-        final cubit = context.read<MarketplaceSearchCubit>();
-        final listings = state.results;
+        if (state.isListingBookmarksLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (state.bookmarkedListings.isEmpty) {
+          return Center(child: Text(context.l10n.noBookmarkedListingsYet));
+        }
+
         final isArabic = Localizations.localeOf(context).languageCode == 'ar';
 
         return NotificationListener<ScrollNotification>(
-          onNotification: (notification) {
-            if (notification is ScrollEndNotification &&
-                notification.metrics.extentAfter == 0) {
-              cubit.loadMore();
-            }
-            return false;
-          },
+          onNotification: (n) => _onScrollNotification(n, context),
           child: CustomScrollView(
             slivers: [
               SliverPadding(
                 padding: EdgeInsets.all(16.w),
                 sliver: SliverList.separated(
                   separatorBuilder: (_, _) => SizedBox(height: 12.h),
-                  itemCount: listings.length,
+                  itemCount: state.bookmarkedListings.length,
                   itemBuilder: (context, index) {
-                    final listing = listings[index];
+                    final listing = state.bookmarkedListings[index];
                     final locationName = isArabic
                         ? (listing.locationNameAr.isNotEmpty
                               ? listing.locationNameAr
@@ -51,8 +62,9 @@ class SearchResultsGrid extends StatelessWidget {
                       isBookmarked: state.bookmarkedListingIds.contains(
                         listing.listingId,
                       ),
-                      onBookmarkToggle: () =>
-                          cubit.toggleListingBookmark(listing.listingId),
+                      onBookmarkToggle: () => context
+                          .read<ProfileCubit>()
+                          .toggleListingBookmark(listing.listingId),
                       onTap: () => context.pushNamed(
                         MyRoutes.listingDetails,
                         arguments: listing.listingId,
@@ -62,17 +74,12 @@ class SearchResultsGrid extends StatelessWidget {
                 ),
               ),
               SliverToBoxAdapter(
-                child: !state.hasMore
+                child: state.isListingBookmarksLoadingMore
                     ? const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        child: Center(child: Icon(Icons.circle, size: 12)),
-                      )
-                    : state.isLoadingMore
-                    ? const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.all(16),
                         child: Center(child: CircularProgressIndicator()),
                       )
-                    : const SizedBox.shrink(),
+                    : SizedBox(height: 80.h),
               ),
             ],
           ),

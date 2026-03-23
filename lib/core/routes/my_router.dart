@@ -165,7 +165,10 @@ class MyRouter {
               cubit.loadProfile();
               cubit.fetchPosts();
               cubit.fetchListings();
-              if (isOwnProfile) cubit.fetchBookmarkedPosts();
+              if (isOwnProfile) {
+                cubit.fetchBookmarkedPosts();
+                cubit.fetchBookmarkedListings();
+              }
               return cubit;
             },
             child: const ProfileScreen(),

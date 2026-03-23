@@ -1,3 +1,4 @@
+import 'package:gaza_tech/core/services/bookmark_event_service.dart';
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_out/data/repos/sign_out_repo.dart';
 import 'package:gaza_tech/features/auth/sign_out/data/services/sign_out_api_service.dart';
@@ -129,12 +130,19 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<SignOutRepo>(() => SignOutRepo(getIt()));
   getIt.registerFactory<SignOutCubit>(() => SignOutCubit(getIt()));
 
+  // Bookmark Event Service (singleton shared across all cubits)
+  getIt.registerLazySingleton<BookmarkEventService>(
+    () => BookmarkEventService(),
+  );
+
   // 10. Marketplace
   getIt.registerLazySingleton<MarketplaceApiService>(
     () => MarketplaceApiService(getIt()),
   );
   getIt.registerLazySingleton<MarketplaceRepo>(() => MarketplaceRepo(getIt()));
-  getIt.registerFactory<MarketplaceCubit>(() => MarketplaceCubit(getIt()));
+  getIt.registerFactory<MarketplaceCubit>(
+    () => MarketplaceCubit(getIt(), getIt()),
+  );
 
   // 11. Add Listing
   getIt.registerLazySingleton<AddListingApiService>(
@@ -151,7 +159,7 @@ Future<void> setupGetIt() async {
     () => ListingDetailsRepo(getIt()),
   );
   getIt.registerFactoryParam<ListingDetailsCubit, String, void>(
-    (listingId, _) => ListingDetailsCubit(getIt(), listingId),
+    (listingId, _) => ListingDetailsCubit(getIt(), listingId, getIt()),
   );
 
   // 13. Search
@@ -162,7 +170,7 @@ Future<void> setupGetIt() async {
     () => MarketplaceSearchRepo(getIt()),
   );
   getIt.registerFactory<MarketplaceSearchCubit>(
-    () => MarketplaceSearchCubit(getIt()),
+    () => MarketplaceSearchCubit(getIt(), getIt()),
   );
 
   // 14. Community
@@ -170,15 +178,17 @@ Future<void> setupGetIt() async {
     () => CommunityApiService(getIt()),
   );
   getIt.registerLazySingleton<CommunityRepo>(() => CommunityRepo(getIt()));
-  getIt.registerFactory<CommunityCubit>(() => CommunityCubit(getIt()));
+  getIt.registerFactory<CommunityCubit>(
+    () => CommunityCubit(getIt(), getIt()),
+  );
   getIt.registerFactoryParam<PostDetailsCubit, String, void>(
-    (postId, _) => PostDetailsCubit(getIt(), postId),
+    (postId, _) => PostDetailsCubit(getIt(), postId, getIt()),
   );
   getIt.registerFactory<AddPostCubit>(() => AddPostCubit(getIt()));
 
   // 15. Community Search
   getIt.registerFactory<CommunitySearchCubit>(
-    () => CommunitySearchCubit(getIt()),
+    () => CommunitySearchCubit(getIt(), getIt()),
   );
 
   // 16. Profile
@@ -187,7 +197,8 @@ Future<void> setupGetIt() async {
   );
   getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
   getIt.registerFactoryParam<ProfileCubit, String, bool>(
-    (userId, isOwnProfile) => ProfileCubit(getIt(), userId, isOwnProfile),
+    (userId, isOwnProfile) =>
+        ProfileCubit(getIt(), userId, isOwnProfile, getIt()),
   );
 
   // 17. Edit Profile

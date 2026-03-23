@@ -395,5 +395,8 @@
   "avatarUploadFailed": "Failed to upload photo",
   "contactUnavailable": "Contact information is not available for this seller",
   "couldNotOpenLink": "Could not open this link",
-  "website": "Website"
+  "website": "Website",
+  "bookmarkedPosts": "Posts",
+  "bookmarkedListings": "Listings",
+  "noBookmarkedListingsYet": "No bookmarked listings yet"
 }

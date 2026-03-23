@@ -35,6 +35,14 @@ abstract class ProfileState with _$ProfileState {
     @Default(false) bool isBookmarksLoading,
     @Default(false) bool isBookmarksLoadingMore,
 
+    // Bookmarked listings (own profile only)
+    @Default([]) List<ListingModel> bookmarkedListings,
+    @Default(0) int listingBookmarksPage,
+    @Default(true) bool listingBookmarksHasMore,
+    @Default(false) bool isListingBookmarksLoading,
+    @Default(false) bool isListingBookmarksLoadingMore,
+    @Default(<String>{}) Set<String> bookmarkedListingIds,
+
     // Like/bookmark tracking
     @Default(<String>{}) Set<String> likedPostIds,
     @Default(<String>{}) Set<String> bookmarkedPostIds,

@@ -63,6 +63,48 @@ class ListingDetailsApiService {
     return List<Map<String, dynamic>>.from(data);
   }
 
+  /// Check if the current user has bookmarked a listing
+  Future<bool> isListingBookmarked(String listingId) async {
+    final userId = _supabase.auth.currentUser?.id;
+    if (userId == null) return false;
+
+    final result = await _supabase
+        .from('bookmarked_listings')
+        .select('user_id')
+        .eq('user_id', userId)
+        .eq('listing_id', listingId)
+        .maybeSingle();
+
+    return result != null;
+  }
+
+  /// Toggle bookmark for a listing; returns true if now bookmarked
+  Future<bool> toggleListingBookmark(String listingId) async {
+    final userId = _supabase.auth.currentUser!.id;
+
+    final existing = await _supabase
+        .from('bookmarked_listings')
+        .select('user_id')
+        .eq('user_id', userId)
+        .eq('listing_id', listingId)
+        .maybeSingle();
+
+    if (existing != null) {
+      await _supabase
+          .from('bookmarked_listings')
+          .delete()
+          .eq('user_id', userId)
+          .eq('listing_id', listingId);
+      return false;
+    } else {
+      await _supabase.from('bookmarked_listings').insert({
+        'user_id': userId,
+        'listing_id': listingId,
+      });
+      return true;
+    }
+  }
+
   /// Increment view count for a listing
   Future<void> incrementViewCount(String listingId) async {
     await _supabase.rpc('increment_views', params: {'listing_id': listingId});
