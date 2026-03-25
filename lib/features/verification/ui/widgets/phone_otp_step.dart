@@ -24,6 +24,7 @@ class PhoneOtpStep extends StatelessWidget {
               controller: cubit.phoneController,
               hintText: context.l10n.phoneNumberHint,
               labelText: context.l10n.enterPhoneNumber,
+              visibleLable: true,
               textInputType: TextInputType.phone,
             ),
             const VerticalSpace(16),

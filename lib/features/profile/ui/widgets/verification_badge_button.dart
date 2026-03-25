@@ -66,7 +66,7 @@ class VerificationBadgeButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
         decoration: BoxDecoration(
           color: color.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(20.r),
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(color: color),
         ),
         child: Row(

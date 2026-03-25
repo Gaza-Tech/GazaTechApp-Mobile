@@ -29,6 +29,7 @@ class MyTextFormField extends StatelessWidget {
     this.onFieldSubmitted,
     this.fillColor,
     this.autofocus = false,
+    this.visibleLable = false,
   });
 
   final EdgeInsets? contentPadding;
@@ -55,7 +56,7 @@ class MyTextFormField extends StatelessWidget {
   final void Function(String)? onFieldSubmitted;
   final Color? fillColor;
   final bool autofocus;
-  final bool visibleLable = false;
+  final bool visibleLable;
 
   @override
   Widget build(BuildContext context) {

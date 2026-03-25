@@ -26,6 +26,7 @@ class PersonalInfoStep extends StatelessWidget {
                 controller: cubit.fullNameController,
                 hintText: context.l10n.idFullNameHint,
                 labelText: context.l10n.idFullName,
+                visibleLable: true,
                 textInputType: TextInputType.name,
                 validator: (v) => (v == null || v.trim().isEmpty)
                     ? context.l10n.required
@@ -40,6 +41,7 @@ class PersonalInfoStep extends StatelessWidget {
                 controller: cubit.addressController,
                 hintText: context.l10n.addressHint,
                 labelText: context.l10n.address,
+                visibleLable: true,
                 textInputType: TextInputType.streetAddress,
                 maxLines: 2,
                 validator: (v) => (v == null || v.trim().isEmpty)
@@ -51,7 +53,8 @@ class PersonalInfoStep extends StatelessWidget {
                 controller: cubit.nationalIdController,
                 hintText: context.l10n.nationalIdNumberHint,
                 labelText: context.l10n.nationalIdNumber,
-                textInputType: TextInputType.text,
+                visibleLable: true,
+                textInputType: TextInputType.number,
                 validator: (v) => (v == null || v.trim().isEmpty)
                     ? context.l10n.required
                     : null,
@@ -85,6 +88,7 @@ class PersonalInfoStep extends StatelessWidget {
             );
             if (date != null) cubit.selectDateOfBirth(date);
           },
+          borderRadius: BorderRadius.circular(12.r),
           child: IgnorePointer(
             child: MyTextFormField(
               controller: cubit.dateOfBirthController,
