@@ -22,7 +22,8 @@ mixin _$MarketplaceState {
  bool get isInitialLoading; bool get isLoadingMore;// Sort
  MarketplaceSort get activeSort;// Error state
  String? get errorMessage;// Total count per category
- Map<String, int> get totalCountByCategory;
+ Map<String, int> get totalCountByCategory;// Bookmark tracking
+ Set<String> get bookmarkedListingIds;
 /// Create a copy of MarketplaceState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -33,16 +34,16 @@ $MarketplaceStateCopyWith<MarketplaceState> get copyWith => _$MarketplaceStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketplaceState&&(identical(other.selectedCategory, selectedCategory) || other.selectedCategory == selectedCategory)&&const DeepCollectionEquality().equals(other.categories, categories)&&(identical(other.isCategoriesLoading, isCategoriesLoading) || other.isCategoriesLoading == isCategoriesLoading)&&const DeepCollectionEquality().equals(other.listingsByCategory, listingsByCategory)&&const DeepCollectionEquality().equals(other.currentPageByCategory, currentPageByCategory)&&const DeepCollectionEquality().equals(other.hasMoreByCategory, hasMoreByCategory)&&(identical(other.isInitialLoading, isInitialLoading) || other.isInitialLoading == isInitialLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.activeSort, activeSort) || other.activeSort == activeSort)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other.totalCountByCategory, totalCountByCategory));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketplaceState&&(identical(other.selectedCategory, selectedCategory) || other.selectedCategory == selectedCategory)&&const DeepCollectionEquality().equals(other.categories, categories)&&(identical(other.isCategoriesLoading, isCategoriesLoading) || other.isCategoriesLoading == isCategoriesLoading)&&const DeepCollectionEquality().equals(other.listingsByCategory, listingsByCategory)&&const DeepCollectionEquality().equals(other.currentPageByCategory, currentPageByCategory)&&const DeepCollectionEquality().equals(other.hasMoreByCategory, hasMoreByCategory)&&(identical(other.isInitialLoading, isInitialLoading) || other.isInitialLoading == isInitialLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.activeSort, activeSort) || other.activeSort == activeSort)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other.totalCountByCategory, totalCountByCategory)&&const DeepCollectionEquality().equals(other.bookmarkedListingIds, bookmarkedListingIds));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,selectedCategory,const DeepCollectionEquality().hash(categories),isCategoriesLoading,const DeepCollectionEquality().hash(listingsByCategory),const DeepCollectionEquality().hash(currentPageByCategory),const DeepCollectionEquality().hash(hasMoreByCategory),isInitialLoading,isLoadingMore,activeSort,errorMessage,const DeepCollectionEquality().hash(totalCountByCategory));
+int get hashCode => Object.hash(runtimeType,selectedCategory,const DeepCollectionEquality().hash(categories),isCategoriesLoading,const DeepCollectionEquality().hash(listingsByCategory),const DeepCollectionEquality().hash(currentPageByCategory),const DeepCollectionEquality().hash(hasMoreByCategory),isInitialLoading,isLoadingMore,activeSort,errorMessage,const DeepCollectionEquality().hash(totalCountByCategory),const DeepCollectionEquality().hash(bookmarkedListingIds));
 
 @override
 String toString() {
-  return 'MarketplaceState(selectedCategory: $selectedCategory, categories: $categories, isCategoriesLoading: $isCategoriesLoading, listingsByCategory: $listingsByCategory, currentPageByCategory: $currentPageByCategory, hasMoreByCategory: $hasMoreByCategory, isInitialLoading: $isInitialLoading, isLoadingMore: $isLoadingMore, activeSort: $activeSort, errorMessage: $errorMessage, totalCountByCategory: $totalCountByCategory)';
+  return 'MarketplaceState(selectedCategory: $selectedCategory, categories: $categories, isCategoriesLoading: $isCategoriesLoading, listingsByCategory: $listingsByCategory, currentPageByCategory: $currentPageByCategory, hasMoreByCategory: $hasMoreByCategory, isInitialLoading: $isInitialLoading, isLoadingMore: $isLoadingMore, activeSort: $activeSort, errorMessage: $errorMessage, totalCountByCategory: $totalCountByCategory, bookmarkedListingIds: $bookmarkedListingIds)';
 }
 
 
@@ -53,7 +54,7 @@ abstract mixin class $MarketplaceStateCopyWith<$Res>  {
   factory $MarketplaceStateCopyWith(MarketplaceState value, $Res Function(MarketplaceState) _then) = _$MarketplaceStateCopyWithImpl;
 @useResult
 $Res call({
- String selectedCategory, List<CategoryModel> categories, bool isCategoriesLoading, Map<String, List<ListingModel>> listingsByCategory, Map<String, int> currentPageByCategory, Map<String, bool> hasMoreByCategory, bool isInitialLoading, bool isLoadingMore, MarketplaceSort activeSort, String? errorMessage, Map<String, int> totalCountByCategory
+ String selectedCategory, List<CategoryModel> categories, bool isCategoriesLoading, Map<String, List<ListingModel>> listingsByCategory, Map<String, int> currentPageByCategory, Map<String, bool> hasMoreByCategory, bool isInitialLoading, bool isLoadingMore, MarketplaceSort activeSort, String? errorMessage, Map<String, int> totalCountByCategory, Set<String> bookmarkedListingIds
 });
 
 
@@ -70,7 +71,7 @@ class _$MarketplaceStateCopyWithImpl<$Res>
 
 /// Create a copy of MarketplaceState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? selectedCategory = null,Object? categories = null,Object? isCategoriesLoading = null,Object? listingsByCategory = null,Object? currentPageByCategory = null,Object? hasMoreByCategory = null,Object? isInitialLoading = null,Object? isLoadingMore = null,Object? activeSort = null,Object? errorMessage = freezed,Object? totalCountByCategory = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? selectedCategory = null,Object? categories = null,Object? isCategoriesLoading = null,Object? listingsByCategory = null,Object? currentPageByCategory = null,Object? hasMoreByCategory = null,Object? isInitialLoading = null,Object? isLoadingMore = null,Object? activeSort = null,Object? errorMessage = freezed,Object? totalCountByCategory = null,Object? bookmarkedListingIds = null,}) {
   return _then(_self.copyWith(
 selectedCategory: null == selectedCategory ? _self.selectedCategory : selectedCategory // ignore: cast_nullable_to_non_nullable
 as String,categories: null == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
@@ -83,7 +84,8 @@ as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMo
 as bool,activeSort: null == activeSort ? _self.activeSort : activeSort // ignore: cast_nullable_to_non_nullable
 as MarketplaceSort,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,totalCountByCategory: null == totalCountByCategory ? _self.totalCountByCategory : totalCountByCategory // ignore: cast_nullable_to_non_nullable
-as Map<String, int>,
+as Map<String, int>,bookmarkedListingIds: null == bookmarkedListingIds ? _self.bookmarkedListingIds : bookmarkedListingIds // ignore: cast_nullable_to_non_nullable
+as Set<String>,
   ));
 }
 
@@ -168,10 +170,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String selectedCategory,  List<CategoryModel> categories,  bool isCategoriesLoading,  Map<String, List<ListingModel>> listingsByCategory,  Map<String, int> currentPageByCategory,  Map<String, bool> hasMoreByCategory,  bool isInitialLoading,  bool isLoadingMore,  MarketplaceSort activeSort,  String? errorMessage,  Map<String, int> totalCountByCategory)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String selectedCategory,  List<CategoryModel> categories,  bool isCategoriesLoading,  Map<String, List<ListingModel>> listingsByCategory,  Map<String, int> currentPageByCategory,  Map<String, bool> hasMoreByCategory,  bool isInitialLoading,  bool isLoadingMore,  MarketplaceSort activeSort,  String? errorMessage,  Map<String, int> totalCountByCategory,  Set<String> bookmarkedListingIds)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MarketplaceState() when $default != null:
-return $default(_that.selectedCategory,_that.categories,_that.isCategoriesLoading,_that.listingsByCategory,_that.currentPageByCategory,_that.hasMoreByCategory,_that.isInitialLoading,_that.isLoadingMore,_that.activeSort,_that.errorMessage,_that.totalCountByCategory);case _:
+return $default(_that.selectedCategory,_that.categories,_that.isCategoriesLoading,_that.listingsByCategory,_that.currentPageByCategory,_that.hasMoreByCategory,_that.isInitialLoading,_that.isLoadingMore,_that.activeSort,_that.errorMessage,_that.totalCountByCategory,_that.bookmarkedListingIds);case _:
   return orElse();
 
 }
@@ -189,10 +191,10 @@ return $default(_that.selectedCategory,_that.categories,_that.isCategoriesLoadin
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String selectedCategory,  List<CategoryModel> categories,  bool isCategoriesLoading,  Map<String, List<ListingModel>> listingsByCategory,  Map<String, int> currentPageByCategory,  Map<String, bool> hasMoreByCategory,  bool isInitialLoading,  bool isLoadingMore,  MarketplaceSort activeSort,  String? errorMessage,  Map<String, int> totalCountByCategory)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String selectedCategory,  List<CategoryModel> categories,  bool isCategoriesLoading,  Map<String, List<ListingModel>> listingsByCategory,  Map<String, int> currentPageByCategory,  Map<String, bool> hasMoreByCategory,  bool isInitialLoading,  bool isLoadingMore,  MarketplaceSort activeSort,  String? errorMessage,  Map<String, int> totalCountByCategory,  Set<String> bookmarkedListingIds)  $default,) {final _that = this;
 switch (_that) {
 case _MarketplaceState():
-return $default(_that.selectedCategory,_that.categories,_that.isCategoriesLoading,_that.listingsByCategory,_that.currentPageByCategory,_that.hasMoreByCategory,_that.isInitialLoading,_that.isLoadingMore,_that.activeSort,_that.errorMessage,_that.totalCountByCategory);case _:
+return $default(_that.selectedCategory,_that.categories,_that.isCategoriesLoading,_that.listingsByCategory,_that.currentPageByCategory,_that.hasMoreByCategory,_that.isInitialLoading,_that.isLoadingMore,_that.activeSort,_that.errorMessage,_that.totalCountByCategory,_that.bookmarkedListingIds);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -209,10 +211,10 @@ return $default(_that.selectedCategory,_that.categories,_that.isCategoriesLoadin
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String selectedCategory,  List<CategoryModel> categories,  bool isCategoriesLoading,  Map<String, List<ListingModel>> listingsByCategory,  Map<String, int> currentPageByCategory,  Map<String, bool> hasMoreByCategory,  bool isInitialLoading,  bool isLoadingMore,  MarketplaceSort activeSort,  String? errorMessage,  Map<String, int> totalCountByCategory)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String selectedCategory,  List<CategoryModel> categories,  bool isCategoriesLoading,  Map<String, List<ListingModel>> listingsByCategory,  Map<String, int> currentPageByCategory,  Map<String, bool> hasMoreByCategory,  bool isInitialLoading,  bool isLoadingMore,  MarketplaceSort activeSort,  String? errorMessage,  Map<String, int> totalCountByCategory,  Set<String> bookmarkedListingIds)?  $default,) {final _that = this;
 switch (_that) {
 case _MarketplaceState() when $default != null:
-return $default(_that.selectedCategory,_that.categories,_that.isCategoriesLoading,_that.listingsByCategory,_that.currentPageByCategory,_that.hasMoreByCategory,_that.isInitialLoading,_that.isLoadingMore,_that.activeSort,_that.errorMessage,_that.totalCountByCategory);case _:
+return $default(_that.selectedCategory,_that.categories,_that.isCategoriesLoading,_that.listingsByCategory,_that.currentPageByCategory,_that.hasMoreByCategory,_that.isInitialLoading,_that.isLoadingMore,_that.activeSort,_that.errorMessage,_that.totalCountByCategory,_that.bookmarkedListingIds);case _:
   return null;
 
 }
@@ -224,7 +226,7 @@ return $default(_that.selectedCategory,_that.categories,_that.isCategoriesLoadin
 
 
 class _MarketplaceState extends MarketplaceState {
-  const _MarketplaceState({this.selectedCategory = 'all', final  List<CategoryModel> categories = const [], this.isCategoriesLoading = false, final  Map<String, List<ListingModel>> listingsByCategory = const {}, final  Map<String, int> currentPageByCategory = const {}, final  Map<String, bool> hasMoreByCategory = const {}, this.isInitialLoading = false, this.isLoadingMore = false, this.activeSort = MarketplaceSort.newest, this.errorMessage, final  Map<String, int> totalCountByCategory = const {}}): _categories = categories,_listingsByCategory = listingsByCategory,_currentPageByCategory = currentPageByCategory,_hasMoreByCategory = hasMoreByCategory,_totalCountByCategory = totalCountByCategory,super._();
+  const _MarketplaceState({this.selectedCategory = 'all', final  List<CategoryModel> categories = const [], this.isCategoriesLoading = false, final  Map<String, List<ListingModel>> listingsByCategory = const {}, final  Map<String, int> currentPageByCategory = const {}, final  Map<String, bool> hasMoreByCategory = const {}, this.isInitialLoading = false, this.isLoadingMore = false, this.activeSort = MarketplaceSort.newest, this.errorMessage, final  Map<String, int> totalCountByCategory = const {}, final  Set<String> bookmarkedListingIds = const <String>{}}): _categories = categories,_listingsByCategory = listingsByCategory,_currentPageByCategory = currentPageByCategory,_hasMoreByCategory = hasMoreByCategory,_totalCountByCategory = totalCountByCategory,_bookmarkedListingIds = bookmarkedListingIds,super._();
   
 
 // Current category being viewed (slug-based key: 'all', or actual slug from DB)
@@ -280,6 +282,15 @@ class _MarketplaceState extends MarketplaceState {
   return EqualUnmodifiableMapView(_totalCountByCategory);
 }
 
+// Bookmark tracking
+ final  Set<String> _bookmarkedListingIds;
+// Bookmark tracking
+@override@JsonKey() Set<String> get bookmarkedListingIds {
+  if (_bookmarkedListingIds is EqualUnmodifiableSetView) return _bookmarkedListingIds;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableSetView(_bookmarkedListingIds);
+}
+
 
 /// Create a copy of MarketplaceState
 /// with the given fields replaced by the non-null parameter values.
@@ -291,16 +302,16 @@ _$MarketplaceStateCopyWith<_MarketplaceState> get copyWith => __$MarketplaceStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketplaceState&&(identical(other.selectedCategory, selectedCategory) || other.selectedCategory == selectedCategory)&&const DeepCollectionEquality().equals(other._categories, _categories)&&(identical(other.isCategoriesLoading, isCategoriesLoading) || other.isCategoriesLoading == isCategoriesLoading)&&const DeepCollectionEquality().equals(other._listingsByCategory, _listingsByCategory)&&const DeepCollectionEquality().equals(other._currentPageByCategory, _currentPageByCategory)&&const DeepCollectionEquality().equals(other._hasMoreByCategory, _hasMoreByCategory)&&(identical(other.isInitialLoading, isInitialLoading) || other.isInitialLoading == isInitialLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.activeSort, activeSort) || other.activeSort == activeSort)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other._totalCountByCategory, _totalCountByCategory));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketplaceState&&(identical(other.selectedCategory, selectedCategory) || other.selectedCategory == selectedCategory)&&const DeepCollectionEquality().equals(other._categories, _categories)&&(identical(other.isCategoriesLoading, isCategoriesLoading) || other.isCategoriesLoading == isCategoriesLoading)&&const DeepCollectionEquality().equals(other._listingsByCategory, _listingsByCategory)&&const DeepCollectionEquality().equals(other._currentPageByCategory, _currentPageByCategory)&&const DeepCollectionEquality().equals(other._hasMoreByCategory, _hasMoreByCategory)&&(identical(other.isInitialLoading, isInitialLoading) || other.isInitialLoading == isInitialLoading)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.activeSort, activeSort) || other.activeSort == activeSort)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other._totalCountByCategory, _totalCountByCategory)&&const DeepCollectionEquality().equals(other._bookmarkedListingIds, _bookmarkedListingIds));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,selectedCategory,const DeepCollectionEquality().hash(_categories),isCategoriesLoading,const DeepCollectionEquality().hash(_listingsByCategory),const DeepCollectionEquality().hash(_currentPageByCategory),const DeepCollectionEquality().hash(_hasMoreByCategory),isInitialLoading,isLoadingMore,activeSort,errorMessage,const DeepCollectionEquality().hash(_totalCountByCategory));
+int get hashCode => Object.hash(runtimeType,selectedCategory,const DeepCollectionEquality().hash(_categories),isCategoriesLoading,const DeepCollectionEquality().hash(_listingsByCategory),const DeepCollectionEquality().hash(_currentPageByCategory),const DeepCollectionEquality().hash(_hasMoreByCategory),isInitialLoading,isLoadingMore,activeSort,errorMessage,const DeepCollectionEquality().hash(_totalCountByCategory),const DeepCollectionEquality().hash(_bookmarkedListingIds));
 
 @override
 String toString() {
-  return 'MarketplaceState(selectedCategory: $selectedCategory, categories: $categories, isCategoriesLoading: $isCategoriesLoading, listingsByCategory: $listingsByCategory, currentPageByCategory: $currentPageByCategory, hasMoreByCategory: $hasMoreByCategory, isInitialLoading: $isInitialLoading, isLoadingMore: $isLoadingMore, activeSort: $activeSort, errorMessage: $errorMessage, totalCountByCategory: $totalCountByCategory)';
+  return 'MarketplaceState(selectedCategory: $selectedCategory, categories: $categories, isCategoriesLoading: $isCategoriesLoading, listingsByCategory: $listingsByCategory, currentPageByCategory: $currentPageByCategory, hasMoreByCategory: $hasMoreByCategory, isInitialLoading: $isInitialLoading, isLoadingMore: $isLoadingMore, activeSort: $activeSort, errorMessage: $errorMessage, totalCountByCategory: $totalCountByCategory, bookmarkedListingIds: $bookmarkedListingIds)';
 }
 
 
@@ -311,7 +322,7 @@ abstract mixin class _$MarketplaceStateCopyWith<$Res> implements $MarketplaceSta
   factory _$MarketplaceStateCopyWith(_MarketplaceState value, $Res Function(_MarketplaceState) _then) = __$MarketplaceStateCopyWithImpl;
 @override @useResult
 $Res call({
- String selectedCategory, List<CategoryModel> categories, bool isCategoriesLoading, Map<String, List<ListingModel>> listingsByCategory, Map<String, int> currentPageByCategory, Map<String, bool> hasMoreByCategory, bool isInitialLoading, bool isLoadingMore, MarketplaceSort activeSort, String? errorMessage, Map<String, int> totalCountByCategory
+ String selectedCategory, List<CategoryModel> categories, bool isCategoriesLoading, Map<String, List<ListingModel>> listingsByCategory, Map<String, int> currentPageByCategory, Map<String, bool> hasMoreByCategory, bool isInitialLoading, bool isLoadingMore, MarketplaceSort activeSort, String? errorMessage, Map<String, int> totalCountByCategory, Set<String> bookmarkedListingIds
 });
 
 
@@ -328,7 +339,7 @@ class __$MarketplaceStateCopyWithImpl<$Res>
 
 /// Create a copy of MarketplaceState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? selectedCategory = null,Object? categories = null,Object? isCategoriesLoading = null,Object? listingsByCategory = null,Object? currentPageByCategory = null,Object? hasMoreByCategory = null,Object? isInitialLoading = null,Object? isLoadingMore = null,Object? activeSort = null,Object? errorMessage = freezed,Object? totalCountByCategory = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? selectedCategory = null,Object? categories = null,Object? isCategoriesLoading = null,Object? listingsByCategory = null,Object? currentPageByCategory = null,Object? hasMoreByCategory = null,Object? isInitialLoading = null,Object? isLoadingMore = null,Object? activeSort = null,Object? errorMessage = freezed,Object? totalCountByCategory = null,Object? bookmarkedListingIds = null,}) {
   return _then(_MarketplaceState(
 selectedCategory: null == selectedCategory ? _self.selectedCategory : selectedCategory // ignore: cast_nullable_to_non_nullable
 as String,categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
@@ -341,7 +352,8 @@ as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMo
 as bool,activeSort: null == activeSort ? _self.activeSort : activeSort // ignore: cast_nullable_to_non_nullable
 as MarketplaceSort,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,totalCountByCategory: null == totalCountByCategory ? _self._totalCountByCategory : totalCountByCategory // ignore: cast_nullable_to_non_nullable
-as Map<String, int>,
+as Map<String, int>,bookmarkedListingIds: null == bookmarkedListingIds ? _self._bookmarkedListingIds : bookmarkedListingIds // ignore: cast_nullable_to_non_nullable
+as Set<String>,
   ));
 }
 

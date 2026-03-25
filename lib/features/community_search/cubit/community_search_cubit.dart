@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/cache/shared_pref_keys.dart';
 import 'package:gaza_tech/core/helpers/shared_pref_helper.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
+import 'package:gaza_tech/core/services/bookmark_event_service.dart';
 import 'package:gaza_tech/features/community/data/models/community_sort.dart';
 import 'package:gaza_tech/features/community/data/repos/community_repo.dart';
 import 'package:gaza_tech/features/community_search/data/models/search_filter.dart';
@@ -12,8 +14,26 @@ import 'community_search_state.dart';
 
 class CommunitySearchCubit extends Cubit<CommunitySearchState> {
   final CommunityRepo _repo;
+  final BookmarkEventService _bookmarkEventService;
+  late final StreamSubscription<PostBookmarkEvent> _bookmarkSub;
 
-  CommunitySearchCubit(this._repo) : super(const CommunitySearchState());
+  CommunitySearchCubit(this._repo, this._bookmarkEventService)
+    : super(const CommunitySearchState()) {
+    _bookmarkSub = _bookmarkEventService.postBookmarkChanges.listen(
+      _onPostBookmarkEvent,
+    );
+  }
+
+  void _onPostBookmarkEvent(PostBookmarkEvent event) {
+    final current = state.bookmarkedPostIds;
+    if (current.contains(event.postId) == event.isBookmarked) return;
+
+    final updated = Set<String>.from(current);
+    event.isBookmarked
+        ? updated.add(event.postId)
+        : updated.remove(event.postId);
+    emit(state.copyWith(bookmarkedPostIds: updated));
+  }
 
   final TextEditingController searchController = TextEditingController();
 
@@ -101,6 +121,7 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
 
     result.when(
       success: (response) {
+        final fetchedPostIds = response.posts.map((p) => p.postId).toSet();
         final newLikedIds = response.posts
             .where((p) => p.isLiked)
             .map((p) => p.postId)
@@ -109,15 +130,19 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
             .where((p) => p.isBookmarked)
             .map((p) => p.postId)
             .toSet();
+        final cleanedLikedIds = state.likedPostIds.difference(fetchedPostIds);
+        final cleanedBookmarkedIds =
+            state.bookmarkedPostIds.difference(fetchedPostIds);
+
         emit(
           state.copyWith(
             results: [...state.results, ...response.posts],
             hasMore: response.hasMore,
             currentPage: nextPage,
             isLoadingMore: false,
-            likedPostIds: {...state.likedPostIds, ...newLikedIds},
+            likedPostIds: {...cleanedLikedIds, ...newLikedIds},
             bookmarkedPostIds: {
-              ...state.bookmarkedPostIds,
+              ...cleanedBookmarkedIds,
               ...newBookmarkedIds,
             },
           ),
@@ -230,6 +255,10 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
         ? newBookmarkedIds.remove(postId)
         : newBookmarkedIds.add(postId);
     emit(state.copyWith(bookmarkedPostIds: newBookmarkedIds));
+    _bookmarkEventService.emitPostBookmark(
+      postId,
+      isBookmarked: !wasBookmarked,
+    );
 
     final result = await _repo.toggleBookmark(postId);
     result.when(
@@ -238,12 +267,17 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
         final revertIds = Set<String>.from(state.bookmarkedPostIds);
         wasBookmarked ? revertIds.add(postId) : revertIds.remove(postId);
         emit(state.copyWith(bookmarkedPostIds: revertIds));
+        _bookmarkEventService.emitPostBookmark(
+          postId,
+          isBookmarked: wasBookmarked,
+        );
       },
     );
   }
 
   @override
   Future<void> close() {
+    _bookmarkSub.cancel();
     searchController.dispose();
     return super.close();
   }

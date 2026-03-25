@@ -333,5 +333,8 @@
   "avatarUploadFailed": "فشل رفع الصورة",
   "contactUnavailable": "معلومات التواصل غير متوفرة لهذا البائع",
   "couldNotOpenLink": "تعذر فتح هذا الرابط",
-  "website": "الموقع"
+  "website": "الموقع",
+  "bookmarkedPosts": "المنشورات",
+  "bookmarkedListings": "الإعلانات",
+  "noBookmarkedListingsYet": "لا توجد إعلانات محفوظة بعد"
 }

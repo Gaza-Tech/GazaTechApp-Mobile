@@ -21,15 +21,8 @@ import 'package:gaza_tech/features/listing_details/ui/widgets/specifications_tab
 import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
 import 'package:gaza_tech/l10n/app_localizations.dart';
 
-class ListingDetailsScreen extends StatefulWidget {
+class ListingDetailsScreen extends StatelessWidget {
   const ListingDetailsScreen({super.key});
-
-  @override
-  State<ListingDetailsScreen> createState() => _ListingDetailsScreenState();
-}
-
-class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
-  bool _isBookmarked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +45,13 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
             initial: () => const SizedBox.shrink(),
             loading: () => const Center(child: CircularProgressIndicator()),
             failure: (message) => _buildErrorState(context, message),
-            success: (listing, similarListings, sellerListings) =>
+            success: (listing, similarListings, sellerListings, isBookmarked) =>
                 _buildContent(
                   context,
                   listing,
                   similarListings,
                   sellerListings,
+                  isBookmarked,
                 ),
           );
         },
@@ -96,6 +90,7 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
     ListingDetailModel listing,
     List<ListingModel> similarListings,
     List<ListingModel> sellerListings,
+    bool isBookmarked,
   ) {
     final l10n = context.l10n;
     final isArabic = Localizations.localeOf(context).languageCode == 'ar';
@@ -131,10 +126,9 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
           // Image carousel
           ImageCarousel(
             imageUrls: listing.imageUrls,
-            isBookmarked: _isBookmarked,
-            onBookmarkToggle: () {
-              setState(() => _isBookmarked = !_isBookmarked);
-            },
+            isBookmarked: isBookmarked,
+            onBookmarkToggle: () =>
+                context.read<ListingDetailsCubit>().toggleBookmark(),
           ),
 
           // Main content with horizontal padding

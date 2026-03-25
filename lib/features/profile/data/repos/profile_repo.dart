@@ -83,31 +83,10 @@ class ProfileRepo {
     }
   }
 
-  Future<ApiResult<PostsResponse>> fetchBookmarkedPosts(int page) async {
+  Future<ApiResult<bool>> togglePostBookmark(String postId) async {
     try {
-      final raw = await _service.fetchBookmarkedPosts(page);
-      final hasMore = raw.length > ProfileApiService.postsPageSize;
-      final items = hasMore
-          ? raw.sublist(0, ProfileApiService.postsPageSize)
-          : raw;
-      final posts = items.map((e) => PostModel.fromJson(e)).toList();
-
-      final postIds = posts.map((p) => p.postId).toList();
-      final likedIds = await _service.fetchLikedPostIds(postIds);
-      final bookmarkedIds = await _service.fetchBookmarkedPostIds(postIds);
-
-      final enriched = posts
-          .map(
-            (p) => p.copyWith(
-              isLiked: likedIds.contains(p.postId),
-              isBookmarked: bookmarkedIds.contains(p.postId),
-            ),
-          )
-          .toList();
-
-      return ApiResult.success(
-        PostsResponse(posts: enriched, hasMore: hasMore),
-      );
+      final result = await _service.togglePostBookmark(postId);
+      return ApiResult.success(result);
     } catch (e) {
       return ApiResult.failure(ErrorHandler.handle(e));
     }

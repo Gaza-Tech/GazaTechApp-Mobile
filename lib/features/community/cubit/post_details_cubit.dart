@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
+import 'package:gaza_tech/core/services/bookmark_event_service.dart';
 import '../data/models/comment_model.dart';
 import '../data/repos/community_repo.dart';
 import 'post_details_state.dart';
@@ -7,8 +10,22 @@ import 'post_details_state.dart';
 class PostDetailsCubit extends Cubit<PostDetailsState> {
   final CommunityRepo _repo;
   final String postId;
+  final BookmarkEventService _bookmarkEventService;
+  late final StreamSubscription<PostBookmarkEvent> _bookmarkSub;
 
-  PostDetailsCubit(this._repo, this.postId) : super(const PostDetailsState());
+  PostDetailsCubit(this._repo, this.postId, this._bookmarkEventService)
+    : super(const PostDetailsState()) {
+    _bookmarkSub = _bookmarkEventService.postBookmarkChanges.listen(
+      _onPostBookmarkEvent,
+    );
+  }
+
+  void _onPostBookmarkEvent(PostBookmarkEvent event) {
+    if (event.postId != postId) return;
+    if (state.isBookmarked == event.isBookmarked) return;
+
+    emit(state.copyWith(isBookmarked: event.isBookmarked));
+  }
 
   Future<void> loadPost() async {
     emit(state.copyWith(isPostLoading: true, errorMessage: null));
@@ -111,11 +128,21 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
   Future<void> toggleBookmark() async {
     final wasBookmarked = state.isBookmarked;
     emit(state.copyWith(isBookmarked: !wasBookmarked));
+    _bookmarkEventService.emitPostBookmark(
+      postId,
+      isBookmarked: !wasBookmarked,
+    );
 
     final result = await _repo.toggleBookmark(postId);
     result.when(
       success: (_) {},
-      failure: (_) => emit(state.copyWith(isBookmarked: wasBookmarked)),
+      failure: (_) {
+        emit(state.copyWith(isBookmarked: wasBookmarked));
+        _bookmarkEventService.emitPostBookmark(
+          postId,
+          isBookmarked: wasBookmarked,
+        );
+      },
     );
   }
 
@@ -285,5 +312,11 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
       },
       failure: (error) => emit(state.copyWith(errorMessage: error.message)),
     );
+  }
+
+  @override
+  Future<void> close() {
+    _bookmarkSub.cancel();
+    return super.close();
   }
 }

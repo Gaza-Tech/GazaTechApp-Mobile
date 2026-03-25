@@ -63,13 +63,34 @@ class MarketplaceSearchRepo {
           .map((json) => ListingModel.fromJson(json))
           .toList();
 
+      final listingIds = listings.map((l) => l.listingId).toList();
+      final bookmarkedIds = await _apiService.fetchBookmarkedListingIds(
+        listingIds,
+      );
+      final enriched = listings
+          .map(
+            (l) =>
+                l.copyWith(isBookmarked: bookmarkedIds.contains(l.listingId)),
+          )
+          .toList();
+
       return ApiResult.success(
         ListingsResponse(
-          listings: listings,
-          totalCount: listings.length,
+          listings: enriched,
+          totalCount: enriched.length,
           hasMore: hasMore,
         ),
       );
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  /// Toggle bookmark for a listing
+  Future<ApiResult<bool>> toggleListingBookmark(String listingId) async {
+    try {
+      final result = await _apiService.toggleListingBookmark(listingId);
+      return ApiResult.success(result);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
     }

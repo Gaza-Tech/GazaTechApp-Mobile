@@ -17,8 +17,7 @@ mixin _$ProfileState {
  UserProfileModel? get userProfile; bool get isOwnProfile;// Profile loading
  bool get isProfileLoading;// Posts tab
  List<PostModel> get posts; int get postsPage; bool get postsHasMore; bool get isPostsLoading; bool get isPostsLoadingMore;// Listings tab
- List<ListingModel> get listings; int get listingsPage; bool get listingsHasMore; bool get isListingsLoading; bool get isListingsLoadingMore;// Bookmarks tab (own profile only)
- List<PostModel> get bookmarkedPosts; int get bookmarksPage; bool get bookmarksHasMore; bool get isBookmarksLoading; bool get isBookmarksLoadingMore;// Like/bookmark tracking
+ List<ListingModel> get listings; int get listingsPage; bool get listingsHasMore; bool get isListingsLoading; bool get isListingsLoadingMore;// Like/bookmark tracking
  Set<String> get likedPostIds; Set<String> get bookmarkedPostIds; String? get errorMessage;
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
@@ -30,16 +29,16 @@ $ProfileStateCopyWith<ProfileState> get copyWith => _$ProfileStateCopyWithImpl<P
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileState&&(identical(other.userProfile, userProfile) || other.userProfile == userProfile)&&(identical(other.isOwnProfile, isOwnProfile) || other.isOwnProfile == isOwnProfile)&&(identical(other.isProfileLoading, isProfileLoading) || other.isProfileLoading == isProfileLoading)&&const DeepCollectionEquality().equals(other.posts, posts)&&(identical(other.postsPage, postsPage) || other.postsPage == postsPage)&&(identical(other.postsHasMore, postsHasMore) || other.postsHasMore == postsHasMore)&&(identical(other.isPostsLoading, isPostsLoading) || other.isPostsLoading == isPostsLoading)&&(identical(other.isPostsLoadingMore, isPostsLoadingMore) || other.isPostsLoadingMore == isPostsLoadingMore)&&const DeepCollectionEquality().equals(other.listings, listings)&&(identical(other.listingsPage, listingsPage) || other.listingsPage == listingsPage)&&(identical(other.listingsHasMore, listingsHasMore) || other.listingsHasMore == listingsHasMore)&&(identical(other.isListingsLoading, isListingsLoading) || other.isListingsLoading == isListingsLoading)&&(identical(other.isListingsLoadingMore, isListingsLoadingMore) || other.isListingsLoadingMore == isListingsLoadingMore)&&const DeepCollectionEquality().equals(other.bookmarkedPosts, bookmarkedPosts)&&(identical(other.bookmarksPage, bookmarksPage) || other.bookmarksPage == bookmarksPage)&&(identical(other.bookmarksHasMore, bookmarksHasMore) || other.bookmarksHasMore == bookmarksHasMore)&&(identical(other.isBookmarksLoading, isBookmarksLoading) || other.isBookmarksLoading == isBookmarksLoading)&&(identical(other.isBookmarksLoadingMore, isBookmarksLoadingMore) || other.isBookmarksLoadingMore == isBookmarksLoadingMore)&&const DeepCollectionEquality().equals(other.likedPostIds, likedPostIds)&&const DeepCollectionEquality().equals(other.bookmarkedPostIds, bookmarkedPostIds)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileState&&(identical(other.userProfile, userProfile) || other.userProfile == userProfile)&&(identical(other.isOwnProfile, isOwnProfile) || other.isOwnProfile == isOwnProfile)&&(identical(other.isProfileLoading, isProfileLoading) || other.isProfileLoading == isProfileLoading)&&const DeepCollectionEquality().equals(other.posts, posts)&&(identical(other.postsPage, postsPage) || other.postsPage == postsPage)&&(identical(other.postsHasMore, postsHasMore) || other.postsHasMore == postsHasMore)&&(identical(other.isPostsLoading, isPostsLoading) || other.isPostsLoading == isPostsLoading)&&(identical(other.isPostsLoadingMore, isPostsLoadingMore) || other.isPostsLoadingMore == isPostsLoadingMore)&&const DeepCollectionEquality().equals(other.listings, listings)&&(identical(other.listingsPage, listingsPage) || other.listingsPage == listingsPage)&&(identical(other.listingsHasMore, listingsHasMore) || other.listingsHasMore == listingsHasMore)&&(identical(other.isListingsLoading, isListingsLoading) || other.isListingsLoading == isListingsLoading)&&(identical(other.isListingsLoadingMore, isListingsLoadingMore) || other.isListingsLoadingMore == isListingsLoadingMore)&&const DeepCollectionEquality().equals(other.likedPostIds, likedPostIds)&&const DeepCollectionEquality().equals(other.bookmarkedPostIds, bookmarkedPostIds)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hashAll([runtimeType,userProfile,isOwnProfile,isProfileLoading,const DeepCollectionEquality().hash(posts),postsPage,postsHasMore,isPostsLoading,isPostsLoadingMore,const DeepCollectionEquality().hash(listings),listingsPage,listingsHasMore,isListingsLoading,isListingsLoadingMore,const DeepCollectionEquality().hash(bookmarkedPosts),bookmarksPage,bookmarksHasMore,isBookmarksLoading,isBookmarksLoadingMore,const DeepCollectionEquality().hash(likedPostIds),const DeepCollectionEquality().hash(bookmarkedPostIds),errorMessage]);
+int get hashCode => Object.hash(runtimeType,userProfile,isOwnProfile,isProfileLoading,const DeepCollectionEquality().hash(posts),postsPage,postsHasMore,isPostsLoading,isPostsLoadingMore,const DeepCollectionEquality().hash(listings),listingsPage,listingsHasMore,isListingsLoading,isListingsLoadingMore,const DeepCollectionEquality().hash(likedPostIds),const DeepCollectionEquality().hash(bookmarkedPostIds),errorMessage);
 
 @override
 String toString() {
-  return 'ProfileState(userProfile: $userProfile, isOwnProfile: $isOwnProfile, isProfileLoading: $isProfileLoading, posts: $posts, postsPage: $postsPage, postsHasMore: $postsHasMore, isPostsLoading: $isPostsLoading, isPostsLoadingMore: $isPostsLoadingMore, listings: $listings, listingsPage: $listingsPage, listingsHasMore: $listingsHasMore, isListingsLoading: $isListingsLoading, isListingsLoadingMore: $isListingsLoadingMore, bookmarkedPosts: $bookmarkedPosts, bookmarksPage: $bookmarksPage, bookmarksHasMore: $bookmarksHasMore, isBookmarksLoading: $isBookmarksLoading, isBookmarksLoadingMore: $isBookmarksLoadingMore, likedPostIds: $likedPostIds, bookmarkedPostIds: $bookmarkedPostIds, errorMessage: $errorMessage)';
+  return 'ProfileState(userProfile: $userProfile, isOwnProfile: $isOwnProfile, isProfileLoading: $isProfileLoading, posts: $posts, postsPage: $postsPage, postsHasMore: $postsHasMore, isPostsLoading: $isPostsLoading, isPostsLoadingMore: $isPostsLoadingMore, listings: $listings, listingsPage: $listingsPage, listingsHasMore: $listingsHasMore, isListingsLoading: $isListingsLoading, isListingsLoadingMore: $isListingsLoadingMore, likedPostIds: $likedPostIds, bookmarkedPostIds: $bookmarkedPostIds, errorMessage: $errorMessage)';
 }
 
 
@@ -50,7 +49,7 @@ abstract mixin class $ProfileStateCopyWith<$Res>  {
   factory $ProfileStateCopyWith(ProfileState value, $Res Function(ProfileState) _then) = _$ProfileStateCopyWithImpl;
 @useResult
 $Res call({
- UserProfileModel? userProfile, bool isOwnProfile, bool isProfileLoading, List<PostModel> posts, int postsPage, bool postsHasMore, bool isPostsLoading, bool isPostsLoadingMore, List<ListingModel> listings, int listingsPage, bool listingsHasMore, bool isListingsLoading, bool isListingsLoadingMore, List<PostModel> bookmarkedPosts, int bookmarksPage, bool bookmarksHasMore, bool isBookmarksLoading, bool isBookmarksLoadingMore, Set<String> likedPostIds, Set<String> bookmarkedPostIds, String? errorMessage
+ UserProfileModel? userProfile, bool isOwnProfile, bool isProfileLoading, List<PostModel> posts, int postsPage, bool postsHasMore, bool isPostsLoading, bool isPostsLoadingMore, List<ListingModel> listings, int listingsPage, bool listingsHasMore, bool isListingsLoading, bool isListingsLoadingMore, Set<String> likedPostIds, Set<String> bookmarkedPostIds, String? errorMessage
 });
 
 
@@ -67,7 +66,7 @@ class _$ProfileStateCopyWithImpl<$Res>
 
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userProfile = freezed,Object? isOwnProfile = null,Object? isProfileLoading = null,Object? posts = null,Object? postsPage = null,Object? postsHasMore = null,Object? isPostsLoading = null,Object? isPostsLoadingMore = null,Object? listings = null,Object? listingsPage = null,Object? listingsHasMore = null,Object? isListingsLoading = null,Object? isListingsLoadingMore = null,Object? bookmarkedPosts = null,Object? bookmarksPage = null,Object? bookmarksHasMore = null,Object? isBookmarksLoading = null,Object? isBookmarksLoadingMore = null,Object? likedPostIds = null,Object? bookmarkedPostIds = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userProfile = freezed,Object? isOwnProfile = null,Object? isProfileLoading = null,Object? posts = null,Object? postsPage = null,Object? postsHasMore = null,Object? isPostsLoading = null,Object? isPostsLoadingMore = null,Object? listings = null,Object? listingsPage = null,Object? listingsHasMore = null,Object? isListingsLoading = null,Object? isListingsLoadingMore = null,Object? likedPostIds = null,Object? bookmarkedPostIds = null,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 userProfile: freezed == userProfile ? _self.userProfile : userProfile // ignore: cast_nullable_to_non_nullable
 as UserProfileModel?,isOwnProfile: null == isOwnProfile ? _self.isOwnProfile : isOwnProfile // ignore: cast_nullable_to_non_nullable
@@ -82,11 +81,6 @@ as List<ListingModel>,listingsPage: null == listingsPage ? _self.listingsPage : 
 as int,listingsHasMore: null == listingsHasMore ? _self.listingsHasMore : listingsHasMore // ignore: cast_nullable_to_non_nullable
 as bool,isListingsLoading: null == isListingsLoading ? _self.isListingsLoading : isListingsLoading // ignore: cast_nullable_to_non_nullable
 as bool,isListingsLoadingMore: null == isListingsLoadingMore ? _self.isListingsLoadingMore : isListingsLoadingMore // ignore: cast_nullable_to_non_nullable
-as bool,bookmarkedPosts: null == bookmarkedPosts ? _self.bookmarkedPosts : bookmarkedPosts // ignore: cast_nullable_to_non_nullable
-as List<PostModel>,bookmarksPage: null == bookmarksPage ? _self.bookmarksPage : bookmarksPage // ignore: cast_nullable_to_non_nullable
-as int,bookmarksHasMore: null == bookmarksHasMore ? _self.bookmarksHasMore : bookmarksHasMore // ignore: cast_nullable_to_non_nullable
-as bool,isBookmarksLoading: null == isBookmarksLoading ? _self.isBookmarksLoading : isBookmarksLoading // ignore: cast_nullable_to_non_nullable
-as bool,isBookmarksLoadingMore: null == isBookmarksLoadingMore ? _self.isBookmarksLoadingMore : isBookmarksLoadingMore // ignore: cast_nullable_to_non_nullable
 as bool,likedPostIds: null == likedPostIds ? _self.likedPostIds : likedPostIds // ignore: cast_nullable_to_non_nullable
 as Set<String>,bookmarkedPostIds: null == bookmarkedPostIds ? _self.bookmarkedPostIds : bookmarkedPostIds // ignore: cast_nullable_to_non_nullable
 as Set<String>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -187,10 +181,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( UserProfileModel? userProfile,  bool isOwnProfile,  bool isProfileLoading,  List<PostModel> posts,  int postsPage,  bool postsHasMore,  bool isPostsLoading,  bool isPostsLoadingMore,  List<ListingModel> listings,  int listingsPage,  bool listingsHasMore,  bool isListingsLoading,  bool isListingsLoadingMore,  List<PostModel> bookmarkedPosts,  int bookmarksPage,  bool bookmarksHasMore,  bool isBookmarksLoading,  bool isBookmarksLoadingMore,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( UserProfileModel? userProfile,  bool isOwnProfile,  bool isProfileLoading,  List<PostModel> posts,  int postsPage,  bool postsHasMore,  bool isPostsLoading,  bool isPostsLoadingMore,  List<ListingModel> listings,  int listingsPage,  bool listingsHasMore,  bool isListingsLoading,  bool isListingsLoadingMore,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProfileState() when $default != null:
-return $default(_that.userProfile,_that.isOwnProfile,_that.isProfileLoading,_that.posts,_that.postsPage,_that.postsHasMore,_that.isPostsLoading,_that.isPostsLoadingMore,_that.listings,_that.listingsPage,_that.listingsHasMore,_that.isListingsLoading,_that.isListingsLoadingMore,_that.bookmarkedPosts,_that.bookmarksPage,_that.bookmarksHasMore,_that.isBookmarksLoading,_that.isBookmarksLoadingMore,_that.likedPostIds,_that.bookmarkedPostIds,_that.errorMessage);case _:
+return $default(_that.userProfile,_that.isOwnProfile,_that.isProfileLoading,_that.posts,_that.postsPage,_that.postsHasMore,_that.isPostsLoading,_that.isPostsLoadingMore,_that.listings,_that.listingsPage,_that.listingsHasMore,_that.isListingsLoading,_that.isListingsLoadingMore,_that.likedPostIds,_that.bookmarkedPostIds,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -208,10 +202,10 @@ return $default(_that.userProfile,_that.isOwnProfile,_that.isProfileLoading,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( UserProfileModel? userProfile,  bool isOwnProfile,  bool isProfileLoading,  List<PostModel> posts,  int postsPage,  bool postsHasMore,  bool isPostsLoading,  bool isPostsLoadingMore,  List<ListingModel> listings,  int listingsPage,  bool listingsHasMore,  bool isListingsLoading,  bool isListingsLoadingMore,  List<PostModel> bookmarkedPosts,  int bookmarksPage,  bool bookmarksHasMore,  bool isBookmarksLoading,  bool isBookmarksLoadingMore,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( UserProfileModel? userProfile,  bool isOwnProfile,  bool isProfileLoading,  List<PostModel> posts,  int postsPage,  bool postsHasMore,  bool isPostsLoading,  bool isPostsLoadingMore,  List<ListingModel> listings,  int listingsPage,  bool listingsHasMore,  bool isListingsLoading,  bool isListingsLoadingMore,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _ProfileState():
-return $default(_that.userProfile,_that.isOwnProfile,_that.isProfileLoading,_that.posts,_that.postsPage,_that.postsHasMore,_that.isPostsLoading,_that.isPostsLoadingMore,_that.listings,_that.listingsPage,_that.listingsHasMore,_that.isListingsLoading,_that.isListingsLoadingMore,_that.bookmarkedPosts,_that.bookmarksPage,_that.bookmarksHasMore,_that.isBookmarksLoading,_that.isBookmarksLoadingMore,_that.likedPostIds,_that.bookmarkedPostIds,_that.errorMessage);case _:
+return $default(_that.userProfile,_that.isOwnProfile,_that.isProfileLoading,_that.posts,_that.postsPage,_that.postsHasMore,_that.isPostsLoading,_that.isPostsLoadingMore,_that.listings,_that.listingsPage,_that.listingsHasMore,_that.isListingsLoading,_that.isListingsLoadingMore,_that.likedPostIds,_that.bookmarkedPostIds,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -228,10 +222,10 @@ return $default(_that.userProfile,_that.isOwnProfile,_that.isProfileLoading,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( UserProfileModel? userProfile,  bool isOwnProfile,  bool isProfileLoading,  List<PostModel> posts,  int postsPage,  bool postsHasMore,  bool isPostsLoading,  bool isPostsLoadingMore,  List<ListingModel> listings,  int listingsPage,  bool listingsHasMore,  bool isListingsLoading,  bool isListingsLoadingMore,  List<PostModel> bookmarkedPosts,  int bookmarksPage,  bool bookmarksHasMore,  bool isBookmarksLoading,  bool isBookmarksLoadingMore,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( UserProfileModel? userProfile,  bool isOwnProfile,  bool isProfileLoading,  List<PostModel> posts,  int postsPage,  bool postsHasMore,  bool isPostsLoading,  bool isPostsLoadingMore,  List<ListingModel> listings,  int listingsPage,  bool listingsHasMore,  bool isListingsLoading,  bool isListingsLoadingMore,  Set<String> likedPostIds,  Set<String> bookmarkedPostIds,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _ProfileState() when $default != null:
-return $default(_that.userProfile,_that.isOwnProfile,_that.isProfileLoading,_that.posts,_that.postsPage,_that.postsHasMore,_that.isPostsLoading,_that.isPostsLoadingMore,_that.listings,_that.listingsPage,_that.listingsHasMore,_that.isListingsLoading,_that.isListingsLoadingMore,_that.bookmarkedPosts,_that.bookmarksPage,_that.bookmarksHasMore,_that.isBookmarksLoading,_that.isBookmarksLoadingMore,_that.likedPostIds,_that.bookmarkedPostIds,_that.errorMessage);case _:
+return $default(_that.userProfile,_that.isOwnProfile,_that.isProfileLoading,_that.posts,_that.postsPage,_that.postsHasMore,_that.isPostsLoading,_that.isPostsLoadingMore,_that.listings,_that.listingsPage,_that.listingsHasMore,_that.isListingsLoading,_that.isListingsLoadingMore,_that.likedPostIds,_that.bookmarkedPostIds,_that.errorMessage);case _:
   return null;
 
 }
@@ -243,7 +237,7 @@ return $default(_that.userProfile,_that.isOwnProfile,_that.isProfileLoading,_tha
 
 
 class _ProfileState implements ProfileState {
-  const _ProfileState({this.userProfile, this.isOwnProfile = false, this.isProfileLoading = false, final  List<PostModel> posts = const [], this.postsPage = 0, this.postsHasMore = true, this.isPostsLoading = false, this.isPostsLoadingMore = false, final  List<ListingModel> listings = const [], this.listingsPage = 0, this.listingsHasMore = true, this.isListingsLoading = false, this.isListingsLoadingMore = false, final  List<PostModel> bookmarkedPosts = const [], this.bookmarksPage = 0, this.bookmarksHasMore = true, this.isBookmarksLoading = false, this.isBookmarksLoadingMore = false, final  Set<String> likedPostIds = const <String>{}, final  Set<String> bookmarkedPostIds = const <String>{}, this.errorMessage}): _posts = posts,_listings = listings,_bookmarkedPosts = bookmarkedPosts,_likedPostIds = likedPostIds,_bookmarkedPostIds = bookmarkedPostIds;
+  const _ProfileState({this.userProfile, this.isOwnProfile = false, this.isProfileLoading = false, final  List<PostModel> posts = const [], this.postsPage = 0, this.postsHasMore = true, this.isPostsLoading = false, this.isPostsLoadingMore = false, final  List<ListingModel> listings = const [], this.listingsPage = 0, this.listingsHasMore = true, this.isListingsLoading = false, this.isListingsLoadingMore = false, final  Set<String> likedPostIds = const <String>{}, final  Set<String> bookmarkedPostIds = const <String>{}, this.errorMessage}): _posts = posts,_listings = listings,_likedPostIds = likedPostIds,_bookmarkedPostIds = bookmarkedPostIds;
   
 
 @override final  UserProfileModel? userProfile;
@@ -276,19 +270,6 @@ class _ProfileState implements ProfileState {
 @override@JsonKey() final  bool listingsHasMore;
 @override@JsonKey() final  bool isListingsLoading;
 @override@JsonKey() final  bool isListingsLoadingMore;
-// Bookmarks tab (own profile only)
- final  List<PostModel> _bookmarkedPosts;
-// Bookmarks tab (own profile only)
-@override@JsonKey() List<PostModel> get bookmarkedPosts {
-  if (_bookmarkedPosts is EqualUnmodifiableListView) return _bookmarkedPosts;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_bookmarkedPosts);
-}
-
-@override@JsonKey() final  int bookmarksPage;
-@override@JsonKey() final  bool bookmarksHasMore;
-@override@JsonKey() final  bool isBookmarksLoading;
-@override@JsonKey() final  bool isBookmarksLoadingMore;
 // Like/bookmark tracking
  final  Set<String> _likedPostIds;
 // Like/bookmark tracking
@@ -317,16 +298,16 @@ _$ProfileStateCopyWith<_ProfileState> get copyWith => __$ProfileStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileState&&(identical(other.userProfile, userProfile) || other.userProfile == userProfile)&&(identical(other.isOwnProfile, isOwnProfile) || other.isOwnProfile == isOwnProfile)&&(identical(other.isProfileLoading, isProfileLoading) || other.isProfileLoading == isProfileLoading)&&const DeepCollectionEquality().equals(other._posts, _posts)&&(identical(other.postsPage, postsPage) || other.postsPage == postsPage)&&(identical(other.postsHasMore, postsHasMore) || other.postsHasMore == postsHasMore)&&(identical(other.isPostsLoading, isPostsLoading) || other.isPostsLoading == isPostsLoading)&&(identical(other.isPostsLoadingMore, isPostsLoadingMore) || other.isPostsLoadingMore == isPostsLoadingMore)&&const DeepCollectionEquality().equals(other._listings, _listings)&&(identical(other.listingsPage, listingsPage) || other.listingsPage == listingsPage)&&(identical(other.listingsHasMore, listingsHasMore) || other.listingsHasMore == listingsHasMore)&&(identical(other.isListingsLoading, isListingsLoading) || other.isListingsLoading == isListingsLoading)&&(identical(other.isListingsLoadingMore, isListingsLoadingMore) || other.isListingsLoadingMore == isListingsLoadingMore)&&const DeepCollectionEquality().equals(other._bookmarkedPosts, _bookmarkedPosts)&&(identical(other.bookmarksPage, bookmarksPage) || other.bookmarksPage == bookmarksPage)&&(identical(other.bookmarksHasMore, bookmarksHasMore) || other.bookmarksHasMore == bookmarksHasMore)&&(identical(other.isBookmarksLoading, isBookmarksLoading) || other.isBookmarksLoading == isBookmarksLoading)&&(identical(other.isBookmarksLoadingMore, isBookmarksLoadingMore) || other.isBookmarksLoadingMore == isBookmarksLoadingMore)&&const DeepCollectionEquality().equals(other._likedPostIds, _likedPostIds)&&const DeepCollectionEquality().equals(other._bookmarkedPostIds, _bookmarkedPostIds)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileState&&(identical(other.userProfile, userProfile) || other.userProfile == userProfile)&&(identical(other.isOwnProfile, isOwnProfile) || other.isOwnProfile == isOwnProfile)&&(identical(other.isProfileLoading, isProfileLoading) || other.isProfileLoading == isProfileLoading)&&const DeepCollectionEquality().equals(other._posts, _posts)&&(identical(other.postsPage, postsPage) || other.postsPage == postsPage)&&(identical(other.postsHasMore, postsHasMore) || other.postsHasMore == postsHasMore)&&(identical(other.isPostsLoading, isPostsLoading) || other.isPostsLoading == isPostsLoading)&&(identical(other.isPostsLoadingMore, isPostsLoadingMore) || other.isPostsLoadingMore == isPostsLoadingMore)&&const DeepCollectionEquality().equals(other._listings, _listings)&&(identical(other.listingsPage, listingsPage) || other.listingsPage == listingsPage)&&(identical(other.listingsHasMore, listingsHasMore) || other.listingsHasMore == listingsHasMore)&&(identical(other.isListingsLoading, isListingsLoading) || other.isListingsLoading == isListingsLoading)&&(identical(other.isListingsLoadingMore, isListingsLoadingMore) || other.isListingsLoadingMore == isListingsLoadingMore)&&const DeepCollectionEquality().equals(other._likedPostIds, _likedPostIds)&&const DeepCollectionEquality().equals(other._bookmarkedPostIds, _bookmarkedPostIds)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hashAll([runtimeType,userProfile,isOwnProfile,isProfileLoading,const DeepCollectionEquality().hash(_posts),postsPage,postsHasMore,isPostsLoading,isPostsLoadingMore,const DeepCollectionEquality().hash(_listings),listingsPage,listingsHasMore,isListingsLoading,isListingsLoadingMore,const DeepCollectionEquality().hash(_bookmarkedPosts),bookmarksPage,bookmarksHasMore,isBookmarksLoading,isBookmarksLoadingMore,const DeepCollectionEquality().hash(_likedPostIds),const DeepCollectionEquality().hash(_bookmarkedPostIds),errorMessage]);
+int get hashCode => Object.hash(runtimeType,userProfile,isOwnProfile,isProfileLoading,const DeepCollectionEquality().hash(_posts),postsPage,postsHasMore,isPostsLoading,isPostsLoadingMore,const DeepCollectionEquality().hash(_listings),listingsPage,listingsHasMore,isListingsLoading,isListingsLoadingMore,const DeepCollectionEquality().hash(_likedPostIds),const DeepCollectionEquality().hash(_bookmarkedPostIds),errorMessage);
 
 @override
 String toString() {
-  return 'ProfileState(userProfile: $userProfile, isOwnProfile: $isOwnProfile, isProfileLoading: $isProfileLoading, posts: $posts, postsPage: $postsPage, postsHasMore: $postsHasMore, isPostsLoading: $isPostsLoading, isPostsLoadingMore: $isPostsLoadingMore, listings: $listings, listingsPage: $listingsPage, listingsHasMore: $listingsHasMore, isListingsLoading: $isListingsLoading, isListingsLoadingMore: $isListingsLoadingMore, bookmarkedPosts: $bookmarkedPosts, bookmarksPage: $bookmarksPage, bookmarksHasMore: $bookmarksHasMore, isBookmarksLoading: $isBookmarksLoading, isBookmarksLoadingMore: $isBookmarksLoadingMore, likedPostIds: $likedPostIds, bookmarkedPostIds: $bookmarkedPostIds, errorMessage: $errorMessage)';
+  return 'ProfileState(userProfile: $userProfile, isOwnProfile: $isOwnProfile, isProfileLoading: $isProfileLoading, posts: $posts, postsPage: $postsPage, postsHasMore: $postsHasMore, isPostsLoading: $isPostsLoading, isPostsLoadingMore: $isPostsLoadingMore, listings: $listings, listingsPage: $listingsPage, listingsHasMore: $listingsHasMore, isListingsLoading: $isListingsLoading, isListingsLoadingMore: $isListingsLoadingMore, likedPostIds: $likedPostIds, bookmarkedPostIds: $bookmarkedPostIds, errorMessage: $errorMessage)';
 }
 
 
@@ -337,7 +318,7 @@ abstract mixin class _$ProfileStateCopyWith<$Res> implements $ProfileStateCopyWi
   factory _$ProfileStateCopyWith(_ProfileState value, $Res Function(_ProfileState) _then) = __$ProfileStateCopyWithImpl;
 @override @useResult
 $Res call({
- UserProfileModel? userProfile, bool isOwnProfile, bool isProfileLoading, List<PostModel> posts, int postsPage, bool postsHasMore, bool isPostsLoading, bool isPostsLoadingMore, List<ListingModel> listings, int listingsPage, bool listingsHasMore, bool isListingsLoading, bool isListingsLoadingMore, List<PostModel> bookmarkedPosts, int bookmarksPage, bool bookmarksHasMore, bool isBookmarksLoading, bool isBookmarksLoadingMore, Set<String> likedPostIds, Set<String> bookmarkedPostIds, String? errorMessage
+ UserProfileModel? userProfile, bool isOwnProfile, bool isProfileLoading, List<PostModel> posts, int postsPage, bool postsHasMore, bool isPostsLoading, bool isPostsLoadingMore, List<ListingModel> listings, int listingsPage, bool listingsHasMore, bool isListingsLoading, bool isListingsLoadingMore, Set<String> likedPostIds, Set<String> bookmarkedPostIds, String? errorMessage
 });
 
 
@@ -354,7 +335,7 @@ class __$ProfileStateCopyWithImpl<$Res>
 
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userProfile = freezed,Object? isOwnProfile = null,Object? isProfileLoading = null,Object? posts = null,Object? postsPage = null,Object? postsHasMore = null,Object? isPostsLoading = null,Object? isPostsLoadingMore = null,Object? listings = null,Object? listingsPage = null,Object? listingsHasMore = null,Object? isListingsLoading = null,Object? isListingsLoadingMore = null,Object? bookmarkedPosts = null,Object? bookmarksPage = null,Object? bookmarksHasMore = null,Object? isBookmarksLoading = null,Object? isBookmarksLoadingMore = null,Object? likedPostIds = null,Object? bookmarkedPostIds = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userProfile = freezed,Object? isOwnProfile = null,Object? isProfileLoading = null,Object? posts = null,Object? postsPage = null,Object? postsHasMore = null,Object? isPostsLoading = null,Object? isPostsLoadingMore = null,Object? listings = null,Object? listingsPage = null,Object? listingsHasMore = null,Object? isListingsLoading = null,Object? isListingsLoadingMore = null,Object? likedPostIds = null,Object? bookmarkedPostIds = null,Object? errorMessage = freezed,}) {
   return _then(_ProfileState(
 userProfile: freezed == userProfile ? _self.userProfile : userProfile // ignore: cast_nullable_to_non_nullable
 as UserProfileModel?,isOwnProfile: null == isOwnProfile ? _self.isOwnProfile : isOwnProfile // ignore: cast_nullable_to_non_nullable
@@ -369,11 +350,6 @@ as List<ListingModel>,listingsPage: null == listingsPage ? _self.listingsPage : 
 as int,listingsHasMore: null == listingsHasMore ? _self.listingsHasMore : listingsHasMore // ignore: cast_nullable_to_non_nullable
 as bool,isListingsLoading: null == isListingsLoading ? _self.isListingsLoading : isListingsLoading // ignore: cast_nullable_to_non_nullable
 as bool,isListingsLoadingMore: null == isListingsLoadingMore ? _self.isListingsLoadingMore : isListingsLoadingMore // ignore: cast_nullable_to_non_nullable
-as bool,bookmarkedPosts: null == bookmarkedPosts ? _self._bookmarkedPosts : bookmarkedPosts // ignore: cast_nullable_to_non_nullable
-as List<PostModel>,bookmarksPage: null == bookmarksPage ? _self.bookmarksPage : bookmarksPage // ignore: cast_nullable_to_non_nullable
-as int,bookmarksHasMore: null == bookmarksHasMore ? _self.bookmarksHasMore : bookmarksHasMore // ignore: cast_nullable_to_non_nullable
-as bool,isBookmarksLoading: null == isBookmarksLoading ? _self.isBookmarksLoading : isBookmarksLoading // ignore: cast_nullable_to_non_nullable
-as bool,isBookmarksLoadingMore: null == isBookmarksLoadingMore ? _self.isBookmarksLoadingMore : isBookmarksLoadingMore // ignore: cast_nullable_to_non_nullable
 as bool,likedPostIds: null == likedPostIds ? _self._likedPostIds : likedPostIds // ignore: cast_nullable_to_non_nullable
 as Set<String>,bookmarkedPostIds: null == bookmarkedPostIds ? _self._bookmarkedPostIds : bookmarkedPostIds // ignore: cast_nullable_to_non_nullable
 as Set<String>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable

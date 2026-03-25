@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -5,16 +6,35 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/cache/shared_pref_keys.dart';
 import 'package:gaza_tech/core/helpers/shared_pref_helper.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
+import 'package:gaza_tech/core/services/bookmark_event_service.dart';
 import '../data/models/marketplace_search_filters_model.dart';
 import '../data/repos/marketplace_search_repo.dart';
 import 'marketplace_search_state.dart';
 
 class MarketplaceSearchCubit extends Cubit<MarketplaceSearchState> {
   final MarketplaceSearchRepo _repo;
+  final BookmarkEventService _bookmarkEventService;
+  late final StreamSubscription<ListingBookmarkEvent> _bookmarkSub;
 
   final TextEditingController searchController = TextEditingController();
 
-  MarketplaceSearchCubit(this._repo) : super(const MarketplaceSearchState());
+  MarketplaceSearchCubit(this._repo, this._bookmarkEventService)
+    : super(const MarketplaceSearchState()) {
+    _bookmarkSub = _bookmarkEventService.listingBookmarkChanges.listen(
+      _onListingBookmarkEvent,
+    );
+  }
+
+  void _onListingBookmarkEvent(ListingBookmarkEvent event) {
+    final current = state.bookmarkedListingIds;
+    if (current.contains(event.listingId) == event.isBookmarked) return;
+
+    final updated = Set<String>.from(current);
+    event.isBookmarked
+        ? updated.add(event.listingId)
+        : updated.remove(event.listingId);
+    emit(state.copyWith(bookmarkedListingIds: updated));
+  }
 
   /// Load categories and locations for filter dropdowns
   Future<void> loadFilterData() async {
@@ -109,12 +129,17 @@ class MarketplaceSearchCubit extends Cubit<MarketplaceSearchState> {
 
     result.when(
       success: (response) {
+        final newBookmarkedIds = response.listings
+            .where((l) => l.isBookmarked)
+            .map((l) => l.listingId)
+            .toSet();
         emit(
           state.copyWith(
             results: response.listings,
             hasMore: response.hasMore,
             currentPage: 0,
             isSearching: false,
+            bookmarkedListingIds: newBookmarkedIds,
           ),
         );
       },
@@ -139,17 +164,57 @@ class MarketplaceSearchCubit extends Cubit<MarketplaceSearchState> {
 
     result.when(
       success: (response) {
+        final fetchedIds =
+            response.listings.map((l) => l.listingId).toSet();
+        final newBookmarkedIds = response.listings
+            .where((l) => l.isBookmarked)
+            .map((l) => l.listingId)
+            .toSet();
+        final cleanedIds = state.bookmarkedListingIds.difference(fetchedIds);
+
         emit(
           state.copyWith(
             results: [...state.results, ...response.listings],
             hasMore: response.hasMore,
             currentPage: nextPage,
             isLoadingMore: false,
+            bookmarkedListingIds: {...cleanedIds, ...newBookmarkedIds},
           ),
         );
       },
       failure: (error) {
         emit(state.copyWith(isLoadingMore: false, errorMessage: error.message));
+      },
+    );
+  }
+
+  /// Toggle bookmark for a listing (optimistic update)
+  Future<void> toggleListingBookmark(String listingId) async {
+    final wasBookmarked = state.bookmarkedListingIds.contains(listingId);
+    final optimisticIds = Set<String>.from(state.bookmarkedListingIds);
+    wasBookmarked
+        ? optimisticIds.remove(listingId)
+        : optimisticIds.add(listingId);
+    emit(state.copyWith(bookmarkedListingIds: optimisticIds));
+    _bookmarkEventService.emitListingBookmark(
+      listingId,
+      isBookmarked: !wasBookmarked,
+    );
+
+    final result = await _repo.toggleListingBookmark(listingId);
+
+    result.when(
+      success: (_) {},
+      failure: (_) {
+        final revertedIds = Set<String>.from(state.bookmarkedListingIds);
+        wasBookmarked
+            ? revertedIds.add(listingId)
+            : revertedIds.remove(listingId);
+        emit(state.copyWith(bookmarkedListingIds: revertedIds));
+        _bookmarkEventService.emitListingBookmark(
+          listingId,
+          isBookmarked: wasBookmarked,
+        );
       },
     );
   }
@@ -246,6 +311,7 @@ class MarketplaceSearchCubit extends Cubit<MarketplaceSearchState> {
 
   @override
   Future<void> close() {
+    _bookmarkSub.cancel();
     searchController.dispose();
     return super.close();
   }

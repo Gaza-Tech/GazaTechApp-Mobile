@@ -33,6 +33,8 @@ import 'package:gaza_tech/features/search/ui/marketplace_search_screen.dart';
 import 'package:gaza_tech/features/profile/cubit/profile_cubit.dart';
 import 'package:gaza_tech/features/profile/ui/profile_screen.dart';
 import 'package:gaza_tech/features/profile/data/models/user_profile_model.dart';
+import 'package:gaza_tech/features/bookmarks/cubit/bookmarks_cubit.dart';
+import 'package:gaza_tech/features/bookmarks/ui/bookmarks_screen.dart';
 import 'package:gaza_tech/features/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:gaza_tech/features/edit_profile/ui/edit_profile_screen.dart';
 
@@ -165,10 +167,16 @@ class MyRouter {
               cubit.loadProfile();
               cubit.fetchPosts();
               cubit.fetchListings();
-              if (isOwnProfile) cubit.fetchBookmarkedPosts();
               return cubit;
             },
             child: const ProfileScreen(),
+          ),
+        );
+      case MyRoutes.bookmarks:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<BookmarksCubit>(),
+            child: const BookmarksScreen(),
           ),
         );
       case MyRoutes.editProfile:

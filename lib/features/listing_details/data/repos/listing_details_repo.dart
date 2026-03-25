@@ -14,7 +14,8 @@ class ListingDetailsRepo {
     try {
       final data = await _apiService.fetchListingById(listingId);
       final listing = ListingDetailModel.fromJson(data);
-      return ApiResult.success(listing);
+      final isBookmarked = await _apiService.isListingBookmarked(listingId);
+      return ApiResult.success(listing.copyWith(isBookmarked: isBookmarked));
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
@@ -49,6 +50,16 @@ class ListingDetailsRepo {
       );
       final listings = data.map((json) => ListingModel.fromJson(json)).toList();
       return ApiResult.success(listings);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  /// Toggle bookmark for a listing
+  Future<ApiResult<bool>> toggleListingBookmark(String listingId) async {
+    try {
+      final result = await _apiService.toggleListingBookmark(listingId);
+      return ApiResult.success(result);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
     }

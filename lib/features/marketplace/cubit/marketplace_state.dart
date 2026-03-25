@@ -34,6 +34,9 @@ abstract class MarketplaceState with _$MarketplaceState {
 
     // Total count per category
     @Default({}) Map<String, int> totalCountByCategory,
+
+    // Bookmark tracking
+    @Default(<String>{}) Set<String> bookmarkedListingIds,
   }) = _MarketplaceState;
 
   const MarketplaceState._();

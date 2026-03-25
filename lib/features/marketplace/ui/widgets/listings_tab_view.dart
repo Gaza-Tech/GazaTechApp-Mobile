@@ -118,6 +118,12 @@ class _ListingsTabViewState extends State<ListingsTabView>
                         sellerName: listing.sellerName,
                         productCondition: listing.productCondition,
                         imageUrl: listing.thumbnailUrl,
+                        isBookmarked: state.bookmarkedListingIds.contains(
+                          listing.listingId,
+                        ),
+                        onBookmarkToggle: () => context
+                            .read<MarketplaceCubit>()
+                            .toggleBookmark(listing.listingId),
                         onTap: () => context.pushNamed(
                           MyRoutes.listingDetails,
                           arguments: listing.listingId,

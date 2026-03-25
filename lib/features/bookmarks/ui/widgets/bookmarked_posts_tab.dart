@@ -3,24 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
+import 'package:gaza_tech/features/bookmarks/cubit/bookmarks_cubit.dart';
+import 'package:gaza_tech/features/bookmarks/cubit/bookmarks_state.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card.dart';
-import 'package:gaza_tech/features/profile/cubit/profile_cubit.dart';
-import 'package:gaza_tech/features/profile/cubit/profile_state.dart';
 import 'package:gaza_tech/l10n/app_localizations.dart';
 
-class ProfileBookmarksTab extends StatefulWidget {
-  const ProfileBookmarksTab({super.key});
+class BookmarkedPostsTab extends StatefulWidget {
+  const BookmarkedPostsTab({super.key});
 
   @override
-  State<ProfileBookmarksTab> createState() => _ProfileBookmarksTabState();
+  State<BookmarkedPostsTab> createState() => _BookmarkedPostsTabState();
 }
 
-class _ProfileBookmarksTabState extends State<ProfileBookmarksTab>
+class _BookmarkedPostsTabState extends State<BookmarkedPostsTab>
     with AutomaticKeepAliveClientMixin {
   bool _onScrollNotification(ScrollNotification notification) {
     if (notification is ScrollEndNotification &&
         notification.metrics.extentAfter == 0) {
-      context.read<ProfileCubit>().fetchMoreBookmarkedPosts();
+      context.read<BookmarksCubit>().fetchMoreBookmarkedPosts();
     }
     return false;
   }
@@ -50,9 +50,10 @@ class _ProfileBookmarksTabState extends State<ProfileBookmarksTab>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return BlocBuilder<ProfileCubit, ProfileState>(
+
+    return BlocBuilder<BookmarksCubit, BookmarksState>(
       builder: (context, state) {
-        if (state.isBookmarksLoading) {
+        if (state.isPostsLoading) {
           return const Center(child: CircularProgressIndicator());
         }
 
@@ -67,10 +68,11 @@ class _ProfileBookmarksTabState extends State<ProfileBookmarksTab>
               SliverPadding(
                 padding: EdgeInsets.symmetric(vertical: 8.h),
                 sliver: SliverList.separated(
-                  separatorBuilder: (_, __) => const SizedBox.shrink(),
+                  separatorBuilder: (_, _) => const SizedBox.shrink(),
                   itemCount: state.bookmarkedPosts.length,
                   itemBuilder: (context, index) {
                     final post = state.bookmarkedPosts[index];
+                    final cubit = context.read<BookmarksCubit>();
                     return PostCard(
                       userName: post.authorName,
                       timeAgo: _timeAgo(context.l10n, post.createdAt),
@@ -83,11 +85,9 @@ class _ProfileBookmarksTabState extends State<ProfileBookmarksTab>
                       isBookmarked: state.bookmarkedPostIds.contains(
                         post.postId,
                       ),
-                      onLikeToggle: () =>
-                          context.read<ProfileCubit>().toggleLike(post.postId),
-                      onBookmarkToggle: () => context
-                          .read<ProfileCubit>()
-                          .toggleBookmark(post.postId),
+                      onLikeToggle: () => cubit.togglePostLike(post.postId),
+                      onBookmarkToggle: () =>
+                          cubit.togglePostBookmark(post.postId),
                       onTap: () => Navigator.pushNamed(
                         context,
                         MyRoutes.postDetails,
@@ -98,7 +98,7 @@ class _ProfileBookmarksTabState extends State<ProfileBookmarksTab>
                 ),
               ),
               SliverToBoxAdapter(
-                child: state.isBookmarksLoadingMore
+                child: state.isPostsLoadingMore
                     ? const Padding(
                         padding: EdgeInsets.all(16),
                         child: Center(child: CircularProgressIndicator()),

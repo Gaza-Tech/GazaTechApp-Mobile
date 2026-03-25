@@ -61,6 +61,14 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: const Icon(Icons.bookmarks_outlined),
+            title: Text(context.l10n.bookmarks),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, MyRoutes.bookmarks);
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.settings_outlined),
             title: Text(context.l10n.settings),
             onTap: () {

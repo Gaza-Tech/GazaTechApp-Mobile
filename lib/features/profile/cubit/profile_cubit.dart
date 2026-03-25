@@ -1,14 +1,39 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
+import 'package:gaza_tech/core/services/bookmark_event_service.dart';
 import 'package:gaza_tech/features/profile/data/repos/profile_repo.dart';
 import 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepo _repo;
   final String _userId;
+  final BookmarkEventService _bookmarkEventService;
+  late final StreamSubscription<PostBookmarkEvent> _postBookmarkSub;
 
-  ProfileCubit(this._repo, this._userId, bool isOwnProfile)
-    : super(ProfileState(isOwnProfile: isOwnProfile));
+  ProfileCubit(
+    this._repo,
+    this._userId,
+    bool isOwnProfile,
+    this._bookmarkEventService,
+  ) : super(ProfileState(isOwnProfile: isOwnProfile)) {
+    _postBookmarkSub = _bookmarkEventService.postBookmarkChanges.listen(
+      _onPostBookmarkEvent,
+    );
+  }
+
+  void _onPostBookmarkEvent(PostBookmarkEvent event) {
+    final current = state.bookmarkedPostIds;
+    if (current.contains(event.postId) == event.isBookmarked) return;
+
+    final updated = Set<String>.from(current);
+    event.isBookmarked
+        ? updated.add(event.postId)
+        : updated.remove(event.postId);
+
+    emit(state.copyWith(bookmarkedPostIds: updated));
+  }
 
   Future<void> loadProfile() async {
     emit(state.copyWith(isProfileLoading: true, errorMessage: null));
@@ -27,6 +52,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     final result = await _repo.fetchUserPosts(_userId, 0);
     result.when(
       success: (response) {
+        final fetchedPostIds = response.posts.map((p) => p.postId).toSet();
         final likedIds = response.posts
             .where((p) => p.isLiked)
             .map((p) => p.postId)
@@ -35,14 +61,17 @@ class ProfileCubit extends Cubit<ProfileState> {
             .where((p) => p.isBookmarked)
             .map((p) => p.postId)
             .toSet();
+        final cleanedLikedIds = state.likedPostIds.difference(fetchedPostIds);
+        final cleanedBookmarkedIds =
+            state.bookmarkedPostIds.difference(fetchedPostIds);
         emit(
           state.copyWith(
             isPostsLoading: false,
             posts: response.posts,
             postsPage: 0,
             postsHasMore: response.hasMore,
-            likedPostIds: {...state.likedPostIds, ...likedIds},
-            bookmarkedPostIds: {...state.bookmarkedPostIds, ...bookmarkedIds},
+            likedPostIds: {...cleanedLikedIds, ...likedIds},
+            bookmarkedPostIds: {...cleanedBookmarkedIds, ...bookmarkedIds},
           ),
         );
       },
@@ -59,6 +88,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     final result = await _repo.fetchUserPosts(_userId, nextPage);
     result.when(
       success: (response) {
+        final fetchedPostIds = response.posts.map((p) => p.postId).toSet();
         final likedIds = response.posts
             .where((p) => p.isLiked)
             .map((p) => p.postId)
@@ -67,14 +97,17 @@ class ProfileCubit extends Cubit<ProfileState> {
             .where((p) => p.isBookmarked)
             .map((p) => p.postId)
             .toSet();
+        final cleanedLikedIds = state.likedPostIds.difference(fetchedPostIds);
+        final cleanedBookmarkedIds =
+            state.bookmarkedPostIds.difference(fetchedPostIds);
         emit(
           state.copyWith(
             isPostsLoadingMore: false,
             posts: [...state.posts, ...response.posts],
             postsPage: nextPage,
             postsHasMore: response.hasMore,
-            likedPostIds: {...state.likedPostIds, ...likedIds},
-            bookmarkedPostIds: {...state.bookmarkedPostIds, ...bookmarkedIds},
+            likedPostIds: {...cleanedLikedIds, ...likedIds},
+            bookmarkedPostIds: {...cleanedBookmarkedIds, ...bookmarkedIds},
           ),
         );
       },
@@ -127,73 +160,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
-  Future<void> fetchBookmarkedPosts() async {
-    if (!state.isOwnProfile) return;
-    emit(
-      state.copyWith(
-        isBookmarksLoading: true,
-        bookmarksPage: 0,
-        bookmarkedPosts: [],
-      ),
-    );
-    final result = await _repo.fetchBookmarkedPosts(0);
-    result.when(
-      success: (response) {
-        final likedIds = response.posts
-            .where((p) => p.isLiked)
-            .map((p) => p.postId)
-            .toSet();
-        final bookmarkedIds = response.posts
-            .where((p) => p.isBookmarked)
-            .map((p) => p.postId)
-            .toSet();
-        emit(
-          state.copyWith(
-            isBookmarksLoading: false,
-            bookmarkedPosts: response.posts,
-            bookmarksPage: 0,
-            bookmarksHasMore: response.hasMore,
-            likedPostIds: {...state.likedPostIds, ...likedIds},
-            bookmarkedPostIds: {...state.bookmarkedPostIds, ...bookmarkedIds},
-          ),
-        );
-      },
-      failure: (error) => emit(
-        state.copyWith(isBookmarksLoading: false, errorMessage: error.message),
-      ),
-    );
-  }
-
-  Future<void> fetchMoreBookmarkedPosts() async {
-    if (state.isBookmarksLoadingMore || !state.bookmarksHasMore) return;
-    final nextPage = state.bookmarksPage + 1;
-    emit(state.copyWith(isBookmarksLoadingMore: true));
-    final result = await _repo.fetchBookmarkedPosts(nextPage);
-    result.when(
-      success: (response) {
-        final likedIds = response.posts
-            .where((p) => p.isLiked)
-            .map((p) => p.postId)
-            .toSet();
-        emit(
-          state.copyWith(
-            isBookmarksLoadingMore: false,
-            bookmarkedPosts: [...state.bookmarkedPosts, ...response.posts],
-            bookmarksPage: nextPage,
-            bookmarksHasMore: response.hasMore,
-            likedPostIds: {...state.likedPostIds, ...likedIds},
-          ),
-        );
-      },
-      failure: (error) => emit(
-        state.copyWith(
-          isBookmarksLoadingMore: false,
-          errorMessage: error.message,
-        ),
-      ),
-    );
-  }
-
   void toggleLike(String postId) {
     final wasLiked = state.likedPostIds.contains(postId);
     final newIds = Set<String>.from(state.likedPostIds);
@@ -208,19 +174,40 @@ class ProfileCubit extends Cubit<ProfileState> {
             return p.copyWith(likesCount: p.likesCount + delta);
           return p;
         }).toList(),
-        bookmarkedPosts: state.bookmarkedPosts.map((p) {
-          if (p.postId == postId)
-            return p.copyWith(likesCount: p.likesCount + delta);
-          return p;
-        }).toList(),
       ),
     );
   }
 
-  void toggleBookmark(String postId) {
+  Future<void> toggleBookmark(String postId) async {
     final wasBookmarked = state.bookmarkedPostIds.contains(postId);
-    final newIds = Set<String>.from(state.bookmarkedPostIds);
-    wasBookmarked ? newIds.remove(postId) : newIds.add(postId);
-    emit(state.copyWith(bookmarkedPostIds: newIds));
+    final optimisticIds = Set<String>.from(state.bookmarkedPostIds);
+    wasBookmarked ? optimisticIds.remove(postId) : optimisticIds.add(postId);
+
+    emit(state.copyWith(bookmarkedPostIds: optimisticIds));
+    _bookmarkEventService.emitPostBookmark(
+      postId,
+      isBookmarked: !wasBookmarked,
+    );
+
+    final result = await _repo.togglePostBookmark(postId);
+
+    result.when(
+      success: (_) {},
+      failure: (_) {
+        final revertedIds = Set<String>.from(state.bookmarkedPostIds);
+        wasBookmarked ? revertedIds.add(postId) : revertedIds.remove(postId);
+        emit(state.copyWith(bookmarkedPostIds: revertedIds));
+        _bookmarkEventService.emitPostBookmark(
+          postId,
+          isBookmarked: wasBookmarked,
+        );
+      },
+    );
+  }
+
+  @override
+  Future<void> close() {
+    _postBookmarkSub.cancel();
+    return super.close();
   }
 }

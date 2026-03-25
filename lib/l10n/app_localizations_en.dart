@@ -795,4 +795,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get website => 'Website';
+
+  @override
+  String get bookmarkedPosts => 'Posts';
+
+  @override
+  String get bookmarkedListings => 'Listings';
+
+  @override
+  String get noBookmarkedListingsYet => 'No bookmarked listings yet';
 }

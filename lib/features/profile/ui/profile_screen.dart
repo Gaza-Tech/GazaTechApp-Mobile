@@ -5,7 +5,6 @@ import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/profile/cubit/profile_cubit.dart';
 import 'package:gaza_tech/features/profile/cubit/profile_state.dart';
-import 'package:gaza_tech/features/profile/ui/widgets/profile_bookmarks_tab.dart';
 import 'package:gaza_tech/features/profile/ui/widgets/profile_header.dart';
 import 'package:gaza_tech/features/profile/ui/widgets/profile_listings_tab.dart';
 import 'package:gaza_tech/features/profile/ui/widgets/profile_posts_tab.dart';
@@ -24,8 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   void initState() {
     super.initState();
-    final isOwn = context.read<ProfileCubit>().state.isOwnProfile;
-    _tabController = TabController(length: isOwn ? 3 : 2, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -38,8 +36,6 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
-        final isOwn = state.isOwnProfile;
-
         return Scaffold(
           body: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -52,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   floating: false,
                   forceElevated: innerBoxIsScrolled,
                   actions: [
-                    if (isOwn && state.userProfile != null)
+                    if (state.isOwnProfile && state.userProfile != null)
                       IconButton(
                         icon: const Icon(Icons.edit_outlined),
                         onPressed: () async {
@@ -77,7 +73,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                       tabs: [
                         Tab(text: context.l10n.myPosts),
                         Tab(text: context.l10n.myListings),
-                        if (isOwn) Tab(text: context.l10n.bookmarks),
                       ],
                     ),
                     Theme.of(context).scaffoldBackgroundColor,
@@ -87,10 +82,9 @@ class _ProfileScreenState extends State<ProfileScreen>
             },
             body: TabBarView(
               controller: _tabController,
-              children: [
-                const ProfilePostsTab(),
-                const ProfileListingsTab(),
-                if (isOwn) const ProfileBookmarksTab(),
+              children: const [
+                ProfilePostsTab(),
+                ProfileListingsTab(),
               ],
             ),
           ),

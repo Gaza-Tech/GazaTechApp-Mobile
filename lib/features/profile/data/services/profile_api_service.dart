@@ -62,29 +62,6 @@ class ProfileApiService {
     return List<Map<String, dynamic>>.from(data as List);
   }
 
-  Future<List<Map<String, dynamic>>> fetchBookmarkedPosts(int page) async {
-    final userId = _supabase.auth.currentUser?.id;
-    if (userId == null) return [];
-
-    final start = page * postsPageSize;
-    final end = start + postsPageSize;
-
-    final data = await _supabase
-        .from('bookmarked_posts')
-        .select('post_id, community_posts_with_counts!inner($_postSelect)')
-        .eq('user_id', userId)
-        .order('created_at', ascending: false)
-        .range(start, end);
-
-    return (data as List)
-        .map(
-          (e) =>
-              (e as Map<String, dynamic>)['community_posts_with_counts']
-                  as Map<String, dynamic>,
-        )
-        .toList();
-  }
-
   Future<Set<String>> fetchLikedPostIds(List<String> postIds) async {
     final userId = _supabase.auth.currentUser?.id;
     if (userId == null || postIds.isEmpty) return {};
@@ -116,4 +93,31 @@ class ProfileApiService {
         (e as Map<String, dynamic>)['post_id'] as String,
     };
   }
+
+  Future<bool> togglePostBookmark(String postId) async {
+    final userId = _supabase.auth.currentUser!.id;
+
+    final existing = await _supabase
+        .from('bookmarked_posts')
+        .select('user_id')
+        .eq('user_id', userId)
+        .eq('post_id', postId)
+        .maybeSingle();
+
+    if (existing != null) {
+      await _supabase
+          .from('bookmarked_posts')
+          .delete()
+          .eq('user_id', userId)
+          .eq('post_id', postId);
+      return false;
+    } else {
+      await _supabase.from('bookmarked_posts').insert({
+        'user_id': userId,
+        'post_id': postId,
+      });
+      return true;
+    }
+  }
+
 }

@@ -123,4 +123,48 @@ class MarketplaceSearchApiService {
 
     return List<Map<String, dynamic>>.from(data);
   }
+
+  /// Fetch bookmarked listing IDs for the current user from a given list
+  Future<Set<String>> fetchBookmarkedListingIds(List<String> listingIds) async {
+    final userId = _supabase.auth.currentUser?.id;
+    if (userId == null || listingIds.isEmpty) return {};
+
+    final data = await _supabase
+        .from('bookmarked_listings')
+        .select('listing_id')
+        .eq('user_id', userId)
+        .inFilter('listing_id', listingIds);
+
+    return {
+      for (final e in (data as List<dynamic>))
+        (e as Map<String, dynamic>)['listing_id'] as String,
+    };
+  }
+
+  /// Toggle bookmark for a listing; returns true if now bookmarked
+  Future<bool> toggleListingBookmark(String listingId) async {
+    final userId = _supabase.auth.currentUser!.id;
+
+    final existing = await _supabase
+        .from('bookmarked_listings')
+        .select('user_id')
+        .eq('user_id', userId)
+        .eq('listing_id', listingId)
+        .maybeSingle();
+
+    if (existing != null) {
+      await _supabase
+          .from('bookmarked_listings')
+          .delete()
+          .eq('user_id', userId)
+          .eq('listing_id', listingId);
+      return false;
+    } else {
+      await _supabase.from('bookmarked_listings').insert({
+        'user_id': userId,
+        'listing_id': listingId,
+      });
+      return true;
+    }
+  }
 }

@@ -40,6 +40,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       actions: actions,
       title: MyTextFormField(
+        
         controller: controller,
         hintText: hintText,
         textInputType: TextInputType.text,
