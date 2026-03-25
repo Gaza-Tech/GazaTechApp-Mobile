@@ -32,6 +32,9 @@ abstract class ProfileState with _$ProfileState {
     @Default(<String>{}) Set<String> likedPostIds,
     @Default(<String>{}) Set<String> bookmarkedPostIds,
 
+    // Verification
+    String? verificationStatus,
+
     String? errorMessage,
   }) = _ProfileState;
 }

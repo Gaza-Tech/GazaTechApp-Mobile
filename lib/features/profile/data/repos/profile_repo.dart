@@ -91,4 +91,13 @@ class ProfileRepo {
       return ApiResult.failure(ErrorHandler.handle(e));
     }
   }
+
+  Future<ApiResult<String?>> fetchVerificationStatus(String userId) async {
+    try {
+      final status = await _service.fetchVerificationStatus(userId);
+      return ApiResult.success(status);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
 }

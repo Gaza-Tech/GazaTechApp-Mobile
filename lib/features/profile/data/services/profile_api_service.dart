@@ -94,6 +94,17 @@ class ProfileApiService {
     };
   }
 
+  Future<String?> fetchVerificationStatus(String userId) async {
+    final result = await _supabase
+        .from('verification_requests')
+        .select('verification_status')
+        .eq('user_id', userId)
+        .order('created_at', ascending: false)
+        .limit(1)
+        .maybeSingle();
+    return result?['verification_status'] as String?;
+  }
+
   Future<bool> togglePostBookmark(String postId) async {
     final userId = _supabase.auth.currentUser!.id;
 
@@ -119,5 +130,4 @@ class ProfileApiService {
       return true;
     }
   }
-
 }
