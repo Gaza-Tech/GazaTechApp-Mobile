@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 > Developer guide for Claude Code when working in this Flutter repository.
 > Treat this as the source of truth for architecture, conventions, and workflow.
 
@@ -72,12 +74,15 @@ lib/
 ├── core/
 │   ├── cache/          # SharedPreferences key constants
 │   ├── di/             # GetIt registrations (injection.dart)
-│   ├── helpers/        # ValidatorHelper, SharedPrefHelper, LocaleHelper
-│   ├── networks/       # Error handler, ApiResult, Supabase config
+│   ├── extentions/     # BuildContext extensions (Navigation, l10n shorthand)
+│   │                   # Note: directory is intentionally spelled "extentions" — do not rename
+│   ├── helpers/        # ValidatorHelper, SharedPrefHelper, LocaleHelper, UrlLauncherHelper
+│   ├── netowoks/       # Error handler, ApiResult, Supabase config
 │   │                   # Note: directory is intentionally spelled "netowoks" — do not rename
 │   ├── routes/         # my_routes.dart (constants), my_router.dart (generateRoute)
+│   ├── services/       # Cross-feature singletons (BookmarkEventService)
 │   ├── theme/          # Colors, text styles, ThemeData
-│   └── widgets/        # Shared/reusable widgets (MyButton, MyTextFormField, etc.)
+│   └── widgets/        # Shared/reusable widgets (see list below)
 │
 ├── features/
 │   └── feature_name/
@@ -99,7 +104,27 @@ lib/
 `lib/features/auth/{sign_in,sign_up,verify_otp,forgot_password,reset_password,google_auth,sign_out}/`
 Each sub-feature follows the same `cubit/data/ui` pattern.
 
+**Current non-auth features and their routes:**
+
+| Feature | Route constant | Notes |
+|---|---|---|
+| `home` | `MyRoutes.home` | Shell — hosts `MarketplaceCubit`, `CommunityCubit`, `SignOutCubit` |
+| `marketplace` | _(tab in home)_ | Listing feed with filter/sort |
+| `listing_details` | `MyRoutes.listingDetails` | Arg: `String` listingId |
+| `add_listing` | `MyRoutes.addListing` | Image picker, categories, locations |
+| `search` | `MyRoutes.search` | Marketplace keyword + filter search |
+| `community` | _(tab in home)_ | Post feed |
+| `community_search` | `MyRoutes.communitySearch` | Post keyword search |
+| `add_post` | `MyRoutes.createPost` | Create community post |
+| `profile` | `MyRoutes.profile` | Arg: `Map<String,dynamic>` — `userId`, `isOwnProfile` |
+| `edit_profile` | `MyRoutes.editProfile` | Arg: `UserProfileModel` |
+| `bookmarks` | `MyRoutes.bookmarks` | Saved listings + posts |
+| `verification` | `MyRoutes.verificationForm` / `verificationStatus` | User identity verification |
+
 **Rule**: When a pattern appears in 2+ features, move it to `core/widgets/`.
+
+**Available `core/widgets/`** — check before creating anything new:
+`MyButton`, `MyTextFormField`, `MyOtpFormField`, `TappableSearchBar`, `SearchAppBar`, `SortButton`, `ChipSelector`, `ActiveFiltersBar`, `FilterSheetShell`, `ConditionTag`, `RecentSearchesView`, `SpacingWidgets`, `StatusBarHider`, `LanguageSwitcher`, `GoogleSignInButton`
 
 ---
 
