@@ -55,18 +55,27 @@ class MyTextFormField extends StatelessWidget {
   final void Function(String)? onFieldSubmitted;
   final Color? fillColor;
   final bool autofocus;
+  final bool visibleLable = false;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // lable
-        Text(
-          labelText ?? '',
-          style: MyTextStyle.body.m.copyWith(fontWeight: FontWeight.w500),
+        Visibility(
+          visible: visibleLable,
+          child: Column(
+            children: [
+              Text(
+                labelText ?? '',
+                style: MyTextStyle.body.m.copyWith(fontWeight: FontWeight.w500),
+              ),
+              const VerticalSpace(8),
+            ],
+          ),
         ),
-        const VerticalSpace(8),
+
+        // lable
         TextFormField(
           onTapOutside: (PointerDownEvent event) {
             FocusScope.of(context).unfocus();
