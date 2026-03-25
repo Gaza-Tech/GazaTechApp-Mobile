@@ -3,29 +3,34 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
+import 'package:gaza_tech/features/bookmarks/cubit/bookmarks_cubit.dart';
+import 'package:gaza_tech/features/bookmarks/cubit/bookmarks_state.dart';
 import 'package:gaza_tech/features/marketplace/ui/widgets/product_card_grid.dart';
-import 'package:gaza_tech/features/profile/cubit/profile_cubit.dart';
-import 'package:gaza_tech/features/profile/cubit/profile_state.dart';
 
-class BookmarkedListingsList extends StatelessWidget {
-  const BookmarkedListingsList({super.key});
+class BookmarkedListingsTab extends StatefulWidget {
+  const BookmarkedListingsTab({super.key});
 
-  bool _onScrollNotification(
-    ScrollNotification notification,
-    BuildContext context,
-  ) {
+  @override
+  State<BookmarkedListingsTab> createState() => _BookmarkedListingsTabState();
+}
+
+class _BookmarkedListingsTabState extends State<BookmarkedListingsTab>
+    with AutomaticKeepAliveClientMixin {
+  bool _onScrollNotification(ScrollNotification notification) {
     if (notification is ScrollEndNotification &&
         notification.metrics.extentAfter == 0) {
-      context.read<ProfileCubit>().fetchMoreBookmarkedListings();
+      context.read<BookmarksCubit>().fetchMoreBookmarkedListings();
     }
     return false;
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
+    super.build(context);
+
+    return BlocBuilder<BookmarksCubit, BookmarksState>(
       builder: (context, state) {
-        if (state.isListingBookmarksLoading) {
+        if (state.isListingsLoading) {
           return const Center(child: CircularProgressIndicator());
         }
 
@@ -36,7 +41,7 @@ class BookmarkedListingsList extends StatelessWidget {
         final isArabic = Localizations.localeOf(context).languageCode == 'ar';
 
         return NotificationListener<ScrollNotification>(
-          onNotification: (n) => _onScrollNotification(n, context),
+          onNotification: _onScrollNotification,
           child: CustomScrollView(
             slivers: [
               SliverPadding(
@@ -51,6 +56,7 @@ class BookmarkedListingsList extends StatelessWidget {
                               ? listing.locationNameAr
                               : listing.locationName)
                         : listing.locationName;
+                    final cubit = context.read<BookmarksCubit>();
                     return ProductCardGrid(
                       name: listing.title,
                       price:
@@ -62,9 +68,8 @@ class BookmarkedListingsList extends StatelessWidget {
                       isBookmarked: state.bookmarkedListingIds.contains(
                         listing.listingId,
                       ),
-                      onBookmarkToggle: () => context
-                          .read<ProfileCubit>()
-                          .toggleListingBookmark(listing.listingId),
+                      onBookmarkToggle: () =>
+                          cubit.toggleListingBookmark(listing.listingId),
                       onTap: () => context.pushNamed(
                         MyRoutes.listingDetails,
                         arguments: listing.listingId,
@@ -74,7 +79,7 @@ class BookmarkedListingsList extends StatelessWidget {
                 ),
               ),
               SliverToBoxAdapter(
-                child: state.isListingBookmarksLoadingMore
+                child: state.isListingsLoadingMore
                     ? const Padding(
                         padding: EdgeInsets.all(16),
                         child: Center(child: CircularProgressIndicator()),
@@ -87,4 +92,7 @@ class BookmarkedListingsList extends StatelessWidget {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

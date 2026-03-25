@@ -83,77 +83,10 @@ class ProfileRepo {
     }
   }
 
-  Future<ApiResult<PostsResponse>> fetchBookmarkedPosts(int page) async {
-    try {
-      final raw = await _service.fetchBookmarkedPosts(page);
-      final hasMore = raw.length > ProfileApiService.postsPageSize;
-      final items = hasMore
-          ? raw.sublist(0, ProfileApiService.postsPageSize)
-          : raw;
-      final posts = items.map((e) => PostModel.fromJson(e)).toList();
-
-      final postIds = posts.map((p) => p.postId).toList();
-      final likedIds = await _service.fetchLikedPostIds(postIds);
-      final bookmarkedIds = await _service.fetchBookmarkedPostIds(postIds);
-
-      final enriched = posts
-          .map(
-            (p) => p.copyWith(
-              isLiked: likedIds.contains(p.postId),
-              isBookmarked: bookmarkedIds.contains(p.postId),
-            ),
-          )
-          .toList();
-
-      return ApiResult.success(
-        PostsResponse(posts: enriched, hasMore: hasMore),
-      );
-    } catch (e) {
-      return ApiResult.failure(ErrorHandler.handle(e));
-    }
-  }
-
   Future<ApiResult<bool>> togglePostBookmark(String postId) async {
     try {
       final result = await _service.togglePostBookmark(postId);
       return ApiResult.success(result);
-    } catch (e) {
-      return ApiResult.failure(ErrorHandler.handle(e));
-    }
-  }
-
-  Future<ApiResult<bool>> toggleListingBookmark(String listingId) async {
-    try {
-      final result = await _service.toggleListingBookmark(listingId);
-      return ApiResult.success(result);
-    } catch (e) {
-      return ApiResult.failure(ErrorHandler.handle(e));
-    }
-  }
-
-  Future<ApiResult<ListingsResponse>> fetchBookmarkedListings(int page) async {
-    try {
-      final raw = await _service.fetchBookmarkedListings(page);
-      final hasMore = raw.length > ProfileApiService.listingsPageSize;
-      final items = hasMore
-          ? raw.sublist(0, ProfileApiService.listingsPageSize)
-          : raw;
-      final listings = items.map((e) => ListingModel.fromJson(e)).toList();
-
-      final listingIds = listings.map((l) => l.listingId).toList();
-      final bookmarkedIds = await _service.fetchBookmarkedListingIds(
-        listingIds,
-      );
-      final enriched = listings
-          .map(
-            (l) =>
-                l.copyWith(isBookmarked: bookmarkedIds.contains(l.listingId)),
-          )
-          .toList();
-
-      return ApiResult.success(
-        ListingsResponse(listings: enriched, hasMore: hasMore),
-      );
     } catch (e) {
       return ApiResult.failure(ErrorHandler.handle(e));
     }

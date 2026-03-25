@@ -1,4 +1,7 @@
 import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/features/bookmarks/cubit/bookmarks_cubit.dart';
+import 'package:gaza_tech/features/bookmarks/data/repos/bookmarks_repo.dart';
+import 'package:gaza_tech/features/bookmarks/data/services/bookmarks_api_service.dart';
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_out/data/repos/sign_out_repo.dart';
 import 'package:gaza_tech/features/auth/sign_out/data/services/sign_out_api_service.dart';
@@ -133,6 +136,15 @@ Future<void> setupGetIt() async {
   // Bookmark Event Service (singleton shared across all cubits)
   getIt.registerLazySingleton<BookmarkEventService>(
     () => BookmarkEventService(),
+  );
+
+  // Bookmarks Feature
+  getIt.registerLazySingleton<BookmarksApiService>(
+    () => BookmarksApiService(getIt()),
+  );
+  getIt.registerLazySingleton<BookmarksRepo>(() => BookmarksRepo(getIt()));
+  getIt.registerFactory<BookmarksCubit>(
+    () => BookmarksCubit(getIt(), getIt()),
   );
 
   // 10. Marketplace
