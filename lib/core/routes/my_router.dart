@@ -37,6 +37,9 @@ import 'package:gaza_tech/features/bookmarks/cubit/bookmarks_cubit.dart';
 import 'package:gaza_tech/features/bookmarks/ui/bookmarks_screen.dart';
 import 'package:gaza_tech/features/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:gaza_tech/features/edit_profile/ui/edit_profile_screen.dart';
+import 'package:gaza_tech/features/verification/cubit/verification_cubit.dart';
+import 'package:gaza_tech/features/verification/ui/verification_form_screen.dart';
+import 'package:gaza_tech/features/verification/ui/verification_status_screen.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -185,6 +188,21 @@ class MyRouter {
           builder: (_) => BlocProvider(
             create: (context) => getIt<EditProfileCubit>(param1: profile),
             child: const EditProfileScreen(),
+          ),
+        );
+      case MyRoutes.verificationForm:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<VerificationCubit>(),
+            child: const VerificationFormScreen(),
+          ),
+        );
+      case MyRoutes.verificationStatus:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                getIt<VerificationCubit>()..loadExistingRequest(),
+            child: const VerificationStatusScreen(),
           ),
         );
       default:

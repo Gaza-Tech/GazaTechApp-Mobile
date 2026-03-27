@@ -336,5 +336,88 @@
   "website": "الموقع",
   "bookmarkedPosts": "المنشورات",
   "bookmarkedListings": "الإعلانات",
-  "noBookmarkedListingsYet": "لا توجد إعلانات محفوظة بعد"
+  "noBookmarkedListingsYet": "لا توجد إعلانات محفوظة بعد",
+
+  "getVerified": "توثيق الحساب",
+  "verificationRequest": "طلب التوثيق",
+  "verificationStatusTitle": "حالة التوثيق",
+  "verificationPending": "التوثيق قيد المراجعة",
+  "verificationApproved": "تم التوثيق",
+  "verificationRejected": "تم رفض التوثيق",
+  "verificationExpired": "انتهت صلاحية التوثيق",
+  "verificationSuspicious": "قيد المراجعة اليدوية",
+
+  "stepPersonalInfo": "المعلومات الشخصية",
+  "stepDocuments": "المستندات",
+  "stepPhoneVerification": "الهاتف",
+  "stepReview": "مراجعة",
+
+  "idFullName": "الاسم الكامل (كما في الهوية)",
+  "idFullNameHint": "أدخل اسمك الكامل كما يظهر في هويتك",
+  "dateOfBirth": "تاريخ الميلاد",
+  "selectDateOfBirth": "اختر تاريخ الميلاد",
+  "gender": "الجنس",
+  "genderMale": "ذكر",
+  "genderFemale": "أنثى",
+  "address": "العنوان",
+  "addressHint": "أدخل عنوانك الحالي",
+  "nationalIdNumber": "رقم الهوية الوطنية",
+  "nationalIdNumberHint": "أدخل رقم هويتك الوطنية",
+
+  "documentType": "نوع المستند",
+  "palestinianId": "هوية فلسطينية",
+  "passport": "جواز سفر",
+  "palestinianDrivingLicence": "رخصة قيادة فلسطينية",
+  "documentFront": "الوجه الأمامي للمستند",
+  "documentBack": "الوجه الخلفي للمستند",
+  "selfieWithId": "صورة شخصية مع الهوية",
+  "tapToUploadPhoto": "انقر لرفع صورة",
+  "changePhoto": "تغيير الصورة",
+  "gallery": "معرض الصور",
+  "camera": "الكاميرا",
+
+  "phoneVerification": "توثيق رقم الهاتف",
+  "enterPhoneNumber": "رقم الهاتف",
+  "phoneNumberHint": "+970xxxxxxxxx",
+  "sendOtp": "إرسال رمز التحقق",
+  "verifyPhone": "تحقق",
+  "phoneVerifiedSuccess": "تم التحقق من رقم الهاتف بنجاح",
+  "pleaseVerifyPhone": "يرجى التحقق من رقم هاتفك للمتابعة",
+  "otpSentToPhone": "تم إرسال رمز التحقق إلى هاتفك",
+
+  "reviewYourData": "مراجعة بياناتك",
+  "reviewPersonalInfo": "المعلومات الشخصية",
+  "reviewDocuments": "المستندات المرفوعة",
+  "reviewPhone": "التحقق من الهاتف",
+  "submitVerification": "إرسال طلب التوثيق",
+  "submittingVerification": "جارٍ الإرسال...",
+
+  "verificationSubmitted": "تم إرسال طلب التوثيق بنجاح",
+  "verificationUnderReview": "طلبك قيد المراجعة. سنقوم بإعلامك فور معالجته.",
+  "rejectionReason": "سبب الرفض",
+  "resubmitVerification": "إعادة تقديم طلب التوثيق",
+  "submittedOn": "تم الإرسال في {date}",
+  "@submittedOn": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "reviewedOn": "تمت المراجعة في {date}",
+  "@reviewedOn": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+
+  "back": "رجوع",
+  "next": "التالي",
+
+  "pleaseSelectGender": "يرجى اختيار الجنس",
+  "pleaseSelectDocumentType": "يرجى اختيار نوع المستند",
+  "pleaseUploadAllDocuments": "يرجى رفع جميع المستندات المطلوبة",
+  "pleaseFillDateOfBirth": "يرجى اختيار تاريخ ميلادك",
+
+  "timelineSubmitted": "تم الإرسال",
+  "timelineUnderReview": "قيد المراجعة",
+  "timelineDecision": "القرار"
 }

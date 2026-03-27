@@ -803,4 +803,198 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noBookmarkedListingsYet => 'لا توجد إعلانات محفوظة بعد';
+
+  @override
+  String get getVerified => 'توثيق الحساب';
+
+  @override
+  String get verificationRequest => 'طلب التوثيق';
+
+  @override
+  String get verificationStatusTitle => 'حالة التوثيق';
+
+  @override
+  String get verificationPending => 'التوثيق قيد المراجعة';
+
+  @override
+  String get verificationApproved => 'تم التوثيق';
+
+  @override
+  String get verificationRejected => 'تم رفض التوثيق';
+
+  @override
+  String get verificationExpired => 'انتهت صلاحية التوثيق';
+
+  @override
+  String get verificationSuspicious => 'قيد المراجعة اليدوية';
+
+  @override
+  String get stepPersonalInfo => 'المعلومات الشخصية';
+
+  @override
+  String get stepDocuments => 'المستندات';
+
+  @override
+  String get stepPhoneVerification => 'الهاتف';
+
+  @override
+  String get stepReview => 'مراجعة';
+
+  @override
+  String get idFullName => 'الاسم الكامل (كما في الهوية)';
+
+  @override
+  String get idFullNameHint => 'أدخل اسمك الكامل كما يظهر في هويتك';
+
+  @override
+  String get dateOfBirth => 'تاريخ الميلاد';
+
+  @override
+  String get selectDateOfBirth => 'اختر تاريخ الميلاد';
+
+  @override
+  String get gender => 'الجنس';
+
+  @override
+  String get genderMale => 'ذكر';
+
+  @override
+  String get genderFemale => 'أنثى';
+
+  @override
+  String get address => 'العنوان';
+
+  @override
+  String get addressHint => 'أدخل عنوانك الحالي';
+
+  @override
+  String get nationalIdNumber => 'رقم الهوية الوطنية';
+
+  @override
+  String get nationalIdNumberHint => 'أدخل رقم هويتك الوطنية';
+
+  @override
+  String get documentType => 'نوع المستند';
+
+  @override
+  String get palestinianId => 'هوية فلسطينية';
+
+  @override
+  String get passport => 'جواز سفر';
+
+  @override
+  String get palestinianDrivingLicence => 'رخصة قيادة فلسطينية';
+
+  @override
+  String get documentFront => 'الوجه الأمامي للمستند';
+
+  @override
+  String get documentBack => 'الوجه الخلفي للمستند';
+
+  @override
+  String get selfieWithId => 'صورة شخصية مع الهوية';
+
+  @override
+  String get tapToUploadPhoto => 'انقر لرفع صورة';
+
+  @override
+  String get changePhoto => 'تغيير الصورة';
+
+  @override
+  String get gallery => 'معرض الصور';
+
+  @override
+  String get camera => 'الكاميرا';
+
+  @override
+  String get phoneVerification => 'توثيق رقم الهاتف';
+
+  @override
+  String get enterPhoneNumber => 'رقم الهاتف';
+
+  @override
+  String get phoneNumberHint => '+970xxxxxxxxx';
+
+  @override
+  String get sendOtp => 'إرسال رمز التحقق';
+
+  @override
+  String get verifyPhone => 'تحقق';
+
+  @override
+  String get phoneVerifiedSuccess => 'تم التحقق من رقم الهاتف بنجاح';
+
+  @override
+  String get pleaseVerifyPhone => 'يرجى التحقق من رقم هاتفك للمتابعة';
+
+  @override
+  String get otpSentToPhone => 'تم إرسال رمز التحقق إلى هاتفك';
+
+  @override
+  String get reviewYourData => 'مراجعة بياناتك';
+
+  @override
+  String get reviewPersonalInfo => 'المعلومات الشخصية';
+
+  @override
+  String get reviewDocuments => 'المستندات المرفوعة';
+
+  @override
+  String get reviewPhone => 'التحقق من الهاتف';
+
+  @override
+  String get submitVerification => 'إرسال طلب التوثيق';
+
+  @override
+  String get submittingVerification => 'جارٍ الإرسال...';
+
+  @override
+  String get verificationSubmitted => 'تم إرسال طلب التوثيق بنجاح';
+
+  @override
+  String get verificationUnderReview =>
+      'طلبك قيد المراجعة. سنقوم بإعلامك فور معالجته.';
+
+  @override
+  String get rejectionReason => 'سبب الرفض';
+
+  @override
+  String get resubmitVerification => 'إعادة تقديم طلب التوثيق';
+
+  @override
+  String submittedOn(String date) {
+    return 'تم الإرسال في $date';
+  }
+
+  @override
+  String reviewedOn(String date) {
+    return 'تمت المراجعة في $date';
+  }
+
+  @override
+  String get back => 'رجوع';
+
+  @override
+  String get next => 'التالي';
+
+  @override
+  String get pleaseSelectGender => 'يرجى اختيار الجنس';
+
+  @override
+  String get pleaseSelectDocumentType => 'يرجى اختيار نوع المستند';
+
+  @override
+  String get pleaseUploadAllDocuments => 'يرجى رفع جميع المستندات المطلوبة';
+
+  @override
+  String get pleaseFillDateOfBirth => 'يرجى اختيار تاريخ ميلادك';
+
+  @override
+  String get timelineSubmitted => 'تم الإرسال';
+
+  @override
+  String get timelineUnderReview => 'قيد المراجعة';
+
+  @override
+  String get timelineDecision => 'القرار';
 }

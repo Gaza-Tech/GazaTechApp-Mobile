@@ -5,11 +5,19 @@ import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/profile/data/models/user_profile_model.dart';
 import 'profile_social_links.dart';
+import 'verification_badge_button.dart';
 
 class ProfileHeader extends StatelessWidget {
   final UserProfileModel profile;
+  final bool isOwnProfile;
+  final String? verificationStatus;
 
-  const ProfileHeader({super.key, required this.profile});
+  const ProfileHeader({
+    super.key,
+    required this.profile,
+    this.isOwnProfile = false,
+    this.verificationStatus,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +31,10 @@ class ProfileHeader extends StatelessWidget {
           _buildAvatar(theme),
           const VerticalSpace(12),
           _buildNameRow(context, theme),
+          if (isOwnProfile && !profile.isVerified) ...[
+            const VerticalSpace(8),
+            VerificationBadgeButton(verificationStatus: verificationStatus),
+          ],
           if (profile.bio != null && profile.bio!.isNotEmpty) ...[
             const VerticalSpace(8),
             Text(

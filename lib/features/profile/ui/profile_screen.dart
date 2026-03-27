@@ -82,10 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             },
             body: TabBarView(
               controller: _tabController,
-              children: const [
-                ProfilePostsTab(),
-                ProfileListingsTab(),
-              ],
+              children: const [ProfilePostsTab(), ProfileListingsTab()],
             ),
           ),
         );
@@ -109,7 +106,11 @@ class _ProfileScreenState extends State<ProfileScreen>
       }
       return const SizedBox.shrink();
     }
-    return ProfileHeader(profile: state.userProfile!);
+    return ProfileHeader(
+      profile: state.userProfile!,
+      isOwnProfile: state.isOwnProfile,
+      verificationStatus: state.verificationStatus,
+    );
   }
 }
 

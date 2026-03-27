@@ -56,6 +56,9 @@ import 'package:gaza_tech/features/profile/data/models/user_profile_model.dart';
 import 'package:gaza_tech/features/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:gaza_tech/features/edit_profile/data/repos/edit_profile_repo.dart';
 import 'package:gaza_tech/features/edit_profile/data/services/edit_profile_api_service.dart';
+import 'package:gaza_tech/features/verification/cubit/verification_cubit.dart';
+import 'package:gaza_tech/features/verification/data/repos/verification_repo.dart';
+import 'package:gaza_tech/features/verification/data/services/verification_api_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -143,9 +146,7 @@ Future<void> setupGetIt() async {
     () => BookmarksApiService(getIt()),
   );
   getIt.registerLazySingleton<BookmarksRepo>(() => BookmarksRepo(getIt()));
-  getIt.registerFactory<BookmarksCubit>(
-    () => BookmarksCubit(getIt(), getIt()),
-  );
+  getIt.registerFactory<BookmarksCubit>(() => BookmarksCubit(getIt(), getIt()));
 
   // 10. Marketplace
   getIt.registerLazySingleton<MarketplaceApiService>(
@@ -190,9 +191,7 @@ Future<void> setupGetIt() async {
     () => CommunityApiService(getIt()),
   );
   getIt.registerLazySingleton<CommunityRepo>(() => CommunityRepo(getIt()));
-  getIt.registerFactory<CommunityCubit>(
-    () => CommunityCubit(getIt(), getIt()),
-  );
+  getIt.registerFactory<CommunityCubit>(() => CommunityCubit(getIt(), getIt()));
   getIt.registerFactoryParam<PostDetailsCubit, String, void>(
     (postId, _) => PostDetailsCubit(getIt(), postId, getIt()),
   );
@@ -221,4 +220,13 @@ Future<void> setupGetIt() async {
   getIt.registerFactoryParam<EditProfileCubit, UserProfileModel, void>(
     (profile, _) => EditProfileCubit(getIt(), profile),
   );
+
+  // 18. Verification
+  getIt.registerLazySingleton<VerificationApiService>(
+    () => VerificationApiService(getIt()),
+  );
+  getIt.registerLazySingleton<VerificationRepo>(
+    () => VerificationRepo(getIt()),
+  );
+  getIt.registerFactory<VerificationCubit>(() => VerificationCubit(getIt()));
 }

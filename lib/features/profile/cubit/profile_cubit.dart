@@ -39,11 +39,23 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(state.copyWith(isProfileLoading: true, errorMessage: null));
     final result = await _repo.fetchUserProfile(_userId);
     result.when(
-      success: (profile) =>
-          emit(state.copyWith(isProfileLoading: false, userProfile: profile)),
+      success: (profile) {
+        emit(state.copyWith(isProfileLoading: false, userProfile: profile));
+        if (state.isOwnProfile && !profile.isVerified) {
+          _fetchVerificationStatus();
+        }
+      },
       failure: (error) => emit(
         state.copyWith(isProfileLoading: false, errorMessage: error.message),
       ),
+    );
+  }
+
+  Future<void> _fetchVerificationStatus() async {
+    final result = await _repo.fetchVerificationStatus(_userId);
+    result.when(
+      success: (status) => emit(state.copyWith(verificationStatus: status)),
+      failure: (_) {},
     );
   }
 
@@ -62,8 +74,9 @@ class ProfileCubit extends Cubit<ProfileState> {
             .map((p) => p.postId)
             .toSet();
         final cleanedLikedIds = state.likedPostIds.difference(fetchedPostIds);
-        final cleanedBookmarkedIds =
-            state.bookmarkedPostIds.difference(fetchedPostIds);
+        final cleanedBookmarkedIds = state.bookmarkedPostIds.difference(
+          fetchedPostIds,
+        );
         emit(
           state.copyWith(
             isPostsLoading: false,
@@ -98,8 +111,9 @@ class ProfileCubit extends Cubit<ProfileState> {
             .map((p) => p.postId)
             .toSet();
         final cleanedLikedIds = state.likedPostIds.difference(fetchedPostIds);
-        final cleanedBookmarkedIds =
-            state.bookmarkedPostIds.difference(fetchedPostIds);
+        final cleanedBookmarkedIds = state.bookmarkedPostIds.difference(
+          fetchedPostIds,
+        );
         emit(
           state.copyWith(
             isPostsLoadingMore: false,

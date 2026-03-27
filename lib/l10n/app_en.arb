@@ -398,5 +398,88 @@
   "website": "Website",
   "bookmarkedPosts": "Posts",
   "bookmarkedListings": "Listings",
-  "noBookmarkedListingsYet": "No bookmarked listings yet"
+  "noBookmarkedListingsYet": "No bookmarked listings yet",
+
+  "getVerified": "Get Verified",
+  "verificationRequest": "Verification Request",
+  "verificationStatusTitle": "Verification Status",
+  "verificationPending": "Verification Pending",
+  "verificationApproved": "Verification Approved",
+  "verificationRejected": "Verification Rejected",
+  "verificationExpired": "Verification Expired",
+  "verificationSuspicious": "Under Manual Review",
+
+  "stepPersonalInfo": "Personal Info",
+  "stepDocuments": "Documents",
+  "stepPhoneVerification": "Phone",
+  "stepReview": "Review",
+
+  "idFullName": "Full Name (as on ID)",
+  "idFullNameHint": "Enter your full name as it appears on your ID",
+  "dateOfBirth": "Date of Birth",
+  "selectDateOfBirth": "Select date of birth",
+  "gender": "Gender",
+  "genderMale": "Male",
+  "genderFemale": "Female",
+  "address": "Address",
+  "addressHint": "Enter your current address",
+  "nationalIdNumber": "National ID Number",
+  "nationalIdNumberHint": "Enter your national ID number",
+
+  "documentType": "Document Type",
+  "palestinianId": "Palestinian ID",
+  "passport": "Passport",
+  "palestinianDrivingLicence": "Palestinian Driving Licence",
+  "documentFront": "Front of Document",
+  "documentBack": "Back of Document",
+  "selfieWithId": "Selfie with ID",
+  "tapToUploadPhoto": "Tap to upload photo",
+  "changePhoto": "Change photo",
+  "gallery": "Gallery",
+  "camera": "Camera",
+
+  "phoneVerification": "Phone Verification",
+  "enterPhoneNumber": "Phone Number",
+  "phoneNumberHint": "+970xxxxxxxxx",
+  "sendOtp": "Send OTP",
+  "verifyPhone": "Verify",
+  "phoneVerifiedSuccess": "Phone verified successfully",
+  "pleaseVerifyPhone": "Please verify your phone number to continue",
+  "otpSentToPhone": "A verification code was sent to your phone",
+
+  "reviewYourData": "Review Your Data",
+  "reviewPersonalInfo": "Personal Information",
+  "reviewDocuments": "Uploaded Documents",
+  "reviewPhone": "Phone Verification",
+  "submitVerification": "Submit Verification Request",
+  "submittingVerification": "Submitting...",
+
+  "verificationSubmitted": "Verification request submitted successfully",
+  "verificationUnderReview": "Your request is under review. You will be notified once it is processed.",
+  "rejectionReason": "Rejection Reason",
+  "resubmitVerification": "Resubmit Verification",
+  "submittedOn": "Submitted on {date}",
+  "@submittedOn": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "reviewedOn": "Reviewed on {date}",
+  "@reviewedOn": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+
+  "back": "Back",
+  "next": "Next",
+
+  "pleaseSelectGender": "Please select a gender",
+  "pleaseSelectDocumentType": "Please select a document type",
+  "pleaseUploadAllDocuments": "Please upload all required documents",
+  "pleaseFillDateOfBirth": "Please select your date of birth",
+
+  "timelineSubmitted": "Submitted",
+  "timelineUnderReview": "Under Review",
+  "timelineDecision": "Decision"
 }

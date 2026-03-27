@@ -1597,6 +1597,384 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No bookmarked listings yet'**
   String get noBookmarkedListingsYet;
+
+  /// No description provided for @getVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Verified'**
+  String get getVerified;
+
+  /// No description provided for @verificationRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification Request'**
+  String get verificationRequest;
+
+  /// No description provided for @verificationStatusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification Status'**
+  String get verificationStatusTitle;
+
+  /// No description provided for @verificationPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification Pending'**
+  String get verificationPending;
+
+  /// No description provided for @verificationApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification Approved'**
+  String get verificationApproved;
+
+  /// No description provided for @verificationRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification Rejected'**
+  String get verificationRejected;
+
+  /// No description provided for @verificationExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification Expired'**
+  String get verificationExpired;
+
+  /// No description provided for @verificationSuspicious.
+  ///
+  /// In en, this message translates to:
+  /// **'Under Manual Review'**
+  String get verificationSuspicious;
+
+  /// No description provided for @stepPersonalInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Info'**
+  String get stepPersonalInfo;
+
+  /// No description provided for @stepDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents'**
+  String get stepDocuments;
+
+  /// No description provided for @stepPhoneVerification.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get stepPhoneVerification;
+
+  /// No description provided for @stepReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get stepReview;
+
+  /// No description provided for @idFullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name (as on ID)'**
+  String get idFullName;
+
+  /// No description provided for @idFullNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your full name as it appears on your ID'**
+  String get idFullNameHint;
+
+  /// No description provided for @dateOfBirth.
+  ///
+  /// In en, this message translates to:
+  /// **'Date of Birth'**
+  String get dateOfBirth;
+
+  /// No description provided for @selectDateOfBirth.
+  ///
+  /// In en, this message translates to:
+  /// **'Select date of birth'**
+  String get selectDateOfBirth;
+
+  /// No description provided for @gender.
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get gender;
+
+  /// No description provided for @genderMale.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get genderMale;
+
+  /// No description provided for @genderFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get genderFemale;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @addressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your current address'**
+  String get addressHint;
+
+  /// No description provided for @nationalIdNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'National ID Number'**
+  String get nationalIdNumber;
+
+  /// No description provided for @nationalIdNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your national ID number'**
+  String get nationalIdNumberHint;
+
+  /// No description provided for @documentType.
+  ///
+  /// In en, this message translates to:
+  /// **'Document Type'**
+  String get documentType;
+
+  /// No description provided for @palestinianId.
+  ///
+  /// In en, this message translates to:
+  /// **'Palestinian ID'**
+  String get palestinianId;
+
+  /// No description provided for @passport.
+  ///
+  /// In en, this message translates to:
+  /// **'Passport'**
+  String get passport;
+
+  /// No description provided for @palestinianDrivingLicence.
+  ///
+  /// In en, this message translates to:
+  /// **'Palestinian Driving Licence'**
+  String get palestinianDrivingLicence;
+
+  /// No description provided for @documentFront.
+  ///
+  /// In en, this message translates to:
+  /// **'Front of Document'**
+  String get documentFront;
+
+  /// No description provided for @documentBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back of Document'**
+  String get documentBack;
+
+  /// No description provided for @selfieWithId.
+  ///
+  /// In en, this message translates to:
+  /// **'Selfie with ID'**
+  String get selfieWithId;
+
+  /// No description provided for @tapToUploadPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to upload photo'**
+  String get tapToUploadPhoto;
+
+  /// No description provided for @changePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Change photo'**
+  String get changePhoto;
+
+  /// No description provided for @gallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get gallery;
+
+  /// No description provided for @camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get camera;
+
+  /// No description provided for @phoneVerification.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Verification'**
+  String get phoneVerification;
+
+  /// No description provided for @enterPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get enterPhoneNumber;
+
+  /// No description provided for @phoneNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'+970xxxxxxxxx'**
+  String get phoneNumberHint;
+
+  /// No description provided for @sendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Send OTP'**
+  String get sendOtp;
+
+  /// No description provided for @verifyPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verifyPhone;
+
+  /// No description provided for @phoneVerifiedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone verified successfully'**
+  String get phoneVerifiedSuccess;
+
+  /// No description provided for @pleaseVerifyPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Please verify your phone number to continue'**
+  String get pleaseVerifyPhone;
+
+  /// No description provided for @otpSentToPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'A verification code was sent to your phone'**
+  String get otpSentToPhone;
+
+  /// No description provided for @reviewYourData.
+  ///
+  /// In en, this message translates to:
+  /// **'Review Your Data'**
+  String get reviewYourData;
+
+  /// No description provided for @reviewPersonalInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Information'**
+  String get reviewPersonalInfo;
+
+  /// No description provided for @reviewDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploaded Documents'**
+  String get reviewDocuments;
+
+  /// No description provided for @reviewPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Verification'**
+  String get reviewPhone;
+
+  /// No description provided for @submitVerification.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Verification Request'**
+  String get submitVerification;
+
+  /// No description provided for @submittingVerification.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitting...'**
+  String get submittingVerification;
+
+  /// No description provided for @verificationSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification request submitted successfully'**
+  String get verificationSubmitted;
+
+  /// No description provided for @verificationUnderReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Your request is under review. You will be notified once it is processed.'**
+  String get verificationUnderReview;
+
+  /// No description provided for @rejectionReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejection Reason'**
+  String get rejectionReason;
+
+  /// No description provided for @resubmitVerification.
+  ///
+  /// In en, this message translates to:
+  /// **'Resubmit Verification'**
+  String get resubmitVerification;
+
+  /// No description provided for @submittedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted on {date}'**
+  String submittedOn(String date);
+
+  /// No description provided for @reviewedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewed on {date}'**
+  String reviewedOn(String date);
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @pleaseSelectGender.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a gender'**
+  String get pleaseSelectGender;
+
+  /// No description provided for @pleaseSelectDocumentType.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a document type'**
+  String get pleaseSelectDocumentType;
+
+  /// No description provided for @pleaseUploadAllDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Please upload all required documents'**
+  String get pleaseUploadAllDocuments;
+
+  /// No description provided for @pleaseFillDateOfBirth.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select your date of birth'**
+  String get pleaseFillDateOfBirth;
+
+  /// No description provided for @timelineSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted'**
+  String get timelineSubmitted;
+
+  /// No description provided for @timelineUnderReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Under Review'**
+  String get timelineUnderReview;
+
+  /// No description provided for @timelineDecision.
+  ///
+  /// In en, this message translates to:
+  /// **'Decision'**
+  String get timelineDecision;
 }
 
 class _AppLocalizationsDelegate

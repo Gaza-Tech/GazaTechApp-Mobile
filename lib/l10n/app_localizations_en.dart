@@ -804,4 +804,199 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noBookmarkedListingsYet => 'No bookmarked listings yet';
+
+  @override
+  String get getVerified => 'Get Verified';
+
+  @override
+  String get verificationRequest => 'Verification Request';
+
+  @override
+  String get verificationStatusTitle => 'Verification Status';
+
+  @override
+  String get verificationPending => 'Verification Pending';
+
+  @override
+  String get verificationApproved => 'Verification Approved';
+
+  @override
+  String get verificationRejected => 'Verification Rejected';
+
+  @override
+  String get verificationExpired => 'Verification Expired';
+
+  @override
+  String get verificationSuspicious => 'Under Manual Review';
+
+  @override
+  String get stepPersonalInfo => 'Personal Info';
+
+  @override
+  String get stepDocuments => 'Documents';
+
+  @override
+  String get stepPhoneVerification => 'Phone';
+
+  @override
+  String get stepReview => 'Review';
+
+  @override
+  String get idFullName => 'Full Name (as on ID)';
+
+  @override
+  String get idFullNameHint => 'Enter your full name as it appears on your ID';
+
+  @override
+  String get dateOfBirth => 'Date of Birth';
+
+  @override
+  String get selectDateOfBirth => 'Select date of birth';
+
+  @override
+  String get gender => 'Gender';
+
+  @override
+  String get genderMale => 'Male';
+
+  @override
+  String get genderFemale => 'Female';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get addressHint => 'Enter your current address';
+
+  @override
+  String get nationalIdNumber => 'National ID Number';
+
+  @override
+  String get nationalIdNumberHint => 'Enter your national ID number';
+
+  @override
+  String get documentType => 'Document Type';
+
+  @override
+  String get palestinianId => 'Palestinian ID';
+
+  @override
+  String get passport => 'Passport';
+
+  @override
+  String get palestinianDrivingLicence => 'Palestinian Driving Licence';
+
+  @override
+  String get documentFront => 'Front of Document';
+
+  @override
+  String get documentBack => 'Back of Document';
+
+  @override
+  String get selfieWithId => 'Selfie with ID';
+
+  @override
+  String get tapToUploadPhoto => 'Tap to upload photo';
+
+  @override
+  String get changePhoto => 'Change photo';
+
+  @override
+  String get gallery => 'Gallery';
+
+  @override
+  String get camera => 'Camera';
+
+  @override
+  String get phoneVerification => 'Phone Verification';
+
+  @override
+  String get enterPhoneNumber => 'Phone Number';
+
+  @override
+  String get phoneNumberHint => '+970xxxxxxxxx';
+
+  @override
+  String get sendOtp => 'Send OTP';
+
+  @override
+  String get verifyPhone => 'Verify';
+
+  @override
+  String get phoneVerifiedSuccess => 'Phone verified successfully';
+
+  @override
+  String get pleaseVerifyPhone => 'Please verify your phone number to continue';
+
+  @override
+  String get otpSentToPhone => 'A verification code was sent to your phone';
+
+  @override
+  String get reviewYourData => 'Review Your Data';
+
+  @override
+  String get reviewPersonalInfo => 'Personal Information';
+
+  @override
+  String get reviewDocuments => 'Uploaded Documents';
+
+  @override
+  String get reviewPhone => 'Phone Verification';
+
+  @override
+  String get submitVerification => 'Submit Verification Request';
+
+  @override
+  String get submittingVerification => 'Submitting...';
+
+  @override
+  String get verificationSubmitted =>
+      'Verification request submitted successfully';
+
+  @override
+  String get verificationUnderReview =>
+      'Your request is under review. You will be notified once it is processed.';
+
+  @override
+  String get rejectionReason => 'Rejection Reason';
+
+  @override
+  String get resubmitVerification => 'Resubmit Verification';
+
+  @override
+  String submittedOn(String date) {
+    return 'Submitted on $date';
+  }
+
+  @override
+  String reviewedOn(String date) {
+    return 'Reviewed on $date';
+  }
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get pleaseSelectGender => 'Please select a gender';
+
+  @override
+  String get pleaseSelectDocumentType => 'Please select a document type';
+
+  @override
+  String get pleaseUploadAllDocuments => 'Please upload all required documents';
+
+  @override
+  String get pleaseFillDateOfBirth => 'Please select your date of birth';
+
+  @override
+  String get timelineSubmitted => 'Submitted';
+
+  @override
+  String get timelineUnderReview => 'Under Review';
+
+  @override
+  String get timelineDecision => 'Decision';
 }
