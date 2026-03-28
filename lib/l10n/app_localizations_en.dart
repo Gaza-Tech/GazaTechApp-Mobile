@@ -999,4 +999,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get timelineDecision => 'Decision';
+
+  @override
+  String get editListing => 'Edit Listing';
+
+  @override
+  String get updateListing => 'Update Listing';
+
+  @override
+  String get listingUpdated => 'Listing updated successfully';
+
+  @override
+  String get deleteListing => 'Delete Listing';
+
+  @override
+  String get deleteListingConfirmTitle => 'Delete Listing?';
+
+  @override
+  String get deleteListingConfirmBody =>
+      'Are you sure you want to delete this listing? This action cannot be undone.';
+
+  @override
+  String get listingDeleted => 'Listing deleted successfully';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get edit => 'Edit';
 }

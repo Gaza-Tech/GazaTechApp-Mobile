@@ -100,4 +100,13 @@ class ProfileRepo {
       return ApiResult.failure(ErrorHandler.handle(e));
     }
   }
+
+  Future<ApiResult<void>> softDeleteListing(String listingId) async {
+    try {
+      await _service.softDeleteListing(listingId);
+      return ApiResult.success(null);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
 }

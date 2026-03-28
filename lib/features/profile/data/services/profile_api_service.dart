@@ -105,6 +105,14 @@ class ProfileApiService {
     return result?['verification_status'] as String?;
   }
 
+  /// Soft delete a listing by setting content_status to 'deleted'
+  Future<void> softDeleteListing(String listingId) async {
+    await _supabase
+        .from('marketplace_listings')
+        .update({'content_status': 'deleted'})
+        .eq('listing_id', listingId);
+  }
+
   Future<bool> togglePostBookmark(String postId) async {
     final userId = _supabase.auth.currentUser!.id;
 

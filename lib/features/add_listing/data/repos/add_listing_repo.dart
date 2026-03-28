@@ -87,4 +87,46 @@ class AddListingRepo {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
+
+  /// Update an existing listing
+  Future<ApiResult<Map<String, dynamic>>> updateListing({
+    required String listingId,
+    required Map<String, dynamic> data,
+  }) async {
+    try {
+      final result = await _apiService.updateListing(
+        listingId: listingId,
+        data: data,
+      );
+      return ApiResult.success(result);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  /// Delete all image records for a listing
+  Future<ApiResult<void>> deleteListingImages(String listingId) async {
+    try {
+      await _apiService.deleteListingImages(listingId);
+      return ApiResult.success(null);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  /// Delete all image files from storage for a listing
+  Future<ApiResult<void>> deleteStorageImages({
+    required String sellerId,
+    required String listingId,
+  }) async {
+    try {
+      await _apiService.deleteStorageImages(
+        sellerId: sellerId,
+        listingId: listingId,
+      );
+      return ApiResult.success(null);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
 }

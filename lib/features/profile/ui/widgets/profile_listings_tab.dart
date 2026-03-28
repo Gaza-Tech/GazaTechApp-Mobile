@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/profile/cubit/profile_cubit.dart';
 import 'package:gaza_tech/features/profile/cubit/profile_state.dart';
 
@@ -23,6 +24,101 @@ class _ProfileListingsTabState extends State<ProfileListingsTab>
       context.read<ProfileCubit>().fetchMoreListings();
     }
     return false;
+  }
+
+  Future<void> _navigateToDetails(
+    BuildContext context,
+    String listingId,
+  ) async {
+    final result = await Navigator.pushNamed(
+      context,
+      MyRoutes.listingDetails,
+      arguments: listingId,
+    );
+    if (!context.mounted) return;
+    if (result == 'deleted' || result == true) {
+      context.read<ProfileCubit>().fetchListings();
+    }
+  }
+
+  void _showDeleteConfirmation(BuildContext context, String listingId) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+      ),
+      builder: (bottomSheetContext) {
+        return Padding(
+          padding: EdgeInsets.all(24.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40.w,
+                height: 4.h,
+                decoration: BoxDecoration(
+                  color: theme.dividerColor,
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
+              ),
+              const VerticalSpace(24),
+              Icon(
+                Icons.delete_outline,
+                size: 48.sp,
+                color: theme.colorScheme.error,
+              ),
+              const VerticalSpace(16),
+              Text(
+                l10n.deleteListingConfirmTitle,
+                style: theme.textTheme.titleLarge,
+              ),
+              const VerticalSpace(8),
+              Text(
+                l10n.deleteListingConfirmBody,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodyMedium,
+              ),
+              const VerticalSpace(24),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.pop(bottomSheetContext),
+                      child: Text(l10n.cancel),
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: theme.colorScheme.error,
+                        foregroundColor: theme.colorScheme.onError,
+                      ),
+                      onPressed: () async {
+                        Navigator.pop(bottomSheetContext);
+                        final success = await context
+                            .read<ProfileCubit>()
+                            .deleteListing(listingId);
+                        if (success && context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(l10n.listingDeleted)),
+                          );
+                        }
+                      },
+                      child: Text(l10n.delete),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).padding.bottom),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -56,10 +152,18 @@ class _ProfileListingsTabState extends State<ProfileListingsTab>
                     final listing = state.listings[index];
                     return _ListingCard(
                       listing: listing,
-                      onTap: () => Navigator.pushNamed(
+                      isOwnProfile: state.isOwnProfile,
+                      onTap: () => _navigateToDetails(
                         context,
-                        MyRoutes.listingDetails,
-                        arguments: listing.listingId,
+                        listing.listingId,
+                      ),
+                      onEdit: () => _navigateToDetails(
+                        context,
+                        listing.listingId,
+                      ),
+                      onDelete: () => _showDeleteConfirmation(
+                        context,
+                        listing.listingId,
                       ),
                     );
                   },
@@ -86,9 +190,18 @@ class _ProfileListingsTabState extends State<ProfileListingsTab>
 
 class _ListingCard extends StatelessWidget {
   final dynamic listing;
+  final bool isOwnProfile;
   final VoidCallback onTap;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
 
-  const _ListingCard({required this.listing, required this.onTap});
+  const _ListingCard({
+    required this.listing,
+    required this.isOwnProfile,
+    required this.onTap,
+    required this.onEdit,
+    required this.onDelete,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -104,23 +217,43 @@ class _ListingCard extends StatelessWidget {
           children: [
             Expanded(
               flex: 3,
-              child: thumbnailUrl != null
-                  ? CachedNetworkImage(
-                      imageUrl: thumbnailUrl,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      placeholder: (_, __) => Container(
-                        color: theme.colorScheme.surfaceContainerHighest,
+              child: Stack(
+                children: [
+                  thumbnailUrl != null
+                      ? CachedNetworkImage(
+                          imageUrl: thumbnailUrl,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                          placeholder: (_, __) => Container(
+                            color:
+                                theme.colorScheme.surfaceContainerHighest,
+                          ),
+                          errorWidget: (_, __, ___) => Container(
+                            color:
+                                theme.colorScheme.surfaceContainerHighest,
+                            child: const Icon(
+                              Icons.image_not_supported_outlined,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          color: theme.colorScheme.surfaceContainerHighest,
+                          child: const Center(
+                            child: Icon(Icons.image_outlined),
+                          ),
+                        ),
+                  if (isOwnProfile)
+                    Positioned(
+                      top: 4.w,
+                      right: 4.w,
+                      child: _MoreMenuButton(
+                        onEdit: onEdit,
+                        onDelete: onDelete,
                       ),
-                      errorWidget: (_, __, ___) => Container(
-                        color: theme.colorScheme.surfaceContainerHighest,
-                        child: const Icon(Icons.image_not_supported_outlined),
-                      ),
-                    )
-                  : Container(
-                      color: theme.colorScheme.surfaceContainerHighest,
-                      child: const Center(child: Icon(Icons.image_outlined)),
                     ),
+                ],
+              ),
             ),
             Expanded(
               flex: 2,
@@ -151,6 +284,65 @@ class _ListingCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _MoreMenuButton extends StatelessWidget {
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
+
+  const _MoreMenuButton({required this.onEdit, required this.onDelete});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.black54,
+        shape: BoxShape.circle,
+      ),
+      child: PopupMenuButton<String>(
+        padding: EdgeInsets.zero,
+        constraints: BoxConstraints(minWidth: 32.w, minHeight: 32.h),
+        iconSize: 18.sp,
+        icon: Icon(Icons.more_vert, color: Colors.white, size: 18.sp),
+        onSelected: (value) {
+          if (value == 'edit') onEdit();
+          if (value == 'delete') onDelete();
+        },
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 'edit',
+            child: Row(
+              children: [
+                const Icon(Icons.edit_outlined, size: 20),
+                SizedBox(width: 8.w),
+                Text(l10n.edit),
+              ],
+            ),
+          ),
+          PopupMenuItem(
+            value: 'delete',
+            child: Row(
+              children: [
+                Icon(
+                  Icons.delete_outlined,
+                  size: 20,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                SizedBox(width: 8.w),
+                Text(
+                  l10n.delete,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

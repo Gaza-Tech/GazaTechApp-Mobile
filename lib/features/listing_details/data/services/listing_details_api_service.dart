@@ -109,4 +109,12 @@ class ListingDetailsApiService {
   Future<void> incrementViewCount(String listingId) async {
     await _supabase.rpc('increment_views', params: {'listing_id': listingId});
   }
+
+  /// Soft delete a listing by setting content_status to 'deleted'
+  Future<void> softDeleteListing(String listingId) async {
+    await _supabase
+        .from('marketplace_listings')
+        .update({'content_status': 'deleted'})
+        .eq('listing_id', listingId);
+  }
 }

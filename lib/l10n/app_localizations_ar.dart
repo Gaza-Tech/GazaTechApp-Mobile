@@ -997,4 +997,32 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get timelineDecision => 'القرار';
+
+  @override
+  String get editListing => 'تعديل الإعلان';
+
+  @override
+  String get updateListing => 'تحديث الإعلان';
+
+  @override
+  String get listingUpdated => 'تم تحديث الإعلان بنجاح';
+
+  @override
+  String get deleteListing => 'حذف الإعلان';
+
+  @override
+  String get deleteListingConfirmTitle => 'حذف الإعلان؟';
+
+  @override
+  String get deleteListingConfirmBody =>
+      'هل أنت متأكد من حذف هذا الإعلان؟ لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String get listingDeleted => 'تم حذف الإعلان بنجاح';
+
+  @override
+  String get delete => 'حذف';
+
+  @override
+  String get edit => 'تعديل';
 }

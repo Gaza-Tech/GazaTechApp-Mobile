@@ -73,4 +73,14 @@ class ListingDetailsRepo {
       // Silently ignore - view count is not critical
     }
   }
+
+  /// Soft delete a listing
+  Future<ApiResult<void>> softDeleteListing(String listingId) async {
+    try {
+      await _apiService.softDeleteListing(listingId);
+      return ApiResult.success(null);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
 }

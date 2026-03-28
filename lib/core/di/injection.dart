@@ -41,6 +41,7 @@ import 'package:gaza_tech/features/add_listing/cubit/add_listing_cubit.dart';
 import 'package:gaza_tech/features/add_listing/data/repos/add_listing_repo.dart';
 import 'package:gaza_tech/features/add_listing/data/services/add_listing_api_service.dart';
 import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
+import 'package:gaza_tech/features/listing_details/data/models/listing_detail_model.dart';
 import 'package:gaza_tech/features/listing_details/data/repos/listing_details_repo.dart';
 import 'package:gaza_tech/features/listing_details/data/services/listing_details_api_service.dart';
 import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
@@ -162,7 +163,9 @@ Future<void> setupGetIt() async {
     () => AddListingApiService(getIt()),
   );
   getIt.registerLazySingleton<AddListingRepo>(() => AddListingRepo(getIt()));
-  getIt.registerFactory<AddListingCubit>(() => AddListingCubit(getIt()));
+  getIt.registerFactoryParam<AddListingCubit, ListingDetailModel?, void>(
+    (listing, _) => AddListingCubit(getIt(), listing),
+  );
 
   // 12. Listing Details
   getIt.registerLazySingleton<ListingDetailsApiService>(

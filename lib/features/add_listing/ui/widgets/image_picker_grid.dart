@@ -1,16 +1,18 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/features/add_listing/data/models/listing_image_item.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerGrid extends StatefulWidget {
-  final List<File> images;
+  final List<ListingImageItem> images;
   final int maxImages;
-  final ValueChanged<List<File>> onImagesChanged;
+  final ValueChanged<List<ListingImageItem>> onImagesChanged;
 
   const ImagePickerGrid({
     super.key,
@@ -31,7 +33,7 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
 
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
-      final updated = [...widget.images, File(image.path)];
+      final updated = [...widget.images, NewImage(File(image.path))];
       widget.onImagesChanged(updated);
     }
   }
@@ -115,7 +117,32 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
     );
   }
 
+  Widget _buildImageWidget(ListingImageItem item, {BoxFit fit = BoxFit.cover}) {
+    return switch (item) {
+      ExistingImage(:final url) => CachedNetworkImage(
+          imageUrl: url,
+          fit: fit,
+          width: double.infinity,
+          height: double.infinity,
+          placeholder: (_, __) => Container(
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          ),
+          errorWidget: (_, __, ___) => Container(
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+            child: const Icon(Icons.image_not_supported_outlined),
+          ),
+        ),
+      NewImage(:final file) => Image.file(
+          file,
+          width: double.infinity,
+          height: double.infinity,
+          fit: fit,
+        ),
+    };
+  }
+
   Widget _buildImageSlot(int index) {
+    final item = widget.images[index];
     return LongPressDraggable<int>(
       data: index,
       feedback: Material(
@@ -123,18 +150,20 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
         borderRadius: BorderRadius.circular(12.r),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12.r),
-          child: Image.file(
-            widget.images[index],
+          child: SizedBox(
             width: 100.w,
             height: 100.w,
-            fit: BoxFit.cover,
+            child: _buildImageWidget(item),
           ),
         ),
       ),
       childWhenDragging: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(color: Theme.of(context).dividerColor, width: 1.5),
+          border: Border.all(
+            color: Theme.of(context).dividerColor,
+            width: 1.5,
+          ),
         ),
       ),
       child: DragTarget<int>(
@@ -144,12 +173,7 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.r),
-                child: Image.file(
-                  widget.images[index],
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+                child: _buildImageWidget(item),
               ),
               Positioned(
                 top: 4.w,

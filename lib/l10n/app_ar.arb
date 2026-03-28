@@ -419,5 +419,15 @@
 
   "timelineSubmitted": "تم الإرسال",
   "timelineUnderReview": "قيد المراجعة",
-  "timelineDecision": "القرار"
+  "timelineDecision": "القرار",
+
+  "editListing": "تعديل الإعلان",
+  "updateListing": "تحديث الإعلان",
+  "listingUpdated": "تم تحديث الإعلان بنجاح",
+  "deleteListing": "حذف الإعلان",
+  "deleteListingConfirmTitle": "حذف الإعلان؟",
+  "deleteListingConfirmBody": "هل أنت متأكد من حذف هذا الإعلان؟ لا يمكن التراجع عن هذا الإجراء.",
+  "listingDeleted": "تم حذف الإعلان بنجاح",
+  "delete": "حذف",
+  "edit": "تعديل"
 }

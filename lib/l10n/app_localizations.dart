@@ -1975,6 +1975,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Decision'**
   String get timelineDecision;
+
+  /// No description provided for @editListing.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Listing'**
+  String get editListing;
+
+  /// No description provided for @updateListing.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Listing'**
+  String get updateListing;
+
+  /// No description provided for @listingUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Listing updated successfully'**
+  String get listingUpdated;
+
+  /// No description provided for @deleteListing.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Listing'**
+  String get deleteListing;
+
+  /// No description provided for @deleteListingConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Listing?'**
+  String get deleteListingConfirmTitle;
+
+  /// No description provided for @deleteListingConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this listing? This action cannot be undone.'**
+  String get deleteListingConfirmBody;
+
+  /// No description provided for @listingDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Listing deleted successfully'**
+  String get listingDeleted;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
 }
 
 class _AppLocalizationsDelegate

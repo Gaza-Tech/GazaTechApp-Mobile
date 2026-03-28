@@ -144,6 +144,15 @@ class ListingDetailsCubit extends Cubit<ListingDetailsState> {
     );
   }
 
+  /// Soft delete this listing
+  Future<bool> deleteListing() async {
+    final result = await _repo.softDeleteListing(listingId);
+    return result.when(
+      success: (_) => true,
+      failure: (_) => false,
+    );
+  }
+
   @override
   Future<void> close() {
     _bookmarkSub.cancel();

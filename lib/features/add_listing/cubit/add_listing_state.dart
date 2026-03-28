@@ -12,6 +12,9 @@ abstract class AddListingState with _$AddListingState {
     @Default([]) List<LocationModel> locations,
     @Default(false) bool isLoadingFormData,
 
+    // Edit mode
+    @Default(false) bool isEditMode,
+
     // Submission
     @Default(false) bool isSubmitting,
     @Default(false) bool submitSuccess,

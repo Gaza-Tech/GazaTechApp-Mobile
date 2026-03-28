@@ -20,10 +20,16 @@ import 'package:gaza_tech/features/listing_details/ui/widgets/similar_products_l
 import 'package:gaza_tech/features/listing_details/ui/widgets/specifications_table.dart';
 import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
 import 'package:gaza_tech/l10n/app_localizations.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class ListingDetailsScreen extends StatelessWidget {
+class ListingDetailsScreen extends StatefulWidget {
   const ListingDetailsScreen({super.key});
 
+  @override
+  State<ListingDetailsScreen> createState() => _ListingDetailsScreenState();
+}
+
+class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +40,43 @@ class ListingDetailsScreen extends StatelessWidget {
           onPressed: () => context.pop(),
         ),
         actions: [
-          IconButton(icon: const Icon(Icons.share_rounded), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.flag_rounded), onPressed: () {}),
-          SizedBox(width: 4.w),
+          BlocBuilder<ListingDetailsCubit, ListingDetailsState>(
+            builder: (context, state) {
+              final listing = state.whenOrNull(
+                success: (listing, _, __, ___) => listing,
+              );
+              final currentUserId =
+                  Supabase.instance.client.auth.currentUser?.id;
+              final isOwner =
+                  listing != null && listing.sellerId == currentUserId;
+
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (isOwner) ...[
+                    IconButton(
+                      icon: const Icon(Icons.edit_outlined),
+                      onPressed: () => _navigateToEdit(context, listing),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete_outlined),
+                      onPressed: () =>
+                          _showDeleteConfirmation(context, listing),
+                    ),
+                  ],
+                  IconButton(
+                    icon: const Icon(Icons.share_rounded),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.flag_rounded),
+                    onPressed: () {},
+                  ),
+                  SizedBox(width: 4.w),
+                ],
+              );
+            },
+          ),
         ],
       ),
       body: BlocBuilder<ListingDetailsCubit, ListingDetailsState>(
@@ -57,6 +97,113 @@ class ListingDetailsScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Future<void> _navigateToEdit(
+    BuildContext context,
+    ListingDetailModel listing,
+  ) async {
+    final result = await Navigator.pushNamed(
+      context,
+      MyRoutes.editListing,
+      arguments: listing,
+    );
+    if (result == true && context.mounted) {
+      context.read<ListingDetailsCubit>().loadListing();
+    }
+  }
+
+  void _showDeleteConfirmation(
+    BuildContext context,
+    ListingDetailModel listing,
+  ) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+      ),
+      builder: (bottomSheetContext) {
+        return Padding(
+          padding: EdgeInsets.all(24.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40.w,
+                height: 4.h,
+                decoration: BoxDecoration(
+                  color: theme.dividerColor,
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
+              ),
+              const VerticalSpace(24),
+              Icon(
+                Icons.delete_outline,
+                size: 48.sp,
+                color: theme.colorScheme.error,
+              ),
+              const VerticalSpace(16),
+              Text(
+                l10n.deleteListingConfirmTitle,
+                style: theme.textTheme.titleLarge,
+              ),
+              const VerticalSpace(8),
+              Text(
+                l10n.deleteListingConfirmBody,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodyMedium,
+              ),
+              const VerticalSpace(24),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.pop(bottomSheetContext),
+                      child: Text(l10n.cancel),
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: theme.colorScheme.error,
+                        foregroundColor: theme.colorScheme.onError,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(bottomSheetContext);
+                        _deleteListing(context);
+                      },
+                      child: Text(l10n.delete),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).padding.bottom),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _deleteListing(BuildContext context) async {
+    final l10n = context.l10n;
+    final success = await context.read<ListingDetailsCubit>().deleteListing();
+    if (!context.mounted) return;
+
+    if (success) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.listingDeleted)));
+      Navigator.pop(context, 'deleted');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.deleteListingConfirmBody)),
+      );
+    }
   }
 
   Widget _buildErrorState(BuildContext context, String message) {

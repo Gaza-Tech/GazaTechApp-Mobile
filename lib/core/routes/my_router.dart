@@ -19,6 +19,7 @@ import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 import 'package:gaza_tech/features/add_listing/cubit/add_listing_cubit.dart';
 import 'package:gaza_tech/features/add_listing/ui/add_listing_screen.dart';
 import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
+import 'package:gaza_tech/features/listing_details/data/models/listing_detail_model.dart';
 import 'package:gaza_tech/features/listing_details/ui/listing_details_screen.dart';
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
 import 'package:gaza_tech/features/add_post/cubit/add_post_cubit.dart';
@@ -109,7 +110,17 @@ class MyRouter {
       case MyRoutes.addListing:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => getIt<AddListingCubit>()..loadFormData(),
+            create: (context) =>
+                getIt<AddListingCubit>(param1: null)..loadFormData(),
+            child: const AddListingScreen(),
+          ),
+        );
+      case MyRoutes.editListing:
+        final listing = settings.arguments as ListingDetailModel;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                getIt<AddListingCubit>(param1: listing)..loadFormData(),
             child: const AddListingScreen(),
           ),
         );

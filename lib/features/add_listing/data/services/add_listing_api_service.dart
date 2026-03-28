@@ -79,4 +79,44 @@ class AddListingApiService {
 
     await _supabase.from('listing_images').insert(records);
   }
+
+  /// Update an existing listing
+  Future<Map<String, dynamic>> updateListing({
+    required String listingId,
+    required Map<String, dynamic> data,
+  }) async {
+    final result = await _supabase
+        .from('marketplace_listings')
+        .update(data)
+        .eq('listing_id', listingId)
+        .select()
+        .single();
+
+    return result;
+  }
+
+  /// Delete all image records for a listing
+  Future<void> deleteListingImages(String listingId) async {
+    await _supabase
+        .from('listing_images')
+        .delete()
+        .eq('listing_id', listingId);
+  }
+
+  /// Delete all image files from storage for a listing
+  Future<void> deleteStorageImages({
+    required String sellerId,
+    required String listingId,
+  }) async {
+    final files = await _supabase.storage
+        .from('marketplace-image')
+        .list(path: '$sellerId/$listingId');
+
+    if (files.isNotEmpty) {
+      final paths = files
+          .map((f) => '$sellerId/$listingId/${f.name}')
+          .toList();
+      await _supabase.storage.from('marketplace-image').remove(paths);
+    }
+  }
 }

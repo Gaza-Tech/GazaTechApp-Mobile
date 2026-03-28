@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +7,7 @@ import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/add_listing/cubit/add_listing_cubit.dart';
 import 'package:gaza_tech/features/add_listing/cubit/add_listing_state.dart';
+import 'package:gaza_tech/features/add_listing/data/models/listing_image_item.dart';
 import 'package:gaza_tech/features/add_listing/ui/widgets/selector.dart';
 import 'package:gaza_tech/features/add_listing/ui/widgets/condition_selector.dart';
 import 'package:gaza_tech/features/add_listing/ui/widgets/image_picker_grid.dart';
@@ -28,7 +27,7 @@ enum ProductCondition { brandNew, usedExcellent, usedGood, forParts }
 class _AddListingScreenState extends State<AddListingScreen> {
   static const int _maxImages = 5;
 
-  List<File> _selectedImages = [];
+  List<ListingImageItem> _selectedImages = [];
   String? _selectedCategoryId;
   String? _selectedCategoryName;
   String? _selectedLocationId;
@@ -36,6 +35,7 @@ class _AddListingScreenState extends State<AddListingScreen> {
   ProductCondition? _selectedCondition;
   bool _isILS = true;
   final List<SpecificationEntry> _specifications = [];
+  bool _editInitialized = false;
 
   @override
   void dispose() {
@@ -45,42 +45,85 @@ class _AddListingScreenState extends State<AddListingScreen> {
     super.dispose();
   }
 
+  void _initializeEditData(AddListingCubit cubit) {
+    if (_editInitialized) return;
+    _editInitialized = true;
+
+    final editData = cubit.initializeForEdit();
+    if (editData == null) return;
+
+    setState(() {
+      _selectedCategoryId = editData.categoryId;
+      _selectedCategoryName = editData.categoryName;
+      _selectedLocationId = editData.locationId;
+      _selectedLocationName = editData.locationName;
+      _selectedCondition = editData.condition;
+      _isILS = editData.isILS;
+      _selectedImages = editData.images;
+      _specifications.addAll(editData.specifications);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cubit = context.read<AddListingCubit>();
 
-    return BlocListener<AddListingCubit, AddListingState>(
-      listener: (context, state) {
-        if (state.submitSuccess) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(context.l10n.publishListing)));
-          context.pop();
-        }
-        if (state.errorMessage != null && !state.isSubmitting) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.errorMessage!)));
-        }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AddListingCubit, AddListingState>(
+          listenWhen: (prev, curr) =>
+              prev.isLoadingFormData && !curr.isLoadingFormData,
+          listener: (context, state) {
+            if (state.isEditMode) {
+              _initializeEditData(cubit);
+            }
+          },
+        ),
+        BlocListener<AddListingCubit, AddListingState>(
+          listenWhen: (prev, curr) =>
+              prev.submitSuccess != curr.submitSuccess ||
+              prev.errorMessage != curr.errorMessage,
+          listener: (context, state) {
+            if (state.submitSuccess) {
+              final message = state.isEditMode
+                  ? context.l10n.listingUpdated
+                  : context.l10n.publishListing;
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(message)));
+              Navigator.pop(context, true);
+            }
+            if (state.errorMessage != null && !state.isSubmitting) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.errorMessage!)));
+            }
+          },
+        ),
+      ],
       child: BlocBuilder<AddListingCubit, AddListingState>(
         builder: (context, state) {
           return Stack(
             children: [
               Scaffold(
                 appBar: AppBar(
-                  title: Text(context.l10n.addListing),
+                  title: Text(
+                    state.isEditMode
+                        ? context.l10n.editListing
+                        : context.l10n.addListing,
+                  ),
                   actions: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(end: 8.w),
-                      child: TextButton(
-                        onPressed: () {
-                          // TODO: implement save draft
-                        },
-                        child: Text(context.l10n.saveDraft),
+                    if (!state.isEditMode)
+                      Padding(
+                        padding: EdgeInsetsDirectional.only(end: 8.w),
+                        child: TextButton(
+                          onPressed: () {
+                            // TODO: implement save draft
+                          },
+                          child: Text(context.l10n.saveDraft),
+                        ),
                       ),
-                    ),
                   ],
                 ),
                 body: state.isLoadingFormData
@@ -148,7 +191,8 @@ class _AddListingScreenState extends State<AddListingScreen> {
                                 hintText: context.l10n.selectCategory,
                                 title: context.l10n.selectCategoryTitle,
                                 onSelected: (categoryName) {
-                                  final category = state.categories.firstWhere(
+                                  final category =
+                                      state.categories.firstWhere(
                                     (c) => c.name == categoryName,
                                   );
                                   setState(() {
@@ -240,7 +284,8 @@ class _AddListingScreenState extends State<AddListingScreen> {
                                 hintText: context.l10n.selectLocation,
                                 title: context.l10n.selectLocationTitle,
                                 onSelected: (locationName) {
-                                  final location = state.locations.firstWhere(
+                                  final location =
+                                      state.locations.firstWhere(
                                     (l) => l.name == locationName,
                                   );
                                   setState(() {
@@ -252,16 +297,29 @@ class _AddListingScreenState extends State<AddListingScreen> {
                               const VerticalSpace(24),
                               MyButton(
                                 onPressed: () {
-                                  cubit.createListing(
-                                    selectedCategoryId: _selectedCategoryId,
-                                    selectedLocationId: _selectedLocationId,
-                                    selectedCondition: _selectedCondition,
-                                    isILS: _isILS,
-                                    images: _selectedImages,
-                                    specifications: _specifications,
-                                  );
+                                  if (state.isEditMode) {
+                                    cubit.updateListing(
+                                      selectedCategoryId: _selectedCategoryId,
+                                      selectedLocationId: _selectedLocationId,
+                                      selectedCondition: _selectedCondition,
+                                      isILS: _isILS,
+                                      images: _selectedImages,
+                                      specifications: _specifications,
+                                    );
+                                  } else {
+                                    cubit.createListing(
+                                      selectedCategoryId: _selectedCategoryId,
+                                      selectedLocationId: _selectedLocationId,
+                                      selectedCondition: _selectedCondition,
+                                      isILS: _isILS,
+                                      images: _selectedImages,
+                                      specifications: _specifications,
+                                    );
+                                  }
                                 },
-                                text: context.l10n.publishListing,
+                                text: state.isEditMode
+                                    ? context.l10n.updateListing
+                                    : context.l10n.publishListing,
                               ),
                             ],
                           ),

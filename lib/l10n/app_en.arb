@@ -481,5 +481,15 @@
 
   "timelineSubmitted": "Submitted",
   "timelineUnderReview": "Under Review",
-  "timelineDecision": "Decision"
+  "timelineDecision": "Decision",
+
+  "editListing": "Edit Listing",
+  "updateListing": "Update Listing",
+  "listingUpdated": "Listing updated successfully",
+  "deleteListing": "Delete Listing",
+  "deleteListingConfirmTitle": "Delete Listing?",
+  "deleteListingConfirmBody": "Are you sure you want to delete this listing? This action cannot be undone.",
+  "listingDeleted": "Listing deleted successfully",
+  "delete": "Delete",
+  "edit": "Edit"
 }
