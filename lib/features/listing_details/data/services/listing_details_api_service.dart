@@ -114,7 +114,9 @@ class ListingDetailsApiService {
   Future<void> softDeleteListing(String listingId) async {
     await _supabase
         .from('marketplace_listings')
-        .update({'content_status': 'deleted'})
-        .eq('listing_id', listingId);
+        .update({'content_status': 'removed'})
+        .eq('listing_id', listingId)
+        .select()
+        .single();
   }
 }

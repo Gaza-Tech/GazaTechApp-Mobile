@@ -61,17 +61,17 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
 
   Future<void> _deletePost(BuildContext context) async {
     final l10n = context.l10n;
-    final success = await context.read<PostDetailsCubit>().deletePost();
+    final error = await context.read<PostDetailsCubit>().deletePost();
     if (!context.mounted) return;
 
-    if (success) {
+    if (error == null) {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(l10n.postDeleted)));
       Navigator.pop(context, 'deleted');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.deletePost)),
+        SnackBar(content: Text(error)),
       );
     }
   }

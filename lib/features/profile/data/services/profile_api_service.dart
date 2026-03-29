@@ -109,16 +109,20 @@ class ProfileApiService {
   Future<void> softDeleteListing(String listingId) async {
     await _supabase
         .from('marketplace_listings')
-        .update({'content_status': 'deleted'})
-        .eq('listing_id', listingId);
+        .update({'content_status': 'removed'})
+        .eq('listing_id', listingId)
+        .select()
+        .single();
   }
 
   /// Soft delete a post by setting content_status to 'deleted'
   Future<void> softDeletePost(String postId) async {
     await _supabase
         .from('community_posts')
-        .update({'content_status': 'deleted'})
-        .eq('post_id', postId);
+        .update({'content_status': 'removed'})
+        .eq('post_id', postId)
+        .select()
+        .single();
   }
 
   Future<bool> togglePostBookmark(String postId) async {

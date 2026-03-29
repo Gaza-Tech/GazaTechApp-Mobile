@@ -145,11 +145,11 @@ class ListingDetailsCubit extends Cubit<ListingDetailsState> {
   }
 
   /// Soft delete this listing
-  Future<bool> deleteListing() async {
+  Future<String?> deleteListing() async {
     final result = await _repo.softDeleteListing(listingId);
     return result.when(
-      success: (_) => true,
-      failure: (_) => false,
+      success: (_) => null,
+      failure: (error) => error.message ?? 'Failed to delete listing',
     );
   }
 

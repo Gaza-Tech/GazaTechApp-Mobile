@@ -107,10 +107,10 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
 
   Future<void> _deleteListing(BuildContext context) async {
     final l10n = context.l10n;
-    final success = await context.read<ListingDetailsCubit>().deleteListing();
+    final error = await context.read<ListingDetailsCubit>().deleteListing();
     if (!context.mounted) return;
 
-    if (success) {
+    if (error == null) {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(l10n.listingDeleted)));
@@ -118,7 +118,7 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
     } else {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(l10n.deleteListing)));
+      ).showSnackBar(SnackBar(content: Text(error)));
     }
   }
 }
