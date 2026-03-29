@@ -47,13 +47,6 @@ class PostCardActions extends StatelessWidget {
         ),
         const Spacer(),
         IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.share_outlined, size: 20.sp),
-          color: inactiveColor,
-          constraints: BoxConstraints(minWidth: 36.w, minHeight: 36.h),
-          padding: EdgeInsets.zero,
-        ),
-        IconButton(
           onPressed: onBookmarkToggle,
           icon: Icon(
             isBookmarked ? Icons.bookmark : Icons.bookmark_border,

@@ -158,49 +158,28 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
           appBar: AppBar(
             title: Text(l10n.postDetails),
             actions: [
-              if (state.post != null &&
-                  state.post!.authorId ==
-                      Supabase.instance.client.auth.currentUser?.id)
-                PopupMenuButton<String>(
-                  icon: const Icon(Icons.more_vert),
-                  onSelected: (value) {
-                    if (value == 'edit') _navigateToEdit(context, state);
-                    if (value == 'delete') {
-                      _showDeleteConfirmation(context);
-                    }
-                  },
-                  itemBuilder: (_) => [
-                    PopupMenuItem(
-                      value: 'edit',
-                      child: Row(
-                        children: [
-                          const Icon(Icons.edit_outlined, size: 20),
-                          SizedBox(width: 8.w),
-                          Text(l10n.edit),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'delete',
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.delete_outlined,
-                            size: 20,
-                            color: Theme.of(context).colorScheme.error,
-                          ),
-                          SizedBox(width: 8.w),
-                          Text(
-                            l10n.delete,
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.error,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+              if (state.post != null) ...[
+                if (state.post!.authorId ==
+                    Supabase.instance.client.auth.currentUser?.id) ...[
+                  IconButton(
+                    icon: const Icon(Icons.edit_outlined),
+                    onPressed: () => _navigateToEdit(context, state),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete_outlined),
+                    onPressed: () => _showDeleteConfirmation(context),
+                  ),
+                ],
+                IconButton(
+                  icon: const Icon(Icons.share_rounded),
+                  onPressed: () {},
                 ),
+                IconButton(
+                  icon: const Icon(Icons.flag_rounded),
+                  onPressed: () {},
+                ),
+                SizedBox(width: 4.w),
+              ],
             ],
           ),
           body: state.isPostLoading
@@ -335,61 +314,10 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
     ThemeData theme,
   ) {
     final post = state.post!;
-    return Row(
-      children: [
-        Expanded(
-          child: PostCardHeader(
-            userName: post.authorName,
-            timeAgo: _timeAgo(context, post.createdAt),
-            category: post.postCategory,
-          ),
-        ),
-        if (post.authorId ==
-            Supabase.instance.client.auth.currentUser?.id)
-          PopupMenuButton<String>(
-            icon: const Icon(Icons.more_horiz),
-            constraints: BoxConstraints(minWidth: 36.w, minHeight: 36.h),
-            padding: EdgeInsets.zero,
-            onSelected: (value) {
-              if (value == 'edit') _navigateToEdit(context, state);
-              if (value == 'delete') _showDeleteConfirmation(context);
-            },
-            itemBuilder: (_) {
-              final l10n = context.l10n;
-              return [
-                PopupMenuItem(
-                  value: 'edit',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.edit_outlined, size: 20),
-                      SizedBox(width: 8.w),
-                      Text(l10n.edit),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'delete',
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.delete_outlined,
-                        size: 20,
-                        color: Theme.of(context).colorScheme.error,
-                      ),
-                      SizedBox(width: 8.w),
-                      Text(
-                        l10n.delete,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.error,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ];
-            },
-          ),
-      ],
+    return PostCardHeader(
+      userName: post.authorName,
+      timeAgo: _timeAgo(context, post.createdAt),
+      category: post.postCategory,
     );
   }
 
