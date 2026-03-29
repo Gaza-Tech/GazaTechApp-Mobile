@@ -22,17 +22,33 @@ class _AddPostScreenState extends State<AddPostScreen> {
   int? _selectedCategoryIndex;
 
   @override
+  void initState() {
+    super.initState();
+    final cubit = context.read<AddPostCubit>();
+    final catIndex = cubit.initializeForEdit();
+    if (catIndex != null) {
+      _selectedCategoryIndex = catIndex;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final cubit = context.read<AddPostCubit>();
+    final l10n = context.l10n;
+    final isEdit = cubit.isEditMode;
 
     return BlocListener<AddPostCubit, AddPostState>(
       listener: (context, state) {
         state.whenOrNull(
           success: () {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(context.l10n.postPublished)));
-            Navigator.pop(context);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  isEdit ? l10n.postUpdated : l10n.postPublished,
+                ),
+              ),
+            );
+            Navigator.pop(context, true);
           },
           failure: (message) {
             ScaffoldMessenger.of(
@@ -43,17 +59,18 @@ class _AddPostScreenState extends State<AddPostScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(context.l10n.createPost),
+          title: Text(isEdit ? l10n.editPost : l10n.createPost),
           actions: [
-            Padding(
-              padding: EdgeInsetsDirectional.only(end: 8.w),
-              child: TextButton(
-                onPressed: () {
-                  // TODO: implement save draft
-                },
-                child: Text(context.l10n.saveDraft),
+            if (!isEdit)
+              Padding(
+                padding: EdgeInsetsDirectional.only(end: 8.w),
+                child: TextButton(
+                  onPressed: () {
+                    // TODO: implement save draft
+                  },
+                  child: Text(l10n.saveDraft),
+                ),
               ),
-            ),
           ],
         ),
         body: BlocBuilder<AddPostCubit, AddPostState>(
@@ -70,28 +87,28 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    LabeledField(label: context.l10n.postTitle),
+                    LabeledField(label: l10n.postTitle),
                     const VerticalSpace(8),
                     MyTextFormField(
                       controller: cubit.titleController,
-                      hintText: context.l10n.enterPostTitle,
+                      hintText: l10n.enterPostTitle,
                       textInputType: TextInputType.text,
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return context.l10n.required;
+                          return l10n.required;
                         }
                         return null;
                       },
                     ),
                     const VerticalSpace(16),
-                    LabeledField(label: context.l10n.categoryLabel),
+                    LabeledField(label: l10n.categoryLabel),
                     const VerticalSpace(8),
                     ChipSelector(
                       items: [
-                        context.l10n.questions,
-                        context.l10n.tips,
-                        context.l10n.news,
-                        context.l10n.troubleshooting,
+                        l10n.questions,
+                        l10n.tips,
+                        l10n.news,
+                        l10n.troubleshooting,
                       ],
                       selectedIndex: _selectedCategoryIndex,
                       onChanged: (index) {
@@ -99,11 +116,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       },
                     ),
                     const VerticalSpace(16),
-                    LabeledField(label: context.l10n.content),
+                    LabeledField(label: l10n.content),
                     const VerticalSpace(8),
                     MyTextFormField(
                       controller: cubit.contentController,
-                      hintText: context.l10n.writeYourPostHere,
+                      hintText: l10n.writeYourPostHere,
                       textInputType: TextInputType.multiline,
                       minLines: 8,
                       contentPadding: EdgeInsets.symmetric(
@@ -113,7 +130,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     ),
                     const VerticalSpace(16),
                     LabeledField(
-                      label: context.l10n.attachments,
+                      label: l10n.attachments,
                       isRequired: false,
                     ),
                     const VerticalSpace(8),
@@ -124,11 +141,18 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     ),
                     const VerticalSpace(24),
                     MyButton(
-                      text: context.l10n.publishPost,
+                      text: isEdit ? l10n.updatePost : l10n.publishPost,
                       onPressed: isLoading
                           ? null
-                          : () =>
-                                cubit.createPost(_selectedCategoryIndex ?? -1),
+                          : () {
+                              final catIndex =
+                                  _selectedCategoryIndex ?? -1;
+                              if (isEdit) {
+                                cubit.updatePost(catIndex);
+                              } else {
+                                cubit.createPost(catIndex);
+                              }
+                            },
                     ),
                   ],
                 ),

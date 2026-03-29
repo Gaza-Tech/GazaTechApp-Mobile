@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_actions.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_header.dart';
@@ -19,6 +20,8 @@ class PostCard extends StatelessWidget {
   final VoidCallback? onTap;
   final String? avatarUrl;
   final VoidCallback? onAuthorTap;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
 
   const PostCard({
     super.key,
@@ -36,6 +39,8 @@ class PostCard extends StatelessWidget {
     this.onTap,
     this.avatarUrl,
     this.onAuthorTap,
+    this.onEdit,
+    this.onDelete,
   });
 
   @override
@@ -52,12 +57,23 @@ class PostCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              PostCardHeader(
-                userName: userName,
-                timeAgo: timeAgo,
-                category: category,
-                avatarUrl: avatarUrl,
-                onAuthorTap: onAuthorTap,
+              Row(
+                children: [
+                  Expanded(
+                    child: PostCardHeader(
+                      userName: userName,
+                      timeAgo: timeAgo,
+                      category: category,
+                      avatarUrl: avatarUrl,
+                      onAuthorTap: onAuthorTap,
+                    ),
+                  ),
+                  if (onEdit != null || onDelete != null)
+                    _PostMoreMenuButton(
+                      onEdit: onEdit,
+                      onDelete: onDelete,
+                    ),
+                ],
               ),
               SizedBox(height: 10.h),
               Text(
@@ -90,6 +106,61 @@ class PostCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _PostMoreMenuButton extends StatelessWidget {
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
+
+  const _PostMoreMenuButton({this.onEdit, this.onDelete});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return PopupMenuButton<String>(
+      padding: EdgeInsets.zero,
+      constraints: BoxConstraints(minWidth: 32.w, minHeight: 32.h),
+      iconSize: 18.sp,
+      icon: Icon(Icons.more_vert, size: 18.sp),
+      onSelected: (value) {
+        if (value == 'edit') onEdit?.call();
+        if (value == 'delete') onDelete?.call();
+      },
+      itemBuilder: (context) => [
+        if (onEdit != null)
+          PopupMenuItem(
+            value: 'edit',
+            child: Row(
+              children: [
+                const Icon(Icons.edit_outlined, size: 20),
+                SizedBox(width: 8.w),
+                Text(l10n.edit),
+              ],
+            ),
+          ),
+        if (onDelete != null)
+          PopupMenuItem(
+            value: 'delete',
+            child: Row(
+              children: [
+                Icon(
+                  Icons.delete_outlined,
+                  size: 20,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                SizedBox(width: 8.w),
+                Text(
+                  l10n.delete,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
     );
   }
 }

@@ -113,6 +113,14 @@ class ProfileApiService {
         .eq('listing_id', listingId);
   }
 
+  /// Soft delete a post by setting content_status to 'deleted'
+  Future<void> softDeletePost(String postId) async {
+    await _supabase
+        .from('community_posts')
+        .update({'content_status': 'deleted'})
+        .eq('post_id', postId);
+  }
+
   Future<bool> togglePostBookmark(String postId) async {
     final userId = _supabase.auth.currentUser!.id;
 

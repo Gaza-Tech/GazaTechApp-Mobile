@@ -16,6 +16,7 @@ class MyRoutes {
   static const String editProfile = '/editProfile';
   static const String bookmarks = '/bookmarks';
   static const String editListing = '/editListing';
+  static const String editPost = '/editPost';
   static const String verificationForm = '/verificationForm';
   static const String verificationStatus = '/verificationStatus';
 }

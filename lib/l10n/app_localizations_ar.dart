@@ -1025,4 +1025,26 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get edit => 'تعديل';
+
+  @override
+  String get editPost => 'تعديل المنشور';
+
+  @override
+  String get updatePost => 'تحديث المنشور';
+
+  @override
+  String get postUpdated => 'تم تحديث المنشور بنجاح';
+
+  @override
+  String get deletePost => 'حذف المنشور';
+
+  @override
+  String get deletePostConfirmTitle => 'حذف المنشور؟';
+
+  @override
+  String get deletePostConfirmBody =>
+      'هل أنت متأكد من حذف هذا المنشور؟ لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String get postDeleted => 'تم حذف المنشور بنجاح';
 }

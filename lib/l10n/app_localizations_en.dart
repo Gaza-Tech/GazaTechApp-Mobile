@@ -1027,4 +1027,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get edit => 'Edit';
+
+  @override
+  String get editPost => 'Edit Post';
+
+  @override
+  String get updatePost => 'Update Post';
+
+  @override
+  String get postUpdated => 'Post updated successfully';
+
+  @override
+  String get deletePost => 'Delete Post';
+
+  @override
+  String get deletePostConfirmTitle => 'Delete Post?';
+
+  @override
+  String get deletePostConfirmBody =>
+      'Are you sure you want to delete this post? This action cannot be undone.';
+
+  @override
+  String get postDeleted => 'Post deleted successfully';
 }

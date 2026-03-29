@@ -24,6 +24,7 @@ import 'package:gaza_tech/features/listing_details/ui/listing_details_screen.dar
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
 import 'package:gaza_tech/features/add_post/cubit/add_post_cubit.dart';
 import 'package:gaza_tech/features/add_post/ui/add_post_screen.dart';
+import 'package:gaza_tech/features/community/data/models/post_model.dart';
 import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
 import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
 import 'package:gaza_tech/features/community/ui/post_details_screen.dart';
@@ -145,7 +146,15 @@ class MyRouter {
       case MyRoutes.createPost:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => getIt<AddPostCubit>(),
+            create: (context) => getIt<AddPostCubit>(param1: null),
+            child: const AddPostScreen(),
+          ),
+        );
+      case MyRoutes.editPost:
+        final post = settings.arguments as PostModel;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<AddPostCubit>(param1: post),
             child: const AddPostScreen(),
           ),
         );

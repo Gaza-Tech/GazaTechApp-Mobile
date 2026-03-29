@@ -133,6 +133,27 @@ class CommunityRepo {
     }
   }
 
+  Future<ApiResult<void>> updatePost({
+    required String postId,
+    required Map<String, dynamic> data,
+  }) async {
+    try {
+      await _service.updatePost(postId: postId, data: data);
+      return ApiResult.success(null);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  Future<ApiResult<void>> softDeletePost(String postId) async {
+    try {
+      await _service.softDeletePost(postId);
+      return ApiResult.success(null);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
   Future<ApiResult<List<CommentModel>>> fetchReplies({
     required String parentCommentId,
   }) async {

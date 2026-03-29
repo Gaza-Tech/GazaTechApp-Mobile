@@ -429,5 +429,13 @@
   "deleteListingConfirmBody": "هل أنت متأكد من حذف هذا الإعلان؟ لا يمكن التراجع عن هذا الإجراء.",
   "listingDeleted": "تم حذف الإعلان بنجاح",
   "delete": "حذف",
-  "edit": "تعديل"
+  "edit": "تعديل",
+
+  "editPost": "تعديل المنشور",
+  "updatePost": "تحديث المنشور",
+  "postUpdated": "تم تحديث المنشور بنجاح",
+  "deletePost": "حذف المنشور",
+  "deletePostConfirmTitle": "حذف المنشور؟",
+  "deletePostConfirmBody": "هل أنت متأكد من حذف هذا المنشور؟ لا يمكن التراجع عن هذا الإجراء.",
+  "postDeleted": "تم حذف المنشور بنجاح"
 }

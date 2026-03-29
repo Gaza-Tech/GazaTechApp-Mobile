@@ -219,6 +219,25 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
+  /// Soft delete a post and remove it from the local list
+  Future<bool> deletePost(String postId) async {
+    final result = await _repo.softDeletePost(postId);
+    return result.when(
+      success: (_) {
+        emit(
+          state.copyWith(
+            posts: state.posts.where((p) => p.postId != postId).toList(),
+          ),
+        );
+        return true;
+      },
+      failure: (error) {
+        emit(state.copyWith(errorMessage: error.message));
+        return false;
+      },
+    );
+  }
+
   /// Soft delete a listing and remove it from the local list
   Future<bool> deleteListing(String listingId) async {
     final result = await _repo.softDeleteListing(listingId);

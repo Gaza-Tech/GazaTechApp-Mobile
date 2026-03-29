@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
 import 'package:gaza_tech/features/community/cubit/post_details_state.dart';
 import 'package:gaza_tech/features/community/ui/widgets/comment_card.dart';
@@ -11,6 +13,7 @@ import 'package:gaza_tech/features/community/ui/widgets/post_card_actions.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_header.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_image_gallery.dart';
 import 'package:gaza_tech/features/community/ui/widgets/view_replies_button.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PostDetailsScreen extends StatefulWidget {
   const PostDetailsScreen({super.key});
@@ -28,6 +31,112 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
   void dispose() {
     _commentController.dispose();
     super.dispose();
+  }
+
+  Future<void> _navigateToEdit(
+    BuildContext context,
+    PostDetailsState state,
+  ) async {
+    final post = state.post;
+    if (post == null) return;
+    final result = await Navigator.pushNamed(
+      context,
+      MyRoutes.editPost,
+      arguments: post,
+    );
+    if (result == true && context.mounted) {
+      context.read<PostDetailsCubit>().loadPost();
+    }
+  }
+
+  void _showDeleteConfirmation(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+      ),
+      builder: (bottomSheetContext) {
+        return Padding(
+          padding: EdgeInsets.all(24.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40.w,
+                height: 4.h,
+                decoration: BoxDecoration(
+                  color: theme.dividerColor,
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
+              ),
+              const VerticalSpace(24),
+              Icon(
+                Icons.delete_outline,
+                size: 48.sp,
+                color: theme.colorScheme.error,
+              ),
+              const VerticalSpace(16),
+              Text(
+                l10n.deletePostConfirmTitle,
+                style: theme.textTheme.titleLarge,
+              ),
+              const VerticalSpace(8),
+              Text(
+                l10n.deletePostConfirmBody,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodyMedium,
+              ),
+              const VerticalSpace(24),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.pop(bottomSheetContext),
+                      child: Text(l10n.cancel),
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: theme.colorScheme.error,
+                        foregroundColor: theme.colorScheme.onError,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(bottomSheetContext);
+                        _deletePost(context);
+                      },
+                      child: Text(l10n.delete),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).padding.bottom),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _deletePost(BuildContext context) async {
+    final l10n = context.l10n;
+    final success = await context.read<PostDetailsCubit>().deletePost();
+    if (!context.mounted) return;
+
+    if (success) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.postDeleted)));
+      Navigator.pop(context, 'deleted');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.deletePostConfirmBody)),
+      );
+    }
   }
 
   String _timeAgo(BuildContext context, DateTime createdAt) {
@@ -49,11 +158,49 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
           appBar: AppBar(
             title: Text(l10n.postDetails),
             actions: [
-              PopupMenuButton<String>(
-                icon: const Icon(Icons.more_vert),
-                onSelected: (_) {},
-                itemBuilder: (_) => [],
-              ),
+              if (state.post != null &&
+                  state.post!.authorId ==
+                      Supabase.instance.client.auth.currentUser?.id)
+                PopupMenuButton<String>(
+                  icon: const Icon(Icons.more_vert),
+                  onSelected: (value) {
+                    if (value == 'edit') _navigateToEdit(context, state);
+                    if (value == 'delete') {
+                      _showDeleteConfirmation(context);
+                    }
+                  },
+                  itemBuilder: (_) => [
+                    PopupMenuItem(
+                      value: 'edit',
+                      child: Row(
+                        children: [
+                          const Icon(Icons.edit_outlined, size: 20),
+                          SizedBox(width: 8.w),
+                          Text(l10n.edit),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 'delete',
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.delete_outlined,
+                            size: 20,
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                          SizedBox(width: 8.w),
+                          Text(
+                            l10n.delete,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.error,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
             ],
           ),
           body: state.isPostLoading
@@ -197,12 +344,51 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
             category: post.postCategory,
           ),
         ),
-        IconButton(
-          icon: const Icon(Icons.more_horiz),
-          onPressed: () {},
-          constraints: BoxConstraints(minWidth: 36.w, minHeight: 36.h),
-          padding: EdgeInsets.zero,
-        ),
+        if (post.authorId ==
+            Supabase.instance.client.auth.currentUser?.id)
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_horiz),
+            constraints: BoxConstraints(minWidth: 36.w, minHeight: 36.h),
+            padding: EdgeInsets.zero,
+            onSelected: (value) {
+              if (value == 'edit') _navigateToEdit(context, state);
+              if (value == 'delete') _showDeleteConfirmation(context);
+            },
+            itemBuilder: (_) {
+              final l10n = context.l10n;
+              return [
+                PopupMenuItem(
+                  value: 'edit',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.edit_outlined, size: 20),
+                      SizedBox(width: 8.w),
+                      Text(l10n.edit),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'delete',
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.delete_outlined,
+                        size: 20,
+                        color: Theme.of(context).colorScheme.error,
+                      ),
+                      SizedBox(width: 8.w),
+                      Text(
+                        l10n.delete,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ];
+            },
+          ),
       ],
     );
   }

@@ -270,6 +270,20 @@ class CommunityApiService {
     });
   }
 
+  Future<void> updatePost({
+    required String postId,
+    required Map<String, dynamic> data,
+  }) async {
+    await _supabase.from('community_posts').update(data).eq('post_id', postId);
+  }
+
+  Future<void> softDeletePost(String postId) async {
+    await _supabase
+        .from('community_posts')
+        .update({'content_status': 'deleted'})
+        .eq('post_id', postId);
+  }
+
   Future<List<Map<String, dynamic>>> searchPosts({
     required String keyword,
     required int page,

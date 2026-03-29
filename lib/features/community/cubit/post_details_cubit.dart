@@ -284,6 +284,11 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
     emit(state.copyWith(comments: updatedComments));
   }
 
+  Future<bool> deletePost() async {
+    final result = await _repo.softDeletePost(postId);
+    return result.when(success: (_) => true, failure: (_) => false);
+  }
+
   Future<void> addComment(String content, {String? parentCommentId}) async {
     if (content.trim().isEmpty) return;
 
