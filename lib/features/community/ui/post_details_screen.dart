@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
-import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/core/widgets/delete_confirmation_sheet.dart';
 import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
 import 'package:gaza_tech/features/community/cubit/post_details_state.dart';
 import 'package:gaza_tech/features/community/ui/widgets/comment_card.dart';
@@ -51,74 +51,11 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
 
   void _showDeleteConfirmation(BuildContext context) {
     final l10n = context.l10n;
-    final theme = Theme.of(context);
-
-    showModalBottomSheet(
-      context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-      ),
-      builder: (bottomSheetContext) {
-        return Padding(
-          padding: EdgeInsets.all(24.w),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 40.w,
-                height: 4.h,
-                decoration: BoxDecoration(
-                  color: theme.dividerColor,
-                  borderRadius: BorderRadius.circular(2.r),
-                ),
-              ),
-              const VerticalSpace(24),
-              Icon(
-                Icons.delete_outline,
-                size: 48.sp,
-                color: theme.colorScheme.error,
-              ),
-              const VerticalSpace(16),
-              Text(
-                l10n.deletePostConfirmTitle,
-                style: theme.textTheme.titleLarge,
-              ),
-              const VerticalSpace(8),
-              Text(
-                l10n.deletePostConfirmBody,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.bodyMedium,
-              ),
-              const VerticalSpace(24),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () => Navigator.pop(bottomSheetContext),
-                      child: Text(l10n.cancel),
-                    ),
-                  ),
-                  SizedBox(width: 12.w),
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: theme.colorScheme.error,
-                        foregroundColor: theme.colorScheme.onError,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(bottomSheetContext);
-                        _deletePost(context);
-                      },
-                      child: Text(l10n.delete),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: MediaQuery.of(context).padding.bottom),
-            ],
-          ),
-        );
-      },
+    showDeleteConfirmationSheet(
+      context,
+      title: l10n.deletePostConfirmTitle,
+      body: l10n.deletePostConfirmBody,
+      onConfirm: () => _deletePost(context),
     );
   }
 
