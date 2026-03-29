@@ -71,7 +71,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
       Navigator.pop(context, 'deleted');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.deletePostConfirmBody)),
+        SnackBar(content: Text(l10n.deletePost)),
       );
     }
   }

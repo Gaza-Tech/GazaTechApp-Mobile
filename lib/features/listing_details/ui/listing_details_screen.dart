@@ -118,7 +118,7 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
     } else {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(l10n.deleteListingConfirmBody)));
+      ).showSnackBar(SnackBar(content: Text(l10n.deleteListing)));
     }
   }
 }
