@@ -437,5 +437,22 @@
   "deletePost": "حذف المنشور",
   "deletePostConfirmTitle": "حذف المنشور؟",
   "deletePostConfirmBody": "هل أنت متأكد من حذف هذا المنشور؟ لا يمكن التراجع عن هذا الإجراء.",
-  "postDeleted": "تم حذف المنشور بنجاح"
+  "postDeleted": "تم حذف المنشور بنجاح",
+
+  "reportListing": "الإبلاغ عن الإعلان",
+  "reportPost": "الإبلاغ عن المنشور",
+  "reportUser": "الإبلاغ عن المستخدم",
+  "reportComment": "الإبلاغ عن التعليق",
+  "reportSubtitle": "لماذا تريد الإبلاغ عن هذا؟",
+  "reportReasonSpam": "محتوى مزعج",
+  "reportReasonInappropriateContent": "محتوى غير لائق",
+  "reportReasonHarassment": "تحرش",
+  "reportReasonMisleading": "مضلل",
+  "reportReasonFraudScam": "احتيال",
+  "reportReasonHateSpeech": "خطاب كراهية",
+  "reportReasonOther": "أخرى",
+  "reportDescriptionHint": "أضف المزيد من التفاصيل (اختياري)",
+  "reportSubmit": "إرسال البلاغ",
+  "reportSuccess": "تم إرسال البلاغ بنجاح. سنراجعه قريباً.",
+  "reportFailure": "فشل إرسال البلاغ. يرجى المحاولة مرة أخرى."
 }

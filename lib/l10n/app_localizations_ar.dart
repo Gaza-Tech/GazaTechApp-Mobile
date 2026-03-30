@@ -1047,4 +1047,52 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get postDeleted => 'تم حذف المنشور بنجاح';
+
+  @override
+  String get reportListing => 'الإبلاغ عن الإعلان';
+
+  @override
+  String get reportPost => 'الإبلاغ عن المنشور';
+
+  @override
+  String get reportUser => 'الإبلاغ عن المستخدم';
+
+  @override
+  String get reportComment => 'الإبلاغ عن التعليق';
+
+  @override
+  String get reportSubtitle => 'لماذا تريد الإبلاغ عن هذا؟';
+
+  @override
+  String get reportReasonSpam => 'محتوى مزعج';
+
+  @override
+  String get reportReasonInappropriateContent => 'محتوى غير لائق';
+
+  @override
+  String get reportReasonHarassment => 'تحرش';
+
+  @override
+  String get reportReasonMisleading => 'مضلل';
+
+  @override
+  String get reportReasonFraudScam => 'احتيال';
+
+  @override
+  String get reportReasonHateSpeech => 'خطاب كراهية';
+
+  @override
+  String get reportReasonOther => 'أخرى';
+
+  @override
+  String get reportDescriptionHint => 'أضف المزيد من التفاصيل (اختياري)';
+
+  @override
+  String get reportSubmit => 'إرسال البلاغ';
+
+  @override
+  String get reportSuccess => 'تم إرسال البلاغ بنجاح. سنراجعه قريباً.';
+
+  @override
+  String get reportFailure => 'فشل إرسال البلاغ. يرجى المحاولة مرة أخرى.';
 }

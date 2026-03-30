@@ -9,6 +9,8 @@ import 'package:gaza_tech/features/listing_details/data/models/listing_detail_mo
 import 'package:gaza_tech/core/widgets/delete_confirmation_sheet.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/listing_details_body.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/listing_details_error_view.dart';
+import 'package:gaza_tech/features/report/data/models/report_reason.dart';
+import 'package:gaza_tech/features/report/ui/widgets/report_bottom_sheet.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ListingDetailsScreen extends StatefulWidget {
@@ -61,10 +63,15 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
                     icon: const Icon(Icons.share_rounded),
                     onPressed: () {},
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.flag_rounded),
-                    onPressed: () {},
-                  ),
+                  if (!isOwner && listing != null)
+                    IconButton(
+                      icon: const Icon(Icons.flag_rounded),
+                      onPressed: () => showReportBottomSheet(
+                        context,
+                        entityType: ReportEntityType.listing,
+                        entityId: listing.listingId,
+                      ),
+                    ),
                   SizedBox(width: 4.w),
                 ],
               );

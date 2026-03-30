@@ -8,6 +8,8 @@ import 'package:gaza_tech/features/profile/cubit/profile_state.dart';
 import 'package:gaza_tech/features/profile/ui/widgets/profile_header.dart';
 import 'package:gaza_tech/features/profile/ui/widgets/profile_listings_tab.dart';
 import 'package:gaza_tech/features/profile/ui/widgets/profile_posts_tab.dart';
+import 'package:gaza_tech/features/report/data/models/report_reason.dart';
+import 'package:gaza_tech/features/report/ui/widgets/report_bottom_sheet.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -61,6 +63,15 @@ class _ProfileScreenState extends State<ProfileScreen>
                             context.read<ProfileCubit>().loadProfile();
                           }
                         },
+                      ),
+                    if (!state.isOwnProfile && state.userProfile != null)
+                      IconButton(
+                        icon: const Icon(Icons.flag_rounded),
+                        onPressed: () => showReportBottomSheet(
+                          context,
+                          entityType: ReportEntityType.user,
+                          entityId: state.userProfile!.userId,
+                        ),
                       ),
                   ],
                 ),

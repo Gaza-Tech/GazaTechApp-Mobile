@@ -12,6 +12,7 @@ class CommentCard extends StatelessWidget {
   final int indentLevel;
   final VoidCallback? onReply;
   final VoidCallback? onLikeTap;
+  final VoidCallback? onReport;
 
   const CommentCard({
     super.key,
@@ -23,6 +24,7 @@ class CommentCard extends StatelessWidget {
     this.indentLevel = 0,
     this.onReply,
     this.onLikeTap,
+    this.onReport,
   });
 
   @override
@@ -118,6 +120,17 @@ class CommentCard extends StatelessWidget {
               style: MyTextStyle.action.s.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),
+            ),
+          ),
+        ],
+        if (onReport != null) ...[
+          const Spacer(),
+          GestureDetector(
+            onTap: onReport,
+            child: Icon(
+              Icons.flag_outlined,
+              size: 16.sp,
+              color: theme.colorScheme.onSurfaceVariant,
             ),
           ),
         ],

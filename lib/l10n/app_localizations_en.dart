@@ -1049,4 +1049,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get postDeleted => 'Post deleted successfully';
+
+  @override
+  String get reportListing => 'Report Listing';
+
+  @override
+  String get reportPost => 'Report Post';
+
+  @override
+  String get reportUser => 'Report User';
+
+  @override
+  String get reportComment => 'Report Comment';
+
+  @override
+  String get reportSubtitle => 'Why are you reporting this?';
+
+  @override
+  String get reportReasonSpam => 'Spam';
+
+  @override
+  String get reportReasonInappropriateContent => 'Inappropriate Content';
+
+  @override
+  String get reportReasonHarassment => 'Harassment';
+
+  @override
+  String get reportReasonMisleading => 'Misleading';
+
+  @override
+  String get reportReasonFraudScam => 'Fraud / Scam';
+
+  @override
+  String get reportReasonHateSpeech => 'Hate Speech';
+
+  @override
+  String get reportReasonOther => 'Other';
+
+  @override
+  String get reportDescriptionHint => 'Add more details (optional)';
+
+  @override
+  String get reportSubmit => 'Submit Report';
+
+  @override
+  String get reportSuccess =>
+      'Report submitted successfully. We will review it shortly.';
+
+  @override
+  String get reportFailure => 'Failed to submit report. Please try again.';
 }

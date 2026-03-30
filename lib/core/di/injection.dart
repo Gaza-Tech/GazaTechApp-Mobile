@@ -61,6 +61,9 @@ import 'package:gaza_tech/features/edit_profile/data/services/edit_profile_api_s
 import 'package:gaza_tech/features/verification/cubit/verification_cubit.dart';
 import 'package:gaza_tech/features/verification/data/repos/verification_repo.dart';
 import 'package:gaza_tech/features/verification/data/services/verification_api_service.dart';
+import 'package:gaza_tech/features/report/cubit/report_cubit.dart';
+import 'package:gaza_tech/features/report/data/repos/report_repo.dart';
+import 'package:gaza_tech/features/report/data/services/report_api_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -235,4 +238,11 @@ Future<void> setupGetIt() async {
     () => VerificationRepo(getIt()),
   );
   getIt.registerFactory<VerificationCubit>(() => VerificationCubit(getIt()));
+
+  // 19. Report
+  getIt.registerLazySingleton<ReportApiService>(
+    () => ReportApiService(getIt()),
+  );
+  getIt.registerLazySingleton<ReportRepo>(() => ReportRepo(getIt()));
+  getIt.registerFactory<ReportCubit>(() => ReportCubit(getIt()));
 }
