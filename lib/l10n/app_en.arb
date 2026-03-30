@@ -516,5 +516,6 @@
   "reportDescriptionHint": "Add more details (optional)",
   "reportSubmit": "Submit Report",
   "reportSuccess": "Report submitted successfully. We will review it shortly.",
-  "reportFailure": "Failed to submit report. Please try again."
+  "reportFailure": "Failed to submit report. Please try again.",
+  "reportAlreadySubmitted": "You have already reported this. We are reviewing it."
 }

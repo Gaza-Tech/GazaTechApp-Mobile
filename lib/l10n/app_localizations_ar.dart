@@ -1095,4 +1095,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get reportFailure => 'فشل إرسال البلاغ. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get reportAlreadySubmitted => 'لقد أبلغت عن هذا مسبقاً. نحن نراجعه.';
 }

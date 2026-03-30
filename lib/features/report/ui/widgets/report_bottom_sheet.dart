@@ -95,6 +95,12 @@ class _ReportSheetContentState extends State<_ReportSheetContent> {
               SnackBar(content: Text(l10n.reportSuccess)),
             );
           },
+          duplicate: () {
+            Navigator.pop(context);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(l10n.reportAlreadySubmitted)),
+            );
+          },
           failure: (message) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(l10n.reportFailure)),

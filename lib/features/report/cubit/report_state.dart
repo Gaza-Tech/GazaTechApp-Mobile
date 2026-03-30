@@ -7,5 +7,6 @@ class ReportState with _$ReportState {
   const factory ReportState.initial() = _Initial;
   const factory ReportState.loading() = _Loading;
   const factory ReportState.success() = _Success;
+  const factory ReportState.duplicate() = _Duplicate;
   const factory ReportState.failure(String message) = _Failure;
 }

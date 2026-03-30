@@ -1098,4 +1098,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reportFailure => 'Failed to submit report. Please try again.';
+
+  @override
+  String get reportAlreadySubmitted =>
+      'You have already reported this. We are reviewing it.';
 }

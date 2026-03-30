@@ -2167,6 +2167,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to submit report. Please try again.'**
   String get reportFailure;
+
+  /// No description provided for @reportAlreadySubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'You have already reported this. We are reviewing it.'**
+  String get reportAlreadySubmitted;
 }
 
 class _AppLocalizationsDelegate

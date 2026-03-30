@@ -35,9 +35,13 @@ class ReportCubit extends Cubit<ReportState> {
 
     result.when(
       success: (_) => emit(const ReportState.success()),
-      failure: (error) => emit(
-        ReportState.failure(error.message ?? 'Unknown error'),
-      ),
+      failure: (error) {
+        if (error.statusCode == 23505) {
+          emit(const ReportState.duplicate());
+        } else {
+          emit(ReportState.failure(error.message ?? 'Unknown error'));
+        }
+      },
     );
   }
 
