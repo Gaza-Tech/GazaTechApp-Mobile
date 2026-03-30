@@ -13,6 +13,8 @@ import 'package:gaza_tech/features/community/ui/widgets/post_card_actions.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_header.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_image_gallery.dart';
 import 'package:gaza_tech/features/community/ui/widgets/view_replies_button.dart';
+import 'package:gaza_tech/features/report/data/models/report_reason.dart';
+import 'package:gaza_tech/features/report/ui/widgets/report_bottom_sheet.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PostDetailsScreen extends StatefulWidget {
@@ -111,10 +113,16 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                   icon: const Icon(Icons.share_rounded),
                   onPressed: () {},
                 ),
-                IconButton(
-                  icon: const Icon(Icons.flag_rounded),
-                  onPressed: () {},
-                ),
+                if (state.post!.authorId !=
+                    Supabase.instance.client.auth.currentUser?.id)
+                  IconButton(
+                    icon: const Icon(Icons.flag_rounded),
+                    onPressed: () => showReportBottomSheet(
+                      context,
+                      entityType: ReportEntityType.post,
+                      entityId: state.post!.postId,
+                    ),
+                  ),
                 SizedBox(width: 4.w),
               ],
             ],
@@ -171,6 +179,16 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                     onLikeTap: () => cubit.toggleCommentLike(
                                       comment.commentId,
                                     ),
+                                    onReport: comment.authorId !=
+                                            Supabase.instance.client.auth
+                                                .currentUser?.id
+                                        ? () => showReportBottomSheet(
+                                              context,
+                                              entityType:
+                                                  ReportEntityType.comment,
+                                              entityId: comment.commentId,
+                                            )
+                                        : null,
                                   ),
                                   if (comment.repliesCount > 0)
                                     ViewRepliesButton(
@@ -206,6 +224,18 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                                 cubit.toggleCommentLike(
                                                   reply.commentId,
                                                 ),
+                                            onReport: reply.authorId !=
+                                                    Supabase.instance.client
+                                                        .auth.currentUser?.id
+                                                ? () => showReportBottomSheet(
+                                                      context,
+                                                      entityType:
+                                                          ReportEntityType
+                                                              .comment,
+                                                      entityId:
+                                                          reply.commentId,
+                                                    )
+                                                : null,
                                           ),
                                         ),
                                 ];

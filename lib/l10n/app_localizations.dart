@@ -2071,6 +2071,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Post deleted successfully'**
   String get postDeleted;
+
+  /// No description provided for @reportListing.
+  ///
+  /// In en, this message translates to:
+  /// **'Report Listing'**
+  String get reportListing;
+
+  /// No description provided for @reportPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Report Post'**
+  String get reportPost;
+
+  /// No description provided for @reportUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Report User'**
+  String get reportUser;
+
+  /// No description provided for @reportComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Report Comment'**
+  String get reportComment;
+
+  /// No description provided for @reportSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Why are you reporting this?'**
+  String get reportSubtitle;
+
+  /// No description provided for @reportReasonSpam.
+  ///
+  /// In en, this message translates to:
+  /// **'Spam'**
+  String get reportReasonSpam;
+
+  /// No description provided for @reportReasonInappropriateContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Inappropriate Content'**
+  String get reportReasonInappropriateContent;
+
+  /// No description provided for @reportReasonHarassment.
+  ///
+  /// In en, this message translates to:
+  /// **'Harassment'**
+  String get reportReasonHarassment;
+
+  /// No description provided for @reportReasonMisleading.
+  ///
+  /// In en, this message translates to:
+  /// **'Misleading'**
+  String get reportReasonMisleading;
+
+  /// No description provided for @reportReasonFraudScam.
+  ///
+  /// In en, this message translates to:
+  /// **'Fraud / Scam'**
+  String get reportReasonFraudScam;
+
+  /// No description provided for @reportReasonHateSpeech.
+  ///
+  /// In en, this message translates to:
+  /// **'Hate Speech'**
+  String get reportReasonHateSpeech;
+
+  /// No description provided for @reportReasonOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get reportReasonOther;
+
+  /// No description provided for @reportDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add more details (optional)'**
+  String get reportDescriptionHint;
+
+  /// No description provided for @reportSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Report'**
+  String get reportSubmit;
+
+  /// No description provided for @reportSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Report submitted successfully. We will review it shortly.'**
+  String get reportSuccess;
+
+  /// No description provided for @reportFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to submit report. Please try again.'**
+  String get reportFailure;
 }
 
 class _AppLocalizationsDelegate
