@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gaza_tech/core/helpers/image_compress_helper.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/features/add_listing/data/models/listing_image_item.dart';
 import 'package:gaza_tech/features/add_listing/data/repos/add_listing_repo.dart';
@@ -301,10 +302,16 @@ class AddListingCubit extends Cubit<AddListingState> {
         case ExistingImage(:final url):
           allUrls.add(url);
         case NewImage(:final file):
+          final compressedFile = await ImageCompressHelper.compressToWebp(
+            file,
+            quality: 80,
+            maxWidth: 1080,
+            maxHeight: 1080,
+          );
           final uploadResult = await _repo.uploadImages(
             sellerId: sellerId,
             listingId: listingId,
-            images: [file],
+            images: [compressedFile],
           );
           switch (uploadResult) {
             case Success(data: final urls):
@@ -343,10 +350,17 @@ class AddListingCubit extends Cubit<AddListingState> {
       return;
     }
 
+    final compressedImages = await ImageCompressHelper.compressMultipleToWebp(
+      images,
+      quality: 80,
+      maxWidth: 1080,
+      maxHeight: 1080,
+    );
+
     final uploadResult = await _repo.uploadImages(
       sellerId: sellerId,
       listingId: listingId,
-      images: images,
+      images: compressedImages,
     );
 
     switch (uploadResult) {

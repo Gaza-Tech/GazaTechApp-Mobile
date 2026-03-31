@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:gaza_tech/core/helpers/image_compress_helper.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/features/edit_profile/data/repos/edit_profile_repo.dart';
 import 'package:gaza_tech/features/profile/data/models/user_profile_model.dart';
@@ -57,12 +58,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
   Future<void> pickAvatar() async {
     final picker = ImagePicker();
-    final picked = await picker.pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 800,
-      maxHeight: 800,
-      imageQuality: 85,
-    );
+    final picked = await picker.pickImage(source: ImageSource.gallery);
     if (picked != null) {
       emit(state.copyWith(avatarLocalPath: picked.path));
     }
@@ -92,9 +88,16 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     // Upload avatar if changed
     if (state.avatarLocalPath != null) {
       emit(state.copyWith(isAvatarUploading: true));
+      final originalFile = File(state.avatarLocalPath!);
+      final compressedFile = await ImageCompressHelper.compressToWebp(
+        originalFile,
+        quality: 70,
+        maxWidth: 512,
+        maxHeight: 512,
+      );
       final uploadResult = await _repo.uploadAvatar(
         _initialProfile.userId,
-        File(state.avatarLocalPath!),
+        compressedFile,
       );
       final failed = uploadResult.when(
         success: (url) {
