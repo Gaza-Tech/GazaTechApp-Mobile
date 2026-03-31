@@ -75,7 +75,9 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
           const Spacer(),
           // Bookmark, Share, Edit, Delete, Report buttons
           _buildCircularIconButton(
-            icon: isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+            icon: isBookmarked
+                ? Icons.bookmark_rounded
+                : Icons.bookmark_border_rounded,
             onPressed: () =>
                 context.read<ListingDetailsCubit>().toggleBookmark(),
           ),
@@ -84,12 +86,12 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
           const HorizontalSpace(4),
           if (isOwner) ...[
             _buildCircularIconButton(
-              icon: Icons.edit_outlined,
+              icon: Icons.edit_rounded,
               onPressed: () => _navigateToEdit(context, listing),
             ),
             const HorizontalSpace(4),
             _buildCircularIconButton(
-              icon: Icons.delete_outlined,
+              icon: Icons.delete_rounded,
               onPressed: () => showDeleteConfirmationSheet(
                 context,
                 title: context.l10n.deleteListingConfirmTitle,
