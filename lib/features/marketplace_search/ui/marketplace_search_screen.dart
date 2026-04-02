@@ -6,9 +6,9 @@ import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/active_filters_bar.dart';
 import 'package:gaza_tech/core/widgets/recent_searches_view.dart';
 import 'package:gaza_tech/core/widgets/search_app_bar.dart';
-import 'package:gaza_tech/features/search/cubit/marketplace_search_cubit.dart';
-import 'package:gaza_tech/features/search/cubit/marketplace_search_state.dart';
-import 'package:gaza_tech/features/search/data/models/marketplace_search_filters_model.dart';
+import 'package:gaza_tech/features/marketplace_search/cubit/marketplace_search_cubit.dart';
+import 'package:gaza_tech/features/marketplace_search/cubit/marketplace_search_state.dart';
+import 'package:gaza_tech/features/marketplace_search/data/models/marketplace_search_filters_model.dart';
 import 'widgets/filter_bottom_sheet.dart';
 import 'widgets/search_results_grid.dart';
 

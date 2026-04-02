@@ -14,7 +14,6 @@ import 'package:gaza_tech/features/listing_details/ui/widgets/seller_info_card.d
 import 'package:gaza_tech/features/listing_details/ui/widgets/similar_products_list.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/specifications_table.dart';
 import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
-import 'package:gaza_tech/features/marketplace/ui/helpers/condition_tag_helper.dart';
 import 'package:gaza_tech/l10n/app_localizations.dart';
 
 class ListingDetailsBody extends StatelessWidget {
@@ -50,10 +49,6 @@ class ListingDetailsBody extends StatelessWidget {
               : listing.categoryName)
         : listing.categoryName;
 
-    final conditionLabel = ConditionTagHelper.getLabel(
-      context,
-      listing.productCondition,
-    );
     final priceText =
         '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}';
     final timeAgo = _formatTimeAgo(l10n, listing.createdAt);
@@ -72,7 +67,7 @@ class ListingDetailsBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const VerticalSpace(16),
-                ListingTags(condition: conditionLabel, category: categoryName),
+                ListingTags(condition: listing.productCondition, category: categoryName),
                 const VerticalSpace(12),
                 ListingInfoSection(
                   title: listing.title,

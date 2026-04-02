@@ -5,9 +5,9 @@ import 'package:gaza_tech/features/bookmarks/data/services/bookmarks_api_service
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_out/data/repos/sign_out_repo.dart';
 import 'package:gaza_tech/features/auth/sign_out/data/services/sign_out_api_service.dart';
-import 'package:gaza_tech/features/search/cubit/marketplace_search_cubit.dart';
-import 'package:gaza_tech/features/search/data/repos/marketplace_search_repo.dart';
-import 'package:gaza_tech/features/search/data/services/search_api_service.dart';
+import 'package:gaza_tech/features/marketplace_search/cubit/marketplace_search_cubit.dart';
+import 'package:gaza_tech/features/marketplace_search/data/repos/marketplace_search_repo.dart';
+import 'package:gaza_tech/features/marketplace_search/data/services/search_api_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gaza_tech/core/localization/locale_cubit.dart';
