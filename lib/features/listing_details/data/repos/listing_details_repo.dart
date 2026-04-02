@@ -15,7 +15,10 @@ class ListingDetailsRepo {
       final data = await _apiService.fetchListingById(listingId);
       final listing = ListingDetailModel.fromJson(data);
       final isBookmarked = await _apiService.isListingBookmarked(listingId);
-      return ApiResult.success(listing.copyWith(isBookmarked: isBookmarked));
+      final isReported = await _apiService.isListingReported(listingId);
+      return ApiResult.success(
+        listing.copyWith(isBookmarked: isBookmarked, isReported: isReported),
+      );
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
     }

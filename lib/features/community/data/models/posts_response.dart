@@ -11,6 +11,11 @@ class PostsResponse {
 class CommentsResponse {
   final List<CommentModel> comments;
   final bool hasMore;
+  final Set<String> reportedCommentIds;
 
-  const CommentsResponse({required this.comments, required this.hasMore});
+  const CommentsResponse({
+    required this.comments,
+    required this.hasMore,
+    this.reportedCommentIds = const {},
+  });
 }

@@ -8,12 +8,12 @@ import 'package:gaza_tech/features/report/cubit/report_cubit.dart';
 import 'package:gaza_tech/features/report/cubit/report_state.dart';
 import 'package:gaza_tech/features/report/data/models/report_reason.dart';
 
-void showReportBottomSheet(
+Future<bool?> showReportBottomSheet(
   BuildContext context, {
   required ReportEntityType entityType,
   required String entityId,
 }) {
-  showModalBottomSheet(
+  return showModalBottomSheet<bool>(
     context: context,
     isScrollControlled: true,
     shape: RoundedRectangleBorder(
@@ -90,13 +90,13 @@ class _ReportSheetContentState extends State<_ReportSheetContent> {
       listener: (context, state) {
         state.whenOrNull(
           success: () {
-            Navigator.pop(context);
+            Navigator.pop(context, true);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(l10n.reportSuccess)),
             );
           },
           duplicate: () {
-            Navigator.pop(context);
+            Navigator.pop(context, true);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(l10n.reportAlreadySubmitted)),
             );

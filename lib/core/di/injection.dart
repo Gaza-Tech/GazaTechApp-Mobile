@@ -1,4 +1,5 @@
 import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/core/services/report_event_service.dart';
 import 'package:gaza_tech/features/bookmarks/cubit/bookmarks_cubit.dart';
 import 'package:gaza_tech/features/bookmarks/data/repos/bookmarks_repo.dart';
 import 'package:gaza_tech/features/bookmarks/data/services/bookmarks_api_service.dart';
@@ -146,6 +147,11 @@ Future<void> setupGetIt() async {
     () => BookmarkEventService(),
   );
 
+  // Report Event Service (singleton shared across all cubits)
+  getIt.registerLazySingleton<ReportEventService>(
+    () => ReportEventService(),
+  );
+
   // Bookmarks Feature
   getIt.registerLazySingleton<BookmarksApiService>(
     () => BookmarksApiService(getIt()),
@@ -179,7 +185,8 @@ Future<void> setupGetIt() async {
     () => ListingDetailsRepo(getIt()),
   );
   getIt.registerFactoryParam<ListingDetailsCubit, String, void>(
-    (listingId, _) => ListingDetailsCubit(getIt(), listingId, getIt()),
+    (listingId, _) =>
+        ListingDetailsCubit(getIt(), listingId, getIt(), getIt()),
   );
 
   // 13. Search
@@ -200,7 +207,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<CommunityRepo>(() => CommunityRepo(getIt()));
   getIt.registerFactory<CommunityCubit>(() => CommunityCubit(getIt(), getIt()));
   getIt.registerFactoryParam<PostDetailsCubit, String, void>(
-    (postId, _) => PostDetailsCubit(getIt(), postId, getIt()),
+    (postId, _) => PostDetailsCubit(getIt(), postId, getIt(), getIt()),
   );
   getIt.registerFactoryParam<AddPostCubit, PostModel?, void>(
     (post, _) => AddPostCubit(getIt(), post),
@@ -218,7 +225,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
   getIt.registerFactoryParam<ProfileCubit, String, bool>(
     (userId, isOwnProfile) =>
-        ProfileCubit(getIt(), userId, isOwnProfile, getIt()),
+        ProfileCubit(getIt(), userId, isOwnProfile, getIt(), getIt()),
   );
 
   // 17. Edit Profile

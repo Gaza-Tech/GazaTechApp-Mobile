@@ -35,6 +35,8 @@ abstract class ProfileState with _$ProfileState {
     // Verification
     String? verificationStatus,
 
+    @Default(false) bool isUserReported,
+
     String? errorMessage,
   }) = _ProfileState;
 }

@@ -33,7 +33,8 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
             initial: () => const SizedBox.shrink(),
             loading: () => const Center(child: CircularProgressIndicator()),
             failure: (message) => ListingDetailsErrorView(message: message),
-            success: (listing, similarListings, sellerListings, isBookmarked) =>
+            success: (listing, similarListings, sellerListings, isBookmarked,
+                    isReported) =>
                 ListingDetailsBody(
                   listing: listing,
                   similarListings: similarListings,
@@ -43,6 +44,7 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
                     context,
                     listing,
                     isBookmarked,
+                    isReported,
                   ),
                 ),
           );
@@ -55,6 +57,7 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
     BuildContext context,
     ListingDetailModel listing,
     bool isBookmarked,
+    bool isReported,
   ) {
     final screenHeight = MediaQuery.of(context).size.height;
     final currentUserId = Supabase.instance.client.auth.currentUser?.id;
@@ -103,12 +106,23 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
           const HorizontalSpace(4),
           if (!isOwner) ...[
             _buildCircularIconButton(
-              icon: Icons.flag_rounded,
-              onPressed: () => showReportBottomSheet(
-                context,
-                entityType: ReportEntityType.listing,
-                entityId: listing.listingId,
-              ),
+              icon: isReported
+                  ? Icons.flag_rounded
+                  : Icons.outlined_flag_rounded,
+              onPressed: isReported
+                  ? () {}
+                  : () async {
+                      final reported = await showReportBottomSheet(
+                        context,
+                        entityType: ReportEntityType.listing,
+                        entityId: listing.listingId,
+                      );
+                      if (reported == true && context.mounted) {
+                        context
+                            .read<ListingDetailsCubit>()
+                            .markAsReported();
+                      }
+                    },
             ),
           ],
         ],

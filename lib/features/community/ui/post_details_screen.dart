@@ -116,12 +116,25 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                 if (state.post!.authorId !=
                     Supabase.instance.client.auth.currentUser?.id)
                   IconButton(
-                    icon: const Icon(Icons.flag_rounded),
-                    onPressed: () => showReportBottomSheet(
-                      context,
-                      entityType: ReportEntityType.post,
-                      entityId: state.post!.postId,
+                    icon: Icon(
+                      state.isReported
+                          ? Icons.flag_rounded
+                          : Icons.outlined_flag_rounded,
                     ),
+                    onPressed: state.isReported
+                        ? null
+                        : () async {
+                            final reported = await showReportBottomSheet(
+                              context,
+                              entityType: ReportEntityType.post,
+                              entityId: state.post!.postId,
+                            );
+                            if (reported == true && context.mounted) {
+                              context
+                                  .read<PostDetailsCubit>()
+                                  .markPostAsReported();
+                            }
+                          },
                   ),
                 SizedBox(width: 4.w),
               ],
@@ -171,6 +184,10 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                     isLiked: state.likedCommentIds.contains(
                                       comment.commentId,
                                     ),
+                                    isReported:
+                                        state.reportedCommentIds.contains(
+                                      comment.commentId,
+                                    ),
                                     indentLevel: 0,
                                     onReply: () => setState(() {
                                       _replyingTo = comment.authorName;
@@ -182,12 +199,21 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                     onReport: comment.authorId !=
                                             Supabase.instance.client.auth
                                                 .currentUser?.id
-                                        ? () => showReportBottomSheet(
+                                        ? () async {
+                                            final reported =
+                                                await showReportBottomSheet(
                                               context,
                                               entityType:
                                                   ReportEntityType.comment,
                                               entityId: comment.commentId,
-                                            )
+                                            );
+                                            if (reported == true &&
+                                                context.mounted) {
+                                              cubit.markCommentAsReported(
+                                                comment.commentId,
+                                              );
+                                            }
+                                          }
                                         : null,
                                   ),
                                   if (comment.repliesCount > 0)
@@ -219,6 +245,9 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                             likes: reply.likesCount,
                                             isLiked: state.likedCommentIds
                                                 .contains(reply.commentId),
+                                            isReported: state
+                                                .reportedCommentIds
+                                                .contains(reply.commentId),
                                             indentLevel: 1,
                                             onLikeTap: () =>
                                                 cubit.toggleCommentLike(
@@ -227,14 +256,24 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                             onReport: reply.authorId !=
                                                     Supabase.instance.client
                                                         .auth.currentUser?.id
-                                                ? () => showReportBottomSheet(
+                                                ? () async {
+                                                    final reported =
+                                                        await showReportBottomSheet(
                                                       context,
                                                       entityType:
                                                           ReportEntityType
                                                               .comment,
                                                       entityId:
                                                           reply.commentId,
-                                                    )
+                                                    );
+                                                    if (reported == true &&
+                                                        context.mounted) {
+                                                      cubit
+                                                          .markCommentAsReported(
+                                                        reply.commentId,
+                                                      );
+                                                    }
+                                                  }
                                                 : null,
                                           ),
                                         ),

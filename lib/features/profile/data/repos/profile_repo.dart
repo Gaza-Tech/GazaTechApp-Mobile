@@ -31,6 +31,15 @@ class ProfileRepo {
     }
   }
 
+  Future<ApiResult<bool>> isUserReported(String userId) async {
+    try {
+      final result = await _service.isUserReported(userId);
+      return ApiResult.success(result);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
   Future<ApiResult<PostsResponse>> fetchUserPosts(
     String userId,
     int page,

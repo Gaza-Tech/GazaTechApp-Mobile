@@ -78,6 +78,21 @@ class ListingDetailsApiService {
     return result != null;
   }
 
+  /// Check if the current user has reported a listing
+  Future<bool> isListingReported(String listingId) async {
+    final userId = _supabase.auth.currentUser?.id;
+    if (userId == null) return false;
+
+    final result = await _supabase
+        .from('reports')
+        .select('report_id')
+        .eq('reporter_id', userId)
+        .eq('reported_listing_id', listingId)
+        .maybeSingle();
+
+    return result != null;
+  }
+
   /// Toggle bookmark for a listing; returns true if now bookmarked
   Future<bool> toggleListingBookmark(String listingId) async {
     final userId = _supabase.auth.currentUser!.id;

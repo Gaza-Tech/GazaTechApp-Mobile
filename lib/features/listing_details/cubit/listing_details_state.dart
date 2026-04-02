@@ -13,6 +13,7 @@ abstract class ListingDetailsState with _$ListingDetailsState {
     required List<ListingModel> similarListings,
     required List<ListingModel> sellerListings,
     @Default(false) bool isBookmarked,
+    @Default(false) bool isReported,
   }) = _Success;
   const factory ListingDetailsState.failure(String message) = _Failure;
 }

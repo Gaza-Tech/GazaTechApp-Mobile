@@ -45,6 +45,7 @@ abstract class PostModel with _$PostModel {
     List<String> attachmentUrls,
     @Default(false) bool isLiked,
     @Default(false) bool isBookmarked,
+    @Default(false) bool isReported,
   }) = _PostModel;
 
   factory PostModel.fromJson(Map<String, dynamic> json) =>
