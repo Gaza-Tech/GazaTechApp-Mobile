@@ -17,6 +17,13 @@ class MyTextStyle {
   // Private consructor to prevent instantiation.
   MyTextStyle._();
 
+  static const String arFontFamily = 'IBMPlexSansArabic';
+  static const String enFontFamily = 'IBMPlexSans';
+
+  static String fontFamilyForLocale(Locale locale) {
+    return locale.languageCode == 'ar' ? arFontFamily : enFontFamily;
+  }
+
   /// 'Heading' text styles (H1-H5).
   static MyHeadingStyles heading = MyHeadingStyles._();
 

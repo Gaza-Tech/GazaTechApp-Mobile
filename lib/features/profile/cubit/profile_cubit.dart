@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/core/services/report_event_service.dart';
+import 'package:gaza_tech/features/report/data/models/report_reason.dart';
 import 'package:gaza_tech/features/profile/data/repos/profile_repo.dart';
 import 'profile_state.dart';
 
@@ -10,17 +12,28 @@ class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepo _repo;
   final String _userId;
   final BookmarkEventService _bookmarkEventService;
+  final ReportEventService _reportEventService;
   late final StreamSubscription<PostBookmarkEvent> _postBookmarkSub;
+  late final StreamSubscription<ReportEvent> _reportSub;
 
   ProfileCubit(
     this._repo,
     this._userId,
     bool isOwnProfile,
     this._bookmarkEventService,
+    this._reportEventService,
   ) : super(ProfileState(isOwnProfile: isOwnProfile)) {
     _postBookmarkSub = _bookmarkEventService.postBookmarkChanges.listen(
       _onPostBookmarkEvent,
     );
+    _reportSub = _reportEventService.reportChanges.listen(_onReportEvent);
+  }
+
+  void _onReportEvent(ReportEvent event) {
+    if (event.entityType == ReportEntityType.user &&
+        event.entityId == _userId) {
+      emit(state.copyWith(isUserReported: event.isReported));
+    }
   }
 
   void _onPostBookmarkEvent(PostBookmarkEvent event) {
@@ -44,10 +57,31 @@ class ProfileCubit extends Cubit<ProfileState> {
         if (state.isOwnProfile && !profile.isVerified) {
           _fetchVerificationStatus();
         }
+        if (!state.isOwnProfile) {
+          _fetchIsUserReported();
+        }
       },
       failure: (error) => emit(
         state.copyWith(isProfileLoading: false, errorMessage: error.message),
       ),
+    );
+  }
+
+  Future<void> _fetchIsUserReported() async {
+    final result = await _repo.isUserReported(_userId);
+    result.when(
+      success: (isReported) =>
+          emit(state.copyWith(isUserReported: isReported)),
+      failure: (_) {},
+    );
+  }
+
+  void markUserAsReported() {
+    emit(state.copyWith(isUserReported: true));
+    _reportEventService.emitReport(
+      ReportEntityType.user,
+      _userId,
+      isReported: true,
     );
   }
 
@@ -262,6 +296,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   @override
   Future<void> close() {
     _postBookmarkSub.cancel();
+    _reportSub.cancel();
     return super.close();
   }
 }

@@ -94,6 +94,20 @@ class ProfileApiService {
     };
   }
 
+  Future<bool> isUserReported(String targetUserId) async {
+    final currentUserId = _supabase.auth.currentUser?.id;
+    if (currentUserId == null) return false;
+
+    final result = await _supabase
+        .from('reports')
+        .select('report_id')
+        .eq('reporter_id', currentUserId)
+        .eq('reported_user_id', targetUserId)
+        .maybeSingle();
+
+    return result != null;
+  }
+
   Future<String?> fetchVerificationStatus(String userId) async {
     final result = await _supabase
         .from('verification_requests')

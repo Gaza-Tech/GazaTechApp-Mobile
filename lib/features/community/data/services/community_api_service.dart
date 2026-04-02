@@ -97,6 +97,40 @@ class CommunityApiService {
     };
   }
 
+  Future<Set<String>> fetchReportedPostIds(List<String> postIds) async {
+    final userId = _supabase.auth.currentUser?.id;
+    if (userId == null || postIds.isEmpty) return {};
+
+    final data = await _supabase
+        .from('reports')
+        .select('reported_post_id')
+        .eq('reporter_id', userId)
+        .inFilter('reported_post_id', postIds);
+
+    return {
+      for (final e in (data as List<dynamic>))
+        (e as Map<String, dynamic>)['reported_post_id'] as String,
+    };
+  }
+
+  Future<Set<String>> fetchReportedCommentIds(
+    List<String> commentIds,
+  ) async {
+    final userId = _supabase.auth.currentUser?.id;
+    if (userId == null || commentIds.isEmpty) return {};
+
+    final data = await _supabase
+        .from('reports')
+        .select('reported_comment_id')
+        .eq('reporter_id', userId)
+        .inFilter('reported_comment_id', commentIds);
+
+    return {
+      for (final e in (data as List<dynamic>))
+        (e as Map<String, dynamic>)['reported_comment_id'] as String,
+    };
+  }
+
   Future<Map<String, dynamic>?> fetchPostDetails(String postId) async {
     return await _supabase
         .from('community_posts_with_counts')

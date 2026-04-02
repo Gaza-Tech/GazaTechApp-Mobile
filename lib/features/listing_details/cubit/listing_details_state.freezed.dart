@@ -128,12 +128,12 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( ListingDetailModel listing,  List<ListingModel> similarListings,  List<ListingModel> sellerListings,  bool isBookmarked)?  success,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( ListingDetailModel listing,  List<ListingModel> similarListings,  List<ListingModel> sellerListings,  bool isBookmarked,  bool isReported)?  success,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Success() when success != null:
-return success(_that.listing,_that.similarListings,_that.sellerListings,_that.isBookmarked);case _Failure() when failure != null:
+return success(_that.listing,_that.similarListings,_that.sellerListings,_that.isBookmarked,_that.isReported);case _Failure() when failure != null:
 return failure(_that.message);case _:
   return orElse();
 
@@ -152,12 +152,12 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( ListingDetailModel listing,  List<ListingModel> similarListings,  List<ListingModel> sellerListings,  bool isBookmarked)  success,required TResult Function( String message)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( ListingDetailModel listing,  List<ListingModel> similarListings,  List<ListingModel> sellerListings,  bool isBookmarked,  bool isReported)  success,required TResult Function( String message)  failure,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Success():
-return success(_that.listing,_that.similarListings,_that.sellerListings,_that.isBookmarked);case _Failure():
+return success(_that.listing,_that.similarListings,_that.sellerListings,_that.isBookmarked,_that.isReported);case _Failure():
 return failure(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +175,12 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( ListingDetailModel listing,  List<ListingModel> similarListings,  List<ListingModel> sellerListings,  bool isBookmarked)?  success,TResult? Function( String message)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( ListingDetailModel listing,  List<ListingModel> similarListings,  List<ListingModel> sellerListings,  bool isBookmarked,  bool isReported)?  success,TResult? Function( String message)?  failure,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Success() when success != null:
-return success(_that.listing,_that.similarListings,_that.sellerListings,_that.isBookmarked);case _Failure() when failure != null:
+return success(_that.listing,_that.similarListings,_that.sellerListings,_that.isBookmarked,_that.isReported);case _Failure() when failure != null:
 return failure(_that.message);case _:
   return null;
 
@@ -257,7 +257,7 @@ String toString() {
 
 
 class _Success implements ListingDetailsState {
-  const _Success({required this.listing, required final  List<ListingModel> similarListings, required final  List<ListingModel> sellerListings, this.isBookmarked = false}): _similarListings = similarListings,_sellerListings = sellerListings;
+  const _Success({required this.listing, required final  List<ListingModel> similarListings, required final  List<ListingModel> sellerListings, this.isBookmarked = false, this.isReported = false}): _similarListings = similarListings,_sellerListings = sellerListings;
   
 
  final  ListingDetailModel listing;
@@ -276,6 +276,7 @@ class _Success implements ListingDetailsState {
 }
 
 @JsonKey() final  bool isBookmarked;
+@JsonKey() final  bool isReported;
 
 /// Create a copy of ListingDetailsState
 /// with the given fields replaced by the non-null parameter values.
@@ -287,16 +288,16 @@ _$SuccessCopyWith<_Success> get copyWith => __$SuccessCopyWithImpl<_Success>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&(identical(other.listing, listing) || other.listing == listing)&&const DeepCollectionEquality().equals(other._similarListings, _similarListings)&&const DeepCollectionEquality().equals(other._sellerListings, _sellerListings)&&(identical(other.isBookmarked, isBookmarked) || other.isBookmarked == isBookmarked));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&(identical(other.listing, listing) || other.listing == listing)&&const DeepCollectionEquality().equals(other._similarListings, _similarListings)&&const DeepCollectionEquality().equals(other._sellerListings, _sellerListings)&&(identical(other.isBookmarked, isBookmarked) || other.isBookmarked == isBookmarked)&&(identical(other.isReported, isReported) || other.isReported == isReported));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,listing,const DeepCollectionEquality().hash(_similarListings),const DeepCollectionEquality().hash(_sellerListings),isBookmarked);
+int get hashCode => Object.hash(runtimeType,listing,const DeepCollectionEquality().hash(_similarListings),const DeepCollectionEquality().hash(_sellerListings),isBookmarked,isReported);
 
 @override
 String toString() {
-  return 'ListingDetailsState.success(listing: $listing, similarListings: $similarListings, sellerListings: $sellerListings, isBookmarked: $isBookmarked)';
+  return 'ListingDetailsState.success(listing: $listing, similarListings: $similarListings, sellerListings: $sellerListings, isBookmarked: $isBookmarked, isReported: $isReported)';
 }
 
 
@@ -307,7 +308,7 @@ abstract mixin class _$SuccessCopyWith<$Res> implements $ListingDetailsStateCopy
   factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) = __$SuccessCopyWithImpl;
 @useResult
 $Res call({
- ListingDetailModel listing, List<ListingModel> similarListings, List<ListingModel> sellerListings, bool isBookmarked
+ ListingDetailModel listing, List<ListingModel> similarListings, List<ListingModel> sellerListings, bool isBookmarked, bool isReported
 });
 
 
@@ -324,12 +325,13 @@ class __$SuccessCopyWithImpl<$Res>
 
 /// Create a copy of ListingDetailsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? listing = null,Object? similarListings = null,Object? sellerListings = null,Object? isBookmarked = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? listing = null,Object? similarListings = null,Object? sellerListings = null,Object? isBookmarked = null,Object? isReported = null,}) {
   return _then(_Success(
 listing: null == listing ? _self.listing : listing // ignore: cast_nullable_to_non_nullable
 as ListingDetailModel,similarListings: null == similarListings ? _self._similarListings : similarListings // ignore: cast_nullable_to_non_nullable
 as List<ListingModel>,sellerListings: null == sellerListings ? _self._sellerListings : sellerListings // ignore: cast_nullable_to_non_nullable
 as List<ListingModel>,isBookmarked: null == isBookmarked ? _self.isBookmarked : isBookmarked // ignore: cast_nullable_to_non_nullable
+as bool,isReported: null == isReported ? _self.isReported : isReported // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

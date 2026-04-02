@@ -66,12 +66,25 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ),
                     if (!state.isOwnProfile && state.userProfile != null)
                       IconButton(
-                        icon: const Icon(Icons.flag_rounded),
-                        onPressed: () => showReportBottomSheet(
-                          context,
-                          entityType: ReportEntityType.user,
-                          entityId: state.userProfile!.userId,
+                        icon: Icon(
+                          state.isUserReported
+                              ? Icons.flag_rounded
+                              : Icons.outlined_flag_rounded,
                         ),
+                        onPressed: state.isUserReported
+                            ? null
+                            : () async {
+                                final reported = await showReportBottomSheet(
+                                  context,
+                                  entityType: ReportEntityType.user,
+                                  entityId: state.userProfile!.userId,
+                                );
+                                if (reported == true && context.mounted) {
+                                  context
+                                      .read<ProfileCubit>()
+                                      .markUserAsReported();
+                                }
+                              },
                       ),
                   ],
                 ),

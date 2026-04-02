@@ -32,12 +32,14 @@ class CommunityRepo {
       final postIds = posts.map((p) => p.postId).toList();
       final likedIds = await _service.fetchLikedPostIds(postIds);
       final bookmarkedIds = await _service.fetchBookmarkedPostIds(postIds);
+      final reportedIds = await _service.fetchReportedPostIds(postIds);
 
       final enrichedPosts = posts
           .map(
             (p) => p.copyWith(
               isLiked: likedIds.contains(p.postId),
               isBookmarked: bookmarkedIds.contains(p.postId),
+              isReported: reportedIds.contains(p.postId),
             ),
           )
           .toList();
@@ -61,9 +63,14 @@ class CommunityRepo {
       final post = PostModel.fromJson(raw);
       final isLiked = await _service.isPostLiked(postId);
       final isBookmarked = await _service.isPostBookmarked(postId);
+      final reportedIds = await _service.fetchReportedPostIds([postId]);
 
       return ApiResult.success(
-        post.copyWith(isLiked: isLiked, isBookmarked: isBookmarked),
+        post.copyWith(
+          isLiked: isLiked,
+          isBookmarked: isBookmarked,
+          isReported: reportedIds.contains(postId),
+        ),
       );
     } catch (e) {
       return ApiResult.failure(ErrorHandler.handle(e));
@@ -81,8 +88,16 @@ class CommunityRepo {
           ? raw.sublist(0, CommunityApiService.commentsPageSize)
           : raw;
       final comments = items.map((e) => CommentModel.fromJson(e)).toList();
+
+      final commentIds = comments.map((c) => c.commentId).toList();
+      final reportedIds = await _service.fetchReportedCommentIds(commentIds);
+
       return ApiResult.success(
-        CommentsResponse(comments: comments, hasMore: hasMore),
+        CommentsResponse(
+          comments: comments,
+          hasMore: hasMore,
+          reportedCommentIds: reportedIds,
+        ),
       );
     } catch (e) {
       return ApiResult.failure(ErrorHandler.handle(e));
@@ -200,12 +215,14 @@ class CommunityRepo {
       final postIds = posts.map((p) => p.postId).toList();
       final likedIds = await _service.fetchLikedPostIds(postIds);
       final bookmarkedIds = await _service.fetchBookmarkedPostIds(postIds);
+      final reportedIds = await _service.fetchReportedPostIds(postIds);
 
       final enrichedPosts = posts
           .map(
             (p) => p.copyWith(
               isLiked: likedIds.contains(p.postId),
               isBookmarked: bookmarkedIds.contains(p.postId),
+              isReported: reportedIds.contains(p.postId),
             ),
           )
           .toList();

@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/core/services/report_event_service.dart';
+import 'package:gaza_tech/features/report/data/models/report_reason.dart';
 import '../data/models/comment_model.dart';
 import '../data/repos/community_repo.dart';
 import 'post_details_state.dart';
@@ -11,13 +13,34 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
   final CommunityRepo _repo;
   final String postId;
   final BookmarkEventService _bookmarkEventService;
+  final ReportEventService _reportEventService;
   late final StreamSubscription<PostBookmarkEvent> _bookmarkSub;
+  late final StreamSubscription<ReportEvent> _reportSub;
 
-  PostDetailsCubit(this._repo, this.postId, this._bookmarkEventService)
-    : super(const PostDetailsState()) {
+  PostDetailsCubit(
+    this._repo,
+    this.postId,
+    this._bookmarkEventService,
+    this._reportEventService,
+  ) : super(const PostDetailsState()) {
     _bookmarkSub = _bookmarkEventService.postBookmarkChanges.listen(
       _onPostBookmarkEvent,
     );
+    _reportSub = _reportEventService.reportChanges.listen(_onReportEvent);
+  }
+
+  void _onReportEvent(ReportEvent event) {
+    if (event.entityType == ReportEntityType.post &&
+        event.entityId == postId) {
+      emit(state.copyWith(isReported: event.isReported));
+    }
+    if (event.entityType == ReportEntityType.comment) {
+      final updated = Set<String>.from(state.reportedCommentIds);
+      event.isReported
+          ? updated.add(event.entityId)
+          : updated.remove(event.entityId);
+      emit(state.copyWith(reportedCommentIds: updated));
+    }
   }
 
   void _onPostBookmarkEvent(PostBookmarkEvent event) {
@@ -38,6 +61,7 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
           post: post,
           isLiked: post.isLiked,
           isBookmarked: post.isBookmarked,
+          isReported: post.isReported,
         ),
       ),
       failure: (error) => emit(
@@ -66,6 +90,7 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
           comments: response.comments,
           hasMoreComments: response.hasMore,
           commentsPage: 1,
+          reportedCommentIds: response.reportedCommentIds,
         ),
       ),
       failure: (error) => emit(
@@ -90,6 +115,10 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
           comments: [...state.comments, ...response.comments],
           hasMoreComments: response.hasMore,
           commentsPage: state.commentsPage + 1,
+          reportedCommentIds: {
+            ...state.reportedCommentIds,
+            ...response.reportedCommentIds,
+          },
         ),
       ),
       failure: (error) => emit(
@@ -322,9 +351,29 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
     );
   }
 
+  void markPostAsReported() {
+    emit(state.copyWith(isReported: true));
+    _reportEventService.emitReport(
+      ReportEntityType.post,
+      postId,
+      isReported: true,
+    );
+  }
+
+  void markCommentAsReported(String commentId) {
+    final updated = Set<String>.from(state.reportedCommentIds)..add(commentId);
+    emit(state.copyWith(reportedCommentIds: updated));
+    _reportEventService.emitReport(
+      ReportEntityType.comment,
+      commentId,
+      isReported: true,
+    );
+  }
+
   @override
   Future<void> close() {
     _bookmarkSub.cancel();
+    _reportSub.cancel();
     return super.close();
   }
 }

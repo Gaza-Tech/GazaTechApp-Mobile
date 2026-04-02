@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostModel {
 
-@JsonKey(name: 'post_id') String get postId;@JsonKey(name: 'author_id') String get authorId; String get title; String get content;@JsonKey(name: 'post_category') String get postCategory;@JsonKey(name: 'content_status') String get contentStatus;@JsonKey(name: 'created_at') DateTime get createdAt;@JsonKey(name: 'published_at') DateTime? get publishedAt;@JsonKey(name: 'users', fromJson: _authorFromJson) PostAuthorModel? get author;@JsonKey(name: 'likes_count') int get likesCount;@JsonKey(name: 'comments_count') int get commentsCount;@JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson) List<String> get attachmentUrls; bool get isLiked; bool get isBookmarked;
+@JsonKey(name: 'post_id') String get postId;@JsonKey(name: 'author_id') String get authorId; String get title; String get content;@JsonKey(name: 'post_category') String get postCategory;@JsonKey(name: 'content_status') String get contentStatus;@JsonKey(name: 'created_at') DateTime get createdAt;@JsonKey(name: 'published_at') DateTime? get publishedAt;@JsonKey(name: 'users', fromJson: _authorFromJson) PostAuthorModel? get author;@JsonKey(name: 'likes_count') int get likesCount;@JsonKey(name: 'comments_count') int get commentsCount;@JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson) List<String> get attachmentUrls; bool get isLiked; bool get isBookmarked; bool get isReported;
 /// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $PostModelCopyWith<PostModel> get copyWith => _$PostModelCopyWithImpl<PostModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostModel&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.authorId, authorId) || other.authorId == authorId)&&(identical(other.title, title) || other.title == title)&&(identical(other.content, content) || other.content == content)&&(identical(other.postCategory, postCategory) || other.postCategory == postCategory)&&(identical(other.contentStatus, contentStatus) || other.contentStatus == contentStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&(identical(other.author, author) || other.author == author)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount)&&(identical(other.commentsCount, commentsCount) || other.commentsCount == commentsCount)&&const DeepCollectionEquality().equals(other.attachmentUrls, attachmentUrls)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.isBookmarked, isBookmarked) || other.isBookmarked == isBookmarked));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostModel&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.authorId, authorId) || other.authorId == authorId)&&(identical(other.title, title) || other.title == title)&&(identical(other.content, content) || other.content == content)&&(identical(other.postCategory, postCategory) || other.postCategory == postCategory)&&(identical(other.contentStatus, contentStatus) || other.contentStatus == contentStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&(identical(other.author, author) || other.author == author)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount)&&(identical(other.commentsCount, commentsCount) || other.commentsCount == commentsCount)&&const DeepCollectionEquality().equals(other.attachmentUrls, attachmentUrls)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.isBookmarked, isBookmarked) || other.isBookmarked == isBookmarked)&&(identical(other.isReported, isReported) || other.isReported == isReported));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,postId,authorId,title,content,postCategory,contentStatus,createdAt,publishedAt,author,likesCount,commentsCount,const DeepCollectionEquality().hash(attachmentUrls),isLiked,isBookmarked);
+int get hashCode => Object.hash(runtimeType,postId,authorId,title,content,postCategory,contentStatus,createdAt,publishedAt,author,likesCount,commentsCount,const DeepCollectionEquality().hash(attachmentUrls),isLiked,isBookmarked,isReported);
 
 @override
 String toString() {
-  return 'PostModel(postId: $postId, authorId: $authorId, title: $title, content: $content, postCategory: $postCategory, contentStatus: $contentStatus, createdAt: $createdAt, publishedAt: $publishedAt, author: $author, likesCount: $likesCount, commentsCount: $commentsCount, attachmentUrls: $attachmentUrls, isLiked: $isLiked, isBookmarked: $isBookmarked)';
+  return 'PostModel(postId: $postId, authorId: $authorId, title: $title, content: $content, postCategory: $postCategory, contentStatus: $contentStatus, createdAt: $createdAt, publishedAt: $publishedAt, author: $author, likesCount: $likesCount, commentsCount: $commentsCount, attachmentUrls: $attachmentUrls, isLiked: $isLiked, isBookmarked: $isBookmarked, isReported: $isReported)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $PostModelCopyWith<$Res>  {
   factory $PostModelCopyWith(PostModel value, $Res Function(PostModel) _then) = _$PostModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'post_id') String postId,@JsonKey(name: 'author_id') String authorId, String title, String content,@JsonKey(name: 'post_category') String postCategory,@JsonKey(name: 'content_status') String contentStatus,@JsonKey(name: 'created_at') DateTime createdAt,@JsonKey(name: 'published_at') DateTime? publishedAt,@JsonKey(name: 'users', fromJson: _authorFromJson) PostAuthorModel? author,@JsonKey(name: 'likes_count') int likesCount,@JsonKey(name: 'comments_count') int commentsCount,@JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson) List<String> attachmentUrls, bool isLiked, bool isBookmarked
+@JsonKey(name: 'post_id') String postId,@JsonKey(name: 'author_id') String authorId, String title, String content,@JsonKey(name: 'post_category') String postCategory,@JsonKey(name: 'content_status') String contentStatus,@JsonKey(name: 'created_at') DateTime createdAt,@JsonKey(name: 'published_at') DateTime? publishedAt,@JsonKey(name: 'users', fromJson: _authorFromJson) PostAuthorModel? author,@JsonKey(name: 'likes_count') int likesCount,@JsonKey(name: 'comments_count') int commentsCount,@JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson) List<String> attachmentUrls, bool isLiked, bool isBookmarked, bool isReported
 });
 
 
@@ -65,7 +65,7 @@ class _$PostModelCopyWithImpl<$Res>
 
 /// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? postId = null,Object? authorId = null,Object? title = null,Object? content = null,Object? postCategory = null,Object? contentStatus = null,Object? createdAt = null,Object? publishedAt = freezed,Object? author = freezed,Object? likesCount = null,Object? commentsCount = null,Object? attachmentUrls = null,Object? isLiked = null,Object? isBookmarked = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? postId = null,Object? authorId = null,Object? title = null,Object? content = null,Object? postCategory = null,Object? contentStatus = null,Object? createdAt = null,Object? publishedAt = freezed,Object? author = freezed,Object? likesCount = null,Object? commentsCount = null,Object? attachmentUrls = null,Object? isLiked = null,Object? isBookmarked = null,Object? isReported = null,}) {
   return _then(_self.copyWith(
 postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,authorId: null == authorId ? _self.authorId : authorId // ignore: cast_nullable_to_non_nullable
@@ -81,6 +81,7 @@ as int,commentsCount: null == commentsCount ? _self.commentsCount : commentsCoun
 as int,attachmentUrls: null == attachmentUrls ? _self.attachmentUrls : attachmentUrls // ignore: cast_nullable_to_non_nullable
 as List<String>,isLiked: null == isLiked ? _self.isLiked : isLiked // ignore: cast_nullable_to_non_nullable
 as bool,isBookmarked: null == isBookmarked ? _self.isBookmarked : isBookmarked // ignore: cast_nullable_to_non_nullable
+as bool,isReported: null == isReported ? _self.isReported : isReported // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -178,10 +179,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'post_id')  String postId, @JsonKey(name: 'author_id')  String authorId,  String title,  String content, @JsonKey(name: 'post_category')  String postCategory, @JsonKey(name: 'content_status')  String contentStatus, @JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'published_at')  DateTime? publishedAt, @JsonKey(name: 'users', fromJson: _authorFromJson)  PostAuthorModel? author, @JsonKey(name: 'likes_count')  int likesCount, @JsonKey(name: 'comments_count')  int commentsCount, @JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson)  List<String> attachmentUrls,  bool isLiked,  bool isBookmarked)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'post_id')  String postId, @JsonKey(name: 'author_id')  String authorId,  String title,  String content, @JsonKey(name: 'post_category')  String postCategory, @JsonKey(name: 'content_status')  String contentStatus, @JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'published_at')  DateTime? publishedAt, @JsonKey(name: 'users', fromJson: _authorFromJson)  PostAuthorModel? author, @JsonKey(name: 'likes_count')  int likesCount, @JsonKey(name: 'comments_count')  int commentsCount, @JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson)  List<String> attachmentUrls,  bool isLiked,  bool isBookmarked,  bool isReported)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PostModel() when $default != null:
-return $default(_that.postId,_that.authorId,_that.title,_that.content,_that.postCategory,_that.contentStatus,_that.createdAt,_that.publishedAt,_that.author,_that.likesCount,_that.commentsCount,_that.attachmentUrls,_that.isLiked,_that.isBookmarked);case _:
+return $default(_that.postId,_that.authorId,_that.title,_that.content,_that.postCategory,_that.contentStatus,_that.createdAt,_that.publishedAt,_that.author,_that.likesCount,_that.commentsCount,_that.attachmentUrls,_that.isLiked,_that.isBookmarked,_that.isReported);case _:
   return orElse();
 
 }
@@ -199,10 +200,10 @@ return $default(_that.postId,_that.authorId,_that.title,_that.content,_that.post
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'post_id')  String postId, @JsonKey(name: 'author_id')  String authorId,  String title,  String content, @JsonKey(name: 'post_category')  String postCategory, @JsonKey(name: 'content_status')  String contentStatus, @JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'published_at')  DateTime? publishedAt, @JsonKey(name: 'users', fromJson: _authorFromJson)  PostAuthorModel? author, @JsonKey(name: 'likes_count')  int likesCount, @JsonKey(name: 'comments_count')  int commentsCount, @JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson)  List<String> attachmentUrls,  bool isLiked,  bool isBookmarked)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'post_id')  String postId, @JsonKey(name: 'author_id')  String authorId,  String title,  String content, @JsonKey(name: 'post_category')  String postCategory, @JsonKey(name: 'content_status')  String contentStatus, @JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'published_at')  DateTime? publishedAt, @JsonKey(name: 'users', fromJson: _authorFromJson)  PostAuthorModel? author, @JsonKey(name: 'likes_count')  int likesCount, @JsonKey(name: 'comments_count')  int commentsCount, @JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson)  List<String> attachmentUrls,  bool isLiked,  bool isBookmarked,  bool isReported)  $default,) {final _that = this;
 switch (_that) {
 case _PostModel():
-return $default(_that.postId,_that.authorId,_that.title,_that.content,_that.postCategory,_that.contentStatus,_that.createdAt,_that.publishedAt,_that.author,_that.likesCount,_that.commentsCount,_that.attachmentUrls,_that.isLiked,_that.isBookmarked);case _:
+return $default(_that.postId,_that.authorId,_that.title,_that.content,_that.postCategory,_that.contentStatus,_that.createdAt,_that.publishedAt,_that.author,_that.likesCount,_that.commentsCount,_that.attachmentUrls,_that.isLiked,_that.isBookmarked,_that.isReported);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -219,10 +220,10 @@ return $default(_that.postId,_that.authorId,_that.title,_that.content,_that.post
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'post_id')  String postId, @JsonKey(name: 'author_id')  String authorId,  String title,  String content, @JsonKey(name: 'post_category')  String postCategory, @JsonKey(name: 'content_status')  String contentStatus, @JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'published_at')  DateTime? publishedAt, @JsonKey(name: 'users', fromJson: _authorFromJson)  PostAuthorModel? author, @JsonKey(name: 'likes_count')  int likesCount, @JsonKey(name: 'comments_count')  int commentsCount, @JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson)  List<String> attachmentUrls,  bool isLiked,  bool isBookmarked)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'post_id')  String postId, @JsonKey(name: 'author_id')  String authorId,  String title,  String content, @JsonKey(name: 'post_category')  String postCategory, @JsonKey(name: 'content_status')  String contentStatus, @JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'published_at')  DateTime? publishedAt, @JsonKey(name: 'users', fromJson: _authorFromJson)  PostAuthorModel? author, @JsonKey(name: 'likes_count')  int likesCount, @JsonKey(name: 'comments_count')  int commentsCount, @JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson)  List<String> attachmentUrls,  bool isLiked,  bool isBookmarked,  bool isReported)?  $default,) {final _that = this;
 switch (_that) {
 case _PostModel() when $default != null:
-return $default(_that.postId,_that.authorId,_that.title,_that.content,_that.postCategory,_that.contentStatus,_that.createdAt,_that.publishedAt,_that.author,_that.likesCount,_that.commentsCount,_that.attachmentUrls,_that.isLiked,_that.isBookmarked);case _:
+return $default(_that.postId,_that.authorId,_that.title,_that.content,_that.postCategory,_that.contentStatus,_that.createdAt,_that.publishedAt,_that.author,_that.likesCount,_that.commentsCount,_that.attachmentUrls,_that.isLiked,_that.isBookmarked,_that.isReported);case _:
   return null;
 
 }
@@ -234,7 +235,7 @@ return $default(_that.postId,_that.authorId,_that.title,_that.content,_that.post
 @JsonSerializable()
 
 class _PostModel extends PostModel {
-  const _PostModel({@JsonKey(name: 'post_id') required this.postId, @JsonKey(name: 'author_id') required this.authorId, required this.title, required this.content, @JsonKey(name: 'post_category') required this.postCategory, @JsonKey(name: 'content_status') required this.contentStatus, @JsonKey(name: 'created_at') required this.createdAt, @JsonKey(name: 'published_at') this.publishedAt, @JsonKey(name: 'users', fromJson: _authorFromJson) this.author, @JsonKey(name: 'likes_count') this.likesCount = 0, @JsonKey(name: 'comments_count') this.commentsCount = 0, @JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson) final  List<String> attachmentUrls = const [], this.isLiked = false, this.isBookmarked = false}): _attachmentUrls = attachmentUrls,super._();
+  const _PostModel({@JsonKey(name: 'post_id') required this.postId, @JsonKey(name: 'author_id') required this.authorId, required this.title, required this.content, @JsonKey(name: 'post_category') required this.postCategory, @JsonKey(name: 'content_status') required this.contentStatus, @JsonKey(name: 'created_at') required this.createdAt, @JsonKey(name: 'published_at') this.publishedAt, @JsonKey(name: 'users', fromJson: _authorFromJson) this.author, @JsonKey(name: 'likes_count') this.likesCount = 0, @JsonKey(name: 'comments_count') this.commentsCount = 0, @JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson) final  List<String> attachmentUrls = const [], this.isLiked = false, this.isBookmarked = false, this.isReported = false}): _attachmentUrls = attachmentUrls,super._();
   factory _PostModel.fromJson(Map<String, dynamic> json) => _$PostModelFromJson(json);
 
 @override@JsonKey(name: 'post_id') final  String postId;
@@ -257,6 +258,7 @@ class _PostModel extends PostModel {
 
 @override@JsonKey() final  bool isLiked;
 @override@JsonKey() final  bool isBookmarked;
+@override@JsonKey() final  bool isReported;
 
 /// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
@@ -271,16 +273,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostModel&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.authorId, authorId) || other.authorId == authorId)&&(identical(other.title, title) || other.title == title)&&(identical(other.content, content) || other.content == content)&&(identical(other.postCategory, postCategory) || other.postCategory == postCategory)&&(identical(other.contentStatus, contentStatus) || other.contentStatus == contentStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&(identical(other.author, author) || other.author == author)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount)&&(identical(other.commentsCount, commentsCount) || other.commentsCount == commentsCount)&&const DeepCollectionEquality().equals(other._attachmentUrls, _attachmentUrls)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.isBookmarked, isBookmarked) || other.isBookmarked == isBookmarked));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostModel&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.authorId, authorId) || other.authorId == authorId)&&(identical(other.title, title) || other.title == title)&&(identical(other.content, content) || other.content == content)&&(identical(other.postCategory, postCategory) || other.postCategory == postCategory)&&(identical(other.contentStatus, contentStatus) || other.contentStatus == contentStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&(identical(other.author, author) || other.author == author)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount)&&(identical(other.commentsCount, commentsCount) || other.commentsCount == commentsCount)&&const DeepCollectionEquality().equals(other._attachmentUrls, _attachmentUrls)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked)&&(identical(other.isBookmarked, isBookmarked) || other.isBookmarked == isBookmarked)&&(identical(other.isReported, isReported) || other.isReported == isReported));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,postId,authorId,title,content,postCategory,contentStatus,createdAt,publishedAt,author,likesCount,commentsCount,const DeepCollectionEquality().hash(_attachmentUrls),isLiked,isBookmarked);
+int get hashCode => Object.hash(runtimeType,postId,authorId,title,content,postCategory,contentStatus,createdAt,publishedAt,author,likesCount,commentsCount,const DeepCollectionEquality().hash(_attachmentUrls),isLiked,isBookmarked,isReported);
 
 @override
 String toString() {
-  return 'PostModel(postId: $postId, authorId: $authorId, title: $title, content: $content, postCategory: $postCategory, contentStatus: $contentStatus, createdAt: $createdAt, publishedAt: $publishedAt, author: $author, likesCount: $likesCount, commentsCount: $commentsCount, attachmentUrls: $attachmentUrls, isLiked: $isLiked, isBookmarked: $isBookmarked)';
+  return 'PostModel(postId: $postId, authorId: $authorId, title: $title, content: $content, postCategory: $postCategory, contentStatus: $contentStatus, createdAt: $createdAt, publishedAt: $publishedAt, author: $author, likesCount: $likesCount, commentsCount: $commentsCount, attachmentUrls: $attachmentUrls, isLiked: $isLiked, isBookmarked: $isBookmarked, isReported: $isReported)';
 }
 
 
@@ -291,7 +293,7 @@ abstract mixin class _$PostModelCopyWith<$Res> implements $PostModelCopyWith<$Re
   factory _$PostModelCopyWith(_PostModel value, $Res Function(_PostModel) _then) = __$PostModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'post_id') String postId,@JsonKey(name: 'author_id') String authorId, String title, String content,@JsonKey(name: 'post_category') String postCategory,@JsonKey(name: 'content_status') String contentStatus,@JsonKey(name: 'created_at') DateTime createdAt,@JsonKey(name: 'published_at') DateTime? publishedAt,@JsonKey(name: 'users', fromJson: _authorFromJson) PostAuthorModel? author,@JsonKey(name: 'likes_count') int likesCount,@JsonKey(name: 'comments_count') int commentsCount,@JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson) List<String> attachmentUrls, bool isLiked, bool isBookmarked
+@JsonKey(name: 'post_id') String postId,@JsonKey(name: 'author_id') String authorId, String title, String content,@JsonKey(name: 'post_category') String postCategory,@JsonKey(name: 'content_status') String contentStatus,@JsonKey(name: 'created_at') DateTime createdAt,@JsonKey(name: 'published_at') DateTime? publishedAt,@JsonKey(name: 'users', fromJson: _authorFromJson) PostAuthorModel? author,@JsonKey(name: 'likes_count') int likesCount,@JsonKey(name: 'comments_count') int commentsCount,@JsonKey(name: 'community_posts_attachments', fromJson: _attachmentUrlsFromJson) List<String> attachmentUrls, bool isLiked, bool isBookmarked, bool isReported
 });
 
 
@@ -308,7 +310,7 @@ class __$PostModelCopyWithImpl<$Res>
 
 /// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? postId = null,Object? authorId = null,Object? title = null,Object? content = null,Object? postCategory = null,Object? contentStatus = null,Object? createdAt = null,Object? publishedAt = freezed,Object? author = freezed,Object? likesCount = null,Object? commentsCount = null,Object? attachmentUrls = null,Object? isLiked = null,Object? isBookmarked = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? postId = null,Object? authorId = null,Object? title = null,Object? content = null,Object? postCategory = null,Object? contentStatus = null,Object? createdAt = null,Object? publishedAt = freezed,Object? author = freezed,Object? likesCount = null,Object? commentsCount = null,Object? attachmentUrls = null,Object? isLiked = null,Object? isBookmarked = null,Object? isReported = null,}) {
   return _then(_PostModel(
 postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,authorId: null == authorId ? _self.authorId : authorId // ignore: cast_nullable_to_non_nullable
@@ -324,6 +326,7 @@ as int,commentsCount: null == commentsCount ? _self.commentsCount : commentsCoun
 as int,attachmentUrls: null == attachmentUrls ? _self._attachmentUrls : attachmentUrls // ignore: cast_nullable_to_non_nullable
 as List<String>,isLiked: null == isLiked ? _self.isLiked : isLiked // ignore: cast_nullable_to_non_nullable
 as bool,isBookmarked: null == isBookmarked ? _self.isBookmarked : isBookmarked // ignore: cast_nullable_to_non_nullable
+as bool,isReported: null == isReported ? _self.isReported : isReported // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

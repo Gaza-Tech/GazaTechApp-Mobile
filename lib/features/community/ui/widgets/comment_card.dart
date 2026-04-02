@@ -9,6 +9,7 @@ class CommentCard extends StatelessWidget {
   final String text;
   final int likes;
   final bool isLiked;
+  final bool isReported;
   final int indentLevel;
   final VoidCallback? onReply;
   final VoidCallback? onLikeTap;
@@ -21,6 +22,7 @@ class CommentCard extends StatelessWidget {
     required this.text,
     required this.likes,
     this.isLiked = false,
+    this.isReported = false,
     this.indentLevel = 0,
     this.onReply,
     this.onLikeTap,
@@ -126,9 +128,11 @@ class CommentCard extends StatelessWidget {
         if (onReport != null) ...[
           const Spacer(),
           GestureDetector(
-            onTap: onReport,
+            onTap: isReported ? null : onReport,
             child: Icon(
-              Icons.flag_outlined,
+              isReported
+                  ? Icons.flag_rounded
+                  : Icons.outlined_flag_rounded,
               size: 16.sp,
               color: theme.colorScheme.onSurfaceVariant,
             ),

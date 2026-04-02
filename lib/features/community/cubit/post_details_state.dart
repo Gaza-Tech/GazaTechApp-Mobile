@@ -17,7 +17,9 @@ abstract class PostDetailsState with _$PostDetailsState {
     String? errorMessage,
     @Default(false) bool isLiked,
     @Default(false) bool isBookmarked,
+    @Default(false) bool isReported,
     @Default(<String>{}) Set<String> likedCommentIds,
+    @Default(<String>{}) Set<String> reportedCommentIds,
     @Default(<String, List<CommentModel>>{})
     Map<String, List<CommentModel>> repliesByCommentId,
     @Default(<String>{}) Set<String> expandedCommentIds,

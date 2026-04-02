@@ -25,6 +25,7 @@ _PostModel _$PostModelFromJson(Map<String, dynamic> json) => _PostModel(
       : _attachmentUrlsFromJson(json['community_posts_attachments']),
   isLiked: json['isLiked'] as bool? ?? false,
   isBookmarked: json['isBookmarked'] as bool? ?? false,
+  isReported: json['isReported'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$PostModelToJson(_PostModel instance) =>
@@ -43,4 +44,5 @@ Map<String, dynamic> _$PostModelToJson(_PostModel instance) =>
       'community_posts_attachments': instance.attachmentUrls,
       'isLiked': instance.isLiked,
       'isBookmarked': instance.isBookmarked,
+      'isReported': instance.isReported,
     };

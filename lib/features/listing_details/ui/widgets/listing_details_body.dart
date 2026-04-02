@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/helpers/url_launcher_helper.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/add_listing/ui/widgets/labeled_field.dart';
-import 'package:gaza_tech/features/listing_details/cubit/listing_details_cubit.dart';
 import 'package:gaza_tech/features/listing_details/data/models/listing_detail_model.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/description_section.dart';
-import 'package:gaza_tech/features/listing_details/ui/widgets/image_carousel.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/listing_info_section.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/listing_tags.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/more_from_seller_list.dart';
@@ -17,7 +14,6 @@ import 'package:gaza_tech/features/listing_details/ui/widgets/seller_info_card.d
 import 'package:gaza_tech/features/listing_details/ui/widgets/similar_products_list.dart';
 import 'package:gaza_tech/features/listing_details/ui/widgets/specifications_table.dart';
 import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
-import 'package:gaza_tech/features/marketplace/ui/helpers/condition_tag_helper.dart';
 import 'package:gaza_tech/l10n/app_localizations.dart';
 
 class ListingDetailsBody extends StatelessWidget {
@@ -25,6 +21,7 @@ class ListingDetailsBody extends StatelessWidget {
   final List<ListingModel> similarListings;
   final List<ListingModel> sellerListings;
   final bool isBookmarked;
+  final SliverAppBar sliverAppBar;
 
   const ListingDetailsBody({
     super.key,
@@ -32,6 +29,7 @@ class ListingDetailsBody extends StatelessWidget {
     required this.similarListings,
     required this.sellerListings,
     required this.isBookmarked,
+    required this.sliverAppBar,
   });
 
   @override
@@ -51,10 +49,6 @@ class ListingDetailsBody extends StatelessWidget {
               : listing.categoryName)
         : listing.categoryName;
 
-    final conditionLabel = ConditionTagHelper.getLabel(
-      context,
-      listing.productCondition,
-    );
     final priceText =
         '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}';
     final timeAgo = _formatTimeAgo(l10n, listing.createdAt);
@@ -63,23 +57,17 @@ class ListingDetailsBody extends StatelessWidget {
         ? l10n.memberSince(_formatDate(listing.sellerJoinedAt!))
         : '';
 
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ImageCarousel(
-            imageUrls: listing.imageUrls,
-            isBookmarked: isBookmarked,
-            onBookmarkToggle: () =>
-                context.read<ListingDetailsCubit>().toggleBookmark(),
-          ),
-          Padding(
+    return CustomScrollView(
+      slivers: [
+        sliverAppBar,
+        SliverToBoxAdapter(
+          child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const VerticalSpace(16),
-                ListingTags(condition: conditionLabel, category: categoryName),
+                ListingTags(condition: listing.productCondition, category: categoryName),
                 const VerticalSpace(12),
                 ListingInfoSection(
                   title: listing.title,
@@ -127,20 +115,28 @@ class ListingDetailsBody extends StatelessWidget {
               ],
             ),
           ),
-          if (similarListings.isNotEmpty) ...[
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: LabeledField(
-                label: l10n.similarProducts,
-                isRequired: false,
-              ),
+        ),
+        if (similarListings.isNotEmpty)
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: LabeledField(
+                    label: l10n.similarProducts,
+                    isRequired: false,
+                  ),
+                ),
+                const VerticalSpace(12),
+                SimilarProductsList(listings: similarListings),
+                const VerticalSpace(24),
+              ],
             ),
-            const VerticalSpace(12),
-            SimilarProductsList(listings: similarListings),
-            const VerticalSpace(24),
-          ],
-          if (sellerListings.isNotEmpty)
-            Padding(
+          ),
+        if (sellerListings.isNotEmpty)
+          SliverToBoxAdapter(
+            child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,8 +151,8 @@ class ListingDetailsBody extends StatelessWidget {
                 ],
               ),
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 
