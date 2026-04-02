@@ -59,7 +59,6 @@ class _MyAppState extends State<MyApp> {
     Supabase.instance.client.auth.onAuthStateChange.listen((data) {
       final event = data.event;
       if (event == AuthChangeEvent.signedIn) {
-        
         // Navigate to home when signed in via OAuth
         _navigatorKey.currentState?.pushNamedAndRemoveUntil(
           MyRoutes.home,

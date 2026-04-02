@@ -10,8 +10,8 @@ class LabeledField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).textTheme.bodyMedium?.color;
-    return RichText(
-      text: TextSpan(
+    return Text.rich(
+      TextSpan(
         text: '$label ',
         style: MyTextStyle.heading.h4.copyWith(color: color),
         children: [
