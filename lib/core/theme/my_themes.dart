@@ -7,11 +7,12 @@ class MyThemes {
   // ==========================
   // LIGHT THEME
   // ==========================
-  static ThemeData get lightTheme {
+  static ThemeData lightTheme(Locale locale) {
+    final fontFamily = MyTextStyle.fontFamilyForLocale(locale);
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      // fontFamily: MyTextStyle.fontFamily,
+      fontFamily: fontFamily,
       // 1. Color Scheme
       colorScheme: ColorScheme.fromSeed(
         seedColor: MyColors.primary.base,
@@ -32,6 +33,7 @@ class MyThemes {
         iconTheme: IconThemeData(color: MyColors.light.textPrimary),
         titleTextStyle: MyTextStyle.heading.h2.copyWith(
           color: MyColors.light.textPrimary,
+          fontFamily: fontFamily,
         ),
       ),
 
@@ -52,6 +54,7 @@ class MyThemes {
         fillColor: MyColors.light.surface,
         hintStyle: MyTextStyle.body.m.copyWith(
           color: MyColors.light.textDisabled,
+          fontFamily: fontFamily,
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 16.w),
         border: OutlineInputBorder(
@@ -94,7 +97,7 @@ class MyThemes {
             borderRadius: BorderRadius.circular(12.r),
           ),
           padding: EdgeInsets.symmetric(vertical: 16.w),
-          textStyle: MyTextStyle.action.l,
+          textStyle: MyTextStyle.action.l.copyWith(fontFamily: fontFamily),
         ),
       ),
 
@@ -123,6 +126,7 @@ class MyThemes {
         checkmarkColor: MyColors.primary.base,
         labelStyle: MyTextStyle.body.s.copyWith(
           color: MyColors.light.textPrimary,
+          fontFamily: fontFamily,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.r),
@@ -134,7 +138,7 @@ class MyThemes {
         style: TextButton.styleFrom(
           foregroundColor: MyColors.primary.base,
           backgroundColor: MyColors.primary.container,
-          textStyle: MyTextStyle.action.m,
+          textStyle: MyTextStyle.action.m.copyWith(fontFamily: fontFamily),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.r),
           ),
@@ -146,11 +150,12 @@ class MyThemes {
   // ==========================
   // DARK THEME
   // ==========================
-  static ThemeData get darkTheme {
+  static ThemeData darkTheme(Locale locale) {
+    final fontFamily = MyTextStyle.fontFamilyForLocale(locale);
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      // fontFamily: MyTextStyle.fontFamily,
+      fontFamily: fontFamily,
 
       // 1. Color Scheme
       colorScheme: ColorScheme.fromSeed(
@@ -172,6 +177,7 @@ class MyThemes {
         iconTheme: IconThemeData(color: MyColors.dark.textPrimary),
         titleTextStyle: MyTextStyle.heading.h2.copyWith(
           color: MyColors.dark.textPrimary,
+          fontFamily: fontFamily,
         ),
       ),
 
@@ -193,6 +199,7 @@ class MyThemes {
         fillColor: MyColors.dark.surface,
         hintStyle: MyTextStyle.body.m.copyWith(
           color: MyColors.dark.textDisabled,
+          fontFamily: fontFamily,
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.w),
         border: OutlineInputBorder(
@@ -235,7 +242,7 @@ class MyThemes {
             borderRadius: BorderRadius.circular(12.r),
           ),
           padding: EdgeInsets.symmetric(vertical: 16.w),
-          textStyle: MyTextStyle.action.l,
+          textStyle: MyTextStyle.action.l.copyWith(fontFamily: fontFamily),
         ),
       ),
 
@@ -267,6 +274,7 @@ class MyThemes {
         checkmarkColor: MyColors.primary.onDark,
         labelStyle: MyTextStyle.body.s.copyWith(
           color: MyColors.dark.textPrimary,
+          fontFamily: fontFamily,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.r),
@@ -278,7 +286,7 @@ class MyThemes {
         style: TextButton.styleFrom(
           foregroundColor: MyColors.primary.onDark,
           backgroundColor: MyColors.primary.containerDark,
-          textStyle: MyTextStyle.action.m,
+          textStyle: MyTextStyle.action.m.copyWith(fontFamily: fontFamily),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.r),
           ),
@@ -292,9 +300,9 @@ class MyThemes {
     required Locale locale,
   }) {
     if (brightness == Brightness.light) {
-      return lightTheme;
+      return lightTheme(locale);
     } else {
-      return darkTheme;
+      return darkTheme(locale);
     }
   }
 }

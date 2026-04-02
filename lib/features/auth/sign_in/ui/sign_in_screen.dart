@@ -120,7 +120,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Text(
                       context.l10n.forgotPasswordLink,
                       style: MyTextStyle.action.m.copyWith(
-                        color: MyThemes.darkTheme.colorScheme.primary,
+                        color: MyThemes.darkTheme(const Locale('en')).colorScheme.primary,
                       ),
                     ),
                   ),
@@ -132,7 +132,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   onPressed: () =>
                       context.read<SignInCubit>().emitSignInState(),
                   height: 48.h,
-                  backgroundColor: MyThemes.darkTheme.colorScheme.primary,
+                  backgroundColor: MyThemes.darkTheme(const Locale('en')).colorScheme.primary,
                   text: context.l10n.signIn,
                   textStyle: MyTextStyle.action.l,
                 ),

@@ -28,8 +28,8 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
       appBar: AppBar(
         // background Color matches the scaffold background theme color
         backgroundColor: Theme.of(context).brightness == Brightness.dark
-            ? MyThemes.darkTheme.scaffoldBackgroundColor
-            : MyThemes.lightTheme.scaffoldBackgroundColor,
+            ? MyThemes.darkTheme(const Locale('en')).scaffoldBackgroundColor
+            : MyThemes.lightTheme(const Locale('en')).scaffoldBackgroundColor,
         elevation: 0,
       ),
       body: StatusBarHider(
@@ -91,7 +91,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                       ? () =>
                             context.read<VerifyOtpCubit>().emitVerifyOtpState()
                       : null,
-                  backgroundColor: MyThemes.darkTheme.colorScheme.primary,
+                  backgroundColor: MyThemes.darkTheme(const Locale('en')).colorScheme.primary,
                 ),
                 const VerifyOtpBlocListener(),
               ],

@@ -34,10 +34,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyThemes.darkTheme.scaffoldBackgroundColor,
+        backgroundColor: MyThemes.darkTheme(const Locale('en')).scaffoldBackgroundColor,
         elevation: 0,
         iconTheme: IconThemeData(
-          color: MyThemes.darkTheme.colorScheme.onSurface,
+          color: MyThemes.darkTheme(const Locale('en')).colorScheme.onSurface,
         ),
         automaticallyImplyLeading: false,
       ),
@@ -51,7 +51,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 Text(
                   context.l10n.resetPasswordTitle,
                   style: MyTextStyle.heading.h1.copyWith(
-                    color: MyThemes.darkTheme.colorScheme.onSurface,
+                    color: MyThemes.darkTheme(const Locale('en')).colorScheme.onSurface,
                   ),
                 ),
                 const VerticalSpace(8),
@@ -151,7 +151,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       .read<ResetPasswordCubit>()
                       .emitResetPasswordState(),
                   height: 48.h,
-                  backgroundColor: MyThemes.darkTheme.colorScheme.primary,
+                  backgroundColor: MyThemes.darkTheme(const Locale('en')).colorScheme.primary,
                 ),
                 const ResetPasswordBlocListener(),
               ],
