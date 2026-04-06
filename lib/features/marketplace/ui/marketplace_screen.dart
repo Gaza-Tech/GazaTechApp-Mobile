@@ -98,6 +98,13 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
             return [
               SliverAppBar(
                 title: Text(context.l10n.marketplace),
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.auto_awesome),
+                    tooltip: context.l10n.aiChat,
+                    onPressed: () => context.pushNamed(MyRoutes.aiChat),
+                  ),
+                ],
                 floating: true,
                 snap: true,
                 pinned: false,

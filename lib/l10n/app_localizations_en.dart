@@ -1102,4 +1102,27 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get reportAlreadySubmitted =>
       'You have already reported this. We are reviewing it.';
+
+  @override
+  String get aiChat => 'AI Assistant';
+
+  @override
+  String get aiChatHint => 'Ask about products...';
+
+  @override
+  String get aiChatEmptyTitle => 'AI Marketplace Assistant';
+
+  @override
+  String get aiChatEmptySubtitle =>
+      'Ask me anything about products in the marketplace';
+
+  @override
+  String get clearChat => 'Clear Chat';
+
+  @override
+  String get clearChatConfirm =>
+      'Are you sure you want to clear all chat history?';
+
+  @override
+  String get aiChatError => 'Something went wrong. Please try again.';
 }

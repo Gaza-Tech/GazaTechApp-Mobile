@@ -2173,6 +2173,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You have already reported this. We are reviewing it.'**
   String get reportAlreadySubmitted;
+
+  /// No description provided for @aiChat.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Assistant'**
+  String get aiChat;
+
+  /// No description provided for @aiChatHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about products...'**
+  String get aiChatHint;
+
+  /// No description provided for @aiChatEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Marketplace Assistant'**
+  String get aiChatEmptyTitle;
+
+  /// No description provided for @aiChatEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask me anything about products in the marketplace'**
+  String get aiChatEmptySubtitle;
+
+  /// No description provided for @clearChat.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Chat'**
+  String get clearChat;
+
+  /// No description provided for @clearChatConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to clear all chat history?'**
+  String get clearChatConfirm;
+
+  /// No description provided for @aiChatError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get aiChatError;
 }
 
 class _AppLocalizationsDelegate

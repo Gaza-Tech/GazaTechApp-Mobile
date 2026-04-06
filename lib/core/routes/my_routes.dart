@@ -19,4 +19,5 @@ class MyRoutes {
   static const String editPost = '/editPost';
   static const String verificationForm = '/verificationForm';
   static const String verificationStatus = '/verificationStatus';
+  static const String aiChat = '/aiChat';
 }

@@ -517,5 +517,13 @@
   "reportSubmit": "Submit Report",
   "reportSuccess": "Report submitted successfully. We will review it shortly.",
   "reportFailure": "Failed to submit report. Please try again.",
-  "reportAlreadySubmitted": "You have already reported this. We are reviewing it."
+  "reportAlreadySubmitted": "You have already reported this. We are reviewing it.",
+
+  "aiChat": "AI Assistant",
+  "aiChatHint": "Ask about products...",
+  "aiChatEmptyTitle": "AI Marketplace Assistant",
+  "aiChatEmptySubtitle": "Ask me anything about products in the marketplace",
+  "clearChat": "Clear Chat",
+  "clearChatConfirm": "Are you sure you want to clear all chat history?",
+  "aiChatError": "Something went wrong. Please try again."
 }
