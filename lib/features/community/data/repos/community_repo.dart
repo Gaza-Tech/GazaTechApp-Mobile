@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/core/netowoks/supabase_error_handler.dart';
 import 'package:gaza_tech/features/community_search/data/models/search_filter.dart';
@@ -131,17 +133,63 @@ class CommunityRepo {
     }
   }
 
-  Future<ApiResult<void>> createPost({
+  Future<ApiResult<String>> createPost({
     required String title,
     required String content,
     required String category,
   }) async {
     try {
-      await _service.createPost(
+      final postId = await _service.createPost(
         title: title,
         content: content,
         category: category,
       );
+      return ApiResult.success(postId);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  Future<ApiResult<List<String>>> uploadPostImages({
+    required String authorId,
+    required String postId,
+    required List<File> images,
+  }) async {
+    try {
+      final urls = <String>[];
+      for (int i = 0; i < images.length; i++) {
+        final url = await _service.uploadPostImage(
+          authorId: authorId,
+          postId: postId,
+          file: images[i],
+          index: i,
+        );
+        urls.add(url);
+      }
+      return ApiResult.success(urls);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  Future<ApiResult<void>> savePostAttachments({
+    required String postId,
+    required List<String> imageUrls,
+  }) async {
+    try {
+      await _service.savePostAttachments(postId: postId, imageUrls: imageUrls);
+      return ApiResult.success(null);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  Future<ApiResult<void>> deletePostAttachments({
+    required String postId,
+    required String authorId,
+  }) async {
+    try {
+      await _service.deletePostAttachments(postId: postId, authorId: authorId);
       return ApiResult.success(null);
     } catch (e) {
       return ApiResult.failure(ErrorHandler.handle(e));

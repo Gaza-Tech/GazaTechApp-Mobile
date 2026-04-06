@@ -134,6 +134,7 @@ class _PostsTabViewState extends State<PostsTabView>
                         category: _categoryLabel(context, post.postCategory),
                         title: post.title,
                         description: post.content,
+                        attachmentUrls: post.attachmentUrls,
                         likes: post.likesCount,
                         comments: post.commentsCount,
                         isLiked: state.likedPostIds.contains(post.postId),

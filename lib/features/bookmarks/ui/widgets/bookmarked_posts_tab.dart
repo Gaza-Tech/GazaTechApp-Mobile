@@ -79,6 +79,7 @@ class _BookmarkedPostsTabState extends State<BookmarkedPostsTab>
                       category: _categoryLabel(context.l10n, post.postCategory),
                       title: post.title,
                       description: post.content,
+                      attachmentUrls: post.attachmentUrls,
                       likes: post.likesCount,
                       comments: post.commentsCount,
                       isLiked: state.likedPostIds.contains(post.postId),

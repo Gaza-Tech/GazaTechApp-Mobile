@@ -590,6 +590,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get maxFileSize => 'Max 5MB per file';
 
   @override
+  String imageLimitReached(int max) {
+    return 'You can attach up to $max images';
+  }
+
+  @override
+  String get uploadingImages => 'Uploading images...';
+
+  @override
+  String get imageUploadFailed => 'Failed to upload images';
+
+  @override
   String get publishPost => 'Publish Post';
 
   @override

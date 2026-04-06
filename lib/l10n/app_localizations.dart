@@ -1196,6 +1196,24 @@ abstract class AppLocalizations {
   /// **'Max 5MB per file'**
   String get maxFileSize;
 
+  /// No description provided for @imageLimitReached.
+  ///
+  /// In en, this message translates to:
+  /// **'You can attach up to {max} images'**
+  String imageLimitReached(int max);
+
+  /// No description provided for @uploadingImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploading images...'**
+  String get uploadingImages;
+
+  /// No description provided for @imageUploadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to upload images'**
+  String get imageUploadFailed;
+
   /// No description provided for @publishPost.
   ///
   /// In en, this message translates to:

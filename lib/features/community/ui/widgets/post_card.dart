@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
@@ -22,6 +23,7 @@ class PostCard extends StatelessWidget {
   final VoidCallback? onAuthorTap;
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
+  final List<String> attachmentUrls;
 
   const PostCard({
     super.key,
@@ -41,6 +43,7 @@ class PostCard extends StatelessWidget {
     this.onAuthorTap,
     this.onEdit,
     this.onDelete,
+    this.attachmentUrls = const [],
   });
 
   @override
@@ -69,10 +72,7 @@ class PostCard extends StatelessWidget {
                     ),
                   ),
                   if (onEdit != null || onDelete != null)
-                    _PostMoreMenuButton(
-                      onEdit: onEdit,
-                      onDelete: onDelete,
-                    ),
+                    _PostMoreMenuButton(onEdit: onEdit, onDelete: onDelete),
                 ],
               ),
               SizedBox(height: 10.h),
@@ -93,6 +93,10 @@ class PostCard extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
+              if (attachmentUrls.isNotEmpty) ...[
+                SizedBox(height: 10.h),
+                _PostCardThumbnails(urls: attachmentUrls),
+              ],
               SizedBox(height: 12.h),
               PostCardActions(
                 likes: likes,
@@ -153,14 +157,51 @@ class _PostMoreMenuButton extends StatelessWidget {
                 SizedBox(width: 8.w),
                 Text(
                   l10n.delete,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.error,
-                  ),
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
                 ),
               ],
             ),
           ),
       ],
+    );
+  }
+}
+
+class _PostCardThumbnails extends StatelessWidget {
+  final List<String> urls;
+
+  const _PostCardThumbnails({required this.urls});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return SizedBox(
+      height: 100.h,
+      child: Row(
+        children: [
+          for (int i = 0; i < urls.length; i++) ...[
+            if (i > 0) SizedBox(width: 6.w),
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.r),
+                child: CachedNetworkImage(
+                  imageUrl: urls[i],
+                  fit: BoxFit.cover,
+                  height: 100.h,
+                  memCacheWidth: 200,
+                  placeholder: (_, __) => Container(
+                    color: theme.colorScheme.surfaceContainerHighest,
+                  ),
+                  errorWidget: (_, __, ___) => Container(
+                    color: theme.colorScheme.surfaceContainerHighest,
+                    child: const Icon(Icons.image_not_supported_outlined),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/community_sort.dart';
 
@@ -113,9 +115,7 @@ class CommunityApiService {
     };
   }
 
-  Future<Set<String>> fetchReportedCommentIds(
-    List<String> commentIds,
-  ) async {
+  Future<Set<String>> fetchReportedCommentIds(List<String> commentIds) async {
     final userId = _supabase.auth.currentUser?.id;
     if (userId == null || commentIds.isEmpty) return {};
 
@@ -263,20 +263,72 @@ class CommunityApiService {
     }
   }
 
-  Future<void> createPost({
+  Future<String> createPost({
     required String title,
     required String content,
     required String category,
   }) async {
     final userId = _supabase.auth.currentUser!.id;
-    await _supabase.from('community_posts').insert({
-      'author_id': userId,
-      'title': title,
-      'content': content,
-      'post_category': category,
-      'content_status': 'published',
-      'published_at': DateTime.now().toIso8601String(),
-    });
+    final result = await _supabase
+        .from('community_posts')
+        .insert({
+          'author_id': userId,
+          'title': title,
+          'content': content,
+          'post_category': category,
+          'content_status': 'published',
+          'published_at': DateTime.now().toIso8601String(),
+        })
+        .select('post_id')
+        .single();
+    return result['post_id'] as String;
+  }
+
+  /// Upload a single post image to Supabase Storage.
+  Future<String> uploadPostImage({
+    required String authorId,
+    required String postId,
+    required File file,
+    required int index,
+  }) async {
+    final extension = file.path.split('.').last;
+    final path = '$authorId/$postId/$index.$extension';
+
+    await _supabase.storage.from('community-attachments').upload(path, file);
+
+    return _supabase.storage.from('community-attachments').getPublicUrl(path);
+  }
+
+  /// Save attachment URL records to the database.
+  Future<void> savePostAttachments({
+    required String postId,
+    required List<String> imageUrls,
+  }) async {
+    final records = imageUrls
+        .map((url) => {'post_id': postId, 'file_url': url})
+        .toList();
+
+    await _supabase.from('community_posts_attachments').insert(records);
+  }
+
+  /// Delete all attachment records and storage files for a post.
+  Future<void> deletePostAttachments({
+    required String postId,
+    required String authorId,
+  }) async {
+    await _supabase
+        .from('community_posts_attachments')
+        .delete()
+        .eq('post_id', postId);
+
+    final files = await _supabase.storage
+        .from('community-attachments')
+        .list(path: '$authorId/$postId');
+
+    if (files.isNotEmpty) {
+      final paths = files.map((f) => '$authorId/$postId/${f.name}').toList();
+      await _supabase.storage.from('community-attachments').remove(paths);
+    }
   }
 
   Future<List<Map<String, dynamic>>> fetchReplies({
