@@ -1098,4 +1098,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get reportAlreadySubmitted => 'لقد أبلغت عن هذا مسبقاً. نحن نراجعه.';
+
+  @override
+  String get aiChat => 'المساعد الذكي';
+
+  @override
+  String get aiChatHint => 'اسأل عن المنتجات...';
+
+  @override
+  String get aiChatEmptyTitle => 'مساعد السوق الذكي';
+
+  @override
+  String get aiChatEmptySubtitle => 'اسألني أي شيء عن المنتجات في السوق';
+
+  @override
+  String get clearChat => 'مسح المحادثة';
+
+  @override
+  String get clearChatConfirm => 'هل أنت متأكد أنك تريد مسح كل سجل المحادثة؟';
+
+  @override
+  String get aiChatError => 'حدث خطأ ما. يرجى المحاولة مرة أخرى.';
 }

@@ -455,5 +455,13 @@
   "reportSubmit": "إرسال البلاغ",
   "reportSuccess": "تم إرسال البلاغ بنجاح. سنراجعه قريباً.",
   "reportFailure": "فشل إرسال البلاغ. يرجى المحاولة مرة أخرى.",
-  "reportAlreadySubmitted": "لقد أبلغت عن هذا مسبقاً. نحن نراجعه."
+  "reportAlreadySubmitted": "لقد أبلغت عن هذا مسبقاً. نحن نراجعه.",
+
+  "aiChat": "المساعد الذكي",
+  "aiChatHint": "اسأل عن المنتجات...",
+  "aiChatEmptyTitle": "مساعد السوق الذكي",
+  "aiChatEmptySubtitle": "اسألني أي شيء عن المنتجات في السوق",
+  "clearChat": "مسح المحادثة",
+  "clearChatConfirm": "هل أنت متأكد أنك تريد مسح كل سجل المحادثة؟",
+  "aiChatError": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
 }

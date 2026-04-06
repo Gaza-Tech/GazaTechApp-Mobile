@@ -7,4 +7,7 @@ class SharedPrefKeys {
 
   // Marketplace search
   static const String marketplaceRecentSearches = 'marketplace_recent_searches';
+
+  // AI Chat
+  static const String aiChatHistory = 'ai_chat_history';
 }
