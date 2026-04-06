@@ -49,8 +49,7 @@ class AiChatScreen extends StatelessWidget {
                     state.messages.length + (state.isLoading ? 1 : 0);
 
                 return ListView.builder(
-                  controller:
-                      context.read<AiChatCubit>().scrollController,
+                  controller: context.read<AiChatCubit>().scrollController,
                   keyboardDismissBehavior:
                       ScrollViewKeyboardDismissBehavior.onDrag,
                   padding: EdgeInsets.symmetric(
@@ -62,9 +61,7 @@ class AiChatScreen extends StatelessWidget {
                     if (index == state.messages.length) {
                       return _buildTypingIndicator(context);
                     }
-                    return ChatMessageBubble(
-                      message: state.messages[index],
-                    );
+                    return ChatMessageBubble(message: state.messages[index]);
                   },
                 );
               },
@@ -117,6 +114,10 @@ class AiChatScreen extends StatelessWidget {
               context.read<AiChatCubit>().clearChat();
               Navigator.of(dialogContext).pop();
             },
+            style: TextButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.error,
+              backgroundColor: Theme.of(context).colorScheme.errorContainer,
+            ),
             child: Text(context.l10n.clearChat),
           ),
         ],
@@ -145,9 +146,10 @@ class _AnimatedDotState extends State<_AnimatedDot>
       vsync: this,
       duration: const Duration(milliseconds: 600),
     );
-    _animation = Tween(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _animation = Tween(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     Future.delayed(Duration(milliseconds: widget.delay), () {
       if (mounted) _controller.repeat(reverse: true);
     });
