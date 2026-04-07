@@ -1,13 +1,5 @@
-import 'dart:io';
+import 'package:gaza_tech/core/models/image_item.dart';
 
-sealed class ListingImageItem {}
+export 'package:gaza_tech/core/models/image_item.dart';
 
-class ExistingImage extends ListingImageItem {
-  final String url;
-  ExistingImage(this.url);
-}
-
-class NewImage extends ListingImageItem {
-  final File file;
-  NewImage(this.file);
-}
+typedef ListingImageItem = ImageItem;

@@ -11,6 +11,7 @@ import 'package:gaza_tech/features/community/ui/widgets/comment_card.dart';
 import 'package:gaza_tech/features/community/ui/widgets/comment_input_bar.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_actions.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_header.dart';
+import 'package:gaza_tech/features/community/ui/widgets/fullscreen_image_viewer.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_image_gallery.dart';
 import 'package:gaza_tech/features/community/ui/widgets/view_replies_button.dart';
 import 'package:gaza_tech/features/report/data/models/report_reason.dart';
@@ -72,9 +73,9 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
       ).showSnackBar(SnackBar(content: Text(l10n.postDeleted)));
       Navigator.pop(context, 'deleted');
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(error)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(error)));
     }
   }
 
@@ -159,7 +160,16 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                             if (state.post!.attachmentUrls.isNotEmpty) ...[
                               SizedBox(height: 14.h),
                               PostImageGallery(
-                                imageCount: state.post!.attachmentUrls.length,
+                                imageUrls: state.post!.attachmentUrls,
+                                onImageTap: (index) => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => FullscreenImageViewer(
+                                      imageUrls: state.post!.attachmentUrls,
+                                      initialIndex: index,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ],
                             SizedBox(height: 14.h),
@@ -184,10 +194,8 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                     isLiked: state.likedCommentIds.contains(
                                       comment.commentId,
                                     ),
-                                    isReported:
-                                        state.reportedCommentIds.contains(
-                                      comment.commentId,
-                                    ),
+                                    isReported: state.reportedCommentIds
+                                        .contains(comment.commentId),
                                     indentLevel: 0,
                                     onReply: () => setState(() {
                                       _replyingTo = comment.authorName;
@@ -196,17 +204,22 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                     onLikeTap: () => cubit.toggleCommentLike(
                                       comment.commentId,
                                     ),
-                                    onReport: comment.authorId !=
-                                            Supabase.instance.client.auth
-                                                .currentUser?.id
+                                    onReport:
+                                        comment.authorId !=
+                                            Supabase
+                                                .instance
+                                                .client
+                                                .auth
+                                                .currentUser
+                                                ?.id
                                         ? () async {
                                             final reported =
                                                 await showReportBottomSheet(
-                                              context,
-                                              entityType:
-                                                  ReportEntityType.comment,
-                                              entityId: comment.commentId,
-                                            );
+                                                  context,
+                                                  entityType:
+                                                      ReportEntityType.comment,
+                                                  entityId: comment.commentId,
+                                                );
                                             if (reported == true &&
                                                 context.mounted) {
                                               cubit.markCommentAsReported(
@@ -245,33 +258,37 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                             likes: reply.likesCount,
                                             isLiked: state.likedCommentIds
                                                 .contains(reply.commentId),
-                                            isReported: state
-                                                .reportedCommentIds
+                                            isReported: state.reportedCommentIds
                                                 .contains(reply.commentId),
                                             indentLevel: 1,
                                             onLikeTap: () =>
                                                 cubit.toggleCommentLike(
                                                   reply.commentId,
                                                 ),
-                                            onReport: reply.authorId !=
-                                                    Supabase.instance.client
-                                                        .auth.currentUser?.id
+                                            onReport:
+                                                reply.authorId !=
+                                                    Supabase
+                                                        .instance
+                                                        .client
+                                                        .auth
+                                                        .currentUser
+                                                        ?.id
                                                 ? () async {
                                                     final reported =
                                                         await showReportBottomSheet(
-                                                      context,
-                                                      entityType:
-                                                          ReportEntityType
-                                                              .comment,
-                                                      entityId:
-                                                          reply.commentId,
-                                                    );
+                                                          context,
+                                                          entityType:
+                                                              ReportEntityType
+                                                                  .comment,
+                                                          entityId:
+                                                              reply.commentId,
+                                                        );
                                                     if (reported == true &&
                                                         context.mounted) {
                                                       cubit
                                                           .markCommentAsReported(
-                                                        reply.commentId,
-                                                      );
+                                                            reply.commentId,
+                                                          );
                                                     }
                                                   }
                                                 : null,

@@ -242,6 +242,16 @@
   "attachments": "المرفقات",
   "addImagesOrFiles": "أضف صوراً أو ملفات",
   "maxFileSize": "الحد الأقصى 5 ميجابايت لكل ملف",
+  "imageLimitReached": "يمكنك إرفاق حتى {max} صور",
+  "@imageLimitReached": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "uploadingImages": "جارٍ رفع الصور...",
+  "imageUploadFailed": "فشل رفع الصور",
   "publishPost": "نشر المنشور",
 
   "postDetails": "تفاصيل المنشور",

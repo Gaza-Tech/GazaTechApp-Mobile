@@ -304,6 +304,16 @@
   "attachments": "Attachments",
   "addImagesOrFiles": "Add images or files",
   "maxFileSize": "Max 5MB per file",
+  "imageLimitReached": "You can attach up to {max} images",
+  "@imageLimitReached": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "uploadingImages": "Uploading images...",
+  "imageUploadFailed": "Failed to upload images",
   "publishPost": "Publish Post",
 
   "postDetails": "Post Details",

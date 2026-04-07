@@ -588,6 +588,17 @@ class AppLocalizationsAr extends AppLocalizations {
   String get maxFileSize => 'الحد الأقصى 5 ميجابايت لكل ملف';
 
   @override
+  String imageLimitReached(int max) {
+    return 'يمكنك إرفاق حتى $max صور';
+  }
+
+  @override
+  String get uploadingImages => 'جارٍ رفع الصور...';
+
+  @override
+  String get imageUploadFailed => 'فشل رفع الصور';
+
+  @override
   String get publishPost => 'نشر المنشور';
 
   @override
