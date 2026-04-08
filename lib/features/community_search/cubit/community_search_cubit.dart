@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/cache/shared_pref_keys.dart';
 import 'package:gaza_tech/core/helpers/shared_pref_helper.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
-import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/core/services/post_event_service.dart';
 import 'package:gaza_tech/features/community/data/models/community_sort.dart';
 import 'package:gaza_tech/features/community/data/repos/community_repo.dart';
 import 'package:gaza_tech/features/community_search/data/models/search_filter.dart';
@@ -14,7 +14,7 @@ import 'community_search_state.dart';
 
 class CommunitySearchCubit extends Cubit<CommunitySearchState> {
   final CommunityRepo _repo;
-  final BookmarkEventService _bookmarkEventService;
+  final PostEventService _bookmarkEventService;
   late final StreamSubscription<PostBookmarkEvent> _bookmarkSub;
 
   CommunitySearchCubit(this._repo, this._bookmarkEventService)

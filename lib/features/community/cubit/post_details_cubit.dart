@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
-import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/core/services/post_event_service.dart';
 import 'package:gaza_tech/core/services/report_event_service.dart';
 import 'package:gaza_tech/features/report/data/models/report_reason.dart';
 import '../data/models/comment_model.dart';
@@ -12,7 +12,7 @@ import 'post_details_state.dart';
 class PostDetailsCubit extends Cubit<PostDetailsState> {
   final CommunityRepo _repo;
   final String postId;
-  final BookmarkEventService _bookmarkEventService;
+  final PostEventService _bookmarkEventService;
   final ReportEventService _reportEventService;
   late final StreamSubscription<PostBookmarkEvent> _bookmarkSub;
   late final StreamSubscription<ReportEvent> _reportSub;
@@ -131,26 +131,39 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
   }
 
   Future<void> togglePostLike() async {
+    if (state.post == null) return;
     final wasLiked = state.isLiked;
     final delta = wasLiked ? -1 : 1;
+    final newLikesCount = state.post!.likesCount + delta;
     emit(
       state.copyWith(
         isLiked: !wasLiked,
-        post: state.post?.copyWith(likesCount: state.post!.likesCount + delta),
+        post: state.post!.copyWith(likesCount: newLikesCount),
       ),
+    );
+    _bookmarkEventService.emitPostLike(
+      postId,
+      isLiked: !wasLiked,
+      likesCount: newLikesCount,
     );
 
     final result = await _repo.togglePostLike(postId);
     result.when(
       success: (_) {},
-      failure: (_) => emit(
-        state.copyWith(
-          isLiked: wasLiked,
-          post: state.post?.copyWith(
-            likesCount: state.post!.likesCount - delta,
+      failure: (_) {
+        final revertedCount = state.post!.likesCount - delta;
+        emit(
+          state.copyWith(
+            isLiked: wasLiked,
+            post: state.post!.copyWith(likesCount: revertedCount),
           ),
-        ),
-      ),
+        );
+        _bookmarkEventService.emitPostLike(
+          postId,
+          isLiked: wasLiked,
+          likesCount: revertedCount,
+        );
+      },
     );
   }
 
@@ -332,12 +345,15 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
     result.when(
       success: (_) {
         if (state.post != null) {
+          final newCommentsCount = state.post!.commentsCount + 1;
           emit(
             state.copyWith(
-              post: state.post!.copyWith(
-                commentsCount: state.post!.commentsCount + 1,
-              ),
+              post: state.post!.copyWith(commentsCount: newCommentsCount),
             ),
+          );
+          _bookmarkEventService.emitPostCommentCount(
+            postId,
+            commentsCount: newCommentsCount,
           );
         }
         if (parentCommentId != null) {

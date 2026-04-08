@@ -100,7 +100,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
                 title: Text(context.l10n.marketplace),
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.auto_awesome),
+                    icon: const Icon(Icons.auto_awesome_rounded),
                     tooltip: context.l10n.aiChat,
                     onPressed: () => context.pushNamed(MyRoutes.aiChat),
                   ),

@@ -126,7 +126,7 @@ class MarketpalceSearchScreen extends StatelessWidget {
                   isLabelVisible:
                       state.filters.hasActiveFilters ||
                       state.filters.sort != SearchSortOption.newest,
-                  child: const Icon(Icons.tune_rounded),
+                  child: const Icon(Icons.filter_list_rounded),
                 ),
                 onPressed: () => showFilterBottomSheet(context),
               );

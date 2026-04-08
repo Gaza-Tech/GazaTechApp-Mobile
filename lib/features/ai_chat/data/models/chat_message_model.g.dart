@@ -19,6 +19,7 @@ _ChatMessageModel _$ChatMessageModelFromJson(Map<String, dynamic> json) =>
               )
               .toList() ??
           const [],
+      isStopped: json['isStopped'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$ChatMessageModelToJson(_ChatMessageModel instance) =>
@@ -28,4 +29,5 @@ Map<String, dynamic> _$ChatMessageModelToJson(_ChatMessageModel instance) =>
       'isUser': instance.isUser,
       'timestamp': instance.timestamp.toIso8601String(),
       'listings': instance.listings,
+      'isStopped': instance.isStopped,
     };

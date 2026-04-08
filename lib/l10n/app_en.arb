@@ -535,5 +535,6 @@
   "aiChatEmptySubtitle": "Ask me anything about products in the marketplace",
   "clearChat": "Clear Chat",
   "clearChatConfirm": "Are you sure you want to clear all chat history?",
-  "aiChatError": "Something went wrong. Please try again."
+  "aiChatError": "Something went wrong. Please try again.",
+  "aiChatStopped": "(stopped)"
 }

@@ -19,7 +19,7 @@ class AiChatEmptyState extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              Icons.auto_awesome,
+              Icons.auto_awesome_rounded,
               size: 64.sp,
               color: MyColors.primary.base,
             ),

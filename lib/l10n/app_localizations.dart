@@ -2233,6 +2233,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong. Please try again.'**
   String get aiChatError;
+
+  /// No description provided for @aiChatStopped.
+  ///
+  /// In en, this message translates to:
+  /// **'(stopped)'**
+  String get aiChatStopped;
 }
 
 class _AppLocalizationsDelegate

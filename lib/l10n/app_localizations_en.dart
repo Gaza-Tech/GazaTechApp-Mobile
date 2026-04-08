@@ -1136,4 +1136,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aiChatError => 'Something went wrong. Please try again.';
+
+  @override
+  String get aiChatStopped => '(stopped)';
 }

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
-import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/core/services/post_event_service.dart';
 import '../data/models/community_sort.dart';
 import '../data/models/post_model.dart';
 import '../data/repos/community_repo.dart';
@@ -10,14 +10,53 @@ import 'community_state.dart';
 
 class CommunityCubit extends Cubit<CommunityState> {
   final CommunityRepo _repo;
-  final BookmarkEventService _bookmarkEventService;
+  final PostEventService _bookmarkEventService;
   late final StreamSubscription<PostBookmarkEvent> _bookmarkSub;
+  late final StreamSubscription<PostLikeEvent> _likeSub;
+  late final StreamSubscription<PostCommentCountEvent> _commentCountSub;
 
   CommunityCubit(this._repo, this._bookmarkEventService)
     : super(const CommunityState()) {
     _bookmarkSub = _bookmarkEventService.postBookmarkChanges.listen(
       _onPostBookmarkEvent,
     );
+    _likeSub = _bookmarkEventService.postLikeChanges.listen(_onPostLikeEvent);
+    _commentCountSub = _bookmarkEventService.postCommentCountChanges.listen(
+      _onPostCommentCountEvent,
+    );
+  }
+
+  void _onPostLikeEvent(PostLikeEvent event) {
+    final newLikedIds = Set<String>.from(state.likedPostIds);
+    event.isLiked
+        ? newLikedIds.add(event.postId)
+        : newLikedIds.remove(event.postId);
+
+    final updatedPosts = <String, List<PostModel>>{};
+    for (final entry in state.postsByCategory.entries) {
+      updatedPosts[entry.key] = entry.value.map((p) {
+        if (p.postId == event.postId) {
+          return p.copyWith(likesCount: event.likesCount);
+        }
+        return p;
+      }).toList();
+    }
+    emit(
+      state.copyWith(likedPostIds: newLikedIds, postsByCategory: updatedPosts),
+    );
+  }
+
+  void _onPostCommentCountEvent(PostCommentCountEvent event) {
+    final updatedPosts = <String, List<PostModel>>{};
+    for (final entry in state.postsByCategory.entries) {
+      updatedPosts[entry.key] = entry.value.map((p) {
+        if (p.postId == event.postId) {
+          return p.copyWith(commentsCount: event.commentsCount);
+        }
+        return p;
+      }).toList();
+    }
+    emit(state.copyWith(postsByCategory: updatedPosts));
   }
 
   void _onPostBookmarkEvent(PostBookmarkEvent event) {
@@ -252,6 +291,8 @@ class CommunityCubit extends Cubit<CommunityState> {
   @override
   Future<void> close() {
     _bookmarkSub.cancel();
+    _likeSub.cancel();
+    _commentCountSub.cancel();
     return super.close();
   }
 }

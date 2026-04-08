@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
-import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/core/services/post_event_service.dart';
 import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
 import 'package:gaza_tech/features/marketplace/data/models/marketplace_sort.dart';
 import '../data/repos/marketplace_repo.dart';
@@ -10,7 +10,7 @@ import 'marketplace_state.dart';
 
 class MarketplaceCubit extends Cubit<MarketplaceState> {
   final MarketplaceRepo _repo;
-  final BookmarkEventService _bookmarkEventService;
+  final PostEventService _bookmarkEventService;
   late final StreamSubscription<ListingBookmarkEvent> _bookmarkSub;
 
   MarketplaceCubit(this._repo, this._bookmarkEventService)

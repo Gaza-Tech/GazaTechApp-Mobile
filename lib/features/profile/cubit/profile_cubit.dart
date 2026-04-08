@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
-import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/core/services/post_event_service.dart';
 import 'package:gaza_tech/core/services/report_event_service.dart';
 import 'package:gaza_tech/features/report/data/models/report_reason.dart';
 import 'package:gaza_tech/features/profile/data/repos/profile_repo.dart';
@@ -11,7 +11,7 @@ import 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepo _repo;
   final String _userId;
-  final BookmarkEventService _bookmarkEventService;
+  final PostEventService _bookmarkEventService;
   final ReportEventService _reportEventService;
   late final StreamSubscription<PostBookmarkEvent> _postBookmarkSub;
   late final StreamSubscription<ReportEvent> _reportSub;

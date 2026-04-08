@@ -16,71 +16,86 @@ class AiChatInputBar extends StatelessWidget {
     final theme = Theme.of(context);
     final cubit = context.read<AiChatCubit>();
 
-    return Container(
-      padding: EdgeInsets.fromLTRB(
-        16.w,
-        8.h,
-        8.w,
-        8.h + MediaQuery.of(context).padding.bottom,
-      ),
-      decoration: BoxDecoration(
-        color: theme.scaffoldBackgroundColor,
-        border: Border(
-          top: BorderSide(
-            color: theme.dividerColor,
-            width: 0.5,
+    return BlocBuilder<AiChatCubit, AiChatState>(
+      buildWhen: (prev, curr) => prev.isLoading != curr.isLoading,
+      builder: (context, state) {
+        return Container(
+          padding: EdgeInsets.fromLTRB(
+            16.w,
+            8.h,
+            8.w,
+            8.h + MediaQuery.of(context).padding.bottom,
           ),
-        ),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              controller: cubit.messageController,
-              textInputAction: TextInputAction.send,
-              onSubmitted: (_) => cubit.sendMessage(),
-              style: MyTextStyle.body.s,
-              decoration: InputDecoration(
-                hintText: context.l10n.aiChatHint,
-                hintStyle: MyTextStyle.body.s.copyWith(
-                  color: theme.textTheme.bodySmall?.color,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(24.r),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: theme.colorScheme.surfaceContainerHigh,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 10.h,
-                ),
-              ),
+          decoration: BoxDecoration(
+            color: theme.scaffoldBackgroundColor,
+            border: Border(
+              top: BorderSide(color: theme.dividerColor, width: 0.5),
             ),
           ),
-          SizedBox(width: 4.w),
-          BlocBuilder<AiChatCubit, AiChatState>(
-            buildWhen: (prev, curr) => prev.isLoading != curr.isLoading,
-            builder: (context, state) {
-              return IconButton(
-                onPressed: state.isLoading ? null : () => cubit.sendMessage(),
-                icon: state.isLoading
-                    ? SizedBox(
-                        width: 20.w,
-                        height: 20.w,
-                        child: const CircularProgressIndicator(
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: cubit.messageController,
+                  textInputAction: TextInputAction.send,
+                  onSubmitted: state.isLoading
+                      ? null
+                      : (_) => cubit.sendMessage(),
+                  style: MyTextStyle.body.s,
+                  decoration: InputDecoration(
+                    hintText: context.l10n.aiChatHint,
+                    hintStyle: MyTextStyle.body.s.copyWith(
+                      color: theme.textTheme.bodySmall?.color,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24.r),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: theme.colorScheme.surfaceContainerHigh,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 10.h,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 4.w),
+              SizedBox(
+                width: 44.w,
+                height: 44.w,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    if (state.isLoading)
+                      SizedBox(
+                        width: 38.w,
+                        height: 38.w,
+                        child: CircularProgressIndicator(
                           strokeWidth: 2,
+                          color: MyColors.primary.base,
                         ),
-                      )
-                    : Icon(
-                        Icons.send_rounded,
-                        color: MyColors.primary.base,
                       ),
-              );
-            },
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: state.isLoading
+                          ? cubit.stopGeneration
+                          : cubit.sendMessage,
+                      icon: Icon(
+                        state.isLoading
+                            ? Icons.stop_rounded
+                            : Icons.arrow_upward_rounded,
+                        color: MyColors.primary.base,
+                        size: 20.r,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

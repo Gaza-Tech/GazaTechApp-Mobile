@@ -10,6 +10,9 @@ import '../data/models/chat_message_model.dart';
 import '../data/repos/ai_chat_repo.dart';
 import 'ai_chat_state.dart';
 
+// Exported so widgets can reference it if needed.
+export '../data/repos/ai_chat_repo.dart' show kAiChatCancelled;
+
 class AiChatCubit extends Cubit<AiChatState> {
   final AiChatRepo _repo;
   final SharedPreferences _prefs;
@@ -72,14 +75,30 @@ class AiChatCubit extends Cubit<AiChatState> {
         _scrollToBottom();
       },
       failure: (error) {
-        emit(state.copyWith(
-          isLoading: false,
-          errorMessage: error.message,
-        ));
+        if (error.message == kAiChatCancelled) {
+          final stoppedMsg = ChatMessageModel(
+            id: DateTime.now().millisecondsSinceEpoch.toString(),
+            text: '',
+            isUser: false,
+            timestamp: DateTime.now(),
+            isStopped: true,
+          );
+          emit(state.copyWith(
+            messages: [...state.messages, stoppedMsg],
+            isLoading: false,
+          ));
+        } else {
+          emit(state.copyWith(
+            isLoading: false,
+            errorMessage: error.message,
+          ));
+        }
         _saveHistory();
       },
     );
   }
+
+  void stopGeneration() => _repo.cancel();
 
   void clearChat() {
     _prefs.remove(SharedPrefKeys.aiChatHistory);

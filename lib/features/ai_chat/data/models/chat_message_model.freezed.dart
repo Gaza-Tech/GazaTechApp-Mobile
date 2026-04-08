@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatMessageModel {
 
- String get id; String get text; bool get isUser; DateTime get timestamp; List<AiChatListingModel> get listings;
+ String get id; String get text; bool get isUser; DateTime get timestamp; List<AiChatListingModel> get listings; bool get isStopped;
 /// Create a copy of ChatMessageModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ChatMessageModelCopyWith<ChatMessageModel> get copyWith => _$ChatMessageModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatMessageModel&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.isUser, isUser) || other.isUser == isUser)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&const DeepCollectionEquality().equals(other.listings, listings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatMessageModel&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.isUser, isUser) || other.isUser == isUser)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&const DeepCollectionEquality().equals(other.listings, listings)&&(identical(other.isStopped, isStopped) || other.isStopped == isStopped));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,text,isUser,timestamp,const DeepCollectionEquality().hash(listings));
+int get hashCode => Object.hash(runtimeType,id,text,isUser,timestamp,const DeepCollectionEquality().hash(listings),isStopped);
 
 @override
 String toString() {
-  return 'ChatMessageModel(id: $id, text: $text, isUser: $isUser, timestamp: $timestamp, listings: $listings)';
+  return 'ChatMessageModel(id: $id, text: $text, isUser: $isUser, timestamp: $timestamp, listings: $listings, isStopped: $isStopped)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ChatMessageModelCopyWith<$Res>  {
   factory $ChatMessageModelCopyWith(ChatMessageModel value, $Res Function(ChatMessageModel) _then) = _$ChatMessageModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String text, bool isUser, DateTime timestamp, List<AiChatListingModel> listings
+ String id, String text, bool isUser, DateTime timestamp, List<AiChatListingModel> listings, bool isStopped
 });
 
 
@@ -65,14 +65,15 @@ class _$ChatMessageModelCopyWithImpl<$Res>
 
 /// Create a copy of ChatMessageModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? text = null,Object? isUser = null,Object? timestamp = null,Object? listings = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? text = null,Object? isUser = null,Object? timestamp = null,Object? listings = null,Object? isStopped = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
 as String,isUser: null == isUser ? _self.isUser : isUser // ignore: cast_nullable_to_non_nullable
 as bool,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
 as DateTime,listings: null == listings ? _self.listings : listings // ignore: cast_nullable_to_non_nullable
-as List<AiChatListingModel>,
+as List<AiChatListingModel>,isStopped: null == isStopped ? _self.isStopped : isStopped // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -157,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String text,  bool isUser,  DateTime timestamp,  List<AiChatListingModel> listings)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String text,  bool isUser,  DateTime timestamp,  List<AiChatListingModel> listings,  bool isStopped)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ChatMessageModel() when $default != null:
-return $default(_that.id,_that.text,_that.isUser,_that.timestamp,_that.listings);case _:
+return $default(_that.id,_that.text,_that.isUser,_that.timestamp,_that.listings,_that.isStopped);case _:
   return orElse();
 
 }
@@ -178,10 +179,10 @@ return $default(_that.id,_that.text,_that.isUser,_that.timestamp,_that.listings)
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String text,  bool isUser,  DateTime timestamp,  List<AiChatListingModel> listings)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String text,  bool isUser,  DateTime timestamp,  List<AiChatListingModel> listings,  bool isStopped)  $default,) {final _that = this;
 switch (_that) {
 case _ChatMessageModel():
-return $default(_that.id,_that.text,_that.isUser,_that.timestamp,_that.listings);case _:
+return $default(_that.id,_that.text,_that.isUser,_that.timestamp,_that.listings,_that.isStopped);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +199,10 @@ return $default(_that.id,_that.text,_that.isUser,_that.timestamp,_that.listings)
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String text,  bool isUser,  DateTime timestamp,  List<AiChatListingModel> listings)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String text,  bool isUser,  DateTime timestamp,  List<AiChatListingModel> listings,  bool isStopped)?  $default,) {final _that = this;
 switch (_that) {
 case _ChatMessageModel() when $default != null:
-return $default(_that.id,_that.text,_that.isUser,_that.timestamp,_that.listings);case _:
+return $default(_that.id,_that.text,_that.isUser,_that.timestamp,_that.listings,_that.isStopped);case _:
   return null;
 
 }
@@ -213,7 +214,7 @@ return $default(_that.id,_that.text,_that.isUser,_that.timestamp,_that.listings)
 @JsonSerializable()
 
 class _ChatMessageModel implements ChatMessageModel {
-  const _ChatMessageModel({required this.id, required this.text, required this.isUser, required this.timestamp, final  List<AiChatListingModel> listings = const []}): _listings = listings;
+  const _ChatMessageModel({required this.id, required this.text, required this.isUser, required this.timestamp, final  List<AiChatListingModel> listings = const [], this.isStopped = false}): _listings = listings;
   factory _ChatMessageModel.fromJson(Map<String, dynamic> json) => _$ChatMessageModelFromJson(json);
 
 @override final  String id;
@@ -227,6 +228,7 @@ class _ChatMessageModel implements ChatMessageModel {
   return EqualUnmodifiableListView(_listings);
 }
 
+@override@JsonKey() final  bool isStopped;
 
 /// Create a copy of ChatMessageModel
 /// with the given fields replaced by the non-null parameter values.
@@ -241,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatMessageModel&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.isUser, isUser) || other.isUser == isUser)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&const DeepCollectionEquality().equals(other._listings, _listings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatMessageModel&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.isUser, isUser) || other.isUser == isUser)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&const DeepCollectionEquality().equals(other._listings, _listings)&&(identical(other.isStopped, isStopped) || other.isStopped == isStopped));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,text,isUser,timestamp,const DeepCollectionEquality().hash(_listings));
+int get hashCode => Object.hash(runtimeType,id,text,isUser,timestamp,const DeepCollectionEquality().hash(_listings),isStopped);
 
 @override
 String toString() {
-  return 'ChatMessageModel(id: $id, text: $text, isUser: $isUser, timestamp: $timestamp, listings: $listings)';
+  return 'ChatMessageModel(id: $id, text: $text, isUser: $isUser, timestamp: $timestamp, listings: $listings, isStopped: $isStopped)';
 }
 
 
@@ -261,7 +263,7 @@ abstract mixin class _$ChatMessageModelCopyWith<$Res> implements $ChatMessageMod
   factory _$ChatMessageModelCopyWith(_ChatMessageModel value, $Res Function(_ChatMessageModel) _then) = __$ChatMessageModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String text, bool isUser, DateTime timestamp, List<AiChatListingModel> listings
+ String id, String text, bool isUser, DateTime timestamp, List<AiChatListingModel> listings, bool isStopped
 });
 
 
@@ -278,14 +280,15 @@ class __$ChatMessageModelCopyWithImpl<$Res>
 
 /// Create a copy of ChatMessageModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? text = null,Object? isUser = null,Object? timestamp = null,Object? listings = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? text = null,Object? isUser = null,Object? timestamp = null,Object? listings = null,Object? isStopped = null,}) {
   return _then(_ChatMessageModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
 as String,isUser: null == isUser ? _self.isUser : isUser // ignore: cast_nullable_to_non_nullable
 as bool,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
 as DateTime,listings: null == listings ? _self._listings : listings // ignore: cast_nullable_to_non_nullable
-as List<AiChatListingModel>,
+as List<AiChatListingModel>,isStopped: null == isStopped ? _self.isStopped : isStopped // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

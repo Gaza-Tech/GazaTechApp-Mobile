@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
-import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/core/services/post_event_service.dart';
 import '../data/repos/bookmarks_repo.dart';
 import 'bookmarks_state.dart';
 
 class BookmarksCubit extends Cubit<BookmarksState> {
   final BookmarksRepo _repo;
-  final BookmarkEventService _bookmarkEventService;
+  final PostEventService _bookmarkEventService;
   late final StreamSubscription<ListingBookmarkEvent> _listingBookmarkSub;
   late final StreamSubscription<PostBookmarkEvent> _postBookmarkSub;
 

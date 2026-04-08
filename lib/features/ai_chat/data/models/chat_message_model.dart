@@ -13,6 +13,7 @@ abstract class ChatMessageModel with _$ChatMessageModel {
     required bool isUser,
     required DateTime timestamp,
     @Default([]) List<AiChatListingModel> listings,
+    @Default(false) bool isStopped,
   }) = _ChatMessageModel;
 
   factory ChatMessageModel.fromJson(Map<String, dynamic> json) =>

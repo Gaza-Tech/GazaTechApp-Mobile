@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
-import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/core/services/post_event_service.dart';
 import 'package:gaza_tech/core/services/report_event_service.dart';
 import 'package:gaza_tech/features/report/data/models/report_reason.dart';
 import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
@@ -13,7 +13,7 @@ import 'listing_details_state.dart';
 class ListingDetailsCubit extends Cubit<ListingDetailsState> {
   final ListingDetailsRepo _repo;
   final String listingId;
-  final BookmarkEventService _bookmarkEventService;
+  final PostEventService _bookmarkEventService;
   final ReportEventService _reportEventService;
   late final StreamSubscription<ListingBookmarkEvent> _bookmarkSub;
   late final StreamSubscription<ReportEvent> _reportSub;

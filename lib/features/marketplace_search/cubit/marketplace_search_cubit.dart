@@ -6,14 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/cache/shared_pref_keys.dart';
 import 'package:gaza_tech/core/helpers/shared_pref_helper.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
-import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/core/services/post_event_service.dart';
 import '../data/models/marketplace_search_filters_model.dart';
 import '../data/repos/marketplace_search_repo.dart';
 import 'marketplace_search_state.dart';
 
 class MarketplaceSearchCubit extends Cubit<MarketplaceSearchState> {
   final MarketplaceSearchRepo _repo;
-  final BookmarkEventService _bookmarkEventService;
+  final PostEventService _bookmarkEventService;
   late final StreamSubscription<ListingBookmarkEvent> _bookmarkSub;
 
   final TextEditingController searchController = TextEditingController();

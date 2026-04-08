@@ -1130,4 +1130,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get aiChatError => 'حدث خطأ ما. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get aiChatStopped => '(تم الإيقاف)';
 }

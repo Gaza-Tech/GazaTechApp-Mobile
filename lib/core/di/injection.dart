@@ -1,4 +1,4 @@
-import 'package:gaza_tech/core/services/bookmark_event_service.dart';
+import 'package:gaza_tech/core/services/post_event_service.dart';
 import 'package:gaza_tech/core/services/report_event_service.dart';
 import 'package:gaza_tech/features/bookmarks/cubit/bookmarks_cubit.dart';
 import 'package:gaza_tech/features/bookmarks/data/repos/bookmarks_repo.dart';
@@ -145,9 +145,9 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<SignOutRepo>(() => SignOutRepo(getIt()));
   getIt.registerFactory<SignOutCubit>(() => SignOutCubit(getIt()));
 
-  // Bookmark Event Service (singleton shared across all cubits)
-  getIt.registerLazySingleton<BookmarkEventService>(
-    () => BookmarkEventService(),
+  // Post Event Service (singleton shared across all cubits)
+  getIt.registerLazySingleton<PostEventService>(
+    () => PostEventService(),
   );
 
   // Report Event Service (singleton shared across all cubits)
