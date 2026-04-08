@@ -1133,4 +1133,29 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get aiChatStopped => '(تم الإيقاف)';
+
+  @override
+  String get editComment => 'تعديل التعليق';
+
+  @override
+  String get deleteComment => 'حذف التعليق';
+
+  @override
+  String get deleteCommentConfirmTitle => 'حذف التعليق؟';
+
+  @override
+  String get deleteCommentConfirmBody =>
+      'هل أنت متأكد من حذف هذا التعليق؟ لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String get commentDeleted => 'تم حذف التعليق بنجاح';
+
+  @override
+  String get commentUpdated => 'تم تحديث التعليق بنجاح';
+
+  @override
+  String get editingComment => 'تعديل التعليق';
+
+  @override
+  String get edited => '(معدّل)';
 }

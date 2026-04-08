@@ -299,4 +299,28 @@ class CommunityRepo {
       return ApiResult.failure(ErrorHandler.handle(e));
     }
   }
+
+  Future<ApiResult<CommentModel>> updateComment({
+    required String commentId,
+    required String content,
+  }) async {
+    try {
+      final raw = await _service.updateComment(
+        commentId: commentId,
+        content: content,
+      );
+      return ApiResult.success(CommentModel.fromJson(raw));
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  Future<ApiResult<void>> deleteComment(String commentId) async {
+    try {
+      await _service.deleteComment(commentId);
+      return ApiResult.success(null);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
 }

@@ -356,6 +356,26 @@ class CommunityApiService {
     });
   }
 
+  Future<Map<String, dynamic>> updateComment({
+    required String commentId,
+    required String content,
+  }) async {
+    final data = await _supabase
+        .from('community_post_comments')
+        .update({'content': content, 'is_edited': true})
+        .eq('comment_id', commentId)
+        .select(_commentSelect)
+        .single();
+    return Map<String, dynamic>.from(data as Map);
+  }
+
+  Future<void> deleteComment(String commentId) async {
+    await _supabase
+        .from('community_post_comments')
+        .delete()
+        .eq('comment_id', commentId);
+  }
+
   Future<void> updatePost({
     required String postId,
     required Map<String, dynamic> data,

@@ -7,6 +7,7 @@ import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/delete_confirmation_sheet.dart';
 import 'package:gaza_tech/features/community/cubit/post_details_cubit.dart';
 import 'package:gaza_tech/features/community/cubit/post_details_state.dart';
+import 'package:gaza_tech/features/community/data/models/comment_model.dart';
 import 'package:gaza_tech/features/community/ui/widgets/comment_card.dart';
 import 'package:gaza_tech/features/community/ui/widgets/comment_input_bar.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card_actions.dart';
@@ -28,12 +29,90 @@ class PostDetailsScreen extends StatefulWidget {
 class _PostDetailsScreenState extends State<PostDetailsScreen> {
   String? _replyingTo;
   String? _replyingToCommentId;
+  String? _editingCommentId;
   final _commentController = TextEditingController();
 
   @override
   void dispose() {
     _commentController.dispose();
     super.dispose();
+  }
+
+  void _startEditComment(CommentModel comment, String? parentCommentId) {
+    setState(() {
+      _editingCommentId = comment.commentId;
+      _replyingTo = null;
+      _replyingToCommentId = null;
+    });
+    _commentController.text = comment.content;
+  }
+
+  void _cancelEdit() {
+    setState(() {
+      _editingCommentId = null;
+    });
+    _commentController.clear();
+  }
+
+  void _showDeleteCommentConfirmation(
+    BuildContext context,
+    CommentModel comment,
+    String? parentCommentId,
+  ) {
+    final l10n = context.l10n;
+    showDeleteConfirmationSheet(
+      context,
+      title: l10n.deleteCommentConfirmTitle,
+      body: l10n.deleteCommentConfirmBody,
+      onConfirm: () => _deleteComment(context, comment, parentCommentId),
+    );
+  }
+
+  Future<void> _deleteComment(
+    BuildContext context,
+    CommentModel comment,
+    String? parentCommentId,
+  ) async {
+    final l10n = context.l10n;
+    final error = await context.read<PostDetailsCubit>().deleteComment(
+      comment.commentId,
+      parentCommentId: parentCommentId,
+    );
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(error ?? l10n.commentDeleted)),
+    );
+  }
+
+  Future<void> _submitComment(BuildContext context) async {
+    final cubit = context.read<PostDetailsCubit>();
+    final l10n = context.l10n;
+    final text = _commentController.text;
+
+    if (_editingCommentId != null) {
+      final error = await cubit.updateComment(_editingCommentId!, text);
+      if (!context.mounted) return;
+      if (error == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.commentUpdated)),
+        );
+        setState(() {
+          _editingCommentId = null;
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error)),
+        );
+      }
+    } else {
+      cubit.addComment(text, parentCommentId: _replyingToCommentId);
+      setState(() {
+        _replyingTo = null;
+        _replyingToCommentId = null;
+      });
+    }
+    _commentController.clear();
+    FocusScope.of(context).unfocus();
   }
 
   Future<void> _navigateToEdit(
@@ -182,6 +261,9 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                             else
                               ...state.comments.expand((comment) {
                                 final cubit = context.read<PostDetailsCubit>();
+                                final currentUserId = Supabase
+                                    .instance.client.auth.currentUser?.id;
+                                final isOwn = comment.authorId == currentUserId;
                                 return [
                                   CommentCard(
                                     userName: comment.authorName,
@@ -196,6 +278,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                     ),
                                     isReported: state.reportedCommentIds
                                         .contains(comment.commentId),
+                                    isEdited: comment.isEdited,
                                     indentLevel: 0,
                                     onReply: () => setState(() {
                                       _replyingTo = comment.authorName;
@@ -204,14 +287,18 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                     onLikeTap: () => cubit.toggleCommentLike(
                                       comment.commentId,
                                     ),
-                                    onReport:
-                                        comment.authorId !=
-                                            Supabase
-                                                .instance
-                                                .client
-                                                .auth
-                                                .currentUser
-                                                ?.id
+                                    onEdit: isOwn
+                                        ? () => _startEditComment(comment, null)
+                                        : null,
+                                    onDelete: isOwn
+                                        ? () =>
+                                            _showDeleteCommentConfirmation(
+                                              context,
+                                              comment,
+                                              null,
+                                            )
+                                        : null,
+                                    onReport: !isOwn
                                         ? () async {
                                             final reported =
                                                 await showReportBottomSheet(
@@ -248,51 +335,64 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                                 .commentId] ??
                                             [])
                                         .map(
-                                          (reply) => CommentCard(
-                                            userName: reply.authorName,
-                                            timeAgo: _timeAgo(
-                                              context,
-                                              reply.createdAt,
-                                            ),
-                                            text: reply.content,
-                                            likes: reply.likesCount,
-                                            isLiked: state.likedCommentIds
-                                                .contains(reply.commentId),
-                                            isReported: state.reportedCommentIds
-                                                .contains(reply.commentId),
-                                            indentLevel: 1,
-                                            onLikeTap: () =>
-                                                cubit.toggleCommentLike(
-                                                  reply.commentId,
-                                                ),
-                                            onReport:
-                                                reply.authorId !=
-                                                    Supabase
-                                                        .instance
-                                                        .client
-                                                        .auth
-                                                        .currentUser
-                                                        ?.id
-                                                ? () async {
-                                                    final reported =
-                                                        await showReportBottomSheet(
-                                                          context,
-                                                          entityType:
-                                                              ReportEntityType
-                                                                  .comment,
-                                                          entityId:
-                                                              reply.commentId,
-                                                        );
-                                                    if (reported == true &&
-                                                        context.mounted) {
-                                                      cubit
-                                                          .markCommentAsReported(
-                                                            reply.commentId,
+                                          (reply) {
+                                            final isOwnReply =
+                                                reply.authorId == currentUserId;
+                                            return CommentCard(
+                                              userName: reply.authorName,
+                                              timeAgo: _timeAgo(
+                                                context,
+                                                reply.createdAt,
+                                              ),
+                                              text: reply.content,
+                                              likes: reply.likesCount,
+                                              isLiked: state.likedCommentIds
+                                                  .contains(reply.commentId),
+                                              isReported:
+                                                  state.reportedCommentIds
+                                                      .contains(reply.commentId),
+                                              isEdited: reply.isEdited,
+                                              indentLevel: 1,
+                                              onLikeTap: () =>
+                                                  cubit.toggleCommentLike(
+                                                    reply.commentId,
+                                                  ),
+                                              onEdit: isOwnReply
+                                                  ? () => _startEditComment(
+                                                        reply,
+                                                        comment.commentId,
+                                                      )
+                                                  : null,
+                                              onDelete: isOwnReply
+                                                  ? () =>
+                                                      _showDeleteCommentConfirmation(
+                                                        context,
+                                                        reply,
+                                                        comment.commentId,
+                                                      )
+                                                  : null,
+                                              onReport: !isOwnReply
+                                                  ? () async {
+                                                      final reported =
+                                                          await showReportBottomSheet(
+                                                            context,
+                                                            entityType:
+                                                                ReportEntityType
+                                                                    .comment,
+                                                            entityId:
+                                                                reply.commentId,
                                                           );
+                                                      if (reported == true &&
+                                                          context.mounted) {
+                                                        cubit
+                                                            .markCommentAsReported(
+                                                              reply.commentId,
+                                                            );
+                                                      }
                                                     }
-                                                  }
-                                                : null,
-                                          ),
+                                                  : null,
+                                            );
+                                          },
                                         ),
                                 ];
                               }),
@@ -311,18 +411,9 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                         _replyingTo = null;
                         _replyingToCommentId = null;
                       }),
-                      onSubmit: () {
-                        context.read<PostDetailsCubit>().addComment(
-                          _commentController.text,
-                          parentCommentId: _replyingToCommentId,
-                        );
-                        _commentController.clear();
-                        setState(() {
-                          _replyingTo = null;
-                          _replyingToCommentId = null;
-                        });
-                        FocusScope.of(context).unfocus();
-                      },
+                      isEditing: _editingCommentId != null,
+                      onCancelEdit: _cancelEdit,
+                      onSubmit: () => _submitComment(context),
                     ),
                   ],
                 ),

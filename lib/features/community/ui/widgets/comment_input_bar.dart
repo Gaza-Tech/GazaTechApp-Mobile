@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
@@ -12,12 +11,16 @@ class CommentInputBar extends StatelessWidget {
     this.replyingTo,
     this.onDismissReply,
     this.onSubmit,
+    this.isEditing = false,
+    this.onCancelEdit,
   });
 
   final TextEditingController controller;
   final String? replyingTo;
   final VoidCallback? onDismissReply;
   final VoidCallback? onSubmit;
+  final bool isEditing;
+  final VoidCallback? onCancelEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,10 @@ class CommentInputBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Divider(height: 1.h, thickness: 1),
-          if (replyingTo != null) _buildReplyBanner(context, theme),
+          if (isEditing)
+            _buildEditingBanner(context, theme)
+          else if (replyingTo != null)
+            _buildReplyBanner(context, theme),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
             child: Row(
@@ -71,6 +77,38 @@ class CommentInputBar extends StatelessWidget {
                   constraints: BoxConstraints(minWidth: 36.w, minHeight: 36.h),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEditingBanner(BuildContext context, ThemeData theme) {
+    return Container(
+      color: theme.colorScheme.surfaceContainerLow,
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
+      child: Row(
+        children: [
+          Icon(
+            Icons.edit_outlined,
+            size: 16.sp,
+            color: theme.colorScheme.primary,
+          ),
+          SizedBox(width: 6.w),
+          Text(
+            context.l10n.editingComment,
+            style: MyTextStyle.body.s.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          const Spacer(),
+          GestureDetector(
+            onTap: onCancelEdit,
+            child: Icon(
+              Icons.close,
+              size: 18.sp,
+              color: theme.colorScheme.onSurfaceVariant,
             ),
           ),
         ],
