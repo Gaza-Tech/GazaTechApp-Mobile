@@ -474,5 +474,14 @@
   "clearChat": "مسح المحادثة",
   "clearChatConfirm": "هل أنت متأكد أنك تريد مسح كل سجل المحادثة؟",
   "aiChatError": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
-  "aiChatStopped": "(تم الإيقاف)"
+  "aiChatStopped": "(تم الإيقاف)",
+
+  "editComment": "تعديل التعليق",
+  "deleteComment": "حذف التعليق",
+  "deleteCommentConfirmTitle": "حذف التعليق؟",
+  "deleteCommentConfirmBody": "هل أنت متأكد من حذف هذا التعليق؟ لا يمكن التراجع عن هذا الإجراء.",
+  "commentDeleted": "تم حذف التعليق بنجاح",
+  "commentUpdated": "تم تحديث التعليق بنجاح",
+  "editingComment": "تعديل التعليق",
+  "edited": "(معدّل)"
 }

@@ -2239,6 +2239,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'(stopped)'**
   String get aiChatStopped;
+
+  /// No description provided for @editComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Comment'**
+  String get editComment;
+
+  /// No description provided for @deleteComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Comment'**
+  String get deleteComment;
+
+  /// No description provided for @deleteCommentConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Comment?'**
+  String get deleteCommentConfirmTitle;
+
+  /// No description provided for @deleteCommentConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this comment? This action cannot be undone.'**
+  String get deleteCommentConfirmBody;
+
+  /// No description provided for @commentDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment deleted successfully'**
+  String get commentDeleted;
+
+  /// No description provided for @commentUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment updated successfully'**
+  String get commentUpdated;
+
+  /// No description provided for @editingComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Editing comment'**
+  String get editingComment;
+
+  /// No description provided for @edited.
+  ///
+  /// In en, this message translates to:
+  /// **'(edited)'**
+  String get edited;
 }
 
 class _AppLocalizationsDelegate

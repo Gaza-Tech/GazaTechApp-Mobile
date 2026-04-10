@@ -376,6 +376,124 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
     );
   }
 
+  Future<String?> updateComment(String commentId, String newContent) async {
+    if (newContent.trim().isEmpty) return null;
+    final result = await _repo.updateComment(
+      commentId: commentId,
+      content: newContent.trim(),
+    );
+    return result.when(
+      success: (updated) {
+        final newComments = state.comments
+            .map((c) => c.commentId == commentId ? updated : c)
+            .toList();
+        final newReplies = state.repliesByCommentId.map(
+          (parentId, replies) => MapEntry(
+            parentId,
+            replies
+                .map((r) => r.commentId == commentId ? updated : r)
+                .toList(),
+          ),
+        );
+        emit(state.copyWith(
+          comments: newComments,
+          repliesByCommentId: newReplies,
+        ));
+        return null;
+      },
+      failure: (error) => error.message ?? 'Failed to update comment',
+    );
+  }
+
+  Future<String?> deleteComment(
+    String commentId, {
+    String? parentCommentId,
+  }) async {
+    final result = await _repo.deleteComment(commentId);
+    return result.when(
+      success: (_) {
+        if (parentCommentId == null) {
+          // When deleting a top-level comment, its replies are cascade-deleted
+          // in the DB, so we must subtract (1 + repliesCount) from the post.
+          final deleted = state.comments.firstWhere(
+            (c) => c.commentId == commentId,
+            orElse: () => state.comments.first,
+          );
+          final removedCount = 1 + deleted.repliesCount;
+          final newComments = state.comments
+              .where((c) => c.commentId != commentId)
+              .toList();
+          final newReplies =
+              Map<String, List<CommentModel>>.from(state.repliesByCommentId)
+                ..remove(commentId);
+          final newExpanded = Set<String>.from(state.expandedCommentIds)
+            ..remove(commentId);
+          final newLiked = Set<String>.from(state.likedCommentIds)
+            ..remove(commentId);
+          final newReported = Set<String>.from(state.reportedCommentIds)
+            ..remove(commentId);
+          final newCount = state.post != null
+              ? state.post!.commentsCount - removedCount
+              : 0;
+          emit(state.copyWith(
+            comments: newComments,
+            repliesByCommentId: newReplies,
+            expandedCommentIds: newExpanded,
+            likedCommentIds: newLiked,
+            reportedCommentIds: newReported,
+            post: state.post?.copyWith(
+              commentsCount: newCount < 0 ? 0 : newCount,
+            ),
+          ));
+          if (state.post != null) {
+            _bookmarkEventService.emitPostCommentCount(
+              postId,
+              commentsCount: newCount < 0 ? 0 : newCount,
+            );
+          }
+        } else {
+          final updatedReplies = Map<String, List<CommentModel>>.from(
+            state.repliesByCommentId,
+          );
+          updatedReplies[parentCommentId] = (updatedReplies[parentCommentId] ??
+                  [])
+              .where((r) => r.commentId != commentId)
+              .toList();
+          final newComments = state.comments.map((c) {
+            if (c.commentId == parentCommentId) {
+              final newCount = c.repliesCount - 1;
+              return c.copyWith(repliesCount: newCount < 0 ? 0 : newCount);
+            }
+            return c;
+          }).toList();
+          final newLiked = Set<String>.from(state.likedCommentIds)
+            ..remove(commentId);
+          final newReported = Set<String>.from(state.reportedCommentIds)
+            ..remove(commentId);
+          final newPostCount =
+              state.post != null ? state.post!.commentsCount - 1 : 0;
+          emit(state.copyWith(
+            comments: newComments,
+            repliesByCommentId: updatedReplies,
+            likedCommentIds: newLiked,
+            reportedCommentIds: newReported,
+            post: state.post?.copyWith(
+              commentsCount: newPostCount < 0 ? 0 : newPostCount,
+            ),
+          ));
+          if (state.post != null) {
+            _bookmarkEventService.emitPostCommentCount(
+              postId,
+              commentsCount: newPostCount < 0 ? 0 : newPostCount,
+            );
+          }
+        }
+        return null;
+      },
+      failure: (error) => error.message ?? 'Failed to delete comment',
+    );
+  }
+
   void markCommentAsReported(String commentId) {
     final updated = Set<String>.from(state.reportedCommentIds)..add(commentId);
     emit(state.copyWith(reportedCommentIds: updated));

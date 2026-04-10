@@ -10,10 +10,13 @@ class CommentCard extends StatelessWidget {
   final int likes;
   final bool isLiked;
   final bool isReported;
+  final bool isEdited;
   final int indentLevel;
   final VoidCallback? onReply;
   final VoidCallback? onLikeTap;
   final VoidCallback? onReport;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
 
   const CommentCard({
     super.key,
@@ -23,10 +26,13 @@ class CommentCard extends StatelessWidget {
     required this.likes,
     this.isLiked = false,
     this.isReported = false,
+    this.isEdited = false,
     this.indentLevel = 0,
     this.onReply,
     this.onLikeTap,
     this.onReport,
+    this.onEdit,
+    this.onDelete,
   });
 
   @override
@@ -54,7 +60,7 @@ class CommentCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildHeader(theme),
+                  _buildHeader(context, theme),
                   SizedBox(height: 4.h),
                   Text(
                     text,
@@ -67,13 +73,15 @@ class CommentCard extends StatelessWidget {
                 ],
               ),
             ),
+            if (onEdit != null || onDelete != null)
+              _buildOwnerMenu(context, theme),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildHeader(ThemeData theme) {
+  Widget _buildHeader(BuildContext context, ThemeData theme) {
     return Row(
       children: [
         Text(
@@ -89,6 +97,62 @@ class CommentCard extends StatelessWidget {
             color: theme.colorScheme.onSurfaceVariant,
           ),
         ),
+        if (isEdited) ...[
+          SizedBox(width: 4.w),
+          Text(
+            context.l10n.edited,
+            style: MyTextStyle.body.xs.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildOwnerMenu(BuildContext context, ThemeData theme) {
+    final l10n = context.l10n;
+    return PopupMenuButton<String>(
+      icon: Icon(
+        Icons.more_vert,
+        size: 18.sp,
+        color: theme.colorScheme.onSurfaceVariant,
+      ),
+      padding: EdgeInsets.zero,
+      onSelected: (value) {
+        if (value == 'edit') onEdit?.call();
+        if (value == 'delete') onDelete?.call();
+      },
+      itemBuilder: (_) => [
+        if (onEdit != null)
+          PopupMenuItem(
+            value: 'edit',
+            child: Row(
+              children: [
+                Icon(Icons.edit_outlined, size: 18.sp),
+                SizedBox(width: 8.w),
+                Text(l10n.editComment),
+              ],
+            ),
+          ),
+        if (onDelete != null)
+          PopupMenuItem(
+            value: 'delete',
+            child: Row(
+              children: [
+                Icon(
+                  Icons.delete_outlined,
+                  size: 18.sp,
+                  color: theme.colorScheme.error,
+                ),
+                SizedBox(width: 8.w),
+                Text(
+                  l10n.deleteComment,
+                  style: TextStyle(color: theme.colorScheme.error),
+                ),
+              ],
+            ),
+          ),
       ],
     );
   }
@@ -130,9 +194,7 @@ class CommentCard extends StatelessWidget {
           GestureDetector(
             onTap: isReported ? null : onReport,
             child: Icon(
-              isReported
-                  ? Icons.flag_rounded
-                  : Icons.outlined_flag_rounded,
+              isReported ? Icons.flag_rounded : Icons.outlined_flag_rounded,
               size: 16.sp,
               color: theme.colorScheme.onSurfaceVariant,
             ),

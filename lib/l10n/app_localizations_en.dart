@@ -1139,4 +1139,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aiChatStopped => '(stopped)';
+
+  @override
+  String get editComment => 'Edit Comment';
+
+  @override
+  String get deleteComment => 'Delete Comment';
+
+  @override
+  String get deleteCommentConfirmTitle => 'Delete Comment?';
+
+  @override
+  String get deleteCommentConfirmBody =>
+      'Are you sure you want to delete this comment? This action cannot be undone.';
+
+  @override
+  String get commentDeleted => 'Comment deleted successfully';
+
+  @override
+  String get commentUpdated => 'Comment updated successfully';
+
+  @override
+  String get editingComment => 'Editing comment';
+
+  @override
+  String get edited => '(edited)';
 }
