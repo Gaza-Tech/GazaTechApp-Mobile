@@ -32,21 +32,6 @@ class _BookmarkedPostsTabState extends State<BookmarkedPostsTab>
     return l10n.hoursAgo(diff.inHours.clamp(1, 23));
   }
 
-  String _categoryLabel(AppLocalizations l10n, String category) {
-    switch (category) {
-      case 'questions':
-        return l10n.questions;
-      case 'tips':
-        return l10n.tips;
-      case 'news':
-        return l10n.news;
-      case 'troubleshooting':
-        return l10n.troubleshooting;
-      default:
-        return category;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -76,7 +61,7 @@ class _BookmarkedPostsTabState extends State<BookmarkedPostsTab>
                     return PostCard(
                       userName: post.authorName,
                       timeAgo: _timeAgo(context.l10n, post.createdAt),
-                      category: _categoryLabel(context.l10n, post.postCategory),
+                      category: post.postCategory,
                       title: post.title,
                       description: post.content,
                       attachmentUrls: post.attachmentUrls,

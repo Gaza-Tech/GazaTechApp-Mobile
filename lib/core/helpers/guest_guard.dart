@@ -30,7 +30,7 @@ class GuestGuard {
   ///
   /// ```dart
   /// if (!await GuestGuard.requireAccount(context)) return;
-  /// // ... proceed with write action
+  // / // ... proceed with write action
   /// ```
   static Future<bool> requireAccount(BuildContext context) async {
     if (!isGuest) return true;

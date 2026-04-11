@@ -121,6 +121,8 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
               onPressed: isReported
                   ? () {}
                   : () async {
+                      if (!await GuestGuard.requireAccount(context)) return;
+                      if (!context.mounted) return;
                       final reported = await showReportBottomSheet(
                         context,
                         entityType: ReportEntityType.listing,

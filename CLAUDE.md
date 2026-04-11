@@ -1,9 +1,8 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 > Developer guide for Claude Code when working in this Flutter repository.
 > Treat this as the source of truth for architecture, conventions, and workflow.
+> Apply the Golden Test before modifying this file: "Would removing this rule cause Claude to make mistakes?" 
 
 ---
 
@@ -23,9 +22,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 12. [Widget Cleanliness Rules](#widget-cleanliness-rules)
 13. [UI/UX & Theming Guidelines](#uiux--theming-guidelines)
 14. [Performance Best Practices](#performance-best-practices)
-15. [Testing](#testing)
-16. [Git Workflow](#git-workflow)
-17. [CI/CD](#cicd)
+15. [Security](#security)
+16. [Testing](#testing)
+17. [Git Workflow](#git-workflow)
+18. [CI/CD](#cicd)
+19. [AI Workflow Rules](#ai-workflow-rules)
 
 ---
 
@@ -102,35 +103,31 @@ lib/
 
 **Auth** is nested deeper:
 `lib/features/auth/{sign_in,sign_up,verify_otp,forgot_password,reset_password,google_auth,sign_out}/`
-Each sub-feature follows the same `cubit/data/ui` pattern.
 
 **Current non-auth features and their routes:**
+* `home` | `MyRoutes.home` (Shell — hosts `MarketplaceCubit`, `CommunityCubit`, `SignOutCubit`)
+* `marketplace` | _(tab in home)_ 
+* `listing_details` | `MyRoutes.listingDetails` (Arg: `String` listingId)
+* `add_listing` | `MyRoutes.addListing`
+* `search` | `MyRoutes.search` 
+* `community` | _(tab in home)_
+* `community_search` | `MyRoutes.communitySearch`
+* `add_post` | `MyRoutes.createPost`
+* `profile` | `MyRoutes.profile` (Arg: `Map<String,dynamic>`)
+* `edit_profile` | `MyRoutes.editProfile`
+* `bookmarks` | `MyRoutes.bookmarks`
+* `verification` | `MyRoutes.verificationForm` / `verificationStatus`
 
-| Feature | Route constant | Notes |
-|---|---|---|
-| `home` | `MyRoutes.home` | Shell — hosts `MarketplaceCubit`, `CommunityCubit`, `SignOutCubit` |
-| `marketplace` | _(tab in home)_ | Listing feed with filter/sort |
-| `listing_details` | `MyRoutes.listingDetails` | Arg: `String` listingId |
-| `add_listing` | `MyRoutes.addListing` | Image picker, categories, locations |
-| `search` | `MyRoutes.search` | Marketplace keyword + filter search |
-| `community` | _(tab in home)_ | Post feed |
-| `community_search` | `MyRoutes.communitySearch` | Post keyword search |
-| `add_post` | `MyRoutes.createPost` | Create community post |
-| `profile` | `MyRoutes.profile` | Arg: `Map<String,dynamic>` — `userId`, `isOwnProfile` |
-| `edit_profile` | `MyRoutes.editProfile` | Arg: `UserProfileModel` |
-| `bookmarks` | `MyRoutes.bookmarks` | Saved listings + posts |
-| `verification` | `MyRoutes.verificationForm` / `verificationStatus` | User identity verification |
+**Rule (IMPORTANT):** Any reusable logic, utility, constant, extension, or widget used in 2+ places goes in `core/`. Check `core/` before creating new shared code — never duplicate across features.
 
-**Rule**: When a pattern appears in 2+ features, move it to `core/widgets/`.
-
-**Available `core/widgets/`** — check before creating anything new:
+**Available `core/widgets/`:**
 `MyButton`, `MyTextFormField`, `MyOtpFormField`, `TappableSearchBar`, `SearchAppBar`, `SortButton`, `ChipSelector`, `ActiveFiltersBar`, `FilterSheetShell`, `ConditionTag`, `RecentSearchesView`, `SpacingWidgets`, `StatusBarHider`, `LanguageSwitcher`, `GoogleSignInButton`
 
 ---
 
 ## Architecture & Data Flow
 
-Unidirectional flow — no shortcuts:
+Follow the project's architecture layer boundaries strictly. Unidirectional flow — no shortcuts:
 
 ```
 UI (Screen)
@@ -144,8 +141,15 @@ UI (Screen)
 |---|---|
 | **ApiService** | Direct Supabase calls. Receives `SupabaseClient` via DI. No error handling here. |
 | **Repository** | Wraps ApiService in try/catch. Returns `ApiResult<T>`. |
-| **Cubit** | Orchestrates logic. Emits Freezed states. |
-| **UI** | Reacts to states via `BlocBuilder` / `BlocListener`. No business logic. |
+| **Cubit** | Orchestrates logic. Emits Freezed states. **Must have ZERO `package:flutter` imports.** |
+| **UI** | Reacts to states. **ZERO business logic** — only rendering, interaction, and state observation. |
+
+**Change Discipline:**
+- Make the smallest change that solves the problem.
+- Fix root causes, not symptoms.
+- Don't refactor unrelated code unless explicitly requested.
+- Never break existing functionality, APIs, flows, or UX unless explicitly instructed.
+- Read relevant code before modifying it — state assumptions when unclear.
 
 ---
 
@@ -165,10 +169,11 @@ class FeatureState with _$FeatureState {
 }
 ```
 
-- After creating or modifying any Freezed class, run build_runner.
+- After creating or modifying any Freezed class, run `build_runner`.
 - Form `TextEditingController`s and `GlobalKey<FormState>` live in the **Cubit**, not in the UI.
 - Emit `loading` before any async call. Always emit `success` or `failure` after.
 - Never store UI context inside a Cubit.
+- **`setState` Rule:** Allowed ONLY for local UI state (e.g., toggles, form focus) — never for business logic. Keep `setState` scoped to the smallest widget possible.
 
 ---
 
@@ -177,47 +182,26 @@ class FeatureState with _$FeatureState {
 Uses `get_it`. All registrations are in `lib/core/di/injection.dart`.
 
 **Registration order per feature:**
-```dart
-// 1. ApiService
-getIt.registerLazySingleton<FeatureApiService>(
-  () => FeatureApiService(getIt<SupabaseClient>()),
-);
+1.  **ApiService:** `getIt.registerLazySingleton<FeatureApiService>(...)`
+2.  **Repository:** `getIt.registerLazySingleton<FeatureRepo>(...)`
+3.  **Cubit:** `getIt.registerFactory<FeatureCubit>(...)` (new instance per screen)
 
-// 2. Repository
-getIt.registerLazySingleton<FeatureRepo>(
-  () => FeatureRepo(getIt<FeatureApiService>()),
-);
-
-// 3. Cubit (factory — new instance per screen)
-getIt.registerFactory<FeatureCubit>(
-  () => FeatureCubit(getIt<FeatureRepo>()),
-);
-
-// For cubits needing constructor params:
-getIt.registerFactoryParam<FeatureCubit, String, void>(
-  (param, _) => FeatureCubit(getIt<FeatureRepo>(), param),
-);
-```
-
-Access via: `getIt<Type>()` or `getIt<Type>(param1: value)`.
+Access via: `getIt<Type>()` or `getIt<Type>(param1: value)`. Never instantiate these manually in the UI.
 
 ---
 
 ## Routing
 
 - Route name constants: `lib/core/routes/my_routes.dart`
-- `generateRoute` in `lib/core/routes/my_router.dart` — wraps screens with `BlocProvider` / `MultiBlocProvider`
+- `generateRoute` in `lib/core/routes/my_router.dart` — wraps screens with `BlocProvider`
 - Arguments passed via `settings.arguments`, cast at the route level
 - Initial route determined by Supabase auth session check in `main.dart`
-
-**When adding a new screen:**
-1. Add route constant to `my_routes.dart`
-2. Add `case` in `generateRoute` with the correct `BlocProvider`
-3. Register Cubit/Repo/Service in `injection.dart`
 
 ---
 
 ## API Handling & Error Handling
+
+Errors flow cleanly across layers — never skip layers or fail silently.
 
 **ApiResult** — Freezed union wrapping all repository returns:
 ```dart
@@ -228,32 +212,16 @@ class ApiResult<T> with _$ApiResult<T> {
 }
 ```
 
-**Repository pattern:**
-```dart
-Future<ApiResult<T>> doSomething() async {
-  try {
-    final result = await _apiService.doSomething();
-    return ApiResult.success(result);
-  } catch (e) {
-    return ApiResult.failure(ErrorHandler.handle(e));
-  }
-}
-```
-
-- `ErrorHandler.handle()` is in `lib/core/netowoks/supabase_error_handler.dart`
-- It converts `AuthException` and `PostgrestException` into `ApiErrorModel`
-- Never expose raw exceptions to the UI layer
-- Always handle `.failure` in the Cubit and emit a `failure` state with a user-readable message
+- **Data Layer:** Catch exceptions (`AuthException`, `PostgrestException`) in the Repository and map them using `ErrorHandler.handle()` to return an `ApiResult.failure()`.
+- **Domain/Cubit Layer:** Handle `.failure` and emit a `FeatureState.failure` with a user-readable message.
+- **UI Layer:** Map failures to user-friendly messages and UI states. Never expose raw exceptions.
 
 ---
 
 ## Local Storage
 
-- **SharedPreferences** — for simple key-value data (auth tokens, locale, theme preference)
-  - Key constants live in `lib/core/cache/`
-  - Access via `SharedPrefHelper` wrapper — never call `SharedPreferences.getInstance()` directly in feature code
-- **Isar / SQLite** — use for structured local data or offline-first features (not yet in project; add to `core/` if introduced)
-- Never store sensitive credentials in local storage. Use platform-secure storage (e.g., `flutter_secure_storage`) for tokens if needed.
+- **SharedPreferences** — for simple key-value data. Key constants live in `lib/core/cache/`. Access via `SharedPrefHelper` wrapper.
+- Never store sensitive credentials in local storage. Use platform-secure storage for tokens if needed.
 
 ---
 
@@ -262,55 +230,40 @@ Future<ApiResult<T>> doSomething() async {
 - ARB files: `lib/l10n/app_en.arb`, `lib/l10n/app_ar.arb`
 - Config: `l10n.yaml`; generated class: `AppLocalizations`
 - Access: `AppLocalizations.of(context)!.stringKey`
-- RTL support: `LocaleCubit` + `LocaleHelper.getTextDirection()` applied in `main.dart` builder
-- **All user-facing strings must be localized** — no hardcoded English or Arabic strings in widgets
-- After adding new keys to both ARB files, run `flutter gen-l10n`
+- RTL support: `LocaleCubit` + `LocaleHelper.getTextDirection()`
+- **All user-facing strings must be localized.** Run `flutter gen-l10n` after adding new keys to both files.
 
 ---
 
 ## Naming Conventions
 
-| Item | Convention | Example |
-|---|---|---|
-| Files | `snake_case` | `product_card.dart` |
-| Classes | `PascalCase` | `ProductCard` |
-| Variables / methods | `camelCase` | `fetchProducts()` |
-| Constants | `camelCase` (or `kCamelCase`) | `kPrimaryColor` |
-| Private members | `_camelCase` | `_isLoading` |
-| Cubit | `FeatureCubit` | `ProductCubit` |
-| State | `FeatureState` | `ProductState` |
-| Repository | `FeatureRepo` | `ProductRepo` |
-| ApiService | `FeatureApiService` | `ProductApiService` |
-| Screen widget | `FeatureScreen` | `ProductScreen` |
-| Route constant | `routeFeature` | `routeProduct` |
+* Files: `snake_case`
+* Classes/Widgets: `PascalCase`
+* Variables/Methods: `camelCase`
+* Constants: `camelCase` (or `kCamelCase`)
+* Private members: `_camelCase`
 
 ---
 
 ## Code Style & Formatting
 
-- Run `dart format .` before committing (enforced in CI)
-- Max line length: **100 characters**
-- Use `flutter analyze` and fix all warnings before opening a PR
-- Avoid `dynamic` — always type explicitly
-- Avoid `late` unless initialization is guaranteed (prefer nullable + null check)
-- Prefer `final` over `var`; use `const` wherever possible
-- No commented-out code in merged branches — delete it or track it in an issue
-- One `import` block: Dart → Flutter → packages → local (separated by blank lines)
-- Remove unused imports immediately
+- Max line length: **100 characters**.
+- Use `dart format .` and `flutter analyze`. Fix all warnings before opening a PR.
+- Avoid `dynamic` — always type explicitly.
+- Avoid `late` unless initialization is guaranteed (prefer nullable + null check).
+- Prefer `final` over `var`; use `const` wherever possible.
+- No commented-out code in merged branches.
+- Don't add new packages without justification. Any new package must be stable and production-grade.
 
 ---
 
-## Widget Cleanliness Rules
+## Widget Cleanliness Rules (IMPORTANT)
 
-- **File length target**: Keep every `.dart` file under ~150 lines. Exceeding this is a signal to extract.
-- **One widget class per file** — never co-locate unrelated widgets.
-- **No deep inline nesting**: Any subtree deeper than 3 levels or longer than ~30 lines must be extracted.
-  - Use a **private `_buildX()` method** for simple, stateless, parameter-free fragments.
-  - Use a **dedicated widget class** for anything with parameters, state, or reuse potential.
-- **Extract to the right place**:
-  - Feature-specific → `feature/ui/widgets/`
-  - Used in 2+ features → `lib/core/widgets/`
-- **Check `core/widgets/` first** before creating anything new (`MyButton`, `MyTextFormField`, etc.)
+- **Build Method Discipline:** NEVER create `TextEditingController`, `AnimationController`, `FocusNode`, or other expensive objects inside `build()`. Dispose of them properly in `dispose()`.
+- **Scoping:** Use `BlocBuilder`/`BlocSelector` on the smallest widget that needs the state — never at the top of the tree.
+- **File length target**: Keep `.dart` files under ~150 lines. Exceeding this signals a need to extract.
+- **One widget class per file**.
+- **No deep inline nesting**: Extract subtrees deeper than 3 levels or ~30 lines. Use a private `_buildX()` method for stateless fragments, or a dedicated class for parameterized ones.
 - **Prefer `const` constructors** everywhere — it's free performance.
 - `BlocListener`s belong in `ui/widgets/` or at the top of the screen, not buried inside build trees.
 
@@ -318,123 +271,73 @@ Future<ApiResult<T>> doSomething() async {
 
 ## UI/UX & Theming Guidelines
 
-- **Design size**: `375×812` (flutter_screenutil) — use `.w`, `.h`, `.sp`, `.r` for all sizing
-- **Font**: IBMPlexSansArabic (Arabic-first design)
-- **Theme**: Supports light/dark via system — defined in `lib/core/theme/`
-  - Never hardcode colors — always reference theme tokens or constants from `AppColors`
-  - Never hardcode text styles — reference `AppTextStyles`
-- **Responsive**:
-  - Test on at least two screen sizes (small phone + large phone)
-  - Never use fixed pixel heights for list items or cards
-- **Loading states**: Every async action must show a visual loading indicator
-- **Empty states**: Every list/feed must handle empty data gracefully with a message or illustration
-- **Error states**: Surface user-readable error messages — never show raw exception text
-- **Accessibility**: Use `Semantics` labels on icon-only buttons; ensure tap targets are ≥ 48×48 px
+- **Design size**: `375×812` (`flutter_screenutil`) — use `.w`, `.h`, `.sp`, `.r`.
+- **Font**: IBMPlexSansArabic.
+- **Theme**: Defined in `lib/core/theme/`. Never hardcode colors or text styles — reference `AppColors` and `AppTextStyles`.
+- **States:** Every async action must show a loading indicator. Empty lists must have a message/illustration.
 
 ---
 
 ## Performance Best Practices
 
-- Use `const` constructors wherever possible — prevents unnecessary rebuilds
-- Scope `BlocBuilder` tightly — wrap only the widget that actually needs to rebuild
-- Use `buildWhen` in `BlocBuilder` to skip irrelevant state changes
-- Use `ListView.builder` / `SliverList` — never `ListView(children: [...])` for dynamic lists
-- Avoid rebuilding entire screens; extract stateful parts into smaller widgets
-- Lazy-load images with `CachedNetworkImage`; always provide a placeholder and error widget
-- Avoid heavy computation in `build()` — move it to the Cubit or a helper
-- Profile with Flutter DevTools before assuming something is slow
+- Scope `BlocBuilder` tightly and use `buildWhen` to skip irrelevant state changes.
+- Use `ListView.builder` / `SliverList` for dynamic lists.
+- Lazy-load images with `CachedNetworkImage` (provide placeholder/error widget).
+- Avoid heavy computation in `build()` — move it to the Cubit or a helper.
+
+---
+
+## Security
+
+- Never hardcode secrets, tokens, or credentials.
+- Never log sensitive information or user PII.
+- Validate all external and API input.
+- Proactively flag security risks when spotted during code generation or review.
 
 ---
 
 ## Testing
 
-Aim for meaningful coverage, not 100% coverage theater.
+Aim for meaningful coverage, not 100% coverage theater. Tests must be deterministic — no flaky or timing-dependent tests. Test one behavior per test case.
 
-**Unit tests** — for Cubits and Repositories:
-```
-test/
-└── features/
-    └── feature_name/
-        ├── cubit/feature_cubit_test.dart
-        └── data/repos/feature_repo_test.dart
-```
+**Unit tests** (`test/features/.../`):
+- Mock dependencies with `mocktail` or `mockito`.
+- Test every state transition in a Cubit (initial → loading → success / failure).
+- Test Repository error-handling paths.
 
-- Mock dependencies with `mocktail` or `mockito`
-- Test every state transition in a Cubit (initial → loading → success / failure)
-- Test Repository error-handling paths (what happens on exception)
-
-**Widget tests** — for reusable `core/widgets/`:
-- Verify widget renders correctly for key states
-- Verify tap callbacks fire
-
-**Integration tests** — for critical user flows (auth, checkout, etc.) as the project matures.
-
-**Rules:**
-- Tests live in `test/` mirroring `lib/` structure
-- No `print` statements in tests
-- A PR that breaks existing tests cannot be merged
+**Widget tests** (`test/core/widgets/`):
+- Verify widget renders correctly for key states and tap callbacks fire.
 
 ---
 
 ## Git Workflow
 
 **Branch model** (Git Flow):
+`main` (Production) | `dev` (Integration) | `feature/name` | `fix/name` | `chore/name`
 
-| Branch | Purpose |
-|---|---|
-| `main` | Production-ready code only |
-| `dev` | Integration branch — all features merge here first |
-| `feature/short-description` | One feature or fix per branch |
-| `fix/short-description` | Bug fixes |
-| `chore/short-description` | Non-functional changes (deps, config, docs) |
-
-**Rules:**
-- Branch off `dev`, not `main`
-- PR into `dev`; `dev` → `main` only for releases
-- Require at least one approval before merging
-- Squash-merge feature branches to keep `dev` history clean
-
-**Commit messages** (Conventional Commits):
-
-```
-<type>(<scope>): <short imperative description>
-
-Types: feat | fix | refactor | style | test | chore | docs | perf
-Scope: optional, matches the feature name (auth, product, cart, etc.)
-
-Examples:
-feat(auth): add Google sign-in flow
-fix(product): correct price formatting for Arabic locale
-refactor(cart): extract CartItemCard into separate widget
-chore: upgrade flutter_bloc to 9.0.0
-test(auth): add sign-in cubit state transition tests
-```
-
-- Subject line ≤ 72 characters
-- Use imperative mood ("add", not "added" or "adding")
-- Reference issue numbers in the body if applicable: `Closes #42`
+- Branch off `dev`. PR into `dev`. Require 1 approval. Squash-merge features.
+- **Conventional Commits:** `<type>(<scope>): <short imperative description>` (e.g., `feat(auth): add Google sign-in`).
 
 ---
 
 ## CI/CD
 
-**GitHub Actions** — run on every PR targeting `dev` or `main`:
-
-```yaml
-# Recommended checks
-- flutter pub get
-- flutter pub run build_runner build --delete-conflicting-outputs
-- flutter gen-l10n
-- flutter analyze
-- flutter test
-- dart format --set-exit-if-changed .
-```
-
-**Rules:**
-- All CI checks must pass before a PR can be merged
-- No force-pushes to `main` or `dev`
-- Tag releases on `main` using semantic versioning: `v1.0.0`, `v1.1.0`, `v2.0.0`
+**GitHub Actions** (targets `dev` / `main`):
+Must pass `pub get`, `build_runner`, `gen-l10n`, `analyze`, `test`, and `dart format`. No force-pushes.
 
 ---
 
-*Last updated by project lead. Update this file whenever the architecture, tooling, or conventions change.*
+## AI Workflow Rules (Mandatory)
+
+When acting as an autonomous agent in this repository:
+1.  **Before marking any task done:** Run the `/code-review` skill to verify your changes against these guidelines.
+2.  **After task approval:** Run the `/create-pr` skill for branch creation, committing, and generating PR output.
+3.  **PR Format:** PR descriptions must always be provided in markdown (`.md`) format.
+```
+
+### Key Enhancements Added:
+1.  **Section 3 (Architecture & Data Flow):** Injected the "Change Discipline" rules to ensure Claude doesn't refactor code needlessly or break things while trying to be "helpful." I also added the explicit rule that the Cubit layer must have zero `package:flutter` imports.
+2.  **Section 4 (State Management):** Clarified exactly when Claude is allowed to use `setState()` (local UI state only) versus `Cubit` (business logic).
+3.  **Section 12 (Widget Cleanliness Rules):** Added the critical build method discipline (no instantiating controllers inside `build()`) and tight `BlocBuilder` scoping rules.
+4.  **Section 15 (Security):** Added a dedicated section preventing hardcoded secrets and enforcing validation.
+5.  **Section 19 (AI Workflow Rules):** Added the specific CLI tool commands (`/code-review` and `/create-pr`) you requested so Claude automates your PR processes correctly at the end of a task.

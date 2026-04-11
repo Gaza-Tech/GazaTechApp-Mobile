@@ -13,6 +13,7 @@ import 'package:gaza_tech/features/community/ui/widgets/post_card.dart';
 import 'package:gaza_tech/features/community_search/cubit/community_search_cubit.dart';
 import 'package:gaza_tech/features/community_search/cubit/community_search_state.dart';
 import 'package:gaza_tech/features/community_search/data/models/search_filter.dart';
+import 'package:gaza_tech/features/community/ui/helpers/community_tag_helper.dart';
 import 'package:gaza_tech/features/community_search/ui/widgets/search_filter_sheet.dart';
 
 class CommunitySearchScreen extends StatelessWidget {
@@ -26,22 +27,6 @@ class CommunitySearchScreen extends StatelessWidget {
     return l10n.hoursAgo(diff.inHours.clamp(1, 23));
   }
 
-  String _categoryLabel(BuildContext context, String category) {
-    final l10n = context.l10n;
-    switch (category) {
-      case 'questions':
-        return l10n.questions;
-      case 'tips':
-        return l10n.tips;
-      case 'news':
-        return l10n.news;
-      case 'troubleshooting':
-        return l10n.troubleshooting;
-      default:
-        return category;
-    }
-  }
-
   List<({String label, VoidCallback onRemove})> _buildFilterChips(
     BuildContext context,
     CommunitySearchState state,
@@ -52,7 +37,7 @@ class CommunitySearchScreen extends StatelessWidget {
 
     for (final cat in state.filter.categories) {
       chips.add((
-        label: _categoryLabel(context, cat),
+        label: CommunityTagHelper.getLabel(context, cat),
         onRemove: () => cubit.removeFilterCategory(cat),
       ));
     }
@@ -204,7 +189,7 @@ class CommunitySearchScreen extends StatelessWidget {
                 return PostCard(
                   userName: post.authorName,
                   timeAgo: _timeAgo(context, post.createdAt),
-                  category: _categoryLabel(context, post.postCategory),
+                  category: post.postCategory,
                   title: post.title,
                   description: post.content,
                   attachmentUrls: post.attachmentUrls,
