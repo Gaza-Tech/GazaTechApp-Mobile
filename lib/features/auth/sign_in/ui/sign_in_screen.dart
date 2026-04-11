@@ -12,10 +12,14 @@ import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/core/widgets/status_bar_hider.dart';
 import 'package:gaza_tech/features/auth/sign_in/cubit/sign_in_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_in/ui/widgets/account_action_row.dart';
+import 'package:gaza_tech/core/widgets/continue_as_guest_button.dart';
 import 'package:gaza_tech/core/widgets/google_sign_in_button.dart';
 import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_cubit.dart';
 import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_state.dart';
 import 'package:gaza_tech/features/auth/google_auth/ui/widgets/google_auth_bloc_listener.dart';
+import 'package:gaza_tech/features/auth/guest_auth/cubit/guest_auth_cubit.dart';
+import 'package:gaza_tech/features/auth/guest_auth/cubit/guest_auth_state.dart';
+import 'package:gaza_tech/features/auth/guest_auth/ui/widgets/guest_auth_bloc_listener.dart';
 import 'widgets/sign_in_bloc_listener.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -168,6 +172,22 @@ class _SignInScreenState extends State<SignInScreen> {
                   },
                 ),
                 const GoogleAuthBlocListener(),
+                const VerticalSpace(16),
+
+                // Continue as Guest Button
+                BlocBuilder<GuestAuthCubit, GuestAuthState>(
+                  builder: (context, state) {
+                    return ContinueAsGuestButton(
+                      isLoading: state.maybeWhen(
+                        loading: () => true,
+                        orElse: () => false,
+                      ),
+                      onPressed: () =>
+                          context.read<GuestAuthCubit>().continueAsGuest(),
+                    );
+                  },
+                ),
+                const GuestAuthBlocListener(),
                 const VerticalSpace(24),
 
                 // Don't have an account? Sign up

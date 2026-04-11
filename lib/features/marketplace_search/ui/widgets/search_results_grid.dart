@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/helpers/guest_guard.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/marketplace/ui/widgets/product_card_grid.dart';
 import 'package:gaza_tech/features/marketplace_search/cubit/marketplace_search_cubit.dart';
@@ -51,8 +52,12 @@ class SearchResultsGrid extends StatelessWidget {
                       isBookmarked: state.bookmarkedListingIds.contains(
                         listing.listingId,
                       ),
-                      onBookmarkToggle: () =>
-                          cubit.toggleListingBookmark(listing.listingId),
+                      onBookmarkToggle: () async {
+                        if (!await GuestGuard.requireAccount(context)) {
+                          return;
+                        }
+                        cubit.toggleListingBookmark(listing.listingId);
+                      },
                       onTap: () => context.pushNamed(
                         MyRoutes.listingDetails,
                         arguments: listing.listingId,

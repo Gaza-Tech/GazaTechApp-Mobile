@@ -236,6 +236,36 @@ abstract class AppLocalizations {
   /// **'Continue with Google'**
   String get continueWithGoogle;
 
+  /// No description provided for @continueAsGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue as Guest'**
+  String get continueAsGuest;
+
+  /// No description provided for @signUpPromptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create an account'**
+  String get signUpPromptTitle;
+
+  /// No description provided for @signUpPromptMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up to use this feature and unlock the full experience.'**
+  String get signUpPromptMessage;
+
+  /// No description provided for @signUpPromptSignUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up'**
+  String get signUpPromptSignUp;
+
+  /// No description provided for @signUpPromptSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'I already have an account'**
+  String get signUpPromptSignIn;
+
   /// No description provided for @dontHaveAccount.
   ///
   /// In en, this message translates to:
@@ -385,6 +415,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Success'**
   String get success;
+
+  /// No description provided for @unknownError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown error'**
+  String get unknownError;
 
   /// No description provided for @ok.
   ///

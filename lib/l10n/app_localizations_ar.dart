@@ -78,6 +78,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get continueWithGoogle => 'المتابعة مع جوجل';
 
   @override
+  String get continueAsGuest => 'المتابعة كضيف';
+
+  @override
+  String get signUpPromptTitle => 'أنشئ حسابًا';
+
+  @override
+  String get signUpPromptMessage =>
+      'أنشئ حسابًا لاستخدام هذه الميزة والحصول على التجربة الكاملة.';
+
+  @override
+  String get signUpPromptSignUp => 'إنشاء حساب';
+
+  @override
+  String get signUpPromptSignIn => 'لدي حساب بالفعل';
+
+  @override
   String get dontHaveAccount => 'ليس لديك حساب؟ ';
 
   @override
@@ -152,6 +168,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get success => 'نجاح';
+
+  @override
+  String get unknownError => 'خطأ غير معروف';
 
   @override
   String get ok => 'حسناً';

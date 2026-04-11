@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/helpers/guest_guard.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 
 class VerificationBadgeButton extends StatelessWidget {
@@ -18,7 +19,11 @@ class VerificationBadgeButton extends StatelessWidget {
         label: context.l10n.getVerified,
         icon: Icons.verified_outlined,
         color: theme.colorScheme.primary,
-        onTap: () => context.pushNamed(MyRoutes.verificationForm),
+        onTap: () async {
+          if (!await GuestGuard.requireAccount(context)) return;
+          if (!context.mounted) return;
+          context.pushNamed(MyRoutes.verificationForm);
+        },
       );
     }
 

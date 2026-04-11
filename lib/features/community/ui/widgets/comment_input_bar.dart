@@ -13,6 +13,7 @@ class CommentInputBar extends StatelessWidget {
     this.onSubmit,
     this.isEditing = false,
     this.onCancelEdit,
+    this.isGuest = false,
   });
 
   final TextEditingController controller;
@@ -21,6 +22,11 @@ class CommentInputBar extends StatelessWidget {
   final VoidCallback? onSubmit;
   final bool isEditing;
   final VoidCallback? onCancelEdit;
+
+  /// When `true`, the input is non-interactive and visually dimmed. Tapping
+  /// anywhere in the bar routes through [onSubmit] — typically a handler
+  /// gated by `GuestGuard` that shows the sign-up prompt sheet.
+  final bool isGuest;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +42,69 @@ class CommentInputBar extends StatelessWidget {
             _buildEditingBanner(context, theme)
           else if (replyingTo != null)
             _buildReplyBanner(context, theme),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+          if (isGuest)
+            _buildGuestRow(context, theme)
+          else
+            _buildInputRow(context, theme),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInputRow(BuildContext context, ThemeData theme) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          CircleAvatar(
+            radius: 18.r,
+            backgroundColor: theme.colorScheme.surfaceContainerHighest,
+            child: Icon(
+              Icons.person,
+              size: 18.sp,
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          SizedBox(width: 8.w),
+          Expanded(
+            child: MyTextFormField(
+              controller: controller,
+              hintText: context.l10n.addComment,
+              textInputType: TextInputType.multiline,
+              maxLines: 4,
+              minLines: 1,
+              textInputAction: TextInputAction.newline,
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 8.h,
+                horizontal: 8.w,
+              ),
+            ),
+          ),
+          SizedBox(width: 4.w),
+          IconButton(
+            icon: Icon(
+              Icons.send_rounded,
+              color: theme.colorScheme.primary,
+              size: 22.sp,
+            ),
+            onPressed: onSubmit,
+            padding: EdgeInsets.zero,
+            constraints: BoxConstraints(minWidth: 36.w, minHeight: 36.h),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGuestRow(BuildContext context, ThemeData theme) {
+    return InkWell(
+      onTap: onSubmit,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        child: Opacity(
+          opacity: 0.5,
+          child: IgnorePointer(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -69,17 +136,17 @@ class CommentInputBar extends StatelessWidget {
                 IconButton(
                   icon: Icon(
                     Icons.send_rounded,
-                    color: theme.colorScheme.primary,
+                    color: theme.colorScheme.onSurfaceVariant,
                     size: 22.sp,
                   ),
-                  onPressed: onSubmit,
+                  onPressed: null,
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(minWidth: 36.w, minHeight: 36.h),
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

@@ -27,6 +27,11 @@
   "forgotPasswordLink": "نسيت كلمة المرور؟",
   "or": "أو",
   "continueWithGoogle": "المتابعة مع جوجل",
+  "continueAsGuest": "المتابعة كضيف",
+  "signUpPromptTitle": "أنشئ حسابًا",
+  "signUpPromptMessage": "أنشئ حسابًا لاستخدام هذه الميزة والحصول على التجربة الكاملة.",
+  "signUpPromptSignUp": "إنشاء حساب",
+  "signUpPromptSignIn": "لدي حساب بالفعل",
 
   "dontHaveAccount": "ليس لديك حساب؟ ",
   "alreadyHaveAccount": "لديك حساب بالفعل؟ ",
@@ -59,6 +64,7 @@
 
   "error": "خطأ",
   "success": "نجاح",
+  "unknownError": "خطأ غير معروف",
   "ok": "حسناً",
   "cancel": "إلغاء",
   "signInCancelled": "تم إلغاء تسجيل الدخول",
