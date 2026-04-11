@@ -12,6 +12,7 @@ import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/core/widgets/status_bar_hider.dart';
 import 'package:gaza_tech/features/auth/sign_in/cubit/sign_in_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_in/ui/widgets/account_action_row.dart';
+import 'package:gaza_tech/core/widgets/continue_as_guest_button.dart';
 import 'package:gaza_tech/core/widgets/google_sign_in_button.dart';
 import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_cubit.dart';
 import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_state.dart';
@@ -176,44 +177,13 @@ class _SignInScreenState extends State<SignInScreen> {
                 // Continue as Guest Button
                 BlocBuilder<GuestAuthCubit, GuestAuthState>(
                   builder: (context, state) {
-                    final isLoading = state.maybeWhen(
-                      loading: () => true,
-                      orElse: () => false,
-                    );
-                    return SizedBox(
-                      width: double.infinity,
-                      height: 48.h,
-                      child: OutlinedButton(
-                        onPressed: isLoading
-                            ? null
-                            : () => context
-                                  .read<GuestAuthCubit>()
-                                  .continueAsGuest(),
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: Colors.grey[400]!),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.dg),
-                          ),
-                          foregroundColor: Theme.of(
-                            context,
-                          ).colorScheme.onSurface,
-                        ),
-                        child: isLoading
-                            ? SizedBox(
-                                width: 20.w,
-                                height: 20.w,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.onSurface,
-                                ),
-                              )
-                            : Text(
-                                context.l10n.continueAsGuest,
-                                style: MyTextStyle.action.l,
-                              ),
+                    return ContinueAsGuestButton(
+                      isLoading: state.maybeWhen(
+                        loading: () => true,
+                        orElse: () => false,
                       ),
+                      onPressed: () =>
+                          context.read<GuestAuthCubit>().continueAsGuest(),
                     );
                   },
                 ),
