@@ -37,22 +37,6 @@ class _PostsTabViewState extends State<PostsTabView>
     return false;
   }
 
-  String _categoryLabel(BuildContext context, String category) {
-    final l10n = context.l10n;
-    switch (category) {
-      case 'questions':
-        return l10n.questions;
-      case 'tips':
-        return l10n.tips;
-      case 'news':
-        return l10n.news;
-      case 'troubleshooting':
-        return l10n.troubleshooting;
-      default:
-        return category;
-    }
-  }
-
   String _timeAgo(BuildContext context, DateTime createdAt) {
     final l10n = context.l10n;
     final diff = DateTime.now().difference(createdAt);
@@ -132,7 +116,7 @@ class _PostsTabViewState extends State<PostsTabView>
                       return PostCard(
                         userName: post.authorName,
                         timeAgo: _timeAgo(context, post.createdAt),
-                        category: _categoryLabel(context, post.postCategory),
+                        category: post.postCategory,
                         title: post.title,
                         description: post.content,
                         attachmentUrls: post.attachmentUrls,

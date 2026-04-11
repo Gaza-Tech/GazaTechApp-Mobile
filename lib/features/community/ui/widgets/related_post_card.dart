@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/core/widgets/post_category_tag.dart';
 
 class RelatedPostCard extends StatelessWidget {
   final String title;
@@ -55,12 +56,7 @@ class RelatedPostCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: 4.h),
-                  Text(
-                    category,
-                    style: MyTextStyle.body.xs.copyWith(
-                      color: theme.colorScheme.primary,
-                    ),
-                  ),
+                  PostCategoryTag(category: category),
                   SizedBox(height: 6.h),
                   Row(
                     children: [

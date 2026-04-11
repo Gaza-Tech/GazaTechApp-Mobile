@@ -6,8 +6,8 @@ class CommunityTagHelper {
   static String getLabel(BuildContext context, String categoryKey) {
     final l10n = context.l10n;
     switch (categoryKey) {
-      case 'question':
-        return l10n.question;
+      case 'questions':
+        return l10n.questions;
       case 'tips':
         return l10n.tips;
       case 'news':
@@ -22,7 +22,7 @@ class CommunityTagHelper {
   static Color getColor(BuildContext context, String categoryKey) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     switch (categoryKey) {
-      case 'question':
+      case 'questions':
         return isDark ? MyColors.primary.onDark : MyColors.primary.base;
       case 'tips':
         return isDark
