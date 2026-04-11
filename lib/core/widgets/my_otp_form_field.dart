@@ -73,13 +73,16 @@ class _MyOtpFormFieldState extends State<MyOtpFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(
-        widget.length,
-        (index) => Padding(
-          padding: EdgeInsets.only(right: index < widget.length - 1 ? 6 : 0),
-          child: _buildOtpField(index),
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: List.generate(
+          widget.length,
+          (index) => Padding(
+            padding: EdgeInsets.only(right: index < widget.length - 1 ? 6 : 0),
+            child: _buildOtpField(index),
+          ),
         ),
       ),
     );
