@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/helpers/guest_guard.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/profile/cubit/profile_cubit.dart';
 import 'package:gaza_tech/features/profile/cubit/profile_state.dart';
@@ -54,6 +55,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                       IconButton(
                         icon: const Icon(Icons.edit_outlined),
                         onPressed: () async {
+                          if (!await GuestGuard.requireAccount(context)) {
+                            return;
+                          }
+                          if (!context.mounted) return;
                           final refreshed = await Navigator.pushNamed(
                             context,
                             MyRoutes.editProfile,

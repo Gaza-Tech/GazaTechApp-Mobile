@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/helpers/guest_guard.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/marketplace/ui/marketplace_screen.dart';
 import 'package:gaza_tech/features/community/ui/community_screen.dart';
@@ -150,7 +151,9 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _onFabPressed(BuildContext context) {
+  Future<void> _onFabPressed(BuildContext context) async {
+    if (!await GuestGuard.requireAccount(context)) return;
+    if (!context.mounted) return;
     if (_currentIndex == 0) {
       context.pushNamed(MyRoutes.addListing);
     } else {

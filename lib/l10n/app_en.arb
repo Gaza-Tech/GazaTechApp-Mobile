@@ -27,6 +27,11 @@
   "forgotPasswordLink": "Forgot Password?",
   "or": "Or",
   "continueWithGoogle": "Continue with Google",
+  "continueAsGuest": "Continue as Guest",
+  "signUpPromptTitle": "Create an account",
+  "signUpPromptMessage": "Sign up to use this feature and unlock the full experience.",
+  "signUpPromptSignUp": "Sign up",
+  "signUpPromptSignIn": "I already have an account",
 
   "dontHaveAccount": "Don't have an account? ",
   "alreadyHaveAccount": "Already have an account? ",
@@ -59,6 +64,7 @@
 
   "error": "Error",
   "success": "Success",
+  "unknownError": "Unknown error",
   "ok": "OK",
   "cancel": "Cancel",
   "signInCancelled": "Sign-in cancelled",

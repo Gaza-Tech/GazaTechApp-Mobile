@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/helpers/guest_guard.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/widgets/delete_confirmation_sheet.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card.dart';
@@ -33,10 +34,7 @@ class _ProfilePostsTabState extends State<ProfilePostsTab>
     return l10n.hoursAgo(diff.inHours.clamp(1, 23));
   }
 
-  Future<void> _navigateToDetails(
-    BuildContext context,
-    String postId,
-  ) async {
+  Future<void> _navigateToDetails(BuildContext context, String postId) async {
     final result = await Navigator.pushNamed(
       context,
       MyRoutes.postDetails,
@@ -57,9 +55,9 @@ class _ProfilePostsTabState extends State<ProfilePostsTab>
       onConfirm: () async {
         final success = await context.read<ProfileCubit>().deletePost(postId);
         if (success && context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.postDeleted)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(l10n.postDeleted)));
         }
       },
     );
@@ -117,20 +115,24 @@ class _ProfilePostsTabState extends State<ProfilePostsTab>
                       isBookmarked: state.bookmarkedPostIds.contains(
                         post.postId,
                       ),
-                      onLikeToggle: () =>
-                          context.read<ProfileCubit>().toggleLike(post.postId),
-                      onBookmarkToggle: () => context
-                          .read<ProfileCubit>()
-                          .toggleBookmark(post.postId),
+                      onLikeToggle: () async {
+                        if (!await GuestGuard.requireAccount(context)) return;
+                        if (!context.mounted) return;
+                        context.read<ProfileCubit>().toggleLike(post.postId);
+                      },
+                      onBookmarkToggle: () async {
+                        if (!await GuestGuard.requireAccount(context)) return;
+                        if (!context.mounted) return;
+                        context.read<ProfileCubit>().toggleBookmark(
+                          post.postId,
+                        );
+                      },
                       onTap: () => _navigateToDetails(context, post.postId),
                       onEdit: state.isOwnProfile
                           ? () => _navigateToDetails(context, post.postId)
                           : null,
                       onDelete: state.isOwnProfile
-                          ? () => _showDeleteConfirmation(
-                                context,
-                                post.postId,
-                              )
+                          ? () => _showDeleteConfirmation(context, post.postId)
                           : null,
                     );
                   },

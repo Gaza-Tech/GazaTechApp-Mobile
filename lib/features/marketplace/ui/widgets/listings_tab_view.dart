@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/helpers/guest_guard.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_cubit.dart';
 import 'package:gaza_tech/features/marketplace/cubit/marketplace_state.dart';
@@ -121,9 +122,15 @@ class _ListingsTabViewState extends State<ListingsTabView>
                         isBookmarked: state.bookmarkedListingIds.contains(
                           listing.listingId,
                         ),
-                        onBookmarkToggle: () => context
-                            .read<MarketplaceCubit>()
-                            .toggleBookmark(listing.listingId),
+                        onBookmarkToggle: () async {
+                          if (!await GuestGuard.requireAccount(context)) {
+                            return;
+                          }
+                          if (!context.mounted) return;
+                          context.read<MarketplaceCubit>().toggleBookmark(
+                            listing.listingId,
+                          );
+                        },
                         onTap: () => context.pushNamed(
                           MyRoutes.listingDetails,
                           arguments: listing.listingId,

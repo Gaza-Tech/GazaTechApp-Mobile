@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/helpers/guest_guard.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/community/cubit/community_cubit.dart';
 import 'package:gaza_tech/features/community/cubit/community_state.dart';
@@ -150,10 +151,18 @@ class _PostsTabViewState extends State<PostsTabView>
                             'isOwnProfile': isOwnPost,
                           },
                         ),
-                        onLikeToggle: () =>
-                            _communityCubit.toggleLike(post.postId),
-                        onBookmarkToggle: () =>
-                            _communityCubit.toggleBookmark(post.postId),
+                        onLikeToggle: () async {
+                          if (!await GuestGuard.requireAccount(context)) {
+                            return;
+                          }
+                          _communityCubit.toggleLike(post.postId);
+                        },
+                        onBookmarkToggle: () async {
+                          if (!await GuestGuard.requireAccount(context)) {
+                            return;
+                          }
+                          _communityCubit.toggleBookmark(post.postId);
+                        },
                         onTap: () => Navigator.pushNamed(
                           context,
                           MyRoutes.postDetails,

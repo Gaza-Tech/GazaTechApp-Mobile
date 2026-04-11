@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/helpers/guest_guard.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
@@ -63,7 +64,11 @@ class StatusCard extends StatelessWidget {
           const VerticalSpace(24),
           MyButton(
             text: context.l10n.resubmitVerification,
-            onPressed: () => context.pushNamed(MyRoutes.verificationForm),
+            onPressed: () async {
+              if (!await GuestGuard.requireAccount(context)) return;
+              if (!context.mounted) return;
+              context.pushNamed(MyRoutes.verificationForm);
+            },
           ),
         ],
       ],

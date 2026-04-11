@@ -15,6 +15,7 @@ import 'package:gaza_tech/features/auth/reset_password/cubit/reset_password_cubi
 import 'package:gaza_tech/features/auth/reset_password/ui/verify_recovery_otp_screen.dart';
 import 'package:gaza_tech/features/auth/reset_password/ui/reset_password_screen.dart';
 import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_cubit.dart';
+import 'package:gaza_tech/features/auth/guest_auth/cubit/guest_auth_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 import 'package:gaza_tech/features/add_listing/cubit/add_listing_cubit.dart';
 import 'package:gaza_tech/features/add_listing/ui/add_listing_screen.dart';
@@ -54,6 +55,7 @@ class MyRouter {
             providers: [
               BlocProvider(create: (context) => getIt<SignInCubit>()),
               BlocProvider(create: (context) => getIt<GoogleAuthCubit>()),
+              BlocProvider(create: (context) => getIt<GuestAuthCubit>()),
             ],
             child: const SignInScreen(),
           ),

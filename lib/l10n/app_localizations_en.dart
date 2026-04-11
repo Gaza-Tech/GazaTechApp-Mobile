@@ -78,6 +78,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get continueWithGoogle => 'Continue with Google';
 
   @override
+  String get continueAsGuest => 'Continue as Guest';
+
+  @override
+  String get signUpPromptTitle => 'Create an account';
+
+  @override
+  String get signUpPromptMessage =>
+      'Sign up to use this feature and unlock the full experience.';
+
+  @override
+  String get signUpPromptSignUp => 'Sign up';
+
+  @override
+  String get signUpPromptSignIn => 'I already have an account';
+
+  @override
   String get dontHaveAccount => 'Don\'t have an account? ';
 
   @override
@@ -152,6 +168,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get success => 'Success';
+
+  @override
+  String get unknownError => 'Unknown error';
 
   @override
   String get ok => 'OK';

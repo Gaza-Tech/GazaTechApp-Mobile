@@ -16,6 +16,9 @@ import 'package:gaza_tech/core/widgets/google_sign_in_button.dart';
 import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_cubit.dart';
 import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_state.dart';
 import 'package:gaza_tech/features/auth/google_auth/ui/widgets/google_auth_bloc_listener.dart';
+import 'package:gaza_tech/features/auth/guest_auth/cubit/guest_auth_cubit.dart';
+import 'package:gaza_tech/features/auth/guest_auth/cubit/guest_auth_state.dart';
+import 'package:gaza_tech/features/auth/guest_auth/ui/widgets/guest_auth_bloc_listener.dart';
 import 'widgets/sign_in_bloc_listener.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -168,6 +171,53 @@ class _SignInScreenState extends State<SignInScreen> {
                   },
                 ),
                 const GoogleAuthBlocListener(),
+                const VerticalSpace(16),
+
+                // Continue as Guest Button
+                BlocBuilder<GuestAuthCubit, GuestAuthState>(
+                  builder: (context, state) {
+                    final isLoading = state.maybeWhen(
+                      loading: () => true,
+                      orElse: () => false,
+                    );
+                    return SizedBox(
+                      width: double.infinity,
+                      height: 48.h,
+                      child: OutlinedButton(
+                        onPressed: isLoading
+                            ? null
+                            : () => context
+                                  .read<GuestAuthCubit>()
+                                  .continueAsGuest(),
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(color: Colors.grey[400]!),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.dg),
+                          ),
+                          foregroundColor: Theme.of(
+                            context,
+                          ).colorScheme.onSurface,
+                        ),
+                        child: isLoading
+                            ? SizedBox(
+                                width: 20.w,
+                                height: 20.w,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
+                                ),
+                              )
+                            : Text(
+                                context.l10n.continueAsGuest,
+                                style: MyTextStyle.action.l,
+                              ),
+                      ),
+                    );
+                  },
+                ),
+                const GuestAuthBlocListener(),
                 const VerticalSpace(24),
 
                 // Don't have an account? Sign up

@@ -22,6 +22,9 @@ import 'package:gaza_tech/features/auth/sign_up/data/services/sign_up_api_servic
 import 'package:gaza_tech/features/auth/google_auth/cubit/google_auth_cubit.dart';
 import 'package:gaza_tech/features/auth/google_auth/data/repos/google_auth_repo.dart';
 import 'package:gaza_tech/features/auth/google_auth/data/services/google_auth_api_service.dart';
+import 'package:gaza_tech/features/auth/guest_auth/cubit/guest_auth_cubit.dart';
+import 'package:gaza_tech/features/auth/guest_auth/data/repos/guest_auth_repo.dart';
+import 'package:gaza_tech/features/auth/guest_auth/data/services/guest_auth_api_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 // Feature Imports
@@ -138,6 +141,13 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<GoogleAuthRepo>(() => GoogleAuthRepo(getIt()));
   getIt.registerFactory<GoogleAuthCubit>(() => GoogleAuthCubit(getIt()));
 
+  // 8.5. Guest Auth
+  getIt.registerLazySingleton<GuestAuthApiService>(
+    () => GuestAuthApiService(getIt()),
+  );
+  getIt.registerLazySingleton<GuestAuthRepo>(() => GuestAuthRepo(getIt()));
+  getIt.registerFactory<GuestAuthCubit>(() => GuestAuthCubit(getIt()));
+
   // 9. SignOut
   getIt.registerLazySingleton<SignOutApiService>(
     () => SignOutApiService(getIt()),
@@ -146,14 +156,10 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<SignOutCubit>(() => SignOutCubit(getIt()));
 
   // Post Event Service (singleton shared across all cubits)
-  getIt.registerLazySingleton<PostEventService>(
-    () => PostEventService(),
-  );
+  getIt.registerLazySingleton<PostEventService>(() => PostEventService());
 
   // Report Event Service (singleton shared across all cubits)
-  getIt.registerLazySingleton<ReportEventService>(
-    () => ReportEventService(),
-  );
+  getIt.registerLazySingleton<ReportEventService>(() => ReportEventService());
 
   // Bookmarks Feature
   getIt.registerLazySingleton<BookmarksApiService>(
@@ -188,8 +194,7 @@ Future<void> setupGetIt() async {
     () => ListingDetailsRepo(getIt()),
   );
   getIt.registerFactoryParam<ListingDetailsCubit, String, void>(
-    (listingId, _) =>
-        ListingDetailsCubit(getIt(), listingId, getIt(), getIt()),
+    (listingId, _) => ListingDetailsCubit(getIt(), listingId, getIt(), getIt()),
   );
 
   // 13. Search

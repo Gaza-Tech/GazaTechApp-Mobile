@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/helpers/guest_guard.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/theme/my_colors.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
@@ -33,9 +34,14 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
             initial: () => const SizedBox.shrink(),
             loading: () => const Center(child: CircularProgressIndicator()),
             failure: (message) => ListingDetailsErrorView(message: message),
-            success: (listing, similarListings, sellerListings, isBookmarked,
-                    isReported) =>
-                ListingDetailsBody(
+            success:
+                (
+                  listing,
+                  similarListings,
+                  sellerListings,
+                  isBookmarked,
+                  isReported,
+                ) => ListingDetailsBody(
                   listing: listing,
                   similarListings: similarListings,
                   sellerListings: sellerListings,
@@ -81,8 +87,11 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
             icon: isBookmarked
                 ? Icons.bookmark_rounded
                 : Icons.bookmark_border_rounded,
-            onPressed: () =>
-                context.read<ListingDetailsCubit>().toggleBookmark(),
+            onPressed: () async {
+              if (!await GuestGuard.requireAccount(context)) return;
+              if (!context.mounted) return;
+              context.read<ListingDetailsCubit>().toggleBookmark();
+            },
           ),
           const HorizontalSpace(4),
           _buildCircularIconButton(icon: Icons.share_rounded, onPressed: () {}),
@@ -118,9 +127,7 @@ class _ListingDetailsScreenState extends State<ListingDetailsScreen> {
                         entityId: listing.listingId,
                       );
                       if (reported == true && context.mounted) {
-                        context
-                            .read<ListingDetailsCubit>()
-                            .markAsReported();
+                        context.read<ListingDetailsCubit>().markAsReported();
                       }
                     },
             ),
