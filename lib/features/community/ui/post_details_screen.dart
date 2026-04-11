@@ -207,6 +207,10 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                     onPressed: state.isReported
                         ? null
                         : () async {
+                            if (!await GuestGuard.requireAccount(context)) {
+                              return;
+                            }
+                            if (!context.mounted) return;
                             final reported = await showReportBottomSheet(
                               context,
                               entityType: ReportEntityType.post,
@@ -313,6 +317,12 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                         : null,
                                     onReport: !isOwn
                                         ? () async {
+                                            if (!await GuestGuard.requireAccount(
+                                              context,
+                                            )) {
+                                              return;
+                                            }
+                                            if (!context.mounted) return;
                                             final reported =
                                                 await showReportBottomSheet(
                                                   context,
@@ -390,6 +400,15 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                                 : null,
                                             onReport: !isOwnReply
                                                 ? () async {
+                                                    if (!await GuestGuard
+                                                        .requireAccount(
+                                                          context,
+                                                        )) {
+                                                      return;
+                                                    }
+                                                    if (!context.mounted) {
+                                                      return;
+                                                    }
                                                     final reported =
                                                         await showReportBottomSheet(
                                                           context,

@@ -79,6 +79,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                         onPressed: state.isUserReported
                             ? null
                             : () async {
+                                if (!await GuestGuard.requireAccount(context)) {
+                                  return;
+                                }
+                                if (!context.mounted) return;
                                 final reported = await showReportBottomSheet(
                                   context,
                                   entityType: ReportEntityType.user,
