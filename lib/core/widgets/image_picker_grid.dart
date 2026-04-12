@@ -124,10 +124,10 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
         fit: fit,
         width: double.infinity,
         height: double.infinity,
-        placeholder: (_, __) => Container(
+        placeholder: (_, _) => Container(
           color: Theme.of(context).colorScheme.surfaceContainerHighest,
         ),
-        errorWidget: (_, __, ___) => Container(
+        errorWidget: (_, _, _) => Container(
           color: Theme.of(context).colorScheme.surfaceContainerHighest,
           child: const Icon(Icons.image_not_supported_outlined),
         ),

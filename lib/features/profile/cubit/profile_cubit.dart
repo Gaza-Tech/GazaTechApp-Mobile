@@ -217,8 +217,9 @@ class ProfileCubit extends Cubit<ProfileState> {
       state.copyWith(
         likedPostIds: newIds,
         posts: state.posts.map((p) {
-          if (p.postId == postId)
+          if (p.postId == postId) {
             return p.copyWith(likesCount: p.likesCount + delta);
+          }
           return p;
         }).toList(),
       ),

@@ -25,16 +25,16 @@ class SharedPrefHelper {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     debugPrint("SharedPrefHelper : setData with key : $key and value : $value");
     switch (value.runtimeType) {
-      case String:
+      case String _:
         await sharedPreferences.setString(key, value);
         break;
-      case int:
+      case int _:
         await sharedPreferences.setInt(key, value);
         break;
-      case bool:
+      case bool _:
         await sharedPreferences.setBool(key, value);
         break;
-      case double:
+      case double _:
         await sharedPreferences.setDouble(key, value);
         break;
       default:
@@ -80,7 +80,7 @@ class SharedPrefHelper {
   }
 
   /// Gets an String value from FlutterSecureStorage with given [key].
-  static getSecuredString(String key) async {
+  static Future<String?> getSecuredString(String key) async {
     const flutterSecureStorage = FlutterSecureStorage();
     debugPrint('FlutterSecureStorage : getSecuredString with key : $key');
     return await flutterSecureStorage.read(key: key) ?? '';

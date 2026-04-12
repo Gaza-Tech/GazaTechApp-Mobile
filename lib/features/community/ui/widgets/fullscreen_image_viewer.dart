@@ -51,10 +51,10 @@ class _FullscreenImageViewerState extends State<FullscreenImageViewer> {
                   child: CachedNetworkImage(
                     imageUrl: widget.imageUrls[index],
                     fit: BoxFit.contain,
-                    placeholder: (_, __) => const Center(
+                    placeholder: (_, _) => const Center(
                       child: CircularProgressIndicator(color: Colors.white),
                     ),
-                    errorWidget: (_, __, ___) => const Icon(
+                    errorWidget: (_, _, _) => const Icon(
                       Icons.image_not_supported_outlined,
                       color: Colors.white54,
                       size: 64,

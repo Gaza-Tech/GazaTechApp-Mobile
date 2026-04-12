@@ -38,7 +38,7 @@ class PostCardHeader extends StatelessWidget {
                       width: 40.r,
                       height: 40.r,
                       fit: BoxFit.cover,
-                      errorWidget: (_, __, ___) => _buildIcon(theme),
+                      errorWidget: (_, _, _) => _buildIcon(theme),
                     )
                   : _buildIcon(theme),
             ),

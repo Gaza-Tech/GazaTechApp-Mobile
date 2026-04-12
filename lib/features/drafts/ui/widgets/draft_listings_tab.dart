@@ -103,7 +103,7 @@ class _DraftListingsTabState extends State<DraftListingsTab>
               SliverPadding(
                 padding: EdgeInsets.all(16.w),
                 sliver: SliverList.separated(
-                  separatorBuilder: (_, _s) => SizedBox(height: 12.h),
+                  separatorBuilder: (_, s) => SizedBox(height: 12.h),
                   itemCount: state.listings.length,
                   itemBuilder: (context, index) {
                     final listing = state.listings[index];

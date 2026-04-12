@@ -74,8 +74,8 @@ class ProfileHeader extends StatelessWidget {
                 width: 88.r,
                 height: 88.r,
                 fit: BoxFit.cover,
-                placeholder: (_, __) => _buildInitials(theme),
-                errorWidget: (_, __, ___) => _buildInitials(theme),
+                placeholder: (_, _) => _buildInitials(theme),
+                errorWidget: (_, _, _) => _buildInitials(theme),
               )
             : _buildInitials(theme),
       ),

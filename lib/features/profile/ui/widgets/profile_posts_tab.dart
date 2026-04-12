@@ -83,7 +83,7 @@ class _ProfilePostsTabState extends State<ProfilePostsTab>
               SliverPadding(
                 padding: EdgeInsets.symmetric(vertical: 8.h),
                 sliver: SliverList.separated(
-                  separatorBuilder: (_, __) => const SizedBox.shrink(),
+                  separatorBuilder: (_, _) => const SizedBox.shrink(),
                   itemCount: state.posts.length,
                   itemBuilder: (context, index) {
                     final post = state.posts[index];

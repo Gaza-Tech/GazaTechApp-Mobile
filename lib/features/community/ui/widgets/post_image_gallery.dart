@@ -102,7 +102,7 @@ class PostImageGallery extends StatelessWidget {
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,
-          placeholder: (_, __) => Container(
+          placeholder: (_, _) => Container(
             color: theme.colorScheme.surfaceContainerHighest,
             child: Center(
               child: CircularProgressIndicator(
@@ -111,7 +111,7 @@ class PostImageGallery extends StatelessWidget {
               ),
             ),
           ),
-          errorWidget: (_, __, ___) => Container(
+          errorWidget: (_, _, _) => Container(
             color: theme.colorScheme.surfaceContainerHighest,
             child: Icon(
               Icons.image_not_supported_outlined,

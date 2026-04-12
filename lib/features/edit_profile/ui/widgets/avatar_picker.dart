@@ -72,8 +72,8 @@ class AvatarPicker extends StatelessWidget {
         width: 100.r,
         height: 100.r,
         fit: BoxFit.cover,
-        placeholder: (_, __) => _buildIcon(theme),
-        errorWidget: (_, __, ___) => _buildIcon(theme),
+        placeholder: (_, _) => _buildIcon(theme),
+        errorWidget: (_, _, _) => _buildIcon(theme),
       );
     }
     return _buildIcon(theme);

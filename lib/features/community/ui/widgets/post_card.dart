@@ -189,10 +189,10 @@ class _PostCardThumbnails extends StatelessWidget {
                   fit: BoxFit.cover,
                   height: 100.h,
                   memCacheWidth: 200,
-                  placeholder: (_, __) => Container(
+                  placeholder: (_, _) => Container(
                     color: theme.colorScheme.surfaceContainerHighest,
                   ),
-                  errorWidget: (_, __, ___) => Container(
+                  errorWidget: (_, _, _) => Container(
                     color: theme.colorScheme.surfaceContainerHighest,
                     child: const Icon(Icons.image_not_supported_outlined),
                   ),

@@ -225,8 +225,8 @@ class _ListingImage extends StatelessWidget {
             ? CachedNetworkImage(
                 imageUrl: imageUrl!,
                 fit: BoxFit.cover,
-                placeholder: (_, __) => _placeholder(),
-                errorWidget: (_, __, ___) => _error(),
+                placeholder: (_, _) => _placeholder(),
+                errorWidget: (_, _, _) => _error(),
               )
             : _error(),
       ),

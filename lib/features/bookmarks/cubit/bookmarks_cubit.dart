@@ -286,8 +286,9 @@ class BookmarksCubit extends Cubit<BookmarksState> {
 
     final delta = wasLiked ? -1 : 1;
     final updatedPosts = state.bookmarkedPosts.map((p) {
-      if (p.postId == postId)
+      if (p.postId == postId) {
         return p.copyWith(likesCount: p.likesCount + delta);
+      }
       return p;
     }).toList();
 
