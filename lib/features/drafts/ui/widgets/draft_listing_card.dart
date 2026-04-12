@@ -39,106 +39,175 @@ class DraftListingCard extends StatelessWidget {
     return Card(
       child: Padding(
         padding: EdgeInsets.all(14.w),
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _ListingImage(imageUrl: imageUrl),
-            const HorizontalSpace(10),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (productCondition.isNotEmpty)
-                    ConditionTag(condition: productCondition),
-                  SizedBox(height: 4.h),
-                  Text(
-                    name,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: MyTextStyle.body.s.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: theme.textTheme.titleMedium?.color,
-                    ),
-                  ),
-                  const VerticalSpace(2),
-                  Text(
-                    price,
-                    style: MyTextStyle.heading.h5.copyWith(
-                      color: MyColors.primary.base,
-                    ),
-                  ),
-                  const VerticalSpace(4),
-                  Row(
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _ListingImage(imageUrl: imageUrl),
+                const HorizontalSpace(10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (sellerName.isNotEmpty) ...[
-                        Icon(
-                          Icons.person_outline,
-                          size: 13.sp,
-                          color: theme.textTheme.bodySmall?.color,
+                      if (productCondition.isNotEmpty)
+                        ConditionTag(condition: productCondition),
+                      SizedBox(height: 4.h),
+                      Text(
+                        name,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: MyTextStyle.body.s.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: theme.textTheme.titleMedium?.color,
                         ),
-                        const HorizontalSpace(2),
-                        Flexible(
-                          child: Text(
-                            sellerName,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: MyTextStyle.body.xs.copyWith(
-                              color: theme.textTheme.bodySmall?.color,
-                            ),
-                          ),
-                        ),
-                        const HorizontalSpace(4),
-                        Icon(
-                          Icons.circle,
-                          size: 4,
-                          color: theme.textTheme.bodySmall?.color,
-                        ),
-                        const HorizontalSpace(4),
-                      ],
-                      Icon(
-                        Icons.location_on_outlined,
-                        size: 12.sp,
-                        color: theme.textTheme.bodySmall?.color,
                       ),
-                      const HorizontalSpace(2),
-                      Flexible(
-                        child: Text(
-                          location,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: MyTextStyle.body.xs.copyWith(
-                            color: theme.textTheme.bodySmall?.color,
-                          ),
+                      const VerticalSpace(2),
+                      Text(
+                        price,
+                        style: MyTextStyle.heading.h5.copyWith(
+                          color: MyColors.primary.base,
                         ),
+                      ),
+                      const VerticalSpace(4),
+                      _SellerLocationRow(
+                        sellerName: sellerName,
+                        location: location,
                       ),
                     ],
                   ),
-                  SizedBox(height: 8.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _DraftListingMoreMenu(onEdit: onEdit, onDelete: onDelete),
-                      OutlinedButton.icon(
-                        onPressed: onPublish,
-                        icon: const Icon(Icons.publish_outlined, size: 14),
-                        label: Text(l10n.publish),
-                        style: OutlinedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 12.w,
-                            vertical: 4.h,
-                          ),
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          visualDensity: VisualDensity.compact,
-                        ),
-                      ),
-                    ],
+                ),
+              ],
+            ),
+            SizedBox(height: 10.h),
+            Row(
+              children: [
+                _ActionButton(
+                  icon: Icons.delete_outlined,
+                  label: l10n.delete,
+                  onTap: onDelete,
+                  color: theme.colorScheme.error,
+                ),
+                SizedBox(width: 8.w),
+                _ActionButton(
+                  icon: Icons.edit_outlined,
+                  label: l10n.edit,
+                  onTap: onEdit,
+                ),
+                const Spacer(),
+                OutlinedButton.icon(
+                  onPressed: onPublish,
+                  icon: const Icon(Icons.publish_outlined, size: 14),
+                  label: Text(l10n.publish),
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 4.h,
+                    ),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    visualDensity: VisualDensity.compact,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ActionButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+  final Color? color;
+
+  const _ActionButton({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+    this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final effectiveColor = color ?? theme.colorScheme.onSurfaceVariant;
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8.r),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 16.sp, color: effectiveColor),
+            SizedBox(width: 4.w),
+            Text(
+              label,
+              style: MyTextStyle.body.xs.copyWith(color: effectiveColor),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SellerLocationRow extends StatelessWidget {
+  final String sellerName;
+  final String location;
+
+  const _SellerLocationRow({
+    required this.sellerName,
+    required this.location,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Row(
+      children: [
+        if (sellerName.isNotEmpty) ...[
+          Icon(
+            Icons.person_outline,
+            size: 13.sp,
+            color: theme.textTheme.bodySmall?.color,
+          ),
+          const HorizontalSpace(2),
+          Flexible(
+            child: Text(
+              sellerName,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: MyTextStyle.body.xs.copyWith(
+                color: theme.textTheme.bodySmall?.color,
+              ),
+            ),
+          ),
+          const HorizontalSpace(4),
+          Icon(Icons.circle, size: 4, color: theme.textTheme.bodySmall?.color),
+          const HorizontalSpace(4),
+        ],
+        Icon(
+          Icons.location_on_outlined,
+          size: 12.sp,
+          color: theme.textTheme.bodySmall?.color,
+        ),
+        const HorizontalSpace(2),
+        Flexible(
+          child: Text(
+            location,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: MyTextStyle.body.xs.copyWith(
+              color: theme.textTheme.bodySmall?.color,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -178,49 +247,4 @@ class _ListingImage extends StatelessWidget {
       child: Icon(Icons.image_not_supported_outlined, color: Colors.white54),
     ),
   );
-}
-
-class _DraftListingMoreMenu extends StatelessWidget {
-  final VoidCallback onEdit;
-  final VoidCallback onDelete;
-
-  const _DraftListingMoreMenu({required this.onEdit, required this.onDelete});
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final theme = Theme.of(context);
-    return PopupMenuButton<String>(
-      padding: EdgeInsets.zero,
-      constraints: BoxConstraints(minWidth: 32.w, minHeight: 32.h),
-      iconSize: 18.sp,
-      icon: Icon(Icons.more_vert, size: 18.sp),
-      onSelected: (value) {
-        if (value == 'edit') onEdit();
-        if (value == 'delete') onDelete();
-      },
-      itemBuilder: (context) => [
-        PopupMenuItem(
-          value: 'edit',
-          child: Row(
-            children: [
-              const Icon(Icons.edit_outlined, size: 20),
-              SizedBox(width: 8.w),
-              Text(l10n.edit),
-            ],
-          ),
-        ),
-        PopupMenuItem(
-          value: 'delete',
-          child: Row(
-            children: [
-              Icon(Icons.delete_outlined, size: 20, color: theme.colorScheme.error),
-              SizedBox(width: 8.w),
-              Text(l10n.delete, style: TextStyle(color: theme.colorScheme.error)),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
 }

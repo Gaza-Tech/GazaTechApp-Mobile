@@ -355,10 +355,7 @@ class AddListingCubit extends Cubit<AddListingState> {
       'currency': isILS ? 'ILS' : 'USD',
       'location_id': selectedLocationId,
       'specifications': specs,
-      if (publish) ...{
-        'content_status': 'published',
-        'published_at': DateTime.now().toIso8601String(),
-      },
+      if (publish) 'content_status': 'published',
     };
 
     final updateResult = await _repo.updateListing(

@@ -173,10 +173,7 @@ class ProfileApiService {
   Future<void> publishListing(String listingId) async {
     await _supabase
         .from('marketplace_listings')
-        .update({
-          'content_status': 'published',
-          'published_at': DateTime.now().toIso8601String(),
-        })
+        .update({'content_status': 'published'})
         .eq('listing_id', listingId);
   }
 

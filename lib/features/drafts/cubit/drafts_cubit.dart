@@ -11,8 +11,7 @@ class DraftsCubit extends Cubit<DraftsState> {
 
   String get _userId => Supabase.instance.client.auth.currentUser!.id;
 
-  // ── Post drafts ────────────────────────────────────────────────────────────
-
+  // Post drafts
   Future<void> fetchPostDrafts() async {
     emit(state.copyWith(isPostsLoading: true, postsPage: 0, posts: []));
     final result = await _repo.fetchUserDrafts(_userId, 0);
@@ -69,7 +68,7 @@ class DraftsCubit extends Cubit<DraftsState> {
     );
   }
 
-  // ── Listing drafts ─────────────────────────────────────────────────────────
+  // Listing drafts
 
   Future<void> fetchListingDrafts() async {
     emit(state.copyWith(isListingsLoading: true, listingsPage: 0, listings: []));

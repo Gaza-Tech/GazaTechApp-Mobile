@@ -41,17 +41,10 @@ class DraftPostCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: PostCardHeader(
-                    userName: authorName,
-                    timeAgo: timeAgo,
-                    category: category,
-                  ),
-                ),
-                _DraftMoreMenuButton(onEdit: onEdit, onDelete: onDelete),
-              ],
+            PostCardHeader(
+              userName: authorName,
+              timeAgo: timeAgo,
+              category: category,
             ),
             SizedBox(height: 10.h),
             Text(
@@ -76,20 +69,34 @@ class DraftPostCard extends StatelessWidget {
               _PostCardThumbnails(urls: attachmentUrls),
             ],
             SizedBox(height: 12.h),
-            Align(
-              alignment: AlignmentDirectional.centerEnd,
-              child: OutlinedButton.icon(
-                onPressed: onPublish,
-                icon: const Icon(Icons.publish_outlined, size: 16),
-                label: Text(l10n.publish),
-                style: OutlinedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 6.h,
-                  ),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            Row(
+              children: [
+                _ActionButton(
+                  icon: Icons.delete_outlined,
+                  label: l10n.delete,
+                  onTap: onDelete,
+                  color: theme.colorScheme.error,
                 ),
-              ),
+                SizedBox(width: 8.w),
+                _ActionButton(
+                  icon: Icons.edit_outlined,
+                  label: l10n.edit,
+                  onTap: onEdit,
+                ),
+                const Spacer(),
+                OutlinedButton.icon(
+                  onPressed: onPublish,
+                  icon: const Icon(Icons.publish_outlined, size: 16),
+                  label: Text(l10n.publish),
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 6.h,
+                    ),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -98,54 +105,40 @@ class DraftPostCard extends StatelessWidget {
   }
 }
 
-class _DraftMoreMenuButton extends StatelessWidget {
-  final VoidCallback onEdit;
-  final VoidCallback onDelete;
+class _ActionButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+  final Color? color;
 
-  const _DraftMoreMenuButton({required this.onEdit, required this.onDelete});
+  const _ActionButton({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     final theme = Theme.of(context);
-    return PopupMenuButton<String>(
-      padding: EdgeInsets.zero,
-      constraints: BoxConstraints(minWidth: 32.w, minHeight: 32.h),
-      iconSize: 18.sp,
-      icon: Icon(Icons.more_vert, size: 18.sp),
-      onSelected: (value) {
-        if (value == 'edit') onEdit();
-        if (value == 'delete') onDelete();
-      },
-      itemBuilder: (context) => [
-        PopupMenuItem(
-          value: 'edit',
-          child: Row(
-            children: [
-              const Icon(Icons.edit_outlined, size: 20),
-              SizedBox(width: 8.w),
-              Text(l10n.edit),
-            ],
-          ),
+    final effectiveColor = color ?? theme.colorScheme.onSurfaceVariant;
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8.r),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 16.sp, color: effectiveColor),
+            SizedBox(width: 4.w),
+            Text(
+              label,
+              style: MyTextStyle.body.xs.copyWith(color: effectiveColor),
+            ),
+          ],
         ),
-        PopupMenuItem(
-          value: 'delete',
-          child: Row(
-            children: [
-              Icon(
-                Icons.delete_outlined,
-                size: 20,
-                color: theme.colorScheme.error,
-              ),
-              SizedBox(width: 8.w),
-              Text(
-                l10n.delete,
-                style: TextStyle(color: theme.colorScheme.error),
-              ),
-            ],
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

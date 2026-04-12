@@ -81,7 +81,16 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   builder: (context, isLoading) => TextButton(
                     onPressed: isLoading
                         ? null
-                        : () => cubit.saveDraft(_selectedCategoryIndex ?? -1),
+                        : () {
+                            if (cubit.isDraftEdit) {
+                              cubit.updatePost(
+                                _selectedCategoryIndex ?? -1,
+                                publish: false,
+                              );
+                            } else {
+                              cubit.saveDraft(_selectedCategoryIndex ?? -1);
+                            }
+                          },
                     child: Text(cubit.isDraftEdit ? l10n.saveEdit : l10n.saveDraft),
                   ),
                 ),
