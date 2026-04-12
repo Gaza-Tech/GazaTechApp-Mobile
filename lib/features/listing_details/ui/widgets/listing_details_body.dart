@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
+import 'package:gaza_tech/core/helpers/guest_guard.dart';
 import 'package:gaza_tech/core/helpers/url_launcher_helper.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
@@ -83,15 +84,23 @@ class ListingDetailsBody extends StatelessWidget {
                 SellerInfoCard(
                   sellerName: listing.sellerName,
                   memberSince: memberSince,
-                  onContactSeller: () => _handleContactSeller(context),
-                  onViewProfile: () => Navigator.pushNamed(
-                    context,
-                    MyRoutes.profile,
-                    arguments: {
-                      'userId': listing.sellerId,
-                      'isOwnProfile': false,
-                    },
-                  ),
+                  onContactSeller: () async {
+                    if (!await GuestGuard.requireAccount(context)) return;
+                    if (context.mounted) _handleContactSeller(context);
+                  },
+                  onViewProfile: () async {
+                    if (!await GuestGuard.requireAccount(context)) return;
+                    if (context.mounted) {
+                      Navigator.pushNamed(
+                        context,
+                        MyRoutes.profile,
+                        arguments: {
+                          'userId': listing.sellerId,
+                          'isOwnProfile': false,
+                        },
+                      );
+                    }
+                  },
                 ),
                 const VerticalSpace(16),
                 const Divider(),
