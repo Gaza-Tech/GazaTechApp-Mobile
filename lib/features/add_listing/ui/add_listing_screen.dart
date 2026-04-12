@@ -83,6 +83,7 @@ class _AddListingScreenState extends State<AddListingScreen> {
         BlocListener<AddListingCubit, AddListingState>(
           listenWhen: (prev, curr) =>
               prev.submitSuccess != curr.submitSuccess ||
+              prev.draftSaved != curr.draftSaved ||
               prev.errorMessage != curr.errorMessage,
           listener: (context, state) {
             if (state.submitSuccess) {
@@ -92,6 +93,12 @@ class _AddListingScreenState extends State<AddListingScreen> {
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(message)));
+              Navigator.pop(context, true);
+            }
+            if (state.draftSaved) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(context.l10n.draftSaved)),
+              );
               Navigator.pop(context, true);
             }
             if (state.errorMessage != null && !state.isSubmitting) {
@@ -114,14 +121,38 @@ class _AddListingScreenState extends State<AddListingScreen> {
                         : context.l10n.addListing,
                   ),
                   actions: [
-                    if (!state.isEditMode)
+                    if (!state.isEditMode || cubit.isDraftEdit)
                       Padding(
                         padding: EdgeInsetsDirectional.only(end: 8.w),
                         child: TextButton(
-                          onPressed: () {
-                            // TODO: implement save draft
-                          },
-                          child: Text(context.l10n.saveDraft),
+                          onPressed: state.isSubmitting
+                              ? null
+                              : () {
+                                  if (cubit.isDraftEdit) {
+                                    cubit.updateListing(
+                                      selectedCategoryId: _selectedCategoryId,
+                                      selectedLocationId: _selectedLocationId,
+                                      selectedCondition: _selectedCondition,
+                                      isILS: _isILS,
+                                      images: _selectedImages,
+                                      specifications: _specifications,
+                                    );
+                                  } else {
+                                    cubit.saveDraft(
+                                      selectedCategoryId: _selectedCategoryId,
+                                      selectedLocationId: _selectedLocationId,
+                                      selectedCondition: _selectedCondition,
+                                      isILS: _isILS,
+                                      images: _selectedImages,
+                                      specifications: _specifications,
+                                    );
+                                  }
+                                },
+                          child: Text(
+                            cubit.isDraftEdit
+                                ? context.l10n.saveEdit
+                                : context.l10n.saveDraft,
+                          ),
                         ),
                       ),
                   ],
@@ -305,6 +336,7 @@ class _AddListingScreenState extends State<AddListingScreen> {
                                       isILS: _isILS,
                                       images: _selectedImages,
                                       specifications: _specifications,
+                                      publish: cubit.isDraftEdit,
                                     );
                                   } else {
                                     cubit.createListing(
@@ -317,9 +349,11 @@ class _AddListingScreenState extends State<AddListingScreen> {
                                     );
                                   }
                                 },
-                                text: state.isEditMode
-                                    ? context.l10n.updateListing
-                                    : context.l10n.publishListing,
+                                text: cubit.isDraftEdit
+                                    ? context.l10n.publishListing
+                                    : (state.isEditMode
+                                        ? context.l10n.updateListing
+                                        : context.l10n.publishListing),
                               ),
                             ],
                           ),

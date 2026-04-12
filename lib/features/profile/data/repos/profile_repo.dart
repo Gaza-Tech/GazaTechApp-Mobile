@@ -2,6 +2,7 @@ import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/core/netowoks/supabase_error_handler.dart';
 import 'package:gaza_tech/features/community/data/models/post_model.dart';
 import 'package:gaza_tech/features/community/data/models/posts_response.dart';
+import 'package:gaza_tech/features/listing_details/data/models/listing_detail_model.dart';
 import 'package:gaza_tech/features/marketplace/data/models/listing_model.dart';
 import '../models/user_profile_model.dart';
 import '../services/profile_api_service.dart';
@@ -10,6 +11,12 @@ class ListingsResponse {
   final List<ListingModel> listings;
   final bool hasMore;
   const ListingsResponse({required this.listings, required this.hasMore});
+}
+
+class ListingDraftsResponse {
+  final List<ListingDetailModel> listings;
+  final bool hasMore;
+  const ListingDraftsResponse({required this.listings, required this.hasMore});
 }
 
 class ProfileRepo {
@@ -73,6 +80,42 @@ class ProfileRepo {
     }
   }
 
+  Future<ApiResult<PostsResponse>> fetchUserDrafts(
+    String userId,
+    int page,
+  ) async {
+    try {
+      final raw = await _service.fetchUserDrafts(userId, page);
+      final hasMore = raw.length > ProfileApiService.postsPageSize;
+      final items = hasMore
+          ? raw.sublist(0, ProfileApiService.postsPageSize)
+          : raw;
+      final posts = items.map((e) => PostModel.fromJson(e)).toList();
+      return ApiResult.success(PostsResponse(posts: posts, hasMore: hasMore));
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  Future<ApiResult<ListingDraftsResponse>> fetchUserListingDrafts(
+    String userId,
+    int page,
+  ) async {
+    try {
+      final raw = await _service.fetchUserListingDrafts(userId, page);
+      final hasMore = raw.length > ProfileApiService.listingsPageSize;
+      final items = hasMore
+          ? raw.sublist(0, ProfileApiService.listingsPageSize)
+          : raw;
+      final listings = items.map((e) => ListingDetailModel.fromJson(e)).toList();
+      return ApiResult.success(
+        ListingDraftsResponse(listings: listings, hasMore: hasMore),
+      );
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
   Future<ApiResult<ListingsResponse>> fetchUserListings(
     String userId,
     int page,
@@ -105,6 +148,24 @@ class ProfileRepo {
     try {
       final status = await _service.fetchVerificationStatus(userId);
       return ApiResult.success(status);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  Future<ApiResult<void>> publishPost(String postId) async {
+    try {
+      await _service.publishPost(postId);
+      return ApiResult.success(null);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  Future<ApiResult<void>> publishListing(String listingId) async {
+    try {
+      await _service.publishListing(listingId);
+      return ApiResult.success(null);
     } catch (e) {
       return ApiResult.failure(ErrorHandler.handle(e));
     }

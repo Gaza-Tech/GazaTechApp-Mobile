@@ -288,6 +288,12 @@
   },
 
   "postPublished": "تم نشر المنشور بنجاح",
+  "draftSaved": "تم حفظ المسودة",
+  "myDrafts": "المسودات",
+  "draft": "مسودة",
+  "noDraftsYet": "لا توجد مسودات بعد",
+  "draftPosts": "المنشورات",
+  "draftListings": "الإعلانات",
 
   "viewReplies": "{count, plural, =1{عرض رد واحد} =2{عرض ردّين} few{عرض {count} ردود} other{عرض {count} ردّ}}",
   "@viewReplies": {
@@ -489,5 +495,11 @@
   "commentDeleted": "تم حذف التعليق بنجاح",
   "commentUpdated": "تم تحديث التعليق بنجاح",
   "editingComment": "تعديل التعليق",
-  "edited": "(معدّل)"
+  "edited": "(معدّل)",
+
+  "saveEdit": "حفظ التعديل",
+  "publish": "نشر",
+  "publishConfirmTitle": "نشر؟",
+  "publishConfirmBody": "ستتم نشر هذه المسودة وستكون مرئية للجميع.",
+  "published": "تم النشر بنجاح"
 }

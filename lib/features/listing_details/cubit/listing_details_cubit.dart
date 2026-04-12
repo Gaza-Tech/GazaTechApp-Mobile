@@ -95,7 +95,7 @@ class ListingDetailsCubit extends Cubit<ListingDetailsState> {
       success: (listing) async {
         // Fetch similar and seller listings in parallel
         final similarResult = _repo.getSimilarListings(
-          categoryId: listing.categoryId,
+          categoryId: listing.categoryId ?? '',
           excludeListingId: listing.listingId,
         );
         final sellerResult = _repo.getSellerListings(

@@ -660,6 +660,24 @@ class AppLocalizationsAr extends AppLocalizations {
   String get postPublished => 'تم نشر المنشور بنجاح';
 
   @override
+  String get draftSaved => 'تم حفظ المسودة';
+
+  @override
+  String get myDrafts => 'المسودات';
+
+  @override
+  String get draft => 'مسودة';
+
+  @override
+  String get noDraftsYet => 'لا توجد مسودات بعد';
+
+  @override
+  String get draftPosts => 'المنشورات';
+
+  @override
+  String get draftListings => 'الإعلانات';
+
+  @override
   String viewReplies(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -1177,4 +1195,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get edited => '(معدّل)';
+
+  @override
+  String get saveEdit => 'حفظ التعديل';
+
+  @override
+  String get publish => 'نشر';
+
+  @override
+  String get publishConfirmTitle => 'نشر؟';
+
+  @override
+  String get publishConfirmBody => 'ستتم نشر هذه المسودة وستكون مرئية للجميع.';
+
+  @override
+  String get published => 'تم النشر بنجاح';
 }

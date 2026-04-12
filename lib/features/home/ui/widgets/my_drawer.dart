@@ -84,6 +84,15 @@ class MyDrawer extends StatelessWidget {
               Navigator.pushNamed(context, MyRoutes.bookmarks);
             },
           ),
+          if (Supabase.instance.client.auth.currentUser != null)
+            ListTile(
+              leading: const Icon(Icons.drafts_outlined),
+              title: Text(context.l10n.myDrafts),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, MyRoutes.drafts);
+              },
+            ),
           ListTile(
             leading: const Icon(Icons.settings_outlined),
             title: Text(context.l10n.settings),

@@ -17,7 +17,7 @@ mixin _$AddListingState {
 // Form data from DB
  List<CategoryModel> get categories; List<LocationModel> get locations; bool get isLoadingFormData;// Edit mode
  bool get isEditMode;// Submission
- bool get isSubmitting; bool get submitSuccess;// Error
+ bool get isSubmitting; bool get submitSuccess; bool get draftSaved;// Error
  String? get errorMessage;
 /// Create a copy of AddListingState
 /// with the given fields replaced by the non-null parameter values.
@@ -29,16 +29,16 @@ $AddListingStateCopyWith<AddListingState> get copyWith => _$AddListingStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddListingState&&const DeepCollectionEquality().equals(other.categories, categories)&&const DeepCollectionEquality().equals(other.locations, locations)&&(identical(other.isLoadingFormData, isLoadingFormData) || other.isLoadingFormData == isLoadingFormData)&&(identical(other.isEditMode, isEditMode) || other.isEditMode == isEditMode)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.submitSuccess, submitSuccess) || other.submitSuccess == submitSuccess)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddListingState&&const DeepCollectionEquality().equals(other.categories, categories)&&const DeepCollectionEquality().equals(other.locations, locations)&&(identical(other.isLoadingFormData, isLoadingFormData) || other.isLoadingFormData == isLoadingFormData)&&(identical(other.isEditMode, isEditMode) || other.isEditMode == isEditMode)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.submitSuccess, submitSuccess) || other.submitSuccess == submitSuccess)&&(identical(other.draftSaved, draftSaved) || other.draftSaved == draftSaved)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(categories),const DeepCollectionEquality().hash(locations),isLoadingFormData,isEditMode,isSubmitting,submitSuccess,errorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(categories),const DeepCollectionEquality().hash(locations),isLoadingFormData,isEditMode,isSubmitting,submitSuccess,draftSaved,errorMessage);
 
 @override
 String toString() {
-  return 'AddListingState(categories: $categories, locations: $locations, isLoadingFormData: $isLoadingFormData, isEditMode: $isEditMode, isSubmitting: $isSubmitting, submitSuccess: $submitSuccess, errorMessage: $errorMessage)';
+  return 'AddListingState(categories: $categories, locations: $locations, isLoadingFormData: $isLoadingFormData, isEditMode: $isEditMode, isSubmitting: $isSubmitting, submitSuccess: $submitSuccess, draftSaved: $draftSaved, errorMessage: $errorMessage)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $AddListingStateCopyWith<$Res>  {
   factory $AddListingStateCopyWith(AddListingState value, $Res Function(AddListingState) _then) = _$AddListingStateCopyWithImpl;
 @useResult
 $Res call({
- List<CategoryModel> categories, List<LocationModel> locations, bool isLoadingFormData, bool isEditMode, bool isSubmitting, bool submitSuccess, String? errorMessage
+ List<CategoryModel> categories, List<LocationModel> locations, bool isLoadingFormData, bool isEditMode, bool isSubmitting, bool submitSuccess, bool draftSaved, String? errorMessage
 });
 
 
@@ -66,7 +66,7 @@ class _$AddListingStateCopyWithImpl<$Res>
 
 /// Create a copy of AddListingState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? categories = null,Object? locations = null,Object? isLoadingFormData = null,Object? isEditMode = null,Object? isSubmitting = null,Object? submitSuccess = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? categories = null,Object? locations = null,Object? isLoadingFormData = null,Object? isEditMode = null,Object? isSubmitting = null,Object? submitSuccess = null,Object? draftSaved = null,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 categories: null == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
 as List<CategoryModel>,locations: null == locations ? _self.locations : locations // ignore: cast_nullable_to_non_nullable
@@ -74,6 +74,7 @@ as List<LocationModel>,isLoadingFormData: null == isLoadingFormData ? _self.isLo
 as bool,isEditMode: null == isEditMode ? _self.isEditMode : isEditMode // ignore: cast_nullable_to_non_nullable
 as bool,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
 as bool,submitSuccess: null == submitSuccess ? _self.submitSuccess : submitSuccess // ignore: cast_nullable_to_non_nullable
+as bool,draftSaved: null == draftSaved ? _self.draftSaved : draftSaved // ignore: cast_nullable_to_non_nullable
 as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -160,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<CategoryModel> categories,  List<LocationModel> locations,  bool isLoadingFormData,  bool isEditMode,  bool isSubmitting,  bool submitSuccess,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<CategoryModel> categories,  List<LocationModel> locations,  bool isLoadingFormData,  bool isEditMode,  bool isSubmitting,  bool submitSuccess,  bool draftSaved,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AddListingState() when $default != null:
-return $default(_that.categories,_that.locations,_that.isLoadingFormData,_that.isEditMode,_that.isSubmitting,_that.submitSuccess,_that.errorMessage);case _:
+return $default(_that.categories,_that.locations,_that.isLoadingFormData,_that.isEditMode,_that.isSubmitting,_that.submitSuccess,_that.draftSaved,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -181,10 +182,10 @@ return $default(_that.categories,_that.locations,_that.isLoadingFormData,_that.i
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<CategoryModel> categories,  List<LocationModel> locations,  bool isLoadingFormData,  bool isEditMode,  bool isSubmitting,  bool submitSuccess,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<CategoryModel> categories,  List<LocationModel> locations,  bool isLoadingFormData,  bool isEditMode,  bool isSubmitting,  bool submitSuccess,  bool draftSaved,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _AddListingState():
-return $default(_that.categories,_that.locations,_that.isLoadingFormData,_that.isEditMode,_that.isSubmitting,_that.submitSuccess,_that.errorMessage);case _:
+return $default(_that.categories,_that.locations,_that.isLoadingFormData,_that.isEditMode,_that.isSubmitting,_that.submitSuccess,_that.draftSaved,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -201,10 +202,10 @@ return $default(_that.categories,_that.locations,_that.isLoadingFormData,_that.i
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<CategoryModel> categories,  List<LocationModel> locations,  bool isLoadingFormData,  bool isEditMode,  bool isSubmitting,  bool submitSuccess,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<CategoryModel> categories,  List<LocationModel> locations,  bool isLoadingFormData,  bool isEditMode,  bool isSubmitting,  bool submitSuccess,  bool draftSaved,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _AddListingState() when $default != null:
-return $default(_that.categories,_that.locations,_that.isLoadingFormData,_that.isEditMode,_that.isSubmitting,_that.submitSuccess,_that.errorMessage);case _:
+return $default(_that.categories,_that.locations,_that.isLoadingFormData,_that.isEditMode,_that.isSubmitting,_that.submitSuccess,_that.draftSaved,_that.errorMessage);case _:
   return null;
 
 }
@@ -216,7 +217,7 @@ return $default(_that.categories,_that.locations,_that.isLoadingFormData,_that.i
 
 
 class _AddListingState implements AddListingState {
-  const _AddListingState({final  List<CategoryModel> categories = const [], final  List<LocationModel> locations = const [], this.isLoadingFormData = false, this.isEditMode = false, this.isSubmitting = false, this.submitSuccess = false, this.errorMessage}): _categories = categories,_locations = locations;
+  const _AddListingState({final  List<CategoryModel> categories = const [], final  List<LocationModel> locations = const [], this.isLoadingFormData = false, this.isEditMode = false, this.isSubmitting = false, this.submitSuccess = false, this.draftSaved = false, this.errorMessage}): _categories = categories,_locations = locations;
   
 
 // Form data from DB
@@ -241,6 +242,7 @@ class _AddListingState implements AddListingState {
 // Submission
 @override@JsonKey() final  bool isSubmitting;
 @override@JsonKey() final  bool submitSuccess;
+@override@JsonKey() final  bool draftSaved;
 // Error
 @override final  String? errorMessage;
 
@@ -254,16 +256,16 @@ _$AddListingStateCopyWith<_AddListingState> get copyWith => __$AddListingStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddListingState&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._locations, _locations)&&(identical(other.isLoadingFormData, isLoadingFormData) || other.isLoadingFormData == isLoadingFormData)&&(identical(other.isEditMode, isEditMode) || other.isEditMode == isEditMode)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.submitSuccess, submitSuccess) || other.submitSuccess == submitSuccess)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddListingState&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._locations, _locations)&&(identical(other.isLoadingFormData, isLoadingFormData) || other.isLoadingFormData == isLoadingFormData)&&(identical(other.isEditMode, isEditMode) || other.isEditMode == isEditMode)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.submitSuccess, submitSuccess) || other.submitSuccess == submitSuccess)&&(identical(other.draftSaved, draftSaved) || other.draftSaved == draftSaved)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_locations),isLoadingFormData,isEditMode,isSubmitting,submitSuccess,errorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_locations),isLoadingFormData,isEditMode,isSubmitting,submitSuccess,draftSaved,errorMessage);
 
 @override
 String toString() {
-  return 'AddListingState(categories: $categories, locations: $locations, isLoadingFormData: $isLoadingFormData, isEditMode: $isEditMode, isSubmitting: $isSubmitting, submitSuccess: $submitSuccess, errorMessage: $errorMessage)';
+  return 'AddListingState(categories: $categories, locations: $locations, isLoadingFormData: $isLoadingFormData, isEditMode: $isEditMode, isSubmitting: $isSubmitting, submitSuccess: $submitSuccess, draftSaved: $draftSaved, errorMessage: $errorMessage)';
 }
 
 
@@ -274,7 +276,7 @@ abstract mixin class _$AddListingStateCopyWith<$Res> implements $AddListingState
   factory _$AddListingStateCopyWith(_AddListingState value, $Res Function(_AddListingState) _then) = __$AddListingStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<CategoryModel> categories, List<LocationModel> locations, bool isLoadingFormData, bool isEditMode, bool isSubmitting, bool submitSuccess, String? errorMessage
+ List<CategoryModel> categories, List<LocationModel> locations, bool isLoadingFormData, bool isEditMode, bool isSubmitting, bool submitSuccess, bool draftSaved, String? errorMessage
 });
 
 
@@ -291,7 +293,7 @@ class __$AddListingStateCopyWithImpl<$Res>
 
 /// Create a copy of AddListingState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? categories = null,Object? locations = null,Object? isLoadingFormData = null,Object? isEditMode = null,Object? isSubmitting = null,Object? submitSuccess = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? categories = null,Object? locations = null,Object? isLoadingFormData = null,Object? isEditMode = null,Object? isSubmitting = null,Object? submitSuccess = null,Object? draftSaved = null,Object? errorMessage = freezed,}) {
   return _then(_AddListingState(
 categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
 as List<CategoryModel>,locations: null == locations ? _self._locations : locations // ignore: cast_nullable_to_non_nullable
@@ -299,6 +301,7 @@ as List<LocationModel>,isLoadingFormData: null == isLoadingFormData ? _self.isLo
 as bool,isEditMode: null == isEditMode ? _self.isEditMode : isEditMode // ignore: cast_nullable_to_non_nullable
 as bool,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
 as bool,submitSuccess: null == submitSuccess ? _self.submitSuccess : submitSuccess // ignore: cast_nullable_to_non_nullable
+as bool,draftSaved: null == draftSaved ? _self.draftSaved : draftSaved // ignore: cast_nullable_to_non_nullable
 as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));

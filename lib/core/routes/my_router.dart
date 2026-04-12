@@ -45,6 +45,8 @@ import 'package:gaza_tech/features/verification/ui/verification_form_screen.dart
 import 'package:gaza_tech/features/verification/ui/verification_status_screen.dart';
 import 'package:gaza_tech/features/ai_chat/cubit/ai_chat_cubit.dart';
 import 'package:gaza_tech/features/ai_chat/ui/ai_chat_screen.dart';
+import 'package:gaza_tech/features/drafts/cubit/drafts_cubit.dart';
+import 'package:gaza_tech/features/drafts/ui/drafts_screen.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -234,6 +236,15 @@ class MyRouter {
           builder: (_) => BlocProvider(
             create: (context) => getIt<AiChatCubit>()..loadHistory(),
             child: const AiChatScreen(),
+          ),
+        );
+      case MyRoutes.drafts:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<DraftsCubit>()
+              ..fetchPostDrafts()
+              ..fetchListingDrafts(),
+            child: const DraftsScreen(),
           ),
         );
       default:

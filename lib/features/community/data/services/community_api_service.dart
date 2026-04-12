@@ -267,18 +267,21 @@ class CommunityApiService {
     required String title,
     required String content,
     required String category,
+    String contentStatus = 'published',
   }) async {
     final userId = _supabase.auth.currentUser!.id;
+    final data = <String, dynamic>{
+      'author_id': userId,
+      'title': title,
+      'content': content,
+      'post_category': category,
+      'content_status': contentStatus,
+      if (contentStatus == 'published')
+        'published_at': DateTime.now().toIso8601String(),
+    };
     final result = await _supabase
         .from('community_posts')
-        .insert({
-          'author_id': userId,
-          'title': title,
-          'content': content,
-          'post_category': category,
-          'content_status': 'published',
-          'published_at': DateTime.now().toIso8601String(),
-        })
+        .insert(data)
         .select('post_id')
         .single();
     return result['post_id'] as String;

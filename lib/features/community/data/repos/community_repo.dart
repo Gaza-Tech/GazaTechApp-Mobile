@@ -137,12 +137,14 @@ class CommunityRepo {
     required String title,
     required String content,
     required String category,
+    String contentStatus = 'published',
   }) async {
     try {
       final postId = await _service.createPost(
         title: title,
         content: content,
         category: category,
+        contentStatus: contentStatus,
       );
       return ApiResult.success(postId);
     } catch (e) {

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ListingDetailModel {
 
-@JsonKey(name: 'listing_id') String get listingId;@JsonKey(name: 'seller_id') String get sellerId; String get title; String get description;@JsonKey(name: 'category_id') String get categoryId;@JsonKey(name: 'product_condition') String get productCondition; int get price; String? get currency;@JsonKey(name: 'location_id') String get locationId;@JsonKey(fromJson: _specificationsFromJson) Map<String, dynamic>? get specifications;@JsonKey(name: 'content_status') String get contentStatus;@JsonKey(name: 'created_at') DateTime get createdAt;@JsonKey(name: 'updated_at') DateTime get updatedAt;// Joined data
+@JsonKey(name: 'listing_id') String get listingId;@JsonKey(name: 'seller_id') String get sellerId; String get title; String get description;@JsonKey(name: 'category_id') String? get categoryId;@JsonKey(name: 'product_condition') String? get productCondition; int get price; String? get currency;@JsonKey(name: 'location_id') String? get locationId;@JsonKey(fromJson: _specificationsFromJson) Map<String, dynamic>? get specifications;@JsonKey(name: 'content_status') String get contentStatus;@JsonKey(name: 'created_at') DateTime get createdAt;@JsonKey(name: 'updated_at') DateTime get updatedAt;// Joined data
 @JsonKey(name: 'locations') Map<String, dynamic>? get locationData;@JsonKey(name: 'users') Map<String, dynamic>? get sellerData;@JsonKey(name: 'listing_images') List<Map<String, dynamic>>? get images;@JsonKey(name: 'marketplace_categories') Map<String, dynamic>? get categoryData;@JsonKey(includeFromJson: false) bool get isBookmarked;@JsonKey(includeFromJson: false) bool get isReported;
 /// Create a copy of ListingDetailModel
 /// with the given fields replaced by the non-null parameter values.
@@ -49,7 +49,7 @@ abstract mixin class $ListingDetailModelCopyWith<$Res>  {
   factory $ListingDetailModelCopyWith(ListingDetailModel value, $Res Function(ListingDetailModel) _then) = _$ListingDetailModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'listing_id') String listingId,@JsonKey(name: 'seller_id') String sellerId, String title, String description,@JsonKey(name: 'category_id') String categoryId,@JsonKey(name: 'product_condition') String productCondition, int price, String? currency,@JsonKey(name: 'location_id') String locationId,@JsonKey(fromJson: _specificationsFromJson) Map<String, dynamic>? specifications,@JsonKey(name: 'content_status') String contentStatus,@JsonKey(name: 'created_at') DateTime createdAt,@JsonKey(name: 'updated_at') DateTime updatedAt,@JsonKey(name: 'locations') Map<String, dynamic>? locationData,@JsonKey(name: 'users') Map<String, dynamic>? sellerData,@JsonKey(name: 'listing_images') List<Map<String, dynamic>>? images,@JsonKey(name: 'marketplace_categories') Map<String, dynamic>? categoryData,@JsonKey(includeFromJson: false) bool isBookmarked,@JsonKey(includeFromJson: false) bool isReported
+@JsonKey(name: 'listing_id') String listingId,@JsonKey(name: 'seller_id') String sellerId, String title, String description,@JsonKey(name: 'category_id') String? categoryId,@JsonKey(name: 'product_condition') String? productCondition, int price, String? currency,@JsonKey(name: 'location_id') String? locationId,@JsonKey(fromJson: _specificationsFromJson) Map<String, dynamic>? specifications,@JsonKey(name: 'content_status') String contentStatus,@JsonKey(name: 'created_at') DateTime createdAt,@JsonKey(name: 'updated_at') DateTime updatedAt,@JsonKey(name: 'locations') Map<String, dynamic>? locationData,@JsonKey(name: 'users') Map<String, dynamic>? sellerData,@JsonKey(name: 'listing_images') List<Map<String, dynamic>>? images,@JsonKey(name: 'marketplace_categories') Map<String, dynamic>? categoryData,@JsonKey(includeFromJson: false) bool isBookmarked,@JsonKey(includeFromJson: false) bool isReported
 });
 
 
@@ -66,18 +66,18 @@ class _$ListingDetailModelCopyWithImpl<$Res>
 
 /// Create a copy of ListingDetailModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? listingId = null,Object? sellerId = null,Object? title = null,Object? description = null,Object? categoryId = null,Object? productCondition = null,Object? price = null,Object? currency = freezed,Object? locationId = null,Object? specifications = freezed,Object? contentStatus = null,Object? createdAt = null,Object? updatedAt = null,Object? locationData = freezed,Object? sellerData = freezed,Object? images = freezed,Object? categoryData = freezed,Object? isBookmarked = null,Object? isReported = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? listingId = null,Object? sellerId = null,Object? title = null,Object? description = null,Object? categoryId = freezed,Object? productCondition = freezed,Object? price = null,Object? currency = freezed,Object? locationId = freezed,Object? specifications = freezed,Object? contentStatus = null,Object? createdAt = null,Object? updatedAt = null,Object? locationData = freezed,Object? sellerData = freezed,Object? images = freezed,Object? categoryData = freezed,Object? isBookmarked = null,Object? isReported = null,}) {
   return _then(_self.copyWith(
 listingId: null == listingId ? _self.listingId : listingId // ignore: cast_nullable_to_non_nullable
 as String,sellerId: null == sellerId ? _self.sellerId : sellerId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,categoryId: null == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
-as String,productCondition: null == productCondition ? _self.productCondition : productCondition // ignore: cast_nullable_to_non_nullable
-as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as String,categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
+as String?,productCondition: freezed == productCondition ? _self.productCondition : productCondition // ignore: cast_nullable_to_non_nullable
+as String?,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as int,currency: freezed == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
-as String?,locationId: null == locationId ? _self.locationId : locationId // ignore: cast_nullable_to_non_nullable
-as String,specifications: freezed == specifications ? _self.specifications : specifications // ignore: cast_nullable_to_non_nullable
+as String?,locationId: freezed == locationId ? _self.locationId : locationId // ignore: cast_nullable_to_non_nullable
+as String?,specifications: freezed == specifications ? _self.specifications : specifications // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>?,contentStatus: null == contentStatus ? _self.contentStatus : contentStatus // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -172,7 +172,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'listing_id')  String listingId, @JsonKey(name: 'seller_id')  String sellerId,  String title,  String description, @JsonKey(name: 'category_id')  String categoryId, @JsonKey(name: 'product_condition')  String productCondition,  int price,  String? currency, @JsonKey(name: 'location_id')  String locationId, @JsonKey(fromJson: _specificationsFromJson)  Map<String, dynamic>? specifications, @JsonKey(name: 'content_status')  String contentStatus, @JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'updated_at')  DateTime updatedAt, @JsonKey(name: 'locations')  Map<String, dynamic>? locationData, @JsonKey(name: 'users')  Map<String, dynamic>? sellerData, @JsonKey(name: 'listing_images')  List<Map<String, dynamic>>? images, @JsonKey(name: 'marketplace_categories')  Map<String, dynamic>? categoryData, @JsonKey(includeFromJson: false)  bool isBookmarked, @JsonKey(includeFromJson: false)  bool isReported)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'listing_id')  String listingId, @JsonKey(name: 'seller_id')  String sellerId,  String title,  String description, @JsonKey(name: 'category_id')  String? categoryId, @JsonKey(name: 'product_condition')  String? productCondition,  int price,  String? currency, @JsonKey(name: 'location_id')  String? locationId, @JsonKey(fromJson: _specificationsFromJson)  Map<String, dynamic>? specifications, @JsonKey(name: 'content_status')  String contentStatus, @JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'updated_at')  DateTime updatedAt, @JsonKey(name: 'locations')  Map<String, dynamic>? locationData, @JsonKey(name: 'users')  Map<String, dynamic>? sellerData, @JsonKey(name: 'listing_images')  List<Map<String, dynamic>>? images, @JsonKey(name: 'marketplace_categories')  Map<String, dynamic>? categoryData, @JsonKey(includeFromJson: false)  bool isBookmarked, @JsonKey(includeFromJson: false)  bool isReported)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ListingDetailModel() when $default != null:
 return $default(_that.listingId,_that.sellerId,_that.title,_that.description,_that.categoryId,_that.productCondition,_that.price,_that.currency,_that.locationId,_that.specifications,_that.contentStatus,_that.createdAt,_that.updatedAt,_that.locationData,_that.sellerData,_that.images,_that.categoryData,_that.isBookmarked,_that.isReported);case _:
@@ -193,7 +193,7 @@ return $default(_that.listingId,_that.sellerId,_that.title,_that.description,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'listing_id')  String listingId, @JsonKey(name: 'seller_id')  String sellerId,  String title,  String description, @JsonKey(name: 'category_id')  String categoryId, @JsonKey(name: 'product_condition')  String productCondition,  int price,  String? currency, @JsonKey(name: 'location_id')  String locationId, @JsonKey(fromJson: _specificationsFromJson)  Map<String, dynamic>? specifications, @JsonKey(name: 'content_status')  String contentStatus, @JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'updated_at')  DateTime updatedAt, @JsonKey(name: 'locations')  Map<String, dynamic>? locationData, @JsonKey(name: 'users')  Map<String, dynamic>? sellerData, @JsonKey(name: 'listing_images')  List<Map<String, dynamic>>? images, @JsonKey(name: 'marketplace_categories')  Map<String, dynamic>? categoryData, @JsonKey(includeFromJson: false)  bool isBookmarked, @JsonKey(includeFromJson: false)  bool isReported)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'listing_id')  String listingId, @JsonKey(name: 'seller_id')  String sellerId,  String title,  String description, @JsonKey(name: 'category_id')  String? categoryId, @JsonKey(name: 'product_condition')  String? productCondition,  int price,  String? currency, @JsonKey(name: 'location_id')  String? locationId, @JsonKey(fromJson: _specificationsFromJson)  Map<String, dynamic>? specifications, @JsonKey(name: 'content_status')  String contentStatus, @JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'updated_at')  DateTime updatedAt, @JsonKey(name: 'locations')  Map<String, dynamic>? locationData, @JsonKey(name: 'users')  Map<String, dynamic>? sellerData, @JsonKey(name: 'listing_images')  List<Map<String, dynamic>>? images, @JsonKey(name: 'marketplace_categories')  Map<String, dynamic>? categoryData, @JsonKey(includeFromJson: false)  bool isBookmarked, @JsonKey(includeFromJson: false)  bool isReported)  $default,) {final _that = this;
 switch (_that) {
 case _ListingDetailModel():
 return $default(_that.listingId,_that.sellerId,_that.title,_that.description,_that.categoryId,_that.productCondition,_that.price,_that.currency,_that.locationId,_that.specifications,_that.contentStatus,_that.createdAt,_that.updatedAt,_that.locationData,_that.sellerData,_that.images,_that.categoryData,_that.isBookmarked,_that.isReported);case _:
@@ -213,7 +213,7 @@ return $default(_that.listingId,_that.sellerId,_that.title,_that.description,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'listing_id')  String listingId, @JsonKey(name: 'seller_id')  String sellerId,  String title,  String description, @JsonKey(name: 'category_id')  String categoryId, @JsonKey(name: 'product_condition')  String productCondition,  int price,  String? currency, @JsonKey(name: 'location_id')  String locationId, @JsonKey(fromJson: _specificationsFromJson)  Map<String, dynamic>? specifications, @JsonKey(name: 'content_status')  String contentStatus, @JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'updated_at')  DateTime updatedAt, @JsonKey(name: 'locations')  Map<String, dynamic>? locationData, @JsonKey(name: 'users')  Map<String, dynamic>? sellerData, @JsonKey(name: 'listing_images')  List<Map<String, dynamic>>? images, @JsonKey(name: 'marketplace_categories')  Map<String, dynamic>? categoryData, @JsonKey(includeFromJson: false)  bool isBookmarked, @JsonKey(includeFromJson: false)  bool isReported)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'listing_id')  String listingId, @JsonKey(name: 'seller_id')  String sellerId,  String title,  String description, @JsonKey(name: 'category_id')  String? categoryId, @JsonKey(name: 'product_condition')  String? productCondition,  int price,  String? currency, @JsonKey(name: 'location_id')  String? locationId, @JsonKey(fromJson: _specificationsFromJson)  Map<String, dynamic>? specifications, @JsonKey(name: 'content_status')  String contentStatus, @JsonKey(name: 'created_at')  DateTime createdAt, @JsonKey(name: 'updated_at')  DateTime updatedAt, @JsonKey(name: 'locations')  Map<String, dynamic>? locationData, @JsonKey(name: 'users')  Map<String, dynamic>? sellerData, @JsonKey(name: 'listing_images')  List<Map<String, dynamic>>? images, @JsonKey(name: 'marketplace_categories')  Map<String, dynamic>? categoryData, @JsonKey(includeFromJson: false)  bool isBookmarked, @JsonKey(includeFromJson: false)  bool isReported)?  $default,) {final _that = this;
 switch (_that) {
 case _ListingDetailModel() when $default != null:
 return $default(_that.listingId,_that.sellerId,_that.title,_that.description,_that.categoryId,_that.productCondition,_that.price,_that.currency,_that.locationId,_that.specifications,_that.contentStatus,_that.createdAt,_that.updatedAt,_that.locationData,_that.sellerData,_that.images,_that.categoryData,_that.isBookmarked,_that.isReported);case _:
@@ -228,18 +228,18 @@ return $default(_that.listingId,_that.sellerId,_that.title,_that.description,_th
 @JsonSerializable()
 
 class _ListingDetailModel extends ListingDetailModel {
-  const _ListingDetailModel({@JsonKey(name: 'listing_id') required this.listingId, @JsonKey(name: 'seller_id') required this.sellerId, required this.title, required this.description, @JsonKey(name: 'category_id') required this.categoryId, @JsonKey(name: 'product_condition') required this.productCondition, required this.price, this.currency, @JsonKey(name: 'location_id') required this.locationId, @JsonKey(fromJson: _specificationsFromJson) final  Map<String, dynamic>? specifications, @JsonKey(name: 'content_status') required this.contentStatus, @JsonKey(name: 'created_at') required this.createdAt, @JsonKey(name: 'updated_at') required this.updatedAt, @JsonKey(name: 'locations') final  Map<String, dynamic>? locationData, @JsonKey(name: 'users') final  Map<String, dynamic>? sellerData, @JsonKey(name: 'listing_images') final  List<Map<String, dynamic>>? images, @JsonKey(name: 'marketplace_categories') final  Map<String, dynamic>? categoryData, @JsonKey(includeFromJson: false) this.isBookmarked = false, @JsonKey(includeFromJson: false) this.isReported = false}): _specifications = specifications,_locationData = locationData,_sellerData = sellerData,_images = images,_categoryData = categoryData,super._();
+  const _ListingDetailModel({@JsonKey(name: 'listing_id') required this.listingId, @JsonKey(name: 'seller_id') required this.sellerId, required this.title, required this.description, @JsonKey(name: 'category_id') this.categoryId, @JsonKey(name: 'product_condition') this.productCondition, this.price = 0, this.currency, @JsonKey(name: 'location_id') this.locationId, @JsonKey(fromJson: _specificationsFromJson) final  Map<String, dynamic>? specifications, @JsonKey(name: 'content_status') required this.contentStatus, @JsonKey(name: 'created_at') required this.createdAt, @JsonKey(name: 'updated_at') required this.updatedAt, @JsonKey(name: 'locations') final  Map<String, dynamic>? locationData, @JsonKey(name: 'users') final  Map<String, dynamic>? sellerData, @JsonKey(name: 'listing_images') final  List<Map<String, dynamic>>? images, @JsonKey(name: 'marketplace_categories') final  Map<String, dynamic>? categoryData, @JsonKey(includeFromJson: false) this.isBookmarked = false, @JsonKey(includeFromJson: false) this.isReported = false}): _specifications = specifications,_locationData = locationData,_sellerData = sellerData,_images = images,_categoryData = categoryData,super._();
   factory _ListingDetailModel.fromJson(Map<String, dynamic> json) => _$ListingDetailModelFromJson(json);
 
 @override@JsonKey(name: 'listing_id') final  String listingId;
 @override@JsonKey(name: 'seller_id') final  String sellerId;
 @override final  String title;
 @override final  String description;
-@override@JsonKey(name: 'category_id') final  String categoryId;
-@override@JsonKey(name: 'product_condition') final  String productCondition;
-@override final  int price;
+@override@JsonKey(name: 'category_id') final  String? categoryId;
+@override@JsonKey(name: 'product_condition') final  String? productCondition;
+@override@JsonKey() final  int price;
 @override final  String? currency;
-@override@JsonKey(name: 'location_id') final  String locationId;
+@override@JsonKey(name: 'location_id') final  String? locationId;
  final  Map<String, dynamic>? _specifications;
 @override@JsonKey(fromJson: _specificationsFromJson) Map<String, dynamic>? get specifications {
   final value = _specifications;
@@ -326,7 +326,7 @@ abstract mixin class _$ListingDetailModelCopyWith<$Res> implements $ListingDetai
   factory _$ListingDetailModelCopyWith(_ListingDetailModel value, $Res Function(_ListingDetailModel) _then) = __$ListingDetailModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'listing_id') String listingId,@JsonKey(name: 'seller_id') String sellerId, String title, String description,@JsonKey(name: 'category_id') String categoryId,@JsonKey(name: 'product_condition') String productCondition, int price, String? currency,@JsonKey(name: 'location_id') String locationId,@JsonKey(fromJson: _specificationsFromJson) Map<String, dynamic>? specifications,@JsonKey(name: 'content_status') String contentStatus,@JsonKey(name: 'created_at') DateTime createdAt,@JsonKey(name: 'updated_at') DateTime updatedAt,@JsonKey(name: 'locations') Map<String, dynamic>? locationData,@JsonKey(name: 'users') Map<String, dynamic>? sellerData,@JsonKey(name: 'listing_images') List<Map<String, dynamic>>? images,@JsonKey(name: 'marketplace_categories') Map<String, dynamic>? categoryData,@JsonKey(includeFromJson: false) bool isBookmarked,@JsonKey(includeFromJson: false) bool isReported
+@JsonKey(name: 'listing_id') String listingId,@JsonKey(name: 'seller_id') String sellerId, String title, String description,@JsonKey(name: 'category_id') String? categoryId,@JsonKey(name: 'product_condition') String? productCondition, int price, String? currency,@JsonKey(name: 'location_id') String? locationId,@JsonKey(fromJson: _specificationsFromJson) Map<String, dynamic>? specifications,@JsonKey(name: 'content_status') String contentStatus,@JsonKey(name: 'created_at') DateTime createdAt,@JsonKey(name: 'updated_at') DateTime updatedAt,@JsonKey(name: 'locations') Map<String, dynamic>? locationData,@JsonKey(name: 'users') Map<String, dynamic>? sellerData,@JsonKey(name: 'listing_images') List<Map<String, dynamic>>? images,@JsonKey(name: 'marketplace_categories') Map<String, dynamic>? categoryData,@JsonKey(includeFromJson: false) bool isBookmarked,@JsonKey(includeFromJson: false) bool isReported
 });
 
 
@@ -343,18 +343,18 @@ class __$ListingDetailModelCopyWithImpl<$Res>
 
 /// Create a copy of ListingDetailModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? listingId = null,Object? sellerId = null,Object? title = null,Object? description = null,Object? categoryId = null,Object? productCondition = null,Object? price = null,Object? currency = freezed,Object? locationId = null,Object? specifications = freezed,Object? contentStatus = null,Object? createdAt = null,Object? updatedAt = null,Object? locationData = freezed,Object? sellerData = freezed,Object? images = freezed,Object? categoryData = freezed,Object? isBookmarked = null,Object? isReported = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? listingId = null,Object? sellerId = null,Object? title = null,Object? description = null,Object? categoryId = freezed,Object? productCondition = freezed,Object? price = null,Object? currency = freezed,Object? locationId = freezed,Object? specifications = freezed,Object? contentStatus = null,Object? createdAt = null,Object? updatedAt = null,Object? locationData = freezed,Object? sellerData = freezed,Object? images = freezed,Object? categoryData = freezed,Object? isBookmarked = null,Object? isReported = null,}) {
   return _then(_ListingDetailModel(
 listingId: null == listingId ? _self.listingId : listingId // ignore: cast_nullable_to_non_nullable
 as String,sellerId: null == sellerId ? _self.sellerId : sellerId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,categoryId: null == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
-as String,productCondition: null == productCondition ? _self.productCondition : productCondition // ignore: cast_nullable_to_non_nullable
-as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as String,categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
+as String?,productCondition: freezed == productCondition ? _self.productCondition : productCondition // ignore: cast_nullable_to_non_nullable
+as String?,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as int,currency: freezed == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
-as String?,locationId: null == locationId ? _self.locationId : locationId // ignore: cast_nullable_to_non_nullable
-as String,specifications: freezed == specifications ? _self._specifications : specifications // ignore: cast_nullable_to_non_nullable
+as String?,locationId: freezed == locationId ? _self.locationId : locationId // ignore: cast_nullable_to_non_nullable
+as String?,specifications: freezed == specifications ? _self._specifications : specifications // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>?,contentStatus: null == contentStatus ? _self.contentStatus : contentStatus // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable

@@ -1322,6 +1322,42 @@ abstract class AppLocalizations {
   /// **'Post published successfully'**
   String get postPublished;
 
+  /// No description provided for @draftSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft saved'**
+  String get draftSaved;
+
+  /// No description provided for @myDrafts.
+  ///
+  /// In en, this message translates to:
+  /// **'Drafts'**
+  String get myDrafts;
+
+  /// No description provided for @draft.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft'**
+  String get draft;
+
+  /// No description provided for @noDraftsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No drafts yet'**
+  String get noDraftsYet;
+
+  /// No description provided for @draftPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Posts'**
+  String get draftPosts;
+
+  /// No description provided for @draftListings.
+  ///
+  /// In en, this message translates to:
+  /// **'Listings'**
+  String get draftListings;
+
   /// No description provided for @viewReplies.
   ///
   /// In en, this message translates to:
@@ -2323,6 +2359,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'(edited)'**
   String get edited;
+
+  /// No description provided for @saveEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Edit'**
+  String get saveEdit;
+
+  /// No description provided for @publish.
+  ///
+  /// In en, this message translates to:
+  /// **'Publish'**
+  String get publish;
+
+  /// No description provided for @publishConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Publish?'**
+  String get publishConfirmTitle;
+
+  /// No description provided for @publishConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This draft will be published and visible to everyone.'**
+  String get publishConfirmBody;
+
+  /// No description provided for @published.
+  ///
+  /// In en, this message translates to:
+  /// **'Published successfully'**
+  String get published;
 }
 
 class _AppLocalizationsDelegate

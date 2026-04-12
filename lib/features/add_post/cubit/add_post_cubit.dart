@@ -32,6 +32,7 @@ class AddPostCubit extends Cubit<AddPostState> {
     : super(const AddPostState.initial());
 
   bool get isEditMode => _existingPost != null;
+  bool get isDraftEdit => _existingPost?.contentStatus == 'draft';
 
   /// Pre-populate form for edit mode. Returns the category index.
   int? initializeForEdit() {
@@ -68,7 +69,63 @@ class AddPostCubit extends Cubit<AddPostState> {
     }
   }
 
-  Future<void> updatePost(int selectedCategoryIndex) async {
+  Future<void> saveDraft(int selectedCategoryIndex) async {
+    if (!formKey.currentState!.validate()) return;
+    if (selectedCategoryIndex < 0) return;
+
+    emit(const AddPostState.loading());
+
+    final result = await _repo.createPost(
+      title: titleController.text.trim(),
+      content: contentController.text.trim(),
+      category: _categoryValues[selectedCategoryIndex],
+      contentStatus: 'draft',
+    );
+
+    switch (result) {
+      case Success(data: final postId):
+        await _uploadAttachmentsDraft(postId);
+      case Failure(error: final error):
+        emit(AddPostState.failure(error.message ?? 'An error occurred'));
+    }
+  }
+
+  Future<void> _uploadAttachmentsDraft(String postId) async {
+    final newFiles = attachments.whereType<NewImage>().toList();
+    if (newFiles.isEmpty) {
+      emit(const AddPostState.draftSaved());
+      return;
+    }
+
+    final authorId = Supabase.instance.client.auth.currentUser!.id;
+    final compressed = await ImageCompressHelper.compressMultipleToWebp(
+      newFiles.map((e) => e.file).toList(),
+    );
+
+    final uploadResult = await _repo.uploadPostImages(
+      authorId: authorId,
+      postId: postId,
+      images: compressed,
+    );
+
+    switch (uploadResult) {
+      case Success(data: final urls):
+        final saveResult = await _repo.savePostAttachments(
+          postId: postId,
+          imageUrls: urls,
+        );
+        switch (saveResult) {
+          case Success():
+            emit(const AddPostState.draftSaved());
+          case Failure(error: final error):
+            emit(AddPostState.failure(error.message ?? 'Failed to save attachments'));
+        }
+      case Failure(error: final error):
+        emit(AddPostState.failure(error.message ?? 'Failed to upload images'));
+    }
+  }
+
+  Future<void> updatePost(int selectedCategoryIndex, {bool publish = false}) async {
     final post = _existingPost;
     if (post == null) return;
     if (!formKey.currentState!.validate()) return;
@@ -80,6 +137,10 @@ class AddPostCubit extends Cubit<AddPostState> {
       'title': titleController.text.trim(),
       'content': contentController.text.trim(),
       'post_category': _categoryValues[selectedCategoryIndex],
+      if (publish) ...{
+        'content_status': 'published',
+        'published_at': DateTime.now().toIso8601String(),
+      },
     };
 
     final updateResult = await _repo.updatePost(

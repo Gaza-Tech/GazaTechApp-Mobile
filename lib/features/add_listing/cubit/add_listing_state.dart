@@ -18,6 +18,7 @@ abstract class AddListingState with _$AddListingState {
     // Submission
     @Default(false) bool isSubmitting,
     @Default(false) bool submitSuccess,
+    @Default(false) bool draftSaved,
 
     // Error
     String? errorMessage,

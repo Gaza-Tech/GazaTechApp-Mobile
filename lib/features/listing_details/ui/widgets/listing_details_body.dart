@@ -67,7 +67,7 @@ class ListingDetailsBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const VerticalSpace(16),
-                ListingTags(condition: listing.productCondition, category: categoryName),
+                ListingTags(condition: listing.productCondition ?? '', category: categoryName),
                 const VerticalSpace(12),
                 ListingInfoSection(
                   title: listing.title,
