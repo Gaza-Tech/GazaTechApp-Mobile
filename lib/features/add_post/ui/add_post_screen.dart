@@ -46,8 +46,16 @@ class _AddPostScreenState extends State<AddPostScreen> {
           success: () {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(isEdit ? l10n.postUpdated : l10n.postPublished),
+                content: Text(
+                  cubit.isDraftEdit ? l10n.postPublished : (isEdit ? l10n.postUpdated : l10n.postPublished),
+                ),
               ),
+            );
+            Navigator.pop(context, true);
+          },
+          draftSaved: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(l10n.draftSaved)),
             );
             Navigator.pop(context, true);
           },
@@ -62,14 +70,20 @@ class _AddPostScreenState extends State<AddPostScreen> {
         appBar: AppBar(
           title: Text(isEdit ? l10n.editPost : l10n.createPost),
           actions: [
-            if (!isEdit)
+            if (!isEdit || cubit.isDraftEdit)
               Padding(
                 padding: EdgeInsetsDirectional.only(end: 8.w),
-                child: TextButton(
-                  onPressed: () {
-                    // TODO: implement save draft
-                  },
-                  child: Text(l10n.saveDraft),
+                child: BlocSelector<AddPostCubit, AddPostState, bool>(
+                  selector: (state) => state.maybeWhen(
+                    loading: () => true,
+                    orElse: () => false,
+                  ),
+                  builder: (context, isLoading) => TextButton(
+                    onPressed: isLoading
+                        ? null
+                        : () => cubit.saveDraft(_selectedCategoryIndex ?? -1),
+                    child: Text(cubit.isDraftEdit ? l10n.saveEdit : l10n.saveDraft),
+                  ),
                 ),
               ),
           ],
@@ -142,13 +156,18 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     ),
                     const VerticalSpace(24),
                     MyButton(
-                      text: isEdit ? l10n.updatePost : l10n.publishPost,
+                      text: cubit.isDraftEdit
+                          ? l10n.publishPost
+                          : (isEdit ? l10n.updatePost : l10n.publishPost),
                       onPressed: isLoading
                           ? null
                           : () {
                               final catIndex = _selectedCategoryIndex ?? -1;
                               if (isEdit) {
-                                cubit.updatePost(catIndex);
+                                cubit.updatePost(
+                                  catIndex,
+                                  publish: cubit.isDraftEdit,
+                                );
                               } else {
                                 cubit.createPost(catIndex);
                               }

@@ -63,7 +63,7 @@ class _BookmarkedListingsTabState extends State<BookmarkedListingsTab>
                           '${listing.currency == "ILS" ? "₪" : "\$"}${listing.price}',
                       location: locationName,
                       sellerName: listing.sellerName,
-                      productCondition: listing.productCondition,
+                      productCondition: listing.productCondition ?? '',
                       imageUrl: listing.thumbnailUrl,
                       isBookmarked: state.bookmarkedListingIds.contains(
                         listing.listingId,

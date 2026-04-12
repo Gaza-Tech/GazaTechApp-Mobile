@@ -20,6 +20,8 @@ class AddListingCubit extends Cubit<AddListingState> {
   AddListingCubit(this._repo, [this._existingListing])
       : super(AddListingState(isEditMode: _existingListing != null));
 
+  bool get isDraftEdit => _existingListing?.contentStatus == 'draft';
+
   // Form controllers (per project convention: controllers live in cubit)
   final titleController = TextEditingController();
   final priceController = TextEditingController();
@@ -203,6 +205,114 @@ class AddListingCubit extends Cubit<AddListingState> {
     }
   }
 
+  /// Save listing as a draft (only title is required)
+  Future<void> saveDraft({
+    required String? selectedCategoryId,
+    required String? selectedLocationId,
+    required ProductCondition? selectedCondition,
+    required bool isILS,
+    required List<ListingImageItem> images,
+    required List<SpecificationEntry> specifications,
+  }) async {
+    if (!formKey.currentState!.validate()) return;
+
+    emit(
+      state.copyWith(
+        isSubmitting: true,
+        errorMessage: null,
+        submitSuccess: false,
+        draftSaved: false,
+      ),
+    );
+
+    final currentUser = Supabase.instance.client.auth.currentUser;
+    if (currentUser == null) {
+      emit(
+        state.copyWith(
+          isSubmitting: false,
+          errorMessage: 'You must be logged in to save a draft',
+        ),
+      );
+      return;
+    }
+
+    final specs = selectedCategoryId != null
+        ? _buildSpecifications(specifications)
+        : <Map<String, dynamic>>[];
+
+    final listingData = <String, dynamic>{
+      'seller_id': currentUser.id,
+      'title': titleController.text.trim(),
+      'description': descriptionController.text.trim(),
+      'content_status': 'draft',
+      if (selectedCategoryId != null) 'category_id': selectedCategoryId,
+      if (selectedCondition != null)
+        'product_condition': _mapConditionToDb(selectedCondition),
+      if (priceController.text.trim().isNotEmpty)
+        'price': int.tryParse(priceController.text.trim()) ?? 0,
+      'currency': isILS ? 'ILS' : 'USD',
+      if (selectedLocationId != null) 'location_id': selectedLocationId,
+      if (specs.isNotEmpty) 'specifications': specs,
+    };
+
+    final createResult = await _repo.createListing(listingData);
+
+    switch (createResult) {
+      case Success(data: final listing):
+        final listingId = listing['listing_id'] as String;
+        final newFiles = images.whereType<NewImage>().map((e) => e.file).toList();
+        if (newFiles.isEmpty) {
+          emit(state.copyWith(isSubmitting: false, draftSaved: true));
+          return;
+        }
+        await _handleDraftImageUpload(
+          listingId: listingId,
+          sellerId: currentUser.id,
+          images: newFiles,
+        );
+      case Failure(error: final error):
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+            errorMessage: error.message ?? 'Failed to save draft',
+          ),
+        );
+    }
+  }
+
+  Future<void> _handleDraftImageUpload({
+    required String listingId,
+    required String sellerId,
+    required List<File> images,
+  }) async {
+    final compressedImages = await ImageCompressHelper.compressMultipleToWebp(
+      images,
+      quality: 80,
+      maxWidth: 1080,
+      maxHeight: 1080,
+    );
+
+    final uploadResult = await _repo.uploadImages(
+      sellerId: sellerId,
+      listingId: listingId,
+      images: compressedImages,
+    );
+
+    switch (uploadResult) {
+      case Success(data: final imageUrls):
+        await _repo.saveListingImages(listingId: listingId, imageUrls: imageUrls);
+        emit(state.copyWith(isSubmitting: false, draftSaved: true));
+      case Failure(error: final error):
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+            draftSaved: true,
+            errorMessage: error.message,
+          ),
+        );
+    }
+  }
+
   /// Update an existing listing
   Future<void> updateListing({
     required String? selectedCategoryId,
@@ -211,6 +321,7 @@ class AddListingCubit extends Cubit<AddListingState> {
     required bool isILS,
     required List<ListingImageItem> images,
     required List<SpecificationEntry> specifications,
+    bool publish = false,
   }) async {
     final listing = _existingListing;
     if (listing == null) return;
@@ -244,6 +355,10 @@ class AddListingCubit extends Cubit<AddListingState> {
       'currency': isILS ? 'ILS' : 'USD',
       'location_id': selectedLocationId,
       'specifications': specs,
+      if (publish) ...{
+        'content_status': 'published',
+        'published_at': DateTime.now().toIso8601String(),
+      },
     };
 
     final updateResult = await _repo.updateListing(

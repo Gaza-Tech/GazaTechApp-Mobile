@@ -71,6 +71,7 @@ import 'package:gaza_tech/features/report/data/services/report_api_service.dart'
 import 'package:gaza_tech/features/ai_chat/cubit/ai_chat_cubit.dart';
 import 'package:gaza_tech/features/ai_chat/data/repos/ai_chat_repo.dart';
 import 'package:gaza_tech/features/ai_chat/data/services/ai_chat_api_service.dart';
+import 'package:gaza_tech/features/drafts/cubit/drafts_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -267,4 +268,7 @@ Future<void> setupGetIt() async {
   );
   getIt.registerLazySingleton<AiChatRepo>(() => AiChatRepo(getIt()));
   getIt.registerFactory<AiChatCubit>(() => AiChatCubit(getIt(), getIt()));
+
+  // 21. Drafts
+  getIt.registerFactory<DraftsCubit>(() => DraftsCubit(getIt()));
 }

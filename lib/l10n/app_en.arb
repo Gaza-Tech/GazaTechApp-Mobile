@@ -350,6 +350,12 @@
   },
 
   "postPublished": "Post published successfully",
+  "draftSaved": "Draft saved",
+  "myDrafts": "Drafts",
+  "draft": "Draft",
+  "noDraftsYet": "No drafts yet",
+  "draftPosts": "Posts",
+  "draftListings": "Listings",
 
   "viewReplies": "{count, plural, =1{View 1 reply} other{View {count} replies}}",
   "@viewReplies": {
@@ -551,5 +557,11 @@
   "commentDeleted": "Comment deleted successfully",
   "commentUpdated": "Comment updated successfully",
   "editingComment": "Editing comment",
-  "edited": "(edited)"
+  "edited": "(edited)",
+
+  "saveEdit": "Save Edit",
+  "publish": "Publish",
+  "publishConfirmTitle": "Publish?",
+  "publishConfirmBody": "This draft will be published and visible to everyone.",
+  "published": "Published successfully"
 }

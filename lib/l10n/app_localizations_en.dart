@@ -662,6 +662,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get postPublished => 'Post published successfully';
 
   @override
+  String get draftSaved => 'Draft saved';
+
+  @override
+  String get myDrafts => 'Drafts';
+
+  @override
+  String get draft => 'Draft';
+
+  @override
+  String get noDraftsYet => 'No drafts yet';
+
+  @override
+  String get draftPosts => 'Posts';
+
+  @override
+  String get draftListings => 'Listings';
+
+  @override
   String viewReplies(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -1183,4 +1201,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get edited => '(edited)';
+
+  @override
+  String get saveEdit => 'Save Edit';
+
+  @override
+  String get publish => 'Publish';
+
+  @override
+  String get publishConfirmTitle => 'Publish?';
+
+  @override
+  String get publishConfirmBody =>
+      'This draft will be published and visible to everyone.';
+
+  @override
+  String get published => 'Published successfully';
 }

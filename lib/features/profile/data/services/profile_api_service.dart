@@ -44,6 +44,47 @@ class ProfileApiService {
     return List<Map<String, dynamic>>.from(data as List);
   }
 
+  Future<List<Map<String, dynamic>>> fetchUserDrafts(
+    String userId,
+    int page,
+  ) async {
+    final start = page * postsPageSize;
+    final end = start + postsPageSize;
+
+    final data = await _supabase
+        .from('community_posts_with_counts')
+        .select(_postSelect)
+        .eq('author_id', userId)
+        .eq('content_status', 'draft')
+        .order('created_at', ascending: false)
+        .range(start, end);
+
+    return List<Map<String, dynamic>>.from(data as List);
+  }
+
+  Future<List<Map<String, dynamic>>> fetchUserListingDrafts(
+    String userId,
+    int page,
+  ) async {
+    final start = page * listingsPageSize;
+    final end = start + listingsPageSize;
+
+    final data = await _supabase
+        .from('marketplace_listings')
+        .select(
+          '*, locations!location_id(name, name_ar), '
+          'users!seller_id(first_name, last_name, created_at, phone_number, whatsapp_number), '
+          'listing_images(image_url, is_thumbnail, sort_order), '
+          'marketplace_categories!category_id(name, name_ar, slug)',
+        )
+        .eq('seller_id', userId)
+        .eq('content_status', 'draft')
+        .order('created_at', ascending: false)
+        .range(start, end);
+
+    return List<Map<String, dynamic>>.from(data as List);
+  }
+
   Future<List<Map<String, dynamic>>> fetchUserListings(
     String userId,
     int page,
@@ -117,6 +158,26 @@ class ProfileApiService {
         .limit(1)
         .maybeSingle();
     return result?['verification_status'] as String?;
+  }
+
+  Future<void> publishPost(String postId) async {
+    await _supabase
+        .from('community_posts')
+        .update({
+          'content_status': 'published',
+          'published_at': DateTime.now().toIso8601String(),
+        })
+        .eq('post_id', postId);
+  }
+
+  Future<void> publishListing(String listingId) async {
+    await _supabase
+        .from('marketplace_listings')
+        .update({
+          'content_status': 'published',
+          'published_at': DateTime.now().toIso8601String(),
+        })
+        .eq('listing_id', listingId);
   }
 
   /// Soft delete a listing by setting content_status to 'deleted'
