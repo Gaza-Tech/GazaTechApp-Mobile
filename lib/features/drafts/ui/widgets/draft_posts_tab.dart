@@ -54,11 +54,13 @@ class _DraftPostsTabState extends State<DraftPostsTab>
       title: l10n.deletePostConfirmTitle,
       body: l10n.deletePostConfirmBody,
       onConfirm: () async {
-        final success = await context.read<DraftsCubit>().deletePostDraft(postId);
+        final success = await context.read<DraftsCubit>().deletePostDraft(
+          postId,
+        );
         if (success && context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.postDeleted)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(l10n.postDeleted)));
         }
       },
     );
@@ -72,12 +74,13 @@ class _DraftPostsTabState extends State<DraftPostsTab>
       body: l10n.publishConfirmBody,
       confirmLabel: l10n.publish,
       onConfirm: () async {
-        final success =
-            await context.read<DraftsCubit>().publishPostDraft(postId);
+        final success = await context.read<DraftsCubit>().publishPostDraft(
+          postId,
+        );
         if (success && context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.published)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(l10n.published)));
         }
       },
     );

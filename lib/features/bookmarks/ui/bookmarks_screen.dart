@@ -46,10 +46,7 @@ class _BookmarksScreenState extends State<BookmarksScreen>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const [
-          BookmarkedPostsTab(),
-          BookmarkedListingsTab(),
-        ],
+        children: const [BookmarkedPostsTab(), BookmarkedListingsTab()],
       ),
     );
   }

@@ -68,7 +68,10 @@ class ListingDetailsBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const VerticalSpace(16),
-                ListingTags(condition: listing.productCondition ?? '', category: categoryName),
+                ListingTags(
+                  condition: listing.productCondition ?? '',
+                  category: categoryName,
+                ),
                 const VerticalSpace(12),
                 ListingInfoSection(
                   title: listing.title,
@@ -205,8 +208,18 @@ class ListingDetailsBody extends StatelessWidget {
 
   String _formatDate(DateTime date) {
     final months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${months[date.month - 1]} ${date.year}';
   }

@@ -18,7 +18,7 @@ class AddListingCubit extends Cubit<AddListingState> {
   final ListingDetailModel? _existingListing;
 
   AddListingCubit(this._repo, [this._existingListing])
-      : super(AddListingState(isEditMode: _existingListing != null));
+    : super(AddListingState(isEditMode: _existingListing != null));
 
   bool get isDraftEdit => _existingListing?.contentStatus == 'draft';
 
@@ -75,7 +75,8 @@ class AddListingCubit extends Cubit<AddListingState> {
     bool isILS,
     List<ListingImageItem> images,
     List<SpecificationEntry> specifications,
-  })? initializeForEdit() {
+  })?
+  initializeForEdit() {
     final listing = _existingListing;
     if (listing == null) return null;
 
@@ -260,7 +261,10 @@ class AddListingCubit extends Cubit<AddListingState> {
     switch (createResult) {
       case Success(data: final listing):
         final listingId = listing['listing_id'] as String;
-        final newFiles = images.whereType<NewImage>().map((e) => e.file).toList();
+        final newFiles = images
+            .whereType<NewImage>()
+            .map((e) => e.file)
+            .toList();
         if (newFiles.isEmpty) {
           emit(state.copyWith(isSubmitting: false, draftSaved: true));
           return;
@@ -300,7 +304,10 @@ class AddListingCubit extends Cubit<AddListingState> {
 
     switch (uploadResult) {
       case Success(data: final imageUrls):
-        await _repo.saveListingImages(listingId: listingId, imageUrls: imageUrls);
+        await _repo.saveListingImages(
+          listingId: listingId,
+          imageUrls: imageUrls,
+        );
         emit(state.copyWith(isSubmitting: false, draftSaved: true));
       case Failure(error: final error):
         emit(
@@ -393,7 +400,8 @@ class AddListingCubit extends Cubit<AddListingState> {
         .toList();
     final originalUrls = _existingListing?.imageUrls ?? [];
 
-    final imagesChanged = hasNewImages ||
+    final imagesChanged =
+        hasNewImages ||
         existingUrls.length != originalUrls.length ||
         !_listsEqual(existingUrls, originalUrls);
 
@@ -442,10 +450,7 @@ class AddListingCubit extends Cubit<AddListingState> {
     }
 
     if (allUrls.isNotEmpty) {
-      await _handleSaveImageRecords(
-        listingId: listingId,
-        imageUrls: allUrls,
-      );
+      await _handleSaveImageRecords(listingId: listingId, imageUrls: allUrls);
     } else {
       emit(state.copyWith(isSubmitting: false, submitSuccess: true));
     }

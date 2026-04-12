@@ -71,7 +71,9 @@ class DraftsCubit extends Cubit<DraftsState> {
   // Listing drafts
 
   Future<void> fetchListingDrafts() async {
-    emit(state.copyWith(isListingsLoading: true, listingsPage: 0, listings: []));
+    emit(
+      state.copyWith(isListingsLoading: true, listingsPage: 0, listings: []),
+    );
     final result = await _repo.fetchUserListingDrafts(_userId, 0);
     result.when(
       success: (response) => emit(

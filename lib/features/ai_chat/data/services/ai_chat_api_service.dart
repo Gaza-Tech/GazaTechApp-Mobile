@@ -15,8 +15,7 @@ class AiChatApiService {
     _client = http.Client();
 
     final uri = Uri.parse('$supabaseUrl/functions/v1/chat-search');
-    final token =
-        _supabase.auth.currentSession?.accessToken ?? supabaseAnonKey;
+    final token = _supabase.auth.currentSession?.accessToken ?? supabaseAnonKey;
 
     final response = await _client.post(
       uri,
@@ -34,9 +33,7 @@ class AiChatApiService {
       );
     }
 
-    return Map<String, dynamic>.from(
-      jsonDecode(response.body) as Map,
-    );
+    return Map<String, dynamic>.from(jsonDecode(response.body) as Map);
   }
 
   void abort() => _client.close();

@@ -20,8 +20,9 @@ class ChatMessageBubble extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: 12.h),
       child: Column(
-        crossAxisAlignment:
-            isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        crossAxisAlignment: isUser
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
         children: [
           Align(
             alignment: isUser
@@ -29,10 +30,7 @@ class ChatMessageBubble extends StatelessWidget {
                 : AlignmentDirectional.centerStart,
             child: Container(
               constraints: BoxConstraints(maxWidth: 0.78.sw),
-              padding: EdgeInsets.symmetric(
-                horizontal: 14.w,
-                vertical: 10.h,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
               decoration: BoxDecoration(
                 color: isUser
                     ? MyColors.primary.base

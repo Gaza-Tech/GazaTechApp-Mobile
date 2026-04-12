@@ -164,8 +164,7 @@ class MarketplaceSearchCubit extends Cubit<MarketplaceSearchState> {
 
     result.when(
       success: (response) {
-        final fetchedIds =
-            response.listings.map((l) => l.listingId).toSet();
+        final fetchedIds = response.listings.map((l) => l.listingId).toSet();
         final newBookmarkedIds = response.listings
             .where((l) => l.isBookmarked)
             .map((l) => l.listingId)

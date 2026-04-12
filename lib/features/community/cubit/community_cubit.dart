@@ -117,8 +117,9 @@ class CommunityCubit extends Cubit<CommunityState> {
             .map((p) => p.postId)
             .toSet();
         final cleanedLikedIds = state.likedPostIds.difference(fetchedPostIds);
-        final cleanedBookmarkedIds =
-            state.bookmarkedPostIds.difference(fetchedPostIds);
+        final cleanedBookmarkedIds = state.bookmarkedPostIds.difference(
+          fetchedPostIds,
+        );
 
         final updatedPosts = Map<String, List<PostModel>>.from(
           state.postsByCategory,
@@ -172,8 +173,9 @@ class CommunityCubit extends Cubit<CommunityState> {
             .map((p) => p.postId)
             .toSet();
         final cleanedLikedIds = state.likedPostIds.difference(fetchedPostIds);
-        final cleanedBookmarkedIds =
-            state.bookmarkedPostIds.difference(fetchedPostIds);
+        final cleanedBookmarkedIds = state.bookmarkedPostIds.difference(
+          fetchedPostIds,
+        );
 
         final current = state.postsByCategory[category] ?? [];
         final updatedPosts = Map<String, List<PostModel>>.from(

@@ -56,21 +56,25 @@ class AiChatCubit extends Cubit<AiChatState> {
       timestamp: DateTime.now(),
     );
 
-    emit(state.copyWith(
-      messages: [...state.messages, userMsg],
-      isLoading: true,
-      errorMessage: null,
-    ));
+    emit(
+      state.copyWith(
+        messages: [...state.messages, userMsg],
+        isLoading: true,
+        errorMessage: null,
+      ),
+    );
     _scrollToBottom();
 
     final result = await _repo.sendMessage(text);
 
     result.when(
       success: (aiMessage) {
-        emit(state.copyWith(
-          messages: [...state.messages, aiMessage],
-          isLoading: false,
-        ));
+        emit(
+          state.copyWith(
+            messages: [...state.messages, aiMessage],
+            isLoading: false,
+          ),
+        );
         _saveHistory();
         _scrollToBottom();
       },
@@ -83,15 +87,14 @@ class AiChatCubit extends Cubit<AiChatState> {
             timestamp: DateTime.now(),
             isStopped: true,
           );
-          emit(state.copyWith(
-            messages: [...state.messages, stoppedMsg],
-            isLoading: false,
-          ));
+          emit(
+            state.copyWith(
+              messages: [...state.messages, stoppedMsg],
+              isLoading: false,
+            ),
+          );
         } else {
-          emit(state.copyWith(
-            isLoading: false,
-            errorMessage: error.message,
-          ));
+          emit(state.copyWith(isLoading: false, errorMessage: error.message));
         }
         _saveHistory();
       },

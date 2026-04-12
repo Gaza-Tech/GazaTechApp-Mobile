@@ -22,8 +22,9 @@ class AiChatRepo {
       final rawListings = data['listings'] as List<dynamic>? ?? [];
       final listings = rawListings
           .map(
-            (e) =>
-                AiChatListingModel.fromJson(Map<String, dynamic>.from(e as Map)),
+            (e) => AiChatListingModel.fromJson(
+              Map<String, dynamic>.from(e as Map),
+            ),
           )
           .toList();
 

@@ -8,7 +8,10 @@ import '../services/bookmarks_api_service.dart';
 class BookmarksListingsResponse {
   final List<ListingModel> listings;
   final bool hasMore;
-  const BookmarksListingsResponse({required this.listings, required this.hasMore});
+  const BookmarksListingsResponse({
+    required this.listings,
+    required this.hasMore,
+  });
 }
 
 class BookmarksRepo {
@@ -38,7 +41,9 @@ class BookmarksRepo {
           )
           .toList();
 
-      return ApiResult.success(PostsResponse(posts: enriched, hasMore: hasMore));
+      return ApiResult.success(
+        PostsResponse(posts: enriched, hasMore: hasMore),
+      );
     } catch (e) {
       return ApiResult.failure(ErrorHandler.handle(e));
     }
@@ -56,7 +61,9 @@ class BookmarksRepo {
       final listings = items.map((e) => ListingModel.fromJson(e)).toList();
 
       final listingIds = listings.map((l) => l.listingId).toList();
-      final bookmarkedIds = await _service.fetchBookmarkedListingIds(listingIds);
+      final bookmarkedIds = await _service.fetchBookmarkedListingIds(
+        listingIds,
+      );
       final enriched = listings
           .map(
             (l) =>

@@ -91,7 +91,9 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                       ? () =>
                             context.read<VerifyOtpCubit>().emitVerifyOtpState()
                       : null,
-                  backgroundColor: MyThemes.darkTheme(const Locale('en')).colorScheme.primary,
+                  backgroundColor: MyThemes.darkTheme(
+                    const Locale('en'),
+                  ).colorScheme.primary,
                 ),
                 const VerifyOtpBlocListener(),
               ],

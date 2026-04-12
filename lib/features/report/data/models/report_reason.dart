@@ -1,9 +1,4 @@
-enum ReportEntityType {
-  user,
-  listing,
-  post,
-  comment,
-}
+enum ReportEntityType { user, listing, post, comment }
 
 enum ReportReason {
   spam,

@@ -239,7 +239,11 @@ class _LanguageOption extends StatelessWidget {
               ),
             ),
             if (selected)
-              Icon(Icons.check_rounded, size: 20.sp, color: theme.colorScheme.primary),
+              Icon(
+                Icons.check_rounded,
+                size: 20.sp,
+                color: theme.colorScheme.primary,
+              ),
           ],
         ),
       ),

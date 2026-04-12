@@ -131,8 +131,9 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
             .map((p) => p.postId)
             .toSet();
         final cleanedLikedIds = state.likedPostIds.difference(fetchedPostIds);
-        final cleanedBookmarkedIds =
-            state.bookmarkedPostIds.difference(fetchedPostIds);
+        final cleanedBookmarkedIds = state.bookmarkedPostIds.difference(
+          fetchedPostIds,
+        );
 
         emit(
           state.copyWith(
@@ -141,10 +142,7 @@ class CommunitySearchCubit extends Cubit<CommunitySearchState> {
             currentPage: nextPage,
             isLoadingMore: false,
             likedPostIds: {...cleanedLikedIds, ...newLikedIds},
-            bookmarkedPostIds: {
-              ...cleanedBookmarkedIds,
-              ...newBookmarkedIds,
-            },
+            bookmarkedPostIds: {...cleanedBookmarkedIds, ...newBookmarkedIds},
           ),
         );
       },

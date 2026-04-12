@@ -56,15 +56,10 @@ class BookmarksCubit extends Cubit<BookmarksState> {
 
     final updatedPosts = event.isBookmarked
         ? state.bookmarkedPosts
-        : state.bookmarkedPosts
-              .where((p) => p.postId != event.postId)
-              .toList();
+        : state.bookmarkedPosts.where((p) => p.postId != event.postId).toList();
 
     emit(
-      state.copyWith(
-        bookmarkedPostIds: updated,
-        bookmarkedPosts: updatedPosts,
-      ),
+      state.copyWith(bookmarkedPostIds: updated, bookmarkedPosts: updatedPosts),
     );
   }
 
@@ -90,8 +85,9 @@ class BookmarksCubit extends Cubit<BookmarksState> {
             .map((p) => p.postId)
             .toSet();
         final cleanedLikedIds = state.likedPostIds.difference(fetchedIds);
-        final cleanedBookmarkedIds =
-            state.bookmarkedPostIds.difference(fetchedIds);
+        final cleanedBookmarkedIds = state.bookmarkedPostIds.difference(
+          fetchedIds,
+        );
         emit(
           state.copyWith(
             isPostsLoading: false,
@@ -126,8 +122,9 @@ class BookmarksCubit extends Cubit<BookmarksState> {
             .map((p) => p.postId)
             .toSet();
         final cleanedLikedIds = state.likedPostIds.difference(fetchedIds);
-        final cleanedBookmarkedIds =
-            state.bookmarkedPostIds.difference(fetchedIds);
+        final cleanedBookmarkedIds = state.bookmarkedPostIds.difference(
+          fetchedIds,
+        );
         emit(
           state.copyWith(
             isPostsLoadingMore: false,
@@ -157,8 +154,7 @@ class BookmarksCubit extends Cubit<BookmarksState> {
     final result = await _repo.fetchBookmarkedListings(0);
     result.when(
       success: (response) {
-        final fetchedIds =
-            response.listings.map((l) => l.listingId).toSet();
+        final fetchedIds = response.listings.map((l) => l.listingId).toSet();
         final cleanedIds = state.bookmarkedListingIds.difference(fetchedIds);
         emit(
           state.copyWith(
@@ -171,10 +167,7 @@ class BookmarksCubit extends Cubit<BookmarksState> {
         );
       },
       failure: (error) => emit(
-        state.copyWith(
-          isListingsLoading: false,
-          errorMessage: error.message,
-        ),
+        state.copyWith(isListingsLoading: false, errorMessage: error.message),
       ),
     );
   }
@@ -186,8 +179,7 @@ class BookmarksCubit extends Cubit<BookmarksState> {
     final result = await _repo.fetchBookmarkedListings(nextPage);
     result.when(
       success: (response) {
-        final fetchedIds =
-            response.listings.map((l) => l.listingId).toSet();
+        final fetchedIds = response.listings.map((l) => l.listingId).toSet();
         final cleanedIds = state.bookmarkedListingIds.difference(fetchedIds);
         emit(
           state.copyWith(
@@ -294,11 +286,14 @@ class BookmarksCubit extends Cubit<BookmarksState> {
 
     final delta = wasLiked ? -1 : 1;
     final updatedPosts = state.bookmarkedPosts.map((p) {
-      if (p.postId == postId) return p.copyWith(likesCount: p.likesCount + delta);
+      if (p.postId == postId)
+        return p.copyWith(likesCount: p.likesCount + delta);
       return p;
     }).toList();
 
-    emit(state.copyWith(likedPostIds: newLikedIds, bookmarkedPosts: updatedPosts));
+    emit(
+      state.copyWith(likedPostIds: newLikedIds, bookmarkedPosts: updatedPosts),
+    );
 
     final result = await _repo.togglePostLike(postId);
     result.when(
@@ -313,7 +308,10 @@ class BookmarksCubit extends Cubit<BookmarksState> {
           return p;
         }).toList();
         emit(
-          state.copyWith(likedPostIds: revertIds, bookmarkedPosts: revertedPosts),
+          state.copyWith(
+            likedPostIds: revertIds,
+            bookmarkedPosts: revertedPosts,
+          ),
         );
       },
     );

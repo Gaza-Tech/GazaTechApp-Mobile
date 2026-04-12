@@ -400,10 +400,9 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                                 : null,
                                             onReport: !isOwnReply
                                                 ? () async {
-                                                    if (!await GuestGuard
-                                                        .requireAccount(
-                                                          context,
-                                                        )) {
+                                                    if (!await GuestGuard.requireAccount(
+                                                      context,
+                                                    )) {
                                                       return;
                                                     }
                                                     if (!context.mounted) {

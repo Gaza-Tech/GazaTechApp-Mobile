@@ -71,11 +71,17 @@ class ListingDetailsCubit extends Cubit<ListingDetailsState> {
     List<ListingModel> sellerListings,
     bool isBookmarked,
     bool isReported,
-  })? get _currentSuccess {
+  })?
+  get _currentSuccess {
     return state.whenOrNull(
-      success: (listing, similarListings, sellerListings, isBookmarked,
-              isReported) =>
+      success:
           (
+            listing,
+            similarListings,
+            sellerListings,
+            isBookmarked,
+            isReported,
+          ) => (
             listing: listing,
             similarListings: similarListings,
             sellerListings: sellerListings,

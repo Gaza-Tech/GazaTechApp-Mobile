@@ -99,8 +99,7 @@ class MarketplaceCubit extends Cubit<MarketplaceState> {
         final updatedCounts = Map<String, int>.from(state.totalCountByCategory)
           ..[category] = response.totalCount;
 
-        final fetchedIds =
-            response.listings.map((l) => l.listingId).toSet();
+        final fetchedIds = response.listings.map((l) => l.listingId).toSet();
         final newBookmarkedIds = response.listings
             .where((l) => l.isBookmarked)
             .map((l) => l.listingId)
@@ -159,8 +158,7 @@ class MarketplaceCubit extends Cubit<MarketplaceState> {
         final updatedHasMore = Map<String, bool>.from(state.hasMoreByCategory)
           ..[category] = response.hasMore;
 
-        final fetchedIds =
-            response.listings.map((l) => l.listingId).toSet();
+        final fetchedIds = response.listings.map((l) => l.listingId).toSet();
         final newBookmarkedIds = response.listings
             .where((l) => l.isBookmarked)
             .map((l) => l.listingId)

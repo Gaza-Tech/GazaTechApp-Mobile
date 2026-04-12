@@ -22,10 +22,7 @@ Future<bool?> showReportBottomSheet(
     builder: (_) {
       return BlocProvider(
         create: (_) => getIt<ReportCubit>(),
-        child: _ReportSheetContent(
-          entityType: entityType,
-          entityId: entityId,
-        ),
+        child: _ReportSheetContent(entityType: entityType, entityId: entityId),
       );
     },
   );
@@ -35,10 +32,7 @@ class _ReportSheetContent extends StatefulWidget {
   final ReportEntityType entityType;
   final String entityId;
 
-  const _ReportSheetContent({
-    required this.entityType,
-    required this.entityId,
-  });
+  const _ReportSheetContent({required this.entityType, required this.entityId});
 
   @override
   State<_ReportSheetContent> createState() => _ReportSheetContentState();
@@ -91,9 +85,9 @@ class _ReportSheetContentState extends State<_ReportSheetContent> {
         state.whenOrNull(
           success: () {
             Navigator.pop(context, true);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(l10n.reportSuccess)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(l10n.reportSuccess)));
           },
           duplicate: () {
             Navigator.pop(context, true);
@@ -102,9 +96,9 @@ class _ReportSheetContentState extends State<_ReportSheetContent> {
             );
           },
           failure: (message) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(l10n.reportFailure)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(l10n.reportFailure)));
           },
         );
       },
@@ -122,10 +116,7 @@ class _ReportSheetContentState extends State<_ReportSheetContent> {
             const VerticalSpace(16),
             Text(_getTitle(context), style: theme.textTheme.titleLarge),
             const VerticalSpace(4),
-            Text(
-              l10n.reportSubtitle,
-              style: theme.textTheme.bodyMedium,
-            ),
+            Text(l10n.reportSubtitle, style: theme.textTheme.bodyMedium),
             const VerticalSpace(16),
             ...ReportReason.values.map(
               (reason) => RadioListTile<ReportReason>(
@@ -188,16 +179,14 @@ class _ReportSheetContentState extends State<_ReportSheetContent> {
 
         return FilledButton(
           style: ButtonStyle(
-            minimumSize: WidgetStateProperty.all(
-              Size(double.infinity, 48.h),
-            ),
+            minimumSize: WidgetStateProperty.all(Size(double.infinity, 48.h)),
           ),
           onPressed: _selectedReason == null || isLoading
               ? null
               : () => context.read<ReportCubit>().submitReport(
-                    entityType: widget.entityType,
-                    entityId: widget.entityId,
-                  ),
+                  entityType: widget.entityType,
+                  entityId: widget.entityId,
+                ),
           child: isLoading
               ? SizedBox(
                   width: 20.w,

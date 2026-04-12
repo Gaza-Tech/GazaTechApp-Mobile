@@ -70,8 +70,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> _fetchIsUserReported() async {
     final result = await _repo.isUserReported(_userId);
     result.when(
-      success: (isReported) =>
-          emit(state.copyWith(isUserReported: isReported)),
+      success: (isReported) => emit(state.copyWith(isUserReported: isReported)),
       failure: (_) {},
     );
   }

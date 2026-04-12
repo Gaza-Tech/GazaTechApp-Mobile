@@ -96,9 +96,7 @@ class BookmarksApiService {
     };
   }
 
-  Future<Set<String>> fetchBookmarkedListingIds(
-    List<String> listingIds,
-  ) async {
+  Future<Set<String>> fetchBookmarkedListingIds(List<String> listingIds) async {
     final userId = _supabase.auth.currentUser?.id;
     if (userId == null || listingIds.isEmpty) return {};
 
@@ -132,9 +130,10 @@ class BookmarksApiService {
           .eq('post_id', postId);
       return false;
     } else {
-      await _supabase
-          .from('bookmarked_posts')
-          .insert({'user_id': userId, 'post_id': postId});
+      await _supabase.from('bookmarked_posts').insert({
+        'user_id': userId,
+        'post_id': postId,
+      });
       return true;
     }
   }
@@ -157,9 +156,10 @@ class BookmarksApiService {
           .eq('listing_id', listingId);
       return false;
     } else {
-      await _supabase
-          .from('bookmarked_listings')
-          .insert({'user_id': userId, 'listing_id': listingId});
+      await _supabase.from('bookmarked_listings').insert({
+        'user_id': userId,
+        'listing_id': listingId,
+      });
       return true;
     }
   }
@@ -182,9 +182,10 @@ class BookmarksApiService {
           .eq('post_id', postId);
       return false;
     } else {
-      await _supabase
-          .from('community_posts_likes')
-          .insert({'user_id': userId, 'post_id': postId});
+      await _supabase.from('community_posts_likes').insert({
+        'user_id': userId,
+        'post_id': postId,
+      });
       return true;
     }
   }

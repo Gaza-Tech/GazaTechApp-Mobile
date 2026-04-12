@@ -30,8 +30,7 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
   }
 
   void _onReportEvent(ReportEvent event) {
-    if (event.entityType == ReportEntityType.post &&
-        event.entityId == postId) {
+    if (event.entityType == ReportEntityType.post && event.entityId == postId) {
       emit(state.copyWith(isReported: event.isReported));
     }
     if (event.entityType == ReportEntityType.comment) {
@@ -390,15 +389,12 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
         final newReplies = state.repliesByCommentId.map(
           (parentId, replies) => MapEntry(
             parentId,
-            replies
-                .map((r) => r.commentId == commentId ? updated : r)
-                .toList(),
+            replies.map((r) => r.commentId == commentId ? updated : r).toList(),
           ),
         );
-        emit(state.copyWith(
-          comments: newComments,
-          repliesByCommentId: newReplies,
-        ));
+        emit(
+          state.copyWith(comments: newComments, repliesByCommentId: newReplies),
+        );
         return null;
       },
       failure: (error) => error.message ?? 'Failed to update comment',
@@ -423,9 +419,9 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
           final newComments = state.comments
               .where((c) => c.commentId != commentId)
               .toList();
-          final newReplies =
-              Map<String, List<CommentModel>>.from(state.repliesByCommentId)
-                ..remove(commentId);
+          final newReplies = Map<String, List<CommentModel>>.from(
+            state.repliesByCommentId,
+          )..remove(commentId);
           final newExpanded = Set<String>.from(state.expandedCommentIds)
             ..remove(commentId);
           final newLiked = Set<String>.from(state.likedCommentIds)
@@ -435,16 +431,18 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
           final newCount = state.post != null
               ? state.post!.commentsCount - removedCount
               : 0;
-          emit(state.copyWith(
-            comments: newComments,
-            repliesByCommentId: newReplies,
-            expandedCommentIds: newExpanded,
-            likedCommentIds: newLiked,
-            reportedCommentIds: newReported,
-            post: state.post?.copyWith(
-              commentsCount: newCount < 0 ? 0 : newCount,
+          emit(
+            state.copyWith(
+              comments: newComments,
+              repliesByCommentId: newReplies,
+              expandedCommentIds: newExpanded,
+              likedCommentIds: newLiked,
+              reportedCommentIds: newReported,
+              post: state.post?.copyWith(
+                commentsCount: newCount < 0 ? 0 : newCount,
+              ),
             ),
-          ));
+          );
           if (state.post != null) {
             _bookmarkEventService.emitPostCommentCount(
               postId,
@@ -455,10 +453,10 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
           final updatedReplies = Map<String, List<CommentModel>>.from(
             state.repliesByCommentId,
           );
-          updatedReplies[parentCommentId] = (updatedReplies[parentCommentId] ??
-                  [])
-              .where((r) => r.commentId != commentId)
-              .toList();
+          updatedReplies[parentCommentId] =
+              (updatedReplies[parentCommentId] ?? [])
+                  .where((r) => r.commentId != commentId)
+                  .toList();
           final newComments = state.comments.map((c) {
             if (c.commentId == parentCommentId) {
               final newCount = c.repliesCount - 1;
@@ -470,17 +468,20 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
             ..remove(commentId);
           final newReported = Set<String>.from(state.reportedCommentIds)
             ..remove(commentId);
-          final newPostCount =
-              state.post != null ? state.post!.commentsCount - 1 : 0;
-          emit(state.copyWith(
-            comments: newComments,
-            repliesByCommentId: updatedReplies,
-            likedCommentIds: newLiked,
-            reportedCommentIds: newReported,
-            post: state.post?.copyWith(
-              commentsCount: newPostCount < 0 ? 0 : newPostCount,
+          final newPostCount = state.post != null
+              ? state.post!.commentsCount - 1
+              : 0;
+          emit(
+            state.copyWith(
+              comments: newComments,
+              repliesByCommentId: updatedReplies,
+              likedCommentIds: newLiked,
+              reportedCommentIds: newReported,
+              post: state.post?.copyWith(
+                commentsCount: newPostCount < 0 ? 0 : newPostCount,
+              ),
             ),
-          ));
+          );
           if (state.post != null) {
             _bookmarkEventService.emitPostCommentCount(
               postId,

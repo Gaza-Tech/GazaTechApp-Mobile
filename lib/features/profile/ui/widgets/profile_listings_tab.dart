@@ -48,12 +48,13 @@ class _ProfileListingsTabState extends State<ProfileListingsTab>
       title: l10n.deleteListingConfirmTitle,
       body: l10n.deleteListingConfirmBody,
       onConfirm: () async {
-        final success =
-            await context.read<ProfileCubit>().deleteListing(listingId);
+        final success = await context.read<ProfileCubit>().deleteListing(
+          listingId,
+        );
         if (success && context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.listingDeleted)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(l10n.listingDeleted)));
         }
       },
     );
@@ -91,18 +92,12 @@ class _ProfileListingsTabState extends State<ProfileListingsTab>
                     return _ListingCard(
                       listing: listing,
                       isOwnProfile: state.isOwnProfile,
-                      onTap: () => _navigateToDetails(
-                        context,
-                        listing.listingId,
-                      ),
-                      onEdit: () => _navigateToDetails(
-                        context,
-                        listing.listingId,
-                      ),
-                      onDelete: () => _showDeleteConfirmation(
-                        context,
-                        listing.listingId,
-                      ),
+                      onTap: () =>
+                          _navigateToDetails(context, listing.listingId),
+                      onEdit: () =>
+                          _navigateToDetails(context, listing.listingId),
+                      onDelete: () =>
+                          _showDeleteConfirmation(context, listing.listingId),
                     );
                   },
                 ),
@@ -164,12 +159,10 @@ class _ListingCard extends StatelessWidget {
                           width: double.infinity,
                           height: double.infinity,
                           placeholder: (_, __) => Container(
-                            color:
-                                theme.colorScheme.surfaceContainerHighest,
+                            color: theme.colorScheme.surfaceContainerHighest,
                           ),
                           errorWidget: (_, __, ___) => Container(
-                            color:
-                                theme.colorScheme.surfaceContainerHighest,
+                            color: theme.colorScheme.surfaceContainerHighest,
                             child: const Icon(
                               Icons.image_not_supported_outlined,
                             ),
@@ -273,9 +266,7 @@ class _MoreMenuButton extends StatelessWidget {
                 SizedBox(width: 8.w),
                 Text(
                   l10n.delete,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.error,
-                  ),
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
                 ),
               ],
             ),

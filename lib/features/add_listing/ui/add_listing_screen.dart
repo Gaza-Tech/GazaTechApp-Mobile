@@ -96,9 +96,9 @@ class _AddListingScreenState extends State<AddListingScreen> {
               Navigator.pop(context, true);
             }
             if (state.draftSaved) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(context.l10n.draftSaved)),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(context.l10n.draftSaved)));
               Navigator.pop(context, true);
             }
             if (state.errorMessage != null && !state.isSubmitting) {
@@ -222,8 +222,7 @@ class _AddListingScreenState extends State<AddListingScreen> {
                                 hintText: context.l10n.selectCategory,
                                 title: context.l10n.selectCategoryTitle,
                                 onSelected: (categoryName) {
-                                  final category =
-                                      state.categories.firstWhere(
+                                  final category = state.categories.firstWhere(
                                     (c) => c.name == categoryName,
                                   );
                                   setState(() {
@@ -315,8 +314,7 @@ class _AddListingScreenState extends State<AddListingScreen> {
                                 hintText: context.l10n.selectLocation,
                                 title: context.l10n.selectLocationTitle,
                                 onSelected: (locationName) {
-                                  final location =
-                                      state.locations.firstWhere(
+                                  final location = state.locations.firstWhere(
                                     (l) => l.name == locationName,
                                   );
                                   setState(() {
@@ -352,8 +350,8 @@ class _AddListingScreenState extends State<AddListingScreen> {
                                 text: cubit.isDraftEdit
                                     ? context.l10n.publishListing
                                     : (state.isEditMode
-                                        ? context.l10n.updateListing
-                                        : context.l10n.publishListing),
+                                          ? context.l10n.updateListing
+                                          : context.l10n.publishListing),
                               ),
                             ],
                           ),

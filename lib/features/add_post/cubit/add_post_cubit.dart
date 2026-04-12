@@ -118,14 +118,21 @@ class AddPostCubit extends Cubit<AddPostState> {
           case Success():
             emit(const AddPostState.draftSaved());
           case Failure(error: final error):
-            emit(AddPostState.failure(error.message ?? 'Failed to save attachments'));
+            emit(
+              AddPostState.failure(
+                error.message ?? 'Failed to save attachments',
+              ),
+            );
         }
       case Failure(error: final error):
         emit(AddPostState.failure(error.message ?? 'Failed to upload images'));
     }
   }
 
-  Future<void> updatePost(int selectedCategoryIndex, {bool publish = false}) async {
+  Future<void> updatePost(
+    int selectedCategoryIndex, {
+    bool publish = false,
+  }) async {
     final post = _existingPost;
     if (post == null) return;
     if (!formKey.currentState!.validate()) return;

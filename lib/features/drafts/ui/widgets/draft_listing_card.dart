@@ -160,10 +160,7 @@ class _SellerLocationRow extends StatelessWidget {
   final String sellerName;
   final String location;
 
-  const _SellerLocationRow({
-    required this.sellerName,
-    required this.location,
-  });
+  const _SellerLocationRow({required this.sellerName, required this.location});
 
   @override
   Widget build(BuildContext context) {

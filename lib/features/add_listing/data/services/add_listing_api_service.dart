@@ -97,10 +97,7 @@ class AddListingApiService {
 
   /// Delete all image records for a listing
   Future<void> deleteListingImages(String listingId) async {
-    await _supabase
-        .from('listing_images')
-        .delete()
-        .eq('listing_id', listingId);
+    await _supabase.from('listing_images').delete().eq('listing_id', listingId);
   }
 
   /// Delete all image files from storage for a listing
@@ -113,9 +110,7 @@ class AddListingApiService {
         .list(path: '$sellerId/$listingId');
 
     if (files.isNotEmpty) {
-      final paths = files
-          .map((f) => '$sellerId/$listingId/${f.name}')
-          .toList();
+      final paths = files.map((f) => '$sellerId/$listingId/${f.name}').toList();
       await _supabase.storage.from('marketplace-image').remove(paths);
     }
   }

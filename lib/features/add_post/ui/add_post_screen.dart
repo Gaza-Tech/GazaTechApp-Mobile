@@ -47,16 +47,18 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  cubit.isDraftEdit ? l10n.postPublished : (isEdit ? l10n.postUpdated : l10n.postPublished),
+                  cubit.isDraftEdit
+                      ? l10n.postPublished
+                      : (isEdit ? l10n.postUpdated : l10n.postPublished),
                 ),
               ),
             );
             Navigator.pop(context, true);
           },
           draftSaved: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(l10n.draftSaved)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(l10n.draftSaved)));
             Navigator.pop(context, true);
           },
           failure: (message) {
@@ -74,10 +76,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
               Padding(
                 padding: EdgeInsetsDirectional.only(end: 8.w),
                 child: BlocSelector<AddPostCubit, AddPostState, bool>(
-                  selector: (state) => state.maybeWhen(
-                    loading: () => true,
-                    orElse: () => false,
-                  ),
+                  selector: (state) =>
+                      state.maybeWhen(loading: () => true, orElse: () => false),
                   builder: (context, isLoading) => TextButton(
                     onPressed: isLoading
                         ? null
@@ -91,7 +91,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
                               cubit.saveDraft(_selectedCategoryIndex ?? -1);
                             }
                           },
-                    child: Text(cubit.isDraftEdit ? l10n.saveEdit : l10n.saveDraft),
+                    child: Text(
+                      cubit.isDraftEdit ? l10n.saveEdit : l10n.saveDraft,
+                    ),
                   ),
                 ),
               ),

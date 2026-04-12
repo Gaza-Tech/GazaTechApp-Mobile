@@ -107,7 +107,9 @@ class ProfileRepo {
       final items = hasMore
           ? raw.sublist(0, ProfileApiService.listingsPageSize)
           : raw;
-      final listings = items.map((e) => ListingDetailModel.fromJson(e)).toList();
+      final listings = items
+          .map((e) => ListingDetailModel.fromJson(e))
+          .toList();
       return ApiResult.success(
         ListingDraftsResponse(listings: listings, hasMore: hasMore),
       );

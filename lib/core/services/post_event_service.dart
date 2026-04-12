@@ -81,11 +81,7 @@ class PostEventService {
     required int likesCount,
   }) {
     _postLikeController.add(
-      PostLikeEvent(
-        postId: postId,
-        isLiked: isLiked,
-        likesCount: likesCount,
-      ),
+      PostLikeEvent(postId: postId, isLiked: isLiked, likesCount: likesCount),
     );
   }
 

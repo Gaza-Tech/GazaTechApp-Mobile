@@ -49,12 +49,13 @@ class _DraftListingsTabState extends State<DraftListingsTab>
       title: l10n.deleteListingConfirmTitle,
       body: l10n.deleteListingConfirmBody,
       onConfirm: () async {
-        final success =
-            await context.read<DraftsCubit>().deleteListingDraft(listingId);
+        final success = await context.read<DraftsCubit>().deleteListingDraft(
+          listingId,
+        );
         if (success && context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.listingDeleted)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(l10n.listingDeleted)));
         }
       },
     );
@@ -68,12 +69,13 @@ class _DraftListingsTabState extends State<DraftListingsTab>
       body: l10n.publishConfirmBody,
       confirmLabel: l10n.publish,
       onConfirm: () async {
-        final success =
-            await context.read<DraftsCubit>().publishListingDraft(listingId);
+        final success = await context.read<DraftsCubit>().publishListingDraft(
+          listingId,
+        );
         if (success && context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.published)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(l10n.published)));
         }
       },
     );
