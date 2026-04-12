@@ -24,7 +24,7 @@ class SharedPrefHelper {
   static Future<Null> setData(String key, value) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     debugPrint("SharedPrefHelper : setData with key : $key and value : $value");
-    switch (value.runtimeType) {
+    switch (value) {
       case String _:
         await sharedPreferences.setString(key, value);
         break;
