@@ -10,4 +10,10 @@ class SharedPrefKeys {
 
   // AI Chat
   static const String aiChatHistory = 'ai_chat_history';
+
+  // Notification preferences
+  static const String notifyNewComments = 'notify_new_comments';
+  static const String notifyNewLikes = 'notify_new_likes';
+  static const String notifyListingInquiries = 'notify_listing_inquiries';
+  static const String notifyVerificationUpdates = 'notify_verification_updates';
 }

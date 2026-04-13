@@ -47,6 +47,9 @@ import 'package:gaza_tech/features/ai_chat/cubit/ai_chat_cubit.dart';
 import 'package:gaza_tech/features/ai_chat/ui/ai_chat_screen.dart';
 import 'package:gaza_tech/features/drafts/cubit/drafts_cubit.dart';
 import 'package:gaza_tech/features/drafts/ui/drafts_screen.dart';
+import 'package:gaza_tech/features/settings/ui/settings_screen.dart';
+import 'package:gaza_tech/features/help/ui/help_screen.dart';
+import 'package:gaza_tech/features/about/ui/about_screen.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -247,6 +250,12 @@ class MyRouter {
             child: const DraftsScreen(),
           ),
         );
+      case MyRoutes.settings:
+        return MaterialPageRoute(builder: (_) => const SettingsScreen());
+      case MyRoutes.help:
+        return MaterialPageRoute(builder: (_) => const HelpScreen());
+      case MyRoutes.about:
+        return MaterialPageRoute(builder: (_) => const AboutScreen());
       default:
         return null;
     }

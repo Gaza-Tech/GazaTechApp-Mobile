@@ -1210,4 +1210,115 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get published => 'تم النشر بنجاح';
+
+  @override
+  String get notificationPreferences => 'تفضيلات الإشعارات';
+
+  @override
+  String get notifyNewComments => 'تعليقات جديدة على منشوراتي';
+
+  @override
+  String get notifyNewLikes => 'إعجابات على محتواي';
+
+  @override
+  String get notifyListingInquiries => 'استفسارات على قوائمي';
+
+  @override
+  String get notifyVerificationUpdates => 'تحديثات حالة التحقق';
+
+  @override
+  String get accountSettings => 'الحساب';
+
+  @override
+  String get changePassword => 'تغيير كلمة المرور';
+
+  @override
+  String get deleteAccount => 'حذف الحساب';
+
+  @override
+  String get deleteAccountTitle => 'حذف الحساب؟';
+
+  @override
+  String get deleteAccountBody =>
+      'لحذف حسابك، يرجى التواصل مع فريق الدعم لدينا. هذا الإجراء لا رجعة فيه.';
+
+  @override
+  String get faq => 'الأسئلة الشائعة';
+
+  @override
+  String get helpFaqBuyingTitle => 'كيف أشتري شيئًا؟';
+
+  @override
+  String get helpFaqBuyingBody =>
+      'تصفح السوق، ابحث عن قائمة تعجبك، وتواصل مع البائع مباشرة من خلال ملفه الشخصي.';
+
+  @override
+  String get helpFaqSellingTitle => 'كيف أبيع شيئًا؟';
+
+  @override
+  String get helpFaqSellingBody =>
+      'اضغط على زر + لإنشاء قائمة. أدخل التفاصيل، أضف صورًا، حدد سعرًا، وانشر.';
+
+  @override
+  String get helpFaqVerificationTitle => 'كيف أحصل على التحقق؟';
+
+  @override
+  String get helpFaqVerificationBody =>
+      'انتقل إلى ملفك الشخصي واضغط على \'احصل على التحقق\'. أكمل نموذج التحقق من الهوية باستخدام وثائق هويتك.';
+
+  @override
+  String get helpFaqPostingTitle => 'كيف أنشر في المجتمع؟';
+
+  @override
+  String get helpFaqPostingBody =>
+      'انتقل إلى تبويب المجتمع واضغط على زر الكتابة. اختر فئة، اكتب منشورك، وانشر.';
+
+  @override
+  String get communityGuidelines => 'إرشادات المجتمع';
+
+  @override
+  String get helpGuidelinesBody =>
+      'كن محترمًا ولطيفًا. لا للرسائل المزعجة أو التحرش أو المحتوى غير اللائق. أبلغ عن الانتهاكات للمساعدة في الحفاظ على سلامة مجتمعنا.';
+
+  @override
+  String get contactSupport => 'تواصل مع الدعم';
+
+  @override
+  String get helpContactDescription =>
+      'تواجه مشكلة؟ تواصل مع فريق الدعم لدينا.';
+
+  @override
+  String get emailSupport => 'الدعم عبر البريد الإلكتروني';
+
+  @override
+  String get reportBug => 'الإبلاغ عن خطأ';
+
+  @override
+  String get appVersion => 'إصدار التطبيق';
+
+  @override
+  String get aboutDescription =>
+      'غزة تك منصة تربط أبناء غزة للشراء والبيع والتفاعل مع مجتمعهم.';
+
+  @override
+  String get ourMission => 'مهمتنا';
+
+  @override
+  String get missionDescription =>
+      'تمكين مجتمع غزة من خلال التكنولوجيا — تمكين التجارة ومشاركة المعرفة والتواصل المحلي.';
+
+  @override
+  String get shareApp => 'مشاركة التطبيق';
+
+  @override
+  String get rateApp => 'تقييم التطبيق';
+
+  @override
+  String get openSourceLicenses => 'تراخيص المصدر المفتوح';
+
+  @override
+  String get termsOfService => 'شروط الخدمة';
+
+  @override
+  String get madeWithLove => 'صُنع بكل محبة لغزة';
 }

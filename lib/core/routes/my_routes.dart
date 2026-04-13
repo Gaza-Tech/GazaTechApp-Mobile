@@ -21,4 +21,7 @@ class MyRoutes {
   static const String verificationStatus = '/verificationStatus';
   static const String aiChat = '/aiChat';
   static const String drafts = '/drafts';
+  static const String settings = '/settings';
+  static const String help = '/help';
+  static const String about = '/about';
 }

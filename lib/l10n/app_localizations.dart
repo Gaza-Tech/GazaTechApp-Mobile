@@ -2389,6 +2389,210 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Published successfully'**
   String get published;
+
+  /// No description provided for @notificationPreferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Preferences'**
+  String get notificationPreferences;
+
+  /// No description provided for @notifyNewComments.
+  ///
+  /// In en, this message translates to:
+  /// **'New comments on my posts'**
+  String get notifyNewComments;
+
+  /// No description provided for @notifyNewLikes.
+  ///
+  /// In en, this message translates to:
+  /// **'Likes on my content'**
+  String get notifyNewLikes;
+
+  /// No description provided for @notifyListingInquiries.
+  ///
+  /// In en, this message translates to:
+  /// **'Inquiries on my listings'**
+  String get notifyListingInquiries;
+
+  /// No description provided for @notifyVerificationUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification status updates'**
+  String get notifyVerificationUpdates;
+
+  /// No description provided for @accountSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get accountSettings;
+
+  /// No description provided for @changePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get changePassword;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccount;
+
+  /// No description provided for @deleteAccountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account?'**
+  String get deleteAccountTitle;
+
+  /// No description provided for @deleteAccountBody.
+  ///
+  /// In en, this message translates to:
+  /// **'To delete your account, please contact our support team. This action is irreversible.'**
+  String get deleteAccountBody;
+
+  /// No description provided for @faq.
+  ///
+  /// In en, this message translates to:
+  /// **'Frequently Asked Questions'**
+  String get faq;
+
+  /// No description provided for @helpFaqBuyingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How do I buy something?'**
+  String get helpFaqBuyingTitle;
+
+  /// No description provided for @helpFaqBuyingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse the marketplace, find a listing you like, and contact the seller directly through their profile.'**
+  String get helpFaqBuyingBody;
+
+  /// No description provided for @helpFaqSellingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How do I sell something?'**
+  String get helpFaqSellingTitle;
+
+  /// No description provided for @helpFaqSellingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the + button to create a listing. Fill in the details, add photos, set a price, and publish.'**
+  String get helpFaqSellingBody;
+
+  /// No description provided for @helpFaqVerificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How do I get verified?'**
+  String get helpFaqVerificationTitle;
+
+  /// No description provided for @helpFaqVerificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to your profile and tap \'Get Verified\'. Complete the identity verification form with your ID documents.'**
+  String get helpFaqVerificationBody;
+
+  /// No description provided for @helpFaqPostingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How do I post in the community?'**
+  String get helpFaqPostingTitle;
+
+  /// No description provided for @helpFaqPostingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to the Community tab and tap the compose button. Choose a category, write your post, and publish.'**
+  String get helpFaqPostingBody;
+
+  /// No description provided for @communityGuidelines.
+  ///
+  /// In en, this message translates to:
+  /// **'Community Guidelines'**
+  String get communityGuidelines;
+
+  /// No description provided for @helpGuidelinesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Be respectful and kind. No spam, harassment, or inappropriate content. Report violations to help keep our community safe.'**
+  String get helpGuidelinesBody;
+
+  /// No description provided for @contactSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Support'**
+  String get contactSupport;
+
+  /// No description provided for @helpContactDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Having trouble? Reach out to our support team.'**
+  String get helpContactDescription;
+
+  /// No description provided for @emailSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Support'**
+  String get emailSupport;
+
+  /// No description provided for @reportBug.
+  ///
+  /// In en, this message translates to:
+  /// **'Report a Bug'**
+  String get reportBug;
+
+  /// No description provided for @appVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'App Version'**
+  String get appVersion;
+
+  /// No description provided for @aboutDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Gaza Tech is a platform connecting the people of Gaza to buy, sell, and engage with their community.'**
+  String get aboutDescription;
+
+  /// No description provided for @ourMission.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Mission'**
+  String get ourMission;
+
+  /// No description provided for @missionDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Empowering Gaza\'s community through technology — enabling commerce, knowledge sharing, and local connection.'**
+  String get missionDescription;
+
+  /// No description provided for @shareApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Share App'**
+  String get shareApp;
+
+  /// No description provided for @rateApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate the App'**
+  String get rateApp;
+
+  /// No description provided for @openSourceLicenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Source Licenses'**
+  String get openSourceLicenses;
+
+  /// No description provided for @termsOfService.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get termsOfService;
+
+  /// No description provided for @madeWithLove.
+  ///
+  /// In en, this message translates to:
+  /// **'Made with love for Gaza'**
+  String get madeWithLove;
 }
 
 class _AppLocalizationsDelegate

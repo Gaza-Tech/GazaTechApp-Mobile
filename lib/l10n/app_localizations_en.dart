@@ -1217,4 +1217,115 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get published => 'Published successfully';
+
+  @override
+  String get notificationPreferences => 'Notification Preferences';
+
+  @override
+  String get notifyNewComments => 'New comments on my posts';
+
+  @override
+  String get notifyNewLikes => 'Likes on my content';
+
+  @override
+  String get notifyListingInquiries => 'Inquiries on my listings';
+
+  @override
+  String get notifyVerificationUpdates => 'Verification status updates';
+
+  @override
+  String get accountSettings => 'Account';
+
+  @override
+  String get changePassword => 'Change Password';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get deleteAccountTitle => 'Delete Account?';
+
+  @override
+  String get deleteAccountBody =>
+      'To delete your account, please contact our support team. This action is irreversible.';
+
+  @override
+  String get faq => 'Frequently Asked Questions';
+
+  @override
+  String get helpFaqBuyingTitle => 'How do I buy something?';
+
+  @override
+  String get helpFaqBuyingBody =>
+      'Browse the marketplace, find a listing you like, and contact the seller directly through their profile.';
+
+  @override
+  String get helpFaqSellingTitle => 'How do I sell something?';
+
+  @override
+  String get helpFaqSellingBody =>
+      'Tap the + button to create a listing. Fill in the details, add photos, set a price, and publish.';
+
+  @override
+  String get helpFaqVerificationTitle => 'How do I get verified?';
+
+  @override
+  String get helpFaqVerificationBody =>
+      'Go to your profile and tap \'Get Verified\'. Complete the identity verification form with your ID documents.';
+
+  @override
+  String get helpFaqPostingTitle => 'How do I post in the community?';
+
+  @override
+  String get helpFaqPostingBody =>
+      'Go to the Community tab and tap the compose button. Choose a category, write your post, and publish.';
+
+  @override
+  String get communityGuidelines => 'Community Guidelines';
+
+  @override
+  String get helpGuidelinesBody =>
+      'Be respectful and kind. No spam, harassment, or inappropriate content. Report violations to help keep our community safe.';
+
+  @override
+  String get contactSupport => 'Contact Support';
+
+  @override
+  String get helpContactDescription =>
+      'Having trouble? Reach out to our support team.';
+
+  @override
+  String get emailSupport => 'Email Support';
+
+  @override
+  String get reportBug => 'Report a Bug';
+
+  @override
+  String get appVersion => 'App Version';
+
+  @override
+  String get aboutDescription =>
+      'Gaza Tech is a platform connecting the people of Gaza to buy, sell, and engage with their community.';
+
+  @override
+  String get ourMission => 'Our Mission';
+
+  @override
+  String get missionDescription =>
+      'Empowering Gaza\'s community through technology — enabling commerce, knowledge sharing, and local connection.';
+
+  @override
+  String get shareApp => 'Share App';
+
+  @override
+  String get rateApp => 'Rate the App';
+
+  @override
+  String get openSourceLicenses => 'Open Source Licenses';
+
+  @override
+  String get termsOfService => 'Terms of Service';
+
+  @override
+  String get madeWithLove => 'Made with love for Gaza';
 }
