@@ -38,8 +38,9 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
       final tempDir = await getTemporaryDirectory();
       final uniqueName =
           '${DateTime.now().millisecondsSinceEpoch}_${p.basename(image.path)}';
-      final stableFile =
-          await File(image.path).copy(p.join(tempDir.path, uniqueName));
+      final stableFile = await File(
+        image.path,
+      ).copy(p.join(tempDir.path, uniqueName));
 
       final updated = [...widget.images, NewImage(stableFile)];
       widget.onImagesChanged(updated);

@@ -111,11 +111,7 @@ class CommentCard extends StatelessWidget {
         ),
         if (isVerified) ...[
           SizedBox(width: 4.w),
-          Icon(
-            Icons.verified,
-            size: 14.sp,
-            color: theme.colorScheme.primary,
-          ),
+          Icon(Icons.verified, size: 14.sp, color: theme.colorScheme.primary),
         ],
         SizedBox(width: 8.w),
         Text(
