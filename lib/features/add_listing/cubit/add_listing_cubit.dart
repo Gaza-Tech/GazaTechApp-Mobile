@@ -69,8 +69,10 @@ class AddListingCubit extends Cubit<AddListingState> {
   ({
     String? categoryId,
     String? categoryName,
+    String? categoryNameAr,
     String? locationId,
     String? locationName,
+    String? locationNameAr,
     ProductCondition? condition,
     bool isILS,
     List<ListingImageItem> images,
@@ -114,8 +116,10 @@ class AddListingCubit extends Cubit<AddListingState> {
     return (
       categoryId: listing.categoryId,
       categoryName: cat.isNotEmpty ? cat.first.name : null,
+      categoryNameAr: cat.isNotEmpty ? cat.first.nameAr : null,
       locationId: listing.locationId,
       locationName: loc.isNotEmpty ? loc.first.name : null,
+      locationNameAr: loc.isNotEmpty ? loc.first.nameAr : null,
       condition: condition,
       isILS: listing.currency != 'USD',
       images: images,

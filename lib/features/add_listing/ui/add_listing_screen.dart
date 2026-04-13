@@ -45,18 +45,29 @@ class _AddListingScreenState extends State<AddListingScreen> {
     super.dispose();
   }
 
-  void _initializeEditData(AddListingCubit cubit) {
+  String _localizedName(String name, String? nameAr, bool isArabic) =>
+      isArabic ? (nameAr ?? name) : name;
+
+  void _initializeEditData(BuildContext context, AddListingCubit cubit) {
     if (_editInitialized) return;
     _editInitialized = true;
 
     final editData = cubit.initializeForEdit();
     if (editData == null) return;
 
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+    final catName = editData.categoryName;
+    final locName = editData.locationName;
+
     setState(() {
       _selectedCategoryId = editData.categoryId;
-      _selectedCategoryName = editData.categoryName;
+      _selectedCategoryName = catName != null
+          ? _localizedName(catName, editData.categoryNameAr, isArabic)
+          : null;
       _selectedLocationId = editData.locationId;
-      _selectedLocationName = editData.locationName;
+      _selectedLocationName = locName != null
+          ? _localizedName(locName, editData.locationNameAr, isArabic)
+          : null;
       _selectedCondition = editData.condition;
       _isILS = editData.isILS;
       _selectedImages = editData.images;
@@ -76,7 +87,7 @@ class _AddListingScreenState extends State<AddListingScreen> {
               prev.isLoadingFormData && !curr.isLoadingFormData,
           listener: (context, state) {
             if (state.isEditMode) {
-              _initializeEditData(cubit);
+              _initializeEditData(context, cubit);
             }
           },
         ),
@@ -111,6 +122,8 @@ class _AddListingScreenState extends State<AddListingScreen> {
       ],
       child: BlocBuilder<AddListingCubit, AddListingState>(
         builder: (context, state) {
+          final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+
           return Stack(
             children: [
               Scaffold(
@@ -217,17 +230,25 @@ class _AddListingScreenState extends State<AddListingScreen> {
                               Selector(
                                 selectedValue: _selectedCategoryName,
                                 items: state.categories
-                                    .map((c) => c.name)
+                                    .map(
+                                      (c) => _localizedName(
+                                        c.name,
+                                        c.nameAr,
+                                        isArabic,
+                                      ),
+                                    )
                                     .toList(),
                                 hintText: context.l10n.selectCategory,
                                 title: context.l10n.selectCategoryTitle,
-                                onSelected: (categoryName) {
-                                  final category = state.categories.firstWhere(
-                                    (c) => c.name == categoryName,
-                                  );
+                                onSelected: (index) {
+                                  final category = state.categories[index];
                                   setState(() {
                                     _selectedCategoryId = category.id;
-                                    _selectedCategoryName = categoryName;
+                                    _selectedCategoryName = _localizedName(
+                                      category.name,
+                                      category.nameAr,
+                                      isArabic,
+                                    );
                                   });
                                 },
                               ),
@@ -309,17 +330,25 @@ class _AddListingScreenState extends State<AddListingScreen> {
                               Selector(
                                 selectedValue: _selectedLocationName,
                                 items: state.locations
-                                    .map((l) => l.name)
+                                    .map(
+                                      (l) => _localizedName(
+                                        l.name,
+                                        l.nameAr,
+                                        isArabic,
+                                      ),
+                                    )
                                     .toList(),
                                 hintText: context.l10n.selectLocation,
                                 title: context.l10n.selectLocationTitle,
-                                onSelected: (locationName) {
-                                  final location = state.locations.firstWhere(
-                                    (l) => l.name == locationName,
-                                  );
+                                onSelected: (index) {
+                                  final location = state.locations[index];
                                   setState(() {
                                     _selectedLocationId = location.locationId;
-                                    _selectedLocationName = locationName;
+                                    _selectedLocationName = _localizedName(
+                                      location.name,
+                                      location.nameAr,
+                                      isArabic,
+                                    );
                                   });
                                 },
                               ),

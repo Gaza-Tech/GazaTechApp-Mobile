@@ -6,7 +6,7 @@ class Selector extends StatelessWidget {
   final List<String> items;
   final String hintText;
   final String title;
-  final ValueChanged<String> onSelected;
+  final ValueChanged<int> onSelected;
 
   const Selector({
     super.key,
@@ -82,7 +82,7 @@ class Selector extends StatelessWidget {
                                 )
                               : null,
                           onTap: () {
-                            onSelected(item);
+                            onSelected(index);
                             Navigator.pop(context);
                           },
                         );
