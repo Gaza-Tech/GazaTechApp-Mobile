@@ -1,6 +1,7 @@
 # CLAUDE.md
 
-> Developer guide for Claude Code when working in this Flutter repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 > Treat this as the source of truth for architecture, conventions, and workflow.
 > Apply the Golden Test before modifying this file: "Would removing this rule cause Claude to make mistakes?" 
 
@@ -48,6 +49,9 @@ flutter gen-l10n
 # Run the app
 flutter run
 
+# Check formatting (CI uses --set-exit-if-changed)
+dart format .
+
 # Static analysis
 flutter analyze
 
@@ -81,7 +85,7 @@ lib/
 │   ├── netowoks/       # Error handler, ApiResult, Supabase config
 │   │                   # Note: directory is intentionally spelled "netowoks" — do not rename
 │   ├── routes/         # my_routes.dart (constants), my_router.dart (generateRoute)
-│   ├── services/       # Cross-feature singletons (BookmarkEventService)
+│   ├── services/       # Cross-feature event buses (PostEventService, ReportEventService)
 │   ├── theme/          # Colors, text styles, ThemeData
 │   └── widgets/        # Shared/reusable widgets (see list below)
 │
@@ -121,7 +125,7 @@ lib/
 **Rule (IMPORTANT):** Any reusable logic, utility, constant, extension, or widget used in 2+ places goes in `core/`. Check `core/` before creating new shared code — never duplicate across features.
 
 **Available `core/widgets/`:**
-`MyButton`, `MyTextFormField`, `MyOtpFormField`, `TappableSearchBar`, `SearchAppBar`, `SortButton`, `ChipSelector`, `ActiveFiltersBar`, `FilterSheetShell`, `ConditionTag`, `RecentSearchesView`, `SpacingWidgets`, `StatusBarHider`, `LanguageSwitcher`, `GoogleSignInButton`
+`MyButton`, `MyTextFormField`, `MyOtpFormField`, `TappableSearchBar`, `SearchAppBar`, `SortButton`, `ChipSelector`, `ActiveFiltersBar`, `FilterSheetShell`, `ConditionTag`, `RecentSearchesView`, `SpacingWidgets`, `StatusBarHider`, `LanguageSwitcher`, `GoogleSignInButton`, `DeleteConfirmationSheet`, `ConfirmationSheet`, `SignUpPromptSheet`, `ImagePickerGrid`
 
 ---
 
@@ -215,6 +219,10 @@ class ApiResult<T> with _$ApiResult<T> {
 - **Data Layer:** Catch exceptions (`AuthException`, `PostgrestException`) in the Repository and map them using `ErrorHandler.handle()` to return an `ApiResult.failure()`.
 - **Domain/Cubit Layer:** Handle `.failure` and emit a `FeatureState.failure` with a user-readable message.
 - **UI Layer:** Map failures to user-friendly messages and UI states. Never expose raw exceptions.
+
+**Soft-delete pattern:** Posts and listings use `content_status` field (`'published'`, `'draft'`, `'removed'`). All fetch queries **must** filter `.eq('content_status', 'published')` to exclude soft-deleted content. When querying through joins (e.g., bookmarks), use PostgREST dot notation: `.eq('joined_table.content_status', 'published')`.
+
+**Guest guard pattern:** Anonymous (guest) users can browse but not perform write actions. Gate write actions with `GuestGuard.requireAccount(context)` — returns `false` for guests (shows sign-up prompt), `true` for real accounts. See `lib/core/helpers/guest_guard.dart`.
 
 ---
 
@@ -322,8 +330,8 @@ Aim for meaningful coverage, not 100% coverage theater. Tests must be determinis
 
 ## CI/CD
 
-**GitHub Actions** (targets `dev` / `main`):
-Must pass `pub get`, `build_runner`, `gen-l10n`, `analyze`, `test`, and `dart format`. No force-pushes.
+**GitHub Actions** (targets `dev` / `main` PRs):
+Must pass `pub get`, `build_runner`, `gen-l10n`, `dart format --set-exit-if-changed .`, and `analyze`. No force-pushes.
 
 ---
 
@@ -333,11 +341,3 @@ When acting as an autonomous agent in this repository:
 1.  **Before marking any task done:** Run the `/code-review` skill to verify your changes against these guidelines.
 2.  **After task approval:** Run the `/create-pr` skill for branch creation, committing, and generating PR output.
 3.  **PR Format:** PR descriptions must always be provided in markdown (`.md`) format.
-```
-
-### Key Enhancements Added:
-1.  **Section 3 (Architecture & Data Flow):** Injected the "Change Discipline" rules to ensure Claude doesn't refactor code needlessly or break things while trying to be "helpful." I also added the explicit rule that the Cubit layer must have zero `package:flutter` imports.
-2.  **Section 4 (State Management):** Clarified exactly when Claude is allowed to use `setState()` (local UI state only) versus `Cubit` (business logic).
-3.  **Section 12 (Widget Cleanliness Rules):** Added the critical build method discipline (no instantiating controllers inside `build()`) and tight `BlocBuilder` scoping rules.
-4.  **Section 15 (Security):** Added a dedicated section preventing hardcoded secrets and enforcing validation.
-5.  **Section 19 (AI Workflow Rules):** Added the specific CLI tool commands (`/code-review` and `/create-pr`) you requested so Claude automates your PR processes correctly at the end of a task.
