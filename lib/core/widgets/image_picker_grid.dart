@@ -8,6 +8,8 @@ import 'package:gaza_tech/core/models/image_item.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 class ImagePickerGrid extends StatefulWidget {
   final List<ImageItem> images;
@@ -33,7 +35,13 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
 
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
-      final updated = [...widget.images, NewImage(File(image.path))];
+      final tempDir = await getTemporaryDirectory();
+      final uniqueName =
+          '${DateTime.now().millisecondsSinceEpoch}_${p.basename(image.path)}';
+      final stableFile =
+          await File(image.path).copy(p.join(tempDir.path, uniqueName));
+
+      final updated = [...widget.images, NewImage(stableFile)];
       widget.onImagesChanged(updated);
     }
   }
