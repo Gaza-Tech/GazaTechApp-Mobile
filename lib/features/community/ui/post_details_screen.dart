@@ -31,7 +31,27 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
   String? _replyingTo;
   String? _replyingToCommentId;
   String? _editingCommentId;
+  String? _currentUserAvatarUrl;
   final _commentController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentUserAvatar();
+  }
+
+  Future<void> _loadCurrentUserAvatar() async {
+    final userId = Supabase.instance.client.auth.currentUser?.id;
+    if (userId == null) return;
+    final data = await Supabase.instance.client
+        .from('users')
+        .select('avatar_url')
+        .eq('user_id', userId)
+        .maybeSingle();
+    if (mounted && data != null) {
+      setState(() => _currentUserAvatarUrl = data['avatar_url'] as String?);
+    }
+  }
 
   @override
   void dispose() {
@@ -278,6 +298,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                 return [
                                   CommentCard(
                                     userName: comment.authorName,
+                                    avatarUrl: comment.author?.avatarUrl,
                                     timeAgo: _timeAgo(
                                       context,
                                       comment.createdAt,
@@ -362,6 +383,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                               reply.authorId == currentUserId;
                                           return CommentCard(
                                             userName: reply.authorName,
+                                            avatarUrl: reply.author?.avatarUrl,
                                             timeAgo: _timeAgo(
                                               context,
                                               reply.createdAt,
@@ -449,6 +471,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                       onCancelEdit: _cancelEdit,
                       onSubmit: () => _submitComment(context),
                       isGuest: GuestGuard.isGuest,
+                      avatarUrl: _currentUserAvatarUrl,
                     ),
                   ],
                 ),

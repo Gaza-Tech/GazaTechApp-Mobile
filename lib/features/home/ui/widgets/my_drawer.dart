@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,8 +9,34 @@ import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
+
+  @override
+  State<MyDrawer> createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
+  String? _avatarUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAvatar();
+  }
+
+  Future<void> _loadAvatar() async {
+    final userId = Supabase.instance.client.auth.currentUser?.id;
+    if (userId == null) return;
+    final data = await Supabase.instance.client
+        .from('users')
+        .select('avatar_url')
+        .eq('user_id', userId)
+        .maybeSingle();
+    if (mounted && data != null) {
+      setState(() => _avatarUrl = data['avatar_url'] as String?);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +56,24 @@ class MyDrawer extends StatelessWidget {
                 CircleAvatar(
                   radius: 32.r,
                   backgroundColor: Theme.of(context).colorScheme.onPrimary,
-                  child: Icon(
-                    Icons.person,
-                    size: 40.sp,
-                    color: Theme.of(context).colorScheme.primary,
+                  child: ClipOval(
+                    child: _avatarUrl != null
+                        ? CachedNetworkImage(
+                            imageUrl: _avatarUrl!,
+                            width: 64.r,
+                            height: 64.r,
+                            fit: BoxFit.cover,
+                            errorWidget: (_, _, _) => Icon(
+                              Icons.person,
+                              size: 40.sp,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          )
+                        : Icon(
+                            Icons.person,
+                            size: 40.sp,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                   ),
                 ),
                 const VerticalSpace(12),

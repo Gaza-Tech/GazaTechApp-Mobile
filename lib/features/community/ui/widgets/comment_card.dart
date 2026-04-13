@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
@@ -12,6 +13,7 @@ class CommentCard extends StatelessWidget {
   final bool isReported;
   final bool isEdited;
   final int indentLevel;
+  final String? avatarUrl;
   final VoidCallback? onReply;
   final VoidCallback? onLikeTap;
   final VoidCallback? onReport;
@@ -28,6 +30,7 @@ class CommentCard extends StatelessWidget {
     this.isReported = false,
     this.isEdited = false,
     this.indentLevel = 0,
+    this.avatarUrl,
     this.onReply,
     this.onLikeTap,
     this.onReport,
@@ -49,10 +52,24 @@ class CommentCard extends StatelessWidget {
             CircleAvatar(
               radius: 18.r,
               backgroundColor: theme.colorScheme.surfaceContainerHighest,
-              child: Icon(
-                Icons.person,
-                size: 18.sp,
-                color: theme.colorScheme.onSurfaceVariant,
+              child: ClipOval(
+                child: avatarUrl != null
+                    ? CachedNetworkImage(
+                        imageUrl: avatarUrl!,
+                        width: 36.r,
+                        height: 36.r,
+                        fit: BoxFit.cover,
+                        errorWidget: (_, _, _) => Icon(
+                          Icons.person,
+                          size: 18.sp,
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      )
+                    : Icon(
+                        Icons.person,
+                        size: 18.sp,
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
               ),
             ),
             SizedBox(width: 10.w),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
@@ -14,6 +15,7 @@ class CommentInputBar extends StatelessWidget {
     this.isEditing = false,
     this.onCancelEdit,
     this.isGuest = false,
+    this.avatarUrl,
   });
 
   final TextEditingController controller;
@@ -27,6 +29,8 @@ class CommentInputBar extends StatelessWidget {
   /// anywhere in the bar routes through [onSubmit] — typically a handler
   /// gated by `GuestGuard` that shows the sign-up prompt sheet.
   final bool isGuest;
+
+  final String? avatarUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -51,21 +55,39 @@ class CommentInputBar extends StatelessWidget {
     );
   }
 
+  Widget _buildAvatar(ThemeData theme) {
+    return CircleAvatar(
+      radius: 18.r,
+      backgroundColor: theme.colorScheme.surfaceContainerHighest,
+      child: ClipOval(
+        child: avatarUrl != null
+            ? CachedNetworkImage(
+                imageUrl: avatarUrl!,
+                width: 36.r,
+                height: 36.r,
+                fit: BoxFit.cover,
+                errorWidget: (_, _, _) => Icon(
+                  Icons.person,
+                  size: 18.sp,
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              )
+            : Icon(
+                Icons.person,
+                size: 18.sp,
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+      ),
+    );
+  }
+
   Widget _buildInputRow(BuildContext context, ThemeData theme) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          CircleAvatar(
-            radius: 18.r,
-            backgroundColor: theme.colorScheme.surfaceContainerHighest,
-            child: Icon(
-              Icons.person,
-              size: 18.sp,
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
+          _buildAvatar(theme),
           SizedBox(width: 8.w),
           Expanded(
             child: MyTextFormField(
@@ -108,15 +130,7 @@ class CommentInputBar extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                CircleAvatar(
-                  radius: 18.r,
-                  backgroundColor: theme.colorScheme.surfaceContainerHighest,
-                  child: Icon(
-                    Icons.person,
-                    size: 18.sp,
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
+                _buildAvatar(theme),
                 SizedBox(width: 8.w),
                 Expanded(
                   child: MyTextFormField(

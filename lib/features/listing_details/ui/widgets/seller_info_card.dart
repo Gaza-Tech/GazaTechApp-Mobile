@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
@@ -8,6 +9,7 @@ import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 class SellerInfoCard extends StatelessWidget {
   final String sellerName;
   final String memberSince;
+  final String? avatarUrl;
   final VoidCallback onContactSeller;
   final VoidCallback onViewProfile;
 
@@ -15,6 +17,7 @@ class SellerInfoCard extends StatelessWidget {
     super.key,
     required this.sellerName,
     required this.memberSince,
+    this.avatarUrl,
     required this.onContactSeller,
     required this.onViewProfile,
   });
@@ -42,11 +45,26 @@ class SellerInfoCard extends StatelessWidget {
               CircleAvatar(
                 radius: 24.dg,
                 backgroundColor: MyColors.primary.soft,
-                child: Text(
-                  sellerName.isNotEmpty ? sellerName[0] : '?',
-                  style: MyTextStyle.heading.h2.copyWith(
-                    color: MyColors.primary.base,
-                  ),
+                child: ClipOval(
+                  child: avatarUrl != null
+                      ? CachedNetworkImage(
+                          imageUrl: avatarUrl!,
+                          width: 48.dg,
+                          height: 48.dg,
+                          fit: BoxFit.cover,
+                          errorWidget: (_, _, _) => Text(
+                            sellerName.isNotEmpty ? sellerName[0] : '?',
+                            style: MyTextStyle.heading.h2.copyWith(
+                              color: MyColors.primary.base,
+                            ),
+                          ),
+                        )
+                      : Text(
+                          sellerName.isNotEmpty ? sellerName[0] : '?',
+                          style: MyTextStyle.heading.h2.copyWith(
+                            color: MyColors.primary.base,
+                          ),
+                        ),
                 ),
               ),
               const HorizontalSpace(12),

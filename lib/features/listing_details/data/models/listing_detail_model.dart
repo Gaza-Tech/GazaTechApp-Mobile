@@ -52,6 +52,7 @@ abstract class ListingDetailModel with _$ListingDetailModel {
     return null;
   }
 
+  String? get sellerAvatarUrl => sellerData?['avatar_url'] as String?;
   String? get sellerPhoneNumber => sellerData?['phone_number'] as String?;
   String? get sellerWhatsappNumber => sellerData?['whatsapp_number'] as String?;
 
