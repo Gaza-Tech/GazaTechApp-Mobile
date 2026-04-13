@@ -11,7 +11,7 @@ class ListingDetailsApiService {
         .from('marketplace_listings')
         .select(
           '*, locations!location_id(name, name_ar), '
-          'users!seller_id(first_name, last_name, avatar_url, created_at, phone_number, whatsapp_number), '
+          'users!seller_id(first_name, last_name, avatar_url, is_verified, created_at, phone_number, whatsapp_number), '
           'listing_images(image_url, is_thumbnail, sort_order), '
           'marketplace_categories!category_id(name, name_ar, slug)',
         )
@@ -30,7 +30,7 @@ class ListingDetailsApiService {
         .from('marketplace_listings')
         .select(
           '*, locations!location_id(name, name_ar), '
-          'users!seller_id(first_name, last_name), '
+          'users!seller_id(first_name, last_name, is_verified), '
           'listing_images(image_url, is_thumbnail, sort_order)',
         )
         .eq('content_status', 'published')
@@ -51,7 +51,7 @@ class ListingDetailsApiService {
         .from('marketplace_listings')
         .select(
           '*, locations!location_id(name, name_ar), '
-          'users!seller_id(first_name, last_name), '
+          'users!seller_id(first_name, last_name, is_verified), '
           'listing_images(image_url, is_thumbnail, sort_order)',
         )
         .eq('content_status', 'published')

@@ -116,6 +116,7 @@ class _DraftPostsTabState extends State<DraftPostsTab>
                       category: post.postCategory,
                       authorName: post.authorName,
                       timeAgo: _timeAgo(context.l10n, post.createdAt),
+                      isVerified: post.author?.isVerified ?? false,
                       attachmentUrls: post.attachmentUrls,
                       onEdit: () => _navigateToEdit(context, post),
                       onDelete: () =>

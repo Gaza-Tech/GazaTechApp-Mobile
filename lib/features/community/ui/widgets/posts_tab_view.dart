@@ -127,6 +127,7 @@ class _PostsTabViewState extends State<PostsTabView>
                           post.postId,
                         ),
                         avatarUrl: post.author?.avatarUrl,
+                        isVerified: post.author?.isVerified ?? false,
                         onAuthorTap: () => Navigator.pushNamed(
                           context,
                           MyRoutes.profile,

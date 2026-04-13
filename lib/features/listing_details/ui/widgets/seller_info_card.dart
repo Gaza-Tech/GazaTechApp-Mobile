@@ -10,6 +10,7 @@ class SellerInfoCard extends StatelessWidget {
   final String sellerName;
   final String memberSince;
   final String? avatarUrl;
+  final bool isVerified;
   final VoidCallback onContactSeller;
   final VoidCallback onViewProfile;
 
@@ -18,6 +19,7 @@ class SellerInfoCard extends StatelessWidget {
     required this.sellerName,
     required this.memberSince,
     this.avatarUrl,
+    this.isVerified = false,
     required this.onContactSeller,
     required this.onViewProfile,
   });
@@ -72,11 +74,26 @@ class SellerInfoCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      sellerName,
-                      style: MyTextStyle.heading.h4.copyWith(
-                        color: theme.textTheme.titleMedium?.color,
-                      ),
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            sellerName,
+                            style: MyTextStyle.heading.h4.copyWith(
+                              color: theme.textTheme.titleMedium?.color,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        if (isVerified) ...[
+                          SizedBox(width: 4.w),
+                          Icon(
+                            Icons.verified,
+                            size: 18.sp,
+                            color: theme.colorScheme.primary,
+                          ),
+                        ],
+                      ],
                     ),
                     const VerticalSpace(4),
                     Text(memberSince, style: theme.textTheme.bodySmall),

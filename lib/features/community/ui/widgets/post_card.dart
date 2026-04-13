@@ -20,6 +20,7 @@ class PostCard extends StatelessWidget {
   final VoidCallback? onBookmarkToggle;
   final VoidCallback? onTap;
   final String? avatarUrl;
+  final bool isVerified;
   final VoidCallback? onAuthorTap;
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
@@ -40,6 +41,7 @@ class PostCard extends StatelessWidget {
     this.onBookmarkToggle,
     this.onTap,
     this.avatarUrl,
+    this.isVerified = false,
     this.onAuthorTap,
     this.onEdit,
     this.onDelete,
@@ -68,6 +70,7 @@ class PostCard extends StatelessWidget {
                       timeAgo: timeAgo,
                       category: category,
                       avatarUrl: avatarUrl,
+                      isVerified: isVerified,
                       onAuthorTap: onAuthorTap,
                     ),
                   ),

@@ -43,6 +43,8 @@ abstract class ListingModel with _$ListingModel {
     return '$first $last'.trim();
   }
 
+  bool get sellerIsVerified => sellerData?['is_verified'] == true;
+
   String? get thumbnailUrl {
     if (images == null || images!.isEmpty) return null;
     // Find thumbnail image first

@@ -67,6 +67,7 @@ class _BookmarkedPostsTabState extends State<BookmarkedPostsTab>
                       attachmentUrls: post.attachmentUrls,
                       likes: post.likesCount,
                       comments: post.commentsCount,
+                      isVerified: post.author?.isVerified ?? false,
                       isLiked: state.likedPostIds.contains(post.postId),
                       isBookmarked: state.bookmarkedPostIds.contains(
                         post.postId,

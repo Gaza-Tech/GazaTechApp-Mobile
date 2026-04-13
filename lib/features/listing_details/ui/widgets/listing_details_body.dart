@@ -88,6 +88,7 @@ class ListingDetailsBody extends StatelessWidget {
                   sellerName: listing.sellerName,
                   memberSince: memberSince,
                   avatarUrl: listing.sellerAvatarUrl,
+                  isVerified: listing.sellerIsVerified,
                   onContactSeller: () async {
                     if (!await GuestGuard.requireAccount(context)) return;
                     if (context.mounted) _handleContactSeller(context);

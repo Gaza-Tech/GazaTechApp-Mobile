@@ -14,6 +14,7 @@ class CommentCard extends StatelessWidget {
   final bool isEdited;
   final int indentLevel;
   final String? avatarUrl;
+  final bool isVerified;
   final VoidCallback? onReply;
   final VoidCallback? onLikeTap;
   final VoidCallback? onReport;
@@ -31,6 +32,7 @@ class CommentCard extends StatelessWidget {
     this.isEdited = false,
     this.indentLevel = 0,
     this.avatarUrl,
+    this.isVerified = false,
     this.onReply,
     this.onLikeTap,
     this.onReport,
@@ -107,6 +109,14 @@ class CommentCard extends StatelessWidget {
             color: theme.colorScheme.onSurface,
           ),
         ),
+        if (isVerified) ...[
+          SizedBox(width: 4.w),
+          Icon(
+            Icons.verified,
+            size: 14.sp,
+            color: theme.colorScheme.primary,
+          ),
+        ],
         SizedBox(width: 8.w),
         Text(
           timeAgo,

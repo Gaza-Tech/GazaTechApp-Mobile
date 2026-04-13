@@ -9,6 +9,7 @@ class PostCardHeader extends StatelessWidget {
   final String timeAgo;
   final String category;
   final String? avatarUrl;
+  final bool isVerified;
   final VoidCallback? onAuthorTap;
 
   const PostCardHeader({
@@ -17,6 +18,7 @@ class PostCardHeader extends StatelessWidget {
     required this.timeAgo,
     required this.category,
     this.avatarUrl,
+    this.isVerified = false,
     this.onAuthorTap,
   });
 
@@ -49,11 +51,26 @@ class PostCardHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                userName,
-                style: MyTextStyle.action.l.copyWith(
-                  color: theme.colorScheme.onSurface,
-                ),
+              Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      userName,
+                      style: MyTextStyle.action.l.copyWith(
+                        color: theme.colorScheme.onSurface,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  if (isVerified) ...[
+                    SizedBox(width: 4.w),
+                    Icon(
+                      Icons.verified,
+                      size: 16.sp,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ],
+                ],
               ),
               SizedBox(height: 2.h),
               Text(

@@ -299,6 +299,8 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                   CommentCard(
                                     userName: comment.authorName,
                                     avatarUrl: comment.author?.avatarUrl,
+                                    isVerified:
+                                        comment.author?.isVerified ?? false,
                                     timeAgo: _timeAgo(
                                       context,
                                       comment.createdAt,
@@ -384,6 +386,9 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                           return CommentCard(
                                             userName: reply.authorName,
                                             avatarUrl: reply.author?.avatarUrl,
+                                            isVerified:
+                                                reply.author?.isVerified ??
+                                                false,
                                             timeAgo: _timeAgo(
                                               context,
                                               reply.createdAt,
@@ -490,6 +495,8 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
       userName: post.authorName,
       timeAgo: _timeAgo(context, post.createdAt),
       category: post.postCategory,
+      avatarUrl: post.author?.avatarUrl,
+      isVerified: post.author?.isVerified ?? false,
     );
   }
 

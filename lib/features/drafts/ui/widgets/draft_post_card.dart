@@ -11,6 +11,7 @@ class DraftPostCard extends StatelessWidget {
   final String category;
   final String authorName;
   final String timeAgo;
+  final bool isVerified;
   final List<String> attachmentUrls;
   final VoidCallback onEdit;
   final VoidCallback onDelete;
@@ -23,6 +24,7 @@ class DraftPostCard extends StatelessWidget {
     required this.category,
     required this.authorName,
     required this.timeAgo,
+    this.isVerified = false,
     required this.onEdit,
     required this.onDelete,
     required this.onPublish,
@@ -45,6 +47,7 @@ class DraftPostCard extends StatelessWidget {
               userName: authorName,
               timeAgo: timeAgo,
               category: category,
+              isVerified: isVerified,
             ),
             SizedBox(height: 10.h),
             Text(
