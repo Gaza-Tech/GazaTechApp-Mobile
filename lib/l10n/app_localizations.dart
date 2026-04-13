@@ -914,6 +914,12 @@ abstract class AppLocalizations {
   /// **'Add Main Image'**
   String get addMainImage;
 
+  /// No description provided for @addPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Add photo'**
+  String get addPhoto;
+
   /// No description provided for @locationGazaCity.
   ///
   /// In en, this message translates to:

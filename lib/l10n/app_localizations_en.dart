@@ -441,6 +441,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addMainImage => 'Add Main Image';
 
   @override
+  String get addPhoto => 'Add photo';
+
+  @override
   String get locationGazaCity => 'Gaza City';
 
   @override

@@ -440,6 +440,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get addMainImage => 'إضافة صورة رئيسية';
 
   @override
+  String get addPhoto => 'إضافة صورة';
+
+  @override
   String get locationGazaCity => 'مدينة غزة';
 
   @override

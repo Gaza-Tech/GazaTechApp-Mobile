@@ -84,6 +84,9 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
   Widget _buildAddPhotoSlot() {
     final borderColor = Theme.of(context).dividerColor;
     final contentColor = Theme.of(context).textTheme.bodySmall?.color;
+    final label = widget.images.isEmpty
+        ? context.l10n.addMainImage
+        : context.l10n.addPhoto;
     return GestureDetector(
       onTap: _pickImage,
       child: Container(
@@ -98,7 +101,7 @@ class _ImagePickerGridState extends State<ImagePickerGrid> {
               Icon(Icons.camera_alt_rounded, size: 32.sp, color: contentColor),
               const VerticalSpace(4),
               Text(
-                context.l10n.addMainImage,
+                label,
                 style: MyTextStyle.caption.m.copyWith(color: contentColor),
               ),
             ],
