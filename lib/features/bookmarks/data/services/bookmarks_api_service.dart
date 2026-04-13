@@ -11,12 +11,12 @@ class BookmarksApiService {
   static const String _postSelect = '''
     post_id, author_id, title, content, post_category, content_status,
     created_at, published_at, likes_count, comments_count,
-    users!author_id(user_id, first_name, last_name, avatar_url),
+    users!author_id(user_id, first_name, last_name, avatar_url, is_verified),
     community_posts_attachments(file_url)
   ''';
 
   static const String _listingSelect =
-      '*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name), listing_images(image_url, is_thumbnail, sort_order)';
+      '*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name, is_verified), listing_images(image_url, is_thumbnail, sort_order)';
 
   Future<List<Map<String, dynamic>>> fetchBookmarkedPosts(int page) async {
     final userId = _supabase.auth.currentUser?.id;
@@ -29,6 +29,7 @@ class BookmarksApiService {
         .from('bookmarked_posts')
         .select('post_id, community_posts_with_counts!inner($_postSelect)')
         .eq('user_id', userId)
+        .eq('community_posts_with_counts.content_status', 'published')
         .order('created_at', ascending: false)
         .range(start, end);
 
@@ -52,6 +53,7 @@ class BookmarksApiService {
         .from('bookmarked_listings')
         .select('listing_id, marketplace_listings!inner($_listingSelect)')
         .eq('user_id', userId)
+        .eq('marketplace_listings.content_status', 'published')
         .order('created_at', ascending: false)
         .range(start, end);
 
