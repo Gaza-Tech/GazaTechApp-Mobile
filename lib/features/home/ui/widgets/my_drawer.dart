@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
+import 'package:gaza_tech/core/widgets/confirmation_sheet.dart';
 import 'package:gaza_tech/core/widgets/language_bottom_sheet.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
@@ -159,8 +160,18 @@ class _MyDrawerState extends State<MyDrawer> {
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
             onTap: () {
+              final cubit = context.read<SignOutCubit>();
+              final l10n = context.l10n;
+              final errorColor = Theme.of(context).colorScheme.error;
               Navigator.pop(context);
-              context.read<SignOutCubit>().emitSignOutState();
+              showConfirmationSheet(
+                context,
+                title: l10n.signOutConfirmTitle,
+                body: l10n.signOutConfirmBody,
+                confirmLabel: l10n.signOutConfirmButton,
+                confirmColor: errorColor,
+                onConfirm: cubit.emitSignOutState,
+              );
             },
           ),
         ],

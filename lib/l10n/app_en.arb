@@ -165,6 +165,9 @@
   "about": "About",
   "help": "Help",
   "sign_out": "Sign out",
+  "signOutConfirmTitle": "Sign out?",
+  "signOutConfirmBody": "You will need to sign in again to access your account.",
+  "signOutConfirmButton": "Sign out",
 
   "saveDraft": "Save Draft",
   "productImagesMax": "Product Images (Max {count})",

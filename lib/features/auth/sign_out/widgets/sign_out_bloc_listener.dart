@@ -13,15 +13,24 @@ class SignOutBlocListener extends StatelessWidget {
     return BlocListener<SignOutCubit, SignOutState>(
       listener: (context, state) {
         state.whenOrNull(
+          loading: () => showDialog<void>(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) => const Center(child: CircularProgressIndicator()),
+          ),
           success: (message) {
+            if (Navigator.canPop(context)) Navigator.pop(context);
             context.pushNamedAndRemoveUntil(
               MyRoutes.signIn,
               predicate: (route) => false,
             );
           },
-          failure: (message) => ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(message), backgroundColor: Colors.red),
-          ),
+          failure: (message) {
+            if (Navigator.canPop(context)) Navigator.pop(context);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(message), backgroundColor: Colors.red),
+            );
+          },
         );
       },
       child: const SizedBox.shrink(),

@@ -710,6 +710,24 @@ abstract class AppLocalizations {
   /// **'Sign out'**
   String get sign_out;
 
+  /// No description provided for @signOutConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out?'**
+  String get signOutConfirmTitle;
+
+  /// No description provided for @signOutConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to sign in again to access your account.'**
+  String get signOutConfirmBody;
+
+  /// No description provided for @signOutConfirmButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get signOutConfirmButton;
+
   /// No description provided for @saveDraft.
   ///
   /// In en, this message translates to:

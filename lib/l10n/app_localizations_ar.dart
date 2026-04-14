@@ -334,6 +334,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sign_out => 'تسجيل الخروج';
 
   @override
+  String get signOutConfirmTitle => 'تسجيل الخروج؟';
+
+  @override
+  String get signOutConfirmBody =>
+      'ستحتاج إلى تسجيل الدخول مرة أخرى للوصول إلى حسابك.';
+
+  @override
+  String get signOutConfirmButton => 'تسجيل الخروج';
+
+  @override
   String get saveDraft => 'حفظ المسودة';
 
   @override
