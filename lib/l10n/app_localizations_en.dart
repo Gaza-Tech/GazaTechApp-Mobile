@@ -1364,4 +1364,8 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get signUpEmailTaken =>
       'This email is already in use. Please sign in or use a different email.';
+
+  @override
+  String get signInAccountBanned =>
+      'This account has been banned or deactivated. You cannot sign in.';
 }

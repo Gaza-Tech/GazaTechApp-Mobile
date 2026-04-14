@@ -1357,4 +1357,8 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get signUpEmailTaken =>
       'هذا البريد الإلكتروني مستخدم بالفعل. يرجى تسجيل الدخول أو استخدام بريد إلكتروني آخر.';
+
+  @override
+  String get signInAccountBanned =>
+      'تم حظر هذا الحساب أو تعطيله. لا يمكنك تسجيل الدخول.';
 }

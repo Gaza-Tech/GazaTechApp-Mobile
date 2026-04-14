@@ -14,9 +14,19 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
     final result = await _googleAuthRepo.signInWithGoogle();
 
     result.when(
-      success: (response) {
+      success: (response) async {
         if (response.user != null) {
-          emit(const GoogleAuthState.success());
+          final email = response.user!.email ?? '';
+          final checkResult = await _googleAuthRepo.checkEmailAvailability(
+            email,
+          );
+          final status = checkResult.whenOrNull(success: (s) => s);
+          if (status == 'banned') {
+            await _googleAuthRepo.signOut();
+            emit(const GoogleAuthState.accountBanned());
+          } else {
+            emit(const GoogleAuthState.success());
+          }
         } else {
           emit(
             const GoogleAuthState.failure("Sign-in failed: No user returned"),

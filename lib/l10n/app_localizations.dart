@@ -2659,6 +2659,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This email is already in use. Please sign in or use a different email.'**
   String get signUpEmailTaken;
+
+  /// No description provided for @signInAccountBanned.
+  ///
+  /// In en, this message translates to:
+  /// **'This account has been banned or deactivated. You cannot sign in.'**
+  String get signInAccountBanned;
 }
 
 class _AppLocalizationsDelegate

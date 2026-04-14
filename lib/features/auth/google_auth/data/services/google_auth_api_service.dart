@@ -12,6 +12,15 @@ class GoogleAuthApiService {
     );
   }
 
+  /// Returns 'available', 'banned', or 'taken'.
+  Future<String> checkEmailAvailability(String email) async {
+    final result = await _supabase.rpc(
+      'check_email_availability',
+      params: {'email_input': email},
+    );
+    return result as String;
+  }
+
   Future<AuthResponse> signInWithGoogle() async {
     final googleUser = await _googleSignIn.signIn();
     if (googleUser == null) {

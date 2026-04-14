@@ -19,6 +19,14 @@ class GoogleAuthBlocListener extends StatelessWidget {
               predicate: (route) => false,
             );
           },
+          accountBanned: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(context.l10n.signInAccountBanned),
+                backgroundColor: Colors.red,
+              ),
+            );
+          },
           cancelled: () {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(context.l10n.signInCancelled)),

@@ -7,4 +7,5 @@ class SignInState with _$SignInState {
   const factory SignInState.loading() = Loading;
   const factory SignInState.success(String message) = Success;
   const factory SignInState.failure(String message) = Failure;
+  const factory SignInState.accountBanned() = AccountBanned;
 }

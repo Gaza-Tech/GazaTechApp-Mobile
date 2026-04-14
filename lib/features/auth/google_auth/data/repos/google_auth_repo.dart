@@ -7,6 +7,15 @@ class GoogleAuthRepo {
   final GoogleAuthApiService _apiService;
   GoogleAuthRepo(this._apiService);
 
+  Future<ApiResult<String>> checkEmailAvailability(String email) async {
+    try {
+      final result = await _apiService.checkEmailAvailability(email);
+      return ApiResult.success(result);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
   Future<ApiResult<AuthResponse>> signInWithGoogle() async {
     try {
       final response = await _apiService.signInWithGoogle();
@@ -14,5 +23,9 @@ class GoogleAuthRepo {
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
+  }
+
+  Future<void> signOut() async {
+    await _apiService.signOut();
   }
 }
