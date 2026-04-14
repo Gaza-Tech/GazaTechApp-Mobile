@@ -616,6 +616,12 @@
   "signUpEmailTaken": "This email is already in use. Please sign in or use a different email.",
   "signInAccountBanned": "This account has been banned or deactivated. You cannot sign in.",
 
+  "appearance": "Appearance",
+  "theme": "Theme",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "themeSystem": "System",
+
   "termsTitle": "Terms and Conditions",
   "termsLastUpdated": "Last updated: April 2026",
   "termsIntro": "Welcome to Gaza Tech App. By creating an account or using our services, you agree to be bound by these Terms and Conditions. Please read them carefully before using the application.",

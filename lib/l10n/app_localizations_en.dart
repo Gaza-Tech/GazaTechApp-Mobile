@@ -1370,6 +1370,21 @@ class AppLocalizationsEn extends AppLocalizations {
       'This account has been banned or deactivated. You cannot sign in.';
 
   @override
+  String get appearance => 'Appearance';
+
+  @override
+  String get theme => 'Theme';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
   String get termsTitle => 'Terms and Conditions';
 
   @override

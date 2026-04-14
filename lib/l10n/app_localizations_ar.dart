@@ -1363,6 +1363,21 @@ class AppLocalizationsAr extends AppLocalizations {
       'تم حظر هذا الحساب أو تعطيله. لا يمكنك تسجيل الدخول.';
 
   @override
+  String get appearance => 'المظهر';
+
+  @override
+  String get theme => 'السمة';
+
+  @override
+  String get themeLight => 'فاتح';
+
+  @override
+  String get themeDark => 'داكن';
+
+  @override
+  String get themeSystem => 'النظام';
+
+  @override
   String get termsTitle => 'الشروط والأحكام';
 
   @override

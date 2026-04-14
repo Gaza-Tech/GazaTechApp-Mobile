@@ -2,6 +2,9 @@ class SharedPrefKeys {
   // Locale keys
   static const String appLocale = 'app_locale';
 
+  // Theme keys
+  static const String appTheme = 'app_theme';
+
   // Community search
   static const String communityRecentSearches = 'community_recent_searches';
 

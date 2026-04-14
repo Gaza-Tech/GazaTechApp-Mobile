@@ -16,6 +16,8 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gaza_tech/core/localization/locale_cubit.dart';
 import 'package:gaza_tech/core/localization/locale_persistence.dart';
+import 'package:gaza_tech/core/theme/theme_cubit.dart';
+import 'package:gaza_tech/core/theme/theme_persistence.dart';
 import 'package:gaza_tech/features/auth/sign_in/cubit/sign_in_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_in/data/repos/sign_in_repo.dart';
 import 'package:gaza_tech/features/auth/sign_in/data/services/sign_in_api_service.dart';
@@ -86,6 +88,10 @@ Future<void> setupGetIt() async {
   // 0.5 Locale Management
   getIt.registerLazySingleton<LocalePersistence>(() => LocalePersistence());
   getIt.registerLazySingleton<LocaleCubit>(() => LocaleCubit(getIt()));
+
+  // 0.6 Theme Management
+  getIt.registerLazySingleton<ThemePersistence>(() => ThemePersistence());
+  getIt.registerLazySingleton<ThemeCubit>(() => ThemeCubit(getIt()));
 
   // 1. External Services (Supabase)
   final supabase = Supabase.instance.client;

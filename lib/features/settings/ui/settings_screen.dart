@@ -7,6 +7,8 @@ import 'package:gaza_tech/core/helpers/shared_pref_helper.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/core/theme/my_colors.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
+import 'package:gaza_tech/core/theme/theme_cubit.dart';
+import 'package:gaza_tech/core/theme/theme_state.dart';
 import 'package:gaza_tech/core/widgets/language_bottom_sheet.dart';
 import 'package:gaza_tech/core/localization/locale_cubit.dart';
 import 'package:gaza_tech/core/localization/locale_state.dart';
@@ -54,6 +56,55 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Future<void> _setNotifPref(String key, bool value) async {
     await SharedPrefHelper.setData(key, value);
+  }
+
+  void _showThemePicker(BuildContext context, ThemeMode current) {
+    final l10n = context.l10n;
+    showModalBottomSheet<void>(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+      ),
+      builder: (sheetContext) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 12.h),
+              Container(
+                width: 40.w,
+                height: 4.h,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).dividerColor,
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
+              ),
+              SizedBox(height: 8.h),
+              for (final option in [
+                (ThemeMode.light, Icons.light_mode_outlined, l10n.themeLight),
+                (ThemeMode.dark, Icons.dark_mode_outlined, l10n.themeDark),
+                (ThemeMode.system, Icons.settings_suggest_outlined, l10n.themeSystem),
+              ])
+                ListTile(
+                  leading: Icon(option.$2),
+                  title: Text(option.$3, style: MyTextStyle.body.m),
+                  trailing: current == option.$1
+                      ? Icon(
+                          Icons.check,
+                          color: Theme.of(context).colorScheme.primary,
+                        )
+                      : null,
+                  onTap: () {
+                    context.read<ThemeCubit>().setThemeMode(option.$1);
+                    Navigator.pop(sheetContext);
+                  },
+                ),
+              SizedBox(height: 8.h),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void _showDeleteAccountSheet() {
@@ -175,6 +226,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   onTap: () => showLanguageBottomSheet(context),
+                );
+              },
+            ),
+            const Divider(),
+            _SectionHeader(title: l10n.appearance),
+            BlocBuilder<ThemeCubit, ThemeState>(
+              builder: (context, themeState) {
+                final currentLabel = switch (themeState.themeMode) {
+                  ThemeMode.light => l10n.themeLight,
+                  ThemeMode.dark => l10n.themeDark,
+                  ThemeMode.system => l10n.themeSystem,
+                };
+                return ListTile(
+                  leading: const Icon(Icons.brightness_6_outlined),
+                  title: Text(l10n.theme, style: MyTextStyle.body.m),
+                  trailing: Text(
+                    currentLabel,
+                    style: MyTextStyle.body.s.copyWith(
+                      color: isDark
+                          ? MyColors.primary.onDark
+                          : MyColors.primary.base,
+                    ),
+                  ),
+                  onTap: () => _showThemePicker(context, themeState.themeMode),
                 );
               },
             ),

@@ -15,6 +15,8 @@ import 'package:gaza_tech/l10n/app_localizations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/theme/my_themes.dart';
+import 'core/theme/theme_cubit.dart';
+import 'core/theme/theme_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -86,48 +88,55 @@ class _MyAppState extends State<MyApp> {
     final session = Supabase.instance.client.auth.currentSession;
     final initialRoute = session != null ? MyRoutes.home : MyRoutes.signIn;
 
-    return BlocProvider(
-      create: (_) => getIt<LocaleCubit>(),
-      child: BlocBuilder<LocaleCubit, LocaleState>(
-        builder: (context, localeState) {
-          return ScreenUtilInit(
-            designSize: const Size(375, 812),
-            builder: (context, child) {
-              return MaterialApp(
-                navigatorKey: _navigatorKey,
-                debugShowCheckedModeBanner: false,
-                title: 'Gaza Tech App',
-
-                // Localization Configuration
-                locale: localeState.locale,
-                supportedLocales: AppLocalizations.supportedLocales,
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-
-                // Theme Configuration - follows system theme
-                themeMode: ThemeMode.system,
-                theme: MyThemes.getTheme(
-                  brightness: Brightness.light,
-                  locale: localeState.locale,
-                ),
-                darkTheme: MyThemes.getTheme(
-                  brightness: Brightness.dark,
-                  locale: localeState.locale,
-                ),
-                onGenerateRoute: widget.myRouter.generateRoute,
-                initialRoute: initialRoute,
-
-                // RTL support via builder
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<LocaleCubit>()),
+        BlocProvider(create: (_) => getIt<ThemeCubit>()),
+      ],
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, themeState) {
+          return BlocBuilder<LocaleCubit, LocaleState>(
+            builder: (context, localeState) {
+              return ScreenUtilInit(
+                designSize: const Size(375, 812),
                 builder: (context, child) {
-                  return Directionality(
-                    textDirection: LocaleHelper.getTextDirection(
-                      localeState.locale,
+                  return MaterialApp(
+                    navigatorKey: _navigatorKey,
+                    debugShowCheckedModeBanner: false,
+                    title: 'Gaza Tech App',
+
+                    // Localization Configuration
+                    locale: localeState.locale,
+                    supportedLocales: AppLocalizations.supportedLocales,
+                    localizationsDelegates: const [
+                      AppLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+
+                    // Theme Configuration
+                    themeMode: themeState.themeMode,
+                    theme: MyThemes.getTheme(
+                      brightness: Brightness.light,
+                      locale: localeState.locale,
                     ),
-                    child: child!,
+                    darkTheme: MyThemes.getTheme(
+                      brightness: Brightness.dark,
+                      locale: localeState.locale,
+                    ),
+                    onGenerateRoute: widget.myRouter.generateRoute,
+                    initialRoute: initialRoute,
+
+                    // RTL support via builder
+                    builder: (context, child) {
+                      return Directionality(
+                        textDirection: LocaleHelper.getTextDirection(
+                          localeState.locale,
+                        ),
+                        child: child!,
+                      );
+                    },
                   );
                 },
               );
