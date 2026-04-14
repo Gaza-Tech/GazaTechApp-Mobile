@@ -14,13 +14,13 @@ class CommunityApiService {
   static const String _postSelect = '''
     post_id, author_id, title, content, post_category, content_status,
     created_at, published_at, likes_count, comments_count,
-    users!author_id(user_id, first_name, last_name, avatar_url, is_verified),
+    users!author_id(user_id, first_name, last_name, avatar_url, is_verified, is_active),
     community_posts_attachments(file_url)
   ''';
 
   static const String _commentSelect = '''
     comment_id, post_id, author_id, content, is_edited, created_at, parent_comment_id,
-    users!author_id(user_id, first_name, last_name, avatar_url, is_verified),
+    users!author_id(user_id, first_name, last_name, avatar_url, is_verified, is_active),
     community_comments_likes(count),
     community_post_comments!parent_comment_id(count)
   ''';

@@ -50,6 +50,7 @@ import 'package:gaza_tech/features/drafts/ui/drafts_screen.dart';
 import 'package:gaza_tech/features/settings/ui/settings_screen.dart';
 import 'package:gaza_tech/features/help/ui/help_screen.dart';
 import 'package:gaza_tech/features/about/ui/about_screen.dart';
+import 'package:gaza_tech/features/auth/delete_account/cubit/delete_account_cubit.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -251,7 +252,12 @@ class MyRouter {
           ),
         );
       case MyRoutes.settings:
-        return MaterialPageRoute(builder: (_) => const SettingsScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<DeleteAccountCubit>(),
+            child: const SettingsScreen(),
+          ),
+        );
       case MyRoutes.help:
         return MaterialPageRoute(builder: (_) => const HelpScreen());
       case MyRoutes.about:

@@ -114,7 +114,9 @@ class _PostsTabViewState extends State<PostsTabView>
                           Supabase.instance.client.auth.currentUser?.id;
                       final isOwnPost = post.authorId == currentUserId;
                       return PostCard(
-                        userName: post.authorName,
+                        userName: post.authorIsActive
+                            ? post.authorName
+                            : context.l10n.deletedUser,
                         timeAgo: _timeAgo(context, post.createdAt),
                         category: post.postCategory,
                         title: post.title,
@@ -126,8 +128,12 @@ class _PostsTabViewState extends State<PostsTabView>
                         isBookmarked: state.bookmarkedPostIds.contains(
                           post.postId,
                         ),
-                        avatarUrl: post.author?.avatarUrl,
-                        isVerified: post.author?.isVerified ?? false,
+                        avatarUrl: post.authorIsActive
+                            ? post.author?.avatarUrl
+                            : null,
+                        isVerified:
+                            post.authorIsActive &&
+                            (post.author?.isVerified ?? false),
                         onAuthorTap: () => Navigator.pushNamed(
                           context,
                           MyRoutes.profile,

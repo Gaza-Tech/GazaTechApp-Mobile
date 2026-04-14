@@ -51,8 +51,11 @@ abstract class PostModel with _$PostModel {
   factory PostModel.fromJson(Map<String, dynamic> json) =>
       _$PostModelFromJson(json);
 
+  bool get authorIsActive => author?.isActive ?? true;
+
   String get authorName {
     if (author == null) return '';
+    if (!author!.isActive) return 'Deleted Account';
     return '${author!.firstName} ${author!.lastName}'.trim();
   }
 }

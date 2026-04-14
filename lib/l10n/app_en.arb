@@ -576,7 +576,12 @@
   "changePassword": "Change Password",
   "deleteAccount": "Delete Account",
   "deleteAccountTitle": "Delete Account?",
-  "deleteAccountBody": "To delete your account, please contact our support team. This action is irreversible.",
+  "deleteAccountBody": "This will permanently deactivate your account. Your listings will be removed and your name will appear as \"Deleted Account\" everywhere. This action cannot be undone.",
+  "deleteAccountConfirmButton": "Delete My Account",
+  "deleteAccountTypeToConfirm": "Type DELETE to confirm",
+  "deleteConfirmWord": "DELETE",
+  "deletedUser": "Deleted Account",
+  "deletedAccountProfile": "This account has been deleted.",
 
   "faq": "Frequently Asked Questions",
   "helpFaqBuyingTitle": "How do I buy something?",

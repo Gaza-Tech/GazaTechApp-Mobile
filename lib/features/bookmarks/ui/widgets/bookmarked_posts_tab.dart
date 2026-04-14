@@ -59,7 +59,9 @@ class _BookmarkedPostsTabState extends State<BookmarkedPostsTab>
                     final post = state.bookmarkedPosts[index];
                     final cubit = context.read<BookmarksCubit>();
                     return PostCard(
-                      userName: post.authorName,
+                      userName: post.authorIsActive
+                          ? post.authorName
+                          : context.l10n.deletedUser,
                       timeAgo: _timeAgo(context.l10n, post.createdAt),
                       category: post.postCategory,
                       title: post.title,
@@ -67,7 +69,9 @@ class _BookmarkedPostsTabState extends State<BookmarkedPostsTab>
                       attachmentUrls: post.attachmentUrls,
                       likes: post.likesCount,
                       comments: post.commentsCount,
-                      isVerified: post.author?.isVerified ?? false,
+                      isVerified:
+                          post.authorIsActive &&
+                          (post.author?.isVerified ?? false),
                       isLiked: state.likedPostIds.contains(post.postId),
                       isBookmarked: state.bookmarkedPostIds.contains(
                         post.postId,

@@ -1250,7 +1250,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deleteAccountBody =>
-      'To delete your account, please contact our support team. This action is irreversible.';
+      'This will permanently deactivate your account. Your listings will be removed and your name will appear as \"Deleted Account\" everywhere. This action cannot be undone.';
+
+  @override
+  String get deleteAccountConfirmButton => 'Delete My Account';
+
+  @override
+  String get deleteAccountTypeToConfirm => 'Type DELETE to confirm';
+
+  @override
+  String get deleteConfirmWord => 'DELETE';
+
+  @override
+  String get deletedUser => 'Deleted Account';
+
+  @override
+  String get deletedAccountProfile => 'This account has been deleted.';
 
   @override
   String get faq => 'Frequently Asked Questions';
