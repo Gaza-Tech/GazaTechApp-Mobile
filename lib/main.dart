@@ -56,9 +56,21 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _setupAuthListener() {
-    Supabase.instance.client.auth.onAuthStateChange.listen((data) {
+    Supabase.instance.client.auth.onAuthStateChange.listen((data) async {
       final event = data.event;
       if (event == AuthChangeEvent.signedIn) {
+        final email = data.session?.user.email ?? '';
+        if (email.isNotEmpty) {
+          // Check if the account is banned/deactivated before navigating
+          final status = await Supabase.instance.client.rpc(
+            'check_email_availability',
+            params: {'email_input': email},
+          );
+          if (status == 'banned') {
+            await Supabase.instance.client.auth.signOut();
+            return;
+          }
+        }
         // Navigate to home when signed in via OAuth
         _navigatorKey.currentState?.pushNamedAndRemoveUntil(
           MyRoutes.home,
