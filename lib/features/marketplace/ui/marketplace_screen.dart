@@ -42,6 +42,13 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
     _tabController!.addListener(_onTabChanged);
   }
 
+  Future<void> _onRefresh() async {
+    if (_tabController != null && _tabController!.index != 0) {
+      _tabController!.animateTo(0);
+    }
+    await _marketplaceCubit.refreshAll();
+  }
+
   void _onTabChanged() {
     if (_tabController != null && !_tabController!.indexIsChanging) {
       final state = _marketplaceCubit.state;
@@ -148,7 +155,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
           body: TabBarView(
             controller: _tabController,
             children: categorySlugs.map((slug) {
-              return ListingsTabView(category: slug);
+              return ListingsTabView(category: slug, onRefresh: _onRefresh);
             }).toList(),
           ),
         );

@@ -256,6 +256,22 @@ class MarketplaceCubit extends Cubit<MarketplaceState> {
     emit(const MarketplaceState());
   }
 
+  /// Refresh everything: categories + listings, reset tab to 'all'
+  Future<void> refreshAll() async {
+    emit(
+      state.copyWith(
+        categories: [],
+        selectedCategory: 'all',
+        listingsByCategory: {},
+        currentPageByCategory: {},
+        hasMoreByCategory: {},
+        totalCountByCategory: {},
+      ),
+    );
+    await fetchCategories();
+    await fetchListings('all');
+  }
+
   @override
   Future<void> close() {
     _bookmarkSub.cancel();
