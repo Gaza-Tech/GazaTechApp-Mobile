@@ -75,7 +75,9 @@ class _ListingsTabViewState extends State<ListingsTabView>
         // Show empty state
         if (listings.isEmpty) {
           return RefreshIndicator(
-            onRefresh: widget.onRefresh ?? () => _marketplaceCubit.fetchListings(widget.category),
+            onRefresh:
+                widget.onRefresh ??
+                () => _marketplaceCubit.fetchListings(widget.category),
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               child: SizedBox(
@@ -88,12 +90,14 @@ class _ListingsTabViewState extends State<ListingsTabView>
 
         // Show listings in grid
         return RefreshIndicator(
-          onRefresh: widget.onRefresh ?? () async {
-            if (!state.hasMoreFor(widget.category)) {
-              _marketplaceCubit.resetPagination(widget.category);
-            }
-            await _marketplaceCubit.fetchListings(widget.category);
-          },
+          onRefresh:
+              widget.onRefresh ??
+              () async {
+                if (!state.hasMoreFor(widget.category)) {
+                  _marketplaceCubit.resetPagination(widget.category);
+                }
+                await _marketplaceCubit.fetchListings(widget.category);
+              },
           child: NotificationListener<ScrollNotification>(
             onNotification: _onScrollNotification,
             child: CustomScrollView(

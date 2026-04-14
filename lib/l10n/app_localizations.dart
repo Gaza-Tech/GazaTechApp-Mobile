@@ -2629,6 +2629,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Made with love for Gaza'**
   String get madeWithLove;
+
+  /// No description provided for @signUpEmailBanned.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is associated with a banned or deactivated account and cannot be used to sign up.'**
+  String get signUpEmailBanned;
+
+  /// No description provided for @signUpEmailTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already in use. Please sign in or use a different email.'**
+  String get signUpEmailTaken;
 }
 
 class _AppLocalizationsDelegate

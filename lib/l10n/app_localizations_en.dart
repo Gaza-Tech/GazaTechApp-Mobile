@@ -1346,4 +1346,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get madeWithLove => 'Made with love for Gaza';
+
+  @override
+  String get signUpEmailBanned =>
+      'This email is associated with a banned or deactivated account and cannot be used to sign up.';
+
+  @override
+  String get signUpEmailTaken =>
+      'This email is already in use. Please sign in or use a different email.';
 }

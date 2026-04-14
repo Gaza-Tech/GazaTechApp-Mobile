@@ -55,14 +55,16 @@ extension SignUpStatePatterns on SignUpState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( Loading value)?  loading,TResult Function( Success value)?  success,TResult Function( Failure value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( Loading value)?  loading,TResult Function( Success value)?  success,TResult Function( Failure value)?  failure,TResult Function( EmailBanned value)?  emailBanned,TResult Function( EmailTaken value)?  emailTaken,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case Loading() when loading != null:
 return loading(_that);case Success() when success != null:
 return success(_that);case Failure() when failure != null:
-return failure(_that);case _:
+return failure(_that);case EmailBanned() when emailBanned != null:
+return emailBanned(_that);case EmailTaken() when emailTaken != null:
+return emailTaken(_that);case _:
   return orElse();
 
 }
@@ -80,14 +82,16 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( Loading value)  loading,required TResult Function( Success value)  success,required TResult Function( Failure value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( Loading value)  loading,required TResult Function( Success value)  success,required TResult Function( Failure value)  failure,required TResult Function( EmailBanned value)  emailBanned,required TResult Function( EmailTaken value)  emailTaken,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case Loading():
 return loading(_that);case Success():
 return success(_that);case Failure():
-return failure(_that);case _:
+return failure(_that);case EmailBanned():
+return emailBanned(_that);case EmailTaken():
+return emailTaken(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +108,16 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( Loading value)?  loading,TResult? Function( Success value)?  success,TResult? Function( Failure value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( Loading value)?  loading,TResult? Function( Success value)?  success,TResult? Function( Failure value)?  failure,TResult? Function( EmailBanned value)?  emailBanned,TResult? Function( EmailTaken value)?  emailTaken,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case Loading() when loading != null:
 return loading(_that);case Success() when success != null:
 return success(_that);case Failure() when failure != null:
-return failure(_that);case _:
+return failure(_that);case EmailBanned() when emailBanned != null:
+return emailBanned(_that);case EmailTaken() when emailTaken != null:
+return emailTaken(_that);case _:
   return null;
 
 }
@@ -128,13 +134,15 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( String message)?  success,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( String message)?  success,TResult Function( String message)?  failure,TResult Function()?  emailBanned,TResult Function()?  emailTaken,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case Loading() when loading != null:
 return loading();case Success() when success != null:
 return success(_that.message);case Failure() when failure != null:
-return failure(_that.message);case _:
+return failure(_that.message);case EmailBanned() when emailBanned != null:
+return emailBanned();case EmailTaken() when emailTaken != null:
+return emailTaken();case _:
   return orElse();
 
 }
@@ -152,13 +160,15 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( String message)  success,required TResult Function( String message)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( String message)  success,required TResult Function( String message)  failure,required TResult Function()  emailBanned,required TResult Function()  emailTaken,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case Loading():
 return loading();case Success():
 return success(_that.message);case Failure():
-return failure(_that.message);case _:
+return failure(_that.message);case EmailBanned():
+return emailBanned();case EmailTaken():
+return emailTaken();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +185,15 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( String message)?  success,TResult? Function( String message)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( String message)?  success,TResult? Function( String message)?  failure,TResult? Function()?  emailBanned,TResult? Function()?  emailTaken,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case Loading() when loading != null:
 return loading();case Success() when success != null:
 return success(_that.message);case Failure() when failure != null:
-return failure(_that.message);case _:
+return failure(_that.message);case EmailBanned() when emailBanned != null:
+return emailBanned();case EmailTaken() when emailTaken != null:
+return emailTaken();case _:
   return null;
 
 }
@@ -384,5 +396,69 @@ as String,
 
 
 }
+
+/// @nodoc
+
+
+class EmailBanned implements SignUpState {
+  const EmailBanned();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EmailBanned);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SignUpState.emailBanned()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class EmailTaken implements SignUpState {
+  const EmailTaken();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EmailTaken);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SignUpState.emailTaken()';
+}
+
+
+}
+
+
+
 
 // dart format on

@@ -1339,4 +1339,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get madeWithLove => 'صُنع بكل محبة لغزة';
+
+  @override
+  String get signUpEmailBanned =>
+      'هذا البريد الإلكتروني مرتبط بحساب محظور أو معطّل ولا يمكن استخدامه للتسجيل.';
+
+  @override
+  String get signUpEmailTaken =>
+      'هذا البريد الإلكتروني مستخدم بالفعل. يرجى تسجيل الدخول أو استخدام بريد إلكتروني آخر.';
 }

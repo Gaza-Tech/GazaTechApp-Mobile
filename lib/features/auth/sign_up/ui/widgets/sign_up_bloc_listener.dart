@@ -4,7 +4,7 @@ import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/auth/sign_up/cubit/sign_up_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_up/cubit/sign_up_state.dart'
-    hide Success, Failure;
+    hide Success, Failure, EmailBanned, EmailTaken;
 
 class SignUpBlocListener extends StatelessWidget {
   const SignUpBlocListener({super.key});
@@ -34,6 +34,24 @@ class SignUpBlocListener extends StatelessWidget {
 
             // Navigate to Verify OTP Screen
             context.pushNamed(MyRoutes.verifyOtp, arguments: email);
+          },
+          emailBanned: () {
+            Navigator.of(context).pop(); // Close dialog
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(context.l10n.signUpEmailBanned),
+                backgroundColor: Colors.red,
+              ),
+            );
+          },
+          emailTaken: () {
+            Navigator.of(context).pop(); // Close dialog
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(context.l10n.signUpEmailTaken),
+                backgroundColor: Colors.red,
+              ),
+            );
           },
           failure: (error) {
             Navigator.of(context).pop(); // Close dialog

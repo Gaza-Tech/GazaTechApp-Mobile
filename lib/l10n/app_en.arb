@@ -607,5 +607,8 @@
   "rateApp": "Rate the App",
   "openSourceLicenses": "Open Source Licenses",
   "termsOfService": "Terms of Service",
-  "madeWithLove": "Made with love for Gaza"
+  "madeWithLove": "Made with love for Gaza",
+
+  "signUpEmailBanned": "This email is associated with a banned or deactivated account and cannot be used to sign up.",
+  "signUpEmailTaken": "This email is already in use. Please sign in or use a different email."
 }
