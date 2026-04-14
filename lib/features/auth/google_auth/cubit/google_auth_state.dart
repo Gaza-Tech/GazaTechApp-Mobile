@@ -9,4 +9,5 @@ class GoogleAuthState with _$GoogleAuthState {
   const factory GoogleAuthState.success() = Success;
   const factory GoogleAuthState.cancelled() = Cancelled;
   const factory GoogleAuthState.failure(String message) = Failure;
+  const factory GoogleAuthState.accountBanned() = AccountBanned;
 }

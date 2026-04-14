@@ -28,6 +28,15 @@ class SignInBlocListener extends StatelessWidget {
               predicate: (route) => false,
             );
           },
+          accountBanned: () {
+            Navigator.of(context).pop(); // Close dialog
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(context.l10n.signInAccountBanned),
+                backgroundColor: Colors.red,
+              ),
+            );
+          },
           failure: (error) {
             Navigator.of(context).pop(); // Close dialog
             showDialog(

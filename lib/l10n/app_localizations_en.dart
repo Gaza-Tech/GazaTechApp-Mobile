@@ -335,6 +335,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sign_out => 'Sign out';
 
   @override
+  String get signOutConfirmTitle => 'Sign out?';
+
+  @override
+  String get signOutConfirmBody =>
+      'You will need to sign in again to access your account.';
+
+  @override
+  String get signOutConfirmButton => 'Sign out';
+
+  @override
   String get saveDraft => 'Save Draft';
 
   @override
@@ -1354,4 +1364,8 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get signUpEmailTaken =>
       'This email is already in use. Please sign in or use a different email.';
+
+  @override
+  String get signInAccountBanned =>
+      'This account has been banned or deactivated. You cannot sign in.';
 }

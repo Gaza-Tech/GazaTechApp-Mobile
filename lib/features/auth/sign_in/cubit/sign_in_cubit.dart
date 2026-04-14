@@ -18,11 +18,18 @@ class SignInCubit extends Cubit<SignInState> {
 
     emit(const SignInState.loading());
 
+    final email = emailController.text.trim();
+
+    // Check if email belongs to a banned/deactivated account
+    final checkResult = await _signInRepo.checkEmailAvailability(email);
+    final status = checkResult.whenOrNull(success: (s) => s);
+    if (status == 'banned') {
+      emit(const SignInState.accountBanned());
+      return;
+    }
+
     final result = await _signInRepo.login(
-      SignInRequestBody(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      ),
+      SignInRequestBody(email: email, password: passwordController.text.trim()),
     );
 
     result.when(

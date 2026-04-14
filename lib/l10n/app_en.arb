@@ -165,6 +165,9 @@
   "about": "About",
   "help": "Help",
   "sign_out": "Sign out",
+  "signOutConfirmTitle": "Sign out?",
+  "signOutConfirmBody": "You will need to sign in again to access your account.",
+  "signOutConfirmButton": "Sign out",
 
   "saveDraft": "Save Draft",
   "productImagesMax": "Product Images (Max {count})",
@@ -610,5 +613,6 @@
   "madeWithLove": "Made with love for Gaza",
 
   "signUpEmailBanned": "This email is associated with a banned or deactivated account and cannot be used to sign up.",
-  "signUpEmailTaken": "This email is already in use. Please sign in or use a different email."
+  "signUpEmailTaken": "This email is already in use. Please sign in or use a different email.",
+  "signInAccountBanned": "This account has been banned or deactivated. You cannot sign in."
 }
