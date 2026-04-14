@@ -2665,6 +2665,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This account has been banned or deactivated. You cannot sign in.'**
   String get signInAccountBanned;
+
+  /// No description provided for @termsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and Conditions'**
+  String get termsTitle;
+
+  /// No description provided for @termsLastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated: April 2026'**
+  String get termsLastUpdated;
+
+  /// No description provided for @termsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Gaza Tech App. By creating an account or using our services, you agree to be bound by these Terms and Conditions. Please read them carefully before using the application.'**
+  String get termsIntro;
+
+  /// No description provided for @termsAccountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Account Registration'**
+  String get termsAccountTitle;
+
+  /// No description provided for @termsAccountBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You must provide accurate and complete information when creating an account. You are responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account. You must be at least 15 years old to use this application. Gaza Tech App reserves the right to suspend or terminate accounts that violate these terms.'**
+  String get termsAccountBody;
+
+  /// No description provided for @termsMarketplaceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'2. Marketplace'**
+  String get termsMarketplaceTitle;
+
+  /// No description provided for @termsMarketplaceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Gaza Tech App provides a platform for users to list and discover products. We do not participate in, facilitate, or guarantee any transactions between buyers and sellers. All transactions are conducted at the sole risk and responsibility of the parties involved. Users must list products accurately and honestly. Listings for illegal, counterfeit, stolen, or prohibited items are strictly forbidden.'**
+  String get termsMarketplaceBody;
+
+  /// No description provided for @termsCommunityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'3. Community'**
+  String get termsCommunityTitle;
+
+  /// No description provided for @termsCommunityBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Users may post content, comments, and engage in community discussions. You retain ownership of your content but grant Gaza Tech App a non-exclusive license to display it within the platform. You agree not to post content that is offensive, harmful, misleading, defamatory, or violates any applicable laws. Gaza Tech App reserves the right to remove any content that violates these guidelines.'**
+  String get termsCommunityBody;
+
+  /// No description provided for @termsContentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'4. User Content & Conduct'**
+  String get termsContentTitle;
+
+  /// No description provided for @termsContentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You are solely responsible for all content you create, upload, or share on the platform. You must not impersonate others, spam, harass other users, or engage in any fraudulent activity. Gaza Tech App may moderate, remove, or restrict content or accounts at its discretion to maintain a safe and respectful environment.'**
+  String get termsContentBody;
+
+  /// No description provided for @termsVerificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'5. Identity Verification'**
+  String get termsVerificationTitle;
+
+  /// No description provided for @termsVerificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Some features may require identity verification. By submitting verification documents (such as national ID), you confirm that the documents are authentic and belong to you. Verification documents are processed securely and handled in accordance with our Privacy Policy.'**
+  String get termsVerificationBody;
+
+  /// No description provided for @termsIntellectualTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'6. Intellectual Property'**
+  String get termsIntellectualTitle;
+
+  /// No description provided for @termsIntellectualBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The Gaza Tech App name, logo, design, and all underlying technology are the intellectual property of Gaza Tech App. You may not copy, modify, distribute, or reverse-engineer any part of the application without prior written consent.'**
+  String get termsIntellectualBody;
+
+  /// No description provided for @termsLiabilityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'7. Limitation of Liability'**
+  String get termsLiabilityTitle;
+
+  /// No description provided for @termsLiabilityBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Gaza Tech App is provided \"as is\" without warranties of any kind. We are not liable for any direct, indirect, incidental, or consequential damages arising from your use of the platform, including but not limited to losses from marketplace transactions, data loss, or service interruptions.'**
+  String get termsLiabilityBody;
+
+  /// No description provided for @termsChangesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'8. Changes to Terms'**
+  String get termsChangesTitle;
+
+  /// No description provided for @termsChangesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We may update these Terms and Conditions from time to time. Continued use of the application after changes constitutes acceptance of the updated terms. We will notify users of significant changes through the application.'**
+  String get termsChangesBody;
+
+  /// No description provided for @termsContactTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'9. Contact Us'**
+  String get termsContactTitle;
+
+  /// No description provided for @termsContactBody.
+  ///
+  /// In en, this message translates to:
+  /// **'If you have any questions about these Terms and Conditions, please contact us at:'**
+  String get termsContactBody;
+
+  /// No description provided for @privacyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyTitle;
+
+  /// No description provided for @privacyLastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated: April 2026'**
+  String get privacyLastUpdated;
+
+  /// No description provided for @privacyIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Gaza Tech App is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and protect your personal information when you use our application.'**
+  String get privacyIntro;
+
+  /// No description provided for @privacyCollectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Information We Collect'**
+  String get privacyCollectionTitle;
+
+  /// No description provided for @privacyCollectionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We collect the following types of information:\n\n• Account information: name, email address, and password when you register.\n• Profile information: bio, phone number, social media links, and profile photo that you choose to provide.\n• Content: listings, posts, comments, bookmarks, and images you create or upload.\n• Verification documents: national ID, date of birth, and address when you apply for identity verification.\n• Usage data: anonymous analytics and crash reports to improve app performance and stability.'**
+  String get privacyCollectionBody;
+
+  /// No description provided for @privacyUseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'2. How We Use Your Information'**
+  String get privacyUseTitle;
+
+  /// No description provided for @privacyUseBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We use your information to:\n\n• Provide, maintain, and improve the Gaza Tech App services.\n• Create and manage your account.\n• Display your listings and posts to other users.\n• Process identity verification requests.\n• Send important service notifications.\n• Analyze app usage to fix bugs and improve user experience.\n• Enforce our Terms and Conditions and protect user safety.'**
+  String get privacyUseBody;
+
+  /// No description provided for @privacyStorageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'3. Data Storage & Security'**
+  String get privacyStorageTitle;
+
+  /// No description provided for @privacyStorageBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data is securely stored using Supabase, a trusted cloud infrastructure provider. We implement industry-standard security measures including encryption in transit and at rest, secure authentication protocols, and access controls. While we take reasonable steps to protect your data, no system is completely secure, and we cannot guarantee absolute security.'**
+  String get privacyStorageBody;
+
+  /// No description provided for @privacySharingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'4. Information Sharing'**
+  String get privacySharingTitle;
+
+  /// No description provided for @privacySharingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We do not sell your personal information. Your data may be shared in the following circumstances:\n\n• Public profile information, listings, and posts are visible to other users as part of the platform\'s functionality.\n• With service providers (Supabase, Google Analytics) who help us operate the application, under strict data processing agreements.\n• When required by law or to protect the rights and safety of our users and platform.'**
+  String get privacySharingBody;
+
+  /// No description provided for @privacyRightsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'5. Your Rights'**
+  String get privacyRightsTitle;
+
+  /// No description provided for @privacyRightsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You have the right to:\n\n• Access and update your personal information through your profile settings.\n• Delete your account and associated data by contacting us or using the account deletion feature.\n• Request a copy of the data we hold about you.\n• Withdraw consent for optional data processing at any time.'**
+  String get privacyRightsBody;
+
+  /// No description provided for @privacyRetentionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'6. Data Retention'**
+  String get privacyRetentionTitle;
+
+  /// No description provided for @privacyRetentionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We retain your data for as long as your account is active or as needed to provide services. When you delete your account, your personal data will be removed within 30 days, except where we are required by law to retain certain information.'**
+  String get privacyRetentionBody;
+
+  /// No description provided for @privacyChildrenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'7. Children\'s Privacy'**
+  String get privacyChildrenTitle;
+
+  /// No description provided for @privacyChildrenBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Gaza Tech App is not intended for children under the age of 15. We do not knowingly collect personal information from children. If we become aware that we have collected data from a child under 15, we will take steps to delete that information promptly.'**
+  String get privacyChildrenBody;
+
+  /// No description provided for @privacyChangesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'8. Changes to This Policy'**
+  String get privacyChangesTitle;
+
+  /// No description provided for @privacyChangesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We may update this Privacy Policy from time to time. We will notify you of significant changes through the application. Continued use of the app after changes constitutes acceptance of the updated policy.'**
+  String get privacyChangesBody;
+
+  /// No description provided for @privacyContactTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'9. Contact Us'**
+  String get privacyContactTitle;
+
+  /// No description provided for @privacyContactBody.
+  ///
+  /// In en, this message translates to:
+  /// **'If you have any questions about this Privacy Policy or wish to exercise your data rights, please contact us at:'**
+  String get privacyContactBody;
 }
 
 class _AppLocalizationsDelegate

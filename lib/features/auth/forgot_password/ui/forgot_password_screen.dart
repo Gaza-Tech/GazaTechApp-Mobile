@@ -31,70 +31,73 @@ class ForgotPasswordScreen extends StatelessWidget {
           onDismiss: () =>
               context.read<ForgotPasswordCubit>().clearFormErrors(),
           child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Language Switcher
-                const LanguageSwitcher(),
-                const VerticalSpace(16),
-                Text(
-                  context.l10n.forgotPasswordTitle,
-                  style: MyTextStyle.heading.h1,
-                ),
-                const VerticalSpace(8),
-                Text(
-                  context.l10n.forgotPasswordSubtitle,
-                  style: MyTextStyle.body.s,
-                ),
-                const VerticalSpace(40),
-                Form(
-                  key: context.read<ForgotPasswordCubit>().formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        context.l10n.email,
-                        style: MyTextStyle.body.m.copyWith(
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const VerticalSpace(8),
-                      MyTextFormField(
-                        controller: context
-                            .read<ForgotPasswordCubit>()
-                            .emailController,
-                        hintText: context.l10n.emailHint,
-                        textInputType: TextInputType.emailAddress,
-                        validator: (v) {
-                          if (v == null || v.isEmpty) {
-                            return context.l10n.required;
-                          }
-                          if (!v.contains('@')) {
-                            return context.l10n.invalidEmail;
-                          }
-                          return null;
-                        },
-                      ),
-                    ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 40,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Language Switcher
+                  const LanguageSwitcher(),
+                  const VerticalSpace(16),
+                  Text(
+                    context.l10n.forgotPasswordTitle,
+                    style: MyTextStyle.heading.h1,
                   ),
-                ),
-                const VerticalSpace(40),
-                MyButton(
-                  text: context.l10n.sendRecoveryCode,
-                  onPressed: () => context
-                      .read<ForgotPasswordCubit>()
-                      .emitSendResetEmailState(),
-                  height: 48.h,
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                ),
+                  const VerticalSpace(8),
+                  Text(
+                    context.l10n.forgotPasswordSubtitle,
+                    style: MyTextStyle.body.s,
+                  ),
+                  const VerticalSpace(40),
+                  Form(
+                    key: context.read<ForgotPasswordCubit>().formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          context.l10n.email,
+                          style: MyTextStyle.body.m.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const VerticalSpace(8),
+                        MyTextFormField(
+                          controller: context
+                              .read<ForgotPasswordCubit>()
+                              .emailController,
+                          hintText: context.l10n.emailHint,
+                          textInputType: TextInputType.emailAddress,
+                          validator: (v) {
+                            if (v == null || v.isEmpty) {
+                              return context.l10n.required;
+                            }
+                            if (!v.contains('@')) {
+                              return context.l10n.invalidEmail;
+                            }
+                            return null;
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  const VerticalSpace(40),
+                  MyButton(
+                    text: context.l10n.sendRecoveryCode,
+                    onPressed: () => context
+                        .read<ForgotPasswordCubit>()
+                        .emitSendResetEmailState(),
+                    height: 48.h,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                  ),
 
-                const ForgotPasswordBlocListener(),
-              ],
+                  const ForgotPasswordBlocListener(),
+                ],
+              ),
             ),
           ),
-        ),
         ),
       ),
     );

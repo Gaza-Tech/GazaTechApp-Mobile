@@ -31,8 +31,11 @@ class AddListingCubit extends Cubit<AddListingState> with FormErrorClearable {
   final formKey = GlobalKey<FormState>();
 
   @override
-  List<TextEditingController> get formControllers =>
-      [titleController, priceController, descriptionController];
+  List<TextEditingController> get formControllers => [
+    titleController,
+    priceController,
+    descriptionController,
+  ];
 
   /// Load categories and locations from DB
   Future<void> loadFormData() async {

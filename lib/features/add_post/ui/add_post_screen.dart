@@ -110,87 +110,87 @@ class _AddPostScreenState extends State<AddPostScreen> {
             return FormErrorDismisser(
               onDismiss: () => cubit.clearFormErrors(),
               child: SingleChildScrollView(
-              padding: EdgeInsets.all(16.w),
-              child: Form(
-                key: cubit.formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    LabeledField(label: l10n.postTitle),
-                    const VerticalSpace(8),
-                    MyTextFormField(
-                      controller: cubit.titleController,
-                      hintText: l10n.enterPostTitle,
-                      textInputType: TextInputType.text,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return l10n.required;
-                        }
-                        return null;
-                      },
-                    ),
-                    const VerticalSpace(16),
-                    LabeledField(label: l10n.categoryLabel),
-                    const VerticalSpace(8),
-                    ChipSelector(
-                      items: [
-                        l10n.questions,
-                        l10n.tips,
-                        l10n.news,
-                        l10n.troubleshooting,
-                      ],
-                      selectedIndex: _selectedCategoryIndex,
-                      onChanged: (index) {
-                        setState(() => _selectedCategoryIndex = index);
-                      },
-                    ),
-                    const VerticalSpace(16),
-                    LabeledField(label: l10n.content),
-                    const VerticalSpace(8),
-                    MyTextFormField(
-                      controller: cubit.contentController,
-                      hintText: l10n.writeYourPostHere,
-                      textInputType: TextInputType.multiline,
-                      minLines: 8,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 20.w,
-                        vertical: 16.w,
+                padding: EdgeInsets.all(16.w),
+                child: Form(
+                  key: cubit.formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      LabeledField(label: l10n.postTitle),
+                      const VerticalSpace(8),
+                      MyTextFormField(
+                        controller: cubit.titleController,
+                        hintText: l10n.enterPostTitle,
+                        textInputType: TextInputType.text,
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return l10n.required;
+                          }
+                          return null;
+                        },
                       ),
-                    ),
-                    const VerticalSpace(16),
-                    LabeledField(label: l10n.attachments, isRequired: false),
-                    const VerticalSpace(8),
-                    ImagePickerGrid(
-                      images: _attachments,
-                      maxImages: AddPostCubit.maxAttachments,
-                      onImagesChanged: (updated) {
-                        setState(() => _attachments = updated);
-                        cubit.attachments = updated;
-                      },
-                    ),
-                    const VerticalSpace(24),
-                    MyButton(
-                      text: cubit.isDraftEdit
-                          ? l10n.publishPost
-                          : (isEdit ? l10n.updatePost : l10n.publishPost),
-                      onPressed: isLoading
-                          ? null
-                          : () {
-                              final catIndex = _selectedCategoryIndex ?? -1;
-                              if (isEdit) {
-                                cubit.updatePost(
-                                  catIndex,
-                                  publish: cubit.isDraftEdit,
-                                );
-                              } else {
-                                cubit.createPost(catIndex);
-                              }
-                            },
-                    ),
-                  ],
+                      const VerticalSpace(16),
+                      LabeledField(label: l10n.categoryLabel),
+                      const VerticalSpace(8),
+                      ChipSelector(
+                        items: [
+                          l10n.questions,
+                          l10n.tips,
+                          l10n.news,
+                          l10n.troubleshooting,
+                        ],
+                        selectedIndex: _selectedCategoryIndex,
+                        onChanged: (index) {
+                          setState(() => _selectedCategoryIndex = index);
+                        },
+                      ),
+                      const VerticalSpace(16),
+                      LabeledField(label: l10n.content),
+                      const VerticalSpace(8),
+                      MyTextFormField(
+                        controller: cubit.contentController,
+                        hintText: l10n.writeYourPostHere,
+                        textInputType: TextInputType.multiline,
+                        minLines: 8,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 20.w,
+                          vertical: 16.w,
+                        ),
+                      ),
+                      const VerticalSpace(16),
+                      LabeledField(label: l10n.attachments, isRequired: false),
+                      const VerticalSpace(8),
+                      ImagePickerGrid(
+                        images: _attachments,
+                        maxImages: AddPostCubit.maxAttachments,
+                        onImagesChanged: (updated) {
+                          setState(() => _attachments = updated);
+                          cubit.attachments = updated;
+                        },
+                      ),
+                      const VerticalSpace(24),
+                      MyButton(
+                        text: cubit.isDraftEdit
+                            ? l10n.publishPost
+                            : (isEdit ? l10n.updatePost : l10n.publishPost),
+                        onPressed: isLoading
+                            ? null
+                            : () {
+                                final catIndex = _selectedCategoryIndex ?? -1;
+                                if (isEdit) {
+                                  cubit.updatePost(
+                                    catIndex,
+                                    publish: cubit.isDraftEdit,
+                                  );
+                                } else {
+                                  cubit.createPost(catIndex);
+                                }
+                              },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
             );
           },
         ),

@@ -5,7 +5,8 @@ import 'package:gaza_tech/core/netowoks/api_result.dart';
 import '../data/repos/reset_password_repo.dart';
 import 'reset_password_state.dart';
 
-class ResetPasswordCubit extends Cubit<ResetPasswordState> with FormErrorClearable {
+class ResetPasswordCubit extends Cubit<ResetPasswordState>
+    with FormErrorClearable {
   final ResetPasswordRepo _resetPasswordRepo;
   final String email;
 
@@ -19,8 +20,10 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> with FormErrorClearab
   final confirmPasswordController = TextEditingController();
 
   @override
-  List<TextEditingController> get formControllers =>
-      [passwordController, confirmPasswordController];
+  List<TextEditingController> get formControllers => [
+    passwordController,
+    confirmPasswordController,
+  ];
 
   Future<void> emitVerifyOtpState() async {
     emit(const ResetPasswordState.verifyLoading());

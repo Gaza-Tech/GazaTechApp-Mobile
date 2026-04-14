@@ -5,7 +5,8 @@ import 'package:gaza_tech/core/netowoks/api_result.dart';
 import '../data/repos/forgot_password_repo.dart';
 import 'forgot_password_state.dart';
 
-class ForgotPasswordCubit extends Cubit<ForgotPasswordState> with FormErrorClearable {
+class ForgotPasswordCubit extends Cubit<ForgotPasswordState>
+    with FormErrorClearable {
   final ForgotPasswordRepo _forgotPasswordRepo;
 
   ForgotPasswordCubit(this._forgotPasswordRepo)

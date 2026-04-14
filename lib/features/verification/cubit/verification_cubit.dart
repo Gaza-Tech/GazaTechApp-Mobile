@@ -10,7 +10,8 @@ import 'package:intl/intl.dart';
 
 import 'verification_state.dart';
 
-class VerificationCubit extends Cubit<VerificationState> with FormErrorClearable {
+class VerificationCubit extends Cubit<VerificationState>
+    with FormErrorClearable {
   final VerificationRepo _repo;
   final _picker = ImagePicker();
 

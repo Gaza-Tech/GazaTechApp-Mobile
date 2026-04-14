@@ -24,4 +24,6 @@ class MyRoutes {
   static const String settings = '/settings';
   static const String help = '/help';
   static const String about = '/about';
+  static const String termsAndConditions = '/termsAndConditions';
+  static const String privacyPolicy = '/privacyPolicy';
 }

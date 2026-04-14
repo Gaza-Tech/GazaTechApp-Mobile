@@ -176,221 +176,223 @@ class _AddListingScreenState extends State<AddListingScreen> {
                     : FormErrorDismisser(
                         onDismiss: () => cubit.clearFormErrors(),
                         child: SingleChildScrollView(
-                        padding: EdgeInsets.all(16.w),
-                        child: Form(
-                          key: cubit.formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // images
-                              Text(
-                                context.l10n.productImagesMax(_maxImages),
-                                style: theme.textTheme.titleMedium,
-                              ),
-                              Text(
-                                context.l10n.productImagesHelper,
-                                style: theme.textTheme.bodySmall,
-                              ),
-                              const VerticalSpace(12),
-                              ImagePickerGrid(
-                                images: _selectedImages,
-                                maxImages: _maxImages,
-                                onImagesChanged: (images) {
-                                  setState(() => _selectedImages = images);
-                                },
-                              ),
-                              const VerticalSpace(8),
-
-                              Text(
-                                context.l10n.productInformation,
-                                style: theme.textTheme.titleMedium,
-                              ),
-                              const VerticalSpace(16),
-
-                              // title
-                              LabeledField(label: context.l10n.titleLabel),
-                              Text(
-                                context.l10n.titleHelper,
-                                style: theme.textTheme.bodySmall,
-                              ),
-                              const VerticalSpace(8),
-                              MyTextFormField(
-                                controller: cubit.titleController,
-                                hintText: context.l10n.titleHint,
-                                textInputType: TextInputType.text,
-                                validator: (value) {
-                                  if (value == null || value.trim().isEmpty) {
-                                    return context.l10n.titleLabel;
-                                  }
-                                  return null;
-                                },
-                              ),
-                              const VerticalSpace(16),
-
-                              // category
-                              LabeledField(label: context.l10n.categoryLabel),
-                              const VerticalSpace(8),
-                              Selector(
-                                selectedValue: _selectedCategoryName,
-                                items: state.categories
-                                    .map(
-                                      (c) => _localizedName(
-                                        c.name,
-                                        c.nameAr,
-                                        isArabic,
-                                      ),
-                                    )
-                                    .toList(),
-                                hintText: context.l10n.selectCategory,
-                                title: context.l10n.selectCategoryTitle,
-                                onSelected: (index) {
-                                  final category = state.categories[index];
-                                  setState(() {
-                                    _selectedCategoryId = category.id;
-                                    _selectedCategoryName = _localizedName(
-                                      category.name,
-                                      category.nameAr,
-                                      isArabic,
-                                    );
-                                  });
-                                },
-                              ),
-                              const VerticalSpace(16),
-
-                              // condition
-                              LabeledField(label: context.l10n.conditionLabel),
-                              const VerticalSpace(8),
-                              ConditionSelector(
-                                selectedCondition: _selectedCondition,
-                                onConditionChanged: (condition) {
-                                  setState(
-                                    () => _selectedCondition = condition,
-                                  );
-                                },
-                              ),
-                              const VerticalSpace(16),
-
-                              // price
-                              LabeledField(label: context.l10n.priceLabel),
-                              Text(
-                                context.l10n.priceHelper,
-                                style: theme.textTheme.bodySmall,
-                              ),
-                              const VerticalSpace(8),
-                              PriceField(
-                                controller: cubit.priceController,
-                                isILS: _isILS,
-                                onCurrencyChanged: (isILS) {
-                                  setState(() => _isILS = isILS);
-                                },
-                              ),
-                              const VerticalSpace(16),
-
-                              // description
-                              LabeledField(
-                                label: context.l10n.descriptionLabel,
-                              ),
-                              Text(
-                                context.l10n.descriptionHelper,
-                                style: theme.textTheme.bodySmall,
-                              ),
-                              const VerticalSpace(8),
-                              MyTextFormField(
-                                controller: cubit.descriptionController,
-                                hintText: context.l10n.descriptionHint,
-                                textInputType: TextInputType.multiline,
-                                contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 20.w,
-                                  vertical: 16.w,
+                          padding: EdgeInsets.all(16.w),
+                          child: Form(
+                            key: cubit.formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // images
+                                Text(
+                                  context.l10n.productImagesMax(_maxImages),
+                                  style: theme.textTheme.titleMedium,
                                 ),
-                                maxLength: 250,
-                                minLines: 11,
-                              ),
-                              const VerticalSpace(16),
+                                Text(
+                                  context.l10n.productImagesHelper,
+                                  style: theme.textTheme.bodySmall,
+                                ),
+                                const VerticalSpace(12),
+                                ImagePickerGrid(
+                                  images: _selectedImages,
+                                  maxImages: _maxImages,
+                                  onImagesChanged: (images) {
+                                    setState(() => _selectedImages = images);
+                                  },
+                                ),
+                                const VerticalSpace(8),
 
-                              // specifications
-                              SpecificationsDisplay(
-                                specifications: _specifications,
-                                onAdd: () {
-                                  setState(
-                                    () => _specifications.add(
-                                      SpecificationEntry(),
-                                    ),
-                                  );
-                                },
-                                onRemove: (index) {
-                                  setState(() {
-                                    _specifications[index].dispose();
-                                    _specifications.removeAt(index);
-                                  });
-                                },
-                              ),
-                              const VerticalSpace(16),
+                                Text(
+                                  context.l10n.productInformation,
+                                  style: theme.textTheme.titleMedium,
+                                ),
+                                const VerticalSpace(16),
 
-                              // location
-                              LabeledField(label: context.l10n.locationLabel),
-                              const VerticalSpace(8),
-                              Selector(
-                                selectedValue: _selectedLocationName,
-                                items: state.locations
-                                    .map(
-                                      (l) => _localizedName(
-                                        l.name,
-                                        l.nameAr,
+                                // title
+                                LabeledField(label: context.l10n.titleLabel),
+                                Text(
+                                  context.l10n.titleHelper,
+                                  style: theme.textTheme.bodySmall,
+                                ),
+                                const VerticalSpace(8),
+                                MyTextFormField(
+                                  controller: cubit.titleController,
+                                  hintText: context.l10n.titleHint,
+                                  textInputType: TextInputType.text,
+                                  validator: (value) {
+                                    if (value == null || value.trim().isEmpty) {
+                                      return context.l10n.titleLabel;
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const VerticalSpace(16),
+
+                                // category
+                                LabeledField(label: context.l10n.categoryLabel),
+                                const VerticalSpace(8),
+                                Selector(
+                                  selectedValue: _selectedCategoryName,
+                                  items: state.categories
+                                      .map(
+                                        (c) => _localizedName(
+                                          c.name,
+                                          c.nameAr,
+                                          isArabic,
+                                        ),
+                                      )
+                                      .toList(),
+                                  hintText: context.l10n.selectCategory,
+                                  title: context.l10n.selectCategoryTitle,
+                                  onSelected: (index) {
+                                    final category = state.categories[index];
+                                    setState(() {
+                                      _selectedCategoryId = category.id;
+                                      _selectedCategoryName = _localizedName(
+                                        category.name,
+                                        category.nameAr,
                                         isArabic,
+                                      );
+                                    });
+                                  },
+                                ),
+                                const VerticalSpace(16),
+
+                                // condition
+                                LabeledField(
+                                  label: context.l10n.conditionLabel,
+                                ),
+                                const VerticalSpace(8),
+                                ConditionSelector(
+                                  selectedCondition: _selectedCondition,
+                                  onConditionChanged: (condition) {
+                                    setState(
+                                      () => _selectedCondition = condition,
+                                    );
+                                  },
+                                ),
+                                const VerticalSpace(16),
+
+                                // price
+                                LabeledField(label: context.l10n.priceLabel),
+                                Text(
+                                  context.l10n.priceHelper,
+                                  style: theme.textTheme.bodySmall,
+                                ),
+                                const VerticalSpace(8),
+                                PriceField(
+                                  controller: cubit.priceController,
+                                  isILS: _isILS,
+                                  onCurrencyChanged: (isILS) {
+                                    setState(() => _isILS = isILS);
+                                  },
+                                ),
+                                const VerticalSpace(16),
+
+                                // description
+                                LabeledField(
+                                  label: context.l10n.descriptionLabel,
+                                ),
+                                Text(
+                                  context.l10n.descriptionHelper,
+                                  style: theme.textTheme.bodySmall,
+                                ),
+                                const VerticalSpace(8),
+                                MyTextFormField(
+                                  controller: cubit.descriptionController,
+                                  hintText: context.l10n.descriptionHint,
+                                  textInputType: TextInputType.multiline,
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20.w,
+                                    vertical: 16.w,
+                                  ),
+                                  maxLength: 250,
+                                  minLines: 11,
+                                ),
+                                const VerticalSpace(16),
+
+                                // specifications
+                                SpecificationsDisplay(
+                                  specifications: _specifications,
+                                  onAdd: () {
+                                    setState(
+                                      () => _specifications.add(
+                                        SpecificationEntry(),
                                       ),
-                                    )
-                                    .toList(),
-                                hintText: context.l10n.selectLocation,
-                                title: context.l10n.selectLocationTitle,
-                                onSelected: (index) {
-                                  final location = state.locations[index];
-                                  setState(() {
-                                    _selectedLocationId = location.locationId;
-                                    _selectedLocationName = _localizedName(
-                                      location.name,
-                                      location.nameAr,
-                                      isArabic,
                                     );
-                                  });
-                                },
-                              ),
-                              const VerticalSpace(24),
-                              MyButton(
-                                onPressed: () {
-                                  if (state.isEditMode) {
-                                    cubit.updateListing(
-                                      selectedCategoryId: _selectedCategoryId,
-                                      selectedLocationId: _selectedLocationId,
-                                      selectedCondition: _selectedCondition,
-                                      isILS: _isILS,
-                                      images: _selectedImages,
-                                      specifications: _specifications,
-                                      publish: cubit.isDraftEdit,
-                                    );
-                                  } else {
-                                    cubit.createListing(
-                                      selectedCategoryId: _selectedCategoryId,
-                                      selectedLocationId: _selectedLocationId,
-                                      selectedCondition: _selectedCondition,
-                                      isILS: _isILS,
-                                      images: _selectedImages,
-                                      specifications: _specifications,
-                                    );
-                                  }
-                                },
-                                text: cubit.isDraftEdit
-                                    ? context.l10n.publishListing
-                                    : (state.isEditMode
-                                          ? context.l10n.updateListing
-                                          : context.l10n.publishListing),
-                              ),
-                            ],
+                                  },
+                                  onRemove: (index) {
+                                    setState(() {
+                                      _specifications[index].dispose();
+                                      _specifications.removeAt(index);
+                                    });
+                                  },
+                                ),
+                                const VerticalSpace(16),
+
+                                // location
+                                LabeledField(label: context.l10n.locationLabel),
+                                const VerticalSpace(8),
+                                Selector(
+                                  selectedValue: _selectedLocationName,
+                                  items: state.locations
+                                      .map(
+                                        (l) => _localizedName(
+                                          l.name,
+                                          l.nameAr,
+                                          isArabic,
+                                        ),
+                                      )
+                                      .toList(),
+                                  hintText: context.l10n.selectLocation,
+                                  title: context.l10n.selectLocationTitle,
+                                  onSelected: (index) {
+                                    final location = state.locations[index];
+                                    setState(() {
+                                      _selectedLocationId = location.locationId;
+                                      _selectedLocationName = _localizedName(
+                                        location.name,
+                                        location.nameAr,
+                                        isArabic,
+                                      );
+                                    });
+                                  },
+                                ),
+                                const VerticalSpace(24),
+                                MyButton(
+                                  onPressed: () {
+                                    if (state.isEditMode) {
+                                      cubit.updateListing(
+                                        selectedCategoryId: _selectedCategoryId,
+                                        selectedLocationId: _selectedLocationId,
+                                        selectedCondition: _selectedCondition,
+                                        isILS: _isILS,
+                                        images: _selectedImages,
+                                        specifications: _specifications,
+                                        publish: cubit.isDraftEdit,
+                                      );
+                                    } else {
+                                      cubit.createListing(
+                                        selectedCategoryId: _selectedCategoryId,
+                                        selectedLocationId: _selectedLocationId,
+                                        selectedCondition: _selectedCondition,
+                                        isILS: _isILS,
+                                        images: _selectedImages,
+                                        specifications: _specifications,
+                                      );
+                                    }
+                                  },
+                                  text: cubit.isDraftEdit
+                                      ? context.l10n.publishListing
+                                      : (state.isEditMode
+                                            ? context.l10n.updateListing
+                                            : context.l10n.publishListing),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
               ),
-                      ),
               // Loading overlay during submission
               if (state.isSubmitting)
                 Container(

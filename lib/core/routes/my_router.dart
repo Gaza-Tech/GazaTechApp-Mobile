@@ -50,6 +50,8 @@ import 'package:gaza_tech/features/drafts/ui/drafts_screen.dart';
 import 'package:gaza_tech/features/settings/ui/settings_screen.dart';
 import 'package:gaza_tech/features/help/ui/help_screen.dart';
 import 'package:gaza_tech/features/about/ui/about_screen.dart';
+import 'package:gaza_tech/features/legal/ui/terms_and_conditions_screen.dart';
+import 'package:gaza_tech/features/legal/ui/privacy_policy_screen.dart';
 import 'package:gaza_tech/features/auth/delete_account/cubit/delete_account_cubit.dart';
 
 class MyRouter {
@@ -262,6 +264,12 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => const HelpScreen());
       case MyRoutes.about:
         return MaterialPageRoute(builder: (_) => const AboutScreen());
+      case MyRoutes.termsAndConditions:
+        return MaterialPageRoute(
+          builder: (_) => const TermsAndConditionsScreen(),
+        );
+      case MyRoutes.privacyPolicy:
+        return MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen());
       default:
         return null;
     }

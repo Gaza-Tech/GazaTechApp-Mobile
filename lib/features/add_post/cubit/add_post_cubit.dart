@@ -20,8 +20,10 @@ class AddPostCubit extends Cubit<AddPostState> with FormErrorClearable {
   final contentController = TextEditingController();
 
   @override
-  List<TextEditingController> get formControllers =>
-      [titleController, contentController];
+  List<TextEditingController> get formControllers => [
+    titleController,
+    contentController,
+  ];
 
   List<ImageItem> attachments = [];
 

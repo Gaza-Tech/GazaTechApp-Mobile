@@ -16,8 +16,10 @@ class SignInCubit extends Cubit<SignInState> with FormErrorClearable {
   final passwordController = TextEditingController();
 
   @override
-  List<TextEditingController> get formControllers =>
-      [emailController, passwordController];
+  List<TextEditingController> get formControllers => [
+    emailController,
+    passwordController,
+  ];
 
   Future<void> emitSignInState() async {
     if (!formKey.currentState!.validate()) return;

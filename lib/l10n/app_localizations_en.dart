@@ -1368,4 +1368,150 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get signInAccountBanned =>
       'This account has been banned or deactivated. You cannot sign in.';
+
+  @override
+  String get termsTitle => 'Terms and Conditions';
+
+  @override
+  String get termsLastUpdated => 'Last updated: April 2026';
+
+  @override
+  String get termsIntro =>
+      'Welcome to Gaza Tech App. By creating an account or using our services, you agree to be bound by these Terms and Conditions. Please read them carefully before using the application.';
+
+  @override
+  String get termsAccountTitle => '1. Account Registration';
+
+  @override
+  String get termsAccountBody =>
+      'You must provide accurate and complete information when creating an account. You are responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account. You must be at least 15 years old to use this application. Gaza Tech App reserves the right to suspend or terminate accounts that violate these terms.';
+
+  @override
+  String get termsMarketplaceTitle => '2. Marketplace';
+
+  @override
+  String get termsMarketplaceBody =>
+      'Gaza Tech App provides a platform for users to list and discover products. We do not participate in, facilitate, or guarantee any transactions between buyers and sellers. All transactions are conducted at the sole risk and responsibility of the parties involved. Users must list products accurately and honestly. Listings for illegal, counterfeit, stolen, or prohibited items are strictly forbidden.';
+
+  @override
+  String get termsCommunityTitle => '3. Community';
+
+  @override
+  String get termsCommunityBody =>
+      'Users may post content, comments, and engage in community discussions. You retain ownership of your content but grant Gaza Tech App a non-exclusive license to display it within the platform. You agree not to post content that is offensive, harmful, misleading, defamatory, or violates any applicable laws. Gaza Tech App reserves the right to remove any content that violates these guidelines.';
+
+  @override
+  String get termsContentTitle => '4. User Content & Conduct';
+
+  @override
+  String get termsContentBody =>
+      'You are solely responsible for all content you create, upload, or share on the platform. You must not impersonate others, spam, harass other users, or engage in any fraudulent activity. Gaza Tech App may moderate, remove, or restrict content or accounts at its discretion to maintain a safe and respectful environment.';
+
+  @override
+  String get termsVerificationTitle => '5. Identity Verification';
+
+  @override
+  String get termsVerificationBody =>
+      'Some features may require identity verification. By submitting verification documents (such as national ID), you confirm that the documents are authentic and belong to you. Verification documents are processed securely and handled in accordance with our Privacy Policy.';
+
+  @override
+  String get termsIntellectualTitle => '6. Intellectual Property';
+
+  @override
+  String get termsIntellectualBody =>
+      'The Gaza Tech App name, logo, design, and all underlying technology are the intellectual property of Gaza Tech App. You may not copy, modify, distribute, or reverse-engineer any part of the application without prior written consent.';
+
+  @override
+  String get termsLiabilityTitle => '7. Limitation of Liability';
+
+  @override
+  String get termsLiabilityBody =>
+      'Gaza Tech App is provided \"as is\" without warranties of any kind. We are not liable for any direct, indirect, incidental, or consequential damages arising from your use of the platform, including but not limited to losses from marketplace transactions, data loss, or service interruptions.';
+
+  @override
+  String get termsChangesTitle => '8. Changes to Terms';
+
+  @override
+  String get termsChangesBody =>
+      'We may update these Terms and Conditions from time to time. Continued use of the application after changes constitutes acceptance of the updated terms. We will notify users of significant changes through the application.';
+
+  @override
+  String get termsContactTitle => '9. Contact Us';
+
+  @override
+  String get termsContactBody =>
+      'If you have any questions about these Terms and Conditions, please contact us at:';
+
+  @override
+  String get privacyTitle => 'Privacy Policy';
+
+  @override
+  String get privacyLastUpdated => 'Last updated: April 2026';
+
+  @override
+  String get privacyIntro =>
+      'Gaza Tech App is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and protect your personal information when you use our application.';
+
+  @override
+  String get privacyCollectionTitle => '1. Information We Collect';
+
+  @override
+  String get privacyCollectionBody =>
+      'We collect the following types of information:\n\n• Account information: name, email address, and password when you register.\n• Profile information: bio, phone number, social media links, and profile photo that you choose to provide.\n• Content: listings, posts, comments, bookmarks, and images you create or upload.\n• Verification documents: national ID, date of birth, and address when you apply for identity verification.\n• Usage data: anonymous analytics and crash reports to improve app performance and stability.';
+
+  @override
+  String get privacyUseTitle => '2. How We Use Your Information';
+
+  @override
+  String get privacyUseBody =>
+      'We use your information to:\n\n• Provide, maintain, and improve the Gaza Tech App services.\n• Create and manage your account.\n• Display your listings and posts to other users.\n• Process identity verification requests.\n• Send important service notifications.\n• Analyze app usage to fix bugs and improve user experience.\n• Enforce our Terms and Conditions and protect user safety.';
+
+  @override
+  String get privacyStorageTitle => '3. Data Storage & Security';
+
+  @override
+  String get privacyStorageBody =>
+      'Your data is securely stored using Supabase, a trusted cloud infrastructure provider. We implement industry-standard security measures including encryption in transit and at rest, secure authentication protocols, and access controls. While we take reasonable steps to protect your data, no system is completely secure, and we cannot guarantee absolute security.';
+
+  @override
+  String get privacySharingTitle => '4. Information Sharing';
+
+  @override
+  String get privacySharingBody =>
+      'We do not sell your personal information. Your data may be shared in the following circumstances:\n\n• Public profile information, listings, and posts are visible to other users as part of the platform\'s functionality.\n• With service providers (Supabase, Google Analytics) who help us operate the application, under strict data processing agreements.\n• When required by law or to protect the rights and safety of our users and platform.';
+
+  @override
+  String get privacyRightsTitle => '5. Your Rights';
+
+  @override
+  String get privacyRightsBody =>
+      'You have the right to:\n\n• Access and update your personal information through your profile settings.\n• Delete your account and associated data by contacting us or using the account deletion feature.\n• Request a copy of the data we hold about you.\n• Withdraw consent for optional data processing at any time.';
+
+  @override
+  String get privacyRetentionTitle => '6. Data Retention';
+
+  @override
+  String get privacyRetentionBody =>
+      'We retain your data for as long as your account is active or as needed to provide services. When you delete your account, your personal data will be removed within 30 days, except where we are required by law to retain certain information.';
+
+  @override
+  String get privacyChildrenTitle => '7. Children\'s Privacy';
+
+  @override
+  String get privacyChildrenBody =>
+      'Gaza Tech App is not intended for children under the age of 15. We do not knowingly collect personal information from children. If we become aware that we have collected data from a child under 15, we will take steps to delete that information promptly.';
+
+  @override
+  String get privacyChangesTitle => '8. Changes to This Policy';
+
+  @override
+  String get privacyChangesBody =>
+      'We may update this Privacy Policy from time to time. We will notify you of significant changes through the application. Continued use of the app after changes constitutes acceptance of the updated policy.';
+
+  @override
+  String get privacyContactTitle => '9. Contact Us';
+
+  @override
+  String get privacyContactBody =>
+      'If you have any questions about this Privacy Policy or wish to exercise your data rights, please contact us at:';
 }
