@@ -21,9 +21,24 @@ class SignUpCubit extends Cubit<SignUpState> {
 
     emit(const SignUpState.loading());
 
+    final email = emailController.text.trim();
+
+    // Check email availability before attempting sign-up
+    final checkResult = await _signUpRepo.checkEmailAvailability(email);
+    final emailStatus = checkResult.whenOrNull(success: (status) => status);
+
+    if (emailStatus == 'banned') {
+      emit(const SignUpState.emailBanned());
+      return;
+    }
+    if (emailStatus == 'taken') {
+      emit(const SignUpState.emailTaken());
+      return;
+    }
+
     final result = await _signUpRepo.signUp(
       SignUpRequestBody(
-        email: emailController.text.trim(),
+        email: email,
         password: passwordController.text.trim(),
         name:
             "${firstNameController.text.trim()} ${lastNameController.text.trim()}",

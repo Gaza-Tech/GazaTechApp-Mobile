@@ -45,7 +45,11 @@ class _ProfileScreenState extends State<ProfileScreen>
               return [
                 SliverAppBar(
                   title: Text(
-                    state.userProfile?.fullName ?? context.l10n.profile,
+                    state.userProfile == null
+                        ? context.l10n.profile
+                        : state.userProfile!.isActive
+                        ? state.userProfile!.fullName
+                        : context.l10n.deletedUser,
                   ),
                   pinned: true,
                   floating: false,
@@ -69,7 +73,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                           }
                         },
                       ),
-                    if (!state.isOwnProfile && state.userProfile != null)
+                    if (!state.isOwnProfile &&
+                        state.userProfile != null &&
+                        state.userProfile!.isActive)
                       IconButton(
                         icon: Icon(
                           state.isUserReported
@@ -139,10 +145,44 @@ class _ProfileScreenState extends State<ProfileScreen>
       }
       return const SizedBox.shrink();
     }
+    if (!state.userProfile!.isActive) {
+      return _DeletedAccountBanner(message: context.l10n.deletedAccountProfile);
+    }
     return ProfileHeader(
       profile: state.userProfile!,
       isOwnProfile: state.isOwnProfile,
       verificationStatus: state.verificationStatus,
+    );
+  }
+}
+
+class _DeletedAccountBanner extends StatelessWidget {
+  final String message;
+  const _DeletedAccountBanner({required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.person_off_outlined,
+            size: 56.sp,
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+          SizedBox(height: 12.h),
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

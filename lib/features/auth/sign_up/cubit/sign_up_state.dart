@@ -7,4 +7,6 @@ class SignUpState with _$SignUpState {
   const factory SignUpState.loading() = Loading;
   const factory SignUpState.success(String message) = Success;
   const factory SignUpState.failure(String message) = Failure;
+  const factory SignUpState.emailBanned() = EmailBanned;
+  const factory SignUpState.emailTaken() = EmailTaken;
 }

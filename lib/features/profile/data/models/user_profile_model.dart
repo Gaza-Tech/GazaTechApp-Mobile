@@ -29,7 +29,10 @@ abstract class UserProfileModel with _$UserProfileModel {
   factory UserProfileModel.fromJson(Map<String, dynamic> json) =>
       _$UserProfileModelFromJson(json);
 
-  String get fullName => '$firstName $lastName'.trim();
+  String get fullName {
+    if (!isActive) return 'Deleted Account';
+    return '$firstName $lastName'.trim();
+  }
 
   bool get hasSocialLinks =>
       facebookLinkUrl != null ||

@@ -187,7 +187,9 @@ class CommunitySearchScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final post = state.results[index];
                 return PostCard(
-                  userName: post.authorName,
+                  userName: post.authorIsActive
+                      ? post.authorName
+                      : context.l10n.deletedUser,
                   timeAgo: _timeAgo(context, post.createdAt),
                   category: post.postCategory,
                   title: post.title,

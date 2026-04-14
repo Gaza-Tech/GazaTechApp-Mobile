@@ -56,8 +56,11 @@ abstract class CommentModel with _$CommentModel {
   factory CommentModel.fromJson(Map<String, dynamic> json) =>
       _$CommentModelFromJson(json);
 
+  bool get authorIsActive => author?.isActive ?? true;
+
   String get authorName {
     if (author == null) return '';
+    if (!author!.isActive) return 'Deleted Account';
     return '${author!.firstName} ${author!.lastName}'.trim();
   }
 }

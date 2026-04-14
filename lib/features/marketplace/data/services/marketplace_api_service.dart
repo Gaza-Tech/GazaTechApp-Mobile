@@ -24,7 +24,7 @@ class MarketplaceApiService {
     var query = _supabase
         .from('marketplace_listings')
         .select(
-          '*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name, is_verified), listing_images(image_url, is_thumbnail, sort_order)',
+          '*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name, is_verified, is_active), listing_images(image_url, is_thumbnail, sort_order)',
         )
         .eq('content_status', 'published');
 
@@ -83,7 +83,7 @@ class MarketplaceApiService {
     final data = await _supabase
         .from('marketplace_listings')
         .select(
-          '*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name, is_verified), listing_images(image_url, is_thumbnail, sort_order)',
+          '*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name, is_verified, is_active), listing_images(image_url, is_thumbnail, sort_order)',
         )
         .eq('content_status', 'published')
         .or('title.ilike.%$keyword%,description.ilike.%$keyword%')

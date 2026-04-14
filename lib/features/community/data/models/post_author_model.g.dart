@@ -13,6 +13,7 @@ _PostAuthorModel _$PostAuthorModelFromJson(Map<String, dynamic> json) =>
       lastName: json['last_name'] as String,
       avatarUrl: json['avatar_url'] as String?,
       isVerified: json['is_verified'] as bool? ?? false,
+      isActive: json['is_active'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$PostAuthorModelToJson(_PostAuthorModel instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$PostAuthorModelToJson(_PostAuthorModel instance) =>
       'last_name': instance.lastName,
       'avatar_url': instance.avatarUrl,
       'is_verified': instance.isVerified,
+      'is_active': instance.isActive,
     };

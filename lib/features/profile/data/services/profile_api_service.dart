@@ -11,12 +11,12 @@ class ProfileApiService {
   static const String _postSelect = '''
     post_id, author_id, title, content, post_category, content_status,
     created_at, published_at, likes_count, comments_count,
-    users!author_id(user_id, first_name, last_name, avatar_url, is_verified),
+    users!author_id(user_id, first_name, last_name, avatar_url, is_verified, is_active),
     community_posts_attachments(file_url)
   ''';
 
   static const String _listingSelect =
-      '*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name, is_verified), listing_images(image_url, is_thumbnail, sort_order)';
+      '*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name, is_verified, is_active), listing_images(image_url, is_thumbnail, sort_order)';
 
   Future<Map<String, dynamic>?> fetchUserProfile(String userId) async {
     return await _supabase

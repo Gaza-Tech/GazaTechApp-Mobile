@@ -38,12 +38,14 @@ abstract class ListingModel with _$ListingModel {
   String get locationNameAr => locationData?['name_ar'] ?? '';
   String get sellerName {
     if (sellerData == null) return '';
+    if (sellerData!['is_active'] == false) return 'Deleted Account';
     final first = sellerData!['first_name'] ?? '';
     final last = sellerData!['last_name'] ?? '';
     return '$first $last'.trim();
   }
 
   bool get sellerIsVerified => sellerData?['is_verified'] == true;
+  bool get sellerIsActive => sellerData?['is_active'] != false;
 
   String? get thumbnailUrl {
     if (images == null || images!.isEmpty) return null;

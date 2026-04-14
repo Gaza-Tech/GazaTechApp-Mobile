@@ -1243,7 +1243,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get deleteAccountBody =>
-      'لحذف حسابك، يرجى التواصل مع فريق الدعم لدينا. هذا الإجراء لا رجعة فيه.';
+      'سيؤدي هذا إلى إلغاء تنشيط حسابك بشكل دائم. ستتم إزالة إعلاناتك وسيظهر اسمك كـ\"حساب محذوف\" في كل مكان. لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String get deleteAccountConfirmButton => 'حذف حسابي';
+
+  @override
+  String get deleteAccountTypeToConfirm => 'اكتب حذف للتأكيد';
+
+  @override
+  String get deleteConfirmWord => 'حذف';
+
+  @override
+  String get deletedUser => 'حساب محذوف';
+
+  @override
+  String get deletedAccountProfile => 'تم حذف هذا الحساب.';
 
   @override
   String get faq => 'الأسئلة الشائعة';
@@ -1324,4 +1339,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get madeWithLove => 'صُنع بكل محبة لغزة';
+
+  @override
+  String get signUpEmailBanned =>
+      'هذا البريد الإلكتروني مرتبط بحساب محظور أو معطّل ولا يمكن استخدامه للتسجيل.';
+
+  @override
+  String get signUpEmailTaken =>
+      'هذا البريد الإلكتروني مستخدم بالفعل. يرجى تسجيل الدخول أو استخدام بريد إلكتروني آخر.';
 }

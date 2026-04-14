@@ -10,8 +10,9 @@ import 'package:gaza_tech/features/marketplace/ui/widgets/product_card_grid.dart
 
 class ListingsTabView extends StatefulWidget {
   final String category;
+  final Future<void> Function()? onRefresh;
 
-  const ListingsTabView({super.key, required this.category});
+  const ListingsTabView({super.key, required this.category, this.onRefresh});
 
   @override
   State<ListingsTabView> createState() => _ListingsTabViewState();
@@ -74,7 +75,9 @@ class _ListingsTabViewState extends State<ListingsTabView>
         // Show empty state
         if (listings.isEmpty) {
           return RefreshIndicator(
-            onRefresh: () => _marketplaceCubit.fetchListings(widget.category),
+            onRefresh:
+                widget.onRefresh ??
+                () => _marketplaceCubit.fetchListings(widget.category),
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               child: SizedBox(
@@ -87,12 +90,14 @@ class _ListingsTabViewState extends State<ListingsTabView>
 
         // Show listings in grid
         return RefreshIndicator(
-          onRefresh: () async {
-            if (!state.hasMoreFor(widget.category)) {
-              _marketplaceCubit.resetPagination(widget.category);
-            }
-            await _marketplaceCubit.fetchListings(widget.category);
-          },
+          onRefresh:
+              widget.onRefresh ??
+              () async {
+                if (!state.hasMoreFor(widget.category)) {
+                  _marketplaceCubit.resetPagination(widget.category);
+                }
+                await _marketplaceCubit.fetchListings(widget.category);
+              },
           child: NotificationListener<ScrollNotification>(
             onNotification: _onScrollNotification,
             child: CustomScrollView(

@@ -12,6 +12,7 @@ abstract class PostAuthorModel with _$PostAuthorModel {
     @JsonKey(name: 'last_name') required String lastName,
     @JsonKey(name: 'avatar_url') String? avatarUrl,
     @JsonKey(name: 'is_verified') @Default(false) bool isVerified,
+    @JsonKey(name: 'is_active') @Default(true) bool isActive,
   }) = _PostAuthorModel;
 
   factory PostAuthorModel.fromJson(Map<String, dynamic> json) =>

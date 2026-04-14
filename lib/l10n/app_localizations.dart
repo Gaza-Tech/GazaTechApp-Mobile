@@ -2453,8 +2453,38 @@ abstract class AppLocalizations {
   /// No description provided for @deleteAccountBody.
   ///
   /// In en, this message translates to:
-  /// **'To delete your account, please contact our support team. This action is irreversible.'**
+  /// **'This will permanently deactivate your account. Your listings will be removed and your name will appear as \"Deleted Account\" everywhere. This action cannot be undone.'**
   String get deleteAccountBody;
+
+  /// No description provided for @deleteAccountConfirmButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete My Account'**
+  String get deleteAccountConfirmButton;
+
+  /// No description provided for @deleteAccountTypeToConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Type DELETE to confirm'**
+  String get deleteAccountTypeToConfirm;
+
+  /// No description provided for @deleteConfirmWord.
+  ///
+  /// In en, this message translates to:
+  /// **'DELETE'**
+  String get deleteConfirmWord;
+
+  /// No description provided for @deletedUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleted Account'**
+  String get deletedUser;
+
+  /// No description provided for @deletedAccountProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'This account has been deleted.'**
+  String get deletedAccountProfile;
 
   /// No description provided for @faq.
   ///
@@ -2599,6 +2629,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Made with love for Gaza'**
   String get madeWithLove;
+
+  /// No description provided for @signUpEmailBanned.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is associated with a banned or deactivated account and cannot be used to sign up.'**
+  String get signUpEmailBanned;
+
+  /// No description provided for @signUpEmailTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already in use. Please sign in or use a different email.'**
+  String get signUpEmailTaken;
 }
 
 class _AppLocalizationsDelegate

@@ -6,6 +6,9 @@ import 'package:gaza_tech/features/bookmarks/data/services/bookmarks_api_service
 import 'package:gaza_tech/features/auth/sign_out/cubit/sign_out_cubit.dart';
 import 'package:gaza_tech/features/auth/sign_out/data/repos/sign_out_repo.dart';
 import 'package:gaza_tech/features/auth/sign_out/data/services/sign_out_api_service.dart';
+import 'package:gaza_tech/features/auth/delete_account/cubit/delete_account_cubit.dart';
+import 'package:gaza_tech/features/auth/delete_account/data/repos/delete_account_repo.dart';
+import 'package:gaza_tech/features/auth/delete_account/data/services/delete_account_api_service.dart';
 import 'package:gaza_tech/features/marketplace_search/cubit/marketplace_search_cubit.dart';
 import 'package:gaza_tech/features/marketplace_search/data/repos/marketplace_search_repo.dart';
 import 'package:gaza_tech/features/marketplace_search/data/services/search_api_service.dart';
@@ -155,6 +158,15 @@ Future<void> setupGetIt() async {
   );
   getIt.registerLazySingleton<SignOutRepo>(() => SignOutRepo(getIt()));
   getIt.registerFactory<SignOutCubit>(() => SignOutCubit(getIt()));
+
+  // 10. Delete Account
+  getIt.registerLazySingleton<DeleteAccountApiService>(
+    () => DeleteAccountApiService(getIt()),
+  );
+  getIt.registerLazySingleton<DeleteAccountRepo>(
+    () => DeleteAccountRepo(getIt()),
+  );
+  getIt.registerFactory<DeleteAccountCubit>(() => DeleteAccountCubit(getIt()));
 
   // Post Event Service (singleton shared across all cubits)
   getIt.registerLazySingleton<PostEventService>(() => PostEventService());

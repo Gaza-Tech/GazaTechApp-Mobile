@@ -514,7 +514,12 @@
   "changePassword": "تغيير كلمة المرور",
   "deleteAccount": "حذف الحساب",
   "deleteAccountTitle": "حذف الحساب؟",
-  "deleteAccountBody": "لحذف حسابك، يرجى التواصل مع فريق الدعم لدينا. هذا الإجراء لا رجعة فيه.",
+  "deleteAccountBody": "سيؤدي هذا إلى إلغاء تنشيط حسابك بشكل دائم. ستتم إزالة إعلاناتك وسيظهر اسمك كـ\"حساب محذوف\" في كل مكان. لا يمكن التراجع عن هذا الإجراء.",
+  "deleteAccountConfirmButton": "حذف حسابي",
+  "deleteAccountTypeToConfirm": "اكتب حذف للتأكيد",
+  "deleteConfirmWord": "حذف",
+  "deletedUser": "حساب محذوف",
+  "deletedAccountProfile": "تم حذف هذا الحساب.",
 
   "faq": "الأسئلة الشائعة",
   "helpFaqBuyingTitle": "كيف أشتري شيئًا؟",
@@ -540,5 +545,8 @@
   "rateApp": "تقييم التطبيق",
   "openSourceLicenses": "تراخيص المصدر المفتوح",
   "termsOfService": "شروط الخدمة",
-  "madeWithLove": "صُنع بكل محبة لغزة"
+  "madeWithLove": "صُنع بكل محبة لغزة",
+
+  "signUpEmailBanned": "هذا البريد الإلكتروني مرتبط بحساب محظور أو معطّل ولا يمكن استخدامه للتسجيل.",
+  "signUpEmailTaken": "هذا البريد الإلكتروني مستخدم بالفعل. يرجى تسجيل الدخول أو استخدام بريد إلكتروني آخر."
 }

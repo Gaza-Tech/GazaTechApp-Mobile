@@ -88,7 +88,9 @@ class _ProfilePostsTabState extends State<ProfilePostsTab>
                   itemBuilder: (context, index) {
                     final post = state.posts[index];
                     return PostCard(
-                      userName: post.authorName,
+                      userName: post.authorIsActive
+                          ? post.authorName
+                          : context.l10n.deletedUser,
                       timeAgo: _timeAgo(context.l10n, post.createdAt),
                       category: post.postCategory,
                       title: post.title,
@@ -96,7 +98,9 @@ class _ProfilePostsTabState extends State<ProfilePostsTab>
                       attachmentUrls: post.attachmentUrls,
                       likes: post.likesCount,
                       comments: post.commentsCount,
-                      isVerified: post.author?.isVerified ?? false,
+                      isVerified:
+                          post.authorIsActive &&
+                          (post.author?.isVerified ?? false),
                       isLiked: state.likedPostIds.contains(post.postId),
                       isBookmarked: state.bookmarkedPostIds.contains(
                         post.postId,

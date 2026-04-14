@@ -83,9 +83,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       .read<ForgotPasswordCubit>()
                       .emitSendResetEmailState(),
                   height: 48.h,
-                  backgroundColor: MyThemes.darkTheme(
-                    const Locale('en'),
-                  ).colorScheme.primary,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
 
                 const ForgotPasswordBlocListener(),

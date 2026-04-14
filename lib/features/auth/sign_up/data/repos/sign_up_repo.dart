@@ -8,6 +8,15 @@ class SignUpRepo {
   final SignUpApiService _apiService;
   SignUpRepo(this._apiService);
 
+  Future<ApiResult<String>> checkEmailAvailability(String email) async {
+    try {
+      final result = await _apiService.checkEmailAvailability(email);
+      return ApiResult.success(result);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
   Future<ApiResult<AuthResponse>> signUp(SignUpRequestBody body) async {
     try {
       final response = await _apiService.signUp(body);

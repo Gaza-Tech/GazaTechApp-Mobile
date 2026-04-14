@@ -297,10 +297,15 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                 final isOwn = comment.authorId == currentUserId;
                                 return [
                                   CommentCard(
-                                    userName: comment.authorName,
-                                    avatarUrl: comment.author?.avatarUrl,
+                                    userName: comment.authorIsActive
+                                        ? comment.authorName
+                                        : context.l10n.deletedUser,
+                                    avatarUrl: comment.authorIsActive
+                                        ? comment.author?.avatarUrl
+                                        : null,
                                     isVerified:
-                                        comment.author?.isVerified ?? false,
+                                        comment.authorIsActive &&
+                                        (comment.author?.isVerified ?? false),
                                     timeAgo: _timeAgo(
                                       context,
                                       comment.createdAt,
@@ -384,11 +389,16 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                           final isOwnReply =
                                               reply.authorId == currentUserId;
                                           return CommentCard(
-                                            userName: reply.authorName,
-                                            avatarUrl: reply.author?.avatarUrl,
+                                            userName: reply.authorIsActive
+                                                ? reply.authorName
+                                                : context.l10n.deletedUser,
+                                            avatarUrl: reply.authorIsActive
+                                                ? reply.author?.avatarUrl
+                                                : null,
                                             isVerified:
-                                                reply.author?.isVerified ??
-                                                false,
+                                                reply.authorIsActive &&
+                                                (reply.author?.isVerified ??
+                                                    false),
                                             timeAgo: _timeAgo(
                                               context,
                                               reply.createdAt,
@@ -492,11 +502,13 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
   ) {
     final post = state.post!;
     return PostCardHeader(
-      userName: post.authorName,
+      userName: post.authorIsActive
+          ? post.authorName
+          : context.l10n.deletedUser,
       timeAgo: _timeAgo(context, post.createdAt),
       category: post.postCategory,
-      avatarUrl: post.author?.avatarUrl,
-      isVerified: post.author?.isVerified ?? false,
+      avatarUrl: post.authorIsActive ? post.author?.avatarUrl : null,
+      isVerified: post.authorIsActive && (post.author?.isVerified ?? false),
     );
   }
 
