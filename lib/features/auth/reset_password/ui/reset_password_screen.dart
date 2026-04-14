@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/theme/my_text_styles.dart';
-import 'package:gaza_tech/core/theme/my_themes.dart';
 import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
@@ -34,12 +33,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyThemes.darkTheme(
-          const Locale('en'),
-        ).scaffoldBackgroundColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         iconTheme: IconThemeData(
-          color: MyThemes.darkTheme(const Locale('en')).colorScheme.onSurface,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
         automaticallyImplyLeading: false,
       ),
@@ -53,9 +50,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 Text(
                   context.l10n.resetPasswordTitle,
                   style: MyTextStyle.heading.h1.copyWith(
-                    color: MyThemes.darkTheme(
-                      const Locale('en'),
-                    ).colorScheme.onSurface,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 const VerticalSpace(8),
@@ -83,6 +78,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         hintText: context.l10n.newPasswordHint,
                         textInputType: TextInputType.text,
                         isObscureText: _obscurePassword,
+                        maxLines: 1,
                         validator: (v) {
                           if (v == null || v.isEmpty) {
                             return context.l10n.required;
@@ -119,6 +115,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         hintText: context.l10n.confirmNewPasswordHint,
                         textInputType: TextInputType.text,
                         isObscureText: _obscureConfirmPassword,
+                        maxLines: 1,
                         validator: (v) {
                           if (v == null || v.isEmpty) {
                             return context.l10n.required;
@@ -155,9 +152,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       .read<ResetPasswordCubit>()
                       .emitResetPasswordState(),
                   height: 48.h,
-                  backgroundColor: MyThemes.darkTheme(
-                    const Locale('en'),
-                  ).colorScheme.primary,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
                 const ResetPasswordBlocListener(),
               ],

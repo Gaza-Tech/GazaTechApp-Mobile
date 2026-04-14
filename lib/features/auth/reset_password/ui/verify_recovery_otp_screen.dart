@@ -28,9 +28,7 @@ class _VerifyRecoveryOtpScreenState extends State<VerifyRecoveryOtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyThemes.darkTheme(
-          const Locale('en'),
-        ).scaffoldBackgroundColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         iconTheme: IconThemeData(
           color: MyThemes.darkTheme(const Locale('en')).colorScheme.onSurface,
