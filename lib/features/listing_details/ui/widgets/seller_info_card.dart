@@ -44,29 +44,32 @@ class SellerInfoCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              CircleAvatar(
-                radius: 24.dg,
-                backgroundColor: MyColors.primary.soft,
-                child: ClipOval(
-                  child: avatarUrl != null
-                      ? CachedNetworkImage(
-                          imageUrl: avatarUrl!,
-                          width: 48.dg,
-                          height: 48.dg,
-                          fit: BoxFit.cover,
-                          errorWidget: (_, _, _) => Text(
+              GestureDetector(
+                onTap: onViewProfile,
+                child: CircleAvatar(
+                  radius: 24.dg,
+                  backgroundColor: MyColors.primary.soft,
+                  child: ClipOval(
+                    child: avatarUrl != null
+                        ? CachedNetworkImage(
+                            imageUrl: avatarUrl!,
+                            width: 48.dg,
+                            height: 48.dg,
+                            fit: BoxFit.cover,
+                            errorWidget: (_, _, _) => Text(
+                              sellerName.isNotEmpty ? sellerName[0] : '?',
+                              style: MyTextStyle.heading.h2.copyWith(
+                                color: MyColors.primary.base,
+                              ),
+                            ),
+                          )
+                        : Text(
                             sellerName.isNotEmpty ? sellerName[0] : '?',
                             style: MyTextStyle.heading.h2.copyWith(
                               color: MyColors.primary.base,
                             ),
                           ),
-                        )
-                      : Text(
-                          sellerName.isNotEmpty ? sellerName[0] : '?',
-                          style: MyTextStyle.heading.h2.copyWith(
-                            color: MyColors.primary.base,
-                          ),
-                        ),
+                  ),
                 ),
               ),
               const HorizontalSpace(12),
@@ -77,12 +80,15 @@ class SellerInfoCard extends StatelessWidget {
                     Row(
                       children: [
                         Flexible(
-                          child: Text(
-                            sellerName,
-                            style: MyTextStyle.heading.h4.copyWith(
-                              color: theme.textTheme.titleMedium?.color,
+                          child: GestureDetector(
+                            onTap: onViewProfile,
+                            child: Text(
+                              sellerName,
+                              style: MyTextStyle.heading.h4.copyWith(
+                                color: theme.textTheme.titleMedium?.color,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         if (isVerified) ...[

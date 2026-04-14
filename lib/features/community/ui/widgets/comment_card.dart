@@ -15,6 +15,7 @@ class CommentCard extends StatelessWidget {
   final int indentLevel;
   final String? avatarUrl;
   final bool isVerified;
+  final VoidCallback? onAuthorTap;
   final VoidCallback? onReply;
   final VoidCallback? onLikeTap;
   final VoidCallback? onReport;
@@ -33,6 +34,7 @@ class CommentCard extends StatelessWidget {
     this.indentLevel = 0,
     this.avatarUrl,
     this.isVerified = false,
+    this.onAuthorTap,
     this.onReply,
     this.onLikeTap,
     this.onReport,
@@ -51,27 +53,30 @@ class CommentCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CircleAvatar(
-              radius: 18.r,
-              backgroundColor: theme.colorScheme.surfaceContainerHighest,
-              child: ClipOval(
-                child: avatarUrl != null
-                    ? CachedNetworkImage(
-                        imageUrl: avatarUrl!,
-                        width: 36.r,
-                        height: 36.r,
-                        fit: BoxFit.cover,
-                        errorWidget: (_, _, _) => Icon(
+            GestureDetector(
+              onTap: onAuthorTap,
+              child: CircleAvatar(
+                radius: 18.r,
+                backgroundColor: theme.colorScheme.surfaceContainerHighest,
+                child: ClipOval(
+                  child: avatarUrl != null
+                      ? CachedNetworkImage(
+                          imageUrl: avatarUrl!,
+                          width: 36.r,
+                          height: 36.r,
+                          fit: BoxFit.cover,
+                          errorWidget: (_, _, _) => Icon(
+                            Icons.person,
+                            size: 18.sp,
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
+                        )
+                      : Icon(
                           Icons.person,
                           size: 18.sp,
                           color: theme.colorScheme.onSurfaceVariant,
                         ),
-                      )
-                    : Icon(
-                        Icons.person,
-                        size: 18.sp,
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
+                ),
               ),
             ),
             SizedBox(width: 10.w),
@@ -103,10 +108,13 @@ class CommentCard extends StatelessWidget {
   Widget _buildHeader(BuildContext context, ThemeData theme) {
     return Row(
       children: [
-        Text(
-          userName,
-          style: MyTextStyle.action.m.copyWith(
-            color: theme.colorScheme.onSurface,
+        GestureDetector(
+          onTap: onAuthorTap,
+          child: Text(
+            userName,
+            style: MyTextStyle.action.m.copyWith(
+              color: theme.colorScheme.onSurface,
+            ),
           ),
         ),
         if (isVerified) ...[

@@ -15,6 +15,7 @@ import 'package:gaza_tech/features/community_search/cubit/community_search_state
 import 'package:gaza_tech/features/community_search/data/models/search_filter.dart';
 import 'package:gaza_tech/features/community/ui/helpers/community_tag_helper.dart';
 import 'package:gaza_tech/features/community_search/ui/widgets/search_filter_sheet.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CommunitySearchScreen extends StatelessWidget {
   const CommunitySearchScreen({super.key});
@@ -200,6 +201,17 @@ class CommunitySearchScreen extends StatelessWidget {
                   isVerified: post.author?.isVerified ?? false,
                   isLiked: state.likedPostIds.contains(post.postId),
                   isBookmarked: state.bookmarkedPostIds.contains(post.postId),
+                  onAuthorTap: post.authorIsActive
+                      ? () => Navigator.pushNamed(
+                            context,
+                            MyRoutes.profile,
+                            arguments: {
+                              'userId': post.authorId,
+                              'isOwnProfile': post.authorId ==
+                                  Supabase.instance.client.auth.currentUser?.id,
+                            },
+                          )
+                      : null,
                   onLikeToggle: () async {
                     if (!await GuestGuard.requireAccount(context)) return;
                     cubit.toggleLike(post.postId);

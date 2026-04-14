@@ -319,6 +319,18 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                         .contains(comment.commentId),
                                     isEdited: comment.isEdited,
                                     indentLevel: 0,
+                                    onAuthorTap: comment.authorIsActive
+                                        ? () => Navigator.pushNamed(
+                                              context,
+                                              MyRoutes.profile,
+                                              arguments: {
+                                                'userId': comment.authorId,
+                                                'isOwnProfile':
+                                                    comment.authorId ==
+                                                    currentUserId,
+                                              },
+                                            )
+                                        : null,
                                     onReply: () => setState(() {
                                       _replyingTo = comment.authorName;
                                       _replyingToCommentId = comment.commentId;
@@ -407,6 +419,18 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                             likes: reply.likesCount,
                                             isLiked: state.likedCommentIds
                                                 .contains(reply.commentId),
+                                            onAuthorTap: reply.authorIsActive
+                                                ? () => Navigator.pushNamed(
+                                                      context,
+                                                      MyRoutes.profile,
+                                                      arguments: {
+                                                        'userId': reply.authorId,
+                                                        'isOwnProfile':
+                                                            reply.authorId ==
+                                                            currentUserId,
+                                                      },
+                                                    )
+                                                : null,
                                             isReported: state.reportedCommentIds
                                                 .contains(reply.commentId),
                                             isEdited: reply.isEdited,
@@ -501,6 +525,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
     ThemeData theme,
   ) {
     final post = state.post!;
+    final currentUserId = Supabase.instance.client.auth.currentUser?.id;
     return PostCardHeader(
       userName: post.authorIsActive
           ? post.authorName
@@ -509,6 +534,16 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
       category: post.postCategory,
       avatarUrl: post.authorIsActive ? post.author?.avatarUrl : null,
       isVerified: post.authorIsActive && (post.author?.isVerified ?? false),
+      onAuthorTap: post.authorIsActive
+          ? () => Navigator.pushNamed(
+                context,
+                MyRoutes.profile,
+                arguments: {
+                  'userId': post.authorId,
+                  'isOwnProfile': post.authorId == currentUserId,
+                },
+              )
+          : null,
     );
   }
 

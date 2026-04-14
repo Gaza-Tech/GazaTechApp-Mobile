@@ -9,6 +9,7 @@ import 'package:gaza_tech/features/community/ui/widgets/post_card.dart';
 import 'package:gaza_tech/features/profile/cubit/profile_cubit.dart';
 import 'package:gaza_tech/features/profile/cubit/profile_state.dart';
 import 'package:gaza_tech/l10n/app_localizations.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProfilePostsTab extends StatefulWidget {
   const ProfilePostsTab({super.key});
@@ -105,6 +106,22 @@ class _ProfilePostsTabState extends State<ProfilePostsTab>
                       isBookmarked: state.bookmarkedPostIds.contains(
                         post.postId,
                       ),
+                      onAuthorTap: post.authorIsActive
+                          ? () => Navigator.pushNamed(
+                                context,
+                                MyRoutes.profile,
+                                arguments: {
+                                  'userId': post.authorId,
+                                  'isOwnProfile': post.authorId ==
+                                      Supabase
+                                          .instance
+                                          .client
+                                          .auth
+                                          .currentUser
+                                          ?.id,
+                                },
+                              )
+                          : null,
                       onLikeToggle: () async {
                         if (!await GuestGuard.requireAccount(context)) return;
                         if (!context.mounted) return;

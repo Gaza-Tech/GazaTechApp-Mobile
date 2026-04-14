@@ -54,12 +54,15 @@ class PostCardHeader extends StatelessWidget {
               Row(
                 children: [
                   Flexible(
-                    child: Text(
-                      userName,
-                      style: MyTextStyle.action.l.copyWith(
-                        color: theme.colorScheme.onSurface,
+                    child: GestureDetector(
+                      onTap: onAuthorTap,
+                      child: Text(
+                        userName,
+                        style: MyTextStyle.action.l.copyWith(
+                          color: theme.colorScheme.onSurface,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   if (isVerified) ...[

@@ -7,6 +7,7 @@ import 'package:gaza_tech/features/bookmarks/cubit/bookmarks_cubit.dart';
 import 'package:gaza_tech/features/bookmarks/cubit/bookmarks_state.dart';
 import 'package:gaza_tech/features/community/ui/widgets/post_card.dart';
 import 'package:gaza_tech/l10n/app_localizations.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class BookmarkedPostsTab extends StatefulWidget {
   const BookmarkedPostsTab({super.key});
@@ -76,6 +77,22 @@ class _BookmarkedPostsTabState extends State<BookmarkedPostsTab>
                       isBookmarked: state.bookmarkedPostIds.contains(
                         post.postId,
                       ),
+                      onAuthorTap: post.authorIsActive
+                          ? () => Navigator.pushNamed(
+                                context,
+                                MyRoutes.profile,
+                                arguments: {
+                                  'userId': post.authorId,
+                                  'isOwnProfile': post.authorId ==
+                                      Supabase
+                                          .instance
+                                          .client
+                                          .auth
+                                          .currentUser
+                                          ?.id,
+                                },
+                              )
+                          : null,
                       onLikeToggle: () => cubit.togglePostLike(post.postId),
                       onBookmarkToggle: () =>
                           cubit.togglePostBookmark(post.postId),
