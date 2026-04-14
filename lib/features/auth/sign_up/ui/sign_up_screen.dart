@@ -7,6 +7,7 @@ import 'package:gaza_tech/core/widgets/my_button.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/core/widgets/language_switcher.dart';
+import 'package:gaza_tech/core/widgets/form_error_dismisser.dart';
 import 'package:gaza_tech/core/widgets/status_bar_hider.dart';
 import 'package:gaza_tech/features/auth/sign_in/ui/widgets/account_action_row.dart';
 import 'package:gaza_tech/features/auth/sign_up/cubit/sign_up_cubit.dart';
@@ -42,7 +43,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StatusBarHider(
-        child: SingleChildScrollView(
+        child: FormErrorDismisser(
+          onDismiss: () => context.read<SignUpCubit>().clearFormErrors(),
+          child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
             child: Column(
@@ -258,6 +261,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ],
             ),
           ),
+        ),
         ),
       ),
     );

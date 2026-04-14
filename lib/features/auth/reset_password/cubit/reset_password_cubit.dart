@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gaza_tech/core/mixins/form_error_clearable.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import '../data/repos/reset_password_repo.dart';
 import 'reset_password_state.dart';
 
-class ResetPasswordCubit extends Cubit<ResetPasswordState> {
+class ResetPasswordCubit extends Cubit<ResetPasswordState> with FormErrorClearable {
   final ResetPasswordRepo _resetPasswordRepo;
   final String email;
 
@@ -12,9 +13,14 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     : super(const ResetPasswordState.initial());
 
   final otpController = TextEditingController();
+  @override
   final formKey = GlobalKey<FormState>();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+
+  @override
+  List<TextEditingController> get formControllers =>
+      [passwordController, confirmPasswordController];
 
   Future<void> emitVerifyOtpState() async {
     emit(const ResetPasswordState.verifyLoading());

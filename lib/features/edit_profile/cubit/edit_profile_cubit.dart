@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:gaza_tech/core/helpers/image_compress_helper.dart';
+import 'package:gaza_tech/core/mixins/form_error_clearable.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/features/edit_profile/data/repos/edit_profile_repo.dart';
 import 'package:gaza_tech/features/profile/data/models/user_profile_model.dart';
 import 'edit_profile_state.dart';
 
-class EditProfileCubit extends Cubit<EditProfileState> {
+class EditProfileCubit extends Cubit<EditProfileState> with FormErrorClearable {
   final EditProfileRepo _repo;
   final UserProfileModel _initialProfile;
 
+  @override
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late final TextEditingController firstNameController;
   late final TextEditingController lastNameController;
@@ -27,6 +29,19 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   String? _avatarUrl;
 
   UserProfileModel get initialProfile => _initialProfile;
+
+  @override
+  List<TextEditingController> get formControllers => [
+    firstNameController,
+    lastNameController,
+    bioController,
+    phoneNumberController,
+    whatsappNumberController,
+    facebookLinkController,
+    instagramLinkController,
+    twitterLinkController,
+    websiteLinkController,
+  ];
 
   EditProfileCubit(this._repo, this._initialProfile)
     : super(const EditProfileState()) {

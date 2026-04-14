@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/core/widgets/form_error_dismisser.dart';
 import 'package:gaza_tech/features/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:gaza_tech/features/edit_profile/cubit/edit_profile_state.dart';
 import 'package:gaza_tech/features/edit_profile/ui/widgets/avatar_picker.dart';
@@ -54,7 +55,9 @@ class EditProfileScreen extends StatelessWidget {
         body: BlocBuilder<EditProfileCubit, EditProfileState>(
           builder: (context, state) {
             final cubit = context.read<EditProfileCubit>();
-            return SingleChildScrollView(
+            return FormErrorDismisser(
+              onDismiss: () => cubit.clearFormErrors(),
+              child: SingleChildScrollView(
               padding: EdgeInsets.all(16.w),
               child: Form(
                 key: cubit.formKey,
@@ -177,6 +180,7 @@ class EditProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
             );
           },
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaza_tech/core/helpers/image_compress_helper.dart';
+import 'package:gaza_tech/core/mixins/form_error_clearable.dart';
 import 'package:gaza_tech/core/models/image_item.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/features/community/data/models/post_model.dart';
@@ -9,13 +10,18 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'add_post_state.dart';
 
-class AddPostCubit extends Cubit<AddPostState> {
+class AddPostCubit extends Cubit<AddPostState> with FormErrorClearable {
   final CommunityRepo _repo;
   final PostModel? _existingPost;
 
+  @override
   final formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final contentController = TextEditingController();
+
+  @override
+  List<TextEditingController> get formControllers =>
+      [titleController, contentController];
 
   List<ImageItem> attachments = [];
 

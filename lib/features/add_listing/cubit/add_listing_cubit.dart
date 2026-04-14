@@ -11,9 +11,10 @@ import 'package:gaza_tech/features/add_listing/ui/widgets/specifications_section
 import 'package:gaza_tech/features/listing_details/data/models/listing_detail_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'package:gaza_tech/core/mixins/form_error_clearable.dart';
 import 'add_listing_state.dart';
 
-class AddListingCubit extends Cubit<AddListingState> {
+class AddListingCubit extends Cubit<AddListingState> with FormErrorClearable {
   final AddListingRepo _repo;
   final ListingDetailModel? _existingListing;
 
@@ -26,7 +27,12 @@ class AddListingCubit extends Cubit<AddListingState> {
   final titleController = TextEditingController();
   final priceController = TextEditingController();
   final descriptionController = TextEditingController();
+  @override
   final formKey = GlobalKey<FormState>();
+
+  @override
+  List<TextEditingController> get formControllers =>
+      [titleController, priceController, descriptionController];
 
   /// Load categories and locations from DB
   Future<void> loadFormData() async {

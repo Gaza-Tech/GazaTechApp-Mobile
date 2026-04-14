@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gaza_tech/core/mixins/form_error_clearable.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import '../data/repos/forgot_password_repo.dart';
 import 'forgot_password_state.dart';
 
-class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
+class ForgotPasswordCubit extends Cubit<ForgotPasswordState> with FormErrorClearable {
   final ForgotPasswordRepo _forgotPasswordRepo;
 
   ForgotPasswordCubit(this._forgotPasswordRepo)
     : super(const ForgotPasswordState.initial());
 
+  @override
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
+
+  @override
+  List<TextEditingController> get formControllers => [emailController];
 
   Future<void> emitSendResetEmailState() async {
     if (!formKey.currentState!.validate()) return;

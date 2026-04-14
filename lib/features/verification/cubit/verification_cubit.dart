@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gaza_tech/core/mixins/form_error_clearable.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/features/verification/data/repos/verification_repo.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,7 +10,7 @@ import 'package:intl/intl.dart';
 
 import 'verification_state.dart';
 
-class VerificationCubit extends Cubit<VerificationState> {
+class VerificationCubit extends Cubit<VerificationState> with FormErrorClearable {
   final VerificationRepo _repo;
   final _picker = ImagePicker();
 
@@ -21,6 +22,18 @@ class VerificationCubit extends Cubit<VerificationState> {
   final phoneController = TextEditingController();
   final otpController = TextEditingController();
   final formKeyStep1 = GlobalKey<FormState>();
+
+  @override
+  GlobalKey<FormState> get formKey => formKeyStep1;
+
+  @override
+  List<TextEditingController> get formControllers => [
+    fullNameController,
+    dateOfBirthController,
+    addressController,
+    nationalIdController,
+    phoneController,
+  ];
 
   DateTime? _selectedDateOfBirth;
 

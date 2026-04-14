@@ -9,6 +9,7 @@ import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
 import 'package:gaza_tech/core/widgets/chip_selector.dart';
 import 'package:gaza_tech/features/add_listing/ui/widgets/labeled_field.dart';
+import 'package:gaza_tech/core/widgets/form_error_dismisser.dart';
 import 'package:gaza_tech/features/add_post/cubit/add_post_cubit.dart';
 import 'package:gaza_tech/features/add_post/cubit/add_post_state.dart';
 
@@ -106,7 +107,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
               orElse: () => false,
             );
 
-            return SingleChildScrollView(
+            return FormErrorDismisser(
+              onDismiss: () => cubit.clearFormErrors(),
+              child: SingleChildScrollView(
               padding: EdgeInsets.all(16.w),
               child: Form(
                 key: cubit.formKey,
@@ -187,6 +190,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   ],
                 ),
               ),
+            ),
             );
           },
         ),

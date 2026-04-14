@@ -1,20 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gaza_tech/core/mixins/form_error_clearable.dart';
 import 'package:gaza_tech/core/netowoks/api_result.dart';
 import '../data/models/sign_up_request_body.dart';
 import '../data/repos/sign_up_repo.dart';
 import 'sign_up_state.dart';
 
-class SignUpCubit extends Cubit<SignUpState> {
+class SignUpCubit extends Cubit<SignUpState> with FormErrorClearable {
   final SignUpRepo _signUpRepo;
   SignUpCubit(this._signUpRepo) : super(const SignUpState.initial());
 
+  @override
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
+
+  @override
+  List<TextEditingController> get formControllers => [
+    emailController,
+    passwordController,
+    confirmPasswordController,
+    firstNameController,
+    lastNameController,
+  ];
 
   Future<void> emitSignUpState() async {
     if (!formKey.currentState!.validate()) return;

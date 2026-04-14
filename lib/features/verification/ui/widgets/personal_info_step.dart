@@ -5,6 +5,7 @@ import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/widgets/chip_selector.dart';
 import 'package:gaza_tech/core/widgets/my_text_form_field.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
+import 'package:gaza_tech/core/widgets/form_error_dismisser.dart';
 import 'package:gaza_tech/features/verification/cubit/verification_cubit.dart';
 import 'package:gaza_tech/features/verification/cubit/verification_state.dart';
 
@@ -17,49 +18,52 @@ class PersonalInfoStep extends StatelessWidget {
     return BlocBuilder<VerificationCubit, VerificationState>(
       buildWhen: (p, c) => p.selectedGenderIndex != c.selectedGenderIndex,
       builder: (context, state) {
-        return Form(
-          key: cubit.formKeyStep1,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MyTextFormField(
-                controller: cubit.fullNameController,
-                hintText: context.l10n.idFullNameHint,
-                labelText: context.l10n.idFullName,
-                visibleLable: true,
-                textInputType: TextInputType.name,
-                validator: (v) => (v == null || v.trim().isEmpty)
-                    ? context.l10n.required
-                    : null,
-              ),
-              const VerticalSpace(16),
-              _buildDateField(context, cubit),
-              const VerticalSpace(16),
-              _buildGenderField(context, state, cubit),
-              const VerticalSpace(16),
-              MyTextFormField(
-                controller: cubit.addressController,
-                hintText: context.l10n.addressHint,
-                labelText: context.l10n.address,
-                visibleLable: true,
-                textInputType: TextInputType.streetAddress,
-                maxLines: 2,
-                validator: (v) => (v == null || v.trim().isEmpty)
-                    ? context.l10n.required
-                    : null,
-              ),
-              const VerticalSpace(16),
-              MyTextFormField(
-                controller: cubit.nationalIdController,
-                hintText: context.l10n.nationalIdNumberHint,
-                labelText: context.l10n.nationalIdNumber,
-                visibleLable: true,
-                textInputType: TextInputType.number,
-                validator: (v) => (v == null || v.trim().isEmpty)
-                    ? context.l10n.required
-                    : null,
-              ),
-            ],
+        return FormErrorDismisser(
+          onDismiss: () => cubit.clearFormErrors(),
+          child: Form(
+            key: cubit.formKeyStep1,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MyTextFormField(
+                  controller: cubit.fullNameController,
+                  hintText: context.l10n.idFullNameHint,
+                  labelText: context.l10n.idFullName,
+                  visibleLable: true,
+                  textInputType: TextInputType.name,
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? context.l10n.required
+                      : null,
+                ),
+                const VerticalSpace(16),
+                _buildDateField(context, cubit),
+                const VerticalSpace(16),
+                _buildGenderField(context, state, cubit),
+                const VerticalSpace(16),
+                MyTextFormField(
+                  controller: cubit.addressController,
+                  hintText: context.l10n.addressHint,
+                  labelText: context.l10n.address,
+                  visibleLable: true,
+                  textInputType: TextInputType.streetAddress,
+                  maxLines: 2,
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? context.l10n.required
+                      : null,
+                ),
+                const VerticalSpace(16),
+                MyTextFormField(
+                  controller: cubit.nationalIdController,
+                  hintText: context.l10n.nationalIdNumberHint,
+                  labelText: context.l10n.nationalIdNumber,
+                  visibleLable: true,
+                  textInputType: TextInputType.number,
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? context.l10n.required
+                      : null,
+                ),
+              ],
+            ),
           ),
         );
       },
