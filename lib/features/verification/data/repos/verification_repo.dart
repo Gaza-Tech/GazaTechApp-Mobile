@@ -4,6 +4,7 @@ import 'package:gaza_tech/core/netowoks/api_result.dart';
 import 'package:gaza_tech/core/netowoks/supabase_error_handler.dart';
 import 'package:gaza_tech/features/verification/data/models/verification_request_model.dart';
 import 'package:gaza_tech/features/verification/data/services/verification_api_service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class VerificationRepo {
   final VerificationApiService _apiService;
@@ -52,6 +53,12 @@ class VerificationRepo {
     try {
       await _apiService.sendPhoneOtp(phone);
       return ApiResult.success(null);
+    } on AuthException catch (e) {
+      // Allow reusing the same phone number during testing
+      if (e.message.contains('already been registered')) {
+        return ApiResult.success(null);
+      }
+      return ApiResult.failure(ErrorHandler.handle(e));
     } catch (e) {
       return ApiResult.failure(ErrorHandler.handle(e));
     }

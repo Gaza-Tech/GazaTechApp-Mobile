@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class VerificationApiService {
@@ -22,7 +23,9 @@ class VerificationApiService {
   }
 
   Future<Map<String, dynamic>> submitRequest(Map<String, dynamic> data) async {
+    debugPrint('[VerificationApiService] Inserting into $_table...');
     final result = await _supabase.from(_table).insert(data).select().single();
+    debugPrint('[VerificationApiService] Insert result: $result');
     return result;
   }
 
@@ -33,12 +36,15 @@ class VerificationApiService {
   }) async {
     final extension = file.path.split('.').last.toLowerCase();
     final path = '$userId/$documentName.$extension';
+    debugPrint('[VerificationApiService] Uploading $path (${file.lengthSync()} bytes)');
 
     await _supabase.storage
         .from(_bucket)
         .upload(path, file, fileOptions: const FileOptions(upsert: true));
 
-    return _supabase.storage.from(_bucket).getPublicUrl(path);
+    final url = _supabase.storage.from(_bucket).getPublicUrl(path);
+    debugPrint('[VerificationApiService] Upload OK → $url');
+    return url;
   }
 
   Future<void> sendPhoneOtp(String phoneNumber) async {

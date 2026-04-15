@@ -71,18 +71,18 @@ class VerificationCubit extends Cubit<VerificationState>
     dateOfBirthController.text = DateFormat('dd/MM/yyyy').format(date);
   }
 
-  Future<void> pickDocumentFront() async {
-    final path = await _pickImage();
+  Future<void> pickDocumentFront({bool fromCamera = false}) async {
+    final path = await _pickImage(preferCamera: fromCamera);
     if (path != null) emit(state.copyWith(documentFrontPath: path));
   }
 
-  Future<void> pickDocumentBack() async {
-    final path = await _pickImage();
+  Future<void> pickDocumentBack({bool fromCamera = false}) async {
+    final path = await _pickImage(preferCamera: fromCamera);
     if (path != null) emit(state.copyWith(documentBackPath: path));
   }
 
-  Future<void> pickSelfie() async {
-    final path = await _pickImage(preferCamera: true);
+  Future<void> pickSelfie({bool fromCamera = false}) async {
+    final path = await _pickImage(preferCamera: fromCamera);
     if (path != null) emit(state.copyWith(selfieWithIdPath: path));
   }
 
@@ -166,6 +166,7 @@ class VerificationCubit extends Cubit<VerificationState>
 
   Future<void> submitVerificationRequest(String userId) async {
     emit(state.copyWith(isSubmitting: true, errorMessage: null));
+    debugPrint('[Verification] Starting submission for user: $userId');
 
     String? frontUrl;
     final frontResult = await _repo.uploadDocument(
@@ -174,9 +175,14 @@ class VerificationCubit extends Cubit<VerificationState>
       documentName: 'document_front',
     );
     frontResult.when(
-      success: (url) => frontUrl = url,
-      failure: (e) =>
-          emit(state.copyWith(isSubmitting: false, errorMessage: e.message)),
+      success: (url) {
+        frontUrl = url;
+        debugPrint('[Verification] Front uploaded: $url');
+      },
+      failure: (e) {
+        debugPrint('[Verification] Front upload FAILED: ${e.message}');
+        emit(state.copyWith(isSubmitting: false, errorMessage: e.message));
+      },
     );
     if (frontUrl == null) return;
 
@@ -187,9 +193,14 @@ class VerificationCubit extends Cubit<VerificationState>
       documentName: 'document_back',
     );
     backResult.when(
-      success: (url) => backUrl = url,
-      failure: (e) =>
-          emit(state.copyWith(isSubmitting: false, errorMessage: e.message)),
+      success: (url) {
+        backUrl = url;
+        debugPrint('[Verification] Back uploaded: $url');
+      },
+      failure: (e) {
+        debugPrint('[Verification] Back upload FAILED: ${e.message}');
+        emit(state.copyWith(isSubmitting: false, errorMessage: e.message));
+      },
     );
     if (backUrl == null) return;
 
@@ -200,9 +211,14 @@ class VerificationCubit extends Cubit<VerificationState>
       documentName: 'selfie_with_id',
     );
     selfieResult.when(
-      success: (url) => selfieUrl = url,
-      failure: (e) =>
-          emit(state.copyWith(isSubmitting: false, errorMessage: e.message)),
+      success: (url) {
+        selfieUrl = url;
+        debugPrint('[Verification] Selfie uploaded: $url');
+      },
+      failure: (e) {
+        debugPrint('[Verification] Selfie upload FAILED: ${e.message}');
+        emit(state.copyWith(isSubmitting: false, errorMessage: e.message));
+      },
     );
     if (selfieUrl == null) return;
 
@@ -222,13 +238,22 @@ class VerificationCubit extends Cubit<VerificationState>
       'phone_verified': true,
     };
 
+    debugPrint('[Verification] Inserting row with data: $data');
+
     final submitResult = await _repo.submitRequest(data);
     submitResult.when(
-      success: (_) =>
-          emit(state.copyWith(isSubmitting: false, submitSuccess: true)),
-      failure: (error) => emit(
-        state.copyWith(isSubmitting: false, errorMessage: error.message),
-      ),
+      success: (model) {
+        debugPrint(
+          '[Verification] SUCCESS — row ID: ${model.verificationRequestId}',
+        );
+        emit(state.copyWith(isSubmitting: false, submitSuccess: true));
+      },
+      failure: (error) {
+        debugPrint('[Verification] INSERT FAILED: ${error.message}');
+        emit(
+          state.copyWith(isSubmitting: false, errorMessage: error.message),
+        );
+      },
     );
   }
 

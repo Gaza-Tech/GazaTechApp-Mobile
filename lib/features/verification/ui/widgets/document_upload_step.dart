@@ -24,22 +24,26 @@ class DocumentUploadStep extends StatelessWidget {
             DocumentPhotoPicker(
               label: context.l10n.documentFront,
               imagePath: state.documentFrontPath,
-              onPickFromGallery: cubit.pickDocumentFront,
-              onPickFromCamera: cubit.pickDocumentFront,
+              onPickFromGallery: () =>
+                  cubit.pickDocumentFront(fromCamera: false),
+              onPickFromCamera: () =>
+                  cubit.pickDocumentFront(fromCamera: true),
             ),
             const VerticalSpace(16),
             DocumentPhotoPicker(
               label: context.l10n.documentBack,
               imagePath: state.documentBackPath,
-              onPickFromGallery: cubit.pickDocumentBack,
-              onPickFromCamera: cubit.pickDocumentBack,
+              onPickFromGallery: () =>
+                  cubit.pickDocumentBack(fromCamera: false),
+              onPickFromCamera: () =>
+                  cubit.pickDocumentBack(fromCamera: true),
             ),
             const VerticalSpace(16),
             DocumentPhotoPicker(
               label: context.l10n.selfieWithId,
               imagePath: state.selfieWithIdPath,
-              onPickFromGallery: cubit.pickSelfie,
-              onPickFromCamera: cubit.pickSelfie,
+              onPickFromGallery: () => cubit.pickSelfie(fromCamera: false),
+              onPickFromCamera: () => cubit.pickSelfie(fromCamera: true),
             ),
           ],
         );
