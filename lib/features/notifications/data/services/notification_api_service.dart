@@ -13,11 +13,7 @@ class NotificationApiService {
 
     final data = await _supabase.rpc(
       'get_grouped_notifications',
-      params: {
-        'p_user_id': userId,
-        'p_page': page,
-        'p_page_size': pageSize,
-      },
+      params: {'p_user_id': userId, 'p_page': page, 'p_page_size': pageSize},
     );
 
     return List<Map<String, dynamic>>.from(data as List);

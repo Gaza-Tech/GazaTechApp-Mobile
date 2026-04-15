@@ -78,7 +78,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               for (final option in [
                 (ThemeMode.light, Icons.light_mode_outlined, l10n.themeLight),
                 (ThemeMode.dark, Icons.dark_mode_outlined, l10n.themeDark),
-                (ThemeMode.system, Icons.settings_suggest_outlined, l10n.themeSystem),
+                (
+                  ThemeMode.system,
+                  Icons.settings_suggest_outlined,
+                  l10n.themeSystem,
+                ),
               ])
                 ListTile(
                   leading: Icon(option.$2),

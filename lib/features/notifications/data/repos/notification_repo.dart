@@ -21,10 +21,12 @@ class NotificationRepo {
     try {
       final raw = await _service.fetchGroupedNotifications(page);
       final hasMore = raw.length > NotificationApiService.pageSize;
-      final items =
-          hasMore ? raw.sublist(0, NotificationApiService.pageSize) : raw;
-      final notifications =
-          items.map((e) => NotificationModel.fromJson(e)).toList();
+      final items = hasMore
+          ? raw.sublist(0, NotificationApiService.pageSize)
+          : raw;
+      final notifications = items
+          .map((e) => NotificationModel.fromJson(e))
+          .toList();
       return ApiResult.success(
         NotificationsResponse(notifications: notifications, hasMore: hasMore),
       );

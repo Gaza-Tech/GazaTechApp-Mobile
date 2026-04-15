@@ -5,8 +5,7 @@ class NotificationRealtimeService {
   final SupabaseClient _supabase;
   RealtimeChannel? _channel;
   Timer? _pollTimer;
-  final StreamController<void> _controller =
-      StreamController<void>.broadcast();
+  final StreamController<void> _controller = StreamController<void>.broadcast();
 
   NotificationRealtimeService(this._supabase);
 
