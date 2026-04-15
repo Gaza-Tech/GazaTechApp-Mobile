@@ -77,6 +77,10 @@ import 'package:gaza_tech/features/ai_chat/cubit/ai_chat_cubit.dart';
 import 'package:gaza_tech/features/ai_chat/data/repos/ai_chat_repo.dart';
 import 'package:gaza_tech/features/ai_chat/data/services/ai_chat_api_service.dart';
 import 'package:gaza_tech/features/drafts/cubit/drafts_cubit.dart';
+import 'package:gaza_tech/features/notifications/cubit/notification_cubit.dart';
+import 'package:gaza_tech/features/notifications/data/repos/notification_repo.dart';
+import 'package:gaza_tech/features/notifications/data/services/notification_api_service.dart';
+import 'package:gaza_tech/features/notifications/data/services/notification_realtime_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -289,4 +293,18 @@ Future<void> setupGetIt() async {
 
   // 21. Drafts
   getIt.registerFactory<DraftsCubit>(() => DraftsCubit(getIt()));
+
+  // 22. Notifications (singleton — persists for realtime subscription + badge count)
+  getIt.registerLazySingleton<NotificationApiService>(
+    () => NotificationApiService(getIt()),
+  );
+  getIt.registerLazySingleton<NotificationRealtimeService>(
+    () => NotificationRealtimeService(getIt()),
+  );
+  getIt.registerLazySingleton<NotificationRepo>(
+    () => NotificationRepo(getIt()),
+  );
+  getIt.registerLazySingleton<NotificationCubit>(
+    () => NotificationCubit(getIt(), getIt()),
+  );
 }

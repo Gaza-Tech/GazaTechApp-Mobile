@@ -25,7 +25,6 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _notifyNewComments = true;
   bool _notifyNewLikes = true;
-  bool _notifyListingInquiries = true;
   bool _notifyVerificationUpdates = true;
 
   @override
@@ -39,9 +38,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       SharedPrefKeys.notifyNewComments,
     );
     final likes = await SharedPrefHelper.getBool(SharedPrefKeys.notifyNewLikes);
-    final inquiries = await SharedPrefHelper.getBool(
-      SharedPrefKeys.notifyListingInquiries,
-    );
     final verification = await SharedPrefHelper.getBool(
       SharedPrefKeys.notifyVerificationUpdates,
     );
@@ -49,7 +45,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       _notifyNewComments = comments ?? true;
       _notifyNewLikes = likes ?? true;
-      _notifyListingInquiries = inquiries ?? true;
       _notifyVerificationUpdates = verification ?? true;
     });
   }
@@ -83,7 +78,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               for (final option in [
                 (ThemeMode.light, Icons.light_mode_outlined, l10n.themeLight),
                 (ThemeMode.dark, Icons.dark_mode_outlined, l10n.themeDark),
-                (ThemeMode.system, Icons.settings_suggest_outlined, l10n.themeSystem),
+                (
+                  ThemeMode.system,
+                  Icons.settings_suggest_outlined,
+                  l10n.themeSystem,
+                ),
               ])
                 ListTile(
                   leading: Icon(option.$2),
@@ -183,17 +182,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onChanged: (val) {
                 setState(() => _notifyNewLikes = val);
                 _setNotifPref(SharedPrefKeys.notifyNewLikes, val);
-              },
-            ),
-            SwitchListTile(
-              title: Text(
-                l10n.notifyListingInquiries,
-                style: MyTextStyle.body.m,
-              ),
-              value: _notifyListingInquiries,
-              onChanged: (val) {
-                setState(() => _notifyListingInquiries = val);
-                _setNotifPref(SharedPrefKeys.notifyListingInquiries, val);
               },
             ),
             SwitchListTile(

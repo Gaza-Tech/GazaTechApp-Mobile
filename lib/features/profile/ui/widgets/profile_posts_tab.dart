@@ -108,19 +108,20 @@ class _ProfilePostsTabState extends State<ProfilePostsTab>
                       ),
                       onAuthorTap: post.authorIsActive
                           ? () => Navigator.pushNamed(
-                                context,
-                                MyRoutes.profile,
-                                arguments: {
-                                  'userId': post.authorId,
-                                  'isOwnProfile': post.authorId ==
-                                      Supabase
-                                          .instance
-                                          .client
-                                          .auth
-                                          .currentUser
-                                          ?.id,
-                                },
-                              )
+                              context,
+                              MyRoutes.profile,
+                              arguments: {
+                                'userId': post.authorId,
+                                'isOwnProfile':
+                                    post.authorId ==
+                                    Supabase
+                                        .instance
+                                        .client
+                                        .auth
+                                        .currentUser
+                                        ?.id,
+                              },
+                            )
                           : null,
                       onLikeToggle: () async {
                         if (!await GuestGuard.requireAccount(context)) return;

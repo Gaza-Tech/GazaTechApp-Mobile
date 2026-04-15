@@ -11,6 +11,7 @@ import 'package:gaza_tech/features/marketplace/data/models/marketplace_sort.dart
 import 'package:gaza_tech/features/marketplace/ui/widgets/category_tab_bar.dart';
 import 'package:gaza_tech/features/marketplace/ui/widgets/listings_tab_view.dart';
 import 'package:gaza_tech/features/marketplace/ui/widgets/marketplace_sort_sheet.dart';
+import 'package:gaza_tech/features/notifications/ui/widgets/notification_bell_icon.dart';
 
 class MarketplaceScreen extends StatefulWidget {
   final ScrollController scrollController;
@@ -106,6 +107,10 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
               SliverAppBar(
                 title: Text(context.l10n.marketplace),
                 actions: [
+                  NotificationBellIcon(
+                    onTap: () =>
+                        Navigator.pushNamed(context, MyRoutes.notifications),
+                  ),
                   IconButton(
                     icon: const Icon(Icons.auto_awesome_rounded),
                     tooltip: context.l10n.aiChat,

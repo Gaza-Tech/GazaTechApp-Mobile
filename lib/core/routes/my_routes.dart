@@ -26,4 +26,5 @@ class MyRoutes {
   static const String about = '/about';
   static const String termsAndConditions = '/termsAndConditions';
   static const String privacyPolicy = '/privacyPolicy';
+  static const String notifications = '/notifications';
 }

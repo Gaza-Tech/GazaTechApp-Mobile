@@ -1529,4 +1529,75 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get privacyContactBody =>
       'If you have any questions about this Privacy Policy or wish to exercise your data rights, please contact us at:';
+
+  @override
+  String get justNow => 'Just now';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get markAllAsRead => 'Mark all as read';
+
+  @override
+  String get noNotifications => 'No notifications yet';
+
+  @override
+  String get noNotificationsSubtitle =>
+      'Your activity notifications will appear here';
+
+  @override
+  String notificationPostLikeSingle(String name) {
+    return '$name liked your post';
+  }
+
+  @override
+  String notificationPostLikeGrouped(String name, int count) {
+    return '$name and $count others liked your post';
+  }
+
+  @override
+  String notificationCommentLikeSingle(String name) {
+    return '$name liked your comment';
+  }
+
+  @override
+  String notificationCommentLikeGrouped(String name, int count) {
+    return '$name and $count others liked your comment';
+  }
+
+  @override
+  String notificationPostCommentSingle(String name) {
+    return '$name commented on your post';
+  }
+
+  @override
+  String notificationPostCommentGrouped(String name, int count) {
+    return '$name and $count others commented on your post';
+  }
+
+  @override
+  String notificationCommentReplySingle(String name) {
+    return '$name replied to your comment';
+  }
+
+  @override
+  String notificationCommentReplyGrouped(String name, int count) {
+    return '$name and $count others replied to your comment';
+  }
+
+  @override
+  String get notificationVerificationApproved =>
+      'Your identity verification has been approved';
+
+  @override
+  String get notificationVerificationRejected =>
+      'Your identity verification was not approved';
+
+  @override
+  String get notificationContentRemoved =>
+      'Your content was removed by a moderator';
+
+  @override
+  String get notificationSystemAnnouncement => 'System announcement';
 }

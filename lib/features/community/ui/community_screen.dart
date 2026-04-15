@@ -10,6 +10,7 @@ import 'package:gaza_tech/core/routes/my_routes.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_search_bar.dart';
 import 'package:gaza_tech/features/community/ui/widgets/community_sort_sheet.dart';
 import 'package:gaza_tech/features/community/ui/widgets/posts_tab_view.dart';
+import 'package:gaza_tech/features/notifications/ui/widgets/notification_bell_icon.dart';
 
 class CommunityScreen extends StatefulWidget {
   final ScrollController scrollController;
@@ -93,6 +94,12 @@ class _CommunityScreenState extends State<CommunityScreen>
                 floating: true,
                 snap: true,
                 pinned: false,
+                actions: [
+                  NotificationBellIcon(
+                    onTap: () =>
+                        Navigator.pushNamed(context, MyRoutes.notifications),
+                  ),
+                ],
                 bottom: PreferredSize(
                   preferredSize: Size.fromHeight(112.h),
                   child: Column(

@@ -2947,6 +2947,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'If you have any questions about this Privacy Policy or wish to exercise your data rights, please contact us at:'**
   String get privacyContactBody;
+
+  /// No description provided for @justNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Just now'**
+  String get justNow;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @markAllAsRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all as read'**
+  String get markAllAsRead;
+
+  /// No description provided for @noNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications yet'**
+  String get noNotifications;
+
+  /// No description provided for @noNotificationsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your activity notifications will appear here'**
+  String get noNotificationsSubtitle;
+
+  /// No description provided for @notificationPostLikeSingle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} liked your post'**
+  String notificationPostLikeSingle(String name);
+
+  /// No description provided for @notificationPostLikeGrouped.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} and {count} others liked your post'**
+  String notificationPostLikeGrouped(String name, int count);
+
+  /// No description provided for @notificationCommentLikeSingle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} liked your comment'**
+  String notificationCommentLikeSingle(String name);
+
+  /// No description provided for @notificationCommentLikeGrouped.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} and {count} others liked your comment'**
+  String notificationCommentLikeGrouped(String name, int count);
+
+  /// No description provided for @notificationPostCommentSingle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} commented on your post'**
+  String notificationPostCommentSingle(String name);
+
+  /// No description provided for @notificationPostCommentGrouped.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} and {count} others commented on your post'**
+  String notificationPostCommentGrouped(String name, int count);
+
+  /// No description provided for @notificationCommentReplySingle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} replied to your comment'**
+  String notificationCommentReplySingle(String name);
+
+  /// No description provided for @notificationCommentReplyGrouped.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} and {count} others replied to your comment'**
+  String notificationCommentReplyGrouped(String name, int count);
+
+  /// No description provided for @notificationVerificationApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your identity verification has been approved'**
+  String get notificationVerificationApproved;
+
+  /// No description provided for @notificationVerificationRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Your identity verification was not approved'**
+  String get notificationVerificationRejected;
+
+  /// No description provided for @notificationContentRemoved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your content was removed by a moderator'**
+  String get notificationContentRemoved;
+
+  /// No description provided for @notificationSystemAnnouncement.
+  ///
+  /// In en, this message translates to:
+  /// **'System announcement'**
+  String get notificationSystemAnnouncement;
 }
 
 class _AppLocalizationsDelegate

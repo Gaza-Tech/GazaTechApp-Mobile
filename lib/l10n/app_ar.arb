@@ -602,5 +602,67 @@
   "privacyChangesTitle": "8. التغييرات على هذه السياسة",
   "privacyChangesBody": "قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنقوم بإخطارك بالتغييرات الجوهرية من خلال التطبيق. يُعتبر استمرار استخدام التطبيق بعد التغييرات موافقة على السياسة المحدثة.",
   "privacyContactTitle": "9. تواصل معنا",
-  "privacyContactBody": "إذا كانت لديك أي أسئلة حول سياسة الخصوصية هذه أو ترغب في ممارسة حقوقك المتعلقة ببياناتك، يرجى التواصل معنا على:"
+  "privacyContactBody": "إذا كانت لديك أي أسئلة حول سياسة الخصوصية هذه أو ترغب في ممارسة حقوقك المتعلقة ببياناتك، يرجى التواصل معنا على:",
+
+  "justNow": "الآن",
+  "notifications": "الإشعارات",
+  "markAllAsRead": "تعليم الكل كمقروء",
+  "noNotifications": "لا توجد إشعارات بعد",
+  "noNotificationsSubtitle": "ستظهر هنا إشعارات نشاطك",
+  "notificationPostLikeSingle": "{name} أعجب بمنشورك",
+  "@notificationPostLikeSingle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notificationPostLikeGrouped": "{name} و{count} آخرون أعجبوا بمنشورك",
+  "@notificationPostLikeGrouped": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "notificationCommentLikeSingle": "{name} أعجب بتعليقك",
+  "@notificationCommentLikeSingle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notificationCommentLikeGrouped": "{name} و{count} آخرون أعجبوا بتعليقك",
+  "@notificationCommentLikeGrouped": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "notificationPostCommentSingle": "{name} علّق على منشورك",
+  "@notificationPostCommentSingle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notificationPostCommentGrouped": "{name} و{count} آخرون علّقوا على منشورك",
+  "@notificationPostCommentGrouped": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "notificationCommentReplySingle": "{name} ردّ على تعليقك",
+  "@notificationCommentReplySingle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notificationCommentReplyGrouped": "{name} و{count} آخرون ردّوا على تعليقك",
+  "@notificationCommentReplyGrouped": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "notificationVerificationApproved": "تمت الموافقة على التحقق من هويتك",
+  "notificationVerificationRejected": "لم تتم الموافقة على التحقق من هويتك",
+  "notificationContentRemoved": "تمت إزالة محتواك بواسطة أحد المشرفين",
+  "notificationSystemAnnouncement": "إعلان من النظام"
 }
