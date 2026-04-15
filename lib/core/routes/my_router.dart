@@ -53,6 +53,8 @@ import 'package:gaza_tech/features/about/ui/about_screen.dart';
 import 'package:gaza_tech/features/legal/ui/terms_and_conditions_screen.dart';
 import 'package:gaza_tech/features/legal/ui/privacy_policy_screen.dart';
 import 'package:gaza_tech/features/auth/delete_account/cubit/delete_account_cubit.dart';
+import 'package:gaza_tech/features/notifications/cubit/notification_cubit.dart';
+import 'package:gaza_tech/features/notifications/ui/notifications_screen.dart';
 
 class MyRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -93,6 +95,9 @@ class MyRouter {
               BlocProvider(create: (context) => getIt<SignOutCubit>()),
               BlocProvider(create: (context) => getIt<MarketplaceCubit>()),
               BlocProvider(create: (context) => getIt<CommunityCubit>()),
+              BlocProvider.value(
+                value: getIt<NotificationCubit>()..fetchUnreadCount(),
+              ),
             ],
             child: const HomeScreen(),
           ),
@@ -270,6 +275,13 @@ class MyRouter {
         );
       case MyRoutes.privacyPolicy:
         return MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen());
+      case MyRoutes.notifications:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: getIt<NotificationCubit>()..fetchNotifications(),
+            child: const NotificationsScreen(),
+          ),
+        );
       default:
         return null;
     }

@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gaza_tech/core/extentions/extentions.dart';
 import 'package:gaza_tech/core/routes/my_routes.dart';
+import 'package:gaza_tech/features/notifications/cubit/notification_cubit.dart';
+import 'package:gaza_tech/features/notifications/cubit/notification_state.dart';
 import 'package:gaza_tech/core/widgets/confirmation_sheet.dart';
 import 'package:gaza_tech/core/widgets/language_bottom_sheet.dart';
 import 'package:gaza_tech/core/widgets/spacing_widgets.dart';
@@ -108,6 +110,26 @@ class _MyDrawerState extends State<MyDrawer> {
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, MyRoutes.bookmarks);
+            },
+          ),
+          BlocBuilder<NotificationCubit, NotificationState>(
+            buildWhen: (prev, curr) => prev.unreadCount != curr.unreadCount,
+            builder: (context, state) {
+              return ListTile(
+                leading: Badge(
+                  isLabelVisible: state.unreadCount > 0,
+                  label: Text(
+                    state.unreadCount > 99 ? '99+' : '${state.unreadCount}',
+                    style: TextStyle(fontSize: 9.sp),
+                  ),
+                  child: const Icon(Icons.notifications_outlined),
+                ),
+                title: Text(context.l10n.notifications),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, MyRoutes.notifications);
+                },
+              );
             },
           ),
           if (Supabase.instance.client.auth.currentUser != null)

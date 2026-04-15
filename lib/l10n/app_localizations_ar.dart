@@ -1522,4 +1522,74 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get privacyContactBody =>
       'إذا كانت لديك أي أسئلة حول سياسة الخصوصية هذه أو ترغب في ممارسة حقوقك المتعلقة ببياناتك، يرجى التواصل معنا على:';
+
+  @override
+  String get justNow => 'الآن';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get markAllAsRead => 'تعليم الكل كمقروء';
+
+  @override
+  String get noNotifications => 'لا توجد إشعارات بعد';
+
+  @override
+  String get noNotificationsSubtitle => 'ستظهر هنا إشعارات نشاطك';
+
+  @override
+  String notificationPostLikeSingle(String name) {
+    return '$name أعجب بمنشورك';
+  }
+
+  @override
+  String notificationPostLikeGrouped(String name, int count) {
+    return '$name و$count آخرون أعجبوا بمنشورك';
+  }
+
+  @override
+  String notificationCommentLikeSingle(String name) {
+    return '$name أعجب بتعليقك';
+  }
+
+  @override
+  String notificationCommentLikeGrouped(String name, int count) {
+    return '$name و$count آخرون أعجبوا بتعليقك';
+  }
+
+  @override
+  String notificationPostCommentSingle(String name) {
+    return '$name علّق على منشورك';
+  }
+
+  @override
+  String notificationPostCommentGrouped(String name, int count) {
+    return '$name و$count آخرون علّقوا على منشورك';
+  }
+
+  @override
+  String notificationCommentReplySingle(String name) {
+    return '$name ردّ على تعليقك';
+  }
+
+  @override
+  String notificationCommentReplyGrouped(String name, int count) {
+    return '$name و$count آخرون ردّوا على تعليقك';
+  }
+
+  @override
+  String get notificationVerificationApproved =>
+      'تمت الموافقة على التحقق من هويتك';
+
+  @override
+  String get notificationVerificationRejected =>
+      'لم تتم الموافقة على التحقق من هويتك';
+
+  @override
+  String get notificationContentRemoved =>
+      'تمت إزالة محتواك بواسطة أحد المشرفين';
+
+  @override
+  String get notificationSystemAnnouncement => 'إعلان من النظام';
 }
