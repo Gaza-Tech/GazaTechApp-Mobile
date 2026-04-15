@@ -114,11 +114,7 @@ class NotificationCard extends StatelessWidget {
       case NotificationType.commentReply:
         final postId = notification.navigationPostId;
         if (postId != null) {
-          Navigator.pushNamed(
-            context,
-            MyRoutes.postDetails,
-            arguments: postId,
-          );
+          Navigator.pushNamed(context, MyRoutes.postDetails, arguments: postId);
         }
       case NotificationType.verificationApproved:
       case NotificationType.verificationRejected:
@@ -154,8 +150,9 @@ class NotificationCard extends StatelessWidget {
                     _buildSummary(context),
                     style: MyTextStyle.body.m.copyWith(
                       color: theme.colorScheme.onSurface,
-                      fontWeight:
-                          isUnread ? FontWeight.w600 : FontWeight.normal,
+                      fontWeight: isUnread
+                          ? FontWeight.w600
+                          : FontWeight.normal,
                     ),
                   ),
                   SizedBox(height: 4.h),

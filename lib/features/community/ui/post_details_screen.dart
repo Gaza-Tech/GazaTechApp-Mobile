@@ -321,15 +321,15 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                     indentLevel: 0,
                                     onAuthorTap: comment.authorIsActive
                                         ? () => Navigator.pushNamed(
-                                              context,
-                                              MyRoutes.profile,
-                                              arguments: {
-                                                'userId': comment.authorId,
-                                                'isOwnProfile':
-                                                    comment.authorId ==
-                                                    currentUserId,
-                                              },
-                                            )
+                                            context,
+                                            MyRoutes.profile,
+                                            arguments: {
+                                              'userId': comment.authorId,
+                                              'isOwnProfile':
+                                                  comment.authorId ==
+                                                  currentUserId,
+                                            },
+                                          )
                                         : null,
                                     onReply: () => setState(() {
                                       _replyingTo = comment.authorName;
@@ -421,15 +421,15 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                                                 .contains(reply.commentId),
                                             onAuthorTap: reply.authorIsActive
                                                 ? () => Navigator.pushNamed(
-                                                      context,
-                                                      MyRoutes.profile,
-                                                      arguments: {
-                                                        'userId': reply.authorId,
-                                                        'isOwnProfile':
-                                                            reply.authorId ==
-                                                            currentUserId,
-                                                      },
-                                                    )
+                                                    context,
+                                                    MyRoutes.profile,
+                                                    arguments: {
+                                                      'userId': reply.authorId,
+                                                      'isOwnProfile':
+                                                          reply.authorId ==
+                                                          currentUserId,
+                                                    },
+                                                  )
                                                 : null,
                                             isReported: state.reportedCommentIds
                                                 .contains(reply.commentId),
@@ -536,13 +536,13 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
       isVerified: post.authorIsActive && (post.author?.isVerified ?? false),
       onAuthorTap: post.authorIsActive
           ? () => Navigator.pushNamed(
-                context,
-                MyRoutes.profile,
-                arguments: {
-                  'userId': post.authorId,
-                  'isOwnProfile': post.authorId == currentUserId,
-                },
-              )
+              context,
+              MyRoutes.profile,
+              arguments: {
+                'userId': post.authorId,
+                'isOwnProfile': post.authorId == currentUserId,
+              },
+            )
           : null,
     );
   }

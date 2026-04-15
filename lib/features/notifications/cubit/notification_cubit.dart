@@ -12,7 +12,7 @@ class NotificationCubit extends Cubit<NotificationState> {
   late final StreamSubscription<void> _realtimeSub;
 
   NotificationCubit(this._repo, this._realtimeService)
-      : super(const NotificationState()) {
+    : super(const NotificationState()) {
     _realtimeSub = _realtimeService.onNewNotification.listen((_) {
       fetchUnreadCount();
     });
@@ -37,9 +37,8 @@ class NotificationCubit extends Cubit<NotificationState> {
           hasMore: response.hasMore,
         ),
       ),
-      failure: (error) => emit(
-        state.copyWith(isLoading: false, errorMessage: error.message),
-      ),
+      failure: (error) =>
+          emit(state.copyWith(isLoading: false, errorMessage: error.message)),
     );
   }
 
@@ -72,8 +71,9 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
   Future<void> markAllAsRead() async {
-    final updated =
-        state.notifications.map((n) => n.copyWith(isRead: true)).toList();
+    final updated = state.notifications
+        .map((n) => n.copyWith(isRead: true))
+        .toList();
     emit(state.copyWith(notifications: updated, unreadCount: 0));
     await _repo.markAllAsRead();
   }
