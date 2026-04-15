@@ -139,29 +139,28 @@ class VerificationCubit extends Cubit<VerificationState>
     }
   }
 
+  // TODO: Replace mock with real Supabase Auth OTP when Twilio is configured
   Future<void> sendPhoneOtp() async {
-    final phone = phoneController.text.trim();
     emit(state.copyWith(isOtpSending: true, otpError: null));
-    final result = await _repo.sendPhoneOtp(phone);
-    result.when(
-      success: (_) =>
-          emit(state.copyWith(isOtpSending: false, isOtpSent: true)),
-      failure: (error) =>
-          emit(state.copyWith(isOtpSending: false, otpError: error.message)),
-    );
+    await Future.delayed(const Duration(milliseconds: 500));
+    debugPrint('[Verification] Mock OTP sent (use code: 123456)');
+    emit(state.copyWith(isOtpSending: false, isOtpSent: true));
   }
 
+  // TODO: Replace mock with real Supabase Auth OTP when Twilio is configured
   Future<void> verifyPhoneOtp() async {
-    final phone = phoneController.text.trim();
     final token = otpController.text.trim();
     emit(state.copyWith(isOtpVerifying: true, otpError: null));
-    final result = await _repo.verifyPhoneOtp(phone: phone, token: token);
-    result.when(
-      success: (_) =>
-          emit(state.copyWith(isOtpVerifying: false, isPhoneVerified: true)),
-      failure: (error) =>
-          emit(state.copyWith(isOtpVerifying: false, otpError: error.message)),
-    );
+    await Future.delayed(const Duration(milliseconds: 300));
+    if (token == '123456') {
+      debugPrint('[Verification] Mock OTP verified successfully');
+      emit(state.copyWith(isOtpVerifying: false, isPhoneVerified: true));
+    } else {
+      debugPrint('[Verification] Mock OTP failed: wrong code "$token"');
+      emit(
+        state.copyWith(isOtpVerifying: false, otpError: 'Invalid OTP code'),
+      );
+    }
   }
 
   Future<void> submitVerificationRequest(String userId) async {
