@@ -16,7 +16,7 @@ class BookmarksApiService {
   ''';
 
   static const String _listingSelect =
-      '*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name, is_verified, is_active), listing_images(image_url, is_thumbnail, sort_order)';
+      '*, locations!location_id(name, name_ar), users!seller_id(first_name, last_name, avatar_url, is_verified, is_active), listing_images(image_url, is_thumbnail, sort_order)';
 
   Future<List<Map<String, dynamic>>> fetchBookmarkedPosts(int page) async {
     final userId = _supabase.auth.currentUser?.id;

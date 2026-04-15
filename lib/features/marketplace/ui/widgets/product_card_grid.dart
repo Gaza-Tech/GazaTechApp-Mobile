@@ -11,6 +11,7 @@ class ProductCardGrid extends StatelessWidget {
   final String price;
   final String location;
   final String sellerName;
+  final String? sellerAvatarUrl;
   final String productCondition;
   final String? imageUrl;
   final VoidCallback onTap;
@@ -23,6 +24,7 @@ class ProductCardGrid extends StatelessWidget {
     required this.price,
     required this.location,
     required this.sellerName,
+    this.sellerAvatarUrl,
     required this.productCondition,
     this.imageUrl,
     required this.onTap,
@@ -43,57 +45,26 @@ class ProductCardGrid extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: 100.w,
-                height: 110.h,
-                child: Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10.r),
-                      child: SizedBox(
-                        width: 100.w,
-                        height: 110.h,
-                        child: imageUrl != null
-                            ? CachedNetworkImage(
-                                imageUrl: imageUrl!,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: double.infinity,
-                                placeholder: (context, url) =>
-                                    _imagePlaceholder(),
-                                errorWidget: (context, url, error) =>
-                                    _imageError(),
-                              )
-                            : _imageError(),
-                      ),
-                    ),
-                    if (onBookmarkToggle != null)
-                      Positioned(
-                        top: 4.h,
-                        right: 4.w,
-                        child: GestureDetector(
-                          onTap: onBookmarkToggle,
-                          child: Container(
-                            width: 28.w,
-                            height: 28.w,
-                            decoration: const BoxDecoration(
-                              color: Colors.black54,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              isBookmarked
-                                  ? Icons.bookmark
-                                  : Icons.bookmark_border,
-                              size: 16.sp,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
+              // Left: product image (no bookmark overlay)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.r),
+                child: SizedBox(
+                  width: 100.w,
+                  height: 110.h,
+                  child: imageUrl != null
+                      ? CachedNetworkImage(
+                          imageUrl: imageUrl!,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                          placeholder: (context, url) => _imagePlaceholder(),
+                          errorWidget: (context, url, error) => _imageError(),
+                        )
+                      : _imageError(),
                 ),
               ),
               const HorizontalSpace(10),
+              // Right: info column
               Expanded(
                 child: SizedBox(
                   height: 110.h,
@@ -101,44 +72,15 @@ class ProductCardGrid extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Top: condition tag
-                      if (productCondition.isNotEmpty)
-                        ConditionTag(condition: productCondition),
-                      // Middle: name + price
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      // Top: seller avatar + name
+                      if (sellerName.isNotEmpty)
+                        Row(
                           children: [
-                            Text(
-                              name,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              style: MyTextStyle.body.s.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: theme.textTheme.titleMedium?.color,
-                              ),
+                            _SellerAvatar(
+                              avatarUrl: sellerAvatarUrl,
+                              sellerName: sellerName,
                             ),
-                            const VerticalSpace(2),
-                            Text(
-                              price,
-                              style: MyTextStyle.heading.h5.copyWith(
-                                color: MyColors.primary.base,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      // Bottom: seller • location
-                      Row(
-                        children: [
-                          if (sellerName.isNotEmpty) ...[
-                            Icon(
-                              Icons.person_outline,
-                              size: 13.sp,
-                              color: theme.textTheme.bodySmall?.color,
-                            ),
-                            const HorizontalSpace(2),
+                            const HorizontalSpace(6),
                             Flexible(
                               child: Text(
                                 sellerName,
@@ -149,30 +91,72 @@ class ProductCardGrid extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const HorizontalSpace(4),
-                            Icon(
-                              Icons.circle,
-                              size: 4,
-                              color: theme.textTheme.bodySmall?.color,
-                            ),
-                            const HorizontalSpace(4),
                           ],
+                        ),
+                      // Middle: product name
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Text(
+                            name,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: MyTextStyle.body.s.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: theme.textTheme.titleMedium?.color,
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Price row + condition tag
+                      Row(
+                        children: [
+                          Text(
+                            price,
+                            style: MyTextStyle.heading.h5.copyWith(
+                              color: MyColors.primary.base,
+                            ),
+                          ),
+                          if (productCondition.isNotEmpty) ...[
+                            const HorizontalSpace(6),
+                            ConditionTag(condition: productCondition),
+                          ],
+                        ],
+                      ),
+                      // Bottom: location + bookmark
+                      Row(
+                        children: [
                           Icon(
                             Icons.location_on_outlined,
                             size: 12.sp,
                             color: theme.textTheme.bodySmall?.color,
                           ),
                           const HorizontalSpace(2),
-                          Flexible(
-                            child: Text(
-                              location,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: MyTextStyle.body.xs.copyWith(
-                                color: theme.textTheme.bodySmall?.color,
-                              ),
+                          Text(
+                            location,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: MyTextStyle.body.xs.copyWith(
+                              color: theme.textTheme.bodySmall?.color,
                             ),
                           ),
+                          const Spacer(),
+
+                          if (onBookmarkToggle != null) ...[
+                            const Spacer(),
+                            GestureDetector(
+                              onTap: onBookmarkToggle,
+                              child: Icon(
+                                isBookmarked
+                                    ? Icons.bookmark
+                                    : Icons.bookmark_border,
+                                size: 18.sp,
+                                color: isBookmarked
+                                    ? MyColors.primary.base
+                                    : theme.textTheme.bodySmall?.color,
+                              ),
+                            ),
+                          ],
                         ],
                       ),
                     ],
@@ -207,4 +191,37 @@ class ProductCardGrid extends StatelessWidget {
       ),
     ),
   );
+}
+
+class _SellerAvatar extends StatelessWidget {
+  final String? avatarUrl;
+  final String sellerName;
+
+  const _SellerAvatar({this.avatarUrl, required this.sellerName});
+
+  @override
+  Widget build(BuildContext context) {
+    final initial = sellerName.isNotEmpty ? sellerName[0].toUpperCase() : '?';
+
+    if (avatarUrl != null && avatarUrl!.isNotEmpty) {
+      return CircleAvatar(
+        radius: 9.r,
+        backgroundImage: CachedNetworkImageProvider(avatarUrl!),
+        backgroundColor: MyColors.dark.outline,
+      );
+    }
+
+    return CircleAvatar(
+      radius: 9.r,
+      backgroundColor: MyColors.primary.base.withOpacity(0.15),
+      child: Text(
+        initial,
+        style: TextStyle(
+          fontSize: 9.sp,
+          fontWeight: FontWeight.w600,
+          color: MyColors.primary.base,
+        ),
+      ),
+    );
+  }
 }

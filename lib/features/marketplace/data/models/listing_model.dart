@@ -46,6 +46,7 @@ abstract class ListingModel with _$ListingModel {
 
   bool get sellerIsVerified => sellerData?['is_verified'] == true;
   bool get sellerIsActive => sellerData?['is_active'] != false;
+  String? get sellerAvatarUrl => sellerData?['avatar_url'] as String?;
 
   String? get thumbnailUrl {
     if (images == null || images!.isEmpty) return null;

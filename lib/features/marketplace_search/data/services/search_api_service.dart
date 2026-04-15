@@ -50,7 +50,7 @@ class MarketplaceSearchApiService {
         .from('marketplace_listings')
         .select(
           '*, locations!location_id(name, name_ar), '
-          'users!seller_id(first_name, last_name), '
+          'users!seller_id(first_name, last_name, avatar_url), '
           'listing_images(image_url, is_thumbnail, sort_order)',
         )
         .eq('content_status', 'published');
