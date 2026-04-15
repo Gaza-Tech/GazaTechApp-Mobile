@@ -46,12 +46,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             buildWhen: (prev, curr) => prev.unreadCount != curr.unreadCount,
             builder: (context, state) {
               if (state.unreadCount == 0) return const SizedBox.shrink();
-              return TextButton(
+              return IconButton(
                 onPressed: () =>
                     context.read<NotificationCubit>().markAllAsRead(),
-                child: Text(
-                  l10n.markAllAsRead,
-                  style: TextStyle(fontSize: 13.sp),
+                icon: Icon(
+                  Icons.mark_chat_read_outlined,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               );
             },
