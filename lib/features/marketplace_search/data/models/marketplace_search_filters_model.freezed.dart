@@ -1,0 +1,304 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'marketplace_search_filters_model.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+// dart format off
+T _$identity<T>(T value) => value;
+/// @nodoc
+mixin _$MarketplaceSearchFiltersModel {
+
+ String? get categoryId; String? get categoryName; String? get locationId; String? get locationName; List<String> get conditions; int? get priceMinUsd; int? get priceMaxUsd; int? get priceMinIls; int? get priceMaxIls; SearchSortOption get sort;
+/// Create a copy of MarketplaceSearchFiltersModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MarketplaceSearchFiltersModelCopyWith<MarketplaceSearchFiltersModel> get copyWith => _$MarketplaceSearchFiltersModelCopyWithImpl<MarketplaceSearchFiltersModel>(this as MarketplaceSearchFiltersModel, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketplaceSearchFiltersModel&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.locationId, locationId) || other.locationId == locationId)&&(identical(other.locationName, locationName) || other.locationName == locationName)&&const DeepCollectionEquality().equals(other.conditions, conditions)&&(identical(other.priceMinUsd, priceMinUsd) || other.priceMinUsd == priceMinUsd)&&(identical(other.priceMaxUsd, priceMaxUsd) || other.priceMaxUsd == priceMaxUsd)&&(identical(other.priceMinIls, priceMinIls) || other.priceMinIls == priceMinIls)&&(identical(other.priceMaxIls, priceMaxIls) || other.priceMaxIls == priceMaxIls)&&(identical(other.sort, sort) || other.sort == sort));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,categoryId,categoryName,locationId,locationName,const DeepCollectionEquality().hash(conditions),priceMinUsd,priceMaxUsd,priceMinIls,priceMaxIls,sort);
+
+@override
+String toString() {
+  return 'MarketplaceSearchFiltersModel(categoryId: $categoryId, categoryName: $categoryName, locationId: $locationId, locationName: $locationName, conditions: $conditions, priceMinUsd: $priceMinUsd, priceMaxUsd: $priceMaxUsd, priceMinIls: $priceMinIls, priceMaxIls: $priceMaxIls, sort: $sort)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $MarketplaceSearchFiltersModelCopyWith<$Res>  {
+  factory $MarketplaceSearchFiltersModelCopyWith(MarketplaceSearchFiltersModel value, $Res Function(MarketplaceSearchFiltersModel) _then) = _$MarketplaceSearchFiltersModelCopyWithImpl;
+@useResult
+$Res call({
+ String? categoryId, String? categoryName, String? locationId, String? locationName, List<String> conditions, int? priceMinUsd, int? priceMaxUsd, int? priceMinIls, int? priceMaxIls, SearchSortOption sort
+});
+
+
+
+
+}
+/// @nodoc
+class _$MarketplaceSearchFiltersModelCopyWithImpl<$Res>
+    implements $MarketplaceSearchFiltersModelCopyWith<$Res> {
+  _$MarketplaceSearchFiltersModelCopyWithImpl(this._self, this._then);
+
+  final MarketplaceSearchFiltersModel _self;
+  final $Res Function(MarketplaceSearchFiltersModel) _then;
+
+/// Create a copy of MarketplaceSearchFiltersModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? categoryId = freezed,Object? categoryName = freezed,Object? locationId = freezed,Object? locationName = freezed,Object? conditions = null,Object? priceMinUsd = freezed,Object? priceMaxUsd = freezed,Object? priceMinIls = freezed,Object? priceMaxIls = freezed,Object? sort = null,}) {
+  return _then(_self.copyWith(
+categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
+as String?,categoryName: freezed == categoryName ? _self.categoryName : categoryName // ignore: cast_nullable_to_non_nullable
+as String?,locationId: freezed == locationId ? _self.locationId : locationId // ignore: cast_nullable_to_non_nullable
+as String?,locationName: freezed == locationName ? _self.locationName : locationName // ignore: cast_nullable_to_non_nullable
+as String?,conditions: null == conditions ? _self.conditions : conditions // ignore: cast_nullable_to_non_nullable
+as List<String>,priceMinUsd: freezed == priceMinUsd ? _self.priceMinUsd : priceMinUsd // ignore: cast_nullable_to_non_nullable
+as int?,priceMaxUsd: freezed == priceMaxUsd ? _self.priceMaxUsd : priceMaxUsd // ignore: cast_nullable_to_non_nullable
+as int?,priceMinIls: freezed == priceMinIls ? _self.priceMinIls : priceMinIls // ignore: cast_nullable_to_non_nullable
+as int?,priceMaxIls: freezed == priceMaxIls ? _self.priceMaxIls : priceMaxIls // ignore: cast_nullable_to_non_nullable
+as int?,sort: null == sort ? _self.sort : sort // ignore: cast_nullable_to_non_nullable
+as SearchSortOption,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [MarketplaceSearchFiltersModel].
+extension MarketplaceSearchFiltersModelPatterns on MarketplaceSearchFiltersModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MarketplaceSearchFiltersModel value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _MarketplaceSearchFiltersModel() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MarketplaceSearchFiltersModel value)  $default,){
+final _that = this;
+switch (_that) {
+case _MarketplaceSearchFiltersModel():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MarketplaceSearchFiltersModel value)?  $default,){
+final _that = this;
+switch (_that) {
+case _MarketplaceSearchFiltersModel() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? categoryId,  String? categoryName,  String? locationId,  String? locationName,  List<String> conditions,  int? priceMinUsd,  int? priceMaxUsd,  int? priceMinIls,  int? priceMaxIls,  SearchSortOption sort)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _MarketplaceSearchFiltersModel() when $default != null:
+return $default(_that.categoryId,_that.categoryName,_that.locationId,_that.locationName,_that.conditions,_that.priceMinUsd,_that.priceMaxUsd,_that.priceMinIls,_that.priceMaxIls,_that.sort);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? categoryId,  String? categoryName,  String? locationId,  String? locationName,  List<String> conditions,  int? priceMinUsd,  int? priceMaxUsd,  int? priceMinIls,  int? priceMaxIls,  SearchSortOption sort)  $default,) {final _that = this;
+switch (_that) {
+case _MarketplaceSearchFiltersModel():
+return $default(_that.categoryId,_that.categoryName,_that.locationId,_that.locationName,_that.conditions,_that.priceMinUsd,_that.priceMaxUsd,_that.priceMinIls,_that.priceMaxIls,_that.sort);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? categoryId,  String? categoryName,  String? locationId,  String? locationName,  List<String> conditions,  int? priceMinUsd,  int? priceMaxUsd,  int? priceMinIls,  int? priceMaxIls,  SearchSortOption sort)?  $default,) {final _that = this;
+switch (_that) {
+case _MarketplaceSearchFiltersModel() when $default != null:
+return $default(_that.categoryId,_that.categoryName,_that.locationId,_that.locationName,_that.conditions,_that.priceMinUsd,_that.priceMaxUsd,_that.priceMinIls,_that.priceMaxIls,_that.sort);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _MarketplaceSearchFiltersModel extends MarketplaceSearchFiltersModel {
+  const _MarketplaceSearchFiltersModel({this.categoryId = null, this.categoryName = null, this.locationId = null, this.locationName = null, final  List<String> conditions = const [], this.priceMinUsd = null, this.priceMaxUsd = null, this.priceMinIls = null, this.priceMaxIls = null, this.sort = SearchSortOption.newest}): _conditions = conditions,super._();
+  
+
+@override@JsonKey() final  String? categoryId;
+@override@JsonKey() final  String? categoryName;
+@override@JsonKey() final  String? locationId;
+@override@JsonKey() final  String? locationName;
+ final  List<String> _conditions;
+@override@JsonKey() List<String> get conditions {
+  if (_conditions is EqualUnmodifiableListView) return _conditions;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_conditions);
+}
+
+@override@JsonKey() final  int? priceMinUsd;
+@override@JsonKey() final  int? priceMaxUsd;
+@override@JsonKey() final  int? priceMinIls;
+@override@JsonKey() final  int? priceMaxIls;
+@override@JsonKey() final  SearchSortOption sort;
+
+/// Create a copy of MarketplaceSearchFiltersModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MarketplaceSearchFiltersModelCopyWith<_MarketplaceSearchFiltersModel> get copyWith => __$MarketplaceSearchFiltersModelCopyWithImpl<_MarketplaceSearchFiltersModel>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketplaceSearchFiltersModel&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.locationId, locationId) || other.locationId == locationId)&&(identical(other.locationName, locationName) || other.locationName == locationName)&&const DeepCollectionEquality().equals(other._conditions, _conditions)&&(identical(other.priceMinUsd, priceMinUsd) || other.priceMinUsd == priceMinUsd)&&(identical(other.priceMaxUsd, priceMaxUsd) || other.priceMaxUsd == priceMaxUsd)&&(identical(other.priceMinIls, priceMinIls) || other.priceMinIls == priceMinIls)&&(identical(other.priceMaxIls, priceMaxIls) || other.priceMaxIls == priceMaxIls)&&(identical(other.sort, sort) || other.sort == sort));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,categoryId,categoryName,locationId,locationName,const DeepCollectionEquality().hash(_conditions),priceMinUsd,priceMaxUsd,priceMinIls,priceMaxIls,sort);
+
+@override
+String toString() {
+  return 'MarketplaceSearchFiltersModel(categoryId: $categoryId, categoryName: $categoryName, locationId: $locationId, locationName: $locationName, conditions: $conditions, priceMinUsd: $priceMinUsd, priceMaxUsd: $priceMaxUsd, priceMinIls: $priceMinIls, priceMaxIls: $priceMaxIls, sort: $sort)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$MarketplaceSearchFiltersModelCopyWith<$Res> implements $MarketplaceSearchFiltersModelCopyWith<$Res> {
+  factory _$MarketplaceSearchFiltersModelCopyWith(_MarketplaceSearchFiltersModel value, $Res Function(_MarketplaceSearchFiltersModel) _then) = __$MarketplaceSearchFiltersModelCopyWithImpl;
+@override @useResult
+$Res call({
+ String? categoryId, String? categoryName, String? locationId, String? locationName, List<String> conditions, int? priceMinUsd, int? priceMaxUsd, int? priceMinIls, int? priceMaxIls, SearchSortOption sort
+});
+
+
+
+
+}
+/// @nodoc
+class __$MarketplaceSearchFiltersModelCopyWithImpl<$Res>
+    implements _$MarketplaceSearchFiltersModelCopyWith<$Res> {
+  __$MarketplaceSearchFiltersModelCopyWithImpl(this._self, this._then);
+
+  final _MarketplaceSearchFiltersModel _self;
+  final $Res Function(_MarketplaceSearchFiltersModel) _then;
+
+/// Create a copy of MarketplaceSearchFiltersModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? categoryId = freezed,Object? categoryName = freezed,Object? locationId = freezed,Object? locationName = freezed,Object? conditions = null,Object? priceMinUsd = freezed,Object? priceMaxUsd = freezed,Object? priceMinIls = freezed,Object? priceMaxIls = freezed,Object? sort = null,}) {
+  return _then(_MarketplaceSearchFiltersModel(
+categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
+as String?,categoryName: freezed == categoryName ? _self.categoryName : categoryName // ignore: cast_nullable_to_non_nullable
+as String?,locationId: freezed == locationId ? _self.locationId : locationId // ignore: cast_nullable_to_non_nullable
+as String?,locationName: freezed == locationName ? _self.locationName : locationName // ignore: cast_nullable_to_non_nullable
+as String?,conditions: null == conditions ? _self._conditions : conditions // ignore: cast_nullable_to_non_nullable
+as List<String>,priceMinUsd: freezed == priceMinUsd ? _self.priceMinUsd : priceMinUsd // ignore: cast_nullable_to_non_nullable
+as int?,priceMaxUsd: freezed == priceMaxUsd ? _self.priceMaxUsd : priceMaxUsd // ignore: cast_nullable_to_non_nullable
+as int?,priceMinIls: freezed == priceMinIls ? _self.priceMinIls : priceMinIls // ignore: cast_nullable_to_non_nullable
+as int?,priceMaxIls: freezed == priceMaxIls ? _self.priceMaxIls : priceMaxIls // ignore: cast_nullable_to_non_nullable
+as int?,sort: null == sort ? _self.sort : sort // ignore: cast_nullable_to_non_nullable
+as SearchSortOption,
+  ));
+}
+
+
+}
+
+// dart format on

@@ -1,0 +1,733 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Gaza Tech App",
+
+  "welcomeBack": "Welcome Back",
+  "signInSubtitle": "Sign in to continue to Gaza Tech",
+  "createAccount": "Create Account",
+  "createAccountSubtitle": "Join us to get started!",
+
+  "email": "Email",
+  "emailHint": "Enter your email",
+  "password": "Password",
+  "passwordHint": "Enter your password",
+  "confirmPassword": "Confirm Password",
+  "confirmPasswordHint": "Re-enter your password",
+  "newPassword": "New Password",
+  "newPasswordHint": "Enter new password",
+  "confirmNewPasswordHint": "Re-enter new password",
+  "firstName": "First Name",
+  "firstNameHint": "Enter your first name",
+  "lastName": "Last Name",
+  "lastNameHint": "Enter your last name",
+
+  "signIn": "Sign in",
+  "signUp": "Sign up",
+  "forgotPasswordLink": "Forgot Password?",
+  "or": "Or",
+  "continueWithGoogle": "Continue with Google",
+  "continueAsGuest": "Continue as Guest",
+  "signUpPromptTitle": "Create an account",
+  "signUpPromptMessage": "Sign up to use this feature and unlock the full experience.",
+  "signUpPromptSignUp": "Sign up",
+  "signUpPromptSignIn": "I already have an account",
+
+  "dontHaveAccount": "Don't have an account? ",
+  "alreadyHaveAccount": "Already have an account? ",
+
+  "agreeToTermsPrefix": "I agree to the ",
+  "termsAndConditions": "Terms and Conditions",
+  "and": " and ",
+  "privacyPolicy": "Privacy Policy",
+
+  "verifyYourEmail": "Verify Your Email",
+  "otpSentTo": "A 6-digit code was sent to",
+  "recoverySentTo": "A recovery code was sent to",
+  "enterConfirmationCode": "Enter confirmation code",
+  "enterRecoveryCode": "Enter recovery code",
+  "verify": "Verify",
+  "didntReceiveCode": "Didn't receive the code? ",
+  "resendCode": "Resend Code",
+  "resendingCode": "Resending code...",
+
+  "forgotPasswordTitle": "Forgot Password",
+  "forgotPasswordSubtitle": "Enter your email address and we'll send you a recovery code.",
+  "sendRecoveryCode": "Send Recovery Code",
+
+  "resetPasswordTitle": "Reset Password",
+  "resetPasswordSubtitle": "Create a new password for your account.",
+  "resetPassword": "Reset Password",
+
+  "welcomeHome": "Welcome to Gaza Tech App!",
+  "homeContent": "Home Screen Content Goes Here",
+
+  "error": "Error",
+  "success": "Success",
+  "unknownError": "Unknown error",
+  "ok": "OK",
+  "cancel": "Cancel",
+  "signInCancelled": "Sign-in cancelled",
+
+  "passwordResetSuccess": "Your password has been reset successfully. Please sign in with your new password.",
+
+  "required": "Required",
+  "invalidEmail": "Invalid email",
+  "minChars": "Min {count} chars",
+  "@minChars": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "minCharacters": "Min {count} characters",
+  "@minCharacters": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "passwordsDoNotMatch": "Passwords do not match",
+
+  "emailCannotBeEmpty": "Email cannot be empty.",
+  "enterValidEmail": "Please enter a valid email address.",
+  "passwordCannotBeEmpty": "Password cannot be empty.",
+  "passwordMinLength": "Password must be at least {count} characters long.",
+  "@passwordMinLength": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "passwordNeedsUppercase": "Password must contain at least one uppercase letter.",
+  "passwordNeedsLowercase": "Password must contain at least one lowercase letter.",
+  "passwordNeedsNumber": "Password must contain at least one number.",
+  "passwordNeedsSpecialChar": "Password must contain at least one special character (@$!%*?&).",
+  "uppercaseRequired": "An uppercase letter is required.",
+  "lowercaseRequired": "A lowercase letter is required.",
+  "numberRequired": "A number is required.",
+  "specialCharRequired": "A special character (@$!%*?&) is required.",
+  "minLengthRequired": "Must be at least {count} characters long.",
+  "@minLengthRequired": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fieldCannotBeEmpty": "{fieldName} cannot be empty.",
+  "@fieldCannotBeEmpty": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldMinLength": "{fieldName} must be at least {count} characters long.",
+  "@fieldMinLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "settings": "Settings",
+  "language": "Language",
+  "english": "English",
+  "arabic": "العربية",
+
+  "marketplace": "Marketplace",
+  "addListing": "Add Listing",
+  "community": "Community",
+  "marketplaceContent": "Browse products and services",
+  "communityContent": "Connect with others",
+
+  "noListingsAvailable": "No listings available",
+  "categoryAll": "All",
+  "categoryElectronics": "Electronics",
+  "categoryClothing": "Clothing",
+  "categoryHomeGarden": "Home & Garden",
+  "categoryFood": "Food",
+  "categoryServices": "Services",
+  "categoryVehicles": "Vehicles",
+  "categoryBooks": "Books",
+  "categorySports": "Sports",
+  "categoryOther": "Other",
+
+  "profile": "Profile",
+  "about": "About",
+  "help": "Help",
+  "sign_out": "Sign out",
+  "signOutConfirmTitle": "Sign out?",
+  "signOutConfirmBody": "You will need to sign in again to access your account.",
+  "signOutConfirmButton": "Sign out",
+
+  "saveDraft": "Save Draft",
+  "productImagesMax": "Product Images (Max {count})",
+  "@productImagesMax": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "productImagesHelper": "Add clear photos of your product. First image will be the cover.",
+  "productInformation": "Product Information",
+  "publishListing": "Publish Listing",
+
+  "titleLabel": "Title",
+  "titleHelper": "Be specific and descriptive",
+  "titleHint": "e.g., iPhone 14 Pro Max 256GB Purple",
+
+  "categoryLabel": "Category",
+  "selectCategory": "Select category",
+  "selectCategoryTitle": "Select Category",
+
+  "conditionLabel": "Condition",
+  "conditionBrandNew": "Brand New",
+  "conditionUsedExcellent": "Used - Excellent",
+  "conditionUsedGood": "Used - Good",
+  "conditionForParts": "For Parts",
+
+  "priceLabel": "Price",
+  "priceHelper": "Set a competitive price to attract buyers",
+  "priceHint": "0.00",
+  "currencyILS": "₪ ILS",
+  "currencyUSD": "$ USD",
+
+  "descriptionLabel": "Description",
+  "descriptionHelper": "Be honest and detailed",
+  "descriptionHint": "Describe your product...",
+
+  "specificationsLabel": "Specifications",
+  "addField": "+ Add Field",
+  "specificationsHelper": "Add technical details to help buyers make informed decisions",
+  "specNameHint": "e.g., Processor",
+  "specValueHint": "e.g., Apple A16 Bionic",
+  "remove": "Remove",
+
+  "locationLabel": "Location",
+  "selectLocation": "Select location",
+  "selectLocationTitle": "Select Location",
+
+  "addMainImage": "Add Main Image",
+
+  "addPhoto": "Add photo",
+
+  "categoryElectronics": "Electronics",
+  "categoryClothing": "Clothing",
+  "categoryHomeGarden": "Home & Garden",
+  "categoryFood": "Food",
+  "categoryServices": "Services",
+  "categoryVehicles": "Vehicles",
+  "categoryBooks": "Books",
+  "categorySports": "Sports",
+  "categoryOther": "Other",
+
+  "locationGazaCity": "Gaza City",
+  "locationJabalia": "Jabalia",
+  "locationAlBureij": "Al Bureij",
+  "locationAlNusirat": "Al Nusirat",
+  "locationDeirAlBalah": "Deir Al Balah",
+  "locationKhanYunis": "Khan Yunis",
+
+  "sellerInformation": "SELLER INFORMATION",
+  "memberSince": "Member since {date}",
+  "@memberSince": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "contactSeller": "Contact Seller",
+  "viewProfile": "View Profile",
+
+  "descriptionSectionTitle": "DESCRIPTION",
+  "specificationsSectionTitle": "SPECIFICATIONS",
+
+  "similarProducts": "Similar Products",
+  "moreFromSeller": "More from {sellerName}",
+  "@moreFromSeller": {
+    "placeholders": {
+      "sellerName": { "type": "String" }
+    }
+  },
+
+  "daysAgo": "{count} days ago",
+  "@daysAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "weekAgo": "1 week ago",
+
+
+
+  "retry": "Retry",
+
+  "searchHint": "Search products...",
+  "searchPrompt": "Search for products",
+  "noResultsFound": "No results found",
+  "noResultsSubtitle": "Try different keywords or adjust your filters",
+  "filters": "Filters",
+  "clearAll": "Clear All",
+  "applyFilters": "Apply Filters",
+  "sortBy": "Sort By",
+  "sortNewest": "Newest",
+  "sortPriceLowToHigh": "Price: Low to High",
+  "sortPriceHighToLow": "Price: High to Low",
+  "priceRange": "Price Range",
+  "priceRangeUsd": "Price Range (USD)",
+  "priceRangeIls": "Price Range (ILS)",
+  "priceMin": "Min",
+  "priceMax": "Max",
+  "conditionFilter": "Condition",
+
+  "searchMarketplace": "Search marketplace...",
+
+  "searchCommunity": "Search community...",
+  "createPost": "Create Post",
+  "recent": "Recent",
+  "questions": "Questions",
+  "tips": "Tips",
+  "news": "News",
+  "troubleshooting": "Troubleshooting",
+  "hoursAgo": "{count} hours ago",
+  "@hoursAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "dayAgo": "1 day ago",
+  "question": "Question",
+  "newPost": "New Post",
+
+  "postTitle": "Post Title",
+  "enterPostTitle": "Enter post title",
+  "content": "Content",
+  "writeYourPostHere": "Write your post here...",
+  "attachments": "Attachments",
+  "addImagesOrFiles": "Add images or files",
+  "maxFileSize": "Max 5MB per file",
+  "imageLimitReached": "You can attach up to {max} images",
+  "@imageLimitReached": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "uploadingImages": "Uploading images...",
+  "imageUploadFailed": "Failed to upload images",
+  "publishPost": "Publish Post",
+
+  "postDetails": "Post Details",
+  "commentsCount": "Comments ({count})",
+  "@commentsCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "topSort": "Top",
+  "reply": "Reply",
+  "loadMoreComments": "Load More Comments",
+  "relatedPosts": "Related Posts",
+  "addComment": "Add a comment...",
+  "minutesAgo": "{count} min ago",
+  "@minutesAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "gaming": "Gaming",
+
+  "replyingTo": "Replying to @{userName}",
+  "@replyingTo": {
+    "placeholders": {
+      "userName": { "type": "String" }
+    }
+  },
+
+  "postPublished": "Post published successfully",
+  "draftSaved": "Draft saved",
+  "myDrafts": "Drafts",
+  "draft": "Draft",
+  "noDraftsYet": "No drafts yet",
+  "draftPosts": "Posts",
+  "draftListings": "Listings",
+
+  "viewReplies": "{count, plural, =1{View 1 reply} other{View {count} replies}}",
+  "@viewReplies": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "hideReplies": "Hide replies",
+
+  "recentSearches": "Recent searches",
+  "clearRecentSearches": "Clear",
+  "noCommunityResults": "No posts found",
+  "noCommunityResultsSubtitle": "Try different keywords",
+
+  "sortPosts": "Sort Posts",
+  "timeBased": "Time-Based",
+  "popularity": "Popularity",
+  "newest": "Newest",
+  "oldest": "Oldest",
+  "mostLiked": "Most Liked",
+  "mostCommented": "Most Commented",
+  "resetSort": "Reset",
+
+  "filterPosts": "Filter Posts",
+  "categoryFilter": "Category",
+  "dateRangeFilter": "Date Range",
+  "engagementLevel": "Engagement Level",
+  "sortOrder": "Sort Order",
+  "today": "Today",
+  "thisWeek": "This Week",
+  "thisMonth": "This Month",
+  "thisYear": "This Year",
+  "likes100Plus": "100+ Likes",
+  "comments50Plus": "50+ Comments",
+
+  "editProfile": "Edit Profile",
+  "bio": "Bio",
+  "bioHint": "Tell others about yourself...",
+  "phoneNumber": "Phone Number",
+  "whatsappNumber": "WhatsApp Number",
+  "socialLinks": "Social Links",
+  "facebookLink": "Facebook",
+  "instagramLink": "Instagram",
+  "twitterLink": "Twitter / X",
+  "websiteLink": "Website",
+  "changeAvatar": "Change Photo",
+  "removeAvatar": "Remove Photo",
+  "saveChanges": "Save Changes",
+  "profileUpdated": "Profile updated successfully",
+  "myPosts": "Posts",
+  "myListings": "Listings",
+  "bookmarks": "Bookmarks",
+  "noPostsYet": "No posts yet",
+  "noListingsYet": "No listings yet",
+  "noBookmarksYet": "No bookmarks yet",
+  "personalInfo": "Personal Info",
+  "contactInfo": "Contact Info",
+  "verified": "Verified",
+  "avatarUploadFailed": "Failed to upload photo",
+  "contactUnavailable": "Contact information is not available for this seller",
+  "couldNotOpenLink": "Could not open this link",
+  "website": "Website",
+  "bookmarkedPosts": "Posts",
+  "bookmarkedListings": "Listings",
+  "noBookmarkedListingsYet": "No bookmarked listings yet",
+
+  "getVerified": "Get Verified",
+  "verificationRequest": "Verification Request",
+  "verificationStatusTitle": "Verification Status",
+  "verificationPending": "Verification Pending",
+  "verificationApproved": "Verification Approved",
+  "verificationRejected": "Verification Rejected",
+  "verificationExpired": "Verification Expired",
+  "verificationSuspicious": "Under Manual Review",
+
+  "stepPersonalInfo": "Personal Info",
+  "stepDocuments": "Documents",
+  "stepPhoneVerification": "Phone",
+  "stepReview": "Review",
+
+  "idFullName": "Full Name (as on ID)",
+  "idFullNameHint": "Enter your full name as it appears on your ID",
+  "dateOfBirth": "Date of Birth",
+  "selectDateOfBirth": "Select date of birth",
+  "gender": "Gender",
+  "genderMale": "Male",
+  "genderFemale": "Female",
+  "address": "Address",
+  "addressHint": "Enter your current address",
+  "nationalIdNumber": "National ID Number",
+  "nationalIdNumberHint": "Enter your national ID number",
+
+  "documentType": "Document Type",
+  "palestinianId": "Palestinian ID",
+  "passport": "Passport",
+  "palestinianDrivingLicence": "Palestinian Driving Licence",
+  "documentFront": "Front of Document",
+  "documentBack": "Back of Document",
+  "selfieWithId": "Selfie with ID",
+  "tapToUploadPhoto": "Tap to upload photo",
+  "changePhoto": "Change photo",
+  "gallery": "Gallery",
+  "camera": "Camera",
+
+  "phoneVerification": "Phone Verification",
+  "enterPhoneNumber": "Phone Number",
+  "phoneNumberHint": "+970xxxxxxxxx",
+  "sendOtp": "Send OTP",
+  "verifyPhone": "Verify",
+  "phoneVerifiedSuccess": "Phone verified successfully",
+  "pleaseVerifyPhone": "Please verify your phone number to continue",
+  "otpSentToPhone": "A verification code was sent to your phone",
+
+  "reviewYourData": "Review Your Data",
+  "reviewPersonalInfo": "Personal Information",
+  "reviewDocuments": "Uploaded Documents",
+  "reviewPhone": "Phone Verification",
+  "submitVerification": "Submit Verification Request",
+  "submittingVerification": "Submitting...",
+
+  "verificationSubmitted": "Verification request submitted successfully",
+  "verificationUnderReview": "Your request is under review. You will be notified once it is processed.",
+  "rejectionReason": "Rejection Reason",
+  "resubmitVerification": "Resubmit Verification",
+  "submittedOn": "Submitted on {date}",
+  "@submittedOn": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "reviewedOn": "Reviewed on {date}",
+  "@reviewedOn": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+
+  "back": "Back",
+  "next": "Next",
+
+  "pleaseSelectGender": "Please select a gender",
+  "pleaseSelectDocumentType": "Please select a document type",
+  "pleaseUploadAllDocuments": "Please upload all required documents",
+  "pleaseFillDateOfBirth": "Please select your date of birth",
+
+  "timelineSubmitted": "Submitted",
+  "timelineUnderReview": "Under Review",
+  "timelineDecision": "Decision",
+
+  "editListing": "Edit Listing",
+  "updateListing": "Update Listing",
+  "listingUpdated": "Listing updated successfully",
+  "deleteListing": "Delete Listing",
+  "deleteListingConfirmTitle": "Delete Listing?",
+  "deleteListingConfirmBody": "Are you sure you want to delete this listing? This action cannot be undone.",
+  "listingDeleted": "Listing deleted successfully",
+  "delete": "Delete",
+  "edit": "Edit",
+
+  "editPost": "Edit Post",
+  "updatePost": "Update Post",
+  "postUpdated": "Post updated successfully",
+  "deletePost": "Delete Post",
+  "deletePostConfirmTitle": "Delete Post?",
+  "deletePostConfirmBody": "Are you sure you want to delete this post? This action cannot be undone.",
+  "postDeleted": "Post deleted successfully",
+
+  "reportListing": "Report Listing",
+  "reportPost": "Report Post",
+  "reportUser": "Report User",
+  "reportComment": "Report Comment",
+  "reportSubtitle": "Why are you reporting this?",
+  "reportReasonSpam": "Spam",
+  "reportReasonInappropriateContent": "Inappropriate Content",
+  "reportReasonHarassment": "Harassment",
+  "reportReasonMisleading": "Misleading",
+  "reportReasonFraudScam": "Fraud / Scam",
+  "reportReasonHateSpeech": "Hate Speech",
+  "reportReasonOther": "Other",
+  "reportDescriptionHint": "Add more details (optional)",
+  "reportSubmit": "Submit Report",
+  "reportSuccess": "Report submitted successfully. We will review it shortly.",
+  "reportFailure": "Failed to submit report. Please try again.",
+  "reportAlreadySubmitted": "You have already reported this. We are reviewing it.",
+
+  "aiChat": "AI Assistant",
+  "aiChatHint": "Ask about products...",
+  "aiChatEmptyTitle": "AI Marketplace Assistant",
+  "aiChatEmptySubtitle": "Ask me anything about products in the marketplace",
+  "clearChat": "Clear Chat",
+  "clearChatConfirm": "Are you sure you want to clear all chat history?",
+  "aiChatError": "Something went wrong. Please try again.",
+  "aiChatStopped": "(stopped)",
+
+  "editComment": "Edit Comment",
+  "deleteComment": "Delete Comment",
+  "deleteCommentConfirmTitle": "Delete Comment?",
+  "deleteCommentConfirmBody": "Are you sure you want to delete this comment? This action cannot be undone.",
+  "commentDeleted": "Comment deleted successfully",
+  "commentUpdated": "Comment updated successfully",
+  "editingComment": "Editing comment",
+  "edited": "(edited)",
+
+  "saveEdit": "Save Edit",
+  "publish": "Publish",
+  "publishConfirmTitle": "Publish?",
+  "publishConfirmBody": "This draft will be published and visible to everyone.",
+  "published": "Published successfully",
+
+  "notificationPreferences": "Notification Preferences",
+  "notifyNewComments": "New comments on my posts",
+  "notifyNewLikes": "Likes on my content",
+  "notifyListingInquiries": "Inquiries on my listings",
+  "notifyVerificationUpdates": "Verification status updates",
+  "accountSettings": "Account",
+  "changePassword": "Change Password",
+  "deleteAccount": "Delete Account",
+  "deleteAccountTitle": "Delete Account?",
+  "deleteAccountBody": "This will permanently deactivate your account. Your listings will be removed and your name will appear as \"Deleted Account\" everywhere. This action cannot be undone.",
+  "deleteAccountConfirmButton": "Delete My Account",
+  "deleteAccountTypeToConfirm": "Type DELETE to confirm",
+  "deleteConfirmWord": "DELETE",
+  "deletedUser": "Deleted Account",
+  "deletedAccountProfile": "This account has been deleted.",
+
+  "faq": "Frequently Asked Questions",
+  "helpFaqBuyingTitle": "How do I buy something?",
+  "helpFaqBuyingBody": "Browse the marketplace, find a listing you like, and contact the seller directly through their profile.",
+  "helpFaqSellingTitle": "How do I sell something?",
+  "helpFaqSellingBody": "Tap the + button to create a listing. Fill in the details, add photos, set a price, and publish.",
+  "helpFaqVerificationTitle": "How do I get verified?",
+  "helpFaqVerificationBody": "Go to your profile and tap 'Get Verified'. Complete the identity verification form with your ID documents.",
+  "helpFaqPostingTitle": "How do I post in the community?",
+  "helpFaqPostingBody": "Go to the Community tab and tap the compose button. Choose a category, write your post, and publish.",
+  "communityGuidelines": "Community Guidelines",
+  "helpGuidelinesBody": "Be respectful and kind. No spam, harassment, or inappropriate content. Report violations to help keep our community safe.",
+  "contactSupport": "Contact Support",
+  "helpContactDescription": "Having trouble? Reach out to our support team.",
+  "emailSupport": "Email Support",
+  "reportBug": "Report a Bug",
+
+  "appVersion": "App Version",
+  "aboutDescription": "Gaza Tech is a platform connecting the people of Gaza to buy, sell, and engage with their community.",
+  "ourMission": "Our Mission",
+  "missionDescription": "Empowering Gaza's community through technology — enabling commerce, knowledge sharing, and local connection.",
+  "shareApp": "Share App",
+  "rateApp": "Rate the App",
+  "openSourceLicenses": "Open Source Licenses",
+  "termsOfService": "Terms of Service",
+  "madeWithLove": "Made with love for Gaza",
+
+  "signUpEmailBanned": "This email is associated with a banned or deactivated account and cannot be used to sign up.",
+  "signUpEmailTaken": "This email is already in use. Please sign in or use a different email.",
+  "signInAccountBanned": "This account has been banned or deactivated. You cannot sign in.",
+
+  "appearance": "Appearance",
+  "theme": "Theme",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "themeSystem": "System",
+
+  "termsTitle": "Terms and Conditions",
+  "termsLastUpdated": "Last updated: April 2026",
+  "termsIntro": "Welcome to Gaza Tech App. By creating an account or using our services, you agree to be bound by these Terms and Conditions. Please read them carefully before using the application.",
+  "termsAccountTitle": "1. Account Registration",
+  "termsAccountBody": "You must provide accurate and complete information when creating an account. You are responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account. You must be at least 15 years old to use this application. Gaza Tech App reserves the right to suspend or terminate accounts that violate these terms.",
+  "termsMarketplaceTitle": "2. Marketplace",
+  "termsMarketplaceBody": "Gaza Tech App provides a platform for users to list and discover products. We do not participate in, facilitate, or guarantee any transactions between buyers and sellers. All transactions are conducted at the sole risk and responsibility of the parties involved. Users must list products accurately and honestly. Listings for illegal, counterfeit, stolen, or prohibited items are strictly forbidden.",
+  "termsCommunityTitle": "3. Community",
+  "termsCommunityBody": "Users may post content, comments, and engage in community discussions. You retain ownership of your content but grant Gaza Tech App a non-exclusive license to display it within the platform. You agree not to post content that is offensive, harmful, misleading, defamatory, or violates any applicable laws. Gaza Tech App reserves the right to remove any content that violates these guidelines.",
+  "termsContentTitle": "4. User Content & Conduct",
+  "termsContentBody": "You are solely responsible for all content you create, upload, or share on the platform. You must not impersonate others, spam, harass other users, or engage in any fraudulent activity. Gaza Tech App may moderate, remove, or restrict content or accounts at its discretion to maintain a safe and respectful environment.",
+  "termsVerificationTitle": "5. Identity Verification",
+  "termsVerificationBody": "Some features may require identity verification. By submitting verification documents (such as national ID), you confirm that the documents are authentic and belong to you. Verification documents are processed securely and handled in accordance with our Privacy Policy.",
+  "termsIntellectualTitle": "6. Intellectual Property",
+  "termsIntellectualBody": "The Gaza Tech App name, logo, design, and all underlying technology are the intellectual property of Gaza Tech App. You may not copy, modify, distribute, or reverse-engineer any part of the application without prior written consent.",
+  "termsLiabilityTitle": "7. Limitation of Liability",
+  "termsLiabilityBody": "Gaza Tech App is provided \"as is\" without warranties of any kind. We are not liable for any direct, indirect, incidental, or consequential damages arising from your use of the platform, including but not limited to losses from marketplace transactions, data loss, or service interruptions.",
+  "termsChangesTitle": "8. Changes to Terms",
+  "termsChangesBody": "We may update these Terms and Conditions from time to time. Continued use of the application after changes constitutes acceptance of the updated terms. We will notify users of significant changes through the application.",
+  "termsContactTitle": "9. Contact Us",
+  "termsContactBody": "If you have any questions about these Terms and Conditions, please contact us at:",
+
+  "privacyTitle": "Privacy Policy",
+  "privacyLastUpdated": "Last updated: April 2026",
+  "privacyIntro": "Gaza Tech App is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and protect your personal information when you use our application.",
+  "privacyCollectionTitle": "1. Information We Collect",
+  "privacyCollectionBody": "We collect the following types of information:\n\n• Account information: name, email address, and password when you register.\n• Profile information: bio, phone number, social media links, and profile photo that you choose to provide.\n• Content: listings, posts, comments, bookmarks, and images you create or upload.\n• Verification documents: national ID, date of birth, and address when you apply for identity verification.\n• Usage data: anonymous analytics and crash reports to improve app performance and stability.",
+  "privacyUseTitle": "2. How We Use Your Information",
+  "privacyUseBody": "We use your information to:\n\n• Provide, maintain, and improve the Gaza Tech App services.\n• Create and manage your account.\n• Display your listings and posts to other users.\n• Process identity verification requests.\n• Send important service notifications.\n• Analyze app usage to fix bugs and improve user experience.\n• Enforce our Terms and Conditions and protect user safety.",
+  "privacyStorageTitle": "3. Data Storage & Security",
+  "privacyStorageBody": "Your data is securely stored using Supabase, a trusted cloud infrastructure provider. We implement industry-standard security measures including encryption in transit and at rest, secure authentication protocols, and access controls. While we take reasonable steps to protect your data, no system is completely secure, and we cannot guarantee absolute security.",
+  "privacySharingTitle": "4. Information Sharing",
+  "privacySharingBody": "We do not sell your personal information. Your data may be shared in the following circumstances:\n\n• Public profile information, listings, and posts are visible to other users as part of the platform's functionality.\n• With service providers (Supabase, Google Analytics) who help us operate the application, under strict data processing agreements.\n• When required by law or to protect the rights and safety of our users and platform.",
+  "privacyRightsTitle": "5. Your Rights",
+  "privacyRightsBody": "You have the right to:\n\n• Access and update your personal information through your profile settings.\n• Delete your account and associated data by contacting us or using the account deletion feature.\n• Request a copy of the data we hold about you.\n• Withdraw consent for optional data processing at any time.",
+  "privacyRetentionTitle": "6. Data Retention",
+  "privacyRetentionBody": "We retain your data for as long as your account is active or as needed to provide services. When you delete your account, your personal data will be removed within 30 days, except where we are required by law to retain certain information.",
+  "privacyChildrenTitle": "7. Children's Privacy",
+  "privacyChildrenBody": "Gaza Tech App is not intended for children under the age of 15. We do not knowingly collect personal information from children. If we become aware that we have collected data from a child under 15, we will take steps to delete that information promptly.",
+  "privacyChangesTitle": "8. Changes to This Policy",
+  "privacyChangesBody": "We may update this Privacy Policy from time to time. We will notify you of significant changes through the application. Continued use of the app after changes constitutes acceptance of the updated policy.",
+  "privacyContactTitle": "9. Contact Us",
+  "privacyContactBody": "If you have any questions about this Privacy Policy or wish to exercise your data rights, please contact us at:",
+
+  "justNow": "Just now",
+  "notifications": "Notifications",
+  "markAllAsRead": "Mark all as read",
+  "noNotifications": "No notifications yet",
+  "noNotificationsSubtitle": "Your activity notifications will appear here",
+  "notificationPostLikeSingle": "{name} liked your post",
+  "@notificationPostLikeSingle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notificationPostLikeGrouped": "{name} and {count} others liked your post",
+  "@notificationPostLikeGrouped": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "notificationCommentLikeSingle": "{name} liked your comment",
+  "@notificationCommentLikeSingle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notificationCommentLikeGrouped": "{name} and {count} others liked your comment",
+  "@notificationCommentLikeGrouped": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "notificationPostCommentSingle": "{name} commented on your post",
+  "@notificationPostCommentSingle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notificationPostCommentGrouped": "{name} and {count} others commented on your post",
+  "@notificationPostCommentGrouped": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "notificationCommentReplySingle": "{name} replied to your comment",
+  "@notificationCommentReplySingle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notificationCommentReplyGrouped": "{name} and {count} others replied to your comment",
+  "@notificationCommentReplyGrouped": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "notificationVerificationApproved": "Your identity verification has been approved",
+  "notificationVerificationRejected": "Your identity verification was not approved",
+  "notificationContentRemoved": "Your content was removed by a moderator",
+  "notificationSystemAnnouncement": "System announcement",
+  "contactSafetyTitle": "Safety Notice",
+  "contactSafetyMessage": "You are about to contact this seller directly. All item and payment arrangements are entirely between you and the seller. Please be cautious and use your best judgment.",
+  "iUnderstand": "OK, I understand"
+}

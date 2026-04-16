@@ -1,0 +1,671 @@
+{
+  "@@locale": "ar",
+
+  "appTitle": "تطبيق غزة تك",
+
+  "welcomeBack": "مرحباً بعودتك",
+  "signInSubtitle": "سجّل الدخول للمتابعة إلى غزة تك",
+  "createAccount": "إنشاء حساب",
+  "createAccountSubtitle": "انضم إلينا للبدء!",
+
+  "email": "البريد الإلكتروني",
+  "emailHint": "أدخل بريدك الإلكتروني",
+  "password": "كلمة المرور",
+  "passwordHint": "أدخل كلمة المرور",
+  "confirmPassword": "تأكيد كلمة المرور",
+  "confirmPasswordHint": "أعد إدخال كلمة المرور",
+  "newPassword": "كلمة المرور الجديدة",
+  "newPasswordHint": "أدخل كلمة المرور الجديدة",
+  "confirmNewPasswordHint": "أعد إدخال كلمة المرور الجديدة",
+  "firstName": "الاسم الأول",
+  "firstNameHint": "أدخل اسمك الأول",
+  "lastName": "اسم العائلة",
+  "lastNameHint": "أدخل اسم عائلتك",
+
+  "signIn": "تسجيل الدخول",
+  "signUp": "إنشاء حساب",
+  "forgotPasswordLink": "نسيت كلمة المرور؟",
+  "or": "أو",
+  "continueWithGoogle": "المتابعة مع جوجل",
+  "continueAsGuest": "المتابعة كضيف",
+  "signUpPromptTitle": "أنشئ حسابًا",
+  "signUpPromptMessage": "أنشئ حسابًا لاستخدام هذه الميزة والحصول على التجربة الكاملة.",
+  "signUpPromptSignUp": "إنشاء حساب",
+  "signUpPromptSignIn": "لدي حساب بالفعل",
+
+  "dontHaveAccount": "ليس لديك حساب؟ ",
+  "alreadyHaveAccount": "لديك حساب بالفعل؟ ",
+
+  "agreeToTermsPrefix": "أوافق على ",
+  "termsAndConditions": "الشروط والأحكام",
+  "and": " و ",
+  "privacyPolicy": "سياسة الخصوصية",
+
+  "verifyYourEmail": "تأكيد بريدك الإلكتروني",
+  "otpSentTo": "تم إرسال رمز مكون من 6 أرقام إلى",
+  "recoverySentTo": "تم إرسال رمز الاسترداد إلى",
+  "enterConfirmationCode": "أدخل رمز التأكيد",
+  "enterRecoveryCode": "أدخل رمز الاسترداد",
+  "verify": "تأكيد",
+  "didntReceiveCode": "لم تستلم الرمز؟ ",
+  "resendCode": "إعادة إرسال الرمز",
+  "resendingCode": "جارٍ إعادة إرسال الرمز...",
+
+  "forgotPasswordTitle": "نسيت كلمة المرور",
+  "forgotPasswordSubtitle": "أدخل بريدك الإلكتروني وسنرسل لك رمز الاسترداد.",
+  "sendRecoveryCode": "إرسال رمز الاسترداد",
+
+  "resetPasswordTitle": "إعادة تعيين كلمة المرور",
+  "resetPasswordSubtitle": "أنشئ كلمة مرور جديدة لحسابك.",
+  "resetPassword": "إعادة تعيين كلمة المرور",
+
+  "welcomeHome": "مرحباً بك في تطبيق غزة تك!",
+  "homeContent": "محتوى الشاشة الرئيسية هنا",
+
+  "error": "خطأ",
+  "success": "نجاح",
+  "unknownError": "خطأ غير معروف",
+  "ok": "حسناً",
+  "cancel": "إلغاء",
+  "signInCancelled": "تم إلغاء تسجيل الدخول",
+
+  "passwordResetSuccess": "تم إعادة تعيين كلمة المرور بنجاح. يرجى تسجيل الدخول بكلمة المرور الجديدة.",
+
+  "required": "مطلوب",
+  "invalidEmail": "بريد إلكتروني غير صالح",
+  "minChars": "الحد الأدنى {count} أحرف",
+  "minCharacters": "الحد الأدنى {count} أحرف",
+  "passwordsDoNotMatch": "كلمات المرور غير متطابقة",
+
+  "emailCannotBeEmpty": "البريد الإلكتروني لا يمكن أن يكون فارغاً.",
+  "enterValidEmail": "يرجى إدخال عنوان بريد إلكتروني صالح.",
+  "passwordCannotBeEmpty": "كلمة المرور لا يمكن أن تكون فارغة.",
+  "passwordMinLength": "يجب أن تتكون كلمة المرور من {count} أحرف على الأقل.",
+  "passwordNeedsUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل.",
+  "passwordNeedsLowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل.",
+  "passwordNeedsNumber": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل.",
+  "passwordNeedsSpecialChar": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل (@$!%*?&).",
+  "uppercaseRequired": "حرف كبير مطلوب.",
+  "lowercaseRequired": "حرف صغير مطلوب.",
+  "numberRequired": "رقم مطلوب.",
+  "specialCharRequired": "رمز خاص (@$!%*?&) مطلوب.",
+  "minLengthRequired": "يجب أن يكون {count} أحرف على الأقل.",
+  "fieldCannotBeEmpty": "{fieldName} لا يمكن أن يكون فارغاً.",
+  "fieldMinLength": "يجب أن يتكون {fieldName} من {count} أحرف على الأقل.",
+
+  "settings": "الإعدادات",
+  "language": "اللغة",
+  "english": "English",
+  "arabic": "العربية",
+
+  "marketplace": "السوق",
+  "addListing": "إضافة إعلان",
+  "community": "المجتمع",
+  "marketplaceContent": "تصفح المنتجات والخدمات",
+  "communityContent": "تواصل مع الآخرين",
+
+  "noListingsAvailable": "لا توجد إعلانات متاحة",
+  "categoryAll": "الكل",
+
+  "profile": "الملف الشخصي",
+  "about": "حول",
+  "help": "المساعدة",
+  "sign_out": "تسجيل الخروج",
+  "signOutConfirmTitle": "تسجيل الخروج؟",
+  "signOutConfirmBody": "ستحتاج إلى تسجيل الدخول مرة أخرى للوصول إلى حسابك.",
+  "signOutConfirmButton": "تسجيل الخروج",
+
+  "saveDraft": "حفظ المسودة",
+  "productImagesMax": "صور المنتج (الحد الأقصى {count})",
+  "productImagesHelper": "أضف صوراً واضحة لمنتجك. الصورة الأولى ستكون صورة الغلاف.",
+  "productInformation": "معلومات المنتج",
+  "publishListing": "نشر الإعلان",
+
+  "titleLabel": "العنوان",
+  "titleHelper": "كن محدداً ووصفياً",
+  "titleHint": "مثال: آيفون 14 برو ماكس 256 جيجابايت بنفسجي",
+
+  "categoryLabel": "الفئة",
+  "selectCategory": "اختر الفئة",
+  "selectCategoryTitle": "اختر الفئة",
+
+  "conditionLabel": "الحالة",
+  "conditionBrandNew": "جديد تماماً",
+  "conditionUsedExcellent": "مستعمل - ممتاز",
+  "conditionUsedGood": "مستعمل - جيد",
+  "conditionForParts": "للقطع",
+
+  "priceLabel": "السعر",
+  "priceHelper": "حدد سعراً تنافسياً لجذب المشترين",
+  "priceHint": "0.00",
+  "currencyILS": "₪ شيكل",
+  "currencyUSD": "$ دولار",
+
+  "descriptionLabel": "الوصف",
+  "descriptionHelper": "كن صادقاً ومفصلاً",
+  "descriptionHint": "صف منتجك...",
+
+  "specificationsLabel": "المواصفات",
+  "addField": "+ إضافة حقل",
+  "specificationsHelper": "أضف تفاصيل تقنية لمساعدة المشترين على اتخاذ قرارات مدروسة",
+  "specNameHint": "مثال: المعالج",
+  "specValueHint": "مثال: Apple A16 Bionic",
+  "remove": "حذف",
+
+  "locationLabel": "الموقع",
+  "selectLocation": "اختر الموقع",
+  "selectLocationTitle": "اختر الموقع",
+
+  "addMainImage": "إضافة صورة رئيسية",
+
+  "addPhoto": "إضافة صورة",
+
+  "categoryElectronics": "إلكترونيات",
+  "categoryClothing": "ملابس",
+  "categoryHomeGarden": "المنزل والحديقة",
+  "categoryFood": "طعام",
+  "categoryServices": "خدمات",
+  "categoryVehicles": "مركبات",
+  "categoryBooks": "كتب",
+  "categorySports": "رياضة",
+  "categoryOther": "أخرى",
+
+  "locationGazaCity": "مدينة غزة",
+  "locationJabalia": "جباليا",
+  "locationAlBureij": "البريج",
+  "locationAlNusirat": "النصيرات",
+  "locationDeirAlBalah": "دير البلح",
+  "locationKhanYunis": "خان يونس",
+
+  "sellerInformation": "معلومات البائع",
+  "memberSince": "عضو منذ {date}",
+  "@memberSince": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "contactSeller": "تواصل مع البائع",
+  "viewProfile": "عرض الملف الشخصي",
+
+  "descriptionSectionTitle": "الوصف",
+  "specificationsSectionTitle": "المواصفات",
+
+  "similarProducts": "منتجات مشابهة",
+  "moreFromSeller": "المزيد من {sellerName}",
+  "@moreFromSeller": {
+    "placeholders": {
+      "sellerName": { "type": "String" }
+    }
+  },
+
+  "daysAgo": "منذ {count} أيام",
+  "@daysAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "weekAgo": "منذ أسبوع",
+
+
+  "retry": "إعادة المحاولة",
+
+  "searchHint": "ابحث عن منتجات...",
+  "searchPrompt": "ابحث عن منتجات",
+  "noResultsFound": "لا توجد نتائج",
+  "noResultsSubtitle": "جرّب كلمات مختلفة أو عدّل الفلاتر",
+  "filters": "الفلاتر",
+  "clearAll": "مسح الكل",
+  "applyFilters": "تطبيق الفلاتر",
+  "sortBy": "ترتيب حسب",
+  "sortNewest": "الأحدث",
+  "sortPriceLowToHigh": "السعر: من الأقل للأعلى",
+  "sortPriceHighToLow": "السعر: من الأعلى للأقل",
+  "priceRange": "نطاق السعر",
+  "priceRangeUsd": "نطاق السعر (دولار)",
+  "priceRangeIls": "نطاق السعر (شيكل)",
+  "priceMin": "الحد الأدنى",
+  "priceMax": "الحد الأقصى",
+  "conditionFilter": "الحالة",
+
+  "searchMarketplace": "ابحث في السوق...",
+
+  "searchCommunity": "ابحث في المجتمع...",
+  "createPost": "إنشاء منشور",
+  "recent": "الأحدث",
+  "questions": "أسئلة",
+  "tips": "نصائح",
+  "news": "أخبار",
+  "troubleshooting": "حلول المشاكل",
+  "hoursAgo": "منذ {count} ساعات",
+  "@hoursAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "dayAgo": "منذ يوم",
+  "question": "سؤال",
+  "newPost": "منشور جديد",
+
+  "postTitle": "عنوان المنشور",
+  "enterPostTitle": "أدخل عنوان المنشور",
+  "content": "المحتوى",
+  "writeYourPostHere": "اكتب منشورك هنا...",
+  "attachments": "المرفقات",
+  "addImagesOrFiles": "أضف صوراً أو ملفات",
+  "maxFileSize": "الحد الأقصى 5 ميجابايت لكل ملف",
+  "imageLimitReached": "يمكنك إرفاق حتى {max} صور",
+  "@imageLimitReached": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "uploadingImages": "جارٍ رفع الصور...",
+  "imageUploadFailed": "فشل رفع الصور",
+  "publishPost": "نشر المنشور",
+
+  "postDetails": "تفاصيل المنشور",
+  "commentsCount": "التعليقات ({count})",
+  "@commentsCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "topSort": "الأعلى",
+  "reply": "رد",
+  "loadMoreComments": "تحميل المزيد من التعليقات",
+  "relatedPosts": "منشورات ذات صلة",
+  "addComment": "أضف تعليقاً...",
+  "minutesAgo": "منذ {count} دقيقة",
+  "@minutesAgo": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "gaming": "ألعاب",
+
+  "replyingTo": "ردّاً على @{userName}",
+  "@replyingTo": {
+    "placeholders": {
+      "userName": { "type": "String" }
+    }
+  },
+
+  "postPublished": "تم نشر المنشور بنجاح",
+  "draftSaved": "تم حفظ المسودة",
+  "myDrafts": "المسودات",
+  "draft": "مسودة",
+  "noDraftsYet": "لا توجد مسودات بعد",
+  "draftPosts": "المنشورات",
+  "draftListings": "الإعلانات",
+
+  "viewReplies": "{count, plural, =1{عرض رد واحد} =2{عرض ردّين} few{عرض {count} ردود} other{عرض {count} ردّ}}",
+  "@viewReplies": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "hideReplies": "إخفاء الردود",
+
+  "recentSearches": "عمليات بحث سابقة",
+  "clearRecentSearches": "مسح",
+  "noCommunityResults": "لم يتم العثور على منشورات",
+  "noCommunityResultsSubtitle": "جرّب كلمات مختلفة",
+
+  "sortPosts": "ترتيب المنشورات",
+  "timeBased": "حسب الوقت",
+  "popularity": "حسب الشعبية",
+  "newest": "الأحدث",
+  "oldest": "الأقدم",
+  "mostLiked": "الأكثر إعجاباً",
+  "mostCommented": "الأكثر تعليقاً",
+  "resetSort": "إعادة تعيين",
+
+  "filterPosts": "تصفية المنشورات",
+  "categoryFilter": "التصنيف",
+  "dateRangeFilter": "النطاق الزمني",
+  "engagementLevel": "مستوى التفاعل",
+  "sortOrder": "ترتيب العرض",
+  "today": "اليوم",
+  "thisWeek": "هذا الأسبوع",
+  "thisMonth": "هذا الشهر",
+  "thisYear": "هذه السنة",
+  "likes100Plus": "+100 إعجاب",
+  "comments50Plus": "+50 تعليق",
+
+  "editProfile": "تعديل الملف الشخصي",
+  "bio": "نبذة عني",
+  "bioHint": "أخبر الآخرين عن نفسك...",
+  "phoneNumber": "رقم الهاتف",
+  "whatsappNumber": "رقم واتساب",
+  "socialLinks": "روابط التواصل",
+  "facebookLink": "فيسبوك",
+  "instagramLink": "إنستغرام",
+  "twitterLink": "تويتر / X",
+  "websiteLink": "الموقع الإلكتروني",
+  "changeAvatar": "تغيير الصورة",
+  "removeAvatar": "حذف الصورة",
+  "saveChanges": "حفظ التغييرات",
+  "profileUpdated": "تم تحديث الملف الشخصي بنجاح",
+  "myPosts": "المنشورات",
+  "myListings": "إعلاناتي",
+  "bookmarks": "المحفوظات",
+  "noPostsYet": "لا توجد منشورات بعد",
+  "noListingsYet": "لا توجد إعلانات بعد",
+  "noBookmarksYet": "لا توجد محفوظات بعد",
+  "personalInfo": "المعلومات الشخصية",
+  "contactInfo": "معلومات التواصل",
+  "verified": "موثق",
+  "avatarUploadFailed": "فشل رفع الصورة",
+  "contactUnavailable": "معلومات التواصل غير متوفرة لهذا البائع",
+  "couldNotOpenLink": "تعذر فتح هذا الرابط",
+  "website": "الموقع",
+  "bookmarkedPosts": "المنشورات",
+  "bookmarkedListings": "الإعلانات",
+  "noBookmarkedListingsYet": "لا توجد إعلانات محفوظة بعد",
+
+  "getVerified": "توثيق الحساب",
+  "verificationRequest": "طلب التوثيق",
+  "verificationStatusTitle": "حالة التوثيق",
+  "verificationPending": "التوثيق قيد المراجعة",
+  "verificationApproved": "تم التوثيق",
+  "verificationRejected": "تم رفض التوثيق",
+  "verificationExpired": "انتهت صلاحية التوثيق",
+  "verificationSuspicious": "قيد المراجعة اليدوية",
+
+  "stepPersonalInfo": "المعلومات الشخصية",
+  "stepDocuments": "المستندات",
+  "stepPhoneVerification": "الهاتف",
+  "stepReview": "مراجعة",
+
+  "idFullName": "الاسم الكامل (كما في الهوية)",
+  "idFullNameHint": "أدخل اسمك الكامل كما يظهر في هويتك",
+  "dateOfBirth": "تاريخ الميلاد",
+  "selectDateOfBirth": "اختر تاريخ الميلاد",
+  "gender": "الجنس",
+  "genderMale": "ذكر",
+  "genderFemale": "أنثى",
+  "address": "العنوان",
+  "addressHint": "أدخل عنوانك الحالي",
+  "nationalIdNumber": "رقم الهوية الوطنية",
+  "nationalIdNumberHint": "أدخل رقم هويتك الوطنية",
+
+  "documentType": "نوع المستند",
+  "palestinianId": "هوية فلسطينية",
+  "passport": "جواز سفر",
+  "palestinianDrivingLicence": "رخصة قيادة فلسطينية",
+  "documentFront": "الوجه الأمامي للمستند",
+  "documentBack": "الوجه الخلفي للمستند",
+  "selfieWithId": "صورة شخصية مع الهوية",
+  "tapToUploadPhoto": "انقر لرفع صورة",
+  "changePhoto": "تغيير الصورة",
+  "gallery": "معرض الصور",
+  "camera": "الكاميرا",
+
+  "phoneVerification": "توثيق رقم الهاتف",
+  "enterPhoneNumber": "رقم الهاتف",
+  "phoneNumberHint": "+970xxxxxxxxx",
+  "sendOtp": "إرسال رمز التحقق",
+  "verifyPhone": "تحقق",
+  "phoneVerifiedSuccess": "تم التحقق من رقم الهاتف بنجاح",
+  "pleaseVerifyPhone": "يرجى التحقق من رقم هاتفك للمتابعة",
+  "otpSentToPhone": "تم إرسال رمز التحقق إلى هاتفك",
+
+  "reviewYourData": "مراجعة بياناتك",
+  "reviewPersonalInfo": "المعلومات الشخصية",
+  "reviewDocuments": "المستندات المرفوعة",
+  "reviewPhone": "التحقق من الهاتف",
+  "submitVerification": "إرسال طلب التوثيق",
+  "submittingVerification": "جارٍ الإرسال...",
+
+  "verificationSubmitted": "تم إرسال طلب التوثيق بنجاح",
+  "verificationUnderReview": "طلبك قيد المراجعة. سنقوم بإعلامك فور معالجته.",
+  "rejectionReason": "سبب الرفض",
+  "resubmitVerification": "إعادة تقديم طلب التوثيق",
+  "submittedOn": "تم الإرسال في {date}",
+  "@submittedOn": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "reviewedOn": "تمت المراجعة في {date}",
+  "@reviewedOn": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+
+  "back": "رجوع",
+  "next": "التالي",
+
+  "pleaseSelectGender": "يرجى اختيار الجنس",
+  "pleaseSelectDocumentType": "يرجى اختيار نوع المستند",
+  "pleaseUploadAllDocuments": "يرجى رفع جميع المستندات المطلوبة",
+  "pleaseFillDateOfBirth": "يرجى اختيار تاريخ ميلادك",
+
+  "timelineSubmitted": "تم الإرسال",
+  "timelineUnderReview": "قيد المراجعة",
+  "timelineDecision": "القرار",
+
+  "editListing": "تعديل الإعلان",
+  "updateListing": "تحديث الإعلان",
+  "listingUpdated": "تم تحديث الإعلان بنجاح",
+  "deleteListing": "حذف الإعلان",
+  "deleteListingConfirmTitle": "حذف الإعلان؟",
+  "deleteListingConfirmBody": "هل أنت متأكد من حذف هذا الإعلان؟ لا يمكن التراجع عن هذا الإجراء.",
+  "listingDeleted": "تم حذف الإعلان بنجاح",
+  "delete": "حذف",
+  "edit": "تعديل",
+
+  "editPost": "تعديل المنشور",
+  "updatePost": "تحديث المنشور",
+  "postUpdated": "تم تحديث المنشور بنجاح",
+  "deletePost": "حذف المنشور",
+  "deletePostConfirmTitle": "حذف المنشور؟",
+  "deletePostConfirmBody": "هل أنت متأكد من حذف هذا المنشور؟ لا يمكن التراجع عن هذا الإجراء.",
+  "postDeleted": "تم حذف المنشور بنجاح",
+
+  "reportListing": "الإبلاغ عن الإعلان",
+  "reportPost": "الإبلاغ عن المنشور",
+  "reportUser": "الإبلاغ عن المستخدم",
+  "reportComment": "الإبلاغ عن التعليق",
+  "reportSubtitle": "لماذا تريد الإبلاغ عن هذا؟",
+  "reportReasonSpam": "محتوى مزعج",
+  "reportReasonInappropriateContent": "محتوى غير لائق",
+  "reportReasonHarassment": "تحرش",
+  "reportReasonMisleading": "مضلل",
+  "reportReasonFraudScam": "احتيال",
+  "reportReasonHateSpeech": "خطاب كراهية",
+  "reportReasonOther": "أخرى",
+  "reportDescriptionHint": "أضف المزيد من التفاصيل (اختياري)",
+  "reportSubmit": "إرسال البلاغ",
+  "reportSuccess": "تم إرسال البلاغ بنجاح. سنراجعه قريباً.",
+  "reportFailure": "فشل إرسال البلاغ. يرجى المحاولة مرة أخرى.",
+  "reportAlreadySubmitted": "لقد أبلغت عن هذا مسبقاً. نحن نراجعه.",
+
+  "aiChat": "المساعد الذكي",
+  "aiChatHint": "اسأل عن المنتجات...",
+  "aiChatEmptyTitle": "مساعد السوق الذكي",
+  "aiChatEmptySubtitle": "اسألني أي شيء عن المنتجات في السوق",
+  "clearChat": "مسح المحادثة",
+  "clearChatConfirm": "هل أنت متأكد أنك تريد مسح كل سجل المحادثة؟",
+  "aiChatError": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+  "aiChatStopped": "(تم الإيقاف)",
+
+  "editComment": "تعديل التعليق",
+  "deleteComment": "حذف التعليق",
+  "deleteCommentConfirmTitle": "حذف التعليق؟",
+  "deleteCommentConfirmBody": "هل أنت متأكد من حذف هذا التعليق؟ لا يمكن التراجع عن هذا الإجراء.",
+  "commentDeleted": "تم حذف التعليق بنجاح",
+  "commentUpdated": "تم تحديث التعليق بنجاح",
+  "editingComment": "تعديل التعليق",
+  "edited": "(معدّل)",
+
+  "saveEdit": "حفظ التعديل",
+  "publish": "نشر",
+  "publishConfirmTitle": "نشر؟",
+  "publishConfirmBody": "ستتم نشر هذه المسودة وستكون مرئية للجميع.",
+  "published": "تم النشر بنجاح",
+
+  "notificationPreferences": "تفضيلات الإشعارات",
+  "notifyNewComments": "تعليقات جديدة على منشوراتي",
+  "notifyNewLikes": "إعجابات على محتواي",
+  "notifyListingInquiries": "استفسارات على قوائمي",
+  "notifyVerificationUpdates": "تحديثات حالة التحقق",
+  "accountSettings": "الحساب",
+  "changePassword": "تغيير كلمة المرور",
+  "deleteAccount": "حذف الحساب",
+  "deleteAccountTitle": "حذف الحساب؟",
+  "deleteAccountBody": "سيؤدي هذا إلى إلغاء تنشيط حسابك بشكل دائم. ستتم إزالة إعلاناتك وسيظهر اسمك كـ\"حساب محذوف\" في كل مكان. لا يمكن التراجع عن هذا الإجراء.",
+  "deleteAccountConfirmButton": "حذف حسابي",
+  "deleteAccountTypeToConfirm": "اكتب حذف للتأكيد",
+  "deleteConfirmWord": "حذف",
+  "deletedUser": "حساب محذوف",
+  "deletedAccountProfile": "تم حذف هذا الحساب.",
+
+  "faq": "الأسئلة الشائعة",
+  "helpFaqBuyingTitle": "كيف أشتري شيئًا؟",
+  "helpFaqBuyingBody": "تصفح السوق، ابحث عن قائمة تعجبك، وتواصل مع البائع مباشرة من خلال ملفه الشخصي.",
+  "helpFaqSellingTitle": "كيف أبيع شيئًا؟",
+  "helpFaqSellingBody": "اضغط على زر + لإنشاء قائمة. أدخل التفاصيل، أضف صورًا، حدد سعرًا، وانشر.",
+  "helpFaqVerificationTitle": "كيف أحصل على التحقق؟",
+  "helpFaqVerificationBody": "انتقل إلى ملفك الشخصي واضغط على 'احصل على التحقق'. أكمل نموذج التحقق من الهوية باستخدام وثائق هويتك.",
+  "helpFaqPostingTitle": "كيف أنشر في المجتمع؟",
+  "helpFaqPostingBody": "انتقل إلى تبويب المجتمع واضغط على زر الكتابة. اختر فئة، اكتب منشورك، وانشر.",
+  "communityGuidelines": "إرشادات المجتمع",
+  "helpGuidelinesBody": "كن محترمًا ولطيفًا. لا للرسائل المزعجة أو التحرش أو المحتوى غير اللائق. أبلغ عن الانتهاكات للمساعدة في الحفاظ على سلامة مجتمعنا.",
+  "contactSupport": "تواصل مع الدعم",
+  "helpContactDescription": "تواجه مشكلة؟ تواصل مع فريق الدعم لدينا.",
+  "emailSupport": "الدعم عبر البريد الإلكتروني",
+  "reportBug": "الإبلاغ عن خطأ",
+
+  "appVersion": "إصدار التطبيق",
+  "aboutDescription": "غزة تك منصة تربط أبناء غزة للشراء والبيع والتفاعل مع مجتمعهم.",
+  "ourMission": "مهمتنا",
+  "missionDescription": "تمكين مجتمع غزة من خلال التكنولوجيا — تمكين التجارة ومشاركة المعرفة والتواصل المحلي.",
+  "shareApp": "مشاركة التطبيق",
+  "rateApp": "تقييم التطبيق",
+  "openSourceLicenses": "تراخيص المصدر المفتوح",
+  "termsOfService": "شروط الخدمة",
+  "madeWithLove": "صُنع بكل محبة لغزة",
+
+  "signUpEmailBanned": "هذا البريد الإلكتروني مرتبط بحساب محظور أو معطّل ولا يمكن استخدامه للتسجيل.",
+  "signUpEmailTaken": "هذا البريد الإلكتروني مستخدم بالفعل. يرجى تسجيل الدخول أو استخدام بريد إلكتروني آخر.",
+  "signInAccountBanned": "تم حظر هذا الحساب أو تعطيله. لا يمكنك تسجيل الدخول.",
+
+  "appearance": "المظهر",
+  "theme": "السمة",
+  "themeLight": "فاتح",
+  "themeDark": "داكن",
+  "themeSystem": "النظام",
+
+  "termsTitle": "الشروط والأحكام",
+  "termsLastUpdated": "آخر تحديث: أبريل 2026",
+  "termsIntro": "مرحباً بك في تطبيق غزة تك. بإنشاء حساب أو استخدام خدماتنا، فإنك توافق على الالتزام بهذه الشروط والأحكام. يرجى قراءتها بعناية قبل استخدام التطبيق.",
+  "termsAccountTitle": "1. تسجيل الحساب",
+  "termsAccountBody": "يجب عليك تقديم معلومات دقيقة وكاملة عند إنشاء حساب. أنت مسؤول عن الحفاظ على سرية بيانات تسجيل الدخول الخاصة بك وعن جميع الأنشطة التي تتم من خلال حسابك. يجب أن يكون عمرك 15 عاماً على الأقل لاستخدام هذا التطبيق. يحتفظ تطبيق غزة تك بالحق في تعليق أو إنهاء الحسابات التي تنتهك هذه الشروط.",
+  "termsMarketplaceTitle": "2. السوق",
+  "termsMarketplaceBody": "يوفر تطبيق غزة تك منصة للمستخدمين لعرض واكتشاف المنتجات. نحن لا نشارك في أي معاملات بين البائعين والمشترين ولا نضمنها. جميع المعاملات تتم على مسؤولية الأطراف المعنية فقط. يجب على المستخدمين إدراج المنتجات بدقة وأمانة. يُمنع منعاً باتاً إدراج المنتجات غير القانونية أو المقلدة أو المسروقة أو المحظورة.",
+  "termsCommunityTitle": "3. المجتمع",
+  "termsCommunityBody": "يمكن للمستخدمين نشر محتوى وتعليقات والمشاركة في النقاشات المجتمعية. تحتفظ بملكية المحتوى الخاص بك ولكنك تمنح تطبيق غزة تك ترخيصاً غير حصري لعرضه داخل المنصة. توافق على عدم نشر محتوى مسيء أو ضار أو مضلل أو يشوه السمعة أو ينتهك أي قوانين معمول بها. يحتفظ تطبيق غزة تك بالحق في إزالة أي محتوى ينتهك هذه الإرشادات.",
+  "termsContentTitle": "4. محتوى المستخدم والسلوك",
+  "termsContentBody": "أنت المسؤول الوحيد عن كل المحتوى الذي تنشئه أو ترفعه أو تشاركه على المنصة. يجب ألا تنتحل شخصية الآخرين أو ترسل رسائل مزعجة أو تضايق مستخدمين آخرين أو تشارك في أي نشاط احتيالي. يحق لتطبيق غزة تك الإشراف على المحتوى أو الحسابات أو إزالتها أو تقييدها وفقاً لتقديره للحفاظ على بيئة آمنة ومحترمة.",
+  "termsVerificationTitle": "5. التحقق من الهوية",
+  "termsVerificationBody": "قد تتطلب بعض الميزات التحقق من الهوية. بتقديم مستندات التحقق (مثل بطاقة الهوية الوطنية)، فإنك تؤكد أن المستندات أصلية وتخصك. تتم معالجة مستندات التحقق بشكل آمن وفقاً لسياسة الخصوصية الخاصة بنا.",
+  "termsIntellectualTitle": "6. الملكية الفكرية",
+  "termsIntellectualBody": "اسم تطبيق غزة تك وشعاره وتصميمه وجميع التقنيات الأساسية هي ملكية فكرية لتطبيق غزة تك. لا يجوز لك نسخ أو تعديل أو توزيع أو عكس هندسة أي جزء من التطبيق دون موافقة كتابية مسبقة.",
+  "termsLiabilityTitle": "7. تحديد المسؤولية",
+  "termsLiabilityBody": "يُقدم تطبيق غزة تك \"كما هو\" دون أي ضمانات من أي نوع. لسنا مسؤولين عن أي أضرار مباشرة أو غير مباشرة أو عرضية أو تبعية ناتجة عن استخدامك للمنصة، بما في ذلك على سبيل المثال لا الحصر الخسائر من معاملات السوق أو فقدان البيانات أو انقطاع الخدمة.",
+  "termsChangesTitle": "8. التغييرات على الشروط",
+  "termsChangesBody": "قد نقوم بتحديث هذه الشروط والأحكام من وقت لآخر. يُعتبر استمرار استخدام التطبيق بعد التغييرات موافقة على الشروط المحدثة. سنقوم بإخطار المستخدمين بالتغييرات الجوهرية من خلال التطبيق.",
+  "termsContactTitle": "9. تواصل معنا",
+  "termsContactBody": "إذا كانت لديك أي أسئلة حول هذه الشروط والأحكام، يرجى التواصل معنا على:",
+
+  "privacyTitle": "سياسة الخصوصية",
+  "privacyLastUpdated": "آخر تحديث: أبريل 2026",
+  "privacyIntro": "يلتزم تطبيق غزة تك بحماية خصوصيتك. توضح سياسة الخصوصية هذه كيفية جمع واستخدام وتخزين وحماية معلوماتك الشخصية عند استخدام تطبيقنا.",
+  "privacyCollectionTitle": "1. المعلومات التي نجمعها",
+  "privacyCollectionBody": "نجمع الأنواع التالية من المعلومات:\n\n• معلومات الحساب: الاسم والبريد الإلكتروني وكلمة المرور عند التسجيل.\n• معلومات الملف الشخصي: السيرة الذاتية ورقم الهاتف وروابط وسائل التواصل الاجتماعي والصورة الشخصية التي تختار تقديمها.\n• المحتوى: الإعلانات والمنشورات والتعليقات والمفضلات والصور التي تنشئها أو ترفعها.\n• مستندات التحقق: بطاقة الهوية الوطنية وتاريخ الميلاد والعنوان عند التقدم للتحقق من الهوية.\n• بيانات الاستخدام: تحليلات مجهولة وتقارير الأعطال لتحسين أداء التطبيق واستقراره.",
+  "privacyUseTitle": "2. كيف نستخدم معلوماتك",
+  "privacyUseBody": "نستخدم معلوماتك من أجل:\n\n• تقديم خدمات تطبيق غزة تك وصيانتها وتحسينها.\n• إنشاء وإدارة حسابك.\n• عرض إعلاناتك ومنشوراتك للمستخدمين الآخرين.\n• معالجة طلبات التحقق من الهوية.\n• إرسال إشعارات الخدمة المهمة.\n• تحليل استخدام التطبيق لإصلاح الأخطاء وتحسين تجربة المستخدم.\n• تطبيق الشروط والأحكام وحماية سلامة المستخدمين.",
+  "privacyStorageTitle": "3. تخزين البيانات والأمان",
+  "privacyStorageBody": "يتم تخزين بياناتك بشكل آمن باستخدام Supabase، مزود البنية التحتية السحابية الموثوق. نطبق معايير الأمان الصناعية بما في ذلك التشفير أثناء النقل وفي حالة السكون وبروتوكولات المصادقة الآمنة وضوابط الوصول. بينما نتخذ خطوات معقولة لحماية بياناتك، لا يوجد نظام آمن تماماً ولا يمكننا ضمان الأمان المطلق.",
+  "privacySharingTitle": "4. مشاركة المعلومات",
+  "privacySharingBody": "نحن لا نبيع معلوماتك الشخصية. قد تتم مشاركة بياناتك في الحالات التالية:\n\n• معلومات الملف الشخصي العامة والإعلانات والمنشورات مرئية للمستخدمين الآخرين كجزء من وظائف المنصة.\n• مع مزودي الخدمة (Supabase، Google Analytics) الذين يساعدوننا في تشغيل التطبيق، بموجب اتفاقيات صارمة لمعالجة البيانات.\n• عندما يقتضي القانون ذلك أو لحماية حقوق وسلامة مستخدمينا ومنصتنا.",
+  "privacyRightsTitle": "5. حقوقك",
+  "privacyRightsBody": "لديك الحق في:\n\n• الوصول إلى معلوماتك الشخصية وتحديثها من خلال إعدادات ملفك الشخصي.\n• حذف حسابك والبيانات المرتبطة به عن طريق التواصل معنا أو استخدام ميزة حذف الحساب.\n• طلب نسخة من البيانات التي نحتفظ بها عنك.\n• سحب الموافقة على معالجة البيانات الاختيارية في أي وقت.",
+  "privacyRetentionTitle": "6. الاحتفاظ بالبيانات",
+  "privacyRetentionBody": "نحتفظ ببياناتك طالما كان حسابك نشطاً أو حسب الحاجة لتقديم الخدمات. عند حذف حسابك، ستتم إزالة بياناتك الشخصية خلال 30 يوماً، باستثناء الحالات التي يلزمنا فيها القانون بالاحتفاظ بمعلومات معينة.",
+  "privacyChildrenTitle": "7. خصوصية الأطفال",
+  "privacyChildrenBody": "تطبيق غزة تك غير مخصص للأطفال دون سن 15 عاماً. نحن لا نجمع معلومات شخصية من الأطفال عن عمد. إذا علمنا أننا جمعنا بيانات من طفل دون 15 عاماً، سنتخذ خطوات لحذف تلك المعلومات فوراً.",
+  "privacyChangesTitle": "8. التغييرات على هذه السياسة",
+  "privacyChangesBody": "قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنقوم بإخطارك بالتغييرات الجوهرية من خلال التطبيق. يُعتبر استمرار استخدام التطبيق بعد التغييرات موافقة على السياسة المحدثة.",
+  "privacyContactTitle": "9. تواصل معنا",
+  "privacyContactBody": "إذا كانت لديك أي أسئلة حول سياسة الخصوصية هذه أو ترغب في ممارسة حقوقك المتعلقة ببياناتك، يرجى التواصل معنا على:",
+
+  "justNow": "الآن",
+  "notifications": "الإشعارات",
+  "markAllAsRead": "تعليم الكل كمقروء",
+  "noNotifications": "لا توجد إشعارات بعد",
+  "noNotificationsSubtitle": "ستظهر هنا إشعارات نشاطك",
+  "notificationPostLikeSingle": "{name} أعجب بمنشورك",
+  "@notificationPostLikeSingle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notificationPostLikeGrouped": "{name} و{count} آخرون أعجبوا بمنشورك",
+  "@notificationPostLikeGrouped": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "notificationCommentLikeSingle": "{name} أعجب بتعليقك",
+  "@notificationCommentLikeSingle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notificationCommentLikeGrouped": "{name} و{count} آخرون أعجبوا بتعليقك",
+  "@notificationCommentLikeGrouped": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "notificationPostCommentSingle": "{name} علّق على منشورك",
+  "@notificationPostCommentSingle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notificationPostCommentGrouped": "{name} و{count} آخرون علّقوا على منشورك",
+  "@notificationPostCommentGrouped": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "notificationCommentReplySingle": "{name} ردّ على تعليقك",
+  "@notificationCommentReplySingle": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notificationCommentReplyGrouped": "{name} و{count} آخرون ردّوا على تعليقك",
+  "@notificationCommentReplyGrouped": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "notificationVerificationApproved": "تمت الموافقة على التحقق من هويتك",
+  "notificationVerificationRejected": "لم تتم الموافقة على التحقق من هويتك",
+  "notificationContentRemoved": "تمت إزالة محتواك بواسطة أحد المشرفين",
+  "notificationSystemAnnouncement": "إعلان من النظام",
+  "contactSafetyTitle": "تنبيه أمان",
+  "contactSafetyMessage": "أنت على وشك التواصل مع البائع مباشرةً. جميع ترتيبات استلام المنتج والدفع تتم بينك وبين البائع شخصيًا. يُرجى توخّي الحذر واستخدام حكمك الشخصي.",
+  "iUnderstand": "حسنًا، فهمت"
+}
