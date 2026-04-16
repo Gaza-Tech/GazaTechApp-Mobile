@@ -91,7 +91,9 @@ class ListingDetailsBody extends StatelessWidget {
                   isVerified: listing.sellerIsVerified,
                   onContactSeller: () async {
                     if (!await GuestGuard.requireAccount(context)) return;
-                    if (context.mounted) _handleContactSeller(context);
+                    if (!context.mounted) return;
+                    final confirmed = await _showContactSafetyDialog(context);
+                    if (confirmed && context.mounted) _handleContactSeller(context);
                   },
                   onViewProfile: () async {
                     if (!await GuestGuard.requireAccount(context)) return;
@@ -168,6 +170,24 @@ class ListingDetailsBody extends StatelessWidget {
           ),
       ],
     );
+  }
+
+  Future<bool> _showContactSafetyDialog(BuildContext context) async {
+    final l10n = context.l10n;
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.contactSafetyTitle),
+        content: Text(l10n.contactSafetyMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: Text(l10n.iUnderstand),
+          ),
+        ],
+      ),
+    );
+    return result == true;
   }
 
   void _handleContactSeller(BuildContext context) async {

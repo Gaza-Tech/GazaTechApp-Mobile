@@ -726,5 +726,8 @@
   "notificationVerificationApproved": "Your identity verification has been approved",
   "notificationVerificationRejected": "Your identity verification was not approved",
   "notificationContentRemoved": "Your content was removed by a moderator",
-  "notificationSystemAnnouncement": "System announcement"
+  "notificationSystemAnnouncement": "System announcement",
+  "contactSafetyTitle": "Safety Notice",
+  "contactSafetyMessage": "You are about to contact this seller directly. All item and payment arrangements are entirely between you and the seller. Please be cautious and use your best judgment.",
+  "iUnderstand": "OK, I understand"
 }

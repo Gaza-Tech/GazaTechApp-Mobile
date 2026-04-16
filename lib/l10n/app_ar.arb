@@ -664,5 +664,8 @@
   "notificationVerificationApproved": "تمت الموافقة على التحقق من هويتك",
   "notificationVerificationRejected": "لم تتم الموافقة على التحقق من هويتك",
   "notificationContentRemoved": "تمت إزالة محتواك بواسطة أحد المشرفين",
-  "notificationSystemAnnouncement": "إعلان من النظام"
+  "notificationSystemAnnouncement": "إعلان من النظام",
+  "contactSafetyTitle": "تنبيه أمان",
+  "contactSafetyMessage": "أنت على وشك التواصل مع البائع مباشرةً. جميع ترتيبات استلام المنتج والدفع تتم بينك وبين البائع شخصيًا. يُرجى توخّي الحذر واستخدام حكمك الشخصي.",
+  "iUnderstand": "حسنًا، فهمت"
 }

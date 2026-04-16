@@ -1600,4 +1600,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationSystemAnnouncement => 'System announcement';
+
+  @override
+  String get contactSafetyTitle => 'Safety Notice';
+
+  @override
+  String get contactSafetyMessage =>
+      'You are about to contact this seller directly. All item and payment arrangements are entirely between you and the seller. Please be cautious and use your best judgment.';
+
+  @override
+  String get iUnderstand => 'OK, I understand';
 }

@@ -1592,4 +1592,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notificationSystemAnnouncement => 'إعلان من النظام';
+
+  @override
+  String get contactSafetyTitle => 'تنبيه أمان';
+
+  @override
+  String get contactSafetyMessage =>
+      'أنت على وشك التواصل مع البائع مباشرةً. جميع ترتيبات استلام المنتج والدفع تتم بينك وبين البائع شخصيًا. يُرجى توخّي الحذر واستخدام حكمك الشخصي.';
+
+  @override
+  String get iUnderstand => 'حسنًا، فهمت';
 }

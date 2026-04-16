@@ -3049,6 +3049,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'System announcement'**
   String get notificationSystemAnnouncement;
+
+  /// No description provided for @contactSafetyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Safety Notice'**
+  String get contactSafetyTitle;
+
+  /// No description provided for @contactSafetyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You are about to contact this seller directly. All item and payment arrangements are entirely between you and the seller. Please be cautious and use your best judgment.'**
+  String get contactSafetyMessage;
+
+  /// No description provided for @iUnderstand.
+  ///
+  /// In en, this message translates to:
+  /// **'OK, I understand'**
+  String get iUnderstand;
 }
 
 class _AppLocalizationsDelegate
